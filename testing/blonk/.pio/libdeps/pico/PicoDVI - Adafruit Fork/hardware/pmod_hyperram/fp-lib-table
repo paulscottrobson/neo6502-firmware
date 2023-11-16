@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name picodvi)(type KiCad)(uri ${KIPRJMOD}/../board/picodvi.pretty)(options "")(descr ""))
-)
