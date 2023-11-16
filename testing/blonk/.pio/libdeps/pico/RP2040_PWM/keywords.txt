@@ -1,0 +1,51 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+RP2040_PWM	KEYWORD1
+PWM_slice KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+###################################
+# Class RP2040_PWM
+###################################
+
+setPWMPushPull_Int  KEYWORD2
+setPWMPushPull  KEYWORD2
+setPWMPushPull_Period KEYWORD2
+setPWM_Int	KEYWORD2
+setPWM	KEYWORD2
+setPWM_manual	KEYWORD2
+setPWM_manual_Fast  KEYWORD2
+setPWM_DCPercentage_manual  KEYWORD2
+setPWM_Period	KEYWORD2
+enablePWM	KEYWORD2
+disablePWM	KEYWORD2
+get_TOP	KEYWORD2
+get_DIV	KEYWORD2
+getActualFreq	KEYWORD2
+get_freq_CPU	KEYWORD2
+getActualDutyCycle  KEYWORD2
+getPin  KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+USING_MBED_RP2040_PWM LITERAL1
+USING_RP2040_PWM  LITERAL1
+
+RP2040_PWM_VERSION  LITERAL1
+RP2040_PWM_VERSION_MAJOR  LITERAL1
+RP2040_PWM_VERSION_MINOR  LITERAL1
+RP2040_PWM_VERSION_PATCH  LITERAL1
+RP2040_PWM_VERSION_INT  LITERAL1
+
+MAX_PWM_FREQUENCY LITERAL1
+MIN_PWM_FREQENCY  LITERAL1
+
+_PWM_LOGLEVEL_  LITERAL1

@@ -1,0 +1,18 @@
+.program clock
+.wrap_target
+    set pins,1 ; CLOCK HIGH
+    wait 1 irq 3
+    set pins,0[2] ; CLOCK LOW
+.wrap
+
+% c-sdk {
+// this is a raw helper function for use by the user which sets up the GPIO output, and configures the SM to output on a particular pin
+
+void clock_program_init(PIO pio, uint sm, uint offset, uint pin) {
+   pio_gpio_init(pio, pin);
+   pio_sm_set_consecutive_pindirs(pio, sm, pin, 1, true);
+   pio_sm_config c = clock_program_get_default_config(offset);
+   sm_config_set_set_pins(&c, pin, 1);
+   pio_sm_init(pio, sm, offset, &c);
+}
+%}

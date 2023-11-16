@@ -1,0 +1,54 @@
+.program address
+.side_set 1 opt
+.wrap_target
+    set pins, 0b110 side 1 [7] ; activate A0-A7
+    in  pins, 8     ; read 8 bits
+    set pins, 0b101[5] ; activate A8-A15
+    in  pins, 8     ; read 8 bits
+    set pins, 0b011[5] ; activate D0-D7
+    in  pins, 12     ; read 12 bits data and r/w bit
+    in  null, 4
+    mov osr, ~null ; set pins 0-7 to OUT
+    out pindirs, 8
+    pull block
+    out pins, 8 ; Write out data
+    mov osr, null ; set pins 0-7 to IN
+    out pindirs, 8 side 0[2]
+.wrap
+
+% c-sdk {
+// this is a raw helper function for use by the user which sets up the GPIO output, and configures the SM to output on a particular pin
+
+void address_program_init(PIO pio, uint sm, uint offset) {
+   pio_gpio_init(pio, 0);
+   pio_gpio_init(pio, 1);
+   pio_gpio_init(pio, 2);
+   pio_gpio_init(pio, 3);
+   pio_gpio_init(pio, 4);
+   pio_gpio_init(pio, 5);
+   pio_gpio_init(pio, 6);
+   pio_gpio_init(pio, 7);
+   pio_gpio_init(pio, 8);
+   pio_gpio_init(pio, 9);
+   pio_gpio_init(pio, 10);
+   pio_gpio_init(pio, 21);
+
+   pio_sm_set_consecutive_pindirs(pio, sm, 0, 8, false);
+   pio_sm_set_consecutive_pindirs(pio, sm, 8, 3, true);
+   pio_sm_set_consecutive_pindirs(pio, sm, 21, 1, true);
+
+   pio_sm_config c = address_program_get_default_config(offset);
+
+   sm_config_set_set_pins(&c, 8, 3);
+
+   sm_config_set_in_pins(&c, 0);
+
+   sm_config_set_out_pins(&c, 0, 8);
+
+   sm_config_set_sideset_pins(&c, 21);
+
+   sm_config_set_in_shift(&c, true, true, 32);		
+
+   pio_sm_init(pio, sm, offset, &c);
+}
+%}

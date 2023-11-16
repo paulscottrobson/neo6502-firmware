@@ -1,0 +1,56 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+RPI_PICO_TimerInterrupt	KEYWORD1
+RPI_PICO_Timer	KEYWORD1
+RPI_PICO_ISR_Timer KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+###########################
+# RPi_Pico_TimerInterrupt
+###########################
+
+setFrequency	KEYWORD2
+setInterval	KEYWORD2
+attachInterrupt	KEYWORD2
+attachInterruptInterval	KEYWORD2
+detachInterrupt	KEYWORD2
+disableTimer	KEYWORD2
+reattachInterrupt	KEYWORD2
+enableTimer	KEYWORD2
+stopTimer	KEYWORD2
+restartTimer	KEYWORD2
+
+###########################
+# RPi_Pico_ISR_Timer
+###########################
+
+init  KEYWORD2
+run KEYWORD2
+setTimeout  KEYWORD2
+setTimer  KEYWORD2
+changeInterval  KEYWORD2
+deleteTimer KEYWORD2
+restartTimer  KEYWORD2
+isEnabled KEYWORD2
+enable  KEYWORD2
+disable KEYWORD2
+enableAll KEYWORD2
+disableAll  KEYWORD2
+toggle  KEYWORD2
+getNumTimers  KEYWORD2
+getNumAvailableTimers KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+RPI_PICO_TIMER_INTERRUPT_VERSION LITERAL1
+RPI_PICO_TIMER_INTERRUPT_VERSION_MAJOR LITERAL1
+RPI_PICO_TIMER_INTERRUPT_VERSION_MINOR LITERAL1
+RPI_PICO_TIMER_INTERRUPT_VERSION_PATCH LITERAL1
+RPI_PICO_TIMER_INTERRUPT_VERSION_INT LITERAL1
