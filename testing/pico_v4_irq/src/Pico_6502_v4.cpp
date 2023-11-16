@@ -146,7 +146,6 @@ void setup() {
 
   clockCount = 0UL;
   lastClockTS = millis();
-
   hasDisplayUpdate++;
 }
 
