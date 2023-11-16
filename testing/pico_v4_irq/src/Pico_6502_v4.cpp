@@ -18,7 +18,6 @@
 #include "memory.h"
 
 #define FRAMERATE       10 // frames per sec
-
 #define FRAMETIME     1000 / FRAMERATE  // msec
 #define WIDTH          320
 #define HEIGHT         240
@@ -120,55 +119,23 @@ void initDisplay() {
 /// setup emulator
 /// </summary>
 void setup() {
-  Serial.begin(115200);
-  //  while (!Serial);
-
-  sleep_ms(5000);
-  Serial.println("NEO6502 memulator v0.021a");
+  sleep_ms(200);
 
   if (!display.begin()) {
-    Serial.println("ERROR: not enough RAM available");
-    for (;;);
   }
-
-  Serial.printf("Running at %dMHz\n", clock_get_hz(clk_sys)/1000000);
-
-
-  Serial.printf("Starting ...\n");
 
   initDisplay();
   display.print("NEO6502");
   display.println(" RetroComputer v0.001a");
-
   initmemory();
   init6502();
-  //reset6502();
-
   clockCount = 0UL;
   lastClockTS = millis();
   hasDisplayUpdate++;
 }
 
-/*
-  SerialEvent occurs whenever a new data comes in the
-  hardware serial RX. Multiple bytes of data may be available.
- */
-inline __attribute__((always_inline))
-void serialEvent1()
-{
-  if (mem[DSP] != 0x00) {
-    writeChar(mem[DSP] & 0x7F);
-    mem[DSP] = 0x00; // we're done
-  }
-}
-
-/// <summary>
-/// 
-/// </summary>
 void loop() {
   static uint32_t i, f = 1;
-
-  serialEvent1();
 
   if (f-- == 0) {
     if ((millis() - frameClockTS) >= FRAMETIME) {
@@ -176,10 +143,8 @@ void loop() {
         display.swap(true, false);
         hasDisplayUpdate = 0;
       }
-
       frameClockTS = millis();
     }
-
     f = 7500;
   }
 }

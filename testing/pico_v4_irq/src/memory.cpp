@@ -26,7 +26,6 @@ void initmemory() {
   if (loadROMS()) {
     Serial.println("ROMs installed");
   }
-
   mem[KBD] = 0x00;
   mem[DSP] = 0x00;
 }

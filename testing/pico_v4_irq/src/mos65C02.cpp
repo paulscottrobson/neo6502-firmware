@@ -9,8 +9,6 @@
 void writeChar(uint8_t vChar);
 
 #define DELAY_FACTOR_SHORT() asm volatile("nop\nnop\nnop\nnop\n");
-//#define DELAY_FACTOR_LONG()  asm volatile("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
-#define DELAY_FACTOR_LONG()  asm volatile("nop\nnop\nnop\nnop\n");
 
 // # of clock cycles to keep rest pin low
 #define RESET_COUNT  4
@@ -77,7 +75,7 @@ void setDirInput() {
   }
 }
 
-/// <summary>
+  /// <summary>
 /// set direction of databus mux
 /// </summary>
 /// <param name="direction"></param>
@@ -118,96 +116,11 @@ void getData() {
 /// <param name="data"></param>
 inline __attribute__((always_inline))
 void putData() {
-
   setDirOutput();
   setEnable(en_D0_7);
   gpio_put_masked(BUS_MASK, (uint32_t)data);
 }
 
-/// <summary>
-/// 
-/// </summary>
-inline __attribute__((always_inline))
-void tick6502()
-{
-  setDebug(true);
-
-  if (clockActive) {
-/*
-    if (addressValid) {
-        //------------------------------------------------------------------------------------
-        // do RW action
-        switch (getRW()) {
-        case RW_WRITE:
-          getData();
-          writememory(); // @address = data
-//          mem[address] = data;
-//          Serial.printf("W %04X %02X\n", address, data);
-          break;
-        }
-      }
-*/
-      setClock(CLOCK_LOW);
-      setDirInput();
-      // read A0-7
-      setEnable(en_A0_7);
-
-      DELAY_FACTOR_LONG();
-
-      //------------------------------------------------------------------------------------
-      setClock(CLOCK_HIGH);
-
-      // get A0-7
-      uint16_t addr = gpio_get_all() & BUS_MASK;
-
-      // read A8-15
-      setEnable(en_A8_15);
-      DELAY_FACTOR_SHORT();
-      addr |= (gpio_get_all() & BUS_MASK) << 8;
-      address = addr;
-      addressValid = true;
-
-      // do RW action
-      switch (getRW()) {
-      case RW_READ:
-//        readmemory(); // data = @address
-        data = mem[address];
-        putData();
-//        Serial.printf("R %04X %02X\n", address, data);
-        break;
-
-      case RW_WRITE:
-        getData();
-        writememory(); // @address = data
-        //          mem[address] = data;
-        //          Serial.printf("W %04X %02X\n", address, data);
-        break;
-
-      }
-
-    // reset mgmt
-    if (inReset) {
-      if (resetCount-- == 0) {
-        // end of reset
-        setReset(RESET_HIGH);
-        inReset = false;
-        //        Serial.printf("RESET release\n");
-      }
-    }
-
-    clockCount++;
-  } // clockActive
-
-  setDebug(false);
-}
-
-//bool __not_in_flash_func(ClockHandler)(struct repeating_timer* t)
-bool ClockHandler(struct repeating_timer* t) {
-  (void)t;
-
-  tick6502();
-  return true;
-}
 
 void start_address_program(PIO pio, uint sm, uint offset) {
     address_program_init(pio, sm, offset);
@@ -230,23 +143,17 @@ void dma_handler() {
     } data;
   } value;
 
-  // if((pio1->fstat & 0x200) != 0)
-  // {
-  //   dma_channel_abort(dma_chan);
-  //   return;
-  //    //Serial.print("WTF");
-  // }
-
-
   value.value = pio1->rxf[0];
   //uint16_t address  = (uint16_t) (( value >> 16) & 0xFFFFUL);
   bool write = value.data.flags == 0x3;
   if(write)
   {
     if (value.data.address == DSP) {
-      int c = value.data.data;
-      if (c >= 65 and c <= 90) c += 32;
+      int c = value.data.data & 0x7F;
+      if (c >= 97 and c <= 122) c ^= 32;
       writeChar(c);
+      writeChar("0123456789ABCDEF"[c >> 4]);
+      writeChar("0123456789ABCDEF"[c & 0x0F]);
       value.data.data = 0;
     }
     *(mem + value.data.address) = value.data.data;
@@ -292,9 +199,8 @@ void init6502() {
 /// <summary>
 /// reset the 65C02
 /// </summary>
-void reset6502() {
-  setReset(RESET_LOW);
-
-  resetCount = RESET_COUNT;
-  inReset = true;
-}
+// void reset6502() {
+//   setReset(RESET_LOW);
+//   resetCount = RESET_COUNT;
+//   inReset = true;
+// }
