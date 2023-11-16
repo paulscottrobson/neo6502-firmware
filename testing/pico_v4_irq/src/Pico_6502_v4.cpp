@@ -137,6 +137,8 @@ void setup() {
   Serial.printf("Starting ...\n");
 
   initDisplay();
+  display.print("NEO6502");
+  display.println(" RetroComputer v0.001a");
 
   initmemory();
   init6502();
@@ -144,8 +146,6 @@ void setup() {
 
   clockCount = 0UL;
   lastClockTS = millis();
-  display.print("NEO6502");
-  display.println(" RetroComputer v0.001a");
 
   hasDisplayUpdate++;
 }

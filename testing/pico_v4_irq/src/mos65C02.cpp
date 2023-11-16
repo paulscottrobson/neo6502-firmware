@@ -6,6 +6,8 @@
 #include "mos65C02.h"
 #include "memory_sm1_address.pio.h"
 
+void writeChar(uint8_t vChar);
+
 #define DELAY_FACTOR_SHORT() asm volatile("nop\nnop\nnop\nnop\n");
 //#define DELAY_FACTOR_LONG()  asm volatile("nop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\nnop\n");
 #define DELAY_FACTOR_LONG()  asm volatile("nop\nnop\nnop\nnop\n");
@@ -241,6 +243,12 @@ void dma_handler() {
   bool write = value.data.flags == 0x3;
   if(write)
   {
+    if (value.data.address == DSP) {
+      int c = value.data.data;
+      if (c >= 65 and c <= 90) c += 32;
+      writeChar(c);
+      value.data.data = 0;
+    }
     *(mem + value.data.address) = value.data.data;
   }
 

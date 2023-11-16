@@ -36,9 +36,9 @@ void initmemory() {
 /// </summary>
 void writememory() {
 
-  if ((0x8000 <= address && address <= 0xCFFF) || (0xF000 <= address && address <= 0xFFF9)) { // exclude writing ROM
-    Serial.printf("access violation @[%04X]\n", address);
-  }
-  else
-    mem[address] = data;
+  // if ((0x8000 <= address && address <= 0xCFFF) || (0xF000 <= address && address <= 0xFFF9)) { // exclude writing ROM
+  //   Serial.printf("access violation @[%04X]\n", address);
+  // }
+  // else
+  //   mem[address] = data;
 }
