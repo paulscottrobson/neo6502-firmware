@@ -18,8 +18,14 @@ endif
 
 all: build
 
-build:
+prelim:
+	$(CDEL) src$(S)binary.h
+	64tass -b -c asm$(S)test.asm -o asm$(S)test.bin -L asm$(S)test.lst
+	$(PYTHON) $(BINDIR)hconvert.py asm$(S)test.bin >src$(S)binary.h
+	touch src$(S)roms.cpp
+
+build: prelim
 	pio run
 
-run:
+run: prelim
 	pio run -t upload

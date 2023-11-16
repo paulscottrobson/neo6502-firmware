@@ -20,8 +20,6 @@ SDL_LDFLAGS = -L$(SDLDIR)$(S)lib -lSDL2 -lSDL2main -static-libstdc++ -static-lib
 OSNAME = windows
 EXTRAFILES = libwinpthread-1.dll  SDL2.dll
 PYTHON = python
-AUDIOOFF =
-AUDIOON =
 else
 CCOPY = cp
 CDEL = rm -f
@@ -36,13 +34,7 @@ LDFLAGS =
 OSNAME = linux
 EXTRAFILES = 
 PYTHON = python3
-AUDIOOFF = amixer set Master mute
-AUDIOON = amixer set Master unmute 
 endif
-#
-#		This TTY port can move about a bit :)
-#
-TTYPORT = /dev/ttyUSB1
 #
 #		Directories
 #
@@ -55,13 +47,8 @@ AEMUDIR = $(ROOTDIR)$(S)..$(S)fab-agon-emulator$(S)
 # 
 MAKEOPTS = --no-print-directory
 PYTHON = python3
-ASSEMBLER = spasm -L -T -N
+ASSEMBLER = 64tass -b -c -Wall
 ASMEND = 
-EEMULATOR = CEmu -u  --launch BASIC -m
-AEMULATOR = cd $(AEMUDIR) ; ./fab-agon-emulator --scale 1000 
-CUPLOAD = tilp --no-gui
-EXPORTHEX = srec_cat $(APPNAME) -binary -offset 0x40000 -execution-start-address=0x40000  -output build$(S)program.hex -Intel
-TRANSMIT = $(PYTHON) $(BINDIR)send.py build$(S)program.hex $(TTYPORT) 384000
 #
 #		Export path to the common scripts.
 #

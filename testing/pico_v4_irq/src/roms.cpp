@@ -5,9 +5,9 @@
 #include "roms.h"
 
 #include "memory.h"
-#include "ewoz.h"
+#include "binary.h"
 
-#define MAX_ROMS  2
+#define MAX_ROMS  1
 #define ROM_FOLDER  "ROM"
 
 // ROM image:
@@ -18,10 +18,15 @@ typedef struct _sROMImage {
   const uint8_t  *image;
 } sROMImage;
 
+const uint8_t vectors_bin[] = {
+  0x00, 0x00, // NMI
+  0x00, 0xFC, // RESET
+  0x86, 0xFD  // IRQ/BRK
+};
 
 sROMImage ROMs[] = {
-  { "Ewoz v1.2",    EWOZ_START,    EWOZ_SIZE,    ewoz_bin },
-  { "Vectors",      0xFFFA,        0X0006,       vectors_bin },
+  { "Test Program", TESTLOAD,      TESTSIZE,     test_bin },
+  { "Vectors",      0xFFFA,        0X0006,       vectors_bin }
 };
 
 uint8_t* readROM(String vROMname) {

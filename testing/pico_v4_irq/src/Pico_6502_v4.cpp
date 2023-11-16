@@ -26,6 +26,15 @@
 #define LINES       HEIGHT / (FONT_CHAR_HEIGHT + 1)
 #define LINECHARS   WIDTH / FONT_CHAR_WIDTH
 
+ // Pico HDMI for Olimex Neo6502 
+static const struct dvi_serialiser_cfg pico_neo6502_cfg = {
+   .pio = DVI_DEFAULT_PIO_INST,
+   .sm_tmds = {0, 1, 2},
+   .pins_tmds = {14, 18, 16},
+   .pins_clk = 12,
+   .invert_diffpairs = true
+};
+  
 // Here's how an 320x240 256 colors graphics display is declared.
 DVIGFX8 display(DVI_RES_320x240p60, true, pico_neo6502_cfg);
 
@@ -119,7 +128,7 @@ void initDisplay() {
 /// setup emulator
 /// </summary>
 void setup() {
-  sleep_ms(200);
+  sleep_ms(2000);
 
   if (!display.begin()) {
   }
@@ -136,6 +145,14 @@ void setup() {
 
 void loop() {
   static uint32_t i, f = 1;
+
+  if (mem[DSP] != 0) {
+   writeChar(mem[DSP] & 0x7F);
+   //writeChar("0123456789abcdef"[mem[DSP] >> 4]);
+   //writeChar("0123456789abcdef"[mem[DSP] & 15]);
+   //writeChar(32);
+   mem[DSP] = 0;
+  }
 
   if (f-- == 0) {
     if ((millis() - frameClockTS) >= FRAMETIME) {

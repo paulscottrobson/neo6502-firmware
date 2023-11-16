@@ -1,0 +1,60 @@
+
+; 64tass Turbo Assembler Macro V1.59.3120 listing file
+; 64tass -b -c -o asm/test.bin -L asm/test.lst asm/test.asm
+; Thu Nov 16 22:30:41 2023
+
+;Offset	;Hex		;Monitor	;Source
+
+;******  Processing input file: asm/test.asm
+
+.fc00					lfc00
+.fc00	d8		cld			cld
+.fc01	58		cli			cli
+.fc02	a2 ff		ldx #$ff		ldx #$ff
+.fc04	9a		txs			txs
+.fc05	20 27 fc	jsr $fc27		jsr 	alphabet
+.fc08					loop2:
+.fc08	a9 01		lda #$01		lda 	#1
+.fc0a	20 19 fc	jsr $fc19		jsr 	delay
+.fc0d	a9 0d		lda #$0d		lda 	#13
+.fc0f	20 39 fc	jsr $fc39		jsr 	lprintchar
+.fc12	20 27 fc	jsr $fc27		jsr 	alphabet
+.fc15	a9 00		lda #$00		lda 	#0
+.fc17	f0 ef		beq $fc08		bEQ 	loop2
+.fc19					delay:
+.fc19	a0 00		ldy #$00		ldy 	#0
+.fc1b	a2 00		ldx #$00		ldx 	#0
+.fc1d					loop1:
+.fc1d	88		dey			dey
+.fc1e	d0 fd		bne $fc1d		bne 	loop1
+.fc20	ca		dex			dex
+.fc21	d0 fa		bne $fc1d		bne 	loop1
+.fc23	3a		dec a			dec		a
+.fc24	d0 f7		bne $fc1d		bne 	loop1
+.fc26	60		rts			rts
+.fc27					alphabet:
+.fc27	a2 0a		ldx #$0a		ldx 	#10
+.fc29					_loop1:
+.fc29	8a		txa			txa
+.fc2a	18		clc			clc
+.fc2b	69 40		adc #$40		adc 	#$40
+.fc2d	20 39 fc	jsr $fc39		jsr lprintchar
+.fc30	ca		dex			dex
+.fc31	10 f6		bpl $fc29		bpl 	_loop1
+.fc33	a9 2a		lda #$2a		lda 	#42
+.fc35	20 39 fc	jsr $fc39		jsr 	lprintchar
+.fc38	60		rts			rts
+.fc39					lprintchar:
+.fc39	48		pha			pha
+.fc3a					waitfree:
+.fc3a	ad 12 d0	lda $d012		lda $d012
+.fc3d	d0 fb		bne $fc3a		bne waitfree
+.fc3f	68		pla			pla
+.fc40	29 7f		and #$7f		and #$7f
+.fc42	8d 12 d0	sta $d012		sta $d012
+.fc45	60		rts			rts
+>fffa	00 00					.word 	0
+>fffc	00 fc					.word 	$FC00
+>fffe	00 00					.word	0
+
+;******  End of listing

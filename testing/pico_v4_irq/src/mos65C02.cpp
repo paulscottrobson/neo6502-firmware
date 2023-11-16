@@ -16,9 +16,6 @@ void writeChar(uint8_t vChar);
 // mask used for the mux address/data bus: GP0-7
 constexpr uint32_t BUS_MASK = 0xFF;
 
-//
-RPI_PICO_Timer IClock1(1);
-
 volatile uint32_t  clockCount = 0UL;
 uint8_t   resetCount;
 boolean   inReset = false;
@@ -121,7 +118,6 @@ void putData() {
   gpio_put_masked(BUS_MASK, (uint32_t)data);
 }
 
-
 void start_address_program(PIO pio, uint sm, uint offset) {
     address_program_init(pio, sm, offset);
     pio_sm_set_enabled(pio, sm, true);
@@ -148,17 +144,9 @@ void dma_handler() {
   bool write = value.data.flags == 0x3;
   if(write)
   {
-    if (value.data.address == DSP) {
-      int c = value.data.data & 0x7F;
-      if (c >= 97 and c <= 122) c ^= 32;
-      writeChar(c);
-      writeChar("0123456789ABCDEF"[c >> 4]);
-      writeChar("0123456789ABCDEF"[c & 0x0F]);
-      value.data.data = 0;
-    }
     *(mem + value.data.address) = value.data.data;
+    //if (value.data.address == 0xD012) writeChar(value.data.data);
   }
-
   uint8_t* address = mem + value.data.address;
   uint8_t data = *address;
   pio1->txf[0] = data;
@@ -192,7 +180,7 @@ void init6502() {
   start_address_program(pio, 0, offset);
 
   setReset(false);
-  sleep_ms(2000);
+  sleep_ms(200);
   setReset(true);
 }
 
