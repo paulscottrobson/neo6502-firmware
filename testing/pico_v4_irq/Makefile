@@ -33,3 +33,6 @@ build: prelim pio
 
 run: prelim pio
 	pio run -t upload
+
+clean:
+	pio run -t clean

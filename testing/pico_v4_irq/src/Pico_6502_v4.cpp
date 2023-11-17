@@ -14,6 +14,10 @@
 
 #include <PicoDVI.h>
 
+#define CFG_TUD_ENABLED 1
+#define CFG_TUH_ENABLED 1
+#include "tusb.h"
+
 #include "mos65C02.h"
 #include "memory.h"
 
@@ -135,6 +139,7 @@ void setup() {
 
   initDisplay();
   display.print("NEO6502");
+  tusb_init();
   display.println(" RetroComputer v0.001a");
   initmemory();
   init6502();
@@ -153,6 +158,8 @@ void loop() {
    //writeChar(32);
    mem[DSP] = 0;
   }
+
+  tuh_task();
 
   if (f-- == 0) {
     if ((millis() - frameClockTS) >= FRAMETIME) {
