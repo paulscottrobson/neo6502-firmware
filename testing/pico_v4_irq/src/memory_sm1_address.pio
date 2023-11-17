@@ -13,7 +13,7 @@
     pull block
     out pins, 8 ; Write out data
     mov osr, null ; set pins 0-7 to IN
-    out pindirs, 8 side 0[2]
+    out pindirs, 8 side 0[7]
 .wrap
 
 % c-sdk {

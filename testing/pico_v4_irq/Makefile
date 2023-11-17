@@ -18,14 +18,18 @@ endif
 
 all: build
 
-prelim:
+prelim: 
 	$(CDEL) src$(S)binary.h
-	64tass -b -c asm$(S)test.asm -o asm$(S)test.bin -L asm$(S)test.lst
+	$(ASSEMBLER) asm$(S)test.asm -o asm$(S)test.bin -L asm$(S)test.lst
 	$(PYTHON) $(BINDIR)hconvert.py asm$(S)test.bin >src$(S)binary.h
 	touch src$(S)roms.cpp
 
-build: prelim
+pio:
+	tools/pioasm src/memory_sm1_address.pio src/memory_sm1_address.pio.h
+	touch src$(S)mos65c02.cpp
+
+build: prelim pio
 	pio run
 
-run: prelim
+run: prelim pio
 	pio run -t upload

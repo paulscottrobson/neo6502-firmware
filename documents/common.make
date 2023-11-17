@@ -47,7 +47,7 @@ AEMUDIR = $(ROOTDIR)$(S)..$(S)fab-agon-emulator$(S)
 # 
 MAKEOPTS = --no-print-directory
 PYTHON = python3
-ASSEMBLER = 64tass -b -c -Wall
+ASSEMBLER = 64tass -b --mr65c02 -Wall
 ASMEND = 
 #
 #		Export path to the common scripts.

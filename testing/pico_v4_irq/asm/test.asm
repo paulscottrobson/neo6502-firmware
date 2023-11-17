@@ -5,15 +5,20 @@ lfc00
 	cli
 	ldx #$ff
 	txs
-	jsr 	alphabet
+	lda 	#-1
+	sta 	$81
 loop2:
-	lda 	#1
+	lda 	#200
 	jsr 	delay
+	jsr 	alphabet	
+	inc 	$81
+	lda 	$81
+	jsr 	lprinthex
 	lda 	#13
 	jsr 	lprintchar
-	jsr 	alphabet	
 	lda 	#0
-	beq 	loop2
+_opcode:	
+	bra 	loop2			; works. bra loop2 doesn't.
 
 delay:
 	ldy 	#0
@@ -28,15 +33,42 @@ loop1:
 	rts
 
 alphabet:	
-	ldx 	#10
+	ldx 	#5
+	phx
+	ply
 _loop1:
-	txa
+	tya
 	clc
-	adc 	#$40
-	jsr lprintchar
-	dex
+	adc 	#$7C
+	jsr lprinthex
+	dey
 	bpl 	_loop1
 	lda 	#42
+	jsr 	lprinthex
+	rts
+
+lprinthex:
+	pha
+	pha
+	lda 	#32
+	jsr 	lprintchar
+	pla
+	lsr 	a
+	lsr 	a
+	lsr 	a
+	lsr 	a
+	jsr 	lprintnibble
+	pla
+	jsr 	lprintnibble
+	rts
+
+lprintnibble:
+	and 	#15
+	cmp 	#10
+	bcc 	_nothex
+	adc 	#6
+_nothex:
+	adc 	#48
 	jsr 	lprintchar
 	rts
 
@@ -54,3 +86,4 @@ waitfree:
 	.word 	0
 	.word 	$FC00
 	.word	0
+	

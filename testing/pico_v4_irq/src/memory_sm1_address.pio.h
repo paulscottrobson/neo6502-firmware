@@ -29,7 +29,7 @@ static const uint16_t address_program_instructions[] = {
     0x80a0, //  9: pull   block                      
     0x6008, // 10: out    pins, 8                    
     0xa0e3, // 11: mov    osr, null                  
-    0x7288, // 12: out    pindirs, 8      side 0 [2] 
+    0x7788, // 12: out    pindirs, 8      side 0 [7] 
             //     .wrap
 };
 
