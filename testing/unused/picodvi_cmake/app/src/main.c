@@ -58,7 +58,7 @@ int main() {
 	uint frame_ctr = 0;
 	while (true) {
 		for (uint y = 0; y < FRAME_HEIGHT; ++y) {
-			uint y_scroll = (FRAME_HEIGHT - (y + frame_ctr) % FRAME_HEIGHT) ^ 16;
+			uint y_scroll = (FRAME_HEIGHT - (y + frame_ctr) % FRAME_HEIGHT) ^ 0;
 			const uint16_t *scanline = &((const uint16_t*)testcard_320x240)[y_scroll * FRAME_WIDTH];
 			queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 			while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline))
