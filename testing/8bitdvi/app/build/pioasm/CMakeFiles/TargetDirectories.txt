@@ -1,0 +1,3 @@
+/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/pioasm/CMakeFiles/pioasm.dir
+/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/pioasm/CMakeFiles/edit_cache.dir
+/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/pioasm/CMakeFiles/rebuild_cache.dir
