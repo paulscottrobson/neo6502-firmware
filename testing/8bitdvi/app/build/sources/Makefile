@@ -1512,29 +1512,53 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 
-dvi_video.obj: dvi_video.c.obj
-.PHONY : dvi_video.obj
+hardware/dvi_video.obj: hardware/dvi_video.c.obj
+.PHONY : hardware/dvi_video.obj
 
 # target to build an object file
-dvi_video.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj
-.PHONY : dvi_video.c.obj
+hardware/dvi_video.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
+.PHONY : hardware/dvi_video.c.obj
 
-dvi_video.i: dvi_video.c.i
-.PHONY : dvi_video.i
+hardware/dvi_video.i: hardware/dvi_video.c.i
+.PHONY : hardware/dvi_video.i
 
 # target to preprocess a source file
-dvi_video.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/dvi_video.c.i
-.PHONY : dvi_video.c.i
+hardware/dvi_video.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.i
+.PHONY : hardware/dvi_video.c.i
 
-dvi_video.s: dvi_video.c.s
-.PHONY : dvi_video.s
+hardware/dvi_video.s: hardware/dvi_video.c.s
+.PHONY : hardware/dvi_video.s
 
 # target to generate assembly for a file
-dvi_video.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/dvi_video.c.s
-.PHONY : dvi_video.c.s
+hardware/dvi_video.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.s
+.PHONY : hardware/dvi_video.c.s
+
+hardware/usbkeyboard.obj: hardware/usbkeyboard.c.obj
+.PHONY : hardware/usbkeyboard.obj
+
+# target to build an object file
+hardware/usbkeyboard.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
+.PHONY : hardware/usbkeyboard.c.obj
+
+hardware/usbkeyboard.i: hardware/usbkeyboard.c.i
+.PHONY : hardware/usbkeyboard.i
+
+# target to preprocess a source file
+hardware/usbkeyboard.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.i
+.PHONY : hardware/usbkeyboard.c.i
+
+hardware/usbkeyboard.s: hardware/usbkeyboard.c.s
+.PHONY : hardware/usbkeyboard.s
+
+# target to generate assembly for a file
+hardware/usbkeyboard.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.s
+.PHONY : hardware/usbkeyboard.c.s
 
 main.obj: main.c.obj
 .PHONY : main.obj
@@ -1559,30 +1583,6 @@ main.s: main.c.s
 main.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/main.c.s
 .PHONY : main.c.s
-
-usbkeyboard.obj: usbkeyboard.c.obj
-.PHONY : usbkeyboard.obj
-
-# target to build an object file
-usbkeyboard.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
-.PHONY : usbkeyboard.c.obj
-
-usbkeyboard.i: usbkeyboard.c.i
-.PHONY : usbkeyboard.i
-
-# target to preprocess a source file
-usbkeyboard.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.i
-.PHONY : usbkeyboard.c.i
-
-usbkeyboard.s: usbkeyboard.c.s
-.PHONY : usbkeyboard.s
-
-# target to generate assembly for a file
-usbkeyboard.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.s
-.PHONY : usbkeyboard.c.s
 
 # Help Target
 help:
@@ -1765,15 +1765,15 @@ help:
 	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.i"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s"
-	@echo "... dvi_video.obj"
-	@echo "... dvi_video.i"
-	@echo "... dvi_video.s"
+	@echo "... hardware/dvi_video.obj"
+	@echo "... hardware/dvi_video.i"
+	@echo "... hardware/dvi_video.s"
+	@echo "... hardware/usbkeyboard.obj"
+	@echo "... hardware/usbkeyboard.i"
+	@echo "... hardware/usbkeyboard.s"
 	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... usbkeyboard.obj"
-	@echo "... usbkeyboard.i"
-	@echo "... usbkeyboard.s"
 .PHONY : help
 
 

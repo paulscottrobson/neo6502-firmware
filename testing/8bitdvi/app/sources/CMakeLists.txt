@@ -1,5 +1,5 @@
 
-add_executable(hello_dvi main.c dvi_video.c usbkeyboard.c)
+add_executable(hello_dvi main.c hardware/dvi_video.c hardware/usbkeyboard.c)
 
 target_compile_options(hello_dvi PRIVATE -Wall)
 

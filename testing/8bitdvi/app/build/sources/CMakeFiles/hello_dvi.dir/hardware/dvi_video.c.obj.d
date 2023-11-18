@@ -1,5 +1,5 @@
-sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj: \
- /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/dvi_video.c \
+sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/dvi_video.c \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \

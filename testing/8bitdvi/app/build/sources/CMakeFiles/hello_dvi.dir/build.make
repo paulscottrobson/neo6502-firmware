@@ -83,33 +83,33 @@ sources/CMakeFiles/hello_dvi.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/main.c.s"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/main.c -o CMakeFiles/hello_dvi.dir/main.c.s
 
-sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj: sources/CMakeFiles/hello_dvi.dir/flags.make
-sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/dvi_video.c
-sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj: sources/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj"
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj -MF CMakeFiles/hello_dvi.dir/dvi_video.c.obj.d -o CMakeFiles/hello_dvi.dir/dvi_video.c.obj -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/dvi_video.c
+sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj: sources/CMakeFiles/hello_dvi.dir/flags.make
+sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/dvi_video.c
+sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj: sources/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj -MF CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj.d -o CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/dvi_video.c
 
-sources/CMakeFiles/hello_dvi.dir/dvi_video.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/dvi_video.c.i"
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/dvi_video.c > CMakeFiles/hello_dvi.dir/dvi_video.c.i
+sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/dvi_video.c > CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.i
 
-sources/CMakeFiles/hello_dvi.dir/dvi_video.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/dvi_video.c.s"
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/dvi_video.c -o CMakeFiles/hello_dvi.dir/dvi_video.c.s
+sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/dvi_video.c -o CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.s
 
-sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj: sources/CMakeFiles/hello_dvi.dir/flags.make
-sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/usbkeyboard.c
-sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj: sources/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj"
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj -MF CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj.d -o CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/usbkeyboard.c
+sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj: sources/CMakeFiles/hello_dvi.dir/flags.make
+sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/usbkeyboard.c
+sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj: sources/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj -MF CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj.d -o CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/usbkeyboard.c
 
-sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/usbkeyboard.c.i"
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/usbkeyboard.c > CMakeFiles/hello_dvi.dir/usbkeyboard.c.i
+sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/usbkeyboard.c > CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.i
 
-sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/usbkeyboard.c.s"
-	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/usbkeyboard.c -o CMakeFiles/hello_dvi.dir/usbkeyboard.c.s
+sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/usbkeyboard.c -o CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.s
 
 sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: sources/CMakeFiles/hello_dvi.dir/flags.make
 sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c
@@ -1012,8 +1012,8 @@ sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/fam
 # Object files for target hello_dvi
 hello_dvi_OBJECTS = \
 "CMakeFiles/hello_dvi.dir/main.c.obj" \
-"CMakeFiles/hello_dvi.dir/dvi_video.c.obj" \
-"CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj" \
+"CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj" \
+"CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj" \
 "CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" \
 "CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj" \
 "CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj" \
@@ -1084,8 +1084,8 @@ hello_dvi_OBJECTS = \
 hello_dvi_EXTERNAL_OBJECTS =
 
 sources/hello_dvi.elf: sources/CMakeFiles/hello_dvi.dir/main.c.obj
-sources/hello_dvi.elf: sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj
-sources/hello_dvi.elf: sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+sources/hello_dvi.elf: sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
+sources/hello_dvi.elf: sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
 sources/hello_dvi.elf: sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 sources/hello_dvi.elf: sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 sources/hello_dvi.elf: sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj

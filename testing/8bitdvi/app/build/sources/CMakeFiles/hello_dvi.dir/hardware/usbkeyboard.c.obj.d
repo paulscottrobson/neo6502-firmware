@@ -1,5 +1,5 @@
-sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj: \
- /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/usbkeyboard.c \
+sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/usbkeyboard.c \
  /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \

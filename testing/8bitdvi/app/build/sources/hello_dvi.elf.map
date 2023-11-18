@@ -92,14 +92,14 @@ Discarded input sections
  .text          0x00000000        0x0 CMakeFiles/hello_dvi.dir/main.c.obj
  .data          0x00000000        0x0 CMakeFiles/hello_dvi.dir/main.c.obj
  .bss           0x00000000        0x0 CMakeFiles/hello_dvi.dir/main.c.obj
- .text          0x00000000        0x0 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
- .data          0x00000000        0x0 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
- .bss           0x00000000        0x0 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+ .text          0x00000000        0x0 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
+ .data          0x00000000        0x0 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
+ .bss           0x00000000        0x0 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
  .text.drawCharacter
-                0x00000000      0x364 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
- .text          0x00000000        0x0 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
- .data          0x00000000        0x0 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
- .bss           0x00000000        0x0 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x00000000      0x364 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
+ .text          0x00000000        0x0 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
+ .data          0x00000000        0x0 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
+ .bss           0x00000000        0x0 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
  .text          0x00000000        0x0 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .data          0x00000000        0x0 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .bss           0x00000000        0x0 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
@@ -1343,9 +1343,9 @@ Discarded input sections
                 0x00000000       0x50 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .text.board_getchar
                 0x00000000        0xc CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
- .text          0x00000000        0x0 /tmp/ccuvM0AW.o
- .data          0x00000000        0x0 /tmp/ccuvM0AW.o
- .bss           0x00000000        0x0 /tmp/ccuvM0AW.o
+ .text          0x00000000        0x0 /tmp/ccviFsiH.o
+ .data          0x00000000        0x0 /tmp/ccviFsiH.o
+ .bss           0x00000000        0x0 /tmp/ccviFsiH.o
  .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .text          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o)
@@ -1730,7 +1730,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
 .boot2          0x10000000      0x100
                 0x10000000                        __boot2_start__ = .
  *(.boot2)
- .boot2         0x10000000      0x100 /tmp/ccuvM0AW.o
+ .boot2         0x10000000      0x100 /tmp/ccviFsiH.o
                 0x10000100                        __boot2_end__ = .
                 0x00000001                        ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -1800,19 +1800,19 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x100002dc       0x38 CMakeFiles/hello_dvi.dir/main.c.obj
                 0x100002dc                main
  .text.writeCharacter
-                0x10000314      0x4e0 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+                0x10000314      0x4e0 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x10000314                writeCharacter
  .text.startVideo
-                0x100007f4      0x128 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+                0x100007f4      0x128 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x100007f4                startVideo
  .text.tuh_hid_mount_cb
-                0x1000091c       0x60 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x1000091c       0x60 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
                 0x1000091c                tuh_hid_mount_cb
  .text.tuh_hid_umount_cb
-                0x1000097c       0x14 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x1000097c       0x14 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
                 0x1000097c                tuh_hid_umount_cb
  .text.tuh_hid_report_received_cb
-                0x10000990       0x94 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x10000990       0x94 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
                 0x10000990                tuh_hid_report_received_cb
  .text.set_sys_clock_pll
                 0x10000a24       0x78 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
@@ -2538,24 +2538,24 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
 .rodata         0x1000a4e8      0x70c
  *(EXCLUDE_FILE(*libm.a: *libc.a:*lib_a-mem*.o *libgcc.a:) .rodata*)
  .rodata.startVideo.str1.4
-                0x1000a4e8      0x358 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+                0x1000a4e8      0x358 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                                  0x32 (size before relaxing)
  .rodata.tuh_hid_mount_cb.str1.4
-                0x1000a840       0x77 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x1000a840       0x77 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
  .rodata.tuh_hid_umount_cb.str1.4
-                0x1000a840       0x36 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x1000a840       0x36 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
  .rodata.tuh_hid_report_received_cb.str1.4
-                0x1000a840       0x29 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x1000a840       0x29 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
  .rodata.hid2asciiShift
-                0x1000a840       0x65 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x1000a840       0x65 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
                 0x1000a840                hid2asciiShift
  *fill*         0x1000a8a5        0x3 
  .rodata.hid2asciiCtrl
-                0x1000a8a8       0x1e CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x1000a8a8       0x1e CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
                 0x1000a8a8                hid2asciiCtrl
  *fill*         0x1000a8c6        0x2 
  .rodata.hid2ascii
-                0x1000a8c8       0x65 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x1000a8c8       0x65 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
                 0x1000a8c8                hid2ascii
  .rodata.spin_lock_claim_unused.str1.4
                 0x1000a92d       0x1b CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
@@ -2682,10 +2682,10 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  *(vtable)
  *(.time_critical*)
  .time_critical.core1_main
-                0x200000c0       0x20 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+                0x200000c0       0x20 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x200000c0                core1_main
  .time_critical._scanline_callback
-                0x200000e0      0x19c CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+                0x200000e0      0x19c CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x200000e0                _scanline_callback
  .time_critical.mutex_enter_blocking
                 0x2000027c       0x48 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
@@ -2739,7 +2739,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x20000e10                        . = ALIGN (0x4)
  *(.data*)
  .data.font_5x7
-                0x20000e10      0x700 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+                0x20000e10      0x700 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
  .data.striped_spin_lock_num
                 0x20001510        0x1 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
  *fill*         0x20001511        0x3 
@@ -2935,9 +2935,9 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x20003224        0x8 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .bss.alarm_callbacks
                 0x2000322c       0x10 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
- .bss.buffer1   0x2000323c      0x280 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+ .bss.buffer1   0x2000323c      0x280 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x2000323c                buffer1
- .bss.buffer2   0x200034bc      0x280 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+ .bss.buffer2   0x200034bc      0x280 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x200034bc                buffer2
  .bss.chars_available_callback
                 0x2000373c        0x4 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
@@ -2951,14 +2951,14 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  .bss.dma_irq_privdata
                 0x20003788        0x8 CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
  .bss.drivers   0x20003790        0x4 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
- .bss.dvi0      0x20003794      0x2b4 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+ .bss.dvi0      0x20003794      0x2b4 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x20003794                dvi0
  .bss.ep_pool   0x20003a48      0x200 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .bss.errno     0x20003c48        0x4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-reent.o)
                 0x20003c48                errno
  .bss.filter    0x20003c4c        0x4 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .bss.frameCounter
-                0x20003c50        0x4 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+                0x20003c50        0x4 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x20003c50                frameCounter
  .bss.heap_end.0
                 0x20003c54        0x4 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
@@ -2966,13 +2966,13 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  .bss.lazy_vsnprintf
                 0x20003c64        0x4 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .bss.lineCounter
-                0x20003c68        0x4 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+                0x20003c68        0x4 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x20003c68                lineCounter
  .bss.object.0  0x20003c6c       0x18 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
- .bss.palette   0x20003c84      0x200 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+ .bss.palette   0x20003c84      0x200 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x20003c84                palette
  .bss.pools     0x20003e84       0x10 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
- .bss.screen    0x20003e94    0x12c00 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+ .bss.screen    0x20003e94    0x12c00 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x20003e94                screen
  .bss.sf_clz_func
                 0x20016a94        0x4 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
@@ -2988,9 +2988,9 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x20016ab0        0x4 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .bss.uart_instance
                 0x20016ab4        0x4 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
- .bss.xc        0x20016ab8        0x4 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+ .bss.xc        0x20016ab8        0x4 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x20016ab8                xc
- .bss.yc        0x20016abc        0x4 CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+ .bss.yc        0x20016abc        0x4 CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
                 0x20016abc                yc
  .bss._claimed  0x20016ac0        0x2 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
  .bss.claimed   0x20016ac2        0x1 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
@@ -2999,9 +2999,9 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x20016ac4        0x1 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .bss.irq_hander_chain_free_slot_head
                 0x20016ac5        0x1 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
- .bss.kbd_addr  0x20016ac6        0x1 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+ .bss.kbd_addr  0x20016ac6        0x1 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
                 0x20016ac6                kbd_addr
- .bss.kbd_inst  0x20016ac7        0x1 CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+ .bss.kbd_inst  0x20016ac7        0x1 CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
                 0x20016ac7                kbd_inst
  .bss.timer_callbacks_pending
                 0x20016ac8        0x1 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
@@ -3036,8 +3036,8 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x00000001                        ASSERT ((__StackLimit >= __HeapLimit), region RAM overflowed)
                 0x00000001                        ASSERT (((__binary_info_header_end - __logical_binary_start) <= 0x100), Binary info must be in first 256 bytes of the binary)
 LOAD CMakeFiles/hello_dvi.dir/main.c.obj
-LOAD CMakeFiles/hello_dvi.dir/dvi_video.c.obj
-LOAD CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+LOAD CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
+LOAD CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
 LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -3103,7 +3103,7 @@ LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/ven
 LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
-LOAD /tmp/ccuvM0AW.o
+LOAD /tmp/ccviFsiH.o
 LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a
 LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 START GROUP
@@ -3129,9 +3129,9 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000004a       0x2c CMakeFiles/hello_dvi.dir/main.c.obj
  .ARM.attributes
-                0x00000076       0x2c CMakeFiles/hello_dvi.dir/dvi_video.c.obj
+                0x00000076       0x2c CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
  .ARM.attributes
-                0x000000a2       0x2c CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+                0x000000a2       0x2c CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
  .ARM.attributes
                 0x000000ce       0x2c CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .ARM.attributes
@@ -3245,7 +3245,7 @@ LOAD linker stubs
  .ARM.attributes
                 0x000009d4       0x2c CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .ARM.attributes
-                0x00000a00       0x22 /tmp/ccuvM0AW.o
+                0x00000a00       0x22 /tmp/ccviFsiH.o
  .ARM.attributes
                 0x00000a22       0x1e /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
@@ -3288,8 +3288,8 @@ LOAD linker stubs
 .comment        0x00000000       0x3c
  .comment       0x00000000       0x3c CMakeFiles/hello_dvi.dir/main.c.obj
                                  0x1f (size before relaxing)
- .comment       0x0000003c       0x1f CMakeFiles/hello_dvi.dir/dvi_video.c.obj
- .comment       0x0000003c       0x1f CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj
+ .comment       0x0000003c       0x1f CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
+ .comment       0x0000003c       0x1f CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
  .comment       0x0000003c       0x1f CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .comment       0x0000003c       0x1f CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .comment       0x0000003c       0x1f CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj

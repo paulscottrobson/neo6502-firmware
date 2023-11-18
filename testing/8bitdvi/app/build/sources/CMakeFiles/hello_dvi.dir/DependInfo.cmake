@@ -178,9 +178,9 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c" "sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj" "gcc" "sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj.d"
   "/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c" "sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj" "gcc" "sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj.d"
   "/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c" "sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" "gcc" "sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d"
-  "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/dvi_video.c" "sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj" "gcc" "sources/CMakeFiles/hello_dvi.dir/dvi_video.c.obj.d"
+  "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/dvi_video.c" "sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj" "gcc" "sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj.d"
+  "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/hardware/usbkeyboard.c" "sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj" "gcc" "sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/main.c" "sources/CMakeFiles/hello_dvi.dir/main.c.obj" "gcc" "sources/CMakeFiles/hello_dvi.dir/main.c.obj.d"
-  "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/sources/usbkeyboard.c" "sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj" "gcc" "sources/CMakeFiles/hello_dvi.dir/usbkeyboard.c.obj.d"
   "/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp" "sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj" "gcc" "sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj.d"
   )
 
