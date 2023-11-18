@@ -22,12 +22,20 @@
 
 struct dvi_inst dvi0;
 
-void core1_main() {
+void __not_in_flash_func(core1_main)() {
 	dvi_register_irqs_this_core(&dvi0, DMA_IRQ_0);
-	while (queue_is_empty(&dvi0.q_colour_valid))
-		__wfe();
+//	while (queue_is_empty(&dvi0.q_colour_valid))
+//		__wfe();
 	dvi_start(&dvi0);
 	dvi_scanbuf_main_16bpp(&dvi0);
+}
+
+uint16_t data[FRAME_WIDTH];
+
+void __not_in_flash_func(_scanline_callback)(void) {
+	uint16_t *scanline = data;
+	queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
+	while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline));
 }
 
 static const struct dvi_serialiser_cfg pico_neo6502_cfg = {
@@ -47,6 +55,10 @@ int main() {
 
 	dvi0.timing = &DVI_TIMING;
 	dvi0.ser_cfg = pico_neo6502_cfg;
+	dvi0.scanline_callback = _scanline_callback;
+
+	for (int i = 0;i < 256;i++) data[i] = i*257;
+
 	dvi_init(&dvi0, next_striped_spin_lock_num(), next_striped_spin_lock_num());
 
 	// Core 1 will wait until it sees the first colour buffer, then start up the
@@ -57,18 +69,7 @@ int main() {
 	// returned to us. Use frame_ctr to scroll the image
 	uint frame_ctr = 0;
 
-	uint16_t data[FRAME_WIDTH];
+	uint16_t *scanline = data;
+	queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 
-	while (true) {
-		for (int i = 0;i < FRAME_WIDTH;i++) data[i] = random();
-		for (uint y = 0; y < FRAME_HEIGHT; ++y) {
-			//uint y_scroll = (y + frame_ctr) % FRAME_HEIGHT;
-			//const uint16_t *scanline = &((const uint16_t*)testcard_320x240)[y_scroll * FRAME_WIDTH];
-			uint16_t *scanline = data;
-			queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
-			while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline))
-				;
-		}
-		++frame_ctr;
-	}
 }

@@ -1941,7 +1941,6 @@ src/CMakeFiles/hello_dvi.dir/main.c.obj: /home/paulr/Projects/neo6502-firmware/t
   /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_serialiser.h \
   /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_timing.h \
   /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/util_queue_u32_inline.h \
-  /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/testcard_320x240_rgb565.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/alloca.h \
@@ -1988,8 +1987,6 @@ src/CMakeFiles/hello_dvi.dir/main.c.obj: /home/paulr/Projects/neo6502-firmware/t
 /usr/arm-none-eabi/include/c++/13.2.0/bits/std_abs.h:
 
 /usr/arm-none-eabi/include/c++/13.2.0/arm-none-eabi/thumb/v6-m/nofp/bits/os_defines.h:
-
-/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/testcard_320x240_rgb565.h:
 
 /usr/arm-none-eabi/include/c++/13.2.0/arm-none-eabi/thumb/v6-m/nofp/bits/cpu_defines.h:
 
