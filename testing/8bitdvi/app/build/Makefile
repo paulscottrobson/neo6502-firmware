@@ -191,7 +191,7 @@ libdvi_dvi_serialiser_pio_h: cmake_check_build_system
 
 # fast build rule for target.
 libdvi_dvi_serialiser_pio_h/fast:
-	$(MAKE) $(MAKESILENT) -f libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build.make libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build
+	$(MAKE) $(MAKESILENT) -f libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build.make libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build
 .PHONY : libdvi_dvi_serialiser_pio_h/fast
 
 #=============================================================================
@@ -204,7 +204,7 @@ libdvi_tmds_encode_1bpp_pio_h: cmake_check_build_system
 
 # fast build rule for target.
 libdvi_tmds_encode_1bpp_pio_h/fast:
-	$(MAKE) $(MAKESILENT) -f libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build.make libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build
+	$(MAKE) $(MAKESILENT) -f libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build.make libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build
 .PHONY : libdvi_tmds_encode_1bpp_pio_h/fast
 
 #=============================================================================
@@ -217,7 +217,7 @@ hello_dvi: cmake_check_build_system
 
 # fast build rule for target.
 hello_dvi/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/hello_dvi.dir/build.make src/CMakeFiles/hello_dvi.dir/build
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/build
 .PHONY : hello_dvi/fast
 
 #=============================================================================
@@ -230,7 +230,7 @@ ELF2UF2Build: cmake_check_build_system
 
 # fast build rule for target.
 ELF2UF2Build/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/ELF2UF2Build.dir/build.make src/CMakeFiles/ELF2UF2Build.dir/build
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/ELF2UF2Build.dir/build.make sources/CMakeFiles/ELF2UF2Build.dir/build
 .PHONY : ELF2UF2Build/fast
 
 # Help Target

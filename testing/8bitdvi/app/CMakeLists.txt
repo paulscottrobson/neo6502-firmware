@@ -16,9 +16,8 @@ set(DVI_DEFAULT_SERIAL_CONFIG "pico_sock_cfg" CACHE STRING
 	"Select a default pin configuration from common_dvi_pin_configs.h")
 
 include_directories(
-	assets
 	include
 	)
 
-add_subdirectory(libs/PicoDVI/software/libdvi)
-add_subdirectory(src)
+add_subdirectory(libraries/PicoDVI/software/libdvi)
+add_subdirectory(sources)

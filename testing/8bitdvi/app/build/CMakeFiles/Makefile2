@@ -64,37 +64,37 @@ CMAKE_BINARY_DIR = /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/bui
 
 # The main recursive "all" target.
 all: pico-sdk/all
-all: libs/PicoDVI/software/libdvi/all
-all: src/all
+all: libraries/PicoDVI/software/libdvi/all
+all: sources/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
 preinstall: pico-sdk/preinstall
-preinstall: libs/PicoDVI/software/libdvi/preinstall
-preinstall: src/preinstall
+preinstall: libraries/PicoDVI/software/libdvi/preinstall
+preinstall: sources/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: pico-sdk/clean
-clean: libs/PicoDVI/software/libdvi/clean
-clean: src/clean
+clean: libraries/PicoDVI/software/libdvi/clean
+clean: sources/clean
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory libs/PicoDVI/software/libdvi
+# Directory level rules for directory libraries/PicoDVI/software/libdvi
 
 # Recursive "all" directory target.
-libs/PicoDVI/software/libdvi/all:
-.PHONY : libs/PicoDVI/software/libdvi/all
+libraries/PicoDVI/software/libdvi/all:
+.PHONY : libraries/PicoDVI/software/libdvi/all
 
 # Recursive "preinstall" directory target.
-libs/PicoDVI/software/libdvi/preinstall:
-.PHONY : libs/PicoDVI/software/libdvi/preinstall
+libraries/PicoDVI/software/libdvi/preinstall:
+.PHONY : libraries/PicoDVI/software/libdvi/preinstall
 
 # Recursive "clean" directory target.
-libs/PicoDVI/software/libdvi/clean: libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/clean
-libs/PicoDVI/software/libdvi/clean: libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/clean
-.PHONY : libs/PicoDVI/software/libdvi/clean
+libraries/PicoDVI/software/libdvi/clean: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/clean
+libraries/PicoDVI/software/libdvi/clean: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/clean
+.PHONY : libraries/PicoDVI/software/libdvi/clean
 
 #=============================================================================
 # Directory level rules for directory pico-sdk
@@ -1518,21 +1518,21 @@ pico-sdk/tools/clean:
 .PHONY : pico-sdk/tools/clean
 
 #=============================================================================
-# Directory level rules for directory src
+# Directory level rules for directory sources
 
 # Recursive "all" directory target.
-src/all: src/CMakeFiles/hello_dvi.dir/all
-src/all: src/CMakeFiles/ELF2UF2Build.dir/all
-.PHONY : src/all
+sources/all: sources/CMakeFiles/hello_dvi.dir/all
+sources/all: sources/CMakeFiles/ELF2UF2Build.dir/all
+.PHONY : sources/all
 
 # Recursive "preinstall" directory target.
-src/preinstall:
-.PHONY : src/preinstall
+sources/preinstall:
+.PHONY : sources/preinstall
 
 # Recursive "clean" directory target.
-src/clean: src/CMakeFiles/hello_dvi.dir/clean
-src/clean: src/CMakeFiles/ELF2UF2Build.dir/clean
-.PHONY : src/clean
+sources/clean: sources/CMakeFiles/hello_dvi.dir/clean
+sources/clean: sources/CMakeFiles/ELF2UF2Build.dir/clean
+.PHONY : sources/clean
 
 #=============================================================================
 # Target rules for target pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir
@@ -1665,111 +1665,111 @@ pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bu
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/clean
 
 #=============================================================================
-# Target rules for target libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir
+# Target rules for target libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir
 
 # All Build rule for target.
-libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all: pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/all
-	$(MAKE) $(MAKESILENT) -f libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build.make libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/depend
-	$(MAKE) $(MAKESILENT) -f libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build.make libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=91 "Built target libdvi_dvi_serialiser_pio_h"
-.PHONY : libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
+libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all: pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/all
+	$(MAKE) $(MAKESILENT) -f libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build.make libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/depend
+	$(MAKE) $(MAKESILENT) -f libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build.make libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=92 "Built target libdvi_dvi_serialiser_pio_h"
+.PHONY : libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
 
 # Build rule for subdir invocation for target.
-libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/rule: cmake_check_build_system
+libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles 9
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles 0
-.PHONY : libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/rule
+.PHONY : libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/rule
 
 # Convenience name for target.
-libdvi_dvi_serialiser_pio_h: libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/rule
+libdvi_dvi_serialiser_pio_h: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/rule
 .PHONY : libdvi_dvi_serialiser_pio_h
 
 # clean rule for target.
-libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/clean:
-	$(MAKE) $(MAKESILENT) -f libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build.make libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/clean
-.PHONY : libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/clean
+libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/build.make libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/clean
+.PHONY : libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/clean
 
 #=============================================================================
-# Target rules for target libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir
+# Target rules for target libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir
 
 # All Build rule for target.
-libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all: pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/all
-	$(MAKE) $(MAKESILENT) -f libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build.make libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/depend
-	$(MAKE) $(MAKESILENT) -f libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build.make libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=92 "Built target libdvi_tmds_encode_1bpp_pio_h"
-.PHONY : libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all
+libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all: pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/all
+	$(MAKE) $(MAKESILENT) -f libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build.make libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/depend
+	$(MAKE) $(MAKESILENT) -f libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build.make libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=93 "Built target libdvi_tmds_encode_1bpp_pio_h"
+.PHONY : libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all
 
 # Build rule for subdir invocation for target.
-libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/rule: cmake_check_build_system
+libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles 9
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles 0
-.PHONY : libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/rule
+.PHONY : libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/rule
 
 # Convenience name for target.
-libdvi_tmds_encode_1bpp_pio_h: libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/rule
+libdvi_tmds_encode_1bpp_pio_h: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/rule
 .PHONY : libdvi_tmds_encode_1bpp_pio_h
 
 # clean rule for target.
-libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/clean:
-	$(MAKE) $(MAKESILENT) -f libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build.make libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/clean
-.PHONY : libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/clean
+libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/build.make libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/clean
+.PHONY : libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/clean
 
 #=============================================================================
-# Target rules for target src/CMakeFiles/hello_dvi.dir
+# Target rules for target sources/CMakeFiles/hello_dvi.dir
 
 # All Build rule for target.
-src/CMakeFiles/hello_dvi.dir/all: pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/all
-src/CMakeFiles/hello_dvi.dir/all: libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
-src/CMakeFiles/hello_dvi.dir/all: libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all
-src/CMakeFiles/hello_dvi.dir/all: src/CMakeFiles/ELF2UF2Build.dir/all
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/hello_dvi.dir/build.make src/CMakeFiles/hello_dvi.dir/depend
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/hello_dvi.dir/build.make src/CMakeFiles/hello_dvi.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 "Built target hello_dvi"
-.PHONY : src/CMakeFiles/hello_dvi.dir/all
+sources/CMakeFiles/hello_dvi.dir/all: pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/all
+sources/CMakeFiles/hello_dvi.dir/all: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
+sources/CMakeFiles/hello_dvi.dir/all: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all
+sources/CMakeFiles/hello_dvi.dir/all: sources/CMakeFiles/ELF2UF2Build.dir/all
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/depend
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91 "Built target hello_dvi"
+.PHONY : sources/CMakeFiles/hello_dvi.dir/all
 
 # Build rule for subdir invocation for target.
-src/CMakeFiles/hello_dvi.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles 90
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/hello_dvi.dir/all
+sources/CMakeFiles/hello_dvi.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles 91
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sources/CMakeFiles/hello_dvi.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles 0
-.PHONY : src/CMakeFiles/hello_dvi.dir/rule
+.PHONY : sources/CMakeFiles/hello_dvi.dir/rule
 
 # Convenience name for target.
-hello_dvi: src/CMakeFiles/hello_dvi.dir/rule
+hello_dvi: sources/CMakeFiles/hello_dvi.dir/rule
 .PHONY : hello_dvi
 
 # clean rule for target.
-src/CMakeFiles/hello_dvi.dir/clean:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/hello_dvi.dir/build.make src/CMakeFiles/hello_dvi.dir/clean
-.PHONY : src/CMakeFiles/hello_dvi.dir/clean
+sources/CMakeFiles/hello_dvi.dir/clean:
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/clean
+.PHONY : sources/CMakeFiles/hello_dvi.dir/clean
 
 #=============================================================================
-# Target rules for target src/CMakeFiles/ELF2UF2Build.dir
+# Target rules for target sources/CMakeFiles/ELF2UF2Build.dir
 
 # All Build rule for target.
-src/CMakeFiles/ELF2UF2Build.dir/all:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/ELF2UF2Build.dir/build.make src/CMakeFiles/ELF2UF2Build.dir/depend
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/ELF2UF2Build.dir/build.make src/CMakeFiles/ELF2UF2Build.dir/build
+sources/CMakeFiles/ELF2UF2Build.dir/all:
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/ELF2UF2Build.dir/build.make sources/CMakeFiles/ELF2UF2Build.dir/depend
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/ELF2UF2Build.dir/build.make sources/CMakeFiles/ELF2UF2Build.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target ELF2UF2Build"
-.PHONY : src/CMakeFiles/ELF2UF2Build.dir/all
+.PHONY : sources/CMakeFiles/ELF2UF2Build.dir/all
 
 # Build rule for subdir invocation for target.
-src/CMakeFiles/ELF2UF2Build.dir/rule: cmake_check_build_system
+sources/CMakeFiles/ELF2UF2Build.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles 8
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/ELF2UF2Build.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sources/CMakeFiles/ELF2UF2Build.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles 0
-.PHONY : src/CMakeFiles/ELF2UF2Build.dir/rule
+.PHONY : sources/CMakeFiles/ELF2UF2Build.dir/rule
 
 # Convenience name for target.
-ELF2UF2Build: src/CMakeFiles/ELF2UF2Build.dir/rule
+ELF2UF2Build: sources/CMakeFiles/ELF2UF2Build.dir/rule
 .PHONY : ELF2UF2Build
 
 # clean rule for target.
-src/CMakeFiles/ELF2UF2Build.dir/clean:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/ELF2UF2Build.dir/build.make src/CMakeFiles/ELF2UF2Build.dir/clean
-.PHONY : src/CMakeFiles/ELF2UF2Build.dir/clean
+sources/CMakeFiles/ELF2UF2Build.dir/clean:
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/ELF2UF2Build.dir/build.make sources/CMakeFiles/ELF2UF2Build.dir/clean
+.PHONY : sources/CMakeFiles/ELF2UF2Build.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

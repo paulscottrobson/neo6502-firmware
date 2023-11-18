@@ -40,8 +40,8 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/pico-sdk/cmake_install.cmake")
-  include("/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/libs/PicoDVI/software/libdvi/cmake_install.cmake")
-  include("/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src/cmake_install.cmake")
+  include("/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/libraries/PicoDVI/software/libdvi/cmake_install.cmake")
+  include("/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/sources/cmake_install.cmake")
 
 endif()
 

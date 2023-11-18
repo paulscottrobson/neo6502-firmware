@@ -1,8 +1,8 @@
 # Hashes of file build rules.
-775fc9e69226c1e26ae47e177a0618ef libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h
-775fc9e69226c1e26ae47e177a0618ef libs/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h
-04142218a7ecfcb09cff418f5b0b3f25 libs/PicoDVI/software/libdvi/dvi_serialiser.pio.h
-e24d22efc6b4359ccd4d0241f716fcd6 libs/PicoDVI/software/libdvi/tmds_encode_1bpp.pio.h
+48b2e1db97a95924229ba738eb4b0084 libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h
+48b2e1db97a95924229ba738eb4b0084 libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h
+59dc8d7fed525e243847a67a43419e9c libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h
+c15beec217bb7d810bdfa2330082e5f7 libraries/PicoDVI/software/libdvi/tmds_encode_1bpp.pio.h
 dc92d2be8002ec3ec88f8c6dff14903a pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin
 dc92d2be8002ec3ec88f8c6dff14903a pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm
 c66aeb728abd4c4304584658c42b3d87 pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
@@ -18,12 +18,12 @@ b9c1b23600fd009906bff7c3a4a8f0f6 pico-sdk/src/rp2_common/pico_cyw43_driver/pioas
 cc76434c0e542783293471f8f6115047 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-mkdir
 41d22d9aa4cb5499a310289afe1f1dbd pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch
 4c0adfc2aebb4ff8b930b872164b9b8b pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-update
-4a50fcccf1dfc17f6f855c54af2473d3 src/CMakeFiles/ELF2UF2Build
-e5f00a863e986eb70a47fd911585e708 src/CMakeFiles/ELF2UF2Build-complete
-fab32c66ee1f5c4139e6c87811b8c812 src/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-build
-1f120be85f4f9c1136ff12b155e1fc69 src/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-configure
-1bed34d8259491ace85fed1db441049b src/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-download
-f83084514f91e24fb00b9682fce436ac src/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-install
-03fe1c28f6ef7e11a9aed81a3d94d164 src/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-mkdir
-d9b87652139d5b18f97a40fe4ca3270c src/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-patch
-c60eaec97d488b143c391a0233188af5 src/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-update
+9c9fc8a08da90855554db2c0a694e2a5 sources/CMakeFiles/ELF2UF2Build
+633868299108f83d41a156e9e715f0d5 sources/CMakeFiles/ELF2UF2Build-complete
+fab32c66ee1f5c4139e6c87811b8c812 sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-build
+d3865f343d86eb7343605ba799fb013a sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-configure
+b46df5b7bec9f56517534dc8b1209153 sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-download
+f83084514f91e24fb00b9682fce436ac sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-install
+bfd111629312b9a6bf91e482963e6a8c sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-mkdir
+afe2ec040a930653f4f16a9f16e15edc sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-patch
+ac03115ab94d6486609af0a87fc980bd sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-update
