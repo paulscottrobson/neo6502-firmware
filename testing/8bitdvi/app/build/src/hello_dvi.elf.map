@@ -94,10 +94,6 @@ Discarded input sections
  .text          0x00000000        0x0 CMakeFiles/hello_dvi.dir/main.c.obj
  .data          0x00000000        0x0 CMakeFiles/hello_dvi.dir/main.c.obj
  .bss           0x00000000        0x0 CMakeFiles/hello_dvi.dir/main.c.obj
- .data.testcard_320x240_rgb565_bin_len
-                0x00000000        0x4 CMakeFiles/hello_dvi.dir/main.c.obj
- .data.testcard_320x240
-                0x00000000    0x25800 CMakeFiles/hello_dvi.dir/main.c.obj
  .text          0x00000000        0x0 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .data          0x00000000        0x0 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .bss           0x00000000        0x0 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
@@ -1214,9 +1210,9 @@ Discarded input sections
                 0x00000000       0xa8 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .text.pio_sm_drain_tx_fifo
                 0x00000000       0x48 CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
- .text          0x00000000        0x0 /tmp/ccqc3WhO.o
- .data          0x00000000        0x0 /tmp/ccqc3WhO.o
- .bss           0x00000000        0x0 /tmp/ccqc3WhO.o
+ .text          0x00000000        0x0 /tmp/ccuFYBdP.o
+ .data          0x00000000        0x0 /tmp/ccuFYBdP.o
+ .bss           0x00000000        0x0 /tmp/ccuFYBdP.o
  .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .text          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o)
@@ -1605,7 +1601,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
 .boot2          0x10000000      0x100
                 0x10000000                        __boot2_start__ = .
  *(.boot2)
- .boot2         0x10000000      0x100 /tmp/ccqc3WhO.o
+ .boot2         0x10000000      0x100 /tmp/ccuFYBdP.o
                 0x10000100                        __boot2_end__ = .
                 0x00000001                        ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -2498,7 +2494,7 @@ LOAD CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj
 LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
 LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
 LOAD CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
-LOAD /tmp/ccqc3WhO.o
+LOAD /tmp/ccuFYBdP.o
 LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a
 LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 START GROUP
@@ -2616,7 +2612,7 @@ LOAD linker stubs
  .ARM.attributes
                 0x000007c4       0x2c CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .ARM.attributes
-                0x000007f0       0x22 /tmp/ccqc3WhO.o
+                0x000007f0       0x22 /tmp/ccuFYBdP.o
  .ARM.attributes
                 0x00000812       0x1e /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .ARM.attributes

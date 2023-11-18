@@ -90,5 +90,4 @@ src/CMakeFiles/hello_dvi.dir/main.c.obj: \
  /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h \
  /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/util_queue_u32_inline.h \
  /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_serialiser.h \
- /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/include/common_dvi_pin_configs.h \
- /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/testcard_320x240_rgb565.h
+ /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/include/common_dvi_pin_configs.h

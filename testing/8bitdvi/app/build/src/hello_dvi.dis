@@ -8540,7 +8540,7 @@ Disassembly of section .data:
 2000015e:	f381 8810 	msr	PRIMASK, r1
 20000162:	0028      	movs	r0, r5
 20000164:	0031      	movs	r1, r6
-20000166:	f000 fcc7 	bl	20000af8 <__best_effort_wfe_or_timeout_veneer>
+20000166:	f000 fcdf 	bl	20000b28 <__best_effort_wfe_or_timeout_veneer>
 2000016a:	2800      	cmp	r0, #0
 2000016c:	d1ed      	bne.n	2000014a <mutex_try_enter_block_until+0x42>
 2000016e:	6822      	ldr	r2, [r4, #0]
@@ -9097,7 +9097,7 @@ Disassembly of section .data:
 20000600:	6033      	str	r3, [r6, #0]
 20000602:	f385 8810 	msr	PRIMASK, r5
 20000606:	4833      	ldr	r0, [pc, #204]	@ (200006d4 <dvi_dma_irq_handler+0x508>)
-20000608:	f000 fa8e 	bl	20000b28 <__panic_veneer>
+20000608:	f000 fa76 	bl	20000af8 <__panic_veneer>
 2000060c:	f3bf 8f5f 	dmb	sy
 20000610:	602b      	str	r3, [r5, #0]
 20000612:	f380 8810 	msr	PRIMASK, r0
@@ -9671,14 +9671,14 @@ Disassembly of section .data:
 20000af4:	4770      	bx	lr
 20000af6:	46c0      	nop			@ (mov r8, r8)
 
-20000af8 <__best_effort_wfe_or_timeout_veneer>:
+20000af8 <__panic_veneer>:
 20000af8:	b401      	push	{r0}
-20000afa:	4802      	ldr	r0, [pc, #8]	@ (20000b04 <__best_effort_wfe_or_timeout_veneer+0xc>)
+20000afa:	4802      	ldr	r0, [pc, #8]	@ (20000b04 <__panic_veneer+0xc>)
 20000afc:	4684      	mov	ip, r0
 20000afe:	bc01      	pop	{r0}
 20000b00:	4760      	bx	ip
 20000b02:	bf00      	nop
-20000b04:	10001309 	.word	0x10001309
+20000b04:	10002239 	.word	0x10002239
 
 20000b08 <__interp_restore_veneer>:
 20000b08:	b401      	push	{r0}
@@ -9698,14 +9698,14 @@ Disassembly of section .data:
 20000b22:	bf00      	nop
 20000b24:	100036f5 	.word	0x100036f5
 
-20000b28 <__panic_veneer>:
+20000b28 <__best_effort_wfe_or_timeout_veneer>:
 20000b28:	b401      	push	{r0}
-20000b2a:	4802      	ldr	r0, [pc, #8]	@ (20000b34 <__panic_veneer+0xc>)
+20000b2a:	4802      	ldr	r0, [pc, #8]	@ (20000b34 <__best_effort_wfe_or_timeout_veneer+0xc>)
 20000b2c:	4684      	mov	ip, r0
 20000b2e:	bc01      	pop	{r0}
 20000b30:	4760      	bx	ip
 20000b32:	bf00      	nop
-20000b34:	10002239 	.word	0x10002239
+20000b34:	10001309 	.word	0x10001309
 
 20000b38 <striped_spin_lock_num>:
 20000b38:	00000010                                ....
