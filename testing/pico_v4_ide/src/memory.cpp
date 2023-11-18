@@ -1,9 +1,9 @@
 // 
 // Author: Rien Matthijsse
 // 
+#include "common.h"
 #include "include/memory.h"
 //#include "sound.h"
-
 #include "include/roms.h"
 
 /// <summary>

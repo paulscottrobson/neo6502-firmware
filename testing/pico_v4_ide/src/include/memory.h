@@ -5,8 +5,6 @@
 #ifndef _MEMORY_h
 #define _MEMORY_h
 
-#include "Arduino.h"
-
 #define MEMORY_SIZE  0x10000 // 64k
 
 #define KBD   0xd010

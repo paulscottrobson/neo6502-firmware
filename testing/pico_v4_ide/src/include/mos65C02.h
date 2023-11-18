@@ -5,7 +5,6 @@
 #ifndef _MOS65C02_h
 #define _MOS65C02_h
 
-#include "Arduino.h"
 #include "pins.h"
 #include "memory.h"
 
