@@ -68,10 +68,6 @@ int main() {
 	dvi0.ser_cfg = pico_neo6502_cfg;
 	dvi0.scanline_callback = _scanline_callback;
 
-	for (int i = 0;i < 320;i++) {
-		buffer1[i] = i*257;
-		buffer2[i] = random();
-	}
 	dvi_init(&dvi0, next_striped_spin_lock_num(), next_striped_spin_lock_num());
 
 	// Core 1 will wait until it sees the first colour buffer, then start up the
