@@ -24,18 +24,29 @@ struct dvi_inst dvi0;
 
 void __not_in_flash_func(core1_main)() {
 	dvi_register_irqs_this_core(&dvi0, DMA_IRQ_0);
-//	while (queue_is_empty(&dvi0.q_colour_valid))
-//		__wfe();
 	dvi_start(&dvi0);
 	dvi_scanbuf_main_16bpp(&dvi0);
 }
 
-uint16_t data[FRAME_WIDTH];
+uint8_t screen[FRAME_WIDTH * FRAME_HEIGHT];
+
+uint16_t buffer1[FRAME_WIDTH],buffer2[FRAME_WIDTH];
+	uint frameCounter = 0,lineCounter;
 
 void __not_in_flash_func(_scanline_callback)(void) {
-	uint16_t *scanline = data;
-	queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
+	uint16_t *scanline;
 	while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline));
+	scanline = (lineCounter & 1) ? buffer1 : buffer2;
+	queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
+	lineCounter++;
+	scanline = (lineCounter & 1) ? buffer1 : buffer2;
+	for (int i = 0;i < FRAME_WIDTH;i++) {
+		scanline[i] = (i >> 2)+(lineCounter << 6);
+	}
+	if (lineCounter == FRAME_HEIGHT) {
+		frameCounter++;
+		lineCounter = 0;
+	}
 }
 
 static const struct dvi_serialiser_cfg pico_neo6502_cfg = {
@@ -57,8 +68,10 @@ int main() {
 	dvi0.ser_cfg = pico_neo6502_cfg;
 	dvi0.scanline_callback = _scanline_callback;
 
-	for (int i = 0;i < 256;i++) data[i] = i*257;
-
+	for (int i = 0;i < 320;i++) {
+		buffer1[i] = i*257;
+		buffer2[i] = random();
+	}
 	dvi_init(&dvi0, next_striped_spin_lock_num(), next_striped_spin_lock_num());
 
 	// Core 1 will wait until it sees the first colour buffer, then start up the
@@ -66,10 +79,18 @@ int main() {
 	multicore_launch_core1(core1_main);
 
 	// Pass out pointers into our preprepared image, discard the pointers when
-	// returned to us. Use frame_ctr to scroll the image
-	uint frame_ctr = 0;
+	// returned to us. Use frameCounter to scroll the image
 
-	uint16_t *scanline = data;
+	uint16_t *scanline = buffer1;
+	lineCounter = 1;
 	queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 
+    gpio_init(20);
+    gpio_set_dir(20, GPIO_OUT);
+    while (1) {
+        gpio_put(20, 0);
+        sleep_ms(250);
+        gpio_put(20, 1);
+        sleep_ms(100);
+    }	
 }
