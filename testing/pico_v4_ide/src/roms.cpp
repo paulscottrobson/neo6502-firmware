@@ -3,9 +3,6 @@
 // 
 
 #include "common.h"
-#include "include/roms.h"
-#include "include/memory.h"
-
 #include "data/binary.h"
 
 #define MAX_ROMS  1
