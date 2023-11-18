@@ -9,8 +9,7 @@
 #define  UCASE_ONLY
 
 #include <PicoDVI.h>
-#include "include/mos65C02.h"
-#include "include/memory.h"
+#include "common.h"
 
 #define FRAMERATE       10 // frames per sec
 #define FRAMETIME     1000 / FRAMERATE  // msec
@@ -123,14 +122,14 @@ void initDisplay() {
 /// setup emulator
 /// </summary>
 void setup() {
-  sleep_ms(2000);
+  sleep_ms(500);
 
   if (!display.begin()) {
   }
 
   initDisplay();
   display.print("NEO6502");
-  display.println(" RetroComputer v0.001a");
+  display.println(" RetroComputer v0.002a");
   initmemory();
   init6502();
   clockCount = 0UL;
