@@ -3,6 +3,7 @@ include($ENV{PICO_SDK_PATH}/pico_sdk_init.cmake)
 project(hello_dvi C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
+
 pico_sdk_init()
 
 add_compile_options(-Wall)

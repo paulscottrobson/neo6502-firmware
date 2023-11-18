@@ -827,6 +827,160 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s
 
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c > CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
+
+src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
+
 # Object files for target hello_dvi
 hello_dvi_OBJECTS = \
 "CMakeFiles/hello_dvi.dir/main.c.obj" \
@@ -883,7 +1037,18 @@ hello_dvi_OBJECTS = \
 "CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj" \
 "CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj" \
 "CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj" \
-"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj"
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj" \
+"CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj"
 
 # External object files for target hello_dvi
 hello_dvi_EXTERNAL_OBJECTS =
@@ -943,10 +1108,21 @@ src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/build.make
 src/hello_dvi.elf: pico-sdk/src/rp2_common/boot_stage2/bs2_default_padded_checksummed.S
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Linking CXX executable hello_dvi.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Linking CXX executable hello_dvi.elf"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/hello_dvi.dir/link.txt --verbose=$(VERBOSE)
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-objcopy -Oihex /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src/hello_dvi.elf hello_dvi.hex
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-objcopy -Obinary /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src/hello_dvi.elf hello_dvi.bin

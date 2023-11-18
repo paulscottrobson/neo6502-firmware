@@ -25,6 +25,8 @@ set(CMAKE_ASM_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_ASM
+  "CFG_TUSB_MCU=OPT_MCU_RP2040"
+  "CFG_TUSB_OS=OPT_OS_PICO"
   "LIB_PICO_BIT_OPS=1"
   "LIB_PICO_BIT_OPS_PICO=1"
   "LIB_PICO_DIVIDER=1"
@@ -53,6 +55,8 @@ set(CMAKE_TARGET_DEFINITIONS_ASM
   "LIB_PICO_SYNC_SEM=1"
   "LIB_PICO_TIME=1"
   "LIB_PICO_UTIL=1"
+  "LIB_TINYUSB_BOARD=1"
+  "LIB_TINYUSB_HOST=1"
   "PICO_BOARD=\"pico\""
   "PICO_BUILD=1"
   "PICO_CMAKE_BUILD_TYPE=\"Release\""
@@ -63,12 +67,14 @@ set(CMAKE_TARGET_DEFINITIONS_ASM
   "PICO_ON_DEVICE=1"
   "PICO_TARGET_NAME=\"hello_dvi\""
   "PICO_USE_BLOCKED_RAM=0"
+  "RP2040_USB_HOST_MODE=1"
   )
 
 # The include file search paths:
 set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/assets"
   "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/include"
+  "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src"
   "/aux/pico/pico-sdk/src/common/pico_stdlib/include"
   "/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include"
   "/aux/pico/pico-sdk/src/common/pico_base/include"
@@ -114,6 +120,9 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "/aux/pico/pico-sdk/src/rp2_common/hardware_interp/include"
   "/aux/pico/pico-sdk/src/rp2_common/hardware_pio/include"
   "/aux/pico/pico-sdk/src/rp2_common/hardware_pwm/include"
+  "/aux/pico/pico-sdk/lib/tinyusb/src"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/common"
+  "/aux/pico/pico-sdk/lib/tinyusb/hw"
   )
 
 # The set of dependency files which are needed:
@@ -122,6 +131,17 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_serialiser.c" "src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_timing.c" "src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/tmds_encode.c" "src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj.d"
+  "/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj.d"
   "/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj.d"
   "/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj.d"
   "/aux/pico/pico-sdk/src/common/pico_sync/mutex.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj.d"

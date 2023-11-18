@@ -12,7 +12,9 @@
 #include "dvi_serialiser.h"
 #include "common_dvi_pin_configs.h"
 
-//#include "testcard_320x240_rgb565.h"
+#include "hardware/gpio.h"
+#include "bsp/board.h"
+#include "tusb.h"
 
 // DVDD 1.2V (1.1V seems ok too)
 #define FRAME_WIDTH 320

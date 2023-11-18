@@ -91,4 +91,33 @@ src/CMakeFiles/hello_dvi.dir/main.c.obj: \
  /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/util_queue_u32_inline.h \
  /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_serialiser.h \
  /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/include/common_dvi_pin_configs.h \
+ /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
+ /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+ /usr/arm-none-eabi/include/string.h \
+ /usr/arm-none-eabi/include/sys/_locale.h \
+ /usr/arm-none-eabi/include/strings.h \
+ /usr/arm-none-eabi/include/sys/string.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+ /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/tusb_config.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
  /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/font_5x7.h

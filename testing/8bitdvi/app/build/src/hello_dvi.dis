@@ -7,17 +7,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 .text         00004918  10000100  10000100  00001100  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       000001f0  10004a18  10004a18  00005a18  2**2
+  2 .rodata       00000208  10004a18  10004a18  00005a18  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .binary_info  00000024  10004c08  10004c08  00005c08  2**2
+  3 .binary_info  0000002c  10004c20  10004c20  00005c20  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   4 .ram_vector_table 000000c0  20000000  20000000  00009000  2**2
                   ALLOC
-  5 .data         0000196c  200000c0  10004c2c  000060c0  2**4
+  5 .data         0000196c  200000c0  10004c4c  000060c0  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   6 .uninitialized_data 00000000  20001a2c  20001a2c  00008164  2**0
                   CONTENTS
-  7 .scratch_x    00000164  20040000  10006598  00008000  2**2
+  7 .scratch_x    00000164  20040000  100065b8  00008000  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   8 .scratch_y    00000000  20041000  20041000  00008164  2**0
                   CONTENTS
@@ -200,8 +200,8 @@ Disassembly of section .text:
 
 100001d4 <binary_info_header>:
 100001d4:	7188ebf2 	.word	0x7188ebf2
-100001d8:	10004c08 	.word	0x10004c08
-100001dc:	10004c2c 	.word	0x10004c2c
+100001d8:	10004c20 	.word	0x10004c20
+100001dc:	10004c4c 	.word	0x10004c4c
 100001e0:	10000234 	.word	0x10000234
 100001e4:	e71aa390 	.word	0xe71aa390
 
@@ -256,13 +256,13 @@ Disassembly of section .text:
 10000232:	4770      	bx	lr
 
 10000234 <data_cpy_table>:
-10000234:	10004c2c 	.word	0x10004c2c
+10000234:	10004c4c 	.word	0x10004c4c
 10000238:	200000c0 	.word	0x200000c0
 1000023c:	20001a2c 	.word	0x20001a2c
-10000240:	10006598 	.word	0x10006598
+10000240:	100065b8 	.word	0x100065b8
 10000244:	20040000 	.word	0x20040000
 10000248:	20040164 	.word	0x20040164
-1000024c:	100066fc 	.word	0x100066fc
+1000024c:	1000671c 	.word	0x1000671c
 10000250:	20041000 	.word	0x20041000
 10000254:	20041000 	.word	0x20041000
 10000258:	00000000 	.word	0x00000000
@@ -292,7 +292,7 @@ Disassembly of section .text:
 100002a0:	50520006 9da22254 10004ad4              ..RPT"...J..
 
 100002ac <__bi_22>:
-100002ac:	50520005 68f465de 100066fc              ..RP.e.h.f..
+100002ac:	50520005 68f465de 1000671c              ..RP.e.h.g..
 
 100002b8 <_init>:
 100002b8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
@@ -5681,7 +5681,7 @@ Disassembly of section .text:
 10002ed6:	4798      	blx	r3
 10002ed8:	e7f2      	b.n	10002ec0 <stdio_out_chars_crlf+0x74>
 10002eda:	46c0      	nop			@ (mov r8, r8)
-10002edc:	10004be4 	.word	0x10004be4
+10002edc:	10004be8 	.word	0x10004be8
 
 10002ee0 <__wrap_putchar>:
 10002ee0:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -6094,8 +6094,8 @@ Disassembly of section .text:
 10003244:	4805      	ldr	r0, [pc, #20]	@ (1000325c <stdio_uart_init+0x44>)
 10003246:	f7ff ff07 	bl	10003058 <stdio_set_driver_enabled>
 1000324a:	bd10      	pop	{r4, pc}
-1000324c:	10004c28 	.word	0x10004c28
-10003250:	10004c24 	.word	0x10004c24
+1000324c:	10004c48 	.word	0x10004c48
+10003250:	10004c44 	.word	0x10004c44
 10003254:	200156dc 	.word	0x200156dc
 10003258:	40034000 	.word	0x40034000
 1000325c:	200014b0 	.word	0x200014b0
@@ -6754,7 +6754,7 @@ Disassembly of section .text:
 100037d2:	46a9      	mov	r9, r5
 100037d4:	46a0      	mov	r8, r4
 100037d6:	bdf0      	pop	{r4, r5, r6, r7, pc}
-100037d8:	10004bfc 	.word	0x10004bfc
+100037d8:	10004c00 	.word	0x10004c00
 100037dc:	9fffffff 	.word	0x9fffffff
 100037e0:	afe00000 	.word	0xafe00000
 100037e4:	680e0000 	.word	0x680e0000
@@ -9054,9 +9054,9 @@ Disassembly of section .data:
 200000c2:	4c06      	ldr	r4, [pc, #24]	@ (200000dc <core1_main+0x1c>)
 200000c4:	210b      	movs	r1, #11
 200000c6:	0020      	movs	r0, r4
-200000c8:	f000 fe16 	bl	20000cf8 <__dvi_register_irqs_this_core_veneer>
+200000c8:	f000 fdf6 	bl	20000cb8 <__dvi_register_irqs_this_core_veneer>
 200000cc:	0020      	movs	r0, r4
-200000ce:	f000 fe1b 	bl	20000d08 <__dvi_start_veneer>
+200000ce:	f000 fe13 	bl	20000cf8 <__dvi_start_veneer>
 200000d2:	0020      	movs	r0, r4
 200000d4:	f000 fc02 	bl	200008dc <dvi_scanbuf_main_16bpp>
 200000d8:	bd10      	pop	{r4, pc}
@@ -9322,7 +9322,7 @@ Disassembly of section .data:
 2000031a:	f381 8810 	msr	PRIMASK, r1
 2000031e:	0028      	movs	r0, r5
 20000320:	0031      	movs	r1, r6
-20000322:	f000 fcc9 	bl	20000cb8 <__best_effort_wfe_or_timeout_veneer>
+20000322:	f000 fce1 	bl	20000ce8 <__best_effort_wfe_or_timeout_veneer>
 20000326:	2800      	cmp	r0, #0
 20000328:	d1ed      	bne.n	20000306 <mutex_try_enter_block_until+0x42>
 2000032a:	6822      	ldr	r2, [r4, #0]
@@ -9879,7 +9879,7 @@ Disassembly of section .data:
 200007bc:	6033      	str	r3, [r6, #0]
 200007be:	f385 8810 	msr	PRIMASK, r5
 200007c2:	4833      	ldr	r0, [pc, #204]	@ (20000890 <dvi_dma_irq_handler+0x508>)
-200007c4:	f000 fa88 	bl	20000cd8 <__panic_veneer>
+200007c4:	f000 fa80 	bl	20000cc8 <__panic_veneer>
 200007c8:	f3bf 8f5f 	dmb	sy
 200007cc:	602b      	str	r3, [r5, #0]
 200007ce:	f380 8810 	msr	PRIMASK, r0
@@ -10384,7 +10384,7 @@ Disassembly of section .data:
 20000c1c:	0028      	movs	r0, r5
 20000c1e:	a901      	add	r1, sp, #4
 20000c20:	4690      	mov	r8, r2
-20000c22:	f000 f851 	bl	20000cc8 <__interp_save_veneer>
+20000c22:	f000 f871 	bl	20000d08 <__interp_save_veneer>
 20000c26:	9a0e      	ldr	r2, [sp, #56]	@ 0x38
 20000c28:	3207      	adds	r2, #7
 20000c2a:	1fe3      	subs	r3, r4, #7
@@ -10418,7 +10418,7 @@ Disassembly of section .data:
 20000c62:	f03f f9cd 	bl	20040000 <tmds_encode_loop_16bpp>
 20000c66:	480f      	ldr	r0, [pc, #60]	@ (20000ca4 <tmds_encode_data_channel_16bpp+0x98>)
 20000c68:	a901      	add	r1, sp, #4
-20000c6a:	f000 f83d 	bl	20000ce8 <__interp_restore_veneer>
+20000c6a:	f000 f835 	bl	20000cd8 <__interp_restore_veneer>
 20000c6e:	b008      	add	sp, #32
 20000c70:	bc80      	pop	{r7}
 20000c72:	46b8      	mov	r8, r7
@@ -10455,59 +10455,59 @@ Disassembly of section .data:
 20000cb4:	0000      	movs	r0, r0
 	...
 
-20000cb8 <__best_effort_wfe_or_timeout_veneer>:
+20000cb8 <__dvi_register_irqs_this_core_veneer>:
 20000cb8:	b401      	push	{r0}
-20000cba:	4802      	ldr	r0, [pc, #8]	@ (20000cc4 <__best_effort_wfe_or_timeout_veneer+0xc>)
+20000cba:	4802      	ldr	r0, [pc, #8]	@ (20000cc4 <__dvi_register_irqs_this_core_veneer+0xc>)
 20000cbc:	4684      	mov	ip, r0
 20000cbe:	bc01      	pop	{r0}
 20000cc0:	4760      	bx	ip
 20000cc2:	bf00      	nop
-20000cc4:	10001735 	.word	0x10001735
+20000cc4:	100034f1 	.word	0x100034f1
 
-20000cc8 <__interp_save_veneer>:
+20000cc8 <__panic_veneer>:
 20000cc8:	b401      	push	{r0}
-20000cca:	4802      	ldr	r0, [pc, #8]	@ (20000cd4 <__interp_save_veneer+0xc>)
+20000cca:	4802      	ldr	r0, [pc, #8]	@ (20000cd4 <__panic_veneer+0xc>)
 20000ccc:	4684      	mov	ip, r0
 20000cce:	bc01      	pop	{r0}
 20000cd0:	4760      	bx	ip
 20000cd2:	bf00      	nop
-20000cd4:	10003b71 	.word	0x10003b71
+20000cd4:	10002665 	.word	0x10002665
 
-20000cd8 <__panic_veneer>:
+20000cd8 <__interp_restore_veneer>:
 20000cd8:	b401      	push	{r0}
-20000cda:	4802      	ldr	r0, [pc, #8]	@ (20000ce4 <__panic_veneer+0xc>)
+20000cda:	4802      	ldr	r0, [pc, #8]	@ (20000ce4 <__interp_restore_veneer+0xc>)
 20000cdc:	4684      	mov	ip, r0
 20000cde:	bc01      	pop	{r0}
 20000ce0:	4760      	bx	ip
 20000ce2:	bf00      	nop
-20000ce4:	10002665 	.word	0x10002665
+20000ce4:	10003b91 	.word	0x10003b91
 
-20000ce8 <__interp_restore_veneer>:
+20000ce8 <__best_effort_wfe_or_timeout_veneer>:
 20000ce8:	b401      	push	{r0}
-20000cea:	4802      	ldr	r0, [pc, #8]	@ (20000cf4 <__interp_restore_veneer+0xc>)
+20000cea:	4802      	ldr	r0, [pc, #8]	@ (20000cf4 <__best_effort_wfe_or_timeout_veneer+0xc>)
 20000cec:	4684      	mov	ip, r0
 20000cee:	bc01      	pop	{r0}
 20000cf0:	4760      	bx	ip
 20000cf2:	bf00      	nop
-20000cf4:	10003b91 	.word	0x10003b91
+20000cf4:	10001735 	.word	0x10001735
 
-20000cf8 <__dvi_register_irqs_this_core_veneer>:
+20000cf8 <__dvi_start_veneer>:
 20000cf8:	b401      	push	{r0}
-20000cfa:	4802      	ldr	r0, [pc, #8]	@ (20000d04 <__dvi_register_irqs_this_core_veneer+0xc>)
+20000cfa:	4802      	ldr	r0, [pc, #8]	@ (20000d04 <__dvi_start_veneer+0xc>)
 20000cfc:	4684      	mov	ip, r0
 20000cfe:	bc01      	pop	{r0}
 20000d00:	4760      	bx	ip
 20000d02:	bf00      	nop
-20000d04:	100034f1 	.word	0x100034f1
+20000d04:	1000358d 	.word	0x1000358d
 
-20000d08 <__dvi_start_veneer>:
+20000d08 <__interp_save_veneer>:
 20000d08:	b401      	push	{r0}
-20000d0a:	4802      	ldr	r0, [pc, #8]	@ (20000d14 <__dvi_start_veneer+0xc>)
+20000d0a:	4802      	ldr	r0, [pc, #8]	@ (20000d14 <__interp_save_veneer+0xc>)
 20000d0c:	4684      	mov	ip, r0
 20000d0e:	bc01      	pop	{r0}
 20000d10:	4760      	bx	ip
 20000d12:	bf00      	nop
-20000d14:	1000358d 	.word	0x1000358d
+20000d14:	10003b71 	.word	0x10003b71
 
 20000d18 <font_5x7>:
 20000d18:	8800a800 0000a800 70f87020 50a80020     ........ p.p ..P
