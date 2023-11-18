@@ -13,8 +13,8 @@
 #define  UCASE_ONLY
 
 #include <PicoDVI.h>
-#include "mos65C02.h"
-#include "memory.h"
+#include "src/include/mos65C02.h"
+#include "src/include/memory.h"
 
 #define FRAMERATE       10 // frames per sec
 #define FRAMETIME     1000 / FRAMERATE  // msec

@@ -1,10 +1,10 @@
 // 
 // Author: Rien Matthijsse
 // 
-#include "memory.h"
+#include "include/memory.h"
 //#include "sound.h"
 
-#include "roms.h"
+#include "include/roms.h"
 
 /// <summary>
 /// 64k RAM

@@ -3,8 +3,8 @@
 // 
 #include "hardware/dma.h"
 //#include "RPi_Pico_TimerInterrupt.h"
-#include "mos65C02.h"
-#include "memory_sm1_address.pio.h"
+#include "include/mos65C02.h"
+#include "include/memory_sm1_address.pio.h"
 
 void writeChar(uint8_t vChar);
 

@@ -2,10 +2,10 @@
 // Author: Rien Matthijsse
 // 
 
-#include "roms.h"
+#include "include/roms.h"
 
-#include "memory.h"
-#include "binary.h"
+#include "include/memory.h"
+#include "include/binary.h"
 
 #define MAX_ROMS  1
 #define ROM_FOLDER  "ROM"
