@@ -1941,6 +1941,7 @@ src/CMakeFiles/hello_dvi.dir/main.c.obj: /home/paulr/Projects/neo6502-firmware/t
   /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_serialiser.h \
   /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_timing.h \
   /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/util_queue_u32_inline.h \
+  /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/font_5x7.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/alloca.h \
@@ -2353,6 +2354,8 @@ libs/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
 /usr/arm-none-eabi/include/sys/reent.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pll.h:
+
+/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/font_5x7.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/xosc.h:
 

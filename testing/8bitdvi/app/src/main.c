@@ -28,24 +28,48 @@ void __not_in_flash_func(core1_main)() {
 	dvi_scanbuf_main_16bpp(&dvi0);
 }
 
+uint16_t palette[256];
 uint8_t screen[FRAME_WIDTH * FRAME_HEIGHT];
 
 uint16_t buffer1[FRAME_WIDTH],buffer2[FRAME_WIDTH];
-	uint frameCounter = 0,lineCounter;
+uint frameCounter = 0,lineCounter = 0;
+
+#include "font_5x7.h"
+
+void drawCharacter(int x,int y,int ch,int col) {
+	for (int y1 = 0;y1 < 7;y1++) {
+		int b = font_5x7[ch*7 + y1];
+		for (int x1 = 0;x1 < 5;x1++) {
+			int p = (x+x1)+(y+y1)*320;
+			screen[p] = (b & 0x80) ? col : 0;
+			b = b << 1;
+		}
+	}
+}
+
+int xc = 0,yc = 0;
+void writeCharacter(int c) {
+	drawCharacter(xc*6+5,yc*8,c,7);
+	xc += 1;
+	if (xc == 52) { xc = 0;yc = (yc + 1) % 30; }
+}
 
 void __not_in_flash_func(_scanline_callback)(void) {
 	uint16_t *scanline;
 	while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline));
-	scanline = (lineCounter & 1) ? buffer1 : buffer2;
+	if (lineCounter >= 0) {
+		scanline = (lineCounter & 1) ? buffer1 : buffer2;
+	}
 	queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 	lineCounter++;
-	scanline = (lineCounter & 1) ? buffer1 : buffer2;
-	for (int i = 0;i < FRAME_WIDTH;i++) {
-		scanline[i] = (i >> 2)+(lineCounter << 6);
-	}
 	if (lineCounter == FRAME_HEIGHT) {
-		frameCounter++;
-		lineCounter = 0;
+	 	frameCounter++;
+	 	lineCounter = 0;
+	}
+	scanline = (lineCounter & 1) ? buffer1 : buffer2;
+	uint8_t *screenPos = screen + lineCounter * FRAME_WIDTH;
+	for (int i = 0;i < FRAME_WIDTH;i++) {
+		scanline[i] = palette[screenPos[i]];
 	}
 }
 
@@ -72,21 +96,36 @@ int main() {
 
 	// Core 1 will wait until it sees the first colour buffer, then start up the
 	// DVI signalling.
-	multicore_launch_core1(core1_main);
 
 	// Pass out pointers into our preprepared image, discard the pointers when
 	// returned to us. Use frameCounter to scroll the image
 
+	for (int i = 0;i < 256;i++) {
+		int p = 0;
+		if (i & 1) p |= 0xF800;
+		if (i & 2) p |= 0x07E0;
+		if (i & 4) p |= 0x001F;
+		palette[i] = (p == 0) ? 0x1234 : p;
+	}
+
+	for (int x = 0;x < 320;x++) {
+		for (int y = 0;y < 240;y++) {
+			screen[x+y*320] = 0;
+		}
+	}
+
+
 	uint16_t *scanline = buffer1;
-	lineCounter = 1;
-	queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
+	lineCounter = 0;
+	_scanline_callback();
+
+	multicore_launch_core1(core1_main);
 
     gpio_init(20);
     gpio_set_dir(20, GPIO_OUT);
+    int xp = 0,yp = 0;
     while (1) {
-        gpio_put(20, 0);
-        sleep_ms(250);
-        gpio_put(20, 1);
-        sleep_ms(100);
+  		sleep_ms(1);
+  		writeCharacter(random() & 0xFF);
     }	
 }
