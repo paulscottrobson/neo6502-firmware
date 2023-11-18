@@ -119,6 +119,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d"
   "CMakeFiles/hello_dvi.dir/main.c.obj"
   "CMakeFiles/hello_dvi.dir/main.c.obj.d"
+  "CMakeFiles/hello_dvi.dir/usb2serial.c.obj"
+  "CMakeFiles/hello_dvi.dir/usb2serial.c.obj.d"
   "hello_dvi.elf"
   "hello_dvi.pdb"
 )

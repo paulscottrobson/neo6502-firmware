@@ -180,6 +180,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj.d"
   "/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/main.c" "src/CMakeFiles/hello_dvi.dir/main.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/main.c.obj.d"
+  "/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/usb2serial.c" "src/CMakeFiles/hello_dvi.dir/usb2serial.c.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/usb2serial.c.obj.d"
   "/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj" "gcc" "src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj.d"
   )
 

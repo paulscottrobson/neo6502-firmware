@@ -116,6 +116,8 @@ int main() {
 		}
 	}
 
+	board_init();
+	tusb_init();
 
 	uint16_t *scanline = buffer1;
 	lineCounter = 0;
@@ -127,7 +129,8 @@ int main() {
     gpio_set_dir(20, GPIO_OUT);
     int xp = 0,yp = 0;
     while (1) {
-  		sleep_ms(1);
-  		writeCharacter(random() & 0xFF);
+  		sleep_ms(50);
+  		writeCharacter('.');
+  		tuh_task();
     }	
 }

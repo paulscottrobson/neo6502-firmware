@@ -83,10 +83,24 @@ src/CMakeFiles/hello_dvi.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/main.c.s"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/main.c -o CMakeFiles/hello_dvi.dir/main.c.s
 
+src/CMakeFiles/hello_dvi.dir/usb2serial.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
+src/CMakeFiles/hello_dvi.dir/usb2serial.c.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/usb2serial.c
+src/CMakeFiles/hello_dvi.dir/usb2serial.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object src/CMakeFiles/hello_dvi.dir/usb2serial.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/usb2serial.c.obj -MF CMakeFiles/hello_dvi.dir/usb2serial.c.obj.d -o CMakeFiles/hello_dvi.dir/usb2serial.c.obj -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/usb2serial.c
+
+src/CMakeFiles/hello_dvi.dir/usb2serial.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/hello_dvi.dir/usb2serial.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/usb2serial.c > CMakeFiles/hello_dvi.dir/usb2serial.c.i
+
+src/CMakeFiles/hello_dvi.dir/usb2serial.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/hello_dvi.dir/usb2serial.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/src/usb2serial.c -o CMakeFiles/hello_dvi.dir/usb2serial.c.s
+
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i: cmake_force
@@ -100,7 +114,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i: cmake_force
@@ -114,7 +128,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i: cmake_force
@@ -128,7 +142,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/plat
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i: cmake_force
@@ -142,7 +156,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/cla
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i: cmake_force
@@ -156,7 +170,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i: cmake_force
@@ -169,7 +183,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.i: cmake_force
@@ -183,7 +197,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_h
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj: /aux/pico/pico-sdk/src/common/pico_sync/sem.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj -c /aux/pico/pico-sdk/src/common/pico_sync/sem.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.i: cmake_force
@@ -197,7 +211,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.s: cma
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj: /aux/pico/pico-sdk/src/common/pico_sync/lock_core.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj -c /aux/pico/pico-sdk/src/common/pico_sync/lock_core.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.i: cmake_force
@@ -211,7 +225,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj: /aux/pico/pico-sdk/src/common/pico_sync/mutex.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj -c /aux/pico/pico-sdk/src/common/pico_sync/mutex.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.i: cmake_force
@@ -225,7 +239,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.s: c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: /aux/pico/pico-sdk/src/common/pico_sync/critical_section.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj -c /aux/pico/pico-sdk/src/common/pico_sync/critical_section.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.i: cmake_force
@@ -239,7 +253,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_sec
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj: /aux/pico/pico-sdk/src/common/pico_time/time.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj -c /aux/pico/pico-sdk/src/common/pico_time/time.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.i: cmake_force
@@ -253,7 +267,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.s: cm
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: /aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj -c /aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i: cmake_force
@@ -267,7 +281,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_help
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i: cmake_force
@@ -281,7 +295,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/tim
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj: /aux/pico/pico-sdk/src/common/pico_util/datetime.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj -c /aux/pico/pico-sdk/src/common/pico_util/datetime.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.i: cmake_force
@@ -295,7 +309,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.s
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj: /aux/pico/pico-sdk/src/common/pico_util/pheap.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj -c /aux/pico/pico-sdk/src/common/pico_util/pheap.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.i: cmake_force
@@ -309,7 +323,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.s: c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj: /aux/pico/pico-sdk/src/common/pico_util/queue.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj -c /aux/pico/pico-sdk/src/common/pico_util/queue.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.i: cmake_force
@@ -323,7 +337,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.s: c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i: cmake_force
@@ -337,7 +351,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i: cmake_force
@@ -351,7 +365,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/cl
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i: cmake_force
@@ -365,7 +379,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i: cmake_force
@@ -379,7 +393,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i: cmake_force
@@ -393,7 +407,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i: cmake_force
@@ -406,7 +420,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.i: cmake_force
@@ -420,7 +434,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/d
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i: cmake_force
@@ -434,7 +448,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runti
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i: cmake_force
@@ -447,7 +461,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.i: cmake_force
@@ -461,7 +475,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_o
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i: cmake_force
@@ -474,7 +488,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootr
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.i: cmake_force
@@ -487,7 +501,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divid
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.i: cmake_force
@@ -501,7 +515,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i: cmake_force
@@ -515,7 +529,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i: cmake_force
@@ -528,7 +542,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.i: cmake_force
@@ -541,7 +555,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.i: cmake_force
@@ -554,7 +568,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pic
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.i: cmake_force
@@ -568,7 +582,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_a
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i: cmake_force
@@ -582,7 +596,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_i
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i: cmake_force
@@ -595,7 +609,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_m
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.i: cmake_force
@@ -609,7 +623,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i: cmake_force
@@ -622,7 +636,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_m
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.i: cmake_force
@@ -635,7 +649,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_o
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building ASM object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.i: cmake_force
@@ -649,7 +663,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj: /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i: cmake_force
@@ -663,7 +677,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i: cmake_force
@@ -677,7 +691,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i: cmake_force
@@ -691,7 +705,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i: cmake_force
@@ -705,7 +719,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/st
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i: cmake_force
@@ -719,7 +733,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/mul
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi.c
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building C object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building C object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.obj -MF CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.obj.d -o CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.obj -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi.c
 
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.i: cmake_force
@@ -733,7 +747,7 @@ src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi.c.s: cmake_forc
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_serialiser.c
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building C object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building C object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj -MF CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj.d -o CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.obj -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_serialiser.c
 
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.i: cmake_force
@@ -747,7 +761,7 @@ src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_serialiser.c.s:
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_timing.c
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building C object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building C object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj -MF CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj.d -o CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.obj -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/dvi_timing.c
 
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.i: cmake_force
@@ -760,7 +774,7 @@ src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/dvi_timing.c.s: cma
 
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.S.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.S.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/tmds_encode.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building ASM object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building ASM object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.S.obj   -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/tmds_encode.S
 
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.S.i: cmake_force
@@ -774,7 +788,7 @@ src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.S.s: cm
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj: /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/tmds_encode.c
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building C object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building C object src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj -MF CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj.d -o CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.obj -c /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/libs/PicoDVI/software/libdvi/tmds_encode.c
 
 src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.i: cmake_force
@@ -788,7 +802,7 @@ src/CMakeFiles/hello_dvi.dir/__/libs/PicoDVI/software/libdvi/tmds_encode.c.s: cm
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.i: cmake_force
@@ -802,7 +816,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.i: cmake_force
@@ -816,7 +830,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/in
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i: cmake_force
@@ -830,7 +844,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i: cmake_force
@@ -844,7 +858,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberr
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i: cmake_force
@@ -858,7 +872,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberr
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i: cmake_force
@@ -872,7 +886,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s: cm
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i: cmake_force
@@ -886,7 +900,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s: cma
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i: cmake_force
@@ -900,7 +914,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_hos
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i: cmake_force
@@ -914,7 +928,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_hos
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i: cmake_force
@@ -928,7 +942,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_hos
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i: cmake_force
@@ -942,7 +956,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vend
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i: cmake_force
@@ -956,7 +970,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s: cmake_f
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i: cmake_force
@@ -970,7 +984,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: src/CMakeFiles/hello_dvi.dir/flags.make
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: src/CMakeFiles/hello_dvi.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj -MF CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj.d -o CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c
 
 src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i: cmake_force
@@ -984,6 +998,7 @@ src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.
 # Object files for target hello_dvi
 hello_dvi_OBJECTS = \
 "CMakeFiles/hello_dvi.dir/main.c.obj" \
+"CMakeFiles/hello_dvi.dir/usb2serial.c.obj" \
 "CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" \
 "CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj" \
 "CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj" \
@@ -1054,6 +1069,7 @@ hello_dvi_OBJECTS = \
 hello_dvi_EXTERNAL_OBJECTS =
 
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/main.c.obj
+src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/usb2serial.c.obj
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -1122,7 +1138,7 @@ src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/build.make
 src/hello_dvi.elf: pico-sdk/src/rp2_common/boot_stage2/bs2_default_padded_checksummed.S
 src/hello_dvi.elf: src/CMakeFiles/hello_dvi.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Linking CXX executable hello_dvi.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Linking CXX executable hello_dvi.elf"
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/hello_dvi.dir/link.txt --verbose=$(VERBOSE)
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-objcopy -Oihex /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src/hello_dvi.elf hello_dvi.hex
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src && /usr/bin/arm-none-eabi-objcopy -Obinary /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build/src/hello_dvi.elf hello_dvi.bin

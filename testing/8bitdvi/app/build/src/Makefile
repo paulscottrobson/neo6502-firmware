@@ -1536,6 +1536,30 @@ main.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hello_dvi.dir/build.make src/CMakeFiles/hello_dvi.dir/main.c.s
 .PHONY : main.c.s
 
+usb2serial.obj: usb2serial.c.obj
+.PHONY : usb2serial.obj
+
+# target to build an object file
+usb2serial.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hello_dvi.dir/build.make src/CMakeFiles/hello_dvi.dir/usb2serial.c.obj
+.PHONY : usb2serial.c.obj
+
+usb2serial.i: usb2serial.c.i
+.PHONY : usb2serial.i
+
+# target to preprocess a source file
+usb2serial.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hello_dvi.dir/build.make src/CMakeFiles/hello_dvi.dir/usb2serial.c.i
+.PHONY : usb2serial.c.i
+
+usb2serial.s: usb2serial.c.s
+.PHONY : usb2serial.s
+
+# target to generate assembly for a file
+usb2serial.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/testing/8bitdvi/app/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/hello_dvi.dir/build.make src/CMakeFiles/hello_dvi.dir/usb2serial.c.s
+.PHONY : usb2serial.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1720,6 +1744,9 @@ help:
 	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... usb2serial.obj"
+	@echo "... usb2serial.i"
+	@echo "... usb2serial.s"
 .PHONY : help
 
 

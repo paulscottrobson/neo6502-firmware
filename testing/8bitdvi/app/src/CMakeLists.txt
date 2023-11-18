@@ -1,6 +1,5 @@
 
-add_executable(hello_dvi main.c
-)
+add_executable(hello_dvi main.c usb2serial.c)
 
 target_compile_options(hello_dvi PRIVATE -Wall)
 
