@@ -1,5 +1,7 @@
 	* = $fc00
 
+	nop
+	nop
 lfc00	
 	cld
 	cli
@@ -8,8 +10,8 @@ lfc00
 	lda 	#-1
 	sta 	$81
 loop2:
-	lda 	#3
-;	jsr 	delay
+	lda 	#200
+	jsr 	delay
 	jsr 	alphabet	
 	inc 	$81
 	lda 	$81
@@ -18,7 +20,7 @@ loop2:
 	jsr 	lprintchar
 	lda 	#0
 _opcode:	
-	bra 	loop2			; works. bra loop2 doesn't.
+	bra 	loop2			
 
 delay:
 	ldy 	#0
@@ -83,7 +85,7 @@ waitfree:
 	rts
 
 	* = $FFFA
-	.word 	$FC00
-	.word 	$FC00
-	.word	$FC00
+	.word 	lfc00
+	.word 	lfc00
+	.word	lfc00
 	
