@@ -2755,6 +2755,7 @@ sources/CMakeFiles/firmware.dir/main.c.obj: /home/paulr/Projects/neo6502-firmwar
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
@@ -2782,509 +2783,699 @@ sources/CMakeFiles/firmware.dir/main.c.obj: /home/paulr/Projects/neo6502-firmwar
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
+sources/CMakeFiles/firmware.dir/memory.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.c \
+  /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
+  /aux/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_bank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/interp.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/iobank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h \
+  /aux/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h \
+  /aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
+  /aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
+  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
+  generated/pico_base/pico/config_autogen.h \
+  generated/pico_base/pico/version.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.h \
+  /usr/arm-none-eabi/include/_ansi.h \
+  /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/assert.h \
+  /usr/arm-none-eabi/include/machine/_default_types.h \
+  /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/newlib.h \
+  /usr/arm-none-eabi/include/stdint.h \
+  /usr/arm-none-eabi/include/sys/_intsup.h \
+  /usr/arm-none-eabi/include/sys/_stdint.h \
+  /usr/arm-none-eabi/include/sys/cdefs.h \
+  /usr/arm-none-eabi/include/sys/config.h \
+  /usr/arm-none-eabi/include/sys/features.h \
+  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h \
+  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
+  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
+
+sources/CMakeFiles/firmware.dir/mos65C02.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.c \
+  /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
+  /aux/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dma.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_bank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pio.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/interp.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/iobank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pio.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h \
+  /aux/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_dma/include/hardware/dma.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h \
+  /aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
+  /aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
+  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
+  generated/pico_base/pico/config_autogen.h \
+  generated/pico_base/pico/version.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/memory_sm1_address.pio.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/pins.h \
+  /usr/arm-none-eabi/include/_ansi.h \
+  /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/assert.h \
+  /usr/arm-none-eabi/include/machine/_default_types.h \
+  /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/newlib.h \
+  /usr/arm-none-eabi/include/stdint.h \
+  /usr/arm-none-eabi/include/sys/_intsup.h \
+  /usr/arm-none-eabi/include/sys/_stdint.h \
+  /usr/arm-none-eabi/include/sys/cdefs.h \
+  /usr/arm-none-eabi/include/sys/config.h \
+  /usr/arm-none-eabi/include/sys/features.h \
+  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h \
+  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
+  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
+
+sources/CMakeFiles/firmware.dir/roms.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.c \
+  /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
+  /aux/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_bank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/interp.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/iobank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
+  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h \
+  /aux/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
+  /aux/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h \
+  /aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
+  /aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
+  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
+  generated/pico_base/pico/config_autogen.h \
+  generated/pico_base/pico/version.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/binary.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.h \
+  /usr/arm-none-eabi/include/_ansi.h \
+  /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/assert.h \
+  /usr/arm-none-eabi/include/machine/_default_types.h \
+  /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/newlib.h \
+  /usr/arm-none-eabi/include/stdint.h \
+  /usr/arm-none-eabi/include/sys/_intsup.h \
+  /usr/arm-none-eabi/include/sys/_stdint.h \
+  /usr/arm-none-eabi/include/sys/cdefs.h \
+  /usr/arm-none-eabi/include/sys/config.h \
+  /usr/arm-none-eabi/include/sys/features.h \
+  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h \
+  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
+  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-/home/paulr/Projects/neo6502-firmware/firmware/include/font_5x7.h:
 
-/usr/arm-none-eabi/include/sys/stat.h:
+/home/paulr/Projects/neo6502-firmware/firmware/sources/roms.c:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h:
+/home/paulr/Projects/neo6502-firmware/firmware/sources/pins.h:
 
-/usr/arm-none-eabi/include/c++/13.2.0/pstl/pstl_config.h:
+/home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.h:
 
-/usr/arm-none-eabi/include/c++/13.2.0/arm-none-eabi/thumb/v6-m/nofp/bits/os_defines.h:
+/home/paulr/Projects/neo6502-firmware/firmware/sources/memory_sm1_address.pio.h:
 
-/usr/arm-none-eabi/include/c++/13.2.0/arm-none-eabi/thumb/v6-m/nofp/bits/cpu_defines.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp:
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/psm.h:
 
-/usr/arm-none-eabi/include/time.h:
+/usr/arm-none-eabi/include/sys/string.h:
 
-/usr/arm-none-eabi/include/sys/types.h:
+/usr/arm-none-eabi/include/sys/sched.h:
 
-/usr/arm-none-eabi/include/sys/time.h:
+/usr/arm-none-eabi/include/sys/_locale.h:
 
-/usr/arm-none-eabi/include/sys/_timeval.h:
+/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c:
 
-/usr/arm-none-eabi/include/sys/_timespec.h:
+/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h:
 
-/usr/arm-none-eabi/include/machine/time.h:
+/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c:
 
-/usr/arm-none-eabi/include/machine/endian.h:
+/aux/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h:
 
-/usr/arm-none-eabi/include/machine/_time.h:
+/usr/arm-none-eabi/include/sys/timespec.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/mpu.h:
+/usr/arm-none-eabi/include/c++/13.2.0/arm-none-eabi/thumb/v6-m/nofp/bits/c++config.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c:
+/usr/arm-none-eabi/include/sys/_types.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/tbman.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sysinfo.h:
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c:
+/usr/arm-none-eabi/include/sys/stdio.h:
 
-/usr/lib/gcc/arm-none-eabi/13.2.0/include/float.h:
+/aux/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_double/include/pico/double.h:
+/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/code.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h:
+/usr/arm-none-eabi/include/machine/_default_types.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c:
+/aux/pico/pico-sdk/src/common/pico_sync/sem.c:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/vreg_and_chip_reset.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c:
+/home/paulr/Projects/neo6502-firmware/firmware/sources/roms.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c:
+/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c:
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.c:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c:
+libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/include/hardware/clocks.h:
+/aux/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pll.h:
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/iobank0.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/xosc.h:
+/aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom.h:
+/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c:
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.c:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_float/include/pico/float.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/include/hardware/xosc.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_claim/include/hardware/claim.h:
-
-/aux/pico/pico-sdk/src/common/pico_util/queue.c:
-
-/aux/pico/pico-sdk/src/common/pico_util/pheap.c:
-
-/aux/pico/pico-sdk/src/common/pico_util/include/pico/util/datetime.h:
-
-/aux/pico/pico-sdk/src/common/pico_util/datetime.c:
-
-/usr/arm-none-eabi/include/sys/times.h:
-
-/aux/pico/pico-sdk/src/common/pico_time/include/pico/timeout_helper.h:
-
-/usr/arm-none-eabi/include/sys/syslimits.h:
-
-/usr/arm-none-eabi/include/machine/_endian.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/clocks.h:
-
-/usr/arm-none-eabi/include/inttypes.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c:
-
-/usr/arm-none-eabi/include/limits.h:
-
-/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c:
-
-/usr/arm-none-eabi/include/unistd.h:
-
-/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c:
-
-/usr/arm-none-eabi/include/sys/_pthreadtypes.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/resets.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/usb.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/resets.h:
-
-/usr/arm-none-eabi/include/math.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/xosc.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/sources/main.c:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c:
-
-/usr/arm-none-eabi/include/c++/13.2.0/cstdlib:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_malloc/include/pico/malloc.h:
-
-/usr/arm-none-eabi/include/stdint.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/include/hardware/vreg.h:
-
-/usr/arm-none-eabi/include/stdio.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/watchdog.h:
-
-/usr/arm-none-eabi/include/assert.h:
-
-/usr/arm-none-eabi/include/newlib.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_table_fullres.h:
-
-/usr/arm-none-eabi/include/_newlib_version.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c:
-
-/usr/arm-none-eabi/include/sys/lock.h:
-
-/usr/lib/gcc/arm-none-eabi/13.2.0/include/syslimits.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_timing.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pwm.h:
-
-/aux/pico/pico-sdk/src/common/pico_sync/mutex.c:
-
-/usr/arm-none-eabi/include/machine/ieeefp.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pll.h:
-
-/usr/arm-none-eabi/include/sys/reent.h:
-
-/usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/include/hardware/watchdog.h:
-
-/usr/arm-none-eabi/include/machine/stdlib.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh_classdriver.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/watchdog.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_config_defs.h:
-
-generated/pico_base/pico/version.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/vreg_and_chip_reset.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dma.h:
-
-/usr/arm-none-eabi/include/sys/_sigset.h:
-
-/aux/pico/pico-sdk/src/common/pico_time/time.c:
-
-/usr/arm-none-eabi/include/strings.h:
-
-/aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h:
-
-/aux/pico/pico-sdk/src/common/pico_util/include/pico/util/queue.h:
-
-/usr/arm-none-eabi/include/sys/_intsup.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h:
-
-/usr/arm-none-eabi/include/string.h:
-
-/aux/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h:
-
-/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info.h:
-
-/aux/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_pll/include/hardware/pll.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/host/hcd.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_dma/include/hardware/dma.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h:
-
-/aux/pico/pico-sdk/src/common/pico_base/include/pico/config.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_qspi.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h:
-
-/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/defs.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_video.c:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h:
-
-/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/structure.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h:
-
-/usr/arm-none-eabi/include/stdlib.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/interp.h:
-
-/usr/arm-none-eabi/include/machine/_types.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.h:
-
-generated/pico_base/pico/config_autogen.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.c:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_timing.c:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pwm.h:
-
-/aux/pico/pico-sdk/src/boards/include/boards/pico.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/include/common_dvi_pin_configs.h:
-
-/usr/arm-none-eabi/include/sys/unistd.h:
-
-/aux/pico/pico-sdk/src/common/pico_util/include/pico/util/pheap.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_bank0.h:
-
-/usr/arm-none-eabi/include/sys/config.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/tusb.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h:
-
-/usr/arm-none-eabi/include/c++/13.2.0/cassert:
-
-/usr/arm-none-eabi/include/machine/types.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pio.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/clocks.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c:
-
-/usr/arm-none-eabi/include/alloca.h:
-
-/aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h:
-
-/aux/pico/pico-sdk/src/rp2_common/boot_stage2/include/boot_stage2/config.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h:
-
-/aux/pico/pico-sdk/src/common/pico_base/include/pico.h:
-
-/aux/pico/pico-sdk/src/common/pico_time/include/pico/time.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h:
-
-/usr/arm-none-eabi/include/c++/13.2.0/bits/std_abs.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h:
-
-/usr/arm-none-eabi/include/_ansi.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pio.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c:
-
-/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/board.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c:
-
-/usr/arm-none-eabi/include/sys/_stdint.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/scb.h:
-
-/usr/arm-none-eabi/include/sys/cdefs.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h:
-
-/usr/arm-none-eabi/include/sys/features.h:
-
-/usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h:
-
-/aux/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h:
-
-/aux/pico/pico-sdk/src/common/pico_base/include/pico/error.h:
-
-/usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c:
+/aux/pico/pico-sdk/src/rp2_common/hardware_interp/include/hardware/interp.h:
 
 /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c:
 
 /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_interp/include/hardware/interp.h:
+/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.c:
+/aux/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/iobank0.h:
-
-/aux/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_pwm/include/hardware/pwm.h:
-
-libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.c:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_table.h:
-
-/usr/lib/gcc/arm-none-eabi/13.2.0/include/limits.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h:
-
-/aux/pico/pico-sdk/src/common/pico_sync/sem.c:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h:
-
-/usr/arm-none-eabi/include/machine/_default_types.h:
-
-/aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h:
-
-/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/code.h:
+/usr/arm-none-eabi/include/sys/features.h:
 
 /usr/arm-none-eabi/include/sys/select.h:
 
-/aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h:
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c:
+/usr/arm-none-eabi/include/sys/cdefs.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.h:
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/scb.h:
 
-/aux/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h:
+/usr/arm-none-eabi/include/sys/_stdint.h:
 
-/usr/arm-none-eabi/include/sys/stdio.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h:
+/usr/arm-none-eabi/include/c++/13.2.0/bits/std_abs.h:
 
-/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c:
+/aux/pico/pico-sdk/src/common/pico_time/include/pico/time.h:
 
-/usr/arm-none-eabi/include/sys/_types.h:
+/aux/pico/pico-sdk/src/common/pico_base/include/pico.h:
 
-/usr/lib/gcc/arm-none-eabi/13.2.0/include/stdarg.h:
+/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h:
 
-/usr/arm-none-eabi/include/c++/13.2.0/arm-none-eabi/thumb/v6-m/nofp/bits/c++config.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h:
+/aux/pico/pico-sdk/src/rp2_common/boot_stage2/include/boot_stage2/config.h:
 
-/usr/arm-none-eabi/include/sys/timespec.h:
+/aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_printf/include/pico/printf.h:
+/usr/arm-none-eabi/include/alloca.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c:
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h:
+/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/board.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h:
+/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h:
+/aux/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c:
+/home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.c:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pio.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h:
+
+/usr/arm-none-eabi/include/machine/types.h:
+
+/usr/arm-none-eabi/include/c++/13.2.0/cassert:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_table.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/tusb.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h:
+
+/usr/arm-none-eabi/include/sys/config.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_bank0.h:
+
+/aux/pico/pico-sdk/src/common/pico_util/include/pico/util/pheap.h:
+
+/aux/pico/pico-sdk/src/boards/include/boards/pico.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pwm.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.c:
+
+generated/pico_base/pico/config_autogen.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h:
+
+/usr/arm-none-eabi/include/machine/_types.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/psm.h:
 
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h:
+
+/usr/arm-none-eabi/include/stdlib.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio.h:
+
+/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/structure.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_video.c:
+
+/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/defs.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_qspi.h:
+
+/aux/pico/pico-sdk/src/common/pico_base/include/pico/config.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_dma/include/hardware/dma.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_pll/include/hardware/pll.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h:
+
+/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info.h:
+
+/aux/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h:
+
+/usr/arm-none-eabi/include/string.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h:
+
+/aux/pico/pico-sdk/src/common/pico_util/include/pico/util/queue.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_timing.c:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.h:
+
+/aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h:
+
+/usr/arm-none-eabi/include/strings.h:
+
+/usr/arm-none-eabi/include/_ansi.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/interp.h:
+
+/usr/arm-none-eabi/include/sys/_sigset.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dma.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/include/common_dvi_pin_configs.h:
+
+generated/pico_base/pico/version.h:
+
+/aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_config_defs.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh_classdriver.h:
+
+/usr/arm-none-eabi/include/machine/stdlib.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/include/hardware/watchdog.h:
+
+/usr/arm-none-eabi/include/sys/reent.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pll.h:
+
+/usr/arm-none-eabi/include/machine/ieeefp.h:
+
+/aux/pico/pico-sdk/src/common/pico_sync/mutex.c:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c:
+
+/usr/arm-none-eabi/include/sys/unistd.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c:
+
+/usr/arm-none-eabi/include/sys/_intsup.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_timing.h:
+
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/syslimits.h:
+
+/usr/arm-none-eabi/include/sys/lock.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/host/hcd.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_table_fullres.h:
+
+/aux/pico/pico-sdk/src/common/pico_time/time.c:
+
+/usr/arm-none-eabi/include/newlib.h:
+
+/usr/arm-none-eabi/include/assert.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/watchdog.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h:
+
+/usr/arm-none-eabi/include/stdio.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/include/hardware/vreg.h:
+
+/usr/arm-none-eabi/include/stdint.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_malloc/include/pico/malloc.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c:
+
+/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c:
+
+/home/paulr/Projects/neo6502-firmware/firmware/sources/main.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/xosc.h:
+
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/watchdog.h:
+
+/usr/arm-none-eabi/include/math.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/resets.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/usb.h:
+
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h:
+
 /aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c:
 
-/usr/arm-none-eabi/include/sys/_locale.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c:
 
-/usr/arm-none-eabi/include/sys/sched.h:
+/usr/arm-none-eabi/include/sys/_pthreadtypes.h:
+
+/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c:
+
+/usr/arm-none-eabi/include/unistd.h:
+
+/usr/arm-none-eabi/include/_newlib_version.h:
+
+/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c:
+
+/usr/arm-none-eabi/include/limits.h:
+
+/usr/arm-none-eabi/include/inttypes.h:
+
+/usr/arm-none-eabi/include/c++/13.2.0/cstdlib:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/clocks.h:
 
 /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h:
 
-/aux/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h:
+/usr/arm-none-eabi/include/machine/_endian.h:
 
-/usr/arm-none-eabi/include/sys/string.h:
+/usr/arm-none-eabi/include/sys/syslimits.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/psm.h:
+/aux/pico/pico-sdk/src/common/pico_time/include/pico/timeout_helper.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/ioqspi.h:
 
-/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c:
+/usr/arm-none-eabi/include/sys/times.h:
+
+/aux/pico/pico-sdk/src/common/pico_util/datetime.c:
+
+/aux/pico/pico-sdk/src/common/pico_util/include/pico/util/datetime.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h:
+
+/aux/pico/pico-sdk/src/common/pico_util/pheap.c:
+
+/aux/pico/pico-sdk/src/common/pico_util/queue.c:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_claim/include/hardware/claim.h:
+
+/aux/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/include/hardware/xosc.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_float/include/pico/float.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c:
+
+/aux/pico/pico-sdk/src/common/pico_base/include/pico/error.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/xosc.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pll.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/include/hardware/clocks.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pio.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_pwm/include/hardware/pwm.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c:
+
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/limits.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/vreg_and_chip_reset.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/vreg_and_chip_reset.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c:
+
+/aux/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_double/include/pico/double.h:
+
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/float.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sysinfo.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pwm.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/tbman.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/mpu.h:
+
+/usr/arm-none-eabi/include/machine/_time.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c:
+
+/usr/arm-none-eabi/include/machine/endian.h:
+
+/usr/arm-none-eabi/include/machine/time.h:
+
+/usr/arm-none-eabi/include/sys/_timespec.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/sources/binary.h:
+
+/usr/arm-none-eabi/include/sys/_timeval.h:
+
+/usr/arm-none-eabi/include/sys/time.h:
+
+/usr/arm-none-eabi/include/sys/types.h:
+
+/usr/arm-none-eabi/include/time.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/resets.h:
+
+/usr/arm-none-eabi/include/c++/13.2.0/arm-none-eabi/thumb/v6-m/nofp/bits/cpu_defines.h:
+
+/usr/arm-none-eabi/include/c++/13.2.0/arm-none-eabi/thumb/v6-m/nofp/bits/os_defines.h:
+
+/usr/arm-none-eabi/include/c++/13.2.0/pstl/pstl_config.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/clocks.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h:
+
+/usr/arm-none-eabi/include/sys/stat.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/include/font_5x7.h:
+
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/stdarg.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/sources/memory.c:

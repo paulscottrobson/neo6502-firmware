@@ -123,6 +123,12 @@ file(REMOVE_RECURSE
   "CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj.d"
   "CMakeFiles/firmware.dir/main.c.obj"
   "CMakeFiles/firmware.dir/main.c.obj.d"
+  "CMakeFiles/firmware.dir/memory.c.obj"
+  "CMakeFiles/firmware.dir/memory.c.obj.d"
+  "CMakeFiles/firmware.dir/mos65C02.c.obj"
+  "CMakeFiles/firmware.dir/mos65C02.c.obj.d"
+  "CMakeFiles/firmware.dir/roms.c.obj"
+  "CMakeFiles/firmware.dir/roms.c.obj.d"
   "firmware.elf"
   "firmware.pdb"
 )

@@ -1584,6 +1584,78 @@ main.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/main.c.s
 .PHONY : main.c.s
 
+memory.obj: memory.c.obj
+.PHONY : memory.obj
+
+# target to build an object file
+memory.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/memory.c.obj
+.PHONY : memory.c.obj
+
+memory.i: memory.c.i
+.PHONY : memory.i
+
+# target to preprocess a source file
+memory.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/memory.c.i
+.PHONY : memory.c.i
+
+memory.s: memory.c.s
+.PHONY : memory.s
+
+# target to generate assembly for a file
+memory.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/memory.c.s
+.PHONY : memory.c.s
+
+mos65C02.obj: mos65C02.c.obj
+.PHONY : mos65C02.obj
+
+# target to build an object file
+mos65C02.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/mos65C02.c.obj
+.PHONY : mos65C02.c.obj
+
+mos65C02.i: mos65C02.c.i
+.PHONY : mos65C02.i
+
+# target to preprocess a source file
+mos65C02.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/mos65C02.c.i
+.PHONY : mos65C02.c.i
+
+mos65C02.s: mos65C02.c.s
+.PHONY : mos65C02.s
+
+# target to generate assembly for a file
+mos65C02.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/mos65C02.c.s
+.PHONY : mos65C02.c.s
+
+roms.obj: roms.c.obj
+.PHONY : roms.obj
+
+# target to build an object file
+roms.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/roms.c.obj
+.PHONY : roms.c.obj
+
+roms.i: roms.c.i
+.PHONY : roms.i
+
+# target to preprocess a source file
+roms.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/roms.c.i
+.PHONY : roms.c.i
+
+roms.s: roms.c.s
+.PHONY : roms.s
+
+# target to generate assembly for a file
+roms.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/roms.c.s
+.PHONY : roms.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1774,6 +1846,15 @@ help:
 	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... memory.obj"
+	@echo "... memory.i"
+	@echo "... memory.s"
+	@echo "... mos65C02.obj"
+	@echo "... mos65C02.i"
+	@echo "... mos65C02.s"
+	@echo "... roms.obj"
+	@echo "... roms.i"
+	@echo "... roms.s"
 .PHONY : help
 
 

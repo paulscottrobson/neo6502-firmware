@@ -84,4 +84,5 @@ sources/CMakeFiles/firmware.dir/main.c.obj: \
  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h
