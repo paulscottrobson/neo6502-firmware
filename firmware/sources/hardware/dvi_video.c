@@ -45,7 +45,7 @@ void drawCharacter(int x,int y,int ch,int col) {
 
 int xc = 0,yc = 0;
 void writeCharacter(int c) {
-	drawCharacter(xc*6+5,yc*8,c,2);
+	drawCharacter(xc*6+5,yc*8,c,7);
 	xc += 1;
 	if (xc == 52) { xc = 0;yc = (yc + 1) % 30; }
 }

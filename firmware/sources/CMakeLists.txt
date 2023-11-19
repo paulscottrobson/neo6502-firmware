@@ -1,6 +1,5 @@
 
-add_executable(firmware main.c 	hardware/dvi_video.c hardware/usbkeyboard.c	system/memory.cpp system/mos65C02.cpp system/roms.cpp
-)
+add_executable(firmware main.c hardware/dvi_video.c hardware/usbkeyboard.c)
 
 target_compile_options(firmware PRIVATE -Wall)
 
