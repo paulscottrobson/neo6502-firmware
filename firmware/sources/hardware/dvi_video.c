@@ -50,6 +50,15 @@ void writeCharacter(int c) {
 	if (xc == 52) { xc = 0;yc = (yc + 1) % 30; }
 }
 
+void writeHex(int n) {
+	static char *c = "0123456789ABCDEF";
+	writeCharacter(32);
+	writeCharacter(c[(n >> 12) & 15]);
+	writeCharacter(c[(n >> 8) & 15]);
+	writeCharacter(c[(n >> 4) & 15]);
+	writeCharacter(c[(n >> 0) & 15]);
+}
+
 void __not_in_flash_func(_scanline_callback)(void) {
 	uint16_t *scanline;
 	while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline));
