@@ -111,7 +111,7 @@ int startVideo() {
 	}
 
 	lineCounter = 2;
-	scanline = buffer1;queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
+	uint16_t *scanline = buffer1;queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 	scanline = buffer2;queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 	multicore_launch_core1(core1_main);
 
