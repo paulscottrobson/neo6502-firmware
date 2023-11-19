@@ -22,7 +22,7 @@ prelim:
 	$(CDEL) src$(S)binary.h
 	$(ASSEMBLER) asm$(S)test.asm -o asm$(S)test.bin -L asm$(S)test.lst
 	$(PYTHON) asm$(S)hconvert.py asm$(S)test.bin >src$(S)binary.h
-	touch src$(S)roms.cpp
+	touch src$(S)roms.c*
 
 pio:
 	tools/pioasm src/memory_sm1_address.pio src/memory_sm1_address.pio.h

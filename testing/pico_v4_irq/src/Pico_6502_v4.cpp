@@ -17,7 +17,7 @@ void swapDisplay();
 extern uint32_t       clockCount;
 
 void setup() {
-  sleep_ms(2000);
+  //sleep_ms(2000);
 
 
   initDisplay();

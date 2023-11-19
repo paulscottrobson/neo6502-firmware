@@ -14,11 +14,11 @@ void writeChar(uint8_t vChar);
 #define RESET_COUNT  4
 
 // mask used for the mux address/data bus: GP0-7
-constexpr uint32_t BUS_MASK = 0xFF;
+const uint32_t BUS_MASK = 0xFF;
 
 volatile uint32_t  clockCount = 0UL;
 uint8_t   resetCount;
-boolean   inReset = false;
+bool      inReset = false;
 uint8_t   dataDir = 2;
 
 bool addressValid = false;
@@ -29,7 +29,7 @@ bool clockActive = false;
 /// </summary>
 /// <param name="vDebug"></param>
 inline __attribute__((always_inline))
-void setDebug(boolean vDebug) {
+void setDebug(bool vDebug) {
   gpio_put(pDebug, vDebug);
 }
 
@@ -38,7 +38,7 @@ void setDebug(boolean vDebug) {
 /// </summary>
 /// <param name="enable"></param>
 inline __attribute__((always_inline))
-void setClock(boolean clock) {
+void setClock(bool clock) {
   gpio_put(uP_CLOCK, clock);
 }
 
@@ -47,7 +47,7 @@ void setClock(boolean clock) {
 /// </summary>
 /// <param name="enable"></param>
 inline __attribute__((always_inline))
-void setReset(boolean reset) {
+void setReset(bool reset) {
   gpio_put(uP_RESET, reset);
 }
 
@@ -66,9 +66,9 @@ void setEnable(uint32_t enable) {
 /// <param name="direction"></param>
 inline __attribute__((always_inline))
 void setDirInput() {
-  if (dataDir != INPUT) {
+  if (dataDir != GPIO_IN) {
     gpio_set_dir_masked(BUS_MASK, (uint32_t)0UL);
-    dataDir = INPUT;
+    dataDir = GPIO_IN;
   }
 }
 
@@ -78,9 +78,9 @@ void setDirInput() {
 /// <param name="direction"></param>
 inline __attribute__((always_inline))
 void setDirOutput() {
-  if (dataDir != OUTPUT) {
+  if (dataDir != GPIO_OUT) {
     gpio_set_dir_masked(BUS_MASK, BUS_MASK);
-    dataDir = OUTPUT;
+    dataDir = GPIO_OUT;
   }
 }
 
@@ -154,23 +154,35 @@ void dma_handler() {
   //Serial.printf("Value: %08X Address: %04X Data: %02X Type: %s Send Data: %02X\n", value.value, value.data.address, value.data.data, write ? "W" : "R" , data);
 }
 
+void pinMode_pullUp(int ulPin) {
+    gpio_init(ulPin);
+    gpio_set_dir(ulPin, false);
+    gpio_pull_up(ulPin);
+    gpio_put(ulPin, 0);
+}
+
+void pinMode_output(int ulPin) {
+    gpio_init(ulPin);
+    gpio_set_drive_strength(ulPin, GPIO_DRIVE_STRENGTH_4MA);
+    gpio_set_dir(ulPin, true);
+}
 /// <summary>
 /// initialise the 65C02
 /// </summary>
 void init6502() {
 
   // RESET
-  pinMode(uP_RESET, OUTPUT);
+  //pinMode(uP_RESET, OUTPUT);
+  pinMode_output(uP_RESET);
 
   // RW
-  pinMode(uP_RW, INPUT_PULLUP);
-
+  //pinMode(uP_RW, INPUT_PULLUP);
+  pinMode_pullUp(uP_RW);
   // PIO
   PIO pio = pio1;
   uint offset = 0;
 
   offset = pio_add_program(pio, &address_program);
-  Serial.printf("Loaded program at %d\n", offset);
   
   pio_set_irq0_source_enabled(pio1,  pis_sm0_rx_fifo_not_empty, true);
   irq_set_exclusive_handler(PIO1_IRQ_0, dma_handler);
