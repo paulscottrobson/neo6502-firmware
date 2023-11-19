@@ -111,10 +111,52 @@ sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c -o CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s
 
+sources/CMakeFiles/firmware.dir/system/memory.cxx.obj: sources/CMakeFiles/firmware.dir/flags.make
+sources/CMakeFiles/firmware.dir/system/memory.cxx.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.cxx
+sources/CMakeFiles/firmware.dir/system/memory.cxx.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object sources/CMakeFiles/firmware.dir/system/memory.cxx.obj"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/system/memory.cxx.obj -MF CMakeFiles/firmware.dir/system/memory.cxx.obj.d -o CMakeFiles/firmware.dir/system/memory.cxx.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.cxx
+
+sources/CMakeFiles/firmware.dir/system/memory.cxx.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/firmware.dir/system/memory.cxx.i"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.cxx > CMakeFiles/firmware.dir/system/memory.cxx.i
+
+sources/CMakeFiles/firmware.dir/system/memory.cxx.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/firmware.dir/system/memory.cxx.s"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.cxx -o CMakeFiles/firmware.dir/system/memory.cxx.s
+
+sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.obj: sources/CMakeFiles/firmware.dir/flags.make
+sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.cxx
+sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.obj"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.obj -MF CMakeFiles/firmware.dir/system/mos65C02.cxx.obj.d -o CMakeFiles/firmware.dir/system/mos65C02.cxx.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.cxx
+
+sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/firmware.dir/system/mos65C02.cxx.i"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.cxx > CMakeFiles/firmware.dir/system/mos65C02.cxx.i
+
+sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/firmware.dir/system/mos65C02.cxx.s"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.cxx -o CMakeFiles/firmware.dir/system/mos65C02.cxx.s
+
+sources/CMakeFiles/firmware.dir/system/roms.cxx.obj: sources/CMakeFiles/firmware.dir/flags.make
+sources/CMakeFiles/firmware.dir/system/roms.cxx.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.cxx
+sources/CMakeFiles/firmware.dir/system/roms.cxx.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object sources/CMakeFiles/firmware.dir/system/roms.cxx.obj"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/system/roms.cxx.obj -MF CMakeFiles/firmware.dir/system/roms.cxx.obj.d -o CMakeFiles/firmware.dir/system/roms.cxx.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.cxx
+
+sources/CMakeFiles/firmware.dir/system/roms.cxx.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/firmware.dir/system/roms.cxx.i"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.cxx > CMakeFiles/firmware.dir/system/roms.cxx.i
+
+sources/CMakeFiles/firmware.dir/system/roms.cxx.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/firmware.dir/system/roms.cxx.s"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.cxx -o CMakeFiles/firmware.dir/system/roms.cxx.s
+
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i: cmake_force
@@ -128,7 +170,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/std
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i: cmake_force
@@ -142,7 +184,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/g
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i: cmake_force
@@ -156,7 +198,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/p
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i: cmake_force
@@ -170,7 +212,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i: cmake_force
@@ -184,7 +226,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/s
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i: cmake_force
@@ -197,7 +239,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/ir
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.i: cmake_force
@@ -211,7 +253,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/ir
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj: /aux/pico/pico-sdk/src/common/pico_sync/sem.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj -c /aux/pico/pico-sdk/src/common/pico_sync/sem.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.i: cmake_force
@@ -225,7 +267,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.s: 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj: /aux/pico/pico-sdk/src/common/pico_sync/lock_core.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj -c /aux/pico/pico-sdk/src/common/pico_sync/lock_core.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.i: cmake_force
@@ -239,7 +281,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj: /aux/pico/pico-sdk/src/common/pico_sync/mutex.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj -c /aux/pico/pico-sdk/src/common/pico_sync/mutex.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.i: cmake_force
@@ -253,7 +295,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.s
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: /aux/pico/pico-sdk/src/common/pico_sync/critical_section.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj -c /aux/pico/pico-sdk/src/common/pico_sync/critical_section.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.i: cmake_force
@@ -267,7 +309,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj: /aux/pico/pico-sdk/src/common/pico_time/time.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj -c /aux/pico/pico-sdk/src/common/pico_time/time.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.i: cmake_force
@@ -281,7 +323,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.s:
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: /aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj -c /aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i: cmake_force
@@ -295,7 +337,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_h
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i: cmake_force
@@ -309,7 +351,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj: /aux/pico/pico-sdk/src/common/pico_util/datetime.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj -c /aux/pico/pico-sdk/src/common/pico_util/datetime.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.i: cmake_force
@@ -323,7 +365,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj: /aux/pico/pico-sdk/src/common/pico_util/pheap.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj -c /aux/pico/pico-sdk/src/common/pico_util/pheap.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.i: cmake_force
@@ -337,7 +379,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.s
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj: /aux/pico/pico-sdk/src/common/pico_util/queue.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj -c /aux/pico/pico-sdk/src/common/pico_util/queue.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.i: cmake_force
@@ -351,7 +393,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.s
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i: cmake_force
@@ -365,7 +407,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/u
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i: cmake_force
@@ -379,7 +421,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i: cmake_force
@@ -393,7 +435,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pl
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i: cmake_force
@@ -407,7 +449,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/v
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i: cmake_force
@@ -421,7 +463,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchd
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i: cmake_force
@@ -434,7 +476,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/x
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.i: cmake_force
@@ -448,7 +490,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divide
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i: cmake_force
@@ -462,7 +504,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/ru
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i: cmake_force
@@ -475,7 +517,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/pri
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.i: cmake_force
@@ -489,7 +531,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bi
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i: cmake_force
@@ -502,7 +544,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bo
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.i: cmake_force
@@ -515,7 +557,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/di
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.i: cmake_force
@@ -529,7 +571,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/dou
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i: cmake_force
@@ -543,7 +585,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/dou
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i: cmake_force
@@ -556,7 +598,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/dou
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.i: cmake_force
@@ -569,7 +611,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/dou
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.i: cmake_force
@@ -582,7 +624,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.i: cmake_force
@@ -596,7 +638,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/floa
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i: cmake_force
@@ -610,7 +652,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/floa
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i: cmake_force
@@ -623,7 +665,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/floa
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.i: cmake_force
@@ -637,7 +679,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/floa
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i: cmake_force
@@ -650,7 +692,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pic
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.i: cmake_force
@@ -663,7 +705,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/me
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj: /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building ASM object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj   -c /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.i: cmake_force
@@ -677,7 +719,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_l
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj: /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i: cmake_force
@@ -691,7 +733,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_l
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i: cmake_force
@@ -705,7 +747,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_l
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i: cmake_force
@@ -719,7 +761,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdi
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i: cmake_force
@@ -733,7 +775,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj -c /aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i: cmake_force
@@ -747,7 +789,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.c
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building C object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building C object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj -MF CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj.d -o CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.c
 
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.i: cmake_force
@@ -761,7 +803,7 @@ sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.s: cm
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.c
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building C object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj -MF CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj.d -o CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.c
 
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.i: cmake_force
@@ -775,7 +817,7 @@ sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_seriali
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_timing.c
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building C object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building C object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj -MF CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj.d -o CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_timing.c
 
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.i: cmake_force
@@ -788,7 +830,7 @@ sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.
 
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building ASM object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building ASM object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj   -c /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.S
 
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.i: cmake_force
@@ -802,7 +844,7 @@ sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.c
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj -MF CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj.d -o CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.c
 
 sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.i: cmake_force
@@ -816,7 +858,7 @@ sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.i: cmake_force
@@ -830,7 +872,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dm
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.i: cmake_force
@@ -844,7 +886,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj -c /aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i: cmake_force
@@ -858,7 +900,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pi
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i: cmake_force
@@ -872,7 +914,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspb
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i: cmake_force
@@ -886,7 +928,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspb
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i: cmake_force
@@ -900,7 +942,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s:
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i: cmake_force
@@ -914,7 +956,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s: 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i: cmake_force
@@ -928,7 +970,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i: cmake_force
@@ -942,7 +984,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i: cmake_force
@@ -956,7 +998,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i: cmake_force
@@ -970,7 +1012,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/v
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i: cmake_force
@@ -984,7 +1026,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s: cmak
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i: cmake_force
@@ -998,7 +1040,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fi
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building C object sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj -MF CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj.d -o CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj -c /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i: cmake_force
@@ -1014,6 +1056,9 @@ firmware_OBJECTS = \
 "CMakeFiles/firmware.dir/main.c.obj" \
 "CMakeFiles/firmware.dir/hardware/dvi_video.c.obj" \
 "CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj" \
+"CMakeFiles/firmware.dir/system/memory.cxx.obj" \
+"CMakeFiles/firmware.dir/system/mos65C02.cxx.obj" \
+"CMakeFiles/firmware.dir/system/roms.cxx.obj" \
 "CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" \
 "CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj" \
 "CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj" \
@@ -1086,6 +1131,9 @@ firmware_EXTERNAL_OBJECTS =
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/main.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj
+sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/memory.cxx.obj
+sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.obj
+sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/roms.cxx.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -1154,7 +1202,7 @@ sources/firmware.elf: sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tiny
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/build.make
 sources/firmware.elf: pico-sdk/src/rp2_common/boot_stage2/bs2_default_padded_checksummed.S
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Linking CXX executable firmware.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Linking CXX executable firmware.elf"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/firmware.dir/link.txt --verbose=$(VERBOSE)
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-objcopy -Oihex /home/paulr/Projects/neo6502-firmware/firmware/build/sources/firmware.elf firmware.hex
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-objcopy -Obinary /home/paulr/Projects/neo6502-firmware/firmware/build/sources/firmware.elf firmware.bin

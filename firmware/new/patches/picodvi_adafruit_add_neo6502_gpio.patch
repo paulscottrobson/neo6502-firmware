@@ -1,0 +1,14 @@
+15c15
+< #define DVI_DEFAULT_SERIAL_CONFIG pico_sock_cfg
+---
+> #define DVI_DEFAULT_SERIAL_CONFIG pico_neo6502_cfg
+109a110,118
+> };
+> 
+> // Pico HDMI for Olimex Neo6502 
+> static const struct dvi_serialiser_cfg pico_neo6502_cfg = {
+>   .pio = DVI_DEFAULT_PIO_INST,
+>   .sm_tmds = {0, 1, 2},
+>   .pins_tmds = {14, 18, 16},
+>   .pins_clk = 12,
+>   .invert_diffpairs = true
