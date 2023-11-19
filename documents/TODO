@@ -1,3 +1,9 @@
 - build enough of the app to get the boot working
 - add the USB as before and get the demo working.
 - add PicoDVI as a submodule.
+
+- consistent writeChar
+- fix pins.h
+- make single buffer / remove swapping code.
+- strip out as much arduino code as possible.
+- fix roms.cpp

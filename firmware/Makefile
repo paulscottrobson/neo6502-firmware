@@ -16,19 +16,19 @@ else
 include ../documents/common.make
 endif
 
-all: build
+all: compile
 
-run: build upload
+run: compile upload
 
 upload:
 	cp build$(S)sources$(S)firmware.elf .
 	cp build$(S)sources$(S)firmware.uf2 .
 	openocd -f interface$(S)cmsis-dap.cfg -f target$(S)rp2040.cfg -c "adapter speed 5000" -c "program firmware.elf verify reset exit"
 
-build:
+compile:
 	make -C build
 
-rebuild: clean build
+rebuild: clean compile
 
 clean:
 	rm -Rf build
