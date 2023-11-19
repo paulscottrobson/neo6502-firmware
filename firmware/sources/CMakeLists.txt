@@ -1,9 +1,9 @@
 
-add_executable(hello_dvi main.c hardware/dvi_video.c hardware/usbkeyboard.c)
+add_executable(firmware main.c hardware/dvi_video.c hardware/usbkeyboard.c)
 
-target_compile_options(hello_dvi PRIVATE -Wall)
+target_compile_options(firmware PRIVATE -Wall)
 
-target_link_libraries(hello_dvi
+target_link_libraries(firmware
 	pico_stdlib
 	pico_multicore
 	pico_util
@@ -12,5 +12,5 @@ target_link_libraries(hello_dvi
 	tinyusb_board
 )
 
-target_include_directories(hello_dvi PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-pico_add_extra_outputs(hello_dvi)
+target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+pico_add_extra_outputs(firmware)
