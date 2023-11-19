@@ -172,7 +172,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=hello_dvi
+CMAKE_PROJECT_NAME:STATIC=firmware
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/arm-none-eabi-ranlib
@@ -306,13 +306,13 @@ PICO_STDIO_UART:BOOL=ON
 PICO_STDIO_USB:BOOL=OFF
 
 //Value Computed by CMake
-hello_dvi_BINARY_DIR:STATIC=/home/paulr/Projects/neo6502-firmware/firmware/build
+firmware_BINARY_DIR:STATIC=/home/paulr/Projects/neo6502-firmware/firmware/build
 
 //Value Computed by CMake
-hello_dvi_IS_TOP_LEVEL:STATIC=ON
+firmware_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-hello_dvi_SOURCE_DIR:STATIC=/home/paulr/Projects/neo6502-firmware/firmware
+firmware_SOURCE_DIR:STATIC=/home/paulr/Projects/neo6502-firmware/firmware
 
 //The directory containing a CMake configuration file for pico-sdk-tools.
 pico-sdk-tools_DIR:PATH=pico-sdk-tools_DIR-NOTFOUND

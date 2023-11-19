@@ -117,18 +117,18 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-sources/CMakeFiles/hello_dvi.dir/rule:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sources/CMakeFiles/hello_dvi.dir/rule
-.PHONY : sources/CMakeFiles/hello_dvi.dir/rule
+sources/CMakeFiles/firmware.dir/rule:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sources/CMakeFiles/firmware.dir/rule
+.PHONY : sources/CMakeFiles/firmware.dir/rule
 
 # Convenience name for target.
-hello_dvi: sources/CMakeFiles/hello_dvi.dir/rule
-.PHONY : hello_dvi
+firmware: sources/CMakeFiles/firmware.dir/rule
+.PHONY : firmware
 
 # fast build rule for target.
-hello_dvi/fast:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/build
-.PHONY : hello_dvi/fast
+firmware/fast:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/build
+.PHONY : firmware/fast
 
 # Convenience name for target.
 sources/CMakeFiles/ELF2UF2Build.dir/rule:
@@ -149,7 +149,7 @@ __/libraries/PicoDVI/software/libdvi/dvi.obj: __/libraries/PicoDVI/software/libd
 
 # target to build an object file
 __/libraries/PicoDVI/software/libdvi/dvi.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
 .PHONY : __/libraries/PicoDVI/software/libdvi/dvi.c.obj
 
 __/libraries/PicoDVI/software/libdvi/dvi.i: __/libraries/PicoDVI/software/libdvi/dvi.c.i
@@ -157,7 +157,7 @@ __/libraries/PicoDVI/software/libdvi/dvi.i: __/libraries/PicoDVI/software/libdvi
 
 # target to preprocess a source file
 __/libraries/PicoDVI/software/libdvi/dvi.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.i
 .PHONY : __/libraries/PicoDVI/software/libdvi/dvi.c.i
 
 __/libraries/PicoDVI/software/libdvi/dvi.s: __/libraries/PicoDVI/software/libdvi/dvi.c.s
@@ -165,7 +165,7 @@ __/libraries/PicoDVI/software/libdvi/dvi.s: __/libraries/PicoDVI/software/libdvi
 
 # target to generate assembly for a file
 __/libraries/PicoDVI/software/libdvi/dvi.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.s
 .PHONY : __/libraries/PicoDVI/software/libdvi/dvi.c.s
 
 __/libraries/PicoDVI/software/libdvi/dvi_serialiser.obj: __/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
@@ -173,7 +173,7 @@ __/libraries/PicoDVI/software/libdvi/dvi_serialiser.obj: __/libraries/PicoDVI/so
 
 # target to build an object file
 __/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
 .PHONY : __/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
 
 __/libraries/PicoDVI/software/libdvi/dvi_serialiser.i: __/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.i
@@ -181,7 +181,7 @@ __/libraries/PicoDVI/software/libdvi/dvi_serialiser.i: __/libraries/PicoDVI/soft
 
 # target to preprocess a source file
 __/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.i
 .PHONY : __/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.i
 
 __/libraries/PicoDVI/software/libdvi/dvi_serialiser.s: __/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.s
@@ -189,7 +189,7 @@ __/libraries/PicoDVI/software/libdvi/dvi_serialiser.s: __/libraries/PicoDVI/soft
 
 # target to generate assembly for a file
 __/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.s
 .PHONY : __/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.s
 
 __/libraries/PicoDVI/software/libdvi/dvi_timing.obj: __/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
@@ -197,7 +197,7 @@ __/libraries/PicoDVI/software/libdvi/dvi_timing.obj: __/libraries/PicoDVI/softwa
 
 # target to build an object file
 __/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
 .PHONY : __/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
 
 __/libraries/PicoDVI/software/libdvi/dvi_timing.i: __/libraries/PicoDVI/software/libdvi/dvi_timing.c.i
@@ -205,7 +205,7 @@ __/libraries/PicoDVI/software/libdvi/dvi_timing.i: __/libraries/PicoDVI/software
 
 # target to preprocess a source file
 __/libraries/PicoDVI/software/libdvi/dvi_timing.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.i
 .PHONY : __/libraries/PicoDVI/software/libdvi/dvi_timing.c.i
 
 __/libraries/PicoDVI/software/libdvi/dvi_timing.s: __/libraries/PicoDVI/software/libdvi/dvi_timing.c.s
@@ -213,7 +213,7 @@ __/libraries/PicoDVI/software/libdvi/dvi_timing.s: __/libraries/PicoDVI/software
 
 # target to generate assembly for a file
 __/libraries/PicoDVI/software/libdvi/dvi_timing.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.s
 .PHONY : __/libraries/PicoDVI/software/libdvi/dvi_timing.c.s
 
 __/libraries/PicoDVI/software/libdvi/tmds_encode.obj: __/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj
@@ -221,7 +221,7 @@ __/libraries/PicoDVI/software/libdvi/tmds_encode.obj: __/libraries/PicoDVI/softw
 
 # target to build an object file
 __/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj
 .PHONY : __/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj
 
 __/libraries/PicoDVI/software/libdvi/tmds_encode.obj: __/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj
@@ -229,7 +229,7 @@ __/libraries/PicoDVI/software/libdvi/tmds_encode.obj: __/libraries/PicoDVI/softw
 
 # target to build an object file
 __/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj
 .PHONY : __/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj
 
 __/libraries/PicoDVI/software/libdvi/tmds_encode.i: __/libraries/PicoDVI/software/libdvi/tmds_encode.c.i
@@ -237,7 +237,7 @@ __/libraries/PicoDVI/software/libdvi/tmds_encode.i: __/libraries/PicoDVI/softwar
 
 # target to preprocess a source file
 __/libraries/PicoDVI/software/libdvi/tmds_encode.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.i
 .PHONY : __/libraries/PicoDVI/software/libdvi/tmds_encode.c.i
 
 __/libraries/PicoDVI/software/libdvi/tmds_encode.s: __/libraries/PicoDVI/software/libdvi/tmds_encode.c.s
@@ -245,7 +245,7 @@ __/libraries/PicoDVI/software/libdvi/tmds_encode.s: __/libraries/PicoDVI/softwar
 
 # target to generate assembly for a file
 __/libraries/PicoDVI/software/libdvi/tmds_encode.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.s
 .PHONY : __/libraries/PicoDVI/software/libdvi/tmds_encode.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.obj: aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
@@ -253,7 +253,7 @@ aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.obj: aux/pico/pico-sdk/lib/ti
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.i: aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
@@ -261,7 +261,7 @@ aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.i: aux/pico/pico-sdk/lib/tiny
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.s: aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
@@ -269,7 +269,7 @@ aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.s: aux/pico/pico-sdk/lib/tiny
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.obj: aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj
@@ -277,7 +277,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.obj: aux/pico/pico-sdk/lib/
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.i: aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i
@@ -285,7 +285,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.i: aux/pico/pico-sdk/lib/ti
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.s: aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s
@@ -293,7 +293,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.s: aux/pico/pico-sdk/lib/ti
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.obj: aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
@@ -301,7 +301,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.obj: aux/pico/pico-sdk/lib/
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.i: aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i
@@ -309,7 +309,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.i: aux/pico/pico-sdk/lib/ti
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.s: aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s
@@ -317,7 +317,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.s: aux/pico/pico-sdk/lib/ti
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.obj: aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
@@ -325,7 +325,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.obj: aux/pico/pico-sdk/lib/
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.i: aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i
@@ -333,7 +333,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.i: aux/pico/pico-sdk/lib/ti
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.s: aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s
@@ -341,7 +341,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.s: aux/pico/pico-sdk/lib/ti
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.obj: aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj
@@ -349,7 +349,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.obj: aux/pico/pico-sd
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.i: aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i
@@ -357,7 +357,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.i: aux/pico/pico-sdk/
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.s: aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s
@@ -365,7 +365,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.s: aux/pico/pico-sdk/
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj: aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
@@ -373,7 +373,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj: aux/pico/pico-sdk/lib/ti
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i: aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
@@ -381,7 +381,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i: aux/pico/pico-sdk/lib/tiny
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s: aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
@@ -389,7 +389,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s: aux/pico/pico-sdk/lib/tiny
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/host/hub.obj: aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
@@ -397,7 +397,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/host/hub.obj: aux/pico/pico-sdk/lib/tinyusb/sr
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/host/hub.i: aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i
@@ -405,7 +405,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/host/hub.i: aux/pico/pico-sdk/lib/tinyusb/src/
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/host/hub.s: aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s
@@ -413,7 +413,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/host/hub.s: aux/pico/pico-sdk/lib/tinyusb/src/
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.obj: aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
@@ -421,7 +421,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.obj: aux/pico/pico-sdk/lib/tinyusb/s
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.i: aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i
@@ -429,7 +429,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.i: aux/pico/pico-sdk/lib/tinyusb/src
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.s: aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s
@@ -437,7 +437,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.s: aux/pico/pico-sdk/lib/tinyusb/src
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.obj: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
@@ -445,7 +445,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.obj: au
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.i: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
@@ -453,7 +453,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.i: aux/
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.s: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
@@ -461,7 +461,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.s: aux/
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
@@ -469,7 +469,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj: au
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
@@ -477,7 +477,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i: aux/
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
@@ -485,7 +485,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s: aux/
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
 
 aux/pico/pico-sdk/lib/tinyusb/src/tusb.obj: aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
@@ -493,7 +493,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/tusb.obj: aux/pico/pico-sdk/lib/tinyusb/src/tu
 
 # target to build an object file
 aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 
 aux/pico/pico-sdk/lib/tinyusb/src/tusb.i: aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
@@ -501,7 +501,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/tusb.i: aux/pico/pico-sdk/lib/tinyusb/src/tusb
 
 # target to preprocess a source file
 aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
 
 aux/pico/pico-sdk/lib/tinyusb/src/tusb.s: aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
@@ -509,7 +509,7 @@ aux/pico/pico-sdk/lib/tinyusb/src/tusb.s: aux/pico/pico-sdk/lib/tinyusb/src/tusb
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
 .PHONY : aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
 
 aux/pico/pico-sdk/src/common/pico_sync/critical_section.obj: aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
@@ -517,7 +517,7 @@ aux/pico/pico-sdk/src/common/pico_sync/critical_section.obj: aux/pico/pico-sdk/s
 
 # target to build an object file
 aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
 
 aux/pico/pico-sdk/src/common/pico_sync/critical_section.i: aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.i
@@ -525,7 +525,7 @@ aux/pico/pico-sdk/src/common/pico_sync/critical_section.i: aux/pico/pico-sdk/src
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.i
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.i
 
 aux/pico/pico-sdk/src/common/pico_sync/critical_section.s: aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.s
@@ -533,7 +533,7 @@ aux/pico/pico-sdk/src/common/pico_sync/critical_section.s: aux/pico/pico-sdk/src
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.s
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.s
 
 aux/pico/pico-sdk/src/common/pico_sync/lock_core.obj: aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
@@ -541,7 +541,7 @@ aux/pico/pico-sdk/src/common/pico_sync/lock_core.obj: aux/pico/pico-sdk/src/comm
 
 # target to build an object file
 aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
 
 aux/pico/pico-sdk/src/common/pico_sync/lock_core.i: aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.i
@@ -549,7 +549,7 @@ aux/pico/pico-sdk/src/common/pico_sync/lock_core.i: aux/pico/pico-sdk/src/common
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.i
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.i
 
 aux/pico/pico-sdk/src/common/pico_sync/lock_core.s: aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.s
@@ -557,7 +557,7 @@ aux/pico/pico-sdk/src/common/pico_sync/lock_core.s: aux/pico/pico-sdk/src/common
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.s
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.s
 
 aux/pico/pico-sdk/src/common/pico_sync/mutex.obj: aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
@@ -565,7 +565,7 @@ aux/pico/pico-sdk/src/common/pico_sync/mutex.obj: aux/pico/pico-sdk/src/common/p
 
 # target to build an object file
 aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
 
 aux/pico/pico-sdk/src/common/pico_sync/mutex.i: aux/pico/pico-sdk/src/common/pico_sync/mutex.c.i
@@ -573,7 +573,7 @@ aux/pico/pico-sdk/src/common/pico_sync/mutex.i: aux/pico/pico-sdk/src/common/pic
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/common/pico_sync/mutex.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.i
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/mutex.c.i
 
 aux/pico/pico-sdk/src/common/pico_sync/mutex.s: aux/pico/pico-sdk/src/common/pico_sync/mutex.c.s
@@ -581,7 +581,7 @@ aux/pico/pico-sdk/src/common/pico_sync/mutex.s: aux/pico/pico-sdk/src/common/pic
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/common/pico_sync/mutex.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.s
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/mutex.c.s
 
 aux/pico/pico-sdk/src/common/pico_sync/sem.obj: aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj
@@ -589,7 +589,7 @@ aux/pico/pico-sdk/src/common/pico_sync/sem.obj: aux/pico/pico-sdk/src/common/pic
 
 # target to build an object file
 aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/sem.c.obj
 
 aux/pico/pico-sdk/src/common/pico_sync/sem.i: aux/pico/pico-sdk/src/common/pico_sync/sem.c.i
@@ -597,7 +597,7 @@ aux/pico/pico-sdk/src/common/pico_sync/sem.i: aux/pico/pico-sdk/src/common/pico_
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/common/pico_sync/sem.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.i
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/sem.c.i
 
 aux/pico/pico-sdk/src/common/pico_sync/sem.s: aux/pico/pico-sdk/src/common/pico_sync/sem.c.s
@@ -605,7 +605,7 @@ aux/pico/pico-sdk/src/common/pico_sync/sem.s: aux/pico/pico-sdk/src/common/pico_
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/common/pico_sync/sem.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/sem.c.s
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/sem.c.s
 
 aux/pico/pico-sdk/src/common/pico_time/time.obj: aux/pico/pico-sdk/src/common/pico_time/time.c.obj
@@ -613,7 +613,7 @@ aux/pico/pico-sdk/src/common/pico_time/time.obj: aux/pico/pico-sdk/src/common/pi
 
 # target to build an object file
 aux/pico/pico-sdk/src/common/pico_time/time.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_time/time.c.obj
 
 aux/pico/pico-sdk/src/common/pico_time/time.i: aux/pico/pico-sdk/src/common/pico_time/time.c.i
@@ -621,7 +621,7 @@ aux/pico/pico-sdk/src/common/pico_time/time.i: aux/pico/pico-sdk/src/common/pico
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/common/pico_time/time.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.i
 .PHONY : aux/pico/pico-sdk/src/common/pico_time/time.c.i
 
 aux/pico/pico-sdk/src/common/pico_time/time.s: aux/pico/pico-sdk/src/common/pico_time/time.c.s
@@ -629,7 +629,7 @@ aux/pico/pico-sdk/src/common/pico_time/time.s: aux/pico/pico-sdk/src/common/pico
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/common/pico_time/time.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.s
 .PHONY : aux/pico/pico-sdk/src/common/pico_time/time.c.s
 
 aux/pico/pico-sdk/src/common/pico_time/timeout_helper.obj: aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj
@@ -637,7 +637,7 @@ aux/pico/pico-sdk/src/common/pico_time/timeout_helper.obj: aux/pico/pico-sdk/src
 
 # target to build an object file
 aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.obj
 
 aux/pico/pico-sdk/src/common/pico_time/timeout_helper.i: aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
@@ -645,7 +645,7 @@ aux/pico/pico-sdk/src/common/pico_time/timeout_helper.i: aux/pico/pico-sdk/src/c
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
 .PHONY : aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.i
 
 aux/pico/pico-sdk/src/common/pico_time/timeout_helper.s: aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
@@ -653,7 +653,7 @@ aux/pico/pico-sdk/src/common/pico_time/timeout_helper.s: aux/pico/pico-sdk/src/c
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
 .PHONY : aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c.s
 
 aux/pico/pico-sdk/src/common/pico_util/datetime.obj: aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj
@@ -661,7 +661,7 @@ aux/pico/pico-sdk/src/common/pico_util/datetime.obj: aux/pico/pico-sdk/src/commo
 
 # target to build an object file
 aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_util/datetime.c.obj
 
 aux/pico/pico-sdk/src/common/pico_util/datetime.i: aux/pico/pico-sdk/src/common/pico_util/datetime.c.i
@@ -669,7 +669,7 @@ aux/pico/pico-sdk/src/common/pico_util/datetime.i: aux/pico/pico-sdk/src/common/
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/common/pico_util/datetime.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.i
 .PHONY : aux/pico/pico-sdk/src/common/pico_util/datetime.c.i
 
 aux/pico/pico-sdk/src/common/pico_util/datetime.s: aux/pico/pico-sdk/src/common/pico_util/datetime.c.s
@@ -677,7 +677,7 @@ aux/pico/pico-sdk/src/common/pico_util/datetime.s: aux/pico/pico-sdk/src/common/
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/common/pico_util/datetime.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/datetime.c.s
 .PHONY : aux/pico/pico-sdk/src/common/pico_util/datetime.c.s
 
 aux/pico/pico-sdk/src/common/pico_util/pheap.obj: aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
@@ -685,7 +685,7 @@ aux/pico/pico-sdk/src/common/pico_util/pheap.obj: aux/pico/pico-sdk/src/common/p
 
 # target to build an object file
 aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
 
 aux/pico/pico-sdk/src/common/pico_util/pheap.i: aux/pico/pico-sdk/src/common/pico_util/pheap.c.i
@@ -693,7 +693,7 @@ aux/pico/pico-sdk/src/common/pico_util/pheap.i: aux/pico/pico-sdk/src/common/pic
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/common/pico_util/pheap.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.i
 .PHONY : aux/pico/pico-sdk/src/common/pico_util/pheap.c.i
 
 aux/pico/pico-sdk/src/common/pico_util/pheap.s: aux/pico/pico-sdk/src/common/pico_util/pheap.c.s
@@ -701,7 +701,7 @@ aux/pico/pico-sdk/src/common/pico_util/pheap.s: aux/pico/pico-sdk/src/common/pic
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/common/pico_util/pheap.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.s
 .PHONY : aux/pico/pico-sdk/src/common/pico_util/pheap.c.s
 
 aux/pico/pico-sdk/src/common/pico_util/queue.obj: aux/pico/pico-sdk/src/common/pico_util/queue.c.obj
@@ -709,7 +709,7 @@ aux/pico/pico-sdk/src/common/pico_util/queue.obj: aux/pico/pico-sdk/src/common/p
 
 # target to build an object file
 aux/pico/pico-sdk/src/common/pico_util/queue.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_util/queue.c.obj
 
 aux/pico/pico-sdk/src/common/pico_util/queue.i: aux/pico/pico-sdk/src/common/pico_util/queue.c.i
@@ -717,7 +717,7 @@ aux/pico/pico-sdk/src/common/pico_util/queue.i: aux/pico/pico-sdk/src/common/pic
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/common/pico_util/queue.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.i
 .PHONY : aux/pico/pico-sdk/src/common/pico_util/queue.c.i
 
 aux/pico/pico-sdk/src/common/pico_util/queue.s: aux/pico/pico-sdk/src/common/pico_util/queue.c.s
@@ -725,7 +725,7 @@ aux/pico/pico-sdk/src/common/pico_util/queue.s: aux/pico/pico-sdk/src/common/pic
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/common/pico_util/queue.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.s
 .PHONY : aux/pico/pico-sdk/src/common/pico_util/queue.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.obj: aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
@@ -733,7 +733,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.obj: aux/pico/pico-sdk/src
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.i: aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
@@ -741,7 +741,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.i: aux/pico/pico-sdk/src/r
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.s: aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
@@ -749,7 +749,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.s: aux/pico/pico-sdk/src/r
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.obj: aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
@@ -757,7 +757,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.obj: aux/pico/pico-sdk/s
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.i: aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i
@@ -765,7 +765,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.i: aux/pico/pico-sdk/src
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.s: aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s
@@ -773,7 +773,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.s: aux/pico/pico-sdk/src
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.obj: aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
@@ -781,7 +781,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.obj: aux/pico/pico-sdk
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_divider/divider.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.obj: aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
@@ -789,7 +789,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.obj: aux/pico/pico-sdk/src/rp2
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.i: aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.i
@@ -797,7 +797,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.i: aux/pico/pico-sdk/src/rp2_c
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.s: aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s
@@ -805,7 +805,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.s: aux/pico/pico-sdk/src/rp2_c
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.obj: aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
@@ -813,7 +813,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.obj: aux/pico/pico-sdk/src/r
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.i: aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i
@@ -821,7 +821,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.i: aux/pico/pico-sdk/src/rp2
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.s: aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
@@ -829,7 +829,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.s: aux/pico/pico-sdk/src/rp2
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.obj: aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
@@ -837,7 +837,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.obj: aux/pico/pico-sdk/s
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.i: aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.i
@@ -845,7 +845,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.i: aux/pico/pico-sdk/src
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.s: aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.s
@@ -853,7 +853,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.s: aux/pico/pico-sdk/src
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj: aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
@@ -861,7 +861,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj: aux/pico/pico-sdk/src/rp2
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.i: aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i
@@ -869,7 +869,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.i: aux/pico/pico-sdk/src/rp2_c
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.s: aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s
@@ -877,7 +877,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.s: aux/pico/pico-sdk/src/rp2_c
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.obj: aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
@@ -885,7 +885,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.obj: aux/pico/pi
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.obj: aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
@@ -893,7 +893,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.obj: aux/pico/pico-sdk/src/rp2
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.i: aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i
@@ -901,7 +901,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.i: aux/pico/pico-sdk/src/rp2_c
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.s: aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s
@@ -909,7 +909,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.s: aux/pico/pico-sdk/src/rp2_c
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.obj: aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
@@ -917,7 +917,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.obj: aux/pico/pico-sdk/src/rp2
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.i: aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i
@@ -925,7 +925,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.i: aux/pico/pico-sdk/src/rp2_c
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.s: aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s
@@ -933,7 +933,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.s: aux/pico/pico-sdk/src/rp2_c
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.obj: aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
@@ -941,7 +941,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.obj: aux/pico/pico-sdk/src/r
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.i: aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i
@@ -949,7 +949,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.i: aux/pico/pico-sdk/src/rp2
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.s: aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s
@@ -957,7 +957,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.s: aux/pico/pico-sdk/src/rp2
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.obj: aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
@@ -965,7 +965,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.obj: aux/pico/pico-sdk/src
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.i: aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
@@ -973,7 +973,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.i: aux/pico/pico-sdk/src/r
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.s: aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
@@ -981,7 +981,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.s: aux/pico/pico-sdk/src/r
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.obj: aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
@@ -989,7 +989,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.obj: aux/pico/pico-sdk/src/r
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.i: aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i
@@ -997,7 +997,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.i: aux/pico/pico-sdk/src/rp2
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.s: aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s
@@ -1005,7 +1005,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.s: aux/pico/pico-sdk/src/rp2
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.obj: aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
@@ -1013,7 +1013,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.obj: aux/pico/pico-sdk/src/r
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.i: aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i
@@ -1021,7 +1021,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.i: aux/pico/pico-sdk/src/rp2
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.s: aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s
@@ -1029,7 +1029,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.s: aux/pico/pico-sdk/src/rp2
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.obj: aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
@@ -1037,7 +1037,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.obj: aux/pico/pico-s
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.i: aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i
@@ -1045,7 +1045,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.i: aux/pico/pico-sdk
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.s: aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
@@ -1053,7 +1053,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.s: aux/pico/pico-sdk
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.obj: aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
@@ -1061,7 +1061,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.obj: aux/pico/pico-sdk/src/r
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.i: aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i
@@ -1069,7 +1069,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.i: aux/pico/pico-sdk/src/rp2
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.i
 
 aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.s: aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s
@@ -1077,7 +1077,7 @@ aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.s: aux/pico/pico-sdk/src/rp2
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.obj: aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
@@ -1085,7 +1085,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.obj: aux/pico/pico-s
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.obj: aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
@@ -1093,7 +1093,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.obj: aux/pico/pico-sdk/src
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.i: aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i
@@ -1101,7 +1101,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.i: aux/pico/pico-sdk/src/r
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.s: aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s
@@ -1109,7 +1109,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.s: aux/pico/pico-sdk/src/r
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.obj: aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
@@ -1117,7 +1117,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.obj: aux/pico/pico-sdk/src
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.obj: aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
@@ -1125,7 +1125,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.obj: aux/pico/pico-sdk
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.obj: aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
@@ -1133,7 +1133,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.obj: aux/pico/pico-
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.i: aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i
@@ -1141,7 +1141,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.i: aux/pico/pico-sd
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.s: aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s
@@ -1149,7 +1149,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.s: aux/pico/pico-sd
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.obj: aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
@@ -1157,7 +1157,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.obj: aux/pico/pico-sdk/
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.i: aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i
@@ -1165,7 +1165,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.i: aux/pico/pico-sdk/sr
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.s: aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s
@@ -1173,7 +1173,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.s: aux/pico/pico-sdk/sr
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.obj: aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
@@ -1181,7 +1181,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.obj: aux/pico/pi
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj: aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
@@ -1189,7 +1189,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj: aux/pico/pico-sdk/s
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.obj: aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
@@ -1197,7 +1197,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.obj: aux/pico/pico-sd
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.i: aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i
@@ -1205,7 +1205,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.i: aux/pico/pico-sdk/
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.s: aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s
@@ -1213,7 +1213,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.s: aux/pico/pico-sdk/
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.obj: aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
@@ -1221,7 +1221,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.obj: aux/pico/pico-sdk/sr
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.i: aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i
@@ -1229,7 +1229,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.i: aux/pico/pico-sdk/src/
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.s: aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s
@@ -1237,7 +1237,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.s: aux/pico/pico-sdk/src/
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.obj: aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
@@ -1245,7 +1245,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.obj: aux/pico/pico
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.obj: aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
@@ -1253,7 +1253,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.obj: aux/pi
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.obj: aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
@@ -1261,7 +1261,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.obj: aux/pico/pico-sdk/
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.i: aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i
@@ -1269,7 +1269,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.i: aux/pico/pico-sdk/sr
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.s: aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s
@@ -1277,7 +1277,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.s: aux/pico/pico-sdk/sr
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.obj: aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
@@ -1285,7 +1285,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.obj: aux/pico/pico-s
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.obj: aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
@@ -1293,7 +1293,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.obj: aux/pico/pico-sdk
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.i: aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i
@@ -1301,7 +1301,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.i: aux/pico/pico-sdk/s
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.s: aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.s
@@ -1309,7 +1309,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.s: aux/pico/pico-sdk/s
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.obj: aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -1317,7 +1317,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.obj: aux/pico/pico-sdk/s
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.i: aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i
@@ -1325,7 +1325,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.i: aux/pico/pico-sdk/src
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.s: aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s
@@ -1333,7 +1333,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.s: aux/pico/pico-sdk/src
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.obj: aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
@@ -1341,7 +1341,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.obj: aux/pico/pico-sdk/src/r
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.i: aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i
@@ -1349,7 +1349,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.i: aux/pico/pico-sdk/src/rp2
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.s: aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s
@@ -1357,7 +1357,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.s: aux/pico/pico-sdk/src/rp2
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.obj: aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
@@ -1365,7 +1365,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.obj: aux/pico/pico-sdk/src
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.i: aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
@@ -1373,7 +1373,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.i: aux/pico/pico-sdk/src/r
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.s: aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
@@ -1381,7 +1381,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.s: aux/pico/pico-sdk/src/r
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.obj: aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
@@ -1389,7 +1389,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.obj: aux/pico/pi
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.i: aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i
@@ -1397,7 +1397,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.i: aux/pico/pico
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.s: aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s
@@ -1405,7 +1405,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.s: aux/pico/pico
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.obj: aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
@@ -1413,7 +1413,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.obj: aux/pico/pico-sdk/
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.obj: aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
@@ -1421,7 +1421,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.obj: aux/pico/pic
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.i: aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i
@@ -1429,7 +1429,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.i: aux/pico/pico-
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.s: aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s
@@ -1437,7 +1437,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.s: aux/pico/pico-
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.obj: aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
@@ -1445,7 +1445,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.obj: aux/pico/pico-sdk/src/rp2
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.i: aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i
@@ -1453,7 +1453,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.i: aux/pico/pico-sdk/src/rp2_c
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.s: aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
@@ -1461,7 +1461,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.s: aux/pico/pico-sdk/src/rp2_c
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.obj: aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
@@ -1469,7 +1469,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.obj: aux/pico/pico-s
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.i: aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
@@ -1477,7 +1477,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.i: aux/pico/pico-sdk
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.s: aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
@@ -1485,7 +1485,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.s: aux/pico/pico-sdk
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
 
 aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj: aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
@@ -1493,7 +1493,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj: aux/pico/pico-sdk/src/r
 
 # target to build an object file
 aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 
 aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.i: aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i
@@ -1501,7 +1501,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.i: aux/pico/pico-sdk/src/rp2
 
 # target to preprocess a source file
 aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.i
 
 aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s: aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
@@ -1509,7 +1509,7 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s: aux/pico/pico-sdk/src/rp2
 
 # target to generate assembly for a file
 aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 
 hardware/dvi_video.obj: hardware/dvi_video.c.obj
@@ -1517,7 +1517,7 @@ hardware/dvi_video.obj: hardware/dvi_video.c.obj
 
 # target to build an object file
 hardware/dvi_video.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj
 .PHONY : hardware/dvi_video.c.obj
 
 hardware/dvi_video.i: hardware/dvi_video.c.i
@@ -1525,7 +1525,7 @@ hardware/dvi_video.i: hardware/dvi_video.c.i
 
 # target to preprocess a source file
 hardware/dvi_video.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.i
 .PHONY : hardware/dvi_video.c.i
 
 hardware/dvi_video.s: hardware/dvi_video.c.s
@@ -1533,7 +1533,7 @@ hardware/dvi_video.s: hardware/dvi_video.c.s
 
 # target to generate assembly for a file
 hardware/dvi_video.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/dvi_video.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.s
 .PHONY : hardware/dvi_video.c.s
 
 hardware/usbkeyboard.obj: hardware/usbkeyboard.c.obj
@@ -1541,7 +1541,7 @@ hardware/usbkeyboard.obj: hardware/usbkeyboard.c.obj
 
 # target to build an object file
 hardware/usbkeyboard.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj
 .PHONY : hardware/usbkeyboard.c.obj
 
 hardware/usbkeyboard.i: hardware/usbkeyboard.c.i
@@ -1549,7 +1549,7 @@ hardware/usbkeyboard.i: hardware/usbkeyboard.c.i
 
 # target to preprocess a source file
 hardware/usbkeyboard.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.i
 .PHONY : hardware/usbkeyboard.c.i
 
 hardware/usbkeyboard.s: hardware/usbkeyboard.c.s
@@ -1557,7 +1557,7 @@ hardware/usbkeyboard.s: hardware/usbkeyboard.c.s
 
 # target to generate assembly for a file
 hardware/usbkeyboard.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/hardware/usbkeyboard.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s
 .PHONY : hardware/usbkeyboard.c.s
 
 main.obj: main.c.obj
@@ -1565,7 +1565,7 @@ main.obj: main.c.obj
 
 # target to build an object file
 main.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/main.c.obj
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/main.c.obj
 .PHONY : main.c.obj
 
 main.i: main.c.i
@@ -1573,7 +1573,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/main.c.i
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -1581,7 +1581,7 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/main.c.s
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/main.c.s
 .PHONY : main.c.s
 
 # Help Target
@@ -1593,7 +1593,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ELF2UF2Build"
-	@echo "... hello_dvi"
+	@echo "... firmware"
 	@echo "... __/libraries/PicoDVI/software/libdvi/dvi.obj"
 	@echo "... __/libraries/PicoDVI/software/libdvi/dvi.i"
 	@echo "... __/libraries/PicoDVI/software/libdvi/dvi.s"

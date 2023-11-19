@@ -208,17 +208,17 @@ libdvi_tmds_encode_1bpp_pio_h/fast:
 .PHONY : libdvi_tmds_encode_1bpp_pio_h/fast
 
 #=============================================================================
-# Target rules for targets named hello_dvi
+# Target rules for targets named firmware
 
 # Build rule for target.
-hello_dvi: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hello_dvi
-.PHONY : hello_dvi
+firmware: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 firmware
+.PHONY : firmware
 
 # fast build rule for target.
-hello_dvi/fast:
-	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/build
-.PHONY : hello_dvi/fast
+firmware/fast:
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/build
+.PHONY : firmware/fast
 
 #=============================================================================
 # Target rules for targets named ELF2UF2Build
@@ -249,7 +249,7 @@ help:
 	@echo "... libdvi_dvi_serialiser_pio_h"
 	@echo "... libdvi_tmds_encode_1bpp_pio_h"
 	@echo "... bs2_default"
-	@echo "... hello_dvi"
+	@echo "... firmware"
 .PHONY : help
 
 

@@ -1521,7 +1521,7 @@ pico-sdk/tools/clean:
 # Directory level rules for directory sources
 
 # Recursive "all" directory target.
-sources/all: sources/CMakeFiles/hello_dvi.dir/all
+sources/all: sources/CMakeFiles/firmware.dir/all
 sources/all: sources/CMakeFiles/ELF2UF2Build.dir/all
 .PHONY : sources/all
 
@@ -1530,7 +1530,7 @@ sources/preinstall:
 .PHONY : sources/preinstall
 
 # Recursive "clean" directory target.
-sources/clean: sources/CMakeFiles/hello_dvi.dir/clean
+sources/clean: sources/CMakeFiles/firmware.dir/clean
 sources/clean: sources/CMakeFiles/ELF2UF2Build.dir/clean
 .PHONY : sources/clean
 
@@ -1717,33 +1717,33 @@ libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/c
 .PHONY : libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/clean
 
 #=============================================================================
-# Target rules for target sources/CMakeFiles/hello_dvi.dir
+# Target rules for target sources/CMakeFiles/firmware.dir
 
 # All Build rule for target.
-sources/CMakeFiles/hello_dvi.dir/all: pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/all
-sources/CMakeFiles/hello_dvi.dir/all: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
-sources/CMakeFiles/hello_dvi.dir/all: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all
-sources/CMakeFiles/hello_dvi.dir/all: sources/CMakeFiles/ELF2UF2Build.dir/all
-	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/depend
-	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91 "Built target hello_dvi"
-.PHONY : sources/CMakeFiles/hello_dvi.dir/all
+sources/CMakeFiles/firmware.dir/all: pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/all
+sources/CMakeFiles/firmware.dir/all: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
+sources/CMakeFiles/firmware.dir/all: libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all
+sources/CMakeFiles/firmware.dir/all: sources/CMakeFiles/ELF2UF2Build.dir/all
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/depend
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91 "Built target firmware"
+.PHONY : sources/CMakeFiles/firmware.dir/all
 
 # Build rule for subdir invocation for target.
-sources/CMakeFiles/hello_dvi.dir/rule: cmake_check_build_system
+sources/CMakeFiles/firmware.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 91
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sources/CMakeFiles/hello_dvi.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sources/CMakeFiles/firmware.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 0
-.PHONY : sources/CMakeFiles/hello_dvi.dir/rule
+.PHONY : sources/CMakeFiles/firmware.dir/rule
 
 # Convenience name for target.
-hello_dvi: sources/CMakeFiles/hello_dvi.dir/rule
-.PHONY : hello_dvi
+firmware: sources/CMakeFiles/firmware.dir/rule
+.PHONY : firmware
 
 # clean rule for target.
-sources/CMakeFiles/hello_dvi.dir/clean:
-	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/hello_dvi.dir/build.make sources/CMakeFiles/hello_dvi.dir/clean
-.PHONY : sources/CMakeFiles/hello_dvi.dir/clean
+sources/CMakeFiles/firmware.dir/clean:
+	$(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/clean
+.PHONY : sources/CMakeFiles/firmware.dir/clean
 
 #=============================================================================
 # Target rules for target sources/CMakeFiles/ELF2UF2Build.dir

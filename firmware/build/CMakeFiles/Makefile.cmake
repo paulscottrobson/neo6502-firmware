@@ -345,6 +345,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/DependInfo.cmake"
   "libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/DependInfo.cmake"
   "libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/DependInfo.cmake"
-  "sources/CMakeFiles/hello_dvi.dir/DependInfo.cmake"
+  "sources/CMakeFiles/firmware.dir/DependInfo.cmake"
   "sources/CMakeFiles/ELF2UF2Build.dir/DependInfo.cmake"
   )
