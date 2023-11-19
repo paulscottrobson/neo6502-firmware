@@ -8,7 +8,7 @@ lfc00
 	lda 	#-1
 	sta 	$81
 loop2:
-	lda 	#20
+	lda 	#3
 	jsr 	delay
 	jsr 	alphabet	
 	inc 	$81

@@ -14,15 +14,9 @@
 
 #include <PicoDVI.h>
 
-#define CFG_TUD_ENABLED 1
-#define CFG_TUH_ENABLED 1
-#include "tusb.h"
-
 #include "mos65C02.h"
 #include "memory.h"
 
-#define FRAMERATE       10 // frames per sec
-#define FRAMETIME     1000 / FRAMERATE  // msec
 #define WIDTH          320
 #define HEIGHT         240
 #define FONT_CHAR_WIDTH  6  
@@ -38,17 +32,15 @@ static const struct dvi_serialiser_cfg pico_neo6502_cfg = {
    .pins_clk = 12,
    .invert_diffpairs = true
 };
+
   
 // Here's how an 320x240 256 colors graphics display is declared.
 DVIGFX8 display(DVI_RES_320x240p60, true, pico_neo6502_cfg);
 
+void swapDisplay() {
+  display.swap(true, false);
+}
 //
-extern uint32_t       clockCount;
-
-unsigned long  lastClockTS;
-unsigned long  frameClockTS;
-
-uint32_t       hasDisplayUpdate = 0;
 
 inline __attribute__((always_inline))
 
@@ -97,19 +89,19 @@ void displayWrite(uint8_t c) {
   }
   //setCursor();
 
-  hasDisplayUpdate++;
 }
 
 
-void writeChar(uint8_t vChar) {
+void writeChar(int vChar) {
 //  Serial.printf("out [%02X]\n", vChar);
 
-  displayWrite(vChar);
-  hasDisplayUpdate++;
+  displayWrite(vChar & 0xFF);
 }
 
 ///
 void initDisplay() {
+  if (!display.begin()) {
+  }
   display.setColor(0, 0x0000);   // Black
   display.setColor(1, 0XF800);   // Red
   display.setColor(2, 0x07e0);   // Green
@@ -125,50 +117,7 @@ void initDisplay() {
   display.setTextSize(1);        // Default size
   display.setTextWrap(false);
   display.swap(false, true);     // Duplicate same palette into front & back buffers
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary>
-/// setup emulator
-/// </summary>
-void setup() {
-  sleep_ms(2000);
-
-  if (!display.begin()) {
-  }
-
-  initDisplay();
   display.print("NEO6502");
-  tusb_init();
   display.println(" RetroComputer v0.001a");
-  initmemory();
-  init6502();
-  clockCount = 0UL;
-  lastClockTS = millis();
-  hasDisplayUpdate++;
 }
 
-void loop() {
-  static uint32_t i, f = 1;
-
-  if (mem[DSP] != 0) {
-   writeChar(mem[DSP] & 0x7F);
-   //writeChar("0123456789abcdef"[mem[DSP] >> 4]);
-   //writeChar("0123456789abcdef"[mem[DSP] & 15]);
-   //writeChar(32);
-   mem[DSP] = 0;
-  }
-
-  tuh_task();
-
-  if (f-- == 0) {
-    if ((millis() - frameClockTS) >= FRAMETIME) {
-      if (hasDisplayUpdate > 0) {
-        display.swap(true, false);
-        hasDisplayUpdate = 0;
-      }
-      frameClockTS = millis();
-    }
-    f = 7500;
-  }
-}

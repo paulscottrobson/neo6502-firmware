@@ -21,12 +21,12 @@ all: build
 prelim: 
 	$(CDEL) src$(S)binary.h
 	$(ASSEMBLER) asm$(S)test.asm -o asm$(S)test.bin -L asm$(S)test.lst
-	$(PYTHON) $(BINDIR)hconvert.py asm$(S)test.bin >src$(S)binary.h
+	$(PYTHON) asm$(S)hconvert.py asm$(S)test.bin >src$(S)binary.h
 	touch src$(S)roms.cpp
 
 pio:
 	tools/pioasm src/memory_sm1_address.pio src/memory_sm1_address.pio.h
-	touch src$(S)mos65c02.cpp
+	touch src$(S)mos65C02.cpp
 
 build: prelim pio
 	pio run

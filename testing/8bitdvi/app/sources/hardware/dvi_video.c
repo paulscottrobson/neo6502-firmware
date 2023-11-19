@@ -27,7 +27,11 @@ void __not_in_flash_func(core1_main)() {
 uint16_t palette[256];
 uint8_t screen[FRAME_WIDTH * FRAME_HEIGHT];
 
-uint16_t buffer1[FRAME_WIDTH],buffer2[FRAME_WIDTH];
+uint16_t buffer1[FRAME_WIDTH+64];
+uint16_t buffer2[FRAME_WIDTH+64];
+uint16_t *buffers[] = { buffer1,buffer1 };
+uint8_t currentBuffer = 0;
+
 uint frameCounter = 0,lineCounter = 0;
 
 #include "font_5x7.h"
@@ -53,19 +57,20 @@ void writeCharacter(int c) {
 void __not_in_flash_func(_scanline_callback)(void) {
 	uint16_t *scanline;
 	while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline));
-	if (lineCounter >= 0) {
-		scanline = (lineCounter & 1) ? buffer1 : buffer2;
-	}
+
+	scanline = buffers[currentBuffer];
 	queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
+
+	currentBuffer = (currentBuffer + 1) & 1;
+	scanline = buffers[currentBuffer];
+	uint8_t *screenPos = screen + lineCounter * FRAME_WIDTH;
+	for (uint16_t i = 0;i < FRAME_WIDTH;i++) {
+	 	*scanline++ = palette[*screenPos++];
+	}
 	lineCounter++;
 	if (lineCounter == FRAME_HEIGHT) {
 	 	frameCounter++;
 	 	lineCounter = 0;
-	}
-	scanline = (lineCounter & 1) ? buffer1 : buffer2;
-	uint8_t *screenPos = screen + lineCounter * FRAME_WIDTH;
-	for (int i = 0;i < FRAME_WIDTH;i++) {
-		scanline[i] = palette[screenPos[i]];
 	}
 }
 
@@ -81,8 +86,6 @@ int startVideo() {
 	vreg_set_voltage(VREG_VSEL);
 	sleep_ms(10);
 	set_sys_clock_khz(DVI_TIMING.bit_clk_khz, true);
-
-	setup_default_uart();
 
 	dvi0.timing = &DVI_TIMING;
 	dvi0.ser_cfg = pico_neo6502_cfg;
@@ -105,15 +108,16 @@ int startVideo() {
 	}
 
 	for (int x = 0;x < 320;x++) {
+		buffer1[x] = palette[(x >> 3) & 7];
+		buffer2[x] = palette[(x >> 3) & 7];
 		for (int y = 0;y < 240;y++) {
-			screen[x+y*320] = 0;
+			screen[x+y*320] = (x >> 3)+(y >> 3)*16;
 		}
 	}
 
 	lineCounter = 0;
 	_scanline_callback();
 	multicore_launch_core1(core1_main);
-
 	return 0;
 }
 
