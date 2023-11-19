@@ -7,7 +7,6 @@
 #include "memory_sm1_address.pio.h"
 
 void writeCharacter(uint8_t vChar);
-void writeHex(int n);
 
 #define DELAY_FACTOR_SHORT() asm volatile("nop\nnop\nnop\nnop\n");
 
@@ -126,9 +125,6 @@ void start_address_program(PIO pio, uint sm, uint offset) {
 
 int dma_chan;
 
-static count = 0;
-static int addr[80];
-
 void dma_handler() {
   //Serial.printf(__FUNCTION__);
   // Clear the interrupt request.
@@ -153,13 +149,6 @@ void dma_handler() {
   }
   uint8_t* address = mem + value.data.address;
   uint8_t data = *address;
-  addr[count] = value.data.address;
-  if (++count == 80) { 
-    for (int i = 0;i < 80;i++) {
-      writeHex(addr[i]);
-    }
-    while (1) {} 
-  }
   pio1->txf[0] = data;
   //dma_channel_set_read_addr(dma_chan, address, true);
   //Serial.printf("Value: %08X Address: %04X Data: %02X Type: %s Send Data: %02X\n", value.value, value.data.address, value.data.data, write ? "W" : "R" , data);
@@ -205,7 +194,6 @@ void init6502() {
   setReset(false);
   sleep_ms(200);
   setReset(true);
-  mem[KBD] = mem[DSP] = 0;
 }
 
 /// <summary>

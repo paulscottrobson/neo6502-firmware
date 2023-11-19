@@ -1,3 +1,5 @@
-- build enough of the app to get the boot working
-- add the USB as before and get the demo working.
-- add PicoDVI as a submodule.
+- get it working on the alternate firmware
+- get the USB running as well
+- import the kernel build.
+- change the outline design.
+- keyboard I/O
