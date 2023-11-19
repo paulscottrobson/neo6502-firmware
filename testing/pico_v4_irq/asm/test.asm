@@ -39,7 +39,7 @@ alphabet:
 _loop1:
 	tya
 	clc
-	adc 	#$3C
+	adc 	#$2C
 	jsr lprinthex
 	dey
 	bpl 	_loop1

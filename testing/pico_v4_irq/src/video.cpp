@@ -36,12 +36,7 @@ static const struct dvi_serialiser_cfg pico_neo6502_cfg = {
 
   
 // Here's how an 320x240 256 colors graphics display is declared.
-DVIGFX8 display(DVI_RES_320x240p60, true, pico_neo6502_cfg);
-
-void swapDisplay() {
-  display.swap(true, false);
-}
-//
+DVIGFX8 display(DVI_RES_320x240p60, false, pico_neo6502_cfg);
 
 inline __attribute__((always_inline))
 
@@ -117,6 +112,5 @@ void initDisplay() {
   display.setTextWrap(false);
   display.swap(false, true);     // Duplicate same palette into front & back buffers
   display.print("NEO6502");
-  display.println(" RetroComputer v0.001a");
+  display.println(" RetroComputer v0.002a");
 }
-
