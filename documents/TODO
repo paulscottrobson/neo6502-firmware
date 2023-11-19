@@ -1,5 +1,3 @@
 - build enough of the app to get the boot working
 - add the USB as before and get the demo working.
 - add PicoDVI as a submodule.
-
-- make single buffer / remove swapping code.

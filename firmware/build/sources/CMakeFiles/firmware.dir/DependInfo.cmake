@@ -182,9 +182,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c" "sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/main.c" "sources/CMakeFiles/firmware.dir/main.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/main.c.obj.d"
   "/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj" "gcc" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj.d"
-  "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.cxx" "sources/CMakeFiles/firmware.dir/system/memory.cxx.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/memory.cxx.obj.d"
-  "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.cxx" "sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/mos65C02.cxx.obj.d"
-  "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.cxx" "sources/CMakeFiles/firmware.dir/system/roms.cxx.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/roms.cxx.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
