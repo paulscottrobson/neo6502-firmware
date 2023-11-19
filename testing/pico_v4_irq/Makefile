@@ -26,7 +26,7 @@ prelim:
 
 pio:
 	tools/pioasm src/memory_sm1_address.pio src/memory_sm1_address.pio.h
-	touch src$(S)mos65C02.cpp
+	touch src$(S)mos65C02.c*
 
 build: prelim pio
 	pio run

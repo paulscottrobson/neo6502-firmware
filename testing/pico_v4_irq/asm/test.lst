@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o asm/test.bin -L asm/test.lst asm/test.asm
-; Sat Nov 18 21:33:16 2023
+; Sun Nov 19 11:34:22 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -44,7 +44,7 @@
 .fc33					_loop1:
 .fc33	98		tya			tya
 .fc34	18		clc			clc
-.fc35	69 7c		adc #$7c		adc 	#$7C
+.fc35	69 3c		adc #$3c		adc 	#$3C
 .fc37	20 43 fc	jsr $fc43		jsr lprinthex
 .fc3a	88		dey			dey
 .fc3b	10 f6		bpl $fc33		bpl 	_loop1

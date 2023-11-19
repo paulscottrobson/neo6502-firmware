@@ -11,7 +11,7 @@ unsigned long  frameClockTS;
 uint32_t       hasDisplayUpdate = 0;
 
 void initDisplay();
-void writeChar(int c);
+void writeCharacter(int c);
 void swapDisplay();
 
 extern uint32_t       clockCount;
@@ -32,7 +32,7 @@ void loop() {
   static uint32_t i, f = 1;
 
   if (mem[DSP] != 0) {
-   writeChar(mem[DSP] & 0x7F);
+   writeCharacter(mem[DSP] & 0x7F);
    hasDisplayUpdate++;
    //writeChar("0123456789abcdef"[mem[DSP] >> 4]);
    //writeChar("0123456789abcdef"[mem[DSP] & 15]);

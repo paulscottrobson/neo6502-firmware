@@ -6,7 +6,7 @@
 #include "mos65C02.h"
 #include "memory_sm1_address.pio.h"
 
-void writeChar(uint8_t vChar);
+void writeCharacter(uint8_t vChar);
 
 #define DELAY_FACTOR_SHORT() asm volatile("nop\nnop\nnop\nnop\n");
 

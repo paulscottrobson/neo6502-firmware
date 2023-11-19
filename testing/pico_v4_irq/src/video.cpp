@@ -93,9 +93,7 @@ void displayWrite(uint8_t c) {
 }
 
 
-void writeChar(int vChar) {
-//  Serial.printf("out [%02X]\n", vChar);
-
+void writeCharacter(int vChar) {
   displayWrite(vChar & 0xFF);
 }
 
