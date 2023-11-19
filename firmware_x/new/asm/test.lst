@@ -1,0 +1,90 @@
+
+; 64tass Turbo Assembler Macro V1.59.3120 listing file
+; 64tass -b --mr65c02 -Wall -o asm/test.bin -L asm/test.lst asm/test.asm
+; Sat Nov 18 21:33:16 2023
+
+;Offset	;Hex		;Monitor	;Source
+
+;******  Processing input file: asm/test.asm
+
+.fc00					lfc00
+.fc00	d8		cld			cld
+.fc01	58		cli			cli
+.fc02	a2 ff		ldx #$ff		ldx #$ff
+.fc04	9a		txs			txs
+.fc05	a9 ff		lda #$ff		lda 	#-1
+.fc07	85 81		sta $81			sta 	$81
+.fc09					loop2:
+.fc09	a9 03		lda #$03		lda 	#3
+.fc0b	20 21 fc	jsr $fc21		jsr 	delay
+.fc0e	20 2f fc	jsr $fc2f		jsr 	alphabet
+.fc11	e6 81		inc $81			inc 	$81
+.fc13	a5 81		lda $81			lda 	$81
+.fc15	20 43 fc	jsr $fc43		jsr 	lprinthex
+.fc18	a9 0d		lda #$0d		lda 	#13
+.fc1a	20 65 fc	jsr $fc65		jsr 	lprintchar
+.fc1d	a9 00		lda #$00		lda 	#0
+.fc1f					_opcode:
+.fc1f	80 e8		bra $fc09		bra 	loop2			; works. bra loop2 doesn't.
+.fc21					delay:
+.fc21	a0 00		ldy #$00		ldy 	#0
+.fc23	a2 00		ldx #$00		ldx 	#0
+.fc25					loop1:
+.fc25	88		dey			dey
+.fc26	d0 fd		bne $fc25		bne 	loop1
+.fc28	ca		dex			dex
+.fc29	d0 fa		bne $fc25		bne 	loop1
+.fc2b	3a		dec a			dec		a
+.fc2c	d0 f7		bne $fc25		bne 	loop1
+.fc2e	60		rts			rts
+.fc2f					alphabet:
+.fc2f	a2 05		ldx #$05		ldx 	#5
+.fc31	da		phx			phx
+.fc32	7a		ply			ply
+.fc33					_loop1:
+.fc33	98		tya			tya
+.fc34	18		clc			clc
+.fc35	69 7c		adc #$7c		adc 	#$7C
+.fc37	20 43 fc	jsr $fc43		jsr lprinthex
+.fc3a	88		dey			dey
+.fc3b	10 f6		bpl $fc33		bpl 	_loop1
+.fc3d	a9 2a		lda #$2a		lda 	#42
+.fc3f	20 43 fc	jsr $fc43		jsr 	lprinthex
+.fc42	60		rts			rts
+.fc43					lprinthex:
+.fc43	48		pha			pha
+.fc44	48		pha			pha
+.fc45	a9 20		lda #$20		lda 	#32
+.fc47	20 65 fc	jsr $fc65		jsr 	lprintchar
+.fc4a	68		pla			pla
+.fc4b	4a		lsr a			lsr 	a
+.fc4c	4a		lsr a			lsr 	a
+.fc4d	4a		lsr a			lsr 	a
+.fc4e	4a		lsr a			lsr 	a
+.fc4f	20 57 fc	jsr $fc57		jsr 	lprintnibble
+.fc52	68		pla			pla
+.fc53	20 57 fc	jsr $fc57		jsr 	lprintnibble
+.fc56	60		rts			rts
+.fc57					lprintnibble:
+.fc57	29 0f		and #$0f		and 	#15
+.fc59	c9 0a		cmp #$0a		cmp 	#10
+.fc5b	90 02		bcc $fc5f		bcc 	_nothex
+.fc5d	69 06		adc #$06		adc 	#6
+.fc5f					_nothex:
+.fc5f	69 30		adc #$30		adc 	#48
+.fc61	20 65 fc	jsr $fc65		jsr 	lprintchar
+.fc64	60		rts			rts
+.fc65					lprintchar:
+.fc65	48		pha			pha
+.fc66					waitfree:
+.fc66	ad 12 d0	lda $d012		lda $d012
+.fc69	d0 fb		bne $fc66		bne waitfree
+.fc6b	68		pla			pla
+.fc6c	29 7f		and #$7f		and #$7f
+.fc6e	8d 12 d0	sta $d012		sta $d012
+.fc71	60		rts			rts
+>fffa	00 00					.word 	0
+>fffc	00 fc					.word 	$FC00
+>fffe	00 00					.word	0
+
+;******  End of listing
