@@ -1,11 +1,11 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
-; 64tass -c -b -Wall -o kernel/test.bin -L kernel/test.lst kernel/test.asm
-; Mon Nov 20 06:39:09 2023
+; 64tass -b --mr65c02 -Wall -o kernel.bin -L kernel.lst kernel.asm
+; Mon Nov 20 07:11:37 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
-;******  Processing input file: kernel/test.asm
+;******  Processing input file: kernel.asm
 
 .fc00	ea		nop			nop
 .fc01	ea		nop			nop
