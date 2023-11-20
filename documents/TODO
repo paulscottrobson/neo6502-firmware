@@ -1,4 +1,8 @@
-- makefile.
-- major tidying session.
-- change the outline design.
-- keyboard I/O
+- major tidying session as we go headers, processor headers, normalise names, comments.
+	- move USB stuff into usb file
+	- move all drawing functionality into interface
+	- create the 320x240 block memory driver
+	- initial hardware specification
+	- create a console rendering design and the initial console implementation
+	- keyboard I/O
+

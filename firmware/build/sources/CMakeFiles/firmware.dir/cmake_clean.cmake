@@ -125,10 +125,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/firmware.dir/main.c.obj.d"
   "CMakeFiles/firmware.dir/system/memory.c.obj"
   "CMakeFiles/firmware.dir/system/memory.c.obj.d"
-  "CMakeFiles/firmware.dir/system/mos65C02.c.obj"
-  "CMakeFiles/firmware.dir/system/mos65C02.c.obj.d"
-  "CMakeFiles/firmware.dir/system/roms.c.obj"
-  "CMakeFiles/firmware.dir/system/roms.c.obj.d"
+  "CMakeFiles/firmware.dir/system/processor.c.obj"
+  "CMakeFiles/firmware.dir/system/processor.c.obj.d"
   "firmware.elf"
   "firmware.pdb"
 )

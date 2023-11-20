@@ -182,8 +182,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c" "sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/main.c" "sources/CMakeFiles/firmware.dir/main.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/main.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.c" "sources/CMakeFiles/firmware.dir/system/memory.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/memory.c.obj.d"
-  "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.c" "sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj.d"
-  "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.c" "sources/CMakeFiles/firmware.dir/system/roms.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/roms.c.obj.d"
+  "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor.c" "sources/CMakeFiles/firmware.dir/system/processor.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/processor.c.obj.d"
   "/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj" "gcc" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj.d"
   )
 

@@ -1,5 +1,6 @@
-sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj: \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.c \
+sources/CMakeFiles/firmware.dir/system/processor.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor.c \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
@@ -50,11 +51,9 @@ sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj: \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/mos65C02.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/pins.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/memory.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/memory.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/wdc65C02cpu.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/wdc65C02cpu.h \
  /usr/arm-none-eabi/include/string.h \
  /usr/arm-none-eabi/include/sys/reent.h \
  /usr/arm-none-eabi/include/_ansi.h \

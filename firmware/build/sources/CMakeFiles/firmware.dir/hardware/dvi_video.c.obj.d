@@ -1,5 +1,6 @@
 sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_video.c \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
@@ -50,6 +51,8 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj: \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
@@ -76,5 +79,5 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj: \
  /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h \
  /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h \
  /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/common_dvi_pin_configs.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/font_5x7.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/common_dvi_pin_configs.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/data/font_5x7.h

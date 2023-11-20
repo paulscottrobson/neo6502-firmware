@@ -6,15 +6,11 @@
 #define _MEMORY_h
 
 #define MEMORY_SIZE  0x10000 // 64k
-
 #define DEFAULT_PORT 0xFF00
 
-extern uint8_t  mem[];
-extern uint16_t address;
-extern uint8_t  data;
+extern uint8_t  cpuMemory[];
 
 void initmemory();
-void writememory();
 
 #endif
 

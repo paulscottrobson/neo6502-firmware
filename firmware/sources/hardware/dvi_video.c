@@ -1,14 +1,10 @@
-#include "pico/stdlib.h"
-#include "pico/multicore.h"
-// #include "hardware/clocks.h"
-// #include "hardware/irq.h"
-// #include "hardware/sync.h"
-// #include "hardware/gpio.h"
-#include "hardware/vreg.h"
+#include "common.h"
 
+#include "pico/multicore.h"
+#include "hardware/vreg.h"
 #include "dvi.h"
 #include "dvi_serialiser.h"
-#include "common_dvi_pin_configs.h"
+#include "system/common_dvi_pin_configs.h"
 
 // DVDD 1.2V (1.1V seems ok too)
 #define FRAME_WIDTH 320
@@ -30,7 +26,7 @@ uint8_t screen[FRAME_WIDTH * FRAME_HEIGHT];
 uint16_t buffer1[FRAME_WIDTH],buffer2[FRAME_WIDTH];
 uint frameCounter = 0,lineCounter = 0;
 
-#include "font_5x7.h"
+#include "data/font_5x7.h"
 
 void drawCharacter(int x,int y,int ch,int col) {
 	for (int y1 = 0;y1 < 7;y1++) {
