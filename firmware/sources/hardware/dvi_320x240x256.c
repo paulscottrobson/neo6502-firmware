@@ -28,7 +28,7 @@
 
 struct dvi_inst dvi0;
 
-void __not_in_flash_func(core1_main)() {
+static void __not_in_flash_func(core1_main)() {
 	dvi_register_irqs_this_core(&dvi0, DMA_IRQ_0);
 	dvi_start(&dvi0);
 	dvi_scanbuf_main_16bpp(&dvi0);
@@ -42,7 +42,7 @@ uint frameCounter = 0,lineCounter = 0;
 
 #include "data/font_5x7.h"
 
-void drawCharacter(int x,int y,int ch,int col) {
+static void drawCharacter(int x,int y,int ch,int col) {
 	for (int y1 = 0;y1 < 7;y1++) {
 		int b = font_5x7[ch*7 + y1];
 		for (int x1 = 0;x1 < 5;x1++) {
@@ -54,6 +54,7 @@ void drawCharacter(int x,int y,int ch,int col) {
 }
 
 int xc = 0,yc = 0;
+
 void writeCharacter(int c) {
 	if (c != 13) {
 		drawCharacter(xc*6+5,yc*8,c,7);
@@ -64,7 +65,7 @@ void writeCharacter(int c) {
 	if (xc >= 52) { xc = 0;yc = (yc + 1) % 30; }
 }
 
-void __not_in_flash_func(_scanline_callback)(void) {
+static void __not_in_flash_func(_scanline_callback)(void) {
 	uint16_t *scanline;
 	while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline));
 	if (lineCounter >= 0) {
@@ -91,7 +92,7 @@ static const struct dvi_serialiser_cfg pico_neo6502_cfg = {
    .invert_diffpairs = true
 };
 
-int startVideo() {
+void DVIStart(void) {
 	vreg_set_voltage(VREG_VSEL);
 	sleep_ms(10);
 	set_sys_clock_khz(DVI_TIMING.bit_clk_khz, true);
@@ -128,7 +129,4 @@ int startVideo() {
 	uint16_t *scanline = buffer1;queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 	scanline = buffer2;queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 	multicore_launch_core1(core1_main);
-
-	return 0;
 }
-

@@ -13,7 +13,7 @@ static void loadROM(const uint8_t *vROM, uint16_t startAddress, uint16_t romSize
   }
 }
 
-void initmemory() {
+void MEMInitialiseMemory(void) {
   loadROM(test_bin,TESTLOAD,TESTSIZE);
   cpuMemory[DEFAULT_PORT] = 0x00;
 }

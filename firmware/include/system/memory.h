@@ -18,7 +18,7 @@
 
 extern uint8_t  cpuMemory[];
 
-void initmemory();
+void MEMInitialiseMemory(void);
 
 #endif
 
