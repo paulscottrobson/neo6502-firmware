@@ -1,5 +1,4 @@
-- get it working on the alternate firmware
-- get the USB running as well
-- import the kernel build.
+- makefile.
+- major tidying session.
 - change the outline design.
 - keyboard I/O
