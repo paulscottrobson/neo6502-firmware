@@ -1,6 +1,6 @@
 
 add_executable(firmware main.c 
-						hardware/dvi_video.c hardware/usbkeyboard.c 
+						hardware/dvi_video.c hardware/usbdriver.c 
 						system/memory.c system/processor.c
 )
 

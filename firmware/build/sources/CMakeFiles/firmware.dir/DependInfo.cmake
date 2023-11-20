@@ -179,7 +179,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj.d"
   "/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_video.c" "sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj.d"
-  "/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c" "sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj.d"
+  "/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbdriver.c" "sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/main.c" "sources/CMakeFiles/firmware.dir/main.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/main.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.c" "sources/CMakeFiles/firmware.dir/system/memory.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/memory.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor.c" "sources/CMakeFiles/firmware.dir/system/processor.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/processor.c.obj.d"

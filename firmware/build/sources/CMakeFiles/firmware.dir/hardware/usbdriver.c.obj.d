@@ -1,5 +1,5 @@
-sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj: \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c \
+sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbdriver.c \
  /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
@@ -53,6 +53,7 @@ sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj: \
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/usbdriver.h \
  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
  /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \

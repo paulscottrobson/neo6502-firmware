@@ -97,19 +97,19 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/hardware/dvi_video.c.s"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_video.c -o CMakeFiles/firmware.dir/hardware/dvi_video.c.s
 
-sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj: sources/CMakeFiles/firmware.dir/flags.make
-sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c
-sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj -MF CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj.d -o CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c
+sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: sources/CMakeFiles/firmware.dir/flags.make
+sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbdriver.c
+sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj -MF CMakeFiles/firmware.dir/hardware/usbdriver.c.obj.d -o CMakeFiles/firmware.dir/hardware/usbdriver.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbdriver.c
 
-sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/hardware/usbkeyboard.c.i"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c > CMakeFiles/firmware.dir/hardware/usbkeyboard.c.i
+sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/hardware/usbdriver.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbdriver.c > CMakeFiles/firmware.dir/hardware/usbdriver.c.i
 
-sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c -o CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s
+sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/hardware/usbdriver.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbdriver.c -o CMakeFiles/firmware.dir/hardware/usbdriver.c.s
 
 sources/CMakeFiles/firmware.dir/system/memory.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/system/memory.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.c
@@ -1041,7 +1041,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/fami
 firmware_OBJECTS = \
 "CMakeFiles/firmware.dir/main.c.obj" \
 "CMakeFiles/firmware.dir/hardware/dvi_video.c.obj" \
-"CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj" \
+"CMakeFiles/firmware.dir/hardware/usbdriver.c.obj" \
 "CMakeFiles/firmware.dir/system/memory.c.obj" \
 "CMakeFiles/firmware.dir/system/processor.c.obj" \
 "CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" \
@@ -1115,7 +1115,7 @@ firmware_EXTERNAL_OBJECTS =
 
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/main.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj
-sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj
+sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/memory.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/processor.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj

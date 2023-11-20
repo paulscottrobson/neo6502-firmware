@@ -1,6 +1,16 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      main.c
+//      Author :    Paul Robson (paul@robsons.org.uk)
+//      Date :      20th November 2023
+//      Reviewed :  No
+//      Purpose :   Main program.
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 #include "common.h"
-#include "bsp/board.h"
-#include "tusb.h"
 
 int startVideo();
 void writeCharacter(int n);
@@ -8,11 +18,9 @@ void writeCharacter(int n);
 int main() {
     initmemory();
     startVideo();    
-    board_init();
-    tusb_init();
     init6502();
 }
 
 void sync() {
-    tuh_task();
+    USBSync();
 }

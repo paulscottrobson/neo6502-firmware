@@ -1,5 +1,22 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      processor.c
+//      Authors :   Paul Robson (paul@robsons.org.uk)
+//                  Andre Weissflog
+//                  Rien Matthijsse
+//                  Veselin Sladkov
+//      Date :      20th November 2023
+//      Reviewed :  No
+//      Purpose :   Drive the 65C02 processor
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 // 
 // Author: Rien Matthijsse
+//          Vlaidimir....
+//          Andre Weissflog
 // 
 #include "common.h"
 
@@ -9,15 +26,6 @@ void writeCharacter(int);
 #define CHIPS_IMPL
 
 #include "system/wdc65C02cpu.h"
-
-void writeHex(int n) {
-    const char *c = "0123456789abcdef";
-    writeCharacter(32);
-    writeCharacter(c[(n >> 12) & 0x0F]);
-    writeCharacter(c[(n >> 8) & 0x0F]);
-    writeCharacter(c[(n >> 4) & 0x0F]);
-    writeCharacter(c[(n >> 0) & 0x0F]);
-}
 
 int controlPort = DEFAULT_PORT;
 uint16_t iCount;

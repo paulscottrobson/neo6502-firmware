@@ -1536,29 +1536,29 @@ hardware/dvi_video.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.s
 .PHONY : hardware/dvi_video.c.s
 
-hardware/usbkeyboard.obj: hardware/usbkeyboard.c.obj
-.PHONY : hardware/usbkeyboard.obj
+hardware/usbdriver.obj: hardware/usbdriver.c.obj
+.PHONY : hardware/usbdriver.obj
 
 # target to build an object file
-hardware/usbkeyboard.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj
-.PHONY : hardware/usbkeyboard.c.obj
+hardware/usbdriver.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
+.PHONY : hardware/usbdriver.c.obj
 
-hardware/usbkeyboard.i: hardware/usbkeyboard.c.i
-.PHONY : hardware/usbkeyboard.i
+hardware/usbdriver.i: hardware/usbdriver.c.i
+.PHONY : hardware/usbdriver.i
 
 # target to preprocess a source file
-hardware/usbkeyboard.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.i
-.PHONY : hardware/usbkeyboard.c.i
+hardware/usbdriver.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.i
+.PHONY : hardware/usbdriver.c.i
 
-hardware/usbkeyboard.s: hardware/usbkeyboard.c.s
-.PHONY : hardware/usbkeyboard.s
+hardware/usbdriver.s: hardware/usbdriver.c.s
+.PHONY : hardware/usbdriver.s
 
 # target to generate assembly for a file
-hardware/usbkeyboard.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s
-.PHONY : hardware/usbkeyboard.c.s
+hardware/usbdriver.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.s
+.PHONY : hardware/usbdriver.c.s
 
 main.obj: main.c.obj
 .PHONY : main.obj
@@ -1816,9 +1816,9 @@ help:
 	@echo "... hardware/dvi_video.obj"
 	@echo "... hardware/dvi_video.i"
 	@echo "... hardware/dvi_video.s"
-	@echo "... hardware/usbkeyboard.obj"
-	@echo "... hardware/usbkeyboard.i"
-	@echo "... hardware/usbkeyboard.s"
+	@echo "... hardware/usbdriver.obj"
+	@echo "... hardware/usbdriver.i"
+	@echo "... hardware/usbdriver.s"
 	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -1,27 +1,15 @@
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2022 No0ne (https://github.com/No0ne)
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      usbdriver.c
+//      Authors :   Tsvetan Usunov (Olimex)
+//                  Paul Robson (paul@robsons.org.uk)
+//      Date :      20th November 2023
+//      Reviewed :  No
+//      Purpose :   Drive the 65C02 processor
+//
+// ***************************************************************************************
+// ***************************************************************************************
 
 #define DEBUG 1
 
@@ -355,19 +343,11 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
   }
 }
 
-// void main() {
+void USBInitialise(void) {
+    board_init();
+    tusb_init();
+}
 
-//   // board_init();
-
-//   // #if DEBUG
-//   // uart_init(UART_ID, BAUD_RATE);
-//   // gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
-//   // printf("\n usb2serial 0.1\n");
-//   // #endif
-
-//   // tusb_init();
-  
-//   // while(true) {
-//   //   tuh_task();
-//   // }
-// }
+void USBSync(void) {
+    tuh_task();
+}

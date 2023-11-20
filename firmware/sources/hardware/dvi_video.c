@@ -1,3 +1,17 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      usbdriver.c
+//      Authors :   Paul Robson (paul@robsons.org.uk)
+//						  Luke Wren (PicoDVI Library)
+//						  Phillip Burgess (adafruit extensions used to understand it)
+//      Date :      20th November 2023
+//      Reviewed :  No
+//      Purpose :   Drive the 65C02 processor
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 #include "common.h"
 
 #include "pico/multicore.h"

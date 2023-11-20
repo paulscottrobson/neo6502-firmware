@@ -53,6 +53,7 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj: \
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/usbdriver.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
