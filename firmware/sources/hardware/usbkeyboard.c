@@ -25,13 +25,13 @@
 
 #define DEBUG 1
 
+#include "common.h"
 #include "hardware/gpio.h"
 #include "bsp/board.h"
 #include "tusb.h"
 
 #if DEBUG
 #include <stdio.h>
-#include "pico/stdlib.h"
 #include "hardware/uart.h"
 #define UART_ID uart0
 #define BAUD_RATE 115200

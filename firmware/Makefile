@@ -25,8 +25,8 @@ always:
 kernel: always
 	$(CDEL) sources$(S)binary.h
 	cd kernel && $(ASSEMBLER) $(KERNELSOURCES) -o kernel.bin -L kernel.lst $(ASMEND)
-	$(PYTHON) scripts$(S)hconvert.py kernel$(S)kernel.bin >include$(S)binary.h
-	$(TOUCH) sources$(S)roms.c*
+	$(PYTHON) scripts$(S)hconvert.py kernel$(S)kernel.bin >include$(S)data$(S)binary.h
+	$(TOUCH) sources$(S)memory.c*
 
 rebuild: clean build
 

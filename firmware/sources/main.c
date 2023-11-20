@@ -1,7 +1,6 @@
-#include "hardware/gpio.h"
+#include "common.h"
 #include "bsp/board.h"
 #include "tusb.h"
-#include "memory.h"
 
 int startVideo();
 void writeCharacter(int n);
@@ -12,7 +11,6 @@ int main() {
     board_init();
     tusb_init();
     init6502();
-//    loop1();
 }
 
 void sync() {
