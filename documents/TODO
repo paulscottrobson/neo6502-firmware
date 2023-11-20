@@ -1,13 +1,17 @@
-- major tidying session as we go headers, processor headers, normalise names, comments.
 	- create a console rendering design and the initial console implementation
 
 		CONWriteChar
+		CONWriteString
 		CONWriteHex
 		CONInitialise(MODE)
+
+	- Build tracker. Generate boot message.
+	- major tidying session as we go headers, processor headers, normalise names, comments.
 
 	- create the 320x240 block memory driver & adapt the console to it.
 	- initial hardware specification
 	- USB displays key codes.
 	- strip USB module
 	- keyboard I/O
+	
 	

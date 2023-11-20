@@ -17,15 +17,14 @@ include ../documents/common.make
 endif
 
 BINARY = firmware
-KERNELSOURCES = kernel.asm
+
 all: build
 
 always:
 
 kernel: always
-	$(CDEL) sources$(S)binary.h
-	cd kernel && $(ASSEMBLER) $(KERNELSOURCES) -o kernel.bin -L kernel.lst $(ASMEND)
-	$(PYTHON) scripts$(S)hconvert.py kernel$(S)kernel.bin >include$(S)data$(S)binary.h
+	make -C ..$(S)kernel
+	$(CCOPY) ..$(S)kernel$(S)build$(S)binary.h include$(S)data
 	$(TOUCH) sources$(S)memory.c*
 
 rebuild: clean build

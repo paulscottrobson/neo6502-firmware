@@ -1,21 +1,27 @@
 # ***************************************************************************************
 # ***************************************************************************************
 #
-#		Name : 		hconvert.py
+#		Name : 		Makefile
 #		Author :	Paul Robson (paul@robsons.org.uk)
 #		Date : 		20th November 2023
 #		Reviewed :	No
-#		Purpose :	Converts a binary file to a loadable hex file.
+#		Purpose :	Main firmware makefile, most of the work is done by CMake.
 #
 # ***************************************************************************************
 # ***************************************************************************************
 
-import sys
-b = [x for x in open(sys.argv[1],"rb").read(-1)]
+ifeq ($(OS),Windows_NT)
+include ..\documents\common.make
+else
+include ../documents/common.make
+endif
 
-print("const uint8_t test_bin[] = {")
-print(",".join([str(x) for x in b]))
-print("};\n")
+BINARY = firmware
+KERNELSOURCES = kernel.asm
+all: always
+	$(CDEL) build$(S)binary.h
+	$(ASSEMBLER) $(KERNELSOURCES) -o build$(S)kernel.bin -L build$(S)kernel.lst $(ASMEND)
+	$(PYTHON) scripts$(S)hconvert.py build$(S)kernel.bin >build$(S)binary.h
 
-print("#define TESTLOAD (0x{0:04x})".format(0xFC00))
-print("#define TESTSIZE (0x{0:04x})".format(len(b)))
+always:
+
