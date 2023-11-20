@@ -21,6 +21,8 @@ void writeHex(int n) {
     writeCharacter(c[(n >> 0) & 0x0F]);
 }
 
+    int iCount;
+
 void init6502() {
     wdc65C02cpu_init();
     writeCharacter('I');

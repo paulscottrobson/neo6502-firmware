@@ -2848,31 +2848,24 @@ sources/CMakeFiles/firmware.dir/mos65C02.c.obj: /home/paulr/Projects/neo6502-fir
   /aux/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dma.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_bank0.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pads_bank0.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pio.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/interp.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/iobank0.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pio.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
   /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/uart.h \
   /aux/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
   /aux/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
-  /aux/pico/pico-sdk/src/rp2_common/hardware_dma/include/hardware/dma.h \
   /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h \
   /aux/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h \
-  /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio.h \
-  /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h \
   /aux/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
   /aux/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h \
   /aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
@@ -2881,21 +2874,29 @@ sources/CMakeFiles/firmware.dir/mos65C02.c.obj: /home/paulr/Projects/neo6502-fir
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/sources/memory_sm1_address.pio.h \
   /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.h \
   /home/paulr/Projects/neo6502-firmware/firmware/sources/pins.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/sources/wdc65C02cpu.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
+  /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
+  /usr/arm-none-eabi/include/string.h \
+  /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
+  /usr/arm-none-eabi/include/sys/_locale.h \
   /usr/arm-none-eabi/include/sys/_stdint.h \
+  /usr/arm-none-eabi/include/sys/_types.h \
   /usr/arm-none-eabi/include/sys/cdefs.h \
   /usr/arm-none-eabi/include/sys/config.h \
   /usr/arm-none-eabi/include/sys/features.h \
+  /usr/arm-none-eabi/include/sys/lock.h \
+  /usr/arm-none-eabi/include/sys/reent.h \
+  /usr/arm-none-eabi/include/sys/string.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
@@ -2958,11 +2959,11 @@ sources/CMakeFiles/firmware.dir/roms.c.obj: /home/paulr/Projects/neo6502-firmwar
 
 /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.c:
 
+/home/paulr/Projects/neo6502-firmware/firmware/sources/wdc65C02cpu.h:
+
 /home/paulr/Projects/neo6502-firmware/firmware/sources/pins.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/sources/memory_sm1_address.pio.h:
 
 /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c:
 
