@@ -1,5 +1,5 @@
-sources/CMakeFiles/firmware.dir/mos65C02.c.obj: \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.c \
+sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.c \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \

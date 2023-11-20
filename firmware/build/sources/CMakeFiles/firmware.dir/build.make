@@ -111,47 +111,47 @@ sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbkeyboard.c -o CMakeFiles/firmware.dir/hardware/usbkeyboard.c.s
 
-sources/CMakeFiles/firmware.dir/memory.c.obj: sources/CMakeFiles/firmware.dir/flags.make
-sources/CMakeFiles/firmware.dir/memory.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.c
-sources/CMakeFiles/firmware.dir/memory.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object sources/CMakeFiles/firmware.dir/memory.c.obj"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/memory.c.obj -MF CMakeFiles/firmware.dir/memory.c.obj.d -o CMakeFiles/firmware.dir/memory.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.c
+sources/CMakeFiles/firmware.dir/system/memory.c.obj: sources/CMakeFiles/firmware.dir/flags.make
+sources/CMakeFiles/firmware.dir/system/memory.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.c
+sources/CMakeFiles/firmware.dir/system/memory.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object sources/CMakeFiles/firmware.dir/system/memory.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/system/memory.c.obj -MF CMakeFiles/firmware.dir/system/memory.c.obj.d -o CMakeFiles/firmware.dir/system/memory.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.c
 
-sources/CMakeFiles/firmware.dir/memory.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/memory.c.i"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.c > CMakeFiles/firmware.dir/memory.c.i
+sources/CMakeFiles/firmware.dir/system/memory.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/system/memory.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.c > CMakeFiles/firmware.dir/system/memory.c.i
 
-sources/CMakeFiles/firmware.dir/memory.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/memory.c.s"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.c -o CMakeFiles/firmware.dir/memory.c.s
+sources/CMakeFiles/firmware.dir/system/memory.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/system/memory.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/system/memory.c -o CMakeFiles/firmware.dir/system/memory.c.s
 
-sources/CMakeFiles/firmware.dir/mos65C02.c.obj: sources/CMakeFiles/firmware.dir/flags.make
-sources/CMakeFiles/firmware.dir/mos65C02.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.c
-sources/CMakeFiles/firmware.dir/mos65C02.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object sources/CMakeFiles/firmware.dir/mos65C02.c.obj"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/mos65C02.c.obj -MF CMakeFiles/firmware.dir/mos65C02.c.obj.d -o CMakeFiles/firmware.dir/mos65C02.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.c
+sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj: sources/CMakeFiles/firmware.dir/flags.make
+sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.c
+sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj -MF CMakeFiles/firmware.dir/system/mos65C02.c.obj.d -o CMakeFiles/firmware.dir/system/mos65C02.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.c
 
-sources/CMakeFiles/firmware.dir/mos65C02.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/mos65C02.c.i"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.c > CMakeFiles/firmware.dir/mos65C02.c.i
+sources/CMakeFiles/firmware.dir/system/mos65C02.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/system/mos65C02.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.c > CMakeFiles/firmware.dir/system/mos65C02.c.i
 
-sources/CMakeFiles/firmware.dir/mos65C02.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/mos65C02.c.s"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.c -o CMakeFiles/firmware.dir/mos65C02.c.s
+sources/CMakeFiles/firmware.dir/system/mos65C02.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/system/mos65C02.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/system/mos65C02.c -o CMakeFiles/firmware.dir/system/mos65C02.c.s
 
-sources/CMakeFiles/firmware.dir/roms.c.obj: sources/CMakeFiles/firmware.dir/flags.make
-sources/CMakeFiles/firmware.dir/roms.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.c
-sources/CMakeFiles/firmware.dir/roms.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object sources/CMakeFiles/firmware.dir/roms.c.obj"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/roms.c.obj -MF CMakeFiles/firmware.dir/roms.c.obj.d -o CMakeFiles/firmware.dir/roms.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.c
+sources/CMakeFiles/firmware.dir/system/roms.c.obj: sources/CMakeFiles/firmware.dir/flags.make
+sources/CMakeFiles/firmware.dir/system/roms.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.c
+sources/CMakeFiles/firmware.dir/system/roms.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object sources/CMakeFiles/firmware.dir/system/roms.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/system/roms.c.obj -MF CMakeFiles/firmware.dir/system/roms.c.obj.d -o CMakeFiles/firmware.dir/system/roms.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.c
 
-sources/CMakeFiles/firmware.dir/roms.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/roms.c.i"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.c > CMakeFiles/firmware.dir/roms.c.i
+sources/CMakeFiles/firmware.dir/system/roms.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/system/roms.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.c > CMakeFiles/firmware.dir/system/roms.c.i
 
-sources/CMakeFiles/firmware.dir/roms.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/roms.c.s"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.c -o CMakeFiles/firmware.dir/roms.c.s
+sources/CMakeFiles/firmware.dir/system/roms.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/system/roms.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/system/roms.c -o CMakeFiles/firmware.dir/system/roms.c.s
 
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c
@@ -1056,9 +1056,9 @@ firmware_OBJECTS = \
 "CMakeFiles/firmware.dir/main.c.obj" \
 "CMakeFiles/firmware.dir/hardware/dvi_video.c.obj" \
 "CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj" \
-"CMakeFiles/firmware.dir/memory.c.obj" \
-"CMakeFiles/firmware.dir/mos65C02.c.obj" \
-"CMakeFiles/firmware.dir/roms.c.obj" \
+"CMakeFiles/firmware.dir/system/memory.c.obj" \
+"CMakeFiles/firmware.dir/system/mos65C02.c.obj" \
+"CMakeFiles/firmware.dir/system/roms.c.obj" \
 "CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" \
 "CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj" \
 "CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj" \
@@ -1131,9 +1131,9 @@ firmware_EXTERNAL_OBJECTS =
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/main.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/usbkeyboard.c.obj
-sources/firmware.elf: sources/CMakeFiles/firmware.dir/memory.c.obj
-sources/firmware.elf: sources/CMakeFiles/firmware.dir/mos65C02.c.obj
-sources/firmware.elf: sources/CMakeFiles/firmware.dir/roms.c.obj
+sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/memory.c.obj
+sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/mos65C02.c.obj
+sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/roms.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
