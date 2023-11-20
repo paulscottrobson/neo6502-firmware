@@ -1,6 +1,6 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
-; 64tass -b --mr65c02 -Wall -o kernel.bin -L kernel.lst kernel.asm
+; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
 ; Mon Nov 20 19:11:04 2023
 
 ;Offset	;Hex		;Monitor	;Source
