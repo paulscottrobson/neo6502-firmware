@@ -21,6 +21,7 @@ void writeHex(int n) {
     writeCharacter(c[(n >> 0) & 0x0F]);
 }
 
+int controlPort = DEFAULT_PORT;
 uint16_t iCount;
 void sync();
 
@@ -31,6 +32,7 @@ void init6502() {
     writeCharacter('R');
     while(1) {
         uint16_t addr;
+        uint8_t data;
         bool rw;
         iCount += 1;
         if ((iCount & 0xFF) == 0) {
@@ -42,13 +44,13 @@ void init6502() {
             wdc65C02cpu_set_data(mem[addr]);
         } else {
             // Memory write
-            mem[addr] = wdc65C02cpu_get_data();
-            if (mem[DSP] != 0) {
-               writeCharacter(mem[DSP] & 0x7F);
+            data = mem[addr] = wdc65C02cpu_get_data();
+            if (addr == controlPort && data != 0) {
+               writeCharacter(data & 0x7F);
                //writeChar("0123456789abcdef"[mem[DSP] >> 4]);
                //writeChar("0123456789abcdef"[mem[DSP] & 15]);
                //writeChar(32);
-               mem[DSP] = 0;
+               mem[controlPort] = 0;
             }
         }       
     }

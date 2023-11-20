@@ -10,7 +10,7 @@ lfc00
 	lda 	#-1
 	sta 	$81
 loop2:
-	lda 	#10
+	lda 	#1
 	jsr 	delay
 	jsr 	alphabet	
 	inc 	$81
@@ -77,11 +77,11 @@ _nothex:
 lprintchar:	
 	pha
 waitfree:
-	lda $d012
+	lda $FF00
 	bne waitfree
 	pla	
 	and #$7f
-	sta $d012
+	sta $FF00
 	rts
 
 	* = $FFFA

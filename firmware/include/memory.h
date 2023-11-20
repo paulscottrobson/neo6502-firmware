@@ -7,9 +7,7 @@
 
 #define MEMORY_SIZE  0x10000 // 64k
 
-#define KBD   0xd010
-#define DSP   0xd012
-#define VDU   0xd020
+#define DEFAULT_PORT 0xFF00
 
 extern uint8_t  mem[];
 extern uint16_t address;

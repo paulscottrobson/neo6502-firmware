@@ -16,6 +16,5 @@ void initmemory() {
 
   // lets install some ROMS
   loadROMS();
-  mem[KBD] = 0x00;
-  mem[DSP] = 0x00;
+  mem[DEFAULT_PORT] = 0x00;
 }
