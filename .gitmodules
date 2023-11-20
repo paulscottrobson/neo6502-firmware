@@ -1,0 +1,3 @@
+[submodule "firmware/libraries/PicoDVI"]
+	path = firmware/libraries/PicoDVI
+	url = https://github.com/Wren6991/PicoDVI
