@@ -1512,29 +1512,29 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 
-hardware/dvi_video.obj: hardware/dvi_video.c.obj
-.PHONY : hardware/dvi_video.obj
+hardware/dvi_320x240x256.obj: hardware/dvi_320x240x256.c.obj
+.PHONY : hardware/dvi_320x240x256.obj
 
 # target to build an object file
-hardware/dvi_video.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj
-.PHONY : hardware/dvi_video.c.obj
+hardware/dvi_320x240x256.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
+.PHONY : hardware/dvi_320x240x256.c.obj
 
-hardware/dvi_video.i: hardware/dvi_video.c.i
-.PHONY : hardware/dvi_video.i
+hardware/dvi_320x240x256.i: hardware/dvi_320x240x256.c.i
+.PHONY : hardware/dvi_320x240x256.i
 
 # target to preprocess a source file
-hardware/dvi_video.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.i
-.PHONY : hardware/dvi_video.c.i
+hardware/dvi_320x240x256.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.i
+.PHONY : hardware/dvi_320x240x256.c.i
 
-hardware/dvi_video.s: hardware/dvi_video.c.s
-.PHONY : hardware/dvi_video.s
+hardware/dvi_320x240x256.s: hardware/dvi_320x240x256.c.s
+.PHONY : hardware/dvi_320x240x256.s
 
 # target to generate assembly for a file
-hardware/dvi_video.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.s
-.PHONY : hardware/dvi_video.c.s
+hardware/dvi_320x240x256.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.s
+.PHONY : hardware/dvi_320x240x256.c.s
 
 hardware/usbdriver.obj: hardware/usbdriver.c.obj
 .PHONY : hardware/usbdriver.obj
@@ -1813,9 +1813,9 @@ help:
 	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.i"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s"
-	@echo "... hardware/dvi_video.obj"
-	@echo "... hardware/dvi_video.i"
-	@echo "... hardware/dvi_video.s"
+	@echo "... hardware/dvi_320x240x256.obj"
+	@echo "... hardware/dvi_320x240x256.i"
+	@echo "... hardware/dvi_320x240x256.s"
 	@echo "... hardware/usbdriver.obj"
 	@echo "... hardware/usbdriver.i"
 	@echo "... hardware/usbdriver.s"

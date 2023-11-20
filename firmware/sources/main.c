@@ -12,15 +12,15 @@
 
 #include "common.h"
 
-int startVideo();
 void writeCharacter(int n);
 
 int main() {
-    initmemory();
-    startVideo();    
-    init6502();
+    const char bootString[] = "NEO6502 Retrocomputer\r\r";
+    MEMInitialiseMemory();
+    DVIStart();    
+    const char *c = bootString;
+    while (*c != '\0') writeCharacter(*c++);
+    USBInitialise();
+    CPUStart();
 }
 
-void sync() {
-    USBSync();
-}

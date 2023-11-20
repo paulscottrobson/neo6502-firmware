@@ -54,6 +54,7 @@ sources/CMakeFiles/firmware.dir/system/processor.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/usbdriver.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/wdc65C02cpu.h \
  /usr/arm-none-eabi/include/string.h \
  /usr/arm-none-eabi/include/sys/reent.h \

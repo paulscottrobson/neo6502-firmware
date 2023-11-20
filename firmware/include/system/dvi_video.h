@@ -1,26 +1,18 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//		Name : 		common.h	
+//		Name : 		dvi_video.h	
 //		Author :	Paul Robson (paul@robsons.org.uk)
 //		Date : 		20th November 2023
 //		Reviewed :	No
-//		Purpose :	General Include File.
+//		Purpose :	Common DVI Video functions
 //
 // ***************************************************************************************
 // ***************************************************************************************
-#ifndef _COMMON_h
-#define _COMMON_h
-//
-//		RP2040 includes
-//
-#include "pico/stdlib.h"
-#include "hardware/gpio.h"
-//
-//		Neo6502 Includes
-//
-#include "system/memory.h"
-#include "system/processor.h"
-#include "system/usbdriver.h"
-#include "system/dvi_video.h"
+
+#ifndef _DVI_VIDEO_h
+#define _DVI_VIDEO_h
+
+void DVIStart(void);
+
 #endif

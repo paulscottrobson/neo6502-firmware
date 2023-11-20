@@ -13,11 +13,6 @@
 // ***************************************************************************************
 // ***************************************************************************************
 
-// 
-// Author: Rien Matthijsse
-//          Vlaidimir....
-//          Andre Weissflog
-// 
 #include "common.h"
 
 void writeCharacter(int);
@@ -27,24 +22,17 @@ void writeCharacter(int);
 
 #include "system/wdc65C02cpu.h"
 
-int controlPort = DEFAULT_PORT;
+static int controlPort = DEFAULT_PORT;
 uint16_t iCount;
+uint16_t addr;
+uint8_t data;
+bool rw;
 
-void sync();
-
-void init6502() {
+void CPUStart(void) {
     wdc65C02cpu_init();
-    writeCharacter('I');
     wdc65C02cpu_reset();
-    writeCharacter('R');
     while(1) {
-        uint16_t addr;
-        uint8_t data;
-        bool rw;
-        iCount += 1;
-        if ((iCount & 0xFFF) == 0) {
-            sync();
-        }
+        if (!iCount++) CPUSync();
         wdc65C02cpu_tick(&addr, &rw);
         if (rw) {
             wdc65C02cpu_set_data(cpuMemory[addr]);
@@ -59,4 +47,6 @@ void init6502() {
     }
 }
 
-
+void CPUSync(void) {
+    USBSync();
+}

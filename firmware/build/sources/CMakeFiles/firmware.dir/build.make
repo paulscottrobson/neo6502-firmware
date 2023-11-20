@@ -83,19 +83,19 @@ sources/CMakeFiles/firmware.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/main.c.s"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/main.c -o CMakeFiles/firmware.dir/main.c.s
 
-sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj: sources/CMakeFiles/firmware.dir/flags.make
-sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_video.c
-sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj -MF CMakeFiles/firmware.dir/hardware/dvi_video.c.obj.d -o CMakeFiles/firmware.dir/hardware/dvi_video.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_video.c
+sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: sources/CMakeFiles/firmware.dir/flags.make
+sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_320x240x256.c
+sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj -MF CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj.d -o CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_320x240x256.c
 
-sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/hardware/dvi_video.c.i"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_video.c > CMakeFiles/firmware.dir/hardware/dvi_video.c.i
+sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_320x240x256.c > CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.i
 
-sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/hardware/dvi_video.c.s"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_video.c -o CMakeFiles/firmware.dir/hardware/dvi_video.c.s
+sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_320x240x256.c -o CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.s
 
 sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbdriver.c
@@ -1040,7 +1040,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/fami
 # Object files for target firmware
 firmware_OBJECTS = \
 "CMakeFiles/firmware.dir/main.c.obj" \
-"CMakeFiles/firmware.dir/hardware/dvi_video.c.obj" \
+"CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj" \
 "CMakeFiles/firmware.dir/hardware/usbdriver.c.obj" \
 "CMakeFiles/firmware.dir/system/memory.c.obj" \
 "CMakeFiles/firmware.dir/system/processor.c.obj" \
@@ -1114,7 +1114,7 @@ firmware_OBJECTS = \
 firmware_EXTERNAL_OBJECTS =
 
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/main.c.obj
-sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/dvi_video.c.obj
+sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/memory.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/processor.c.obj

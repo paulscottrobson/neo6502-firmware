@@ -11,20 +11,9 @@
 // ***************************************************************************************
 // ***************************************************************************************
 
-#define DEBUG 1
-
 #include "common.h"
-#include "hardware/gpio.h"
 #include "bsp/board.h"
 #include "tusb.h"
-
-#if DEBUG
-#include <stdio.h>
-#include "hardware/uart.h"
-#define UART_ID uart0
-#define BAUD_RATE 115200
-#define UART_TX_PIN 28
-#endif
 
 #define HID_A 0x04
 #define HID_Z 0x1D
@@ -279,27 +268,18 @@ void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* desc_re
 
   switch(tuh_hid_interface_protocol(dev_addr, instance)) {
     case HID_ITF_PROTOCOL_KEYBOARD:
-      #if DEBUG
-      printf("HID Interface Protocol = Keyboard\n");
-      #endif
       kbd_addr = dev_addr;
       kbd_inst = instance;
       tuh_hid_receive_report(dev_addr, instance);
     break;
     
     case HID_ITF_PROTOCOL_MOUSE:
-      #if DEBUG
-      printf("HID Interface Protocol = Mouse\n");
-      #endif
       tuh_hid_receive_report(dev_addr, instance);
     break;
   }
 }
 
 void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance) {
-  #if DEBUG
-  printf("HID device address = %d, instance = %d is unmounted\r\n", dev_addr, instance);
-  #endif
 }
 
 void writeCharacter(int ch);
@@ -323,21 +303,15 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
                 ch = hid2ascii[report[2]];		//no Ctrl no Shift 
         };
 
-      #if DEBUG
       if (ch) {
         writeCharacter("0123456789abcdef"[ch >> 4]);
         writeCharacter("0123456789abcdef"[ch & 0x0F]);
       }
-      //printf("keyboard %02x %02x %02x  \n", report[0], report[1], report[2]);
-      #endif
       tuh_hid_receive_report(dev_addr, instance);
     break;
     
     case HID_ITF_PROTOCOL_MOUSE:
       tuh_hid_receive_report(dev_addr, instance);
-      #if DEBUG
-      printf("mouse %02x %02x %02x \n", report[0], report[1], report[2]);
-      #endif
       tuh_hid_receive_report(dev_addr, instance);
     break;
   }
