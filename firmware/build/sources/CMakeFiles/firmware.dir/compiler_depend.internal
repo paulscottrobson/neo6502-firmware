@@ -2810,8 +2810,8 @@ sources/CMakeFiles/firmware.dir/main.c.obj
  /aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h
  /home/paulr/Projects/neo6502-firmware/firmware/build/generated/pico_base/pico/config_autogen.h
  /home/paulr/Projects/neo6502-firmware/firmware/build/generated/pico_base/pico/version.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/memory.h
  /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h
  /usr/arm-none-eabi/include/_ansi.h
  /usr/arm-none-eabi/include/_newlib_version.h
  /usr/arm-none-eabi/include/assert.h
@@ -2876,8 +2876,8 @@ sources/CMakeFiles/firmware.dir/memory.c.obj
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h
  /home/paulr/Projects/neo6502-firmware/firmware/build/generated/pico_base/pico/config_autogen.h
  /home/paulr/Projects/neo6502-firmware/firmware/build/generated/pico_base/pico/version.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/memory.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/roms.h
  /usr/arm-none-eabi/include/_ansi.h
  /usr/arm-none-eabi/include/_newlib_version.h
  /usr/arm-none-eabi/include/assert.h
@@ -2931,10 +2931,10 @@ sources/CMakeFiles/firmware.dir/mos65C02.c.obj
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h
  /home/paulr/Projects/neo6502-firmware/firmware/build/generated/pico_base/pico/config_autogen.h
  /home/paulr/Projects/neo6502-firmware/firmware/build/generated/pico_base/pico/version.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/pins.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/wdc65C02cpu.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/memory.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/mos65C02.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/pins.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/wdc65C02cpu.h
  /usr/arm-none-eabi/include/_ansi.h
  /usr/arm-none-eabi/include/_newlib_version.h
  /usr/arm-none-eabi/include/assert.h
@@ -2996,9 +2996,9 @@ sources/CMakeFiles/firmware.dir/roms.c.obj
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h
  /home/paulr/Projects/neo6502-firmware/firmware/build/generated/pico_base/pico/config_autogen.h
  /home/paulr/Projects/neo6502-firmware/firmware/build/generated/pico_base/pico/version.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/binary.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h
- /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/binary.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/memory.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/roms.h
  /usr/arm-none-eabi/include/_ansi.h
  /usr/arm-none-eabi/include/_newlib_version.h
  /usr/arm-none-eabi/include/assert.h

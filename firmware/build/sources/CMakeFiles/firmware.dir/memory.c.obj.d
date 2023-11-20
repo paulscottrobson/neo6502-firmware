@@ -50,5 +50,5 @@ sources/CMakeFiles/firmware.dir/memory.c.obj: \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/roms.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/memory.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/roms.h

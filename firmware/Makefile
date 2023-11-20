@@ -3,9 +3,9 @@
 #
 #		Name : 		Makefile
 #		Author :	Paul Robson (paul@robsons.org.uk)
-#		Date : 		17th October 2023
+#		Date : 		20th November 2023
 #		Reviewed :	No
-#		Purpose :	Makefile for this directory contents.
+#		Purpose :	Main firmware makefile, most of the work is done by CMake.
 #
 # ***************************************************************************************
 # ***************************************************************************************
@@ -16,23 +16,27 @@ else
 include ../documents/common.make
 endif
 
+BINARY = firmware
+KERNELSOURCES = kernel.asm
 all: build
 
-prelim: 
-	$(CDEL) src$(S)binary.h
-	$(ASSEMBLER) asm$(S)test.asm -o asm$(S)test.bin -L asm$(S)test.lst
-	$(PYTHON) asm$(S)hconvert.py asm$(S)test.bin >src$(S)binary.h
-	touch src$(S)roms.c*
+always:
 
-pio:
-	tools/pioasm src/memory_sm1_address.pio src/memory_sm1_address.pio.h
-	touch src$(S)mos65C02.c*
+kernel: always
+	$(CDEL) sources$(S)binary.h
+	cd kernel && $(ASSEMBLER) $(KERNELSOURCES) -o kernel.bin -L kernel.lst $(ASMEND)
+	$(PYTHON) scripts$(S)hconvert.py kernel$(S)kernel.bin >include$(S)binary.h
+	$(TOUCH) sources$(S)roms.c*
 
-build: prelim pio
-	pio run
+rebuild: clean build
 
-run: prelim pio
-	pio run -t upload
+build: kernel always
+	make -C build
 
-clean:
-	pio run -t clean
+clean: always
+	rm -Rf build
+	cmake -B build -S .
+
+run: build
+	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
+	$(UPLOADER) $(UPCONFIG) $(UPCOMMANDS)

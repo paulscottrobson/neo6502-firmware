@@ -50,10 +50,11 @@ sources/CMakeFiles/firmware.dir/mos65C02.c.obj: \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/mos65C02.h \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/pins.h \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/memory.h \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/wdc65C02cpu.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/mos65C02.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/pins.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/memory.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/memory.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/wdc65C02cpu.h \
  /usr/arm-none-eabi/include/string.h \
  /usr/arm-none-eabi/include/sys/reent.h \
  /usr/arm-none-eabi/include/_ansi.h \
