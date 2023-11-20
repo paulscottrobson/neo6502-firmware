@@ -41,11 +41,9 @@ endif
 ROOTDIR =  $(dir $(realpath $(lastword $(MAKEFILE_LIST))))..$(S)
 BINDIR = $(ROOTDIR)bin$(S)
 SRCDIR = $(ROOTDIR)kernel$(S)
-AEMUDIR = $(ROOTDIR)$(S)..$(S)fab-agon-emulator$(S)
 #
 #		Current applications.
 # 
-MAKEOPTS = --no-print-directory
 PYTHON = python3
 ASSEMBLER = 64tass -b --mr65c02 -Wall
 ASMEND = 

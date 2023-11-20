@@ -45,13 +45,18 @@ void drawCharacter(int x,int y,int ch,int col) {
 
 int xc = 0,yc = 0;
 void writeCharacter(int c) {
-	if (c != 13) {
-		drawCharacter(xc*6+5,yc*8,c,7);
-		xc += 1;
-	} else {
-		xc = 52;
-	}
-	if (xc >= 52) { xc = 0;yc = (yc + 1) % 30; }
+	drawCharacter(xc*6+5,yc*8,c,7);
+	xc += 1;
+	if (xc == 52) { xc = 0;yc = (yc + 1) % 30; }
+}
+
+void writeHex(int n) {
+	static char *c = "0123456789ABCDEF";
+	writeCharacter(32);
+	writeCharacter(c[(n >> 12) & 15]);
+	writeCharacter(c[(n >> 8) & 15]);
+	writeCharacter(c[(n >> 4) & 15]);
+	writeCharacter(c[(n >> 0) & 15]);
 }
 
 void __not_in_flash_func(_scanline_callback)(void) {
