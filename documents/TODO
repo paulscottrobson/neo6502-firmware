@@ -1,6 +1,6 @@
 - major tidying session as we go headers, processor headers, normalise names, comments.
 
-	- add timer and repeat (sync checking)
+	- add key repeat (sync checking)
 	- Build tracker. Generate boot message.
 	- initial hardware specification
 	- make the keyboard i/o work
@@ -9,7 +9,8 @@
 
 00 System
 		Reset (happens by default)
-		
+		Read System Timer
+
 01 Console
 		Keyboard in
 		Character out

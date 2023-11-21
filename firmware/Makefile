@@ -23,6 +23,7 @@ all: build
 always:
 
 kernel: always
+	export PICO_SDK_PATH=$(PICO_SDK_LOCATION)
 	make -C ..$(S)kernel
 	$(CCOPY) ..$(S)kernel$(S)build$(S)binary.h include$(S)data
 	$(TOUCH) sources$(S)memory.c*

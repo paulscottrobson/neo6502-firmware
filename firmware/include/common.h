@@ -28,9 +28,11 @@ typedef void (*VOIDFUNC)();
 //
 #include "system/memory.h"
 #include "system/processor.h"
+
 #include "interface/keyboard.h"
 #include "interface/graphics.h"
 #include "interface/console.h"
+#include "interface/timer.h"
 //
 //		RP2040 specific.
 //
