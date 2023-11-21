@@ -1,22 +1,10 @@
 - major tidying session as we go headers, processor headers, normalise names, comments.
 
-	- Create the keyboard handler from keyboard events.
-		- Control keys - remap on to locations on keyboard.
-		- Internationalisation of shifting etc - dummies
-		- Function key - dummies
-		- REENABLE THE QUEUE !!!
-
-			
+	- add timer and repeat (sync checking)
 	- Build tracker. Generate boot message.
-
 	- initial hardware specification
-	
 	- make the keyboard i/o work
-
 	- Console colour and cursor control / positioning.
-
-	- add timer and repeat
-
 	- Sound
 
 00 System
@@ -39,3 +27,6 @@
 	Information flags (ESC pressed)
 	TOS [4]
 	Parameter Space [8]
+
+- Locale handling
+- Function key handling

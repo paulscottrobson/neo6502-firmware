@@ -99,24 +99,24 @@ void CONScrollUp(void) {
 
 void CONWrite(int c) {
 	switch (c) {
-		case 10:
-			yCursor++; 															// 10 down with scrolling.
+		case CC_LF:
+			yCursor++; 															// J/10 down with scrolling.
 			if (yCursor == graphMode->yCSize) {
 				yCursor--;
 				CONScrollUp();
 			}
 			break;
-		case 12:  																// 12 clears the screen
+		case CC_CLS: 	 														// L/12 clears the screen
 			CONClearScreen();break;
-		case 13:  																// 13 carriage return.
-			xCursor = 0;CONWrite(10);break;
-		case 30: 																// 30 home cursor.
+		case CC_ENTER: 	 														// M/13 carriage return.
+			xCursor = 0;CONWrite(CC_LF);break;
+		case CC_HOME: 															// T/20 home cursor.
 			xCursor = yCursor = 0;break;
 		default:
 			if (c >= ' ' && c < 127) {  										// 32-126 output a character.
 				CONDrawCharacter(xCursor,yCursor,c,foreCol,backCol);
 				xCursor++;
-				if (xCursor == graphMode->xCSize) CONWrite(13);
+				if (xCursor == graphMode->xCSize) CONWrite(CC_ENTER);
 			} else {
 
 			}
@@ -136,3 +136,4 @@ void CONWriteHex(uint16_t h) {
 		h = h << 4;
 	}
 }
+
