@@ -26,24 +26,37 @@ uint16_t addr;
 uint8_t data;
 bool rw;
 
+// ***************************************************************************************
+//
+//                      Start and run the CPU. Does not have to return.
+//
+// ***************************************************************************************
+
 void CPUStart(void) {
     wdc65C02cpu_init();
     wdc65C02cpu_reset();
     while(1) {
-        if (!iCount++) CPUSync();
-        wdc65C02cpu_tick(&addr, &rw);
-        if (rw) {
+        if (!iCount++) CPUSync();                                               // 1 time in 64k. About 25-30Hz.
+        wdc65C02cpu_tick(&addr, &rw);                                           // Tick the processor
+
+        if (rw) {                                                               // Read put data on data lines.
             wdc65C02cpu_set_data(cpuMemory[addr]);
-        } else {
+        } else {                                                                // Write get it and store in memory.
             // Memory write
             data = cpuMemory[addr] = wdc65C02cpu_get_data();
-            if (addr == controlPort && data != 0) {
-               CONWrite(data & 0x7F);
-               cpuMemory[controlPort] = 0;
+            if (addr == controlPort && data != 0) {                             // Message passed
+               CONWrite(data & 0xFF);                                           // Execute the message (temp)
+               cpuMemory[controlPort] = 0;                                      // Clear the message indicating completion.
             }
         }       
     }
 }
+
+// ***************************************************************************************
+//
+//                      Hardware that requires periodic updates
+//
+// ***************************************************************************************
 
 void CPUSync(void) {
     KBDSync();
