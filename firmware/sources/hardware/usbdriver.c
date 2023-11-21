@@ -18,37 +18,39 @@
 
 // ***************************************************************************************
 //
-//							Process USB HID Keyboard Report
+//                          Process USB HID Keyboard Report
 //
-//					This converts it to a series of up/down key events
+//                  This converts it to a series of up/down key events
 //
 // ***************************************************************************************
 
-static short lastReport[KBD_MAX_KEYCODE] = { 0 }; 								// state at last HID report.
+static short lastReport[KBD_MAX_KEYCODE] = { 0 };                               // state at last HID report.
 
 static void usbProcessReport(uint8_t const *report) {
-	for (int i = 0;i < KBD_MAX_KEYCODE;i++) lastReport[i] = -lastReport[i]; 	// So if -ve was present last time.
-	for (int i = 2;i < 8;i++) {  												// Scan the key press array.		
+	for (int i = 0;i < KBD_MAX_KEYCODE;i++) lastReport[i] = -lastReport[i];     // So if -ve was present last time.
+	for (int i = 2;i < 8;i++) {                                                 // Scan the key press array.        
 		uint8_t key = report[i];
-		if (key >= KEY_KP1 && key < KEY_KP1+10) {  								// Numeric keypad numbers will work.
+		if (key >= KEY_KP1 && key < KEY_KP1+10) {                               // Numeric keypad numbers will work.
 			key = key - KEY_KP1 + KEY_1;
 		}
-		if (key != 0 && key < KBD_MAX_KEYCODE) { 								// If key is down, and not too high.
-			if (lastReport[key] == 0) KBDEvent(1,key,report[0]); 				// It wasn't down before so key press.
-			lastReport[key] = 1; 												// Flag it as now being down.
+		if (key == KEY_102ND) key = KEY_BACKSLASH; 								// Non US /| mapped.
+
+		if (key != 0 && key < KBD_MAX_KEYCODE) {                                // If key is down, and not too high.
+			if (lastReport[key] == 0) KBDEvent(1,key,report[0]);                // It wasn't down before so key press.
+			lastReport[key] = 1;                                                // Flag it as now being down.
 		}
 	} 
-	for (int i = 0;i < KBD_MAX_KEYCODE;i++) { 									// Any remaining -ve keys are up actions.
+	for (int i = 0;i < KBD_MAX_KEYCODE;i++) {                                   // Any remaining -ve keys are up actions.
 		if (lastReport[i] < 0) {
-			KBDEvent(0,i,0);   													// Flag going up.
-			lastReport[i] = 0; 													// Mark as now up
+			KBDEvent(0,i,0);                                                    // Flag going up.
+			lastReport[i] = 0;                                                  // Mark as now up
 		}
 	}
 }
 
 // ***************************************************************************************
 //
-//								USB Callback functions
+//                              USB Callback functions
 //
 // ***************************************************************************************
 
@@ -75,7 +77,7 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
 	case HID_ITF_PROTOCOL_KEYBOARD:  
 	  tuh_hid_receive_report(dev_addr, instance);
 	  usbProcessReport(report);
-	  tuh_hid_receive_report(dev_addr, instance);	  
+	  tuh_hid_receive_report(dev_addr, instance);     
 	break;
 	
 	case HID_ITF_PROTOCOL_MOUSE:
@@ -87,20 +89,20 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
 
 // ***************************************************************************************
 //
-//								 Keyboard initialisation
+//                               Keyboard initialisation
 //
 // ***************************************************************************************
 
 void KBDInitialise(void) {
-	board_init();																// USB Initialise.
+	board_init();                                                               // USB Initialise.
 	tusb_init();
-	for (int i = 0;i < KBD_MAX_KEYCODE;i++) lastReport[i] = 0; 					// No keys currently known
-	KBDEvent(0,0xFF,0); 														// Reset the keyboard manager
+	for (int i = 0;i < KBD_MAX_KEYCODE;i++) lastReport[i] = 0;                  // No keys currently known
+	KBDEvent(0,0xFF,0);                                                         // Reset the keyboard manager
 }
 
 // ***************************************************************************************
 //
-//									Keyboard polling
+//                                  Keyboard polling
 //
 // ***************************************************************************************
 

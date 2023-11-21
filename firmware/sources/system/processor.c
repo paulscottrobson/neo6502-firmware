@@ -15,8 +15,6 @@
 
 #include "common.h"
 
-void writeCharacter(int);
-
 #define PICO_NEO6502
 #define CHIPS_IMPL
 

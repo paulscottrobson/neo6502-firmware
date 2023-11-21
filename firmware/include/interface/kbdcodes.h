@@ -38,12 +38,13 @@
 //
 //		Standard keys
 //
-#define KEY_ENTER 0x28 	       	// Keyboard Return (ENTER)
-#define KEY_ESC 0x29 		   	// Keyboard ESCAPE
-#define KEY_BACKSPACE 0x2a 		// Keyboard DELETE (Backspace)
-#define KEY_TAB 0x2b 			// Keyboard Tab
-#define KEY_SPACE 0x2c 			// Keyboard Spacebar
-#define KEY_MINUS 0x2d 			// Keyboard - and _
+#define KEY_ENTER 0x28 	       	// Keyboard Return (ENTER) 			13
+#define KEY_ESC 0x29 		   	// Keyboard ESCAPE					27
+#define KEY_BACKSPACE 0x2a 		// Keyboard DELETE (Backspace) 		127
+#define KEY_TAB 0x2b 			// Keyboard Tab 					9
+#define KEY_SPACE 0x2c 			// Keyboard Spacebar 				32
+
+#define KEY_MINUS 0x2d 			// Keyboard - and _ 
 #define KEY_EQUAL 0x2e 			// Keyboard = and +
 #define KEY_LEFTBRACE 0x2f 		// Keyboard [ and {
 #define KEY_RIGHTBRACE 0x30 	// Keyboard ] and }
@@ -55,24 +56,25 @@
 #define KEY_COMMA 0x36 			// Keyboard , and <
 #define KEY_DOT 0x37 			// Keyboard . and >
 #define KEY_SLASH 0x38 			// Keyboard / and ?
-#define KEY_CAPSLOCK 0x39 		// Keyboard Caps Lock
 //
 //		Function keys F1-F10 are supported.
 //
-#define KEY_F1 0x3a
+#define KEY_F1 0x3a 			// Return 129..138
 //
 //		Control keys
 //
-#define KEY_INSERT 0x49 		// Keyboard Insert
-#define KEY_HOME 0x4a 			// Keyboard Home
-#define KEY_PAGEUP 0x4b 		// Keyboard Page Up
-#define KEY_DELETE 0x4c 		// Keyboard Delete Forward
-#define KEY_END 0x4d 			// Keyboard End
-#define KEY_PAGEDOWN 0x4e 		// Keyboard Page Down
-#define KEY_RIGHT 0x4f 			// Keyboard Right Arrow
-#define KEY_LEFT 0x50 			// Keyboard Left Arrow
-#define KEY_DOWN 0x51 			// Keyboard Down Arrow
-#define KEY_UP 0x52 			// Keyboard Up Arrow
+#define KEY_INSERT 0x49 		// Keyboard Insert 					1
+#define KEY_HOME 0x4a 			// Keyboard Home 	 				30
+#define KEY_PAGEUP 0x4b 		// Keyboard Page Up 				3
+#define KEY_DELETE 0x4c 		// Keyboard Delete Forward 			2
+#define KEY_END 0x4d 			// Keyboard End 					21
+#define KEY_PAGEDOWN 0x4e 		// Keyboard Page Down 				4
+#define KEY_RIGHT 0x4f 			// Keyboard Right Arrow 			5
+#define KEY_LEFT 0x50 			// Keyboard Left Arrow 				4
+#define KEY_DOWN 0x51 			// Keyboard Down Arrow				10
+#define KEY_UP 0x52 			// Keyboard Up Arrow 				11
+
+#define KEY_102ND 0x64 			// Keyboard Non-US \ | 	 mapped onto KEY_BACKSLASH.
 
 #define KBD_MAX_KEYCODE (0x52)	// The biggest scancode we store.
 
