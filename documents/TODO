@@ -1,11 +1,14 @@
 - major tidying session as we go headers, processor headers, normalise names, comments.
 
-	- add key repeat (sync checking)
+	- Sound hardware. Make that work.
+	- **** reenable queue ****
+	- initial hardware specification. Implement it.
 	- Build tracker. Generate boot message.
-	- initial hardware specification
 	- make the keyboard i/o work
+	- Create some test code
+	- Implement the emulator.
+	- Implement NeoWozMon
 	- Console colour and cursor control / positioning.
-	- Sound
 
 00 System
 		Reset (happens by default)

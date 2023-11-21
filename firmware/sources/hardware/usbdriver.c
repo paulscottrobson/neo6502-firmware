@@ -108,4 +108,5 @@ void KBDInitialise(void) {
 
 void KBDSync(void) {
 	tuh_task();
+	KBDCheckTimer();
 }

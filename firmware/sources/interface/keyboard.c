@@ -27,11 +27,16 @@ static uint8_t keyboardState[(KBD_MAX_KEYCODE >> 3)+1];
 static uint8_t queue[MAX_QUEUE_SIZE+1];
 static uint8_t queueSize = 0;
 
+static uint8_t currentASCII,currentKeyCode; 									// Current key pressed.
+static uint32_t nextRepeat;  													// Time of next repeat.
+
 static uint8_t KBDMapToASCII(uint8_t keyCode,uint8_t modifiers);
 static uint8_t KBDDefaultASCIIKeys(uint8_t keyCode,uint8_t isShift);
 static uint8_t KBDDefaultControlKeys(uint8_t keyCode,uint8_t isShift);
 static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers);
 static uint8_t KBDLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifiers);
+static void KBDInsertQueue(uint8_t ascii);
+
 
 // ***************************************************************************************
 //
@@ -50,16 +55,34 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 		uint8_t bit = 0x01 << (keyCode & 7);									// Bit to set or clear.
 		if (isDown) {
 			keyboardState[keyCode >> 3] |= bit; 								// Set down bit.
-			if (queueSize < MAX_QUEUE_SIZE) {   								// Do we have a full queue ?
-				queue[queueSize] = KBDMapToASCII(keyCode,modifiers);			// If not, push it in the queue.
-				// queueSize++; 
-			} 
+			uint8_t ascii = KBDMapToASCII(keyCode,modifiers);  					// What key ?
+			if (ascii != 0) {
+				KBDInsertQueue(ascii);											// Insert in queue 
+				currentASCII = ascii;  											// Remember code and time.
+				currentKeyCode = keyCode;
+				nextRepeat = TMRRead()+KBD_REPEAT_START;
+			}
 		} else {
 			keyboardState[keyCode >> 3] &= (bit ^ 0xFF); 						// Clear down bit.
+			if (keyCode == currentKeyCode) currentASCII = 0; 					// Autorepeat off, key released.
 		}
 	}
 }
 
+// ***************************************************************************************
+//
+//								Handle Repeat
+//
+// ***************************************************************************************
+
+void KBDCheckTimer(void) {
+	if (currentASCII != 0) {  													// Key pressed
+		if (TMRRead() >= nextRepeat) {  										// Time up ?
+			KBDInsertQueue(currentASCII);  										// Put in queue
+			nextRepeat = TMRRead()+KBD_REPEAT_AFTER; 							// Quicker repeat after first time.
+		}
+	}
+}
 
 // ***************************************************************************************
 //
@@ -69,6 +92,24 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 
 uint8_t *KBDGetStateArray(void) {
 	return keyboardState;
+}
+
+// ***************************************************************************************
+//
+//						Insert ASCII character into keyboard queue
+//
+// ***************************************************************************************
+
+static void KBDInsertQueue(uint8_t ascii) {
+	if (queueSize < MAX_QUEUE_SIZE) {   										// Do we have a full queue ?
+		queue[queueSize] = ascii;
+		// queueSize++;
+	}
+	if (ascii != 0) {
+		if (ascii >= 32 && ascii < 127) CONWrite(ascii);	
+		CONWrite(32);CONWriteHex(ascii);CONWrite(32);
+		CONWriteHex(TMRRead() & 0xFFFF);CONWrite(13);
+	}
 }
 
 // ***************************************************************************************
@@ -126,12 +167,6 @@ static uint8_t KBDMapToASCII(uint8_t keyCode,uint8_t modifiers) {
 
 	if (ascii == 0) {															// This maps all the control keys
 		ascii = KBDDefaultControlKeys(keyCode,modifiers); 						
-	}
-
-	if (ascii != 0) {
-		if (ascii >= 32 && ascii < 127) CONWrite(ascii);	
-		CONWrite(32);CONWriteHex(ascii);CONWrite(32);
-		CONWriteHex(TMRRead() & 0xFFFF);CONWrite(13);
 	}
 
 	return KBDLocaleMapping(ascii,keyCode,modifiers); 							// Special mapping for locales.
