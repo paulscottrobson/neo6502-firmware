@@ -29,6 +29,9 @@ static uint8_t queueSize = 0;
 
 static uint8_t KBDMapToASCII(uint8_t keyCode,uint8_t modifiers);
 static uint8_t KBDDefaultASCIIKeys(uint8_t keyCode,uint8_t isShift);
+static uint8_t KBDDefaultControlKeys(uint8_t keyCode,uint8_t isShift);
+static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers);
+static uint8_t KBDLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifiers);
 
 // ***************************************************************************************
 //
@@ -55,10 +58,6 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 			keyboardState[keyCode >> 3] &= (bit ^ 0xFF); 						// Clear down bit.
 		}
 	}
-	// CONWriteHex(isDown);
-	// CONWriteHex(keyCode);
-	// CONWriteHex(modifiers);
-	// CONWrite(13);
 }
 
 
@@ -107,9 +106,12 @@ static uint8_t KBDMapToASCII(uint8_t keyCode,uint8_t modifiers) {
 	uint8_t isShift = (modifiers & KEY_SHIFT) != 0;
 	uint8_t isControl = (modifiers & KEY_CONTROL) != 0;
 
+	if (keyCode >= KEY_F1 && keyCode < KEY_F1+10) {  							// Do whatever with function keys.
+		KBDFunctionKey(keyCode - KEY_F1 + 1,modifiers);
+	}
 	if (keyCode >= KEY_A && keyCode < KEY_A+26) { 								// Handle alphabet.
 		ascii = keyCode - KEY_A + 'A';  										// Make ASCII
-		if (isShift) ascii += 'a'-'A'; 											// Handle shift
+		if (!isShift) ascii += 'a'-'A'; 										// Handle shift
 		if (isControl) ascii &= 0x1F; 											// Handle control
 	}
 
@@ -122,11 +124,16 @@ static uint8_t KBDMapToASCII(uint8_t keyCode,uint8_t modifiers) {
 		ascii = KBDDefaultASCIIKeys(keyCode,modifiers); 						
 	}
 
+	if (ascii == 0) {															// This maps all the control keys
+		ascii = KBDDefaultControlKeys(keyCode,modifiers); 						
+	}
 
-	if (ascii >= 32 && ascii < 127) CONWrite(ascii);
-	CONWrite(32);CONWriteHex(ascii);CONWrite(32);
+	if (ascii != 0) {
+		if (ascii >= 32 && ascii < 127) CONWrite(ascii);	
+		CONWrite(32);CONWriteHex(ascii);CONWrite(32);
+	}
 
-	return ascii;	
+	return KBDLocaleMapping(ascii,keyCode,modifiers); 							// Special mapping for locales.
 }
 
 // ***************************************************************************************
@@ -137,10 +144,10 @@ static uint8_t KBDMapToASCII(uint8_t keyCode,uint8_t modifiers) {
 
 #define KEY(code,normal,shifted) code,normal,shifted
 
-static uint8_t defaultShift[] = {
+static const uint8_t defaultShift[] = {
 	KEY(KEY_MINUS,'-','_'),			KEY(KEY_EQUAL,'=','+'), 		KEY(KEY_LEFTBRACE,'[','{'), 
 	KEY(KEY_RIGHTBRACE,']','}'), 	KEY(KEY_BACKSLASH,'\\','|'), 	KEY(KEY_HASHTILDE,'#','~'),
-	KEY(KEY_SEMICOLON,';',':'), 	KEY(KEY_APOSTROPHE,'\'','@'), 	KEY(KEY_GRAVE,'`','~'),
+	KEY(KEY_SEMICOLON,';',':'), 	KEY(KEY_APOSTROPHE,'\'','"'), 	KEY(KEY_GRAVE,'`','~'),
 	KEY(KEY_COMMA,',','<'), 		KEY(KEY_DOT,'.','>'), 			KEY(KEY_SLASH,'/','?'),
 	KEY(KEY_SPACE,' ',' '),
 	0	
@@ -155,4 +162,49 @@ static uint8_t KBDDefaultASCIIKeys(uint8_t keyCode,uint8_t isShift) {
 		ascii = isShift ? defaultShift[index+2] : defaultShift[index+1]; 	
 	}
 	return ascii;
+}
+
+// ***************************************************************************************
+//
+//						Work out standard controls (include CHR(127))
+//
+// ***************************************************************************************
+
+static const uint8_t defaultControlKeys[] = {
+	KEY_LEFT,CC_LEFT,KEY_RIGHT,CC_RIGHT,KEY_INSERT,CC_INSERT,
+	KEY_PAGEDOWN,CC_PAGEDOWN,KEY_END,CC_END,KEY_DELETE,CC_DELETE,
+	KEY_TAB,CC_TAB,KEY_ENTER,CC_ENTER,KEY_PAGEUP,CC_PAGEUP,KEY_DOWN,CC_DOWN,
+	KEY_HOME,CC_HOME,KEY_UP,CC_UP,KEY_ESC,CC_ESC, 
+	KEY_BACKSPACE, CC_BACKSPACE, 0
+};	
+
+static uint8_t KBDDefaultControlKeys(uint8_t keyCode,uint8_t isShift) {
+	uint8_t index = 0;
+	while (defaultControlKeys[index] != 0) {
+		if (defaultControlKeys[index] == keyCode) {
+			return defaultControlKeys[index+1];
+		}
+		index += 2;
+	} 
+	return 0;
+}	
+
+// ***************************************************************************************
+//
+//								Process function keys
+//
+// ***************************************************************************************
+
+static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers) {
+	CONWrite('F');CONWrite(funcNum+'0');
+}
+
+// ***************************************************************************************
+//
+//								Process locale fixes
+//
+// ***************************************************************************************
+
+static uint8_t KBDLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifiers) {
+	return asciiCode;
 }

@@ -76,6 +76,6 @@
 
 #define KEY_102ND 0x64 			// Keyboard Non-US \ | 	 mapped onto KEY_BACKSLASH.
 
-#define KBD_MAX_KEYCODE (0x52)	// The biggest scancode we store.
+#define KBD_MAX_KEYCODE (0x53)	// The biggest scancode we store, +1
 
 #endif
