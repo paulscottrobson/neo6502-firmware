@@ -1,9 +1,4 @@
-	- create a console rendering design and the initial console implementation
-
-		CONWriteChar
-		CONWriteString
-		CONWriteHex
-		CONInitialise(MODE)
+	- set up DVI Ram using start not in dvi_
 
 	- Build tracker. Generate boot message.
 	- major tidying session as we go headers, processor headers, normalise names, comments.
