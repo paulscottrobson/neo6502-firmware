@@ -12,6 +12,10 @@
 #ifndef _COMMON_h
 #define _COMMON_h
 //
+//		Void Function Pointer.
+//
+typedef void (*VOIDFUNC)();
+//
 //		RP2040 includes
 //
 #include "pico/stdlib.h"
@@ -21,10 +25,12 @@
 //
 #include "system/memory.h"
 #include "system/processor.h"
+#include "interface/graphics.h"
+//
+//		RP2040 specific.
+//
 #include "system/usbdriver.h"
 #include "system/dvi_video.h"
+
+
 #endif
-//
-//		Void Function Pointer.
-//
-typedef void (*VOIDFUNC)();

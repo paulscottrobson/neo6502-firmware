@@ -1560,6 +1560,30 @@ hardware/usbdriver.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.s
 .PHONY : hardware/usbdriver.c.s
 
+interface/graphics.obj: interface/graphics.c.obj
+.PHONY : interface/graphics.obj
+
+# target to build an object file
+interface/graphics.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/graphics.c.obj
+.PHONY : interface/graphics.c.obj
+
+interface/graphics.i: interface/graphics.c.i
+.PHONY : interface/graphics.i
+
+# target to preprocess a source file
+interface/graphics.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/graphics.c.i
+.PHONY : interface/graphics.c.i
+
+interface/graphics.s: interface/graphics.c.s
+.PHONY : interface/graphics.s
+
+# target to generate assembly for a file
+interface/graphics.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/graphics.c.s
+.PHONY : interface/graphics.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -1819,6 +1843,9 @@ help:
 	@echo "... hardware/usbdriver.obj"
 	@echo "... hardware/usbdriver.i"
 	@echo "... hardware/usbdriver.s"
+	@echo "... interface/graphics.obj"
+	@echo "... interface/graphics.i"
+	@echo "... interface/graphics.s"
 	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"

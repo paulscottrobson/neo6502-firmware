@@ -17,7 +17,7 @@ void writeCharacter(int n);
 int main() {
     const char bootString[] = "NEO6502 Retrocomputer\r\r";
     MEMInitialiseMemory();
-    DVIStart();    
+    GFXSetMode(0);
     const char *c = bootString;
     while (*c != '\0') writeCharacter(*c++);
     USBInitialise();

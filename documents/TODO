@@ -1,4 +1,5 @@
-	- set up DVI Ram using start not in dvi_
+	- new palette.
+	- complete graphics/console code.
 
 	- Build tracker. Generate boot message.
 	- major tidying session as we go headers, processor headers, normalise names, comments.

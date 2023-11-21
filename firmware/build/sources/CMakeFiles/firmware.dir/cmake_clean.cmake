@@ -121,6 +121,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj.d"
   "CMakeFiles/firmware.dir/hardware/usbdriver.c.obj"
   "CMakeFiles/firmware.dir/hardware/usbdriver.c.obj.d"
+  "CMakeFiles/firmware.dir/interface/graphics.c.obj"
+  "CMakeFiles/firmware.dir/interface/graphics.c.obj.d"
   "CMakeFiles/firmware.dir/main.c.obj"
   "CMakeFiles/firmware.dir/main.c.obj.d"
   "CMakeFiles/firmware.dir/system/memory.c.obj"

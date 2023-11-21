@@ -1,5 +1,5 @@
-sources/CMakeFiles/firmware.dir/system/processor.c.obj: \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor.c \
+sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/graphics.c \
  /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
@@ -55,14 +55,4 @@ sources/CMakeFiles/firmware.dir/system/processor.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/usbdriver.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/wdc65C02cpu.h \
- /usr/arm-none-eabi/include/string.h \
- /usr/arm-none-eabi/include/sys/reent.h \
- /usr/arm-none-eabi/include/_ansi.h \
- /usr/arm-none-eabi/include/sys/_types.h \
- /usr/arm-none-eabi/include/machine/_types.h \
- /usr/arm-none-eabi/include/sys/lock.h \
- /usr/arm-none-eabi/include/sys/_locale.h \
- /usr/arm-none-eabi/include/strings.h \
- /usr/arm-none-eabi/include/sys/string.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h
