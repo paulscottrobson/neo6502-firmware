@@ -20,6 +20,8 @@ typedef void (*VOIDFUNC)();
 //		RP2040 includes
 //
 #include "pico/stdlib.h"
+#include "pico/stdio.h"
+#include "string.h"
 #include "hardware/gpio.h"
 //
 //		Neo6502 Includes

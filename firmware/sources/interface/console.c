@@ -13,40 +13,112 @@
 #include "common.h"
 #include "data/font_5x7.h"
 
-struct GraphicsMode *graphMode;
+struct GraphicsMode *graphMode;                                         
+uint16_t xCursor = 0,yCursor = 0;
+uint16_t foreCol = 7,backCol = 0;
 
-static void drawCharacter(int x,int y,int ch,int col) {
-   for (int y1 = 0;y1 < 7;y1++) {
-      int b = font_5x7[ch*7 + y1];
-      for (int x1 = 0;x1 < 5;x1++) {
-    int p = (x+x1)+(y+y1)*320;
-    graphMode->screenMemory[p] = (b & 0x80) ? col : 0;
-    b = b << 1;
-      }
-   }
-}
+// ***************************************************************************************
+//
+//									Raw character output
+//
+// ***************************************************************************************
 
-static void CONClearScreen(void) {
-   for (int x = 0;x < 320;x++) {                   // Default clear screen
-      for (int y = 0;y < 240;y++) {
-    	graphMode->screenMemory[x+y*320] = (x >> 4) + (y >> 3) * 16;
-    }
+static void CONDrawCharacter(uint16_t x,uint16_t y,uint16_t ch,uint16_t fcol,uint16_t bcol) {
+	if (x < graphMode->xCSize && y < graphMode->yCSize) {  						// Coords in range.
+		graphMode->consoleMemory[x + y * MAXCONSOLEWIDTH] = ch;  				// Update console memory.
+		uint16_t cWidth = graphMode->fontWidth,cHeight = graphMode->fontHeight; 
+		if (graphMode->xGSize != 0) {  											// Only if graphics mode.
+			for (uint16_t y1 = 0;y1 < cHeight;y1++) {  							// Each line of font data
+				uint16_t b = font_5x7[(ch-32)*cHeight + y1]; 					// Bit pattern for that line.
+				uint8_t *screen = graphMode->graphicsMemory+					// Where in memory it starts.
+												x*cWidth+(y*cHeight+y1) * 320;	
+				screen += ((320-graphMode->xCSize*cWidth)/2);  					// Horizontal centering.
+				for (uint16_t x1 = 0;x1 < cWidth;x1++) { 						// Output colours MSB first.
+					*screen++ = (b & 0x80) ? fcol : bcol;
+					b = b << 1;
+				}
+			}
+		}
 	}
 }
 
-void CONInitialise(struct GraphicsMode *gMode) {
-	graphMode = gMode;	
-	CONClearScreen();
+// ***************************************************************************************
+//
+//									Clear the screen
+//
+// ***************************************************************************************
+
+static void CONClearScreen(void) {
+	xCursor = yCursor = 0;  													// Home cursor
+	if (graphMode->xGSize != 0) {  												// Graphics present ?
+		memset(graphMode->graphicsMemory,backCol,MAXGRAPHICSMEMORY); 	 		// Erase graphics screen to black
+	}
+	memset(graphMode->consoleMemory,' ',MAXCONSOLEMEMORY); 						// Erase character display to spaces.
 }
 
-int xc = 0,yc = 0;
+// ***************************************************************************************
+//
+//								Initialise the console system
+//
+// ***************************************************************************************
+
+void CONInitialise(struct GraphicsMode *gMode) {
+	graphMode = gMode;	
+	foreCol = 7;backCol = 0; 	 												// Reset colours
+	CONWrite(12);  																// Clear screen / home cursor.
+}
+
+// ***************************************************************************************
+//
+//									Scroll the screen up
+//
+// ***************************************************************************************
+
+void CONScrollUp(void) {
+	memmove(graphMode->consoleMemory,  											// Scroll console up.
+		   graphMode->consoleMemory + MAXCONSOLEWIDTH,  							
+		   (MAXCONSOLEHEIGHT-1) * MAXCONSOLEWIDTH);
+
+	memset(graphMode->consoleMemory + (graphMode->yCSize-1) * MAXCONSOLEWIDTH,	// Blank bottom line.
+																' ',MAXCONSOLEWIDTH);
+	if (graphMode->xGSize != 0) {
+		memmove(graphMode->graphicsMemory,  									// Scroll screen up (graphics)
+			   graphMode->graphicsMemory+320*graphMode->fontHeight,
+			   (graphMode->yCSize-1) * graphMode->fontHeight * 320);
+																				// Clear bottom line.
+		memset(graphMode->graphicsMemory + (graphMode->yCSize-1) * graphMode->fontHeight * 320,
+				backCol, graphMode->fontHeight * 320);		
+	}		
+}
+
+// ***************************************************************************************
+//
+//			Send command to console. Similar to BBC Micro, not all supported.
+//
+// ***************************************************************************************
 
 void CONWrite(int c) {
-   if (c != 13) {
-      drawCharacter(xc*6+5,yc*8,c,7);
-      xc += 1;
-   } else {
-      xc = 52;
-   }
-   if (xc >= 52) { xc = 0;yc = (yc + 1) % 30; }
+	switch (c) {
+		case 10:
+			yCursor++; 															// 10 down with scrolling.
+			if (yCursor == graphMode->yCSize) {
+				yCursor--;
+				CONScrollUp();
+			}
+			break;
+		case 12:  																// 12 clears the screen
+			CONClearScreen();break;
+		case 13:  																// 13 carriage return.
+			xCursor = 0;CONWrite(10);break;
+		case 30: 																// 30 home cursor.
+			xCursor = yCursor = 0;break;
+		default:
+			if (c >= ' ' && c < 127) {  										// 32-126 output a character.
+				CONDrawCharacter(xCursor,yCursor,c,foreCol,backCol);
+				xCursor++;
+				if (xCursor == graphMode->xCSize) CONWrite(13);
+			} else {
+
+			}
+	}
 }
