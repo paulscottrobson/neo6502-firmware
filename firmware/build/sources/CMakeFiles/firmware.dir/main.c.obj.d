@@ -62,8 +62,8 @@ sources/CMakeFiles/firmware.dir/main.c.obj: \
  /usr/arm-none-eabi/include/sys/string.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/keyboard.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/usbdriver.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h

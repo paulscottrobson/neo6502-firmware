@@ -10,15 +10,14 @@ lfc00
 	lda 	#-1
 	sta 	$81
 loop2:
-	lda 	#1
-	jsr 	delay
 	jsr 	alphabet	
 	inc 	$81
 	lda 	$81
 	jsr 	lprinthex
 	lda 	#13
 	jsr 	lprintchar
-	lda 	#0
+	lda 	#200
+	jsr 	delay
 _opcode:	
 	bra 	loop2			
 

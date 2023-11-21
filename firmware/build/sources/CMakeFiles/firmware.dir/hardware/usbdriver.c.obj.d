@@ -62,10 +62,10 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
  /usr/arm-none-eabi/include/sys/string.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/keyboard.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/usbdriver.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
@@ -99,4 +99,5 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/kbdcodes.h

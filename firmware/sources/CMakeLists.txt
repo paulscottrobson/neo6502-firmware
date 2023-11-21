@@ -2,7 +2,7 @@
 add_executable(firmware main.c 
 						hardware/dvi_320x240x256.c hardware/usbdriver.c 
 						system/memory.c system/processor.c
-						interface/graphics.c interface/console.c
+						interface/graphics.c interface/console.c interface/keyboard.c
 )
 
 target_compile_options(firmware PRIVATE -Wall)

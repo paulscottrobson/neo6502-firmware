@@ -48,5 +48,5 @@ void CPUStart(void) {
 }
 
 void CPUSync(void) {
-    USBSync();
+    KBDSync();
 }

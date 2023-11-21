@@ -119,6 +119,9 @@ Discarded input sections
  .text          0x00000000        0x0 CMakeFiles/firmware.dir/interface/console.c.obj
  .data          0x00000000        0x0 CMakeFiles/firmware.dir/interface/console.c.obj
  .bss           0x00000000        0x0 CMakeFiles/firmware.dir/interface/console.c.obj
+ .text          0x00000000        0x0 CMakeFiles/firmware.dir/interface/keyboard.c.obj
+ .data          0x00000000        0x0 CMakeFiles/firmware.dir/interface/keyboard.c.obj
+ .bss           0x00000000        0x0 CMakeFiles/firmware.dir/interface/keyboard.c.obj
  .text          0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .data          0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .bss           0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
@@ -525,14 +528,38 @@ Discarded input sections
  .bss           0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text._out_buffer
                 0x00000000        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._out_null
+                0x00000000        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._out_rev
+                0x00000000       0xb0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._ntoa_format
+                0x00000000      0x25c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._ntoa_long
+                0x00000000       0xb8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._ntoa_long_long
+                0x00000000       0xd4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._etoa    0x00000000      0x410 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .rodata._ftoa.str1.4
+                0x00000000       0x15 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._ftoa    0x00000000      0x3c0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._out_fct
+                0x00000000       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._vsnprintf
+                0x00000000      0x700 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .rodata._vsnprintf
+                0x00000000      0x19c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text.__wrap_sprintf
                 0x00000000       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text.__wrap_snprintf
                 0x00000000       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text.__wrap_vsnprintf
                 0x00000000       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text.vfctprintf
+                0x00000000       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text.weak_raw_printf
                 0x00000000       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .rodata.pow10.0
+                0x00000000       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .data          0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
  .bss           0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
  .text.clzsi    0x00000000        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
@@ -552,6 +579,8 @@ Discarded input sections
  .text          0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
  .data          0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
  .bss           0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+ .text.__wrap___aeabi_idiv
+                0x00000000       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
  .text.divmod_s64s64_rem
                 0x00000000        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
  .text.divmod_u64u64_rem
@@ -563,13 +592,31 @@ Discarded input sections
                 0x00000000        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
  .text.pop_r8_r11
                 0x00000000        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .text.__wrap___aeabi_darithmetic
+                0x00000000       0x80 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .text.__wrap___aeabi_cdcmple
+                0x00000000       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
  .text.__wrap___aeabi_dcmpeq
                 0x00000000       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .text.__wrap___aeabi_dcmplt
+                0x00000000        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
  .text.__wrap___aeabi_dcmple
                 0x00000000       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .text.__wrap___aeabi_dcmpge
+                0x00000000       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .text.__wrap___aeabi_dcmpgt
+                0x00000000        0xa CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .text.__wrap___aeabi_dcmpun
+                0x00000000       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
  .text.__wrap___aeabi_ui2d
                 0x00000000       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .text.__wrap___aeabi_i2d
+                0x00000000       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .text.__wrap___aeabi_d2iz
+                0x00000000       0x48 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
  .text.double2int
+                0x00000000       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .text.__wrap___aeabi_d2uiz
                 0x00000000       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
  .text.fix2double
                 0x00000000       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
@@ -694,6 +741,14 @@ Discarded input sections
  .text          0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .data          0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .bss           0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .text.__wrap___aeabi_dsub
+                0x00000000       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .text.dadd_shim
+                0x00000000      0x15c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .text.dmul_shim
+                0x00000000      0x15c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .text.ddiv_shim
+                0x00000000      0x1b0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .text.dsqrt_shim
                 0x00000000      0x1a8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .text.dcordic_vec_step
@@ -702,12 +757,18 @@ Discarded input sections
                 0x00000000       0x76 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .text.double2int_shim
                 0x00000000        0xe CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .text.double2uint_shim
+                0x00000000        0xe CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .text.double2int64_shim
                 0x00000000       0x1a CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .text.double2uint64_shim
+                0x00000000       0x70 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .text.double2float_shim
                 0x00000000       0x5c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .text.x2double_shims
                 0x00000000       0x90 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .text.dunpacks
+                0x00000000       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .text.dreduce  0x00000000       0x82 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .text.dtan_shim
                 0x00000000       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
@@ -923,6 +984,10 @@ Discarded input sections
  .bss           0x00000000        0x0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.stdio_get_until
                 0x00000000       0x84 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .text.stdio_stack_buffer_flush.part.0
+                0x00000000       0x48 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .text.stdio_buffered_printer
+                0x00000000       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.stdout_serialize_begin
                 0x00000000       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.stdout_serialize_end
@@ -940,6 +1005,10 @@ Discarded input sections
  .text._isatty  0x00000000        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.stdio_flush
                 0x00000000       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .text.__wrap_vprintf
+                0x00000000       0x88 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .text.__wrap_printf
+                0x00000000       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.stdio_init_all
                 0x00000000        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.__wrap_getchar
@@ -1376,9 +1445,9 @@ Discarded input sections
                 0x00000000       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .text.board_getchar
                 0x00000000        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
- .text          0x00000000        0x0 /tmp/ccoONpmD.o
- .data          0x00000000        0x0 /tmp/ccoONpmD.o
- .bss           0x00000000        0x0 /tmp/ccoONpmD.o
+ .text          0x00000000        0x0 /tmp/cc3cGYBK.o
+ .data          0x00000000        0x0 /tmp/cc3cGYBK.o
+ .bss           0x00000000        0x0 /tmp/cc3cGYBK.o
  .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .text          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o)
@@ -1748,11 +1817,11 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
 .boot2          0x10000000      0x100
                 0x10000000                        __boot2_start__ = .
  *(.boot2)
- .boot2         0x10000000      0x100 /tmp/ccoONpmD.o
+ .boot2         0x10000000      0x100 /tmp/cc3cGYBK.o
                 0x10000100                        __boot2_end__ = .
                 0x00000001                        ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
-.text           0x10000100     0x8ca8
+.text           0x10000100     0x7138
                 0x10000100                        __logical_binary_start = .
  *(.vectors)
  .vectors       0x10000100       0xd4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
@@ -1827,785 +1896,692 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x100004e8       0x24 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
                 0x100004e8                RNDStartMode0
  .text.tuh_hid_mount_cb
-                0x1000050c       0x4c CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
+                0x1000050c       0x1c CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
                 0x1000050c                tuh_hid_mount_cb
  .text.tuh_hid_umount_cb
-                0x10000558        0x4 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
-                0x10000558                tuh_hid_umount_cb
+                0x10000528        0x4 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
+                0x10000528                tuh_hid_umount_cb
  .text.tuh_hid_report_received_cb
-                0x1000055c       0x84 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
-                0x1000055c                tuh_hid_report_received_cb
- .text.USBInitialise
-                0x100005e0        0xc CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
-                0x100005e0                USBInitialise
- .text.USBSync  0x100005ec       0x10 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
-                0x100005ec                USBSync
+                0x1000052c       0xd0 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
+                0x1000052c                tuh_hid_report_received_cb
+ .text.KBDInitialise
+                0x100005fc       0x24 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
+                0x100005fc                KBDInitialise
+ .text.KBDSync  0x10000620       0x10 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
+                0x10000620                KBDSync
  .text.MEMInitialiseMemory
-                0x100005fc       0x34 CMakeFiles/firmware.dir/system/memory.c.obj
-                0x100005fc                MEMInitialiseMemory
+                0x10000630       0x34 CMakeFiles/firmware.dir/system/memory.c.obj
+                0x10000630                MEMInitialiseMemory
  .text.wdc65C02cpu_init
-                0x10000630       0x88 CMakeFiles/firmware.dir/system/processor.c.obj
-                0x10000630                wdc65C02cpu_init
+                0x10000664       0x88 CMakeFiles/firmware.dir/system/processor.c.obj
+                0x10000664                wdc65C02cpu_init
  .text.wdc65C02cpu_reset
-                0x100006b8       0x1c CMakeFiles/firmware.dir/system/processor.c.obj
-                0x100006b8                wdc65C02cpu_reset
+                0x100006ec       0x1c CMakeFiles/firmware.dir/system/processor.c.obj
+                0x100006ec                wdc65C02cpu_reset
  .text.wdc65C02cpu_get_address
-                0x100006d4       0x44 CMakeFiles/firmware.dir/system/processor.c.obj
-                0x100006d4                wdc65C02cpu_get_address
+                0x10000708       0x44 CMakeFiles/firmware.dir/system/processor.c.obj
+                0x10000708                wdc65C02cpu_get_address
  .text.wdc65C02cpu_get_data
-                0x10000718       0x28 CMakeFiles/firmware.dir/system/processor.c.obj
-                0x10000718                wdc65C02cpu_get_data
+                0x1000074c       0x28 CMakeFiles/firmware.dir/system/processor.c.obj
+                0x1000074c                wdc65C02cpu_get_data
  .text.CPUStart
-                0x10000740       0xcc CMakeFiles/firmware.dir/system/processor.c.obj
-                0x10000740                CPUStart
+                0x10000774       0xcc CMakeFiles/firmware.dir/system/processor.c.obj
+                0x10000774                CPUStart
  .text.GFXSetMode
-                0x1000080c       0x9c CMakeFiles/firmware.dir/interface/graphics.c.obj
-                0x1000080c                GFXSetMode
+                0x10000840       0x9c CMakeFiles/firmware.dir/interface/graphics.c.obj
+                0x10000840                GFXSetMode
  .text.CONScrollUp
-                0x100008a8       0x80 CMakeFiles/firmware.dir/interface/console.c.obj
-                0x100008a8                CONScrollUp
+                0x100008dc       0x80 CMakeFiles/firmware.dir/interface/console.c.obj
+                0x100008dc                CONScrollUp
  .text.CONWrite
-                0x10000928      0x1c4 CMakeFiles/firmware.dir/interface/console.c.obj
-                0x10000928                CONWrite
+                0x1000095c      0x1c4 CMakeFiles/firmware.dir/interface/console.c.obj
+                0x1000095c                CONWrite
  .text.CONInitialise
-                0x10000aec       0x28 CMakeFiles/firmware.dir/interface/console.c.obj
-                0x10000aec                CONInitialise
+                0x10000b20       0x28 CMakeFiles/firmware.dir/interface/console.c.obj
+                0x10000b20                CONInitialise
+ .text.CONWriteHex
+                0x10000b48       0x28 CMakeFiles/firmware.dir/interface/console.c.obj
+                0x10000b48                CONWriteHex
+ .text.KBDEvent
+                0x10000b70       0x20 CMakeFiles/firmware.dir/interface/keyboard.c.obj
+                0x10000b70                KBDEvent
  .text.set_sys_clock_pll
-                0x10000b14       0x78 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
-                0x10000b14                set_sys_clock_pll
+                0x10000b90       0x78 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
+                0x10000b90                set_sys_clock_pll
  .text.check_sys_clock_khz
-                0x10000b8c       0xc4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
-                0x10000b8c                check_sys_clock_khz
+                0x10000c08       0xc4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
+                0x10000c08                check_sys_clock_khz
  .text.gpio_set_function
-                0x10000c50       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
-                0x10000c50                gpio_set_function
+                0x10000ccc       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+                0x10000ccc                gpio_set_function
  .text.gpio_set_outover
-                0x10000c80       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
-                0x10000c80                gpio_set_outover
+                0x10000cfc       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+                0x10000cfc                gpio_set_outover
  .text.gpio_init
-                0x10000ca4       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
-                0x10000ca4                gpio_init
+                0x10000d20       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+                0x10000d20                gpio_init
  .text.gpio_init_mask
-                0x10000ce0       0x74 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
-                0x10000ce0                gpio_init_mask
+                0x10000d5c       0x74 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+                0x10000d5c                gpio_init_mask
  .text.running_on_fpga
-                0x10000d54       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
-                0x10000d54                running_on_fpga
+                0x10000dd0       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+                0x10000dd0                running_on_fpga
  .text.hw_claim_lock
-                0x10000d64       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
-                0x10000d64                hw_claim_lock
+                0x10000de0       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+                0x10000de0                hw_claim_lock
  .text.hw_claim_unlock
-                0x10000d7c       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
-                0x10000d7c                hw_claim_unlock
+                0x10000df8       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+                0x10000df8                hw_claim_unlock
  .text.hw_claim_or_assert
-                0x10000d90       0x44 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
-                0x10000d90                hw_claim_or_assert
+                0x10000e0c       0x44 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+                0x10000e0c                hw_claim_or_assert
  .text.hw_claim_unused_from_range
-                0x10000dd4       0x9c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
-                0x10000dd4                hw_claim_unused_from_range
+                0x10000e50       0x9c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+                0x10000e50                hw_claim_unused_from_range
  .text.spin_locks_reset
-                0x10000e70       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
-                0x10000e70                spin_locks_reset
+                0x10000eec       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x10000eec                spin_locks_reset
  .text.next_striped_spin_lock_num
-                0x10000e8c       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
-                0x10000e8c                next_striped_spin_lock_num
+                0x10000f08       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x10000f08                next_striped_spin_lock_num
  .text.spin_lock_claim_unused
-                0x10000ea4       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
-                0x10000ea4                spin_lock_claim_unused
+                0x10000f20       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x10000f20                spin_lock_claim_unused
  .text.irq_set_enabled
-                0x10000ec8       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10000ec8                irq_set_enabled
+                0x10000f44       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10000f44                irq_set_enabled
  .text.irq_is_enabled
-                0x10000eec       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10000eec                irq_is_enabled
+                0x10000f68       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10000f68                irq_is_enabled
  .text.irq_get_vtable_handler
-                0x10000f04       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10000f04                irq_get_vtable_handler
+                0x10000f80       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10000f80                irq_get_vtable_handler
  .text.irq_set_exclusive_handler
-                0x10000f14       0x54 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10000f14                irq_set_exclusive_handler
+                0x10000f90       0x54 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10000f90                irq_set_exclusive_handler
  .text.irq_add_shared_handler
-                0x10000f68      0x1f4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10000f68                irq_add_shared_handler
+                0x10000fe4      0x1f4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10000fe4                irq_add_shared_handler
  .text.irq_remove_handler
-                0x1000115c      0x1c4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x1000115c                irq_remove_handler
+                0x100011d8      0x1c4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x100011d8                irq_remove_handler
  .text.irq_add_tail_to_free_list
-                0x10001320       0xa4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10001320                irq_add_tail_to_free_list
+                0x1000139c       0xa4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x1000139c                irq_add_tail_to_free_list
  .text.irq_init_priorities
-                0x100013c4       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x100013c4                irq_init_priorities
+                0x10001440       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10001440                irq_init_priorities
  .text.lock_init
-                0x100013e8       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
-                0x100013e8                lock_init
+                0x10001464       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
+                0x10001464                lock_init
  .text.mutex_init
-                0x100013f8       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
-                0x100013f8                mutex_init
+                0x10001474       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
+                0x10001474                mutex_init
  .text.recursive_mutex_init
-                0x10001414       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
-                0x10001414                recursive_mutex_init
+                0x10001490       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
+                0x10001490                recursive_mutex_init
  .text.critical_section_init
-                0x10001430       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
-                0x10001430                critical_section_init
+                0x100014ac       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
+                0x100014ac                critical_section_init
  .text.timer_pool_entry_comparator
-                0x1000144c       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
-                0x1000144c                timer_pool_entry_comparator
+                0x100014c8       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x100014c8                timer_pool_entry_comparator
  .text.sleep_until_callback
-                0x10001480       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x100014fc       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
  .text.alarm_pool_cancel_alarm.part.0
-                0x100014b0       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x1000152c       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
  .text.add_alarm_under_lock
-                0x10001518      0x110 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x10001594      0x110 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
  .text.alarm_pool_alarm_callback
-                0x10001628      0x1c0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x100016a4      0x1c0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
  .text.alarm_pool_init_default
-                0x100017e8       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
-                0x100017e8                alarm_pool_init_default
+                0x10001864       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x10001864                alarm_pool_init_default
  .text.alarm_pool_add_alarm_at
-                0x10001854       0xf4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
-                0x10001854                alarm_pool_add_alarm_at
+                0x100018d0       0xf4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x100018d0                alarm_pool_add_alarm_at
  .text.sleep_until
-                0x10001948       0xc4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
-                0x10001948                sleep_until
+                0x100019c4       0xc4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x100019c4                sleep_until
  .text.sleep_us
-                0x10001a0c       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
-                0x10001a0c                sleep_us
+                0x10001a88       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x10001a88                sleep_us
  .text.sleep_ms
-                0x10001a34       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
-                0x10001a34                sleep_ms
+                0x10001ab0       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x10001ab0                sleep_ms
  .text.best_effort_wfe_or_timeout
-                0x10001a6c       0x60 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
-                0x10001a6c                best_effort_wfe_or_timeout
+                0x10001ae8       0x60 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x10001ae8                best_effort_wfe_or_timeout
  .text.hardware_alarm_irq_handler
-                0x10001acc       0xbc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10001b48       0xbc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  .text.hardware_alarm_claim
-                0x10001b88       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10001b88                hardware_alarm_claim
+                0x10001c04       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10001c04                hardware_alarm_claim
  .text.time_us_64
-                0x10001ba0       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10001ba0                time_us_64
+                0x10001c1c       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10001c1c                time_us_64
  .text.busy_wait_us
-                0x10001bb4       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10001bb4                busy_wait_us
+                0x10001c30       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10001c30                busy_wait_us
  .text.busy_wait_until
-                0x10001c1c       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10001c1c                busy_wait_until
+                0x10001c98       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10001c98                busy_wait_until
  .text.hardware_alarm_set_callback
-                0x10001c3c       0x8c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10001c3c                hardware_alarm_set_callback
+                0x10001cb8       0x8c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10001cb8                hardware_alarm_set_callback
  .text.hardware_alarm_set_target
-                0x10001cc8       0xd0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10001cc8                hardware_alarm_set_target
+                0x10001d44       0xd0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10001d44                hardware_alarm_set_target
  .text.hardware_alarm_cancel
-                0x10001d98       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10001d98                hardware_alarm_cancel
+                0x10001e14       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10001e14                hardware_alarm_cancel
  .text.ph_merge_nodes
-                0x10001dd4       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10001e50       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
  .text.ph_post_alloc_init
-                0x10001e2c       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
-                0x10001e2c                ph_post_alloc_init
+                0x10001ea8       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10001ea8                ph_post_alloc_init
  .text.ph_merge_two_pass
-                0x10001e68       0x48 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
-                0x10001e68                ph_merge_two_pass
+                0x10001ee4       0x48 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10001ee4                ph_merge_two_pass
  .text.ph_remove_any_head
-                0x10001eb0       0x54 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10001f2c       0x54 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
  .text.ph_remove_head
-                0x10001f04       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
-                0x10001f04                ph_remove_head
+                0x10001f80       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10001f80                ph_remove_head
  .text.ph_remove_and_free_node
-                0x10001f5c       0x78 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
-                0x10001f5c                ph_remove_and_free_node
+                0x10001fd8       0x78 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10001fd8                ph_remove_and_free_node
  .text.queue_init_with_spinlock
-                0x10001fd4       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj
-                0x10001fd4                queue_init_with_spinlock
+                0x10002050       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj
+                0x10002050                queue_init_with_spinlock
  .text.uart_write_lcr_bits_masked
-                0x10001ff8       0x70 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+                0x10002074       0x70 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
  .text.uart_set_baudrate
-                0x10002068       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
-                0x10002068                uart_set_baudrate
+                0x100020e4       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+                0x100020e4                uart_set_baudrate
  .text.uart_init
-                0x100020d0       0x90 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
-                0x100020d0                uart_init
+                0x1000214c       0x90 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+                0x1000214c                uart_init
  .text.clock_configure.part.0
-                0x10002160      0x10c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+                0x100021dc      0x10c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
  .text.clock_configure
-                0x1000226c       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
-                0x1000226c                clock_configure
+                0x100022e8       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+                0x100022e8                clock_configure
  .text.clocks_init
-                0x10002284       0xf8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
-                0x10002284                clocks_init
+                0x10002300       0xf8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+                0x10002300                clocks_init
  .text.clock_get_hz
-                0x1000237c        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
-                0x1000237c                clock_get_hz
+                0x100023f8        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+                0x100023f8                clock_get_hz
  .text.pll_init
-                0x10002388       0xa4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
-                0x10002388                pll_init
+                0x10002404       0xa4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
+                0x10002404                pll_init
  .text.vreg_set_voltage
-                0x1000242c       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
-                0x1000242c                vreg_set_voltage
+                0x100024a8       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
+                0x100024a8                vreg_set_voltage
  .text.watchdog_start_tick
-                0x10002448       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
-                0x10002448                watchdog_start_tick
+                0x100024c4       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
+                0x100024c4                watchdog_start_tick
  .text.xosc_init
-                0x10002458       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
-                0x10002458                xosc_init
+                0x100024d4       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+                0x100024d4                xosc_init
  .text.runtime_init
-                0x10002480       0xec CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x10002480                runtime_init
- .text._exit    0x1000256c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x1000256c                _exit
- .text._sbrk    0x10002570       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x10002570                _sbrk
- .text.exit     0x100025a4        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x100025a4                exit
- .text.panic    0x100025ac       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x100025ac                panic
+                0x100024fc       0xec CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x100024fc                runtime_init
+ .text._exit    0x100025e8        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x100025e8                _exit
+ .text._sbrk    0x100025ec       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x100025ec                _sbrk
+ .text.exit     0x10002620        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10002620                exit
+ .text.panic    0x10002628       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10002628                panic
  .text.hard_assertion_failure
-                0x100025dc        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x100025dc                hard_assertion_failure
- .text._out_null
-                0x100025e8        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._out_rev
-                0x100025ec       0xb0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._ntoa_format
-                0x1000269c      0x25c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._ntoa_long
-                0x100028f8       0xb8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._ntoa_long_long
-                0x100029b0       0xd4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._etoa    0x10002a84      0x410 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._ftoa    0x10002e94      0x3c0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10002658        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10002658                hard_assertion_failure
  .text._out_char
-                0x10003254       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._out_fct
-                0x10003264       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._vsnprintf
-                0x10003274      0x700 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text.vfctprintf
-                0x10003974       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
-                0x10003974                vfctprintf
+                0x10002664       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text.weak_raw_vprintf
-                0x10003994       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
-                0x10003994                weak_raw_vprintf
- .text          0x100039c4       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
- .text.ctzsi    0x100039d4        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
-                0x100039d4                __wrap___ctzsi2
+                0x10002674       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10002674                weak_raw_vprintf
+ .text          0x100026a4       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+ .text.ctzsi    0x100026b4        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+                0x100026b4                __wrap___ctzsi2
  .text.rom_func_lookup
-                0x100039e0       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
-                0x100039e0                rom_func_lookup
+                0x100026c0       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+                0x100026c0                rom_func_lookup
  .text.rom_data_lookup
-                0x100039f0       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
-                0x100039f0                rom_data_lookup
+                0x100026d0       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+                0x100026d0                rom_data_lookup
  .text.rom_funcs_lookup
-                0x10003a00       0x44 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
-                0x10003a00                rom_funcs_lookup
- .text.__wrap___aeabi_idiv
-                0x10003a44       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
-                0x10003a44                __wrap___aeabi_idivmod
-                0x10003a44                divmod_s32s32
-                0x10003a44                div_s32s32
-                0x10003a44                __wrap___aeabi_idiv
-                0x10003a4c                divmod_s32s32_unsafe
-                0x10003a78                divmod_s32s32_savestate
+                0x100026e0       0x44 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+                0x100026e0                rom_funcs_lookup
  .text.__wrap___aeabi_uidiv
-                0x10003a94       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
-                0x10003a94                __wrap___aeabi_uidiv
-                0x10003a94                __wrap___aeabi_uidivmod
-                0x10003a94                div_u32u32
-                0x10003a94                divmod_u32u32
-                0x10003a9c                divmod_u32u32_unsafe
-                0x10003ac4                divmod_u32u32_savestate
+                0x10002724       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+                0x10002724                __wrap___aeabi_uidiv
+                0x10002724                __wrap___aeabi_uidivmod
+                0x10002724                div_u32u32
+                0x10002724                divmod_u32u32
+                0x1000272c                divmod_u32u32_unsafe
+                0x10002754                divmod_u32u32_savestate
  .text.__wrap___aeabi_ldiv
-                0x10003ae0      0x424 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
-                0x10003ae0                div_s64s64
-                0x10003ae0                divmod_s64s64
-                0x10003ae0                __wrap___aeabi_ldivmod
-                0x10003b10                div_u64u64
-                0x10003b10                divmod_u64u64
-                0x10003b10                __wrap___aeabi_uldivmod
-                0x10003b20                divmod_u64u64_savestate
-                0x10003b40                divmod_s64s64_unsafe
-                0x10003bc8                divmod_u64u64_unsafe
- .text.__wrap___aeabi_darithmetic
-                0x10003f04       0x80 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10003f04                __wrap___aeabi_drsub
-                0x10003f0a                __wrap___aeabi_dsub
-                0x10003f1c                __wrap___aeabi_dadd
-                0x10003f2e                __wrap___aeabi_ddiv
-                0x10003f6a                __wrap___aeabi_dmul
- .text.__wrap___aeabi_cdcmple
-                0x10003f84       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10003f84                __wrap___aeabi_cdrcmple
-                0x10003f94                __wrap___aeabi_cdcmple
-                0x10003f94                __wrap___aeabi_cdcmpeq
- .text.__wrap___aeabi_dcmplt
-                0x10003ff0        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10003ff0                __wrap___aeabi_dcmplt
- .text.__wrap___aeabi_dcmpge
-                0x10003ffc       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10003ffc                __wrap___aeabi_dcmpge
- .text.__wrap___aeabi_dcmpgt
-                0x1000400c        0xa CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x1000400c                __wrap___aeabi_dcmpgt
- .text.__wrap___aeabi_dcmpun
-                0x10004016       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10004016                __wrap___aeabi_dcmpun
- *fill*         0x10004032        0x2 
- .text.__wrap___aeabi_i2d
-                0x10004034       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10004034                __wrap___aeabi_ui2d
-                0x1000403c                __wrap___aeabi_i2d
- .text.__wrap___aeabi_d2iz
-                0x1000406c       0x48 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x1000406c                __wrap___aeabi_d2iz
-                0x1000406c                double2int_z
- .text.__wrap___aeabi_d2uiz
-                0x100040b4       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x100040b4                double2uint
-                0x100040b4                __wrap___aeabi_d2uiz
+                0x10002770      0x424 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+                0x10002770                div_s64s64
+                0x10002770                divmod_s64s64
+                0x10002770                __wrap___aeabi_ldivmod
+                0x100027a0                div_u64u64
+                0x100027a0                divmod_u64u64
+                0x100027a0                __wrap___aeabi_uldivmod
+                0x100027b0                divmod_u64u64_savestate
+                0x100027d0                divmod_s64s64_unsafe
+                0x10002858                divmod_u64u64_unsafe
  .text.__aeabi_double_init
-                0x100040cc       0x64 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
-                0x100040cc                __aeabi_double_init
+                0x10002b94       0x64 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+                0x10002b94                __aeabi_double_init
  .text.double_table_shim_on_use_helper
-                0x10004130       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x10004130                double_table_shim_on_use_helper
- .text.__wrap___aeabi_dsub
-                0x1000415c       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x1000415c                drsub_shim
-                0x10004162                dsub_shim
- .text.dadd_shim
-                0x1000416c      0x15c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x1000416c                dadd_shim
- .text.dmul_shim
-                0x100042c8      0x15c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x100042c8                dmul_shim
- .text.ddiv_shim
-                0x10004424      0x1b0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x10004424                ddiv_shim
- .text.double2uint_shim
-                0x100045d4        0xe CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x100045d4                double2uint_shim
-                0x100045d6                double2ufix_shim
- *fill*         0x100045e2        0x2 
- .text.double2uint64_shim
-                0x100045e4       0x70 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x100045e4                double2uint64_shim
-                0x100045e6                double2ufix64_shim
-                0x10004606                d2fix_a
- .text.dunpacks
-                0x10004654       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x10004654                dunpacks
+                0x10002bf8       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x10002bf8                double_table_shim_on_use_helper
  .text.__aeabi_lmul
-                0x10004690       0x32 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
-                0x10004690                __wrap___aeabi_lmul
- *fill*         0x100046c2        0x2 
+                0x10002c24       0x32 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
+                0x10002c24                __wrap___aeabi_lmul
+ *fill*         0x10002c56        0x2 
  .text.__aeabi_float_init
-                0x100046c4       0x5c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
-                0x100046c4                __aeabi_float_init
+                0x10002c58       0x5c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+                0x10002c58                __aeabi_float_init
  .text.float_table_shim_on_use_helper
-                0x10004720       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
-                0x10004720                float_table_shim_on_use_helper
+                0x10002cb4       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
+                0x10002cb4                float_table_shim_on_use_helper
  .text.__wrap_malloc
-                0x1000474c       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
-                0x1000474c                __wrap_malloc
+                0x10002ce0       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+                0x10002ce0                __wrap_malloc
  .text.__wrap_calloc
-                0x10004788       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
-                0x10004788                __wrap_calloc
- .text          0x100047c8       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
-                0x100047c8                __aeabi_mem_init
- .text.memset   0x100047d8        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
-                0x100047d8                __wrap_memset
- .text.memcpy   0x100047e4        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
-                0x100047e4                __wrap___aeabi_memcpy
-                0x100047e4                __wrap_memcpy
+                0x10002d1c       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+                0x10002d1c                __wrap_calloc
+ .text          0x10002d5c       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+                0x10002d5c                __aeabi_mem_init
+ .text.memset   0x10002d6c        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+                0x10002d6c                __wrap_memset
+ .text.memcpy   0x10002d78        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+                0x10002d78                __wrap___aeabi_memcpy
+                0x10002d78                __wrap_memcpy
  .text.stdio_out_chars_no_crlf
-                0x100047f0       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10002d84       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.stdio_out_chars_crlf
-                0x10004800       0x94 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
- .text.stdio_stack_buffer_flush.part.0
-                0x10004894       0x48 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
- .text.stdio_buffered_printer
-                0x100048dc       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10002d94       0x94 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.stdio_put_string.isra.0
-                0x100048fc       0xd4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10002e28       0xd4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.__wrap_putchar
-                0x100049d0       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
-                0x100049d0                __wrap_putchar
+                0x10002efc       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10002efc                __wrap_putchar
  .text.__wrap_puts
-                0x100049ec       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
-                0x100049ec                __wrap_puts
+                0x10002f18       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10002f18                __wrap_puts
  .text.stdio_set_driver_enabled
-                0x10004a20       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
-                0x10004a20                stdio_set_driver_enabled
- .text.__wrap_vprintf
-                0x10004a50       0x88 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
-                0x10004a50                __wrap_vprintf
- .text.__wrap_printf
-                0x10004ad8       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
-                0x10004ad8                __wrap_printf
+                0x10002f4c       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10002f4c                stdio_set_driver_enabled
  .text.stdio_uart_out_chars
-                0x10004af0       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+                0x10002f7c       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
  .text.stdio_uart_in_chars
-                0x10004b3c       0x90 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
-                0x10004b3c                stdio_uart_in_chars
+                0x10002fc8       0x90 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+                0x10002fc8                stdio_uart_in_chars
  .text.on_uart_rx
-                0x10004bcc       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+                0x10003058       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
  .text.stdio_uart_set_chars_available_callback
-                0x10004bf4       0x8c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+                0x10003080       0x8c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
  .text.stdio_uart_init_full
-                0x10004c80       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
-                0x10004c80                stdio_uart_init_full
+                0x1000310c       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+                0x1000310c                stdio_uart_init_full
  .text.core1_trampoline
-                0x10004cbc        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+                0x10003148        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
  .text.core1_wrapper
-                0x10004cc0        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
-                0x10004cc0                core1_wrapper
+                0x1000314c        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+                0x1000314c                core1_wrapper
  .text.multicore_launch_core1_raw
-                0x10004ccc       0x84 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
-                0x10004ccc                multicore_launch_core1_raw
+                0x10003158       0x84 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+                0x10003158                multicore_launch_core1_raw
  .text.multicore_launch_core1
-                0x10004d50       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
-                0x10004d50                multicore_launch_core1
+                0x100031dc       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+                0x100031dc                multicore_launch_core1
  .text.dvi_init
-                0x10004da8      0x1a0 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
-                0x10004da8                dvi_init
+                0x10003234      0x1a0 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
+                0x10003234                dvi_init
  .text.dvi_register_irqs_this_core
-                0x10004f48       0xa4 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
-                0x10004f48                dvi_register_irqs_this_core
+                0x100033d4       0xa4 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
+                0x100033d4                dvi_register_irqs_this_core
  .text.dvi_start
-                0x10004fec       0xdc CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
-                0x10004fec                dvi_start
+                0x10003478       0xdc CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
+                0x10003478                dvi_start
  .text.dvi_serialiser_init
-                0x100050c8      0x18c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
-                0x100050c8                dvi_serialiser_init
+                0x10003554      0x18c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
+                0x10003554                dvi_serialiser_init
  .text.dvi_serialiser_enable
-                0x10005254       0x60 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
-                0x10005254                dvi_serialiser_enable
+                0x100036e0       0x60 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
+                0x100036e0                dvi_serialiser_enable
  .text.dvi_timing_state_init
-                0x100052b4        0x8 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
-                0x100052b4                dvi_timing_state_init
+                0x10003740        0x8 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
+                0x10003740                dvi_timing_state_init
  .text.dvi_setup_scanline_for_vblank
-                0x100052bc      0x11c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
-                0x100052bc                dvi_setup_scanline_for_vblank
+                0x10003748      0x11c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
+                0x10003748                dvi_setup_scanline_for_vblank
  .text.dvi_setup_scanline_for_active
-                0x100053d8      0x1b4 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
-                0x100053d8                dvi_setup_scanline_for_active
+                0x10003864      0x1b4 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
+                0x10003864                dvi_setup_scanline_for_active
  .text.dma_claim_unused_channel
-                0x1000558c       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
-                0x1000558c                dma_claim_unused_channel
+                0x10003a18       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+                0x10003a18                dma_claim_unused_channel
  .text.interp_save
-                0x100055b0       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
-                0x100055b0                interp_save
+                0x10003a3c       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
+                0x10003a3c                interp_save
  .text.interp_restore
-                0x100055d0       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
-                0x100055d0                interp_restore
+                0x10003a5c       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
+                0x10003a5c                interp_restore
  .text._pio_add_program_at_offset
-                0x100055f0       0xa0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10003a7c       0xa0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .text._pio_find_offset_for_program.isra.0
-                0x10005690       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10003b1c       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .text.pio_sm_claim
-                0x100056e0       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
-                0x100056e0                pio_sm_claim
+                0x10003b6c       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10003b6c                pio_sm_claim
  .text.pio_add_program
-                0x10005710       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
-                0x10005710                pio_add_program
+                0x10003b9c       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10003b9c                pio_add_program
  .text.pio_sm_set_pins_with_mask
-                0x1000574c       0xa8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
-                0x1000574c                pio_sm_set_pins_with_mask
+                0x10003bd8       0xa8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10003bd8                pio_sm_set_pins_with_mask
  .text.pio_sm_set_pindirs_with_mask
-                0x100057f4       0xa8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
-                0x100057f4                pio_sm_set_pindirs_with_mask
+                0x10003c80       0xa8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10003c80                pio_sm_set_pindirs_with_mask
  .text.pio_sm_init
-                0x1000589c       0x98 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
-                0x1000589c                pio_sm_init
+                0x10003d28       0x98 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10003d28                pio_sm_init
  .text._hw_endpoint_init
-                0x10005934       0xb0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10003dc0       0xb0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .text.hcd_rp2040_irq
-                0x100059e4      0x260 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10003e70      0x260 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .text.hcd_init
-                0x10005c44       0x54 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005c44                hcd_init
+                0x100040d0       0x54 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x100040d0                hcd_init
  .text.hcd_port_reset
-                0x10005c98        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005c98                hcd_port_reset
+                0x10004124        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10004124                hcd_port_reset
  .text.hcd_port_reset_end
-                0x10005c9c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005c9c                hcd_port_reset_end
+                0x10004128        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10004128                hcd_port_reset_end
  .text.hcd_port_connect_status
-                0x10005ca0       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005ca0                hcd_port_connect_status
+                0x1000412c       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x1000412c                hcd_port_connect_status
  .text.hcd_port_speed_get
-                0x10005cb8       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005cb8                hcd_port_speed_get
+                0x10004144       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10004144                hcd_port_speed_get
  .text.hcd_device_close
-                0x10005cdc       0x78 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005cdc                hcd_device_close
+                0x10004168       0x78 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10004168                hcd_device_close
  .text.hcd_int_enable
-                0x10005d54        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005d54                hcd_int_enable
+                0x100041e0        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x100041e0                hcd_int_enable
  .text.hcd_edpt_open
-                0x10005d60       0xa4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005d60                hcd_edpt_open
+                0x100041ec       0xa4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x100041ec                hcd_edpt_open
  .text.hcd_edpt_xfer
-                0x10005e04       0xf8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005e04                hcd_edpt_xfer
+                0x10004290       0xf8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10004290                hcd_edpt_xfer
  .text.hcd_setup_send
-                0x10005efc       0x98 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10005efc                hcd_setup_send
+                0x10004388       0x98 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10004388                hcd_setup_send
  .text.prepare_ep_buffer
-                0x10005f94       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10004420       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .text._hw_endpoint_buffer_control_update32.part.0.isra.0
-                0x10006000       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x1000448c       0x1c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .text.rp2040_usb_init
-                0x1000601c       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-                0x1000601c                rp2040_usb_init
+                0x100044a8       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x100044a8                rp2040_usb_init
  .text.hw_endpoint_reset_transfer
-                0x10006068        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-                0x10006068                hw_endpoint_reset_transfer
+                0x100044f4        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x100044f4                hw_endpoint_reset_transfer
  .text.hw_endpoint_start_next_buffer
-                0x10006074       0x84 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-                0x10006074                hw_endpoint_start_next_buffer
+                0x10004500       0x84 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10004500                hw_endpoint_start_next_buffer
  .text.hw_endpoint_xfer_start
-                0x100060f8       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-                0x100060f8                hw_endpoint_xfer_start
+                0x10004584       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10004584                hw_endpoint_xfer_start
  .text.hw_endpoint_xfer_continue
-                0x1000610c       0xbc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-                0x1000610c                hw_endpoint_xfer_continue
+                0x10004598       0xbc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10004598                hw_endpoint_xfer_continue
  .text._control_blocking_complete_cb
-                0x100061c8        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10004654        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text._xfer_complete
-                0x100061d0       0x64 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x1000465c       0x64 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.process_device_unplugged
-                0x10006234       0xf8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x100046c0       0xf8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.usbh_control_xfer_cb.isra.0
-                0x1000632c       0xb4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x100047b8       0xb4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.tuh_speed_get
-                0x100063e0       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x100063e0                tuh_speed_get
+                0x1000486c       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x1000486c                tuh_speed_get
  .text.tuh_inited
-                0x10006404       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006404                tuh_inited
+                0x10004890       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10004890                tuh_inited
  .text.tuh_init
-                0x10006418       0xc4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006418                tuh_init
+                0x100048a4       0xc4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x100048a4                tuh_init
  .text.tuh_control_xfer
-                0x100064dc       0xec CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x100064dc                tuh_control_xfer
+                0x10004968       0xec CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10004968                tuh_control_xfer
  .text.process_enumeration.part.0
-                0x100065c8      0x42c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10004a54      0x42c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.process_enumeration
-                0x100069f4       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10004e80       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.tuh_task_ext.part.0
-                0x10006a34      0x18c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10004ec0      0x18c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.tuh_task_ext
-                0x10006bc0       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006bc0                tuh_task_ext
+                0x1000504c       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x1000504c                tuh_task_ext
  .text.usbh_get_rhport
-                0x10006bd0       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006bd0                usbh_get_rhport
+                0x1000505c       0x24 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x1000505c                usbh_get_rhport
  .text.usbh_get_enum_buf
-                0x10006bf4        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006bf4                usbh_get_enum_buf
+                0x10005080        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10005080                usbh_get_enum_buf
  .text.usbh_edpt_claim
-                0x10006bfc       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006bfc                usbh_edpt_claim
+                0x10005088       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10005088                usbh_edpt_claim
  .text.usbh_edpt_release
-                0x10006c38       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006c38                usbh_edpt_release
+                0x100050c4       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x100050c4                usbh_edpt_release
  .text.usbh_edpt_xfer_with_callback
-                0x10006c74       0x74 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006c74                usbh_edpt_xfer_with_callback
+                0x10005100       0x74 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10005100                usbh_edpt_xfer_with_callback
  .text.tuh_edpt_open
-                0x10006ce8       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006ce8                tuh_edpt_open
+                0x10005174       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10005174                tuh_edpt_open
  .text.tuh_descriptor_get_hid_report
-                0x10006d38       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006d38                tuh_descriptor_get_hid_report
+                0x100051c4       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x100051c4                tuh_descriptor_get_hid_report
  .text.usbh_driver_set_config_complete
-                0x10006d90       0x80 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10006d90                usbh_driver_set_config_complete
+                0x1000521c       0x80 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x1000521c                usbh_driver_set_config_complete
  .text.connection_port_reset_complete
-                0x10006e10       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x1000529c       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .text.hub_clear_feature_complete_stub
-                0x10006e44       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x100052d0       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .text.config_set_port_power
-                0x10006e74       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x10005300       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .text.config_port_power_complete
-                0x10006ecc       0x90 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x10005358       0x90 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .text.connection_clear_conn_change_complete
-                0x10006f5c       0x98 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x100053e8       0x98 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .text.hub_get_status_complete
-                0x10006ff4       0x90 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x10005480       0x90 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .text.hub_port_get_status_complete
-                0x10007084      0x19c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x10005510      0x19c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .text.hub_port_clear_feature
-                0x10007220       0x48 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
-                0x10007220                hub_port_clear_feature
+                0x100056ac       0x48 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x100056ac                hub_port_clear_feature
  .text.hub_port_get_status
-                0x10007268       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
-                0x10007268                hub_port_get_status
+                0x100056f4       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x100056f4                hub_port_get_status
  .text.hub_init
-                0x100072b4       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
-                0x100072b4                hub_init
+                0x10005740       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x10005740                hub_init
  .text.hub_open
-                0x100072c8       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
-                0x100072c8                hub_open
+                0x10005754       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x10005754                hub_open
  .text.hub_close
-                0x10007320       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
-                0x10007320                hub_close
+                0x100057ac       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x100057ac                hub_close
  .text.hub_edpt_status_xfer
-                0x10007348       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
-                0x10007348                hub_edpt_status_xfer
+                0x100057d4       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x100057d4                hub_edpt_status_xfer
  .text.hub_set_config
-                0x10007374       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
-                0x10007374                hub_set_config
+                0x10005800       0x58 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x10005800                hub_set_config
  .text.hub_xfer_cb
-                0x100073cc      0x124 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
-                0x100073cc                hub_xfer_cb
+                0x10005858      0x124 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x10005858                hub_xfer_cb
  .text.get_instance_id_by_itfnum
-                0x100074f0       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x1000597c       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
  .text.process_set_config
-                0x10007528      0x184 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x100059b4      0x184 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
  .text.tuh_hid_interface_protocol
-                0x100076ac       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x100076ac                tuh_hid_interface_protocol
+                0x10005b38       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10005b38                tuh_hid_interface_protocol
  .text.tuh_hid_receive_report
-                0x100076cc       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x100076cc                tuh_hid_receive_report
+                0x10005b58       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10005b58                tuh_hid_receive_report
  .text.hidh_init
-                0x10007738       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10007738                hidh_init
+                0x10005bc4       0x18 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10005bc4                hidh_init
  .text.hidh_xfer_cb
-                0x10007750       0x7c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10007750                hidh_xfer_cb
+                0x10005bdc       0x7c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10005bdc                hidh_xfer_cb
  .text.hidh_close
-                0x100077cc       0x5c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x100077cc                hidh_close
+                0x10005c58       0x5c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10005c58                hidh_close
  .text.hidh_open
-                0x10007828      0x134 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10007828                hidh_open
+                0x10005cb4      0x134 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10005cb4                hidh_open
  .text.hidh_set_config
-                0x1000795c       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x1000795c                hidh_set_config
+                0x10005de8       0x20 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10005de8                hidh_set_config
  .text.config_read_capacity_complete
-                0x1000797c       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x10005e08       0x6c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
  .text.tuh_msc_scsi_command
-                0x100079e8       0x64 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
-                0x100079e8                tuh_msc_scsi_command
+                0x10005e74       0x64 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x10005e74                tuh_msc_scsi_command
  .text.config_get_maxlun_complete
-                0x10007a4c       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x10005ed8       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
  .text.config_request_sense_complete
-                0x10007ab4       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x10005f40       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
  .text.tuh_msc_read_capacity
-                0x10007b1c       0x70 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
-                0x10007b1c                tuh_msc_read_capacity
+                0x10005fa8       0x70 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x10005fa8                tuh_msc_read_capacity
  .text.tuh_msc_request_sense
-                0x10007b8c       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
-                0x10007b8c                tuh_msc_request_sense
+                0x10006018       0x68 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x10006018                tuh_msc_request_sense
  .text.config_test_unit_ready_complete
-                0x10007bf4       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x10006080       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
  .text.msch_init
-                0x10007c30       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
-                0x10007c30                msch_init
+                0x100060bc       0x14 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x100060bc                msch_init
  .text.msch_close
-                0x10007c44       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
-                0x10007c44                msch_close
+                0x100060d0       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x100060d0                msch_close
  .text.msch_xfer_cb
-                0x10007c7c       0xe0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
-                0x10007c7c                msch_xfer_cb
+                0x10006108       0xe0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x10006108                msch_xfer_cb
  .text.msch_open
-                0x10007d5c       0xbc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
-                0x10007d5c                msch_open
+                0x100061e8       0xbc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x100061e8                msch_open
  .text.msch_set_config
-                0x10007e18       0x5c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
-                0x10007e18                msch_set_config
+                0x100062a4       0x5c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x100062a4                msch_set_config
  .text.tusb_init
-                0x10007e74        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x10007e74                tusb_init
+                0x10006300        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x10006300                tusb_init
  .text.tusb_inited
-                0x10007e80        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x10007e80                tusb_inited
+                0x1000630c        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x1000630c                tusb_inited
  .text.tu_edpt_claim
-                0x10007e88       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x10007e88                tu_edpt_claim
+                0x10006314       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x10006314                tu_edpt_claim
  .text.tu_edpt_release
-                0x10007ed8       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x10007ed8                tu_edpt_release
+                0x10006364       0x38 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x10006364                tu_edpt_release
  .text.tu_edpt_validate
-                0x10007f10       0x7c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x10007f10                tu_edpt_validate
+                0x1000639c       0x7c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x1000639c                tu_edpt_validate
  .text.tu_edpt_bind_driver
-                0x10007f8c       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x10007f8c                tu_edpt_bind_driver
+                0x10006418       0x28 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x10006418                tu_edpt_bind_driver
  .text.tu_desc_get_interface_total_len
-                0x10007fb4       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x10007fb4                tu_desc_get_interface_total_len
+                0x10006440       0x4c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x10006440                tu_desc_get_interface_total_len
  .text._tu_fifo_peek
-                0x10008000       0x54 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+                0x1000648c       0x54 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
  .text.tu_fifo_read
-                0x10008054       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
-                0x10008054                tu_fifo_read
+                0x100064e0       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+                0x100064e0                tu_fifo_read
  .text.tu_fifo_write
-                0x100080a4       0xa8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
-                0x100080a4                tu_fifo_write
+                0x10006530       0xa8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+                0x10006530                tu_fifo_write
  .text.tu_fifo_clear
-                0x1000814c       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
-                0x1000814c                tu_fifo_clear
+                0x100065d8       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+                0x100065d8                tu_fifo_clear
  .text.board_init
-                0x1000818c       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
-                0x1000818c                board_init
- .text.atexit   0x100081bc       0x10 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o)
-                0x100081bc                atexit
- .text.calloc   0x100081cc       0x18 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-calloc.o)
-                0x100081cc                calloc
+                0x10006618       0x30 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10006618                board_init
+ .text.atexit   0x10006648       0x10 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o)
+                0x10006648                atexit
+ .text.calloc   0x10006658       0x18 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-calloc.o)
+                0x10006658                calloc
  .text._calloc_r
-                0x100081e4       0xa8 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-callocr.o)
-                0x100081e4                _calloc_r
- .text.malloc   0x1000828c       0x14 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-malloc.o)
-                0x1000828c                malloc
+                0x10006670       0xa8 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-callocr.o)
+                0x10006670                _calloc_r
+ .text.malloc   0x10006718       0x14 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-malloc.o)
+                0x10006718                malloc
  .text._malloc_r
-                0x100082a0      0x5a4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o)
-                0x100082a0                _malloc_r
+                0x1000672c      0x5a4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o)
+                0x1000672c                _malloc_r
  .text.__malloc_lock
-                0x10008844       0x10 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o)
-                0x10008844                __malloc_lock
+                0x10006cd0       0x10 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o)
+                0x10006cd0                __malloc_lock
  .text.__malloc_unlock
-                0x10008854       0x10 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o)
-                0x10008854                __malloc_unlock
- .text.memmove  0x10008864       0xb0 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
-                0x10008864                memmove
- .text._sbrk_r  0x10008914       0x24 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sbrkr.o)
-                0x10008914                _sbrk_r
- .text.__errno  0x10008938        0xc /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-errno.o)
-                0x10008938                __errno
+                0x10006ce0       0x10 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o)
+                0x10006ce0                __malloc_unlock
+ .text.memmove  0x10006cf0       0xb0 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+                0x10006cf0                memmove
+ .text._sbrk_r  0x10006da0       0x24 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sbrkr.o)
+                0x10006da0                _sbrk_r
+ .text.__errno  0x10006dc4        0xc /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-errno.o)
+                0x10006dc4                __errno
  .text.__libc_fini_array
-                0x10008944       0x28 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fini.o)
-                0x10008944                __libc_fini_array
+                0x10006dd0       0x28 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fini.o)
+                0x10006dd0                __libc_fini_array
  .text.__retarget_lock_acquire_recursive
-                0x1000896c        0x4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o)
-                0x1000896c                __retarget_lock_acquire_recursive
+                0x10006df8        0x4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o)
+                0x10006df8                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x10008970        0x4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o)
-                0x10008970                __retarget_lock_release_recursive
- .text.sysconf  0x10008974       0x1c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sysconf.o)
-                0x10008974                sysconf
- .text.strlen   0x10008990       0x5c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strlen-stub.o)
-                0x10008990                strlen
+                0x10006dfc        0x4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o)
+                0x10006dfc                __retarget_lock_release_recursive
+ .text.sysconf  0x10006e00       0x1c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sysconf.o)
+                0x10006e00                sysconf
+ .text.strlen   0x10006e1c       0x5c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strlen-stub.o)
+                0x10006e1c                strlen
  .text.__register_exitproc
-                0x100089ec       0xa8 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o)
-                0x100089ec                __register_exitproc
+                0x10006e78       0xa8 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o)
+                0x10006e78                __register_exitproc
  .text.startup.register_fini
-                0x10008a94       0x18 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o)
+                0x10006f20       0x18 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o)
  .text._malloc_trim_r
-                0x10008aac       0xb4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o)
-                0x10008aac                _malloc_trim_r
- .text._free_r  0x10008b60      0x1d4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o)
-                0x10008b60                _free_r
+                0x10006f38       0xb4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o)
+                0x10006f38                _malloc_trim_r
+ .text._free_r  0x10006fec      0x1d4 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o)
+                0x10006fec                _free_r
  *(.fini)
- .fini          0x10008d34        0x4 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crti.o
-                0x10008d34                _fini
- .fini.__stub   0x10008d38       0x70 linker stubs
+ .fini          0x100071c0        0x4 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crti.o
+                0x100071c0                _fini
+ *fill*         0x100071c4        0x4 
+ .fini.__stub   0x100071c8       0x70 linker stubs
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -2617,154 +2593,133 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.eh_frame*)
- .eh_frame      0x10008da8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
-                0x10008da8                        . = ALIGN (0x4)
+ .eh_frame      0x10007238        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
+                0x10007238                        . = ALIGN (0x4)
 
-.glue_7         0x10008da8        0x0
- .glue_7        0x10008da8        0x0 linker stubs
+.glue_7         0x10007238        0x0
+ .glue_7        0x10007238        0x0 linker stubs
 
-.glue_7t        0x10008da8        0x0
- .glue_7t       0x10008da8        0x0 linker stubs
+.glue_7t        0x10007238        0x0
+ .glue_7t       0x10007238        0x0 linker stubs
 
-.vfp11_veneer   0x10008da8        0x0
- .vfp11_veneer  0x10008da8        0x0 linker stubs
+.vfp11_veneer   0x10007238        0x0
+ .vfp11_veneer  0x10007238        0x0 linker stubs
 
-.v4_bx          0x10008da8        0x0
- .v4_bx         0x10008da8        0x0 linker stubs
+.v4_bx          0x10007238        0x0
+ .v4_bx         0x10007238        0x0 linker stubs
 
-.iplt           0x10008da8        0x0
- .iplt          0x10008da8        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
+.iplt           0x10007238        0x0
+ .iplt          0x10007238        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
 
-.rodata         0x10008da8      0xa88
+.rodata         0x10007238      0x75c
  *(EXCLUDE_FILE(*libm.a: *libc.a:*lib_a-mem*.o *libgcc.a:) .rodata*)
  .rodata.main.str1.4
-                0x10008da8      0x2b8 CMakeFiles/firmware.dir/main.c.obj
+                0x10007238      0x26c CMakeFiles/firmware.dir/main.c.obj
                                  0x18 (size before relaxing)
  .rodata.DVIStart.str1.4
-                0x10009060       0x32 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
- .rodata.tuh_hid_mount_cb.str1.4
-                0x10009060       0x33 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
- .rodata.tuh_hid_report_received_cb.str1.4
-                0x10009060       0x11 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
- .rodata.hid2asciiShift
-                0x10009060       0x65 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
-                0x10009060                hid2asciiShift
- *fill*         0x100090c5        0x3 
- .rodata.hid2asciiCtrl
-                0x100090c8       0x1e CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
-                0x100090c8                hid2asciiCtrl
- *fill*         0x100090e6        0x2 
- .rodata.hid2ascii
-                0x100090e8       0x65 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
-                0x100090e8                hid2ascii
- *fill*         0x1000914d        0x3 
+                0x100074a4       0x32 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
  .rodata.kernel_bin
-                0x10009150      0x400 CMakeFiles/firmware.dir/system/memory.c.obj
-                0x10009150                kernel_bin
+                0x100074a4      0x400 CMakeFiles/firmware.dir/system/memory.c.obj
+                0x100074a4                kernel_bin
  .rodata.default_palette
-                0x10009550       0x30 CMakeFiles/firmware.dir/interface/graphics.c.obj
-                0x10009550                default_palette
+                0x100078a4       0x30 CMakeFiles/firmware.dir/interface/graphics.c.obj
+                0x100078a4                default_palette
+ .rodata.CONWriteHex.str1.4
+                0x100078d4       0x11 CMakeFiles/firmware.dir/interface/console.c.obj
  .rodata.spin_lock_claim_unused.str1.4
-                0x10009580       0x1b CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x100078d4       0x1b CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
  .rodata.hardware_alarm_claim.str1.4
-                0x10009580       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x100078d4       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  .rodata.panic.str1.4
-                0x10009580       0x12 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x100078d4       0x12 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
  .rodata.hard_assertion_failure.str1.4
-                0x10009580        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
- .rodata._ftoa.str1.4
-                0x10009580       0x15 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .rodata._vsnprintf
-                0x10009580      0x19c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- *fill*         0x1000971c        0x4 
- .rodata.pow10.0
-                0x10009720       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x100078d4        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
  .rodata.__wrap_malloc.str1.4
-                0x10009770        0xe CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+                0x100078d4        0xe CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
  .rodata.str1.4
-                0x10009770       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x100078d4       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.__bi_81
-                0x10009770        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x100078d4        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.__bi_75
-                0x1000977c        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x100078e0        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.__bi_44
-                0x10009788        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x100078ec        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.crlf_str.0
-                0x10009794        0x2 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x100078f8        0x2 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .rodata.str1.4
-                0x10009796       0x1d CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
+                0x100078fa       0x1d CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
  .rodata.dvi_init.str1.4
-                0x10009796       0x1e CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
- *fill*         0x10009796        0x2 
+                0x100078fa       0x1e CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
+ *fill*         0x100078fa        0x2 
  .rodata.dvi_serialiser_program
-                0x10009798        0x6 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
- *fill*         0x1000979e        0x2 
+                0x100078fc        0x6 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
+ *fill*         0x10007902        0x2 
  .rodata.dvi_serialiser_program_instructions
-                0x100097a0        0x4 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
+                0x10007904        0x4 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
  .rodata.dma_claim_unused_channel.str1.4
-                0x100097a4       0x1e CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+                0x10007908       0x1e CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
  .rodata._pio_add_program_at_offset.str1.4
-                0x100097a4       0x11 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10007908       0x11 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .rodata.pio_sm_claim.str1.4
-                0x100097a4       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10007908       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .rodata._hw_endpoint_init.str1.4
-                0x100097a4        0xf CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10007908        0xf CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .rodata.hcd_rp2040_irq.str1.4
-                0x100097a4       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10007908       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .rodata._hw_endpoint_buffer_control_update32.part.0.isra.0.str1.4
-                0x100097a4       0x1f CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10007908       0x1f CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .rodata.hw_endpoint_xfer_continue.str1.4
-                0x100097a4       0x29 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10007908       0x29 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .rodata.str1.4
-                0x100097a4        0x7 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10007908        0x7 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .rodata.process_enumeration.part.0
-                0x100097a4       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007908       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .rodata.usbh_class_drivers
-                0x100097d8       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
- .rodata        0x10009814        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x1000793c       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+ .rodata        0x10007978        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .rodata.str1.4
-                0x1000981c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10007980        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .rodata.__bi_142.0
-                0x1000981c        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10007980        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .rodata.__bi_152.1
-                0x10009828        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
-                0x10009830                        . = ALIGN (0x4)
+                0x1000798c        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10007994                        . = ALIGN (0x4)
  *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.flashdata*)))
-                0x10009830                        . = ALIGN (0x4)
+                0x10007994                        . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x10009830                        __exidx_start = .
+                0x10007994                        __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x10009830                        __exidx_end = .
-                0x10009830                        . = ALIGN (0x4)
-                0x10009830                        __binary_info_start = .
+                0x10007994                        __exidx_end = .
+                0x10007994                        . = ALIGN (0x4)
+                0x10007994                        __binary_info_start = .
 
-.binary_info    0x10009830       0x24
+.binary_info    0x10007994       0x24
  *(.binary_info.keep.*)
  .binary_info.keep.__bi_ptr81
-                0x10009830        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10007994        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr75
-                0x10009834        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10007998        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr50
-                0x10009838        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1000799c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr44
-                0x1000983c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x100079a0        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr38
-                0x10009840        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x100079a4        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr30
-                0x10009844        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x100079a8        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr22
-                0x10009848        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x100079ac        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr152
-                0x1000984c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x100079b0        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .binary_info.keep.__bi_ptr142
-                0x10009850        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x100079b4        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  *(.binary_info.*)
-                0x10009854                        __binary_info_end = .
-                0x10009854                        . = ALIGN (0x4)
+                0x100079b8                        __binary_info_end = .
+                0x100079b8                        . = ALIGN (0x4)
 
 .ram_vector_table
                 0x20000000       0xc0
@@ -2773,7 +2728,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x20000000       0xc0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
                 0x20000000                ram_vector_table
 
-.data           0x200000c0     0x1624 load address 0x10009854
+.data           0x200000c0     0x1624 load address 0x100079b8
                 0x200000c0                        __data_start__ = .
  *(vtable)
  *(.time_critical*)
@@ -2929,17 +2884,17 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  *(.jcr)
                 0x200016e4                        . = ALIGN (0x4)
                 0x200016e4                        __data_end__ = .
-                0x10009854                        __etext = LOADADDR (.data)
+                0x100079b8                        __etext = LOADADDR (.data)
 
-.igot.plt       0x200016e4        0x0 load address 0x1000ae78
+.igot.plt       0x200016e4        0x0 load address 0x10008fdc
  .igot.plt      0x200016e4        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
 
 .uninitialized_data
-                0x200016e4        0x0 load address 0x1000ae78
+                0x200016e4        0x0 load address 0x10008fdc
                 0x200016e4                        . = ALIGN (0x4)
  *(.uninitialized_data*)
 
-.scratch_x      0x20040000      0x164 load address 0x1000ae78
+.scratch_x      0x20040000      0x164 load address 0x10008fdc
                 0x20040000                        __scratch_x_start__ = .
  *(.scratch_x.*)
  .scratch_x.tmds_encode_loop_16bpp
@@ -2952,19 +2907,19 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x20040064      0x100 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj
                 0x20040164                        . = ALIGN (0x4)
                 0x20040164                        __scratch_x_end__ = .
-                0x1000ae78                        __scratch_x_source__ = LOADADDR (.scratch_x)
+                0x10008fdc                        __scratch_x_source__ = LOADADDR (.scratch_x)
 
-.rel.dyn        0x20040164        0x0 load address 0x1000afdc
+.rel.dyn        0x20040164        0x0 load address 0x10009140
  .rel.iplt      0x20040164        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
 
-.scratch_y      0x20041000        0x0 load address 0x1000afdc
+.scratch_y      0x20041000        0x0 load address 0x10009140
                 0x20041000                        __scratch_y_start__ = .
  *(.scratch_y.*)
                 0x20041000                        . = ALIGN (0x4)
                 0x20041000                        __scratch_y_end__ = .
-                0x1000afdc                        __scratch_y_source__ = LOADADDR (.scratch_y)
+                0x10009140                        __scratch_y_source__ = LOADADDR (.scratch_y)
 
-.bss            0x200016e8    0x25998
+.bss            0x200016e8    0x25a38
                 0x200016e8                        . = ALIGN (0x4)
                 0x200016e8                        __bss_start__ = .
  *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.bss*)))
@@ -3068,80 +3023,77 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  .bss.heap_end.0
                 0x20026c00        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
  .bss.hub_data  0x20026c04        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+ .bss.lastReport
+                0x20026c10       0xa4 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
  .bss.lazy_vsnprintf
-                0x20026c10        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .bss.object.0  0x20026c14       0x18 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
- .bss.palette   0x20026c2c      0x200 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
-                0x20026c2c                palette
- .bss.pools     0x20026e2c       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x20026cb4        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .bss.object.0  0x20026cb8       0x18 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
+ .bss.palette   0x20026cd0      0x200 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
+                0x20026cd0                palette
+ .bss.pools     0x20026ed0       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
  .bss.screenMemory
-                0x20026e3c        0x4 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
-                0x20026e3c                screenMemory
- .bss.sd_table  0x20026e40      0x100 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
-                0x20026e40                sd_table
+                0x20026ee0        0x4 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
+                0x20026ee0                screenMemory
+ .bss.sd_table  0x20026ee4      0x100 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+                0x20026ee4                sd_table
  .bss.sf_clz_func
-                0x20026f40        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
-                0x20026f40                sf_clz_func
- .bss.sf_table  0x20026f44      0x100 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
-                0x20026f44                sf_table
+                0x20026fe4        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+                0x20026fe4                sf_clz_func
+ .bss.sf_table  0x20026fe8      0x100 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+                0x20026fe8                sf_table
  .bss.sleep_notifier
-                0x20027044        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x200270e8        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
  .bss.target_hi
-                0x20027048       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x200270ec       0x10 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  .bss.uart_char_to_line_feed
-                0x20027058        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
-                0x20027058                uart_char_to_line_feed
+                0x200270fc        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+                0x200270fc                uart_char_to_line_feed
  .bss.uart_inst
-                0x2002705c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x20027100        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .bss.uart_instance
-                0x20027060        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
- .bss._claimed  0x20027064        0x2 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
- .bss.addr      0x20027066        0x2 CMakeFiles/firmware.dir/system/processor.c.obj
-                0x20027066                addr
- .bss.backCol   0x20027068        0x2 CMakeFiles/firmware.dir/interface/console.c.obj
-                0x20027068                backCol
+                0x20027104        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+ .bss._claimed  0x20027108        0x2 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+ .bss.addr      0x2002710a        0x2 CMakeFiles/firmware.dir/system/processor.c.obj
+                0x2002710a                addr
+ .bss.backCol   0x2002710c        0x2 CMakeFiles/firmware.dir/interface/console.c.obj
+                0x2002710c                backCol
  .bss.frameCounter
-                0x2002706a        0x2 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
-                0x2002706a                frameCounter
- .bss.iCount    0x2002706c        0x2 CMakeFiles/firmware.dir/system/processor.c.obj
-                0x2002706c                iCount
+                0x2002710e        0x2 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
+                0x2002710e                frameCounter
+ .bss.iCount    0x20027110        0x2 CMakeFiles/firmware.dir/system/processor.c.obj
+                0x20027110                iCount
  .bss.lineCounter
-                0x2002706e        0x2 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
-                0x2002706e                lineCounter
- .bss.xCursor   0x20027070        0x2 CMakeFiles/firmware.dir/interface/console.c.obj
-                0x20027070                xCursor
- .bss.yCursor   0x20027072        0x2 CMakeFiles/firmware.dir/interface/console.c.obj
-                0x20027072                yCursor
- .bss.claimed   0x20027074        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
- .bss.claimed   0x20027075        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
- .bss.data      0x20027076        0x1 CMakeFiles/firmware.dir/system/processor.c.obj
-                0x20027076                data
+                0x20027112        0x2 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
+                0x20027112                lineCounter
+ .bss.xCursor   0x20027114        0x2 CMakeFiles/firmware.dir/interface/console.c.obj
+                0x20027114                xCursor
+ .bss.yCursor   0x20027116        0x2 CMakeFiles/firmware.dir/interface/console.c.obj
+                0x20027116                yCursor
+ .bss.claimed   0x20027118        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+ .bss.claimed   0x20027119        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+ .bss.data      0x2002711a        0x1 CMakeFiles/firmware.dir/system/processor.c.obj
+                0x2002711a                data
  .bss.failed_count.0
-                0x20027077        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x2002711b        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .bss.irq_hander_chain_free_slot_head
-                0x20027078        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x2002711c        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
  .bss.isInitialised
-                0x20027079        0x1 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
-                0x20027079                isInitialised
- .bss.kbd_addr  0x2002707a        0x1 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
-                0x2002707a                kbd_addr
- .bss.kbd_inst  0x2002707b        0x1 CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
-                0x2002707b                kbd_inst
- .bss.rw        0x2002707c        0x1 CMakeFiles/firmware.dir/system/processor.c.obj
-                0x2002707c                rw
+                0x2002711d        0x1 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
+                0x2002711d                isInitialised
+ .bss.rw        0x2002711e        0x1 CMakeFiles/firmware.dir/system/processor.c.obj
+                0x2002711e                rw
  .bss.timer_callbacks_pending
-                0x2002707d        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x2002711f        0x1 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  *(COMMON)
-                0x20027080                        . = ALIGN (0x4)
- *fill*         0x2002707e        0x2 
-                0x20027080                        __bss_end__ = .
+                0x20027120                        . = ALIGN (0x4)
+                0x20027120                        __bss_end__ = .
 
-.heap           0x20027080      0x800
-                0x20027080                        __end__ = .
-                0x20027080                        end = __end__
+.heap           0x20027120      0x800
+                0x20027120                        __end__ = .
+                0x20027120                        end = __end__
  *(.heap*)
- .heap          0x20027080      0x800 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
-                0x20027880                        __HeapLimit = .
+ .heap          0x20027120      0x800 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
+                0x20027920                        __HeapLimit = .
 
 .stack1_dummy   0x20040164      0x800
  *(.stack1*)
@@ -3151,8 +3103,8 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  *(.stack*)
  .stack         0x20041000      0x800 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
 
-.flash_end      0x1000afdc        0x0
-                0x1000afdc                        PROVIDE (__flash_binary_end = .)
+.flash_end      0x10009140        0x0
+                0x10009140                        PROVIDE (__flash_binary_end = .)
                 0x20040000                        __StackLimit = (ORIGIN (RAM) + LENGTH (RAM))
                 0x20041000                        __StackOneTop = (ORIGIN (SCRATCH_X) + LENGTH (SCRATCH_X))
                 0x20042000                        __StackTop = (ORIGIN (SCRATCH_Y) + LENGTH (SCRATCH_Y))
@@ -3168,6 +3120,7 @@ LOAD CMakeFiles/firmware.dir/system/memory.c.obj
 LOAD CMakeFiles/firmware.dir/system/processor.c.obj
 LOAD CMakeFiles/firmware.dir/interface/graphics.c.obj
 LOAD CMakeFiles/firmware.dir/interface/console.c.obj
+LOAD CMakeFiles/firmware.dir/interface/keyboard.c.obj
 LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -3233,7 +3186,7 @@ LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vend
 LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
-LOAD /tmp/ccoONpmD.o
+LOAD /tmp/cc3cGYBK.o
 LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a
 LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 START GROUP
@@ -3271,159 +3224,161 @@ LOAD linker stubs
  .ARM.attributes
                 0x00000152       0x2c CMakeFiles/firmware.dir/interface/console.c.obj
  .ARM.attributes
-                0x0000017e       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
+                0x0000017e       0x2c CMakeFiles/firmware.dir/interface/keyboard.c.obj
  .ARM.attributes
-                0x000001aa       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+                0x000001aa       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .ARM.attributes
-                0x000001d6       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+                0x000001d6       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .ARM.attributes
-                0x00000202       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+                0x00000202       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
  .ARM.attributes
-                0x0000022e       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x0000022e       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
  .ARM.attributes
-                0x0000025a       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x0000025a       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
  .ARM.attributes
-                0x00000286       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
+                0x00000286       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
  .ARM.attributes
-                0x000002a8       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
+                0x000002b2       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
  .ARM.attributes
-                0x000002d4       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
+                0x000002d4       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
  .ARM.attributes
-                0x00000300       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
+                0x00000300       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
  .ARM.attributes
-                0x0000032c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
+                0x0000032c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
  .ARM.attributes
-                0x00000358       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x00000358       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_time/time.c.obj
  .ARM.attributes
-                0x00000384       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x00000384       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  .ARM.attributes
-                0x000003b0       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj
+                0x000003b0       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/pheap.c.obj
  .ARM.attributes
-                0x000003dc       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+                0x000003dc       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/common/pico_util/queue.c.obj
  .ARM.attributes
-                0x00000408       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+                0x00000408       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
  .ARM.attributes
-                0x00000434       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
+                0x00000434       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
  .ARM.attributes
-                0x00000460       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
+                0x00000460       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
  .ARM.attributes
-                0x0000048c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
+                0x0000048c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj
  .ARM.attributes
-                0x000004b8       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+                0x000004b8       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
  .ARM.attributes
-                0x000004e4       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x000004e4       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
  .ARM.attributes
-                0x00000510       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x00000510       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
  .ARM.attributes
-                0x0000053c       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+                0x0000053c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .ARM.attributes
-                0x0000055e       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+                0x00000568       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
  .ARM.attributes
-                0x0000058a       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+                0x0000058a       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
  .ARM.attributes
-                0x000005ac       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x000005b6       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
  .ARM.attributes
-                0x000005ce       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+                0x000005d8       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
  .ARM.attributes
-                0x000005fa       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x000005fa       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
  .ARM.attributes
-                0x0000061c       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
+                0x00000626       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
  .ARM.attributes
-                0x0000063e       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
+                0x00000648       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
  .ARM.attributes
-                0x00000660       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+                0x0000066a       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
  .ARM.attributes
-                0x0000068c       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
+                0x0000068c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
  .ARM.attributes
-                0x000006ae       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+                0x000006b8       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
  .ARM.attributes
-                0x000006da       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+                0x000006da       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
  .ARM.attributes
-                0x000006fc       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
+                0x00000706       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
  .ARM.attributes
-                0x0000071e       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x00000728       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
  .ARM.attributes
-                0x0000074a       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x0000074a       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .ARM.attributes
-                0x00000776       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+                0x00000776       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .ARM.attributes
-                0x000007a2       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+                0x000007a2       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
  .ARM.attributes
-                0x000007ce       0x2c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
+                0x000007ce       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
  .ARM.attributes
-                0x000007fa       0x2c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
+                0x000007fa       0x2c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
  .ARM.attributes
-                0x00000826       0x2c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
+                0x00000826       0x2c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
  .ARM.attributes
-                0x00000852       0x22 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj
+                0x00000852       0x2c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_timing.c.obj
  .ARM.attributes
-                0x00000874       0x2c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj
+                0x0000087e       0x22 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.S.obj
  .ARM.attributes
-                0x000008a0       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+                0x000008a0       0x2c CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj
  .ARM.attributes
-                0x000008cc       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
+                0x000008cc       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
  .ARM.attributes
-                0x000008f8       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x000008f8       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_interp/interp.c.obj
  .ARM.attributes
-                0x00000924       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x00000924       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .ARM.attributes
-                0x00000950       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x00000950       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .ARM.attributes
-                0x0000097c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x0000097c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .ARM.attributes
-                0x000009a8       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x000009a8       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .ARM.attributes
-                0x000009d4       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x000009d4       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .ARM.attributes
-                0x00000a00       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+                0x00000a00       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
  .ARM.attributes
-                0x00000a2c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x00000a2c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
  .ARM.attributes
-                0x00000a58       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+                0x00000a58       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
  .ARM.attributes
-                0x00000a84       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x00000a84       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
  .ARM.attributes
-                0x00000ab0       0x22 /tmp/ccoONpmD.o
+                0x00000ab0       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .ARM.attributes
-                0x00000ad2       0x1e /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+                0x00000adc       0x22 /tmp/cc3cGYBK.o
  .ARM.attributes
-                0x00000af0       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o)
+                0x00000afe       0x1e /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
-                0x00000b1c       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-calloc.o)
+                0x00000b1c       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o)
  .ARM.attributes
-                0x00000b48       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-callocr.o)
+                0x00000b48       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-calloc.o)
  .ARM.attributes
-                0x00000b74       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-malloc.o)
+                0x00000b74       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-callocr.o)
  .ARM.attributes
-                0x00000ba0       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o)
+                0x00000ba0       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-malloc.o)
  .ARM.attributes
-                0x00000bcc       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o)
+                0x00000bcc       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o)
  .ARM.attributes
-                0x00000bf8       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+                0x00000bf8       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o)
  .ARM.attributes
-                0x00000c24       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-impure.o)
+                0x00000c24       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
  .ARM.attributes
-                0x00000c50       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sbrkr.o)
+                0x00000c50       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-impure.o)
  .ARM.attributes
-                0x00000c7c       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-errno.o)
+                0x00000c7c       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sbrkr.o)
  .ARM.attributes
-                0x00000ca8       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fini.o)
+                0x00000ca8       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-errno.o)
  .ARM.attributes
-                0x00000cd4       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o)
+                0x00000cd4       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fini.o)
  .ARM.attributes
-                0x00000d00       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sysconf.o)
+                0x00000d00       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o)
  .ARM.attributes
-                0x00000d2c       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strlen-stub.o)
+                0x00000d2c       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sysconf.o)
  .ARM.attributes
-                0x00000d58       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o)
+                0x00000d58       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strlen-stub.o)
  .ARM.attributes
-                0x00000d84       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o)
+                0x00000d84       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o)
  .ARM.attributes
-                0x00000db0       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o)
+                0x00000db0       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o)
  .ARM.attributes
-                0x00000ddc       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o)
+                0x00000ddc       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o)
  .ARM.attributes
-                0x00000e08       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-reent.o)
+                0x00000e08       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o)
+ .ARM.attributes
+                0x00000e34       0x2c /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-reent.o)
 
 .comment        0x00000000       0x3c
  .comment       0x00000000       0x3c CMakeFiles/firmware.dir/main.c.obj
@@ -3434,6 +3389,7 @@ LOAD linker stubs
  .comment       0x0000003c       0x1f CMakeFiles/firmware.dir/system/processor.c.obj
  .comment       0x0000003c       0x1f CMakeFiles/firmware.dir/interface/graphics.c.obj
  .comment       0x0000003c       0x1f CMakeFiles/firmware.dir/interface/console.c.obj
+ .comment       0x0000003c       0x1f CMakeFiles/firmware.dir/interface/keyboard.c.obj
  .comment       0x0000003c       0x1f CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .comment       0x0000003c       0x1f CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .comment       0x0000003c       0x1f CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
