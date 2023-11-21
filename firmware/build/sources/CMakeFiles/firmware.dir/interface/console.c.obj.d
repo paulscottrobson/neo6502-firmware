@@ -1,5 +1,5 @@
-sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/graphics.c \
+sources/CMakeFiles/firmware.dir/interface/console.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/console.c \
  /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
@@ -58,4 +58,4 @@ sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/usbdriver.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/data/palette.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/data/font_5x7.h

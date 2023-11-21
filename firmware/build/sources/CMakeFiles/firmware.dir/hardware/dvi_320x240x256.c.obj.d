@@ -54,6 +54,8 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/usbdriver.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h \
@@ -82,5 +84,4 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: \
  /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h \
  /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h \
  /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/common_dvi_pin_configs.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/data/font_5x7.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/common_dvi_pin_configs.h

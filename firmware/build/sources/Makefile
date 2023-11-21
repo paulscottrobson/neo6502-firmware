@@ -1560,6 +1560,30 @@ hardware/usbdriver.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.s
 .PHONY : hardware/usbdriver.c.s
 
+interface/console.obj: interface/console.c.obj
+.PHONY : interface/console.obj
+
+# target to build an object file
+interface/console.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/console.c.obj
+.PHONY : interface/console.c.obj
+
+interface/console.i: interface/console.c.i
+.PHONY : interface/console.i
+
+# target to preprocess a source file
+interface/console.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/console.c.i
+.PHONY : interface/console.c.i
+
+interface/console.s: interface/console.c.s
+.PHONY : interface/console.s
+
+# target to generate assembly for a file
+interface/console.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/console.c.s
+.PHONY : interface/console.c.s
+
 interface/graphics.obj: interface/graphics.c.obj
 .PHONY : interface/graphics.obj
 
@@ -1843,6 +1867,9 @@ help:
 	@echo "... hardware/usbdriver.obj"
 	@echo "... hardware/usbdriver.i"
 	@echo "... hardware/usbdriver.s"
+	@echo "... interface/console.obj"
+	@echo "... interface/console.i"
+	@echo "... interface/console.s"
 	@echo "... interface/graphics.obj"
 	@echo "... interface/graphics.i"
 	@echo "... interface/graphics.s"

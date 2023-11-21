@@ -19,7 +19,7 @@ int main() {
     MEMInitialiseMemory();
     GFXSetMode(0);
     const char *c = bootString;
-    while (*c != '\0') writeCharacter(*c++);
+    while (*c != '\0') CONWrite(*c++);
     USBInitialise();
     CPUStart();
 }

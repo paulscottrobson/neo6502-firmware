@@ -282,8 +282,6 @@ void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* desc_re
 void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance) {
 }
 
-void writeCharacter(int ch);
-
 void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* report, uint16_t len) {
 
   uint8_t ch = 0;
@@ -304,8 +302,8 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
         };
 
       if (ch) {
-        writeCharacter("0123456789abcdef"[ch >> 4]);
-        writeCharacter("0123456789abcdef"[ch & 0x0F]);
+        CONWrite("0123456789abcdef"[ch >> 4]);
+        CONWrite("0123456789abcdef"[ch & 0x0F]);
       }
       tuh_hid_receive_report(dev_addr, instance);
     break;
