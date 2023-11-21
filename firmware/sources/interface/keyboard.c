@@ -131,6 +131,7 @@ static uint8_t KBDMapToASCII(uint8_t keyCode,uint8_t modifiers) {
 	if (ascii != 0) {
 		if (ascii >= 32 && ascii < 127) CONWrite(ascii);	
 		CONWrite(32);CONWriteHex(ascii);CONWrite(32);
+		CONWriteHex(TMRRead() & 0xFFFF);CONWrite(13);
 	}
 
 	return KBDLocaleMapping(ascii,keyCode,modifiers); 							// Special mapping for locales.

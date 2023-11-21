@@ -1,5 +1,5 @@
-sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_320x240x256.c \
+sources/CMakeFiles/firmware.dir/hardware/timer.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/timer.c \
  /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
@@ -67,31 +67,4 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
- /aux/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h \
- /aux/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h \
- /aux/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
- /aux/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
- /aux/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
- /aux/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
- /aux/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
- /aux/pico/pico-sdk/src/rp2_common/hardware_vreg/include/hardware/vreg.h \
- /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/vreg_and_chip_reset.h \
- /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/vreg_and_chip_reset.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.h \
- /aux/pico/pico-sdk/src/common/pico_util/include/pico/util/queue.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_config_defs.h \
- /aux/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_timing.h \
- /aux/pico/pico-sdk/src/rp2_common/hardware_dma/include/hardware/dma.h \
- /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h \
- /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dma.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.h \
- /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio.h \
- /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pio.h \
- /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pio.h \
- /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/common_dvi_pin_configs.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h

@@ -1536,6 +1536,30 @@ hardware/dvi_320x240x256.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.s
 .PHONY : hardware/dvi_320x240x256.c.s
 
+hardware/timer.obj: hardware/timer.c.obj
+.PHONY : hardware/timer.obj
+
+# target to build an object file
+hardware/timer.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/timer.c.obj
+.PHONY : hardware/timer.c.obj
+
+hardware/timer.i: hardware/timer.c.i
+.PHONY : hardware/timer.i
+
+# target to preprocess a source file
+hardware/timer.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/timer.c.i
+.PHONY : hardware/timer.c.i
+
+hardware/timer.s: hardware/timer.c.s
+.PHONY : hardware/timer.s
+
+# target to generate assembly for a file
+hardware/timer.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/timer.c.s
+.PHONY : hardware/timer.c.s
+
 hardware/usbdriver.obj: hardware/usbdriver.c.obj
 .PHONY : hardware/usbdriver.obj
 
@@ -1888,6 +1912,9 @@ help:
 	@echo "... hardware/dvi_320x240x256.obj"
 	@echo "... hardware/dvi_320x240x256.i"
 	@echo "... hardware/dvi_320x240x256.s"
+	@echo "... hardware/timer.obj"
+	@echo "... hardware/timer.i"
+	@echo "... hardware/timer.s"
 	@echo "... hardware/usbdriver.obj"
 	@echo "... hardware/usbdriver.i"
 	@echo "... hardware/usbdriver.s"

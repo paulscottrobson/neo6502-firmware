@@ -28,6 +28,7 @@ OSNAME = windows
 EXTRAFILES = libwinpthread-1.dll  SDL2.dll
 PYTHON = python
 TOUCH =
+PICO_SDK_PATH=<somewhere, god alone knows>
 else
 CCOPY = cp
 CDEL = rm -f
@@ -43,6 +44,7 @@ OSNAME = linux
 EXTRAFILES = 
 PYTHON = python3
 TOUCH = touch -c
+PICO_SDK_LOCATION=/aux/pico/pico-sdk
 endif
 #
 #		Directories
