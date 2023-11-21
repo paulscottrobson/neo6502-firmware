@@ -38,14 +38,13 @@
 //
 // ***************************************************************************************
 
-struct dvi_inst dvi0;                                             		// DVI information structure
+struct dvi_inst dvi0;                                   	                // DVI information structure
 
-uint16_t palette[256];								// Current DVI palette (RGB565)
-uint8_t screen[FRAME_WIDTH * FRAME_HEIGHT];
-
-uint16_t buffer1[FRAME_WIDTH],buffer2[FRAME_WIDTH];				// 2 buffers for scanline used alternatively
-uint16_t frameCounter = 0,lineCounter = 0;					// Tracking line/frame counts.
-
+uint16_t palette[256];                                                          // Current DVI palette (RGB565)
+uint8_t  *screenMemory;								// Graphics RAM (max 320x240)
+uint16_t buffer1[FRAME_WIDTH],buffer2[FRAME_WIDTH];                             // 2 buffers for scanline used alternatively
+uint16_t frameCounter = 0,lineCounter = 0;                                      // Tracking line/frame counts.
+bool  isInitialised = false;							// Only start core once.
 
 
 #include "data/font_5x7.h"
@@ -54,9 +53,9 @@ static void drawCharacter(int x,int y,int ch,int col) {
    for (int y1 = 0;y1 < 7;y1++) {
       int b = font_5x7[ch*7 + y1];
       for (int x1 = 0;x1 < 5;x1++) {
-	 int p = (x+x1)+(y+y1)*320;
-	 screen[p] = (b & 0x80) ? col : 0;
-	 b = b << 1;
+    int p = (x+x1)+(y+y1)*320;
+    screenMemory[p] = (b & 0x80) ? col : 0;
+    b = b << 1;
       }
    }
 }
@@ -75,45 +74,45 @@ void writeCharacter(int c) {
 
 // ***************************************************************************************
 //
-//			Called every scanline to update display
+//       		Called every scanline to update display
 //
 // ***************************************************************************************
 
 static void __not_in_flash_func(_scanline_callback)(void) {
    uint16_t *scanline;
-   while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline));		// Remove unused buffers from queue
-   if (lineCounter >= 0) {							// Which buffer to send ?
+   while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline));     		// Remove unused buffers from queue
+   if (lineCounter >= 0) {                   					// Which buffer to send ?
       scanline = (lineCounter & 1) ? buffer1 : buffer2;
    }
-   queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);			// Send buffer to queue
+   queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);       		// Send buffer to queue
 
-   lineCounter++;								// Adjust line and frame.
+   lineCounter++;                      // Adjust line and frame.
    if (lineCounter == FRAME_HEIGHT) {
       frameCounter++;
       lineCounter = 0;
    }
-   scanline = (lineCounter & 1) ? buffer1 : buffer2;				// Buffer to create (e.g. the other one)
-   uint8_t *screenPos = screen + lineCounter * FRAME_WIDTH;			// Data to use in screen memory.
-   for (int i = 0;i < FRAME_WIDTH;i++) { 					// For each pixel
-      *scanline++ = palette[*screenPos++];					// convert using palette => buffer.
+   scanline = (lineCounter & 1) ? buffer1 : buffer2;           			// Buffer to create (e.g. the other one)
+   uint8_t *screenPos = screenMemory + lineCounter * FRAME_WIDTH;      		// Data to use in screen memory.
+   for (int i = 0;i < FRAME_WIDTH;i++) {              				// For each pixel
+      *scanline++ = palette[*screenPos++];               			// convert using palette => buffer.
    }
 }
 
 // ***************************************************************************************
 //
-//	  Start core 1, which spends most of its time calling _scanline_callback
+//   	  Start core 1, which spends most of its time calling _scanline_callback
 //
 // ***************************************************************************************
 
 static void __not_in_flash_func(core1_main)() {
-   dvi_register_irqs_this_core(&dvi0, DMA_IRQ_0);				// Enable IRQs
-   dvi_start(&dvi0);  								// Start DVI library
-   dvi_scanbuf_main_16bpp(&dvi0); 						// State we are using 16 bit (e.g. 565) render
+   dvi_register_irqs_this_core(&dvi0, DMA_IRQ_0);           			// Enable IRQs
+   dvi_start(&dvi0);                         					// Start DVI library
+   dvi_scanbuf_main_16bpp(&dvi0);                  				// State we are using 16 bit (e.g. 565) render
 }
 
 // ***************************************************************************************
 //
-//			Serialiser (e.g. the pinout) for Neo6502
+//       		Serialiser (e.g. the pinout) for Neo6502
 //
 // ***************************************************************************************
 
@@ -127,17 +126,19 @@ static const struct dvi_serialiser_cfg pico_neo6502_cfg = {
 
 // ***************************************************************************************
 //
-//				  Called on start.
+//            				Called on start.
 //
 // ***************************************************************************************
 
-void RNDStart(uint8_t *memConsole,uint8_t *memGraphics) {
-	// TODO: Save memGraphics
+void RNDStartMode0(uint8_t *memConsole,uint8_t *memGraphics) {
+   screenMemory = memGraphics; 	 						// Remember where drawing.
+   if (!isInitialised) DVIStart();    						// Start hardware, only once (!)
+   isInitialised = true;
 }
 
 // ***************************************************************************************
 //
-//		Update the palette of whatever's generating the video
+//    		Update the palette of whatever is generating the video
 //
 // ***************************************************************************************
 
@@ -147,35 +148,31 @@ void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b) {
 
 // ***************************************************************************************
 //
-//	   Physically start the DVI hardware - called once, starts up core1.
+//    		Physically start the DVI hardware - called once, starts up core1.
 //
 // ***************************************************************************************
 
 void DVIStart(void) {
-   vreg_set_voltage(VREG_VSEL);  						// Set Voltage on CPU
+   vreg_set_voltage(VREG_VSEL);                    				// Set Voltage on CPU
    sleep_ms(10);
-   set_sys_clock_khz(DVI_TIMING.bit_clk_khz, true); 				// Set the correct clock speed.
+   set_sys_clock_khz(DVI_TIMING.bit_clk_khz, true);            			// Set the correct clock speed.
 
-   dvi0.timing = &DVI_TIMING;  							// Set up timing, config, callback.
+   dvi0.timing = &DVI_TIMING;                      				// Set up timing, config, callback.
    dvi0.ser_cfg = pico_neo6502_cfg;
    dvi0.scanline_callback = _scanline_callback;
 
    dvi_init(&dvi0, next_striped_spin_lock_num(), next_striped_spin_lock_num()); // Initialise DVI. 
 
-   for (int i = 0;i < 256;i++) {  						// Default (wrong) palette.
-      RNDSetPalette(i,(i & 1) ? 255:0,(i & 2) ? 255:0,(i & 4) ? 255:0); 
-   }
-
-   for (int x = 0;x < 320;x++) {  						// Default clear screen
+   for (int x = 0;x < 320;x++) {                   // Default clear screen
       for (int y = 0;y < 240;y++) {
-	 screen[x+y*320] = (x >> 4) + (y >> 3) * 4;
+    screenMemory[x+y*320] = (x >> 4) + (y >> 3) * 4;
       }
    }
 
-   lineCounter = 2;  								// We send two lines to kick off.
-   uint16_t *scanline; 								// Send junk, only lasts one frame.
+   lineCounter = 2;                          					// We send two lines to kick off.
+   uint16_t *scanline;                       					// Send junk, only lasts one frame.
    scanline = buffer1;queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
    scanline = buffer2;queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
-   multicore_launch_core1(core1_main); 						// Start DVI worker core (RP2040 core 1)
+   multicore_launch_core1(core1_main);                   			// Start DVI worker core (RP2040 core 1)
 }
 
