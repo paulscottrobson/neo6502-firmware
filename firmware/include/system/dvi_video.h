@@ -15,4 +15,6 @@
 
 void DVIStart(void);
 
+#define DVI_TIMING dvi_timing_640x480p_60hz
+
 #endif

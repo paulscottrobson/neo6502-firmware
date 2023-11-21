@@ -21,6 +21,7 @@ int main() {
     const char *c = bootString;
     while (*c != '\0') CONWrite(*c++);
     KBDInitialise();
+    SNDInitialise();
     CPUStart();
 }
 

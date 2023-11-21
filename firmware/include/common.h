@@ -33,10 +33,10 @@ typedef void (*VOIDFUNC)();
 #include "interface/graphics.h"
 #include "interface/console.h"
 #include "interface/timer.h"
+#include "interface/sound.h"
 //
 //		RP2040 specific.
 //
 #include "system/dvi_video.h"
-
 
 #endif

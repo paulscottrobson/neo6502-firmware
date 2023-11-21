@@ -30,7 +30,6 @@
 #define FRAME_WIDTH 320
 #define FRAME_HEIGHT 240
 #define VREG_VSEL VREG_VOLTAGE_1_20
-#define DVI_TIMING dvi_timing_640x480p_60hz
 
 // ***************************************************************************************
 //
@@ -64,6 +63,7 @@ static void __not_in_flash_func(_scanline_callback)(void) {
    if (lineCounter == FRAME_HEIGHT) {
       frameCounter++;
       lineCounter = 0;
+      SNDSync();
    }
    scanline = (lineCounter & 1) ? buffer1 : buffer2;           			// Buffer to create (e.g. the other one)
    uint8_t *screenPos = screenMemory + lineCounter * FRAME_WIDTH;      		// Data to use in screen memory.
@@ -129,7 +129,7 @@ void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b) {
 void DVIStart(void) {
    vreg_set_voltage(VREG_VSEL);                    				// Set Voltage on CPU
    sleep_ms(10);
-   set_sys_clock_khz(DVI_TIMING.bit_clk_khz, true);            			// Set the correct clock speed.
+   set_sys_clock_khz(DVI_TIMING.bit_clk_khz, true);     			// Set the correct clock speed.
 
    dvi0.timing = &DVI_TIMING;                      				// Set up timing, config, callback.
    dvi0.ser_cfg = pico_neo6502_cfg;
