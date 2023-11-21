@@ -46,32 +46,6 @@ uint16_t buffer1[FRAME_WIDTH],buffer2[FRAME_WIDTH];                             
 uint16_t frameCounter = 0,lineCounter = 0;                                      // Tracking line/frame counts.
 bool  isInitialised = false;							// Only start core once.
 
-
-#include "data/font_5x7.h"
-
-static void drawCharacter(int x,int y,int ch,int col) {
-   for (int y1 = 0;y1 < 7;y1++) {
-      int b = font_5x7[ch*7 + y1];
-      for (int x1 = 0;x1 < 5;x1++) {
-    int p = (x+x1)+(y+y1)*320;
-    screenMemory[p] = (b & 0x80) ? col : 0;
-    b = b << 1;
-      }
-   }
-}
-
-int xc = 0,yc = 0;
-
-void writeCharacter(int c) {
-   if (c != 13) {
-      drawCharacter(xc*6+5,yc*8,c,7);
-      xc += 1;
-   } else {
-      xc = 52;
-   }
-   if (xc >= 52) { xc = 0;yc = (yc + 1) % 30; }
-}
-
 // ***************************************************************************************
 //
 //       		Called every scanline to update display
@@ -162,12 +136,6 @@ void DVIStart(void) {
    dvi0.scanline_callback = _scanline_callback;
 
    dvi_init(&dvi0, next_striped_spin_lock_num(), next_striped_spin_lock_num()); // Initialise DVI. 
-
-   for (int x = 0;x < 320;x++) {                   // Default clear screen
-      for (int y = 0;y < 240;y++) {
-    screenMemory[x+y*320] = (x >> 4) + (y >> 3) * 4;
-      }
-   }
 
    lineCounter = 2;                          					// We send two lines to kick off.
    uint16_t *scanline;                       					// Send junk, only lasts one frame.

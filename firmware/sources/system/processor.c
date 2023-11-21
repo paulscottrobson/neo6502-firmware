@@ -40,7 +40,7 @@ void CPUStart(void) {
             // Memory write
             data = cpuMemory[addr] = wdc65C02cpu_get_data();
             if (addr == controlPort && data != 0) {
-               writeCharacter(data & 0x7F);
+               CONWrite(data & 0x7F);
                cpuMemory[controlPort] = 0;
             }
         }       

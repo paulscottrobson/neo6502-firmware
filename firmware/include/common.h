@@ -9,8 +9,9 @@
 //
 // ***************************************************************************************
 // ***************************************************************************************
-#ifndef _COMMON_h
-#define _COMMON_h
+
+#ifndef _COMMON_H
+#define _COMMON_H
 //
 //		Void Function Pointer.
 //
@@ -26,6 +27,7 @@ typedef void (*VOIDFUNC)();
 #include "system/memory.h"
 #include "system/processor.h"
 #include "interface/graphics.h"
+#include "interface/console.h"
 //
 //		RP2040 specific.
 //
