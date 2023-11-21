@@ -17,6 +17,9 @@ void KBDInitialise(void);
 void KBDSync(void);
 
 void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers);
+uint8_t *KBDGetStateArray(void);
+bool KBDIsKeyAvailable(void);
+uint8_t KBDGetKey(void);
 
 #endif
 

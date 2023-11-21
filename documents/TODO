@@ -1,10 +1,13 @@
 - major tidying session as we go headers, processor headers, normalise names, comments.
 
 	- Create the keyboard handler from keyboard events.
-		- Key Queue & mapper.
-		- Key status.
+		- Control keys
+		- Internationalisation of shifting etc.
+		- REENABLE THE QUEUE !!!
 		
 	- Build tracker. Generate boot message.
 
 	- initial hardware specification
 	
+	- Console colour and cursor control
+
