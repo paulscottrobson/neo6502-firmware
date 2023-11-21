@@ -24,3 +24,7 @@
 #include "system/usbdriver.h"
 #include "system/dvi_video.h"
 #endif
+//
+//		Void Function Pointer.
+//
+typedef void (*VOIDFUNC)();
