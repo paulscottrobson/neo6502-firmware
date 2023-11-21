@@ -1,9 +1,10 @@
 - major tidying session as we go headers, processor headers, normalise names, comments.
 
+	- Create the keyboard handler from keyboard events.
+		- Key Queue & mapper.
+		- Key status.
+		
 	- Build tracker. Generate boot message.
 
 	- initial hardware specification
-	- USB displays key codes.
-	- strip USB module
-	- keyboard I/O
 	

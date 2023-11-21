@@ -1,6 +1,16 @@
+# ***************************************************************************************
+# ***************************************************************************************
 #
-#		Convert font to 6x8 ordered.
+#      Name :      hd44780.py
+#      Authors :   Paul Robson (paul@robsons.org.uk)
+#      Date :      21st November 2023
+#      Reviewed :  No
+#      Purpose :   Converts font stored vertically to 6x8 horizontal format
+#                  from the ubiquitous HD44780 LCD display.
+#				   (not built into the build process)
 #
+# ***************************************************************************************
+
 lcdfont = [
 	 0x00, 0x00, 0x00, 0x00, 0x00 ,  # 20  32
 	 0x00, 0x00, 0x4F, 0x00, 0x00 ,  # 21  33  !

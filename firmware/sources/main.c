@@ -20,7 +20,7 @@ int main() {
     GFXSetMode(0);
     const char *c = bootString;
     while (*c != '\0') CONWrite(*c++);
-    USBInitialise();
+    KBDInitialise();
     CPUStart();
 }
 

@@ -1,24 +1,22 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      console.h
+//      Name :      keyboard.h
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //      Date :      21st November 2023
 //      Reviewed :  No
-//      Purpose :   Console headers
+//      Purpose :   Keyboard prototypes
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-#ifndef _CONSOLE_H
-#define _CONSOLE_H
+#ifndef _KEYBOARD_H
+#define _KEYBOARD_H
 
-#include "interface/graphics.h"
+void KBDInitialise(void);
+void KBDSync(void);
 
-void CONInitialise(struct GraphicsMode *gMode);
-void CONWrite(int c);
-
-void CONWriteHex(uint16_t h);	// See note
+void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers);
 
 #endif
 
