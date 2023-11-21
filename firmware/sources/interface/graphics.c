@@ -16,7 +16,8 @@
 
 struct GraphicsMode gMode;														// Info about current mode.
 
-static uint8_t screenMemory[MAXGRAPHICSMEMORY],consoleMemory[MAXCONSOLEMEMORY]; // RAM used for graphics and console text.
+static uint8_t graphicsMemory[MAXGRAPHICSMEMORY],								// RAM used for graphics and console text.
+				consoleMemory[MAXCONSOLEMEMORY]; 
 
 // ***************************************************************************************
 //
@@ -25,10 +26,10 @@ static uint8_t screenMemory[MAXGRAPHICSMEMORY],consoleMemory[MAXCONSOLEMEMORY]; 
 // ***************************************************************************************
 
 static void GFXInitialise320x240x256(void) {
-	gMode.xCSize = 48;gMode.yCSize = 30;										// Console text size
+	gMode.xCSize = 53;gMode.yCSize = 30;										// Console text size
 	gMode.xGSize = 320;gMode.yGSize = 240;  									// Graphics pixel size.
-	gMode.textFont = USE_FONT_5X7;  											// Font size on display
-	gMode.screenMemory = screenMemory;  										// Set up memory pointers.
+	gMode.fontWidth = 6;gMode.fontHeight = 8;  									// Font size on display
+	gMode.graphicsMemory = graphicsMemory;  									// Set up memory pointers.
 	gMode.consoleMemory = consoleMemory;
 	gMode.startMode = (VOIDFUNC)RNDStartMode0;  								// Set up support functions.
 	gMode.setPalette = (VOIDFUNC)RNDSetPalette;
@@ -42,7 +43,7 @@ static void GFXInitialise320x240x256(void) {
 
 void GFXSetMode(int Mode) {
 	GFXInitialise320x240x256(); 												// Initialise mode 0
-	(*gMode.startMode)(consoleMemory,screenMemory);  							// Start it, telling it about memory.
+	(*gMode.startMode)(consoleMemory,graphicsMemory);  							// Start it, telling it about memory.
 	//
 	//		Default palette. For $0x, this is default colour x. For $yx it is default colour y. x doesn't matter
 	//		This is for the split layer sprites.

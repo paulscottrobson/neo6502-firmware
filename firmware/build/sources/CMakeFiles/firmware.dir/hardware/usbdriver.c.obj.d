@@ -51,6 +51,15 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
+ /usr/arm-none-eabi/include/string.h \
+ /usr/arm-none-eabi/include/sys/reent.h \
+ /usr/arm-none-eabi/include/_ansi.h \
+ /usr/arm-none-eabi/include/sys/_types.h \
+ /usr/arm-none-eabi/include/machine/_types.h \
+ /usr/arm-none-eabi/include/sys/lock.h \
+ /usr/arm-none-eabi/include/sys/_locale.h \
+ /usr/arm-none-eabi/include/strings.h \
+ /usr/arm-none-eabi/include/sys/string.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
@@ -62,15 +71,6 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
  /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
- /usr/arm-none-eabi/include/string.h \
- /usr/arm-none-eabi/include/sys/reent.h \
- /usr/arm-none-eabi/include/_ansi.h \
- /usr/arm-none-eabi/include/sys/_types.h \
- /usr/arm-none-eabi/include/machine/_types.h \
- /usr/arm-none-eabi/include/sys/lock.h \
- /usr/arm-none-eabi/include/sys/_locale.h \
- /usr/arm-none-eabi/include/strings.h \
- /usr/arm-none-eabi/include/sys/string.h \
  /usr/arm-none-eabi/include/stdio.h \
  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdarg.h \
  /usr/arm-none-eabi/include/sys/stdio.h \
