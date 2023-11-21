@@ -67,6 +67,7 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \

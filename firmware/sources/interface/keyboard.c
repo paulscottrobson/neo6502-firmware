@@ -13,7 +13,7 @@
 #include "common.h"
 #include "interface/kbdcodes.h"
 
-#define MAX_QUEUE_SIZE (10) 													// Max size of keyboard queue.
+#define MAX_QUEUE_SIZE (64) 													// Max size of keyboard queue.
 
 //
 //		Bit patterns for the key states. These represent the key codes (see kbdcodes.h)
@@ -36,7 +36,6 @@ static uint8_t KBDDefaultControlKeys(uint8_t keyCode,uint8_t isShift);
 static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers);
 static uint8_t KBDLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifiers);
 static void KBDInsertQueue(uint8_t ascii);
-
 
 // ***************************************************************************************
 //
@@ -102,13 +101,8 @@ uint8_t *KBDGetStateArray(void) {
 
 static void KBDInsertQueue(uint8_t ascii) {
 	if (queueSize < MAX_QUEUE_SIZE) {   										// Do we have a full queue ?
-		queue[queueSize] = ascii;
-		// queueSize++;
-	}
-	if (ascii != 0) {
-		if (ascii >= 32 && ascii < 127) CONWrite(ascii);	
-		CONWrite(32);CONWriteHex(ascii);CONWrite(32);
-		CONWriteHex(TMRRead() & 0xFFFF);CONWrite(13);
+		queue[queueSize] = ascii;  												// If not insert it.
+		queueSize++;
 	}
 }
 

@@ -1,36 +1,40 @@
 - major tidying session as we go headers, processor headers, normalise names, comments.
 
-	- Sound hardware. Make that work.
-	- **** reenable queue ****
-	- initial hardware specification. Implement it.
+	- initial hardware specification. Implement it :) With test code.
+		- reset
+		- console out
+		- system timer
+		- console in.
+
 	- Build tracker. Generate boot message.
-	- make the keyboard i/o work
-	- Create some test code
 	- Implement the emulator.
 	- Implement NeoWozMon
 	- Console colour and cursor control / positioning.
 
 00 System
-		Reset (happens by default)
-		Read System Timer
+		00 	Reset (happens by default as well)
+		01 	Read System Timer into P0-3
 
 01 Console
-		Keyboard in
-		Character out
+		00 	Character out from P0
+		01 	Is Character available -> P0
+		02 	Read next character if available -> P0
 
-02 File System
+02 Graphics
 
-03 Graphics
+03 Sound
 
-04 Sound
+04 File I/O
+
+05 Arithmetic
 
 16 byte block
-	Main command
-	Sub command
-	Errors
-	Information flags (ESC pressed)
-	TOS [4]
-	Parameter Space [8]
+0		Main command
+1		Sub command
+2		Errors
+3		Information flags (ESC pressed sets bit 7, TOS Float bit 6)
+4-11	Parameter Space [8]
+12-15 	Top of Stack.
 
 - Locale handling
 - Function key handling

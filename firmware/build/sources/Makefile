@@ -1536,6 +1536,30 @@ hardware/dvi_320x240x256.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.s
 .PHONY : hardware/dvi_320x240x256.c.s
 
+hardware/sound.obj: hardware/sound.c.obj
+.PHONY : hardware/sound.obj
+
+# target to build an object file
+hardware/sound.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/sound.c.obj
+.PHONY : hardware/sound.c.obj
+
+hardware/sound.i: hardware/sound.c.i
+.PHONY : hardware/sound.i
+
+# target to preprocess a source file
+hardware/sound.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/sound.c.i
+.PHONY : hardware/sound.c.i
+
+hardware/sound.s: hardware/sound.c.s
+.PHONY : hardware/sound.s
+
+# target to generate assembly for a file
+hardware/sound.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/hardware/sound.c.s
+.PHONY : hardware/sound.c.s
+
 hardware/timer.obj: hardware/timer.c.obj
 .PHONY : hardware/timer.obj
 
@@ -1912,6 +1936,9 @@ help:
 	@echo "... hardware/dvi_320x240x256.obj"
 	@echo "... hardware/dvi_320x240x256.i"
 	@echo "... hardware/dvi_320x240x256.s"
+	@echo "... hardware/sound.obj"
+	@echo "... hardware/sound.i"
+	@echo "... hardware/sound.s"
 	@echo "... hardware/timer.obj"
 	@echo "... hardware/timer.i"
 	@echo "... hardware/timer.s"

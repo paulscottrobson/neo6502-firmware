@@ -67,4 +67,5 @@ sources/CMakeFiles/firmware.dir/hardware/timer.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h

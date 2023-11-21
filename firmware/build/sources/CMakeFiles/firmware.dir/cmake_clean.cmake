@@ -119,6 +119,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d"
   "CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj"
   "CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj.d"
+  "CMakeFiles/firmware.dir/hardware/sound.c.obj"
+  "CMakeFiles/firmware.dir/hardware/sound.c.obj.d"
   "CMakeFiles/firmware.dir/hardware/timer.c.obj"
   "CMakeFiles/firmware.dir/hardware/timer.c.obj.d"
   "CMakeFiles/firmware.dir/hardware/usbdriver.c.obj"

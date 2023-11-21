@@ -1,5 +1,5 @@
-sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/graphics.c \
+sources/CMakeFiles/firmware.dir/hardware/sound.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/sound.c \
  /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
@@ -69,4 +69,23 @@ sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/data/palette.h
+ /aux/pico/pico-sdk/src/rp2_common/hardware_pwm/include/hardware/pwm.h \
+ /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pwm.h \
+ /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pwm.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.h \
+ /aux/pico/pico-sdk/src/common/pico_util/include/pico/util/queue.h \
+ /aux/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
+ /aux/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_config_defs.h \
+ /aux/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_timing.h \
+ /aux/pico/pico-sdk/src/rp2_common/hardware_dma/include/hardware/dma.h \
+ /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h \
+ /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dma.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.h \
+ /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio.h \
+ /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pio.h \
+ /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pio.h \
+ /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h

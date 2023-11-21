@@ -67,6 +67,7 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h \
