@@ -29,7 +29,7 @@ void CONWriteHex(uint16_t h);	// See note
 #define CC_INSERT 	CONTROL('E')
 #define CC_PAGEDOWN	CONTROL('F')
 #define CC_END 		CONTROL('G')
-#define CC_DELETE 	CONTROL('H')
+#define CC_BACKSPACE CONTROL('H')
 #define CC_TAB  	CONTROL('I')
 #define CC_LF  		CONTROL('J')
 #define CC_CLS  	CONTROL('L')
@@ -38,9 +38,9 @@ void CONWriteHex(uint16_t h);	// See note
 #define CC_DOWN 	CONTROL('S')
 #define CC_HOME 	CONTROL('T')
 #define CC_UP  		CONTROL('W')
+#define CC_DELETE 	CONTROL('Z')
 #define CC_ESC 		CONTROL('[')
 
-#define CC_BACKSPACE (0x7F)
 
 #endif
 
