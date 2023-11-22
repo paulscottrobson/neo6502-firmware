@@ -96,8 +96,8 @@ DSP     =       $D012
 ; The program can be relocated to a different address but should be a
 ; multiple of $2000.
 
-        .org    $E000
-        .export START
+        * = $E000
+
 START:  JMP     cold            ; BASIC cold start entry point
 
 ; Get character for keyboard, return in A.
@@ -499,7 +499,7 @@ read_line:      JSR     rdkey
         STA     buffer,Y
         RTS
 cold:   JSR     mem_init_4k
-        .export warm
+
 warm:   JSR     crout           ; BASIC warm start entry point
 Le2b6:  LSR     run_flag
         LDA     #'>'+$80        ; Prompt character (high bit set)
@@ -1388,7 +1388,7 @@ return_stmt:    LDY     #$4A
         STA     pline
         LDA     gstk_plineh-1,Y
         STA     pline+1
-        LDX     a:synpag+1,Y            ; force absolute addressing mode
+        LDX     @w synpag+1,Y            ; force absolute addressing mode
         LDA     gstk_pverbh-1,Y
 Le8be:  TAY
         TXA
