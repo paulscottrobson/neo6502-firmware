@@ -10,25 +10,44 @@
 ; ***************************************************************************************
 ; ***************************************************************************************
 
+; ***************************************************************************************
+;
+;							Write A to the current console
+;
+; ***************************************************************************************
+
 KWriteCharacter:	
-	jsr KWaitProcess
-	and #$7f
-	sta $FF04
-	lda #0
-	sta $FF01
-	lda #1
-	sta $FF00
-	rts
+		pha
+		jsr KWaitProcess
+		sta $FF04
+		lda #0
+		sta $FF01
+		lda #1
+		sta $FF00
+		pla
+		rts
+
+; ***************************************************************************************
+;
+;							Read keystroke from the console
+;
+; ***************************************************************************************
 
 KReadCharacter:
-	jsr 	KWaitProcess
-	lda 	#1
-	sta		$FF01
-	sta 	$FF00
-	jsr 	KWaitProcess
-	lda 	$FF04
-	beq 	KReadCharacter
-	rts
+		jsr 	KWaitProcess
+		lda 	#1
+		sta		$FF01
+		sta 	$FF00
+		jsr 	KWaitProcess
+		lda 	$FF04
+		beq 	KReadCharacter
+		rts
+
+; ***************************************************************************************
+;
+;			Wait for the handler process to acknowledge or return a value
+;
+; ***************************************************************************************
 
 KWaitProcess:
 	pha

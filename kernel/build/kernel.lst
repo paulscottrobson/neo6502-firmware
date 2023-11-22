@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Wed Nov 22 17:01:56 2023
+; Wed Nov 22 17:43:09 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -17,23 +17,24 @@
 ;******  Processing file: support.asm
 
 .fc00					KWriteCharacter:
-.fc00	20 27 fc	jsr $fc27		jsr KWaitProcess
-.fc03	29 7f		and #$7f		and #$7f
-.fc05	8d 04 ff	sta $ff04		sta $FF04
-.fc08	a9 00		lda #$00		lda #0
-.fc0a	8d 01 ff	sta $ff01		sta $FF01
-.fc0d	a9 01		lda #$01		lda #1
-.fc0f	8d 00 ff	sta $ff00		sta $FF00
-.fc12	60		rts			rts
+.fc00	48		pha				pha
+.fc01	20 27 fc	jsr $fc27			jsr KWaitProcess
+.fc04	8d 04 ff	sta $ff04			sta $FF04
+.fc07	a9 00		lda #$00			lda #0
+.fc09	8d 01 ff	sta $ff01			sta $FF01
+.fc0c	a9 01		lda #$01			lda #1
+.fc0e	8d 00 ff	sta $ff00			sta $FF00
+.fc11	68		pla				pla
+.fc12	60		rts				rts
 .fc13					KReadCharacter:
-.fc13	20 27 fc	jsr $fc27		jsr 	KWaitProcess
-.fc16	a9 01		lda #$01		lda 	#1
-.fc18	8d 01 ff	sta $ff01		sta		$FF01
-.fc1b	8d 00 ff	sta $ff00		sta 	$FF00
-.fc1e	20 27 fc	jsr $fc27		jsr 	KWaitProcess
-.fc21	ad 04 ff	lda $ff04		lda 	$FF04
-.fc24	f0 ed		beq $fc13		beq 	KReadCharacter
-.fc26	60		rts			rts
+.fc13	20 27 fc	jsr $fc27			jsr 	KWaitProcess
+.fc16	a9 01		lda #$01			lda 	#1
+.fc18	8d 01 ff	sta $ff01			sta		$FF01
+.fc1b	8d 00 ff	sta $ff00			sta 	$FF00
+.fc1e	20 27 fc	jsr $fc27			jsr 	KWaitProcess
+.fc21	ad 04 ff	lda $ff04			lda 	$FF04
+.fc24	f0 ed		beq $fc13			beq 	KReadCharacter
+.fc26	60		rts				rts
 .fc27					KWaitProcess:
 .fc27	48		pha			pha
 .fc28					KWaitProcess1:
@@ -116,6 +117,15 @@
 .fc91	60		rts			rts
 >ff00	00 00 00 00 00 00 00 00			.word 	0,0,0,0,0,0,0,0
 >ff08	00 00 00 00 00 00 00 00
+
+;******  Processing file: build/_vectors.inc
+
+.fff1	4c 13 fc	jmp $fc13		jmp	KReadCharacter
+.fff4	4c 00 fc	jmp $fc00		jmp	KWriteCharacter
+.fff7	4c 27 fc	jmp $fc27		jmp	KWaitProcess
+
+;******  Return to file: kernel.asm
+
 >fffa	46 fc					.word 	start
 >fffc	46 fc					.word 	start
 >fffe	46 fc					.word 	start
