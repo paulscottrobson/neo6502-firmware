@@ -27,7 +27,7 @@
 
 void DSPHandler(uint8_t *cBlock,uint8_t *memory) {
 
-       CONWrite(*DCOMMAND);    
+       #include "data/dispatch_code.h"  
 
        *DCOMMAND = 0;															// Clear the message indicating completion.
 }

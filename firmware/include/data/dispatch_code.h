@@ -8,14 +8,14 @@ switch (*DCOMMAND) {
 				DSPReset();
 				break;
 			case 1:
-				*((uint32_t *)PARAMS) = TMRRead();
+				*((uint32_t *)DPARAMS) = TMRRead();
 				break;
 		}
 		break;
 	case 1:
 		switch (*DFUNCTION) {
 			case 0:
-				CONWrite(*PARAMS);
+				CONWrite(*DPARAMS);
 				break;
 		}
 		break;

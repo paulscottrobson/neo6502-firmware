@@ -78,9 +78,13 @@ lprintchar:
 waitfree:
 	lda $FF00
 	bne waitfree
+	lda #1
+	sta $FF00
+	lda #0
+	sta $FF01
 	pla	
 	and #$7f
-	sta $FF00
+	sta $FF04
 	rts
 
 	* = $FFFA
