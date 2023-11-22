@@ -17,13 +17,13 @@
 #include "sys_processor.h"
 #include "sys_debug_system.h"
 #include "hardware.h"
-#include "interface/memory.h"
+#include "common.h"
 
 // *******************************************************************************************************************************
 //														   Timing
 // *******************************************************************************************************************************
 
-#define CYCLE_RATE 		(22*1024*1024/10)											// Cycles per second (2.2Mhz)
+#define CYCLE_RATE 		(34*1024*1024/10)											// Cycles per second (3.4Mhz)
 #define FRAME_RATE		(60)														// Frames per second (60 arbitrary)
 #define CYCLES_PER_FRAME (CYCLE_RATE / FRAME_RATE)									// Cycles per frame
 
@@ -70,6 +70,9 @@ static inline BYTE8 _Read(WORD16 address) {
 
 static inline void _Write(WORD16 address,BYTE8 data) { 
 	 cpuMemory[address] = data;			
+	 if (address == CONTROLPORT) {
+	 	DSPHandler(cpuMemory+address,cpuMemory);
+	 }
 }
 
 // *******************************************************************************************************************************
