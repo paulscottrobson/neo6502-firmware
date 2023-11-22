@@ -1,20 +1,18 @@
 TODO List
 ---------
 
-	- Add basic vectors to kernel.
-			GeneralDispatch 
-			Get them working in the emulator.
-
 	- add more functionality to dispatcher as required.
+			General Dispatcher
 
 	- Implement NeoWozMon
-	- Implement NeoWozBasic (?)
+	- Implement NeoWozBasic (was Applesoft Basic) if not too heavy.
 
 	- It can go out to people to play with.	
 
-	- Locale handling
-
+- Locale handling
 - Escape flag setting.
 - Function key handling
 - Console colour and cursor control / positioning.
-- Audio system driver on emulator, and audio.
+- Audio system driver on emulator, and audio interface
+- File I/O
+- Mathematics system

@@ -75,6 +75,8 @@ _loop1:
 	* = $FF00
 	.word 	0,0,0,0,0,0,0,0
 
+	.include "build/_vectors.inc"
+	
 	* = $FFFA
 	.word 	start
 	.word 	start

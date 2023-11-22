@@ -20,7 +20,10 @@ BINARY = firmware
 KERNELSOURCES = kernel.asm
 
 all: always
+	$(CDEL) $(BINDIR)binary.h
 	$(CDEL) build$(S)binary.h
+	$(CDEL) $(BINDIR)kernel.bin
+	$(PYTHON) scripts$(S)vectors.py >build$(S)_vectors.inc
 	$(ASSEMBLER) $(KERNELSOURCES) -o build$(S)kernel.bin -L build$(S)kernel.lst $(ASMEND)
 	$(PYTHON) scripts$(S)hconvert.py build$(S)kernel.bin >build$(S)binary.h
 	$(CCOPY) build$(S)kernel.bin $(BINDIR)
