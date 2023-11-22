@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Wed Nov 22 06:02:27 2023
+; Wed Nov 22 08:10:57 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -80,10 +80,14 @@
 .fc66					waitfree:
 .fc66	ad 00 ff	lda $ff00		lda $FF00
 .fc69	d0 fb		bne $fc66		bne waitfree
-.fc6b	68		pla			pla
-.fc6c	29 7f		and #$7f		and #$7f
-.fc6e	8d 00 ff	sta $ff00		sta $FF00
-.fc71	60		rts			rts
+.fc6b	a9 01		lda #$01		lda #1
+.fc6d	8d 00 ff	sta $ff00		sta $FF00
+.fc70	a9 00		lda #$00		lda #0
+.fc72	8d 01 ff	sta $ff01		sta $FF01
+.fc75	68		pla			pla
+.fc76	29 7f		and #$7f		and #$7f
+.fc78	8d 04 ff	sta $ff04		sta $FF04
+.fc7b	60		rts			rts
 >fffa	02 fc					.word 	lfc00
 >fffc	02 fc					.word 	lfc00
 >fffe	02 fc					.word	lfc00

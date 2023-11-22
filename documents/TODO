@@ -1,14 +1,13 @@
 - major tidying session as we go headers, processor headers, normalise names, comments.
 
-	- Dispatcher
-		- add functionality to dispatcher.
-	- Test code.
-	- Build tracker. Generate boot message.
 	- Implement the emulator.
+	- Add basic vectors to kernel.
+			ConIn ConOut GeneralDispatch call. Wait for command clear.
+	- add more functionality to dispatcher.
+	- Build tracker. Generate boot message.
 	- Implement NeoWozMon
-	- Console colour and cursor control / positioning.
-	- Audio system driver
-
+	- Implement NeoWozBasic
+	
 00 System
 		00 	Reset (happens by default as well)
 		01 	Read System Timer into P0-3
@@ -26,13 +25,8 @@
 
 05 Arithmetic
 
-16 byte block
-0		Main command
-1		Sub command
-2		Errors
-3		Information flags (ESC pressed sets bit 7, TOS Float bit 6)
-4-11	Parameter Space [8]
-12-15 	Top of Stack.
 
 - Locale handling
 - Function key handling
+- Console colour and cursor control / positioning.
+- Audio system driver

@@ -2990,6 +2990,7 @@ sources/CMakeFiles/firmware.dir/interface/dispatch.c.obj: /home/paulr/Projects/n
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/include/data/dispatch_code.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/dispatch.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
@@ -3382,6 +3383,8 @@ sources/CMakeFiles/firmware.dir/system/processor.c.obj: /home/paulr/Projects/neo
 /home/paulr/Projects/neo6502-firmware/firmware/include/data/palette.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/graphics.c:
+
+/home/paulr/Projects/neo6502-firmware/firmware/include/data/dispatch_code.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/console.c:
 
