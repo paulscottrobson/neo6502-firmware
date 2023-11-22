@@ -7,6 +7,10 @@ lfc00
 	cli
 	ldx #$ff
 	txs
+	nop
+	lda 	#42
+	jsr 	lprintchar
+
 	lda 	#-1
 	sta 	$81
 loop2:
