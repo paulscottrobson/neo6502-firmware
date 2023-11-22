@@ -13,6 +13,7 @@
 // ***************************************************************************************
 
 #include "common.h"
+#include "system/dvi_video.h"
 
 #include "pico/multicore.h"
 #include "hardware/vreg.h"
@@ -63,7 +64,6 @@ static void __not_in_flash_func(_scanline_callback)(void) {
    if (lineCounter == FRAME_HEIGHT) {
       frameCounter++;
       lineCounter = 0;
-      SNDSync();
    }
    scanline = (lineCounter & 1) ? buffer1 : buffer2;           			// Buffer to create (e.g. the other one)
    uint8_t *screenPos = screenMemory + lineCounter * FRAME_WIDTH;      		// Data to use in screen memory.

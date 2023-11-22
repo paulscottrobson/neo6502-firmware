@@ -20,7 +20,6 @@
 
 #include "system/wdc65C02cpu.h"
 
-static int controlPort = DEFAULT_PORT;
 uint16_t iCount;
 uint16_t addr;
 uint8_t data;
@@ -32,32 +31,20 @@ bool rw;
 //
 // ***************************************************************************************
 
-void CPUStart(void) {
-    wdc65C02cpu_init();
+void CPUExecute(void) {
+    wdc65C02cpu_init();                                                         // Set up the 65C02
     wdc65C02cpu_reset();
     while(1) {
-        if (!iCount++) CPUSync();                                               // 1 time in 64k. About 25-30Hz.
+        if (!iCount++) DSPSync();                                               // 1 time in 64k. About 25-30Hz.
         wdc65C02cpu_tick(&addr, &rw);                                           // Tick the processor
-
         if (rw) {                                                               // Read put data on data lines.
             wdc65C02cpu_set_data(cpuMemory[addr]);
         } else {                                                                // Write get it and store in memory.
-            // Memory write
             data = cpuMemory[addr] = wdc65C02cpu_get_data();
-            if (addr == controlPort && data != 0) {                             // Message passed
-               CONWrite(data & 0xFF);                                           // Execute the message (temp)
-               cpuMemory[controlPort] = 0;                                      // Clear the message indicating completion.
+            if (addr == CONTROLPORT && data != 0) {                             // Message passed
+                DSPHandler(cpuMemory+controlPort,cpuMemory);                    // Go do it. Synchronous, could be Async
             }
         }       
     }
 }
 
-// ***************************************************************************************
-//
-//                      Hardware that requires periodic updates
-//
-// ***************************************************************************************
-
-void CPUSync(void) {
-    KBDSync();
-}

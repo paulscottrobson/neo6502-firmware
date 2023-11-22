@@ -1,15 +1,13 @@
 - major tidying session as we go headers, processor headers, normalise names, comments.
 
-	- initial hardware specification. Implement it :) With test code.
-		- reset
-		- console out
-		- system timer
-		- console in.
-
+	- Dispatcher
+		- add functionality to dispatcher.
+	- Test code.
 	- Build tracker. Generate boot message.
 	- Implement the emulator.
 	- Implement NeoWozMon
 	- Console colour and cursor control / positioning.
+	- Audio system driver
 
 00 System
 		00 	Reset (happens by default as well)

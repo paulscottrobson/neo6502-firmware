@@ -17,6 +17,13 @@
 #define DEFAULT_PORT 0xFF00
 
 extern uint8_t  cpuMemory[];
+extern uint16_t controlPort;
+
+//
+//		Access the control port address via this Macro !
+//
+#define CONTROLPORT 	(controlPort)
+
 
 void MEMInitialiseMemory(void);
 

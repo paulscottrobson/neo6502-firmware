@@ -100,6 +100,7 @@ uint8_t *KBDGetStateArray(void) {
 // ***************************************************************************************
 
 static void KBDInsertQueue(uint8_t ascii) {
+	CONWriteHex(ascii);
 	if (queueSize < MAX_QUEUE_SIZE) {   										// Do we have a full queue ?
 		queue[queueSize] = ascii;  												// If not insert it.
 		queueSize++;
