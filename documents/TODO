@@ -1,13 +1,14 @@
 TODO List
 ---------
 
-	- add more functionality to dispatcher as required.
-			General Dispatcher
+	- Implement Backspace in console (chr(8))
 
 	- Implement NeoWozMon
+
 	- Implement NeoWozBasic (was Applesoft Basic) if not too heavy.
 
 	- It can go out to people to play with.	
+
 
 - Locale handling
 - Escape flag setting.

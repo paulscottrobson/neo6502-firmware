@@ -13,7 +13,8 @@
 vectors = [
 		"KReadCharacter",
 		"KWriteCharacter",
-		"KWaitProcess"
+		"KWaitMessage",
+		"KSendMessage"
 ]
 
 base = 0xFFFA-len(vectors)*3

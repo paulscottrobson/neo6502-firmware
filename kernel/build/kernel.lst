@@ -1,133 +1,153 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Wed Nov 22 17:43:09 2023
+; Wed Nov 22 18:49:03 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
 ;******  Processing input file: kernel.asm
 
-=$ff00						DCommand = $FF00
-=$ff01						DFunction = $FF01
-=$ff02						DError = $FF02
-=$ff03						DControl = $FF03
-=$ff04						DParameters = $FF04
-=$ff0c						DTopOfStack = $FF0C
+=$ff00						ControlPort = $FF00
+=65280						DCommand = ControlPort+0
+=65281						DFunction = ControlPort+1
+=65282						DError = ControlPort+2
+=65283						DControl = ControlPort+3
+=65284						DParameters = ControlPort+4
+=65292						DTopOfStack = ControlPort+12
 
 ;******  Processing file: support.asm
 
-.fc00					KWriteCharacter:
-.fc00	48		pha				pha
-.fc01	20 27 fc	jsr $fc27			jsr KWaitProcess
-.fc04	8d 04 ff	sta $ff04			sta $FF04
-.fc07	a9 00		lda #$00			lda #0
-.fc09	8d 01 ff	sta $ff01			sta $FF01
-.fc0c	a9 01		lda #$01			lda #1
-.fc0e	8d 00 ff	sta $ff00			sta $FF00
-.fc11	68		pla				pla
-.fc12	60		rts				rts
-.fc13					KReadCharacter:
-.fc13	20 27 fc	jsr $fc27			jsr 	KWaitProcess
-.fc16	a9 01		lda #$01			lda 	#1
-.fc18	8d 01 ff	sta $ff01			sta		$FF01
-.fc1b	8d 00 ff	sta $ff00			sta 	$FF00
-.fc1e	20 27 fc	jsr $fc27			jsr 	KWaitProcess
-.fc21	ad 04 ff	lda $ff04			lda 	$FF04
-.fc24	f0 ed		beq $fc13			beq 	KReadCharacter
-.fc26	60		rts				rts
-.fc27					KWaitProcess:
-.fc27	48		pha			pha
-.fc28					KWaitProcess1:
-.fc28	ad 00 ff	lda $ff00		lda $FF00
-.fc2b	d0 fb		bne $fc28		bne KWaitProcess1
-.fc2d	68		pla			pla
-.fc2e	60		rts			rts
+.fc00					KSendMessage:
+.fc00	20 44 fc	jsr $fc44			jsr		KWaitMessage 				; wait for command to be released.
+.fc03	8d 20 fc	sta $fc20			sta 	_KSMReturnA+1 				; save A reloaded at end.
+.fc06	68		pla				pla 								; pop return address to the read instruction
+.fc07	8d 2d fc	sta $fc2d			sta 	_KSMRAddress+1
+.fc0a	68		pla				pla
+.fc0b	8d 2e fc	sta $fc2e			sta 	_KSMRAddress+2
+.fc0e	20 24 fc	jsr $fc24			jsr 	_KSMReadAdvance 			; read the command.
+.fc11	48		pha				pha 								; save, write it after the command.
+.fc12	20 24 fc	jsr $fc24			jsr 	_KSMReadAdvance 			; read the function number
+.fc15	8d 01 ff	sta $ff01			sta 	DFunction
+.fc18	68		pla				pla
+.fc19	8d 00 ff	sta $ff00			sta 	DCommand 					; save the command, starting the message.
+.fc1c	20 24 fc	jsr $fc24			jsr 	_KSMReadAdvance 			; use jmp indirect so advance it again.
+.fc1f					_KSMReturnA:
+.fc1f	a9 ff		lda #$ff			lda 	#$FF 						; original A value
+.fc21	6c 2d fc	jmp ($fc2d)			jmp 	(_KSMRAddress+1)
+.fc24					_KSMReadAdvance:
+.fc24	ee 2d fc	inc $fc2d			inc 	_KSMRAddress+1 				; pre-inc because of 6502 RTS behaviour
+.fc27	d0 03		bne $fc2c			bne 	_KSMRAddress
+.fc29	ee 2e fc	inc $fc2e			inc 	_KSMRAddress+2
+.fc2c					_KSMRAddress:
+.fc2c	ad ff ff	lda $ffff			lda 	$FFFF 						; holds the return address.
+.fc2f	60		rts				rts
+.fc30					KWriteCharacter:
+.fc30	8d 04 ff	sta $ff04			sta 	DParameters 				; sending A
+.fc33	20 00 fc	jsr $fc00			jsr 	KSendMessage 				; command 1,0 write character
+>fc36	01 00						.byte 	1,0
+.fc38	60		rts				rts
+.fc39					KReadCharacter:
+.fc39	20 00 fc	jsr $fc00			jsr 	KSendMessage 				; send command 1,1 read keyboard
+>fc3c	01 01						.byte 	1,1
+.fc3e	ad 04 ff	lda $ff04			lda 	DParameters 				; read result
+.fc41	f0 f6		beq $fc39			beq 	KReadCharacter 				; no key, yet.
+.fc43	60		rts				rts
+.fc44					KWaitMessage:
+.fc44	48		pha				pha
+.fc45					KWaitMessage1:
+.fc45	ad 00 ff	lda $ff00			lda 	DCommand 					; wait until the handler has finished.
+.fc48	d0 fb		bne $fc45			bne 	KWaitMessage1
+.fc4a	68		pla				pla
+.fc4b	60		rts				rts
 
 ;******  Return to file: kernel.asm
 
 
 ;******  Processing file: wozmon.asm
 
-.fc2f					PrintHexByte:
-.fc2f	48		pha			pha
-.fc30	4a		lsr a			lsr 	a
-.fc31	4a		lsr a			lsr 	a
-.fc32	4a		lsr a			lsr 	a
-.fc33	4a		lsr a			lsr 	a
-.fc34	20 38 fc	jsr $fc38		jsr 	_PrintHexNibble
-.fc37	68		pla			pla
-.fc38					_PrintHexNibble:
-.fc38	29 0f		and #$0f		and 	#15
-.fc3a	c9 0a		cmp #$0a		cmp 	#10
-.fc3c	90 02		bcc $fc40		bcc 	_nothex
-.fc3e	69 06		adc #$06		adc 	#6
-.fc40					_nothex:
-.fc40	69 30		adc #$30		adc 	#48
-.fc42	20 00 fc	jsr $fc00		jsr 	KWriteCharacter
-.fc45	60		rts			rts
+.fc4c					PrintHexByte:
+.fc4c	48		pha			pha
+.fc4d	4a		lsr a			lsr 	a
+.fc4e	4a		lsr a			lsr 	a
+.fc4f	4a		lsr a			lsr 	a
+.fc50	4a		lsr a			lsr 	a
+.fc51	20 55 fc	jsr $fc55		jsr 	_PrintHexNibble
+.fc54	68		pla			pla
+.fc55					_PrintHexNibble:
+.fc55	29 0f		and #$0f		and 	#15
+.fc57	c9 0a		cmp #$0a		cmp 	#10
+.fc59	90 02		bcc $fc5d		bcc 	_nothex
+.fc5b	69 06		adc #$06		adc 	#6
+.fc5d					_nothex:
+.fc5d	69 30		adc #$30		adc 	#48
+.fc5f	20 30 fc	jsr $fc30		jsr 	KWriteCharacter
+.fc62	60		rts			rts
 
 ;******  Return to file: kernel.asm
 
-.fc46					start
-.fc46	d8		cld			cld
-.fc47	58		cli			cli
-.fc48	a2 ff		ldx #$ff		ldx #$ff
-.fc4a	9a		txs			txs
-.fc4b	a9 2a		lda #$2a		lda 	#42
-.fc4d	20 00 fc	jsr $fc00		jsr 	KWriteCharacter
-.fc50	20 13 fc	jsr $fc13		jsr 	KReadCharacter
-.fc53	20 2f fc	jsr $fc2f		jsr 	PrintHexByte
-.fc56	a9 ff		lda #$ff		lda 	#-1
-.fc58	85 81		sta $81			sta 	$81
-.fc5a					loop2:
-.fc5a	20 7e fc	jsr $fc7e		jsr 	alphabet
-.fc5d	e6 81		inc $81			inc 	$81
-.fc5f	a5 81		lda $81			lda 	$81
-.fc61	20 2f fc	jsr $fc2f		jsr 	PrintHexByte
-.fc64	a9 0d		lda #$0d		lda 	#13
-.fc66	20 00 fc	jsr $fc00		jsr 	KWriteCharacter
-.fc69	a9 0a		lda #$0a		lda 	#10
-.fc6b	20 70 fc	jsr $fc70		jsr 	delay
-.fc6e					_opcode:
-.fc6e	80 ea		bra $fc5a		bra 	loop2
-.fc70					delay:
-.fc70	a0 00		ldy #$00		ldy 	#0
-.fc72	a2 00		ldx #$00		ldx 	#0
-.fc74					loop1:
-.fc74	88		dey			dey
-.fc75	d0 fd		bne $fc74		bne 	loop1
-.fc77	ca		dex			dex
-.fc78	d0 fa		bne $fc74		bne 	loop1
-.fc7a	3a		dec a			dec		a
-.fc7b	d0 f7		bne $fc74		bne 	loop1
-.fc7d	60		rts			rts
-.fc7e					alphabet:
-.fc7e	a2 05		ldx #$05		ldx 	#5
-.fc80	da		phx			phx
-.fc81	7a		ply			ply
-.fc82					_loop1:
-.fc82	98		tya			tya
-.fc83	18		clc			clc
-.fc84	69 1c		adc #$1c		adc 	#$1C
-.fc86	20 2f fc	jsr $fc2f		jsr PrintHexByte
-.fc89	88		dey			dey
-.fc8a	10 f6		bpl $fc82		bpl 	_loop1
-.fc8c	a9 2a		lda #$2a		lda 	#42
-.fc8e	20 2f fc	jsr $fc2f		jsr 	PrintHexByte
-.fc91	60		rts			rts
+.fc63					start
+.fc63	d8		cld				cld 								; set up
+.fc64	78		sei				sei
+.fc65	a2 ff		ldx #$ff			ldx 	#$ff
+.fc67	9a		txs				txs
+.fc68	a9 2a		lda #$2a		lda 	#42
+.fc6a	8d 04 ff	sta $ff04		sta 	DParameters
+.fc6d	20 00 fc	jsr $fc00		jsr 	KSendMessage
+>fc70	01 00					.byte  	1,0
+.fc72	20 39 fc	jsr $fc39		jsr 	KReadCharacter
+.fc75	20 4c fc	jsr $fc4c		jsr 	PrintHexByte
+.fc78	a9 ff		lda #$ff		lda 	#-1
+.fc7a	85 81		sta $81			sta 	$81
+.fc7c					loop2:
+.fc7c	20 a0 fc	jsr $fca0		jsr 	alphabet
+.fc7f	e6 81		inc $81			inc 	$81
+.fc81	a5 81		lda $81			lda 	$81
+.fc83	20 4c fc	jsr $fc4c		jsr 	PrintHexByte
+.fc86	a9 0d		lda #$0d		lda 	#13
+.fc88	20 30 fc	jsr $fc30		jsr 	KWriteCharacter
+.fc8b	a9 0a		lda #$0a		lda 	#10
+.fc8d	20 92 fc	jsr $fc92		jsr 	delay
+.fc90					_opcode:
+.fc90	80 ea		bra $fc7c		bra 	loop2
+.fc92					delay:
+.fc92	a0 00		ldy #$00		ldy 	#0
+.fc94	a2 00		ldx #$00		ldx 	#0
+.fc96					loop1:
+.fc96	88		dey			dey
+.fc97	d0 fd		bne $fc96		bne 	loop1
+.fc99	ca		dex			dex
+.fc9a	d0 fa		bne $fc96		bne 	loop1
+.fc9c	3a		dec a			dec		a
+.fc9d	d0 f7		bne $fc96		bne 	loop1
+.fc9f	60		rts			rts
+.fca0					alphabet:
+.fca0	a2 05		ldx #$05		ldx 	#5
+.fca2	da		phx			phx
+.fca3	7a		ply			ply
+.fca4					_loop1:
+.fca4	98		tya			tya
+.fca5	18		clc			clc
+.fca6	69 1c		adc #$1c		adc 	#$1C
+.fca8	20 4c fc	jsr $fc4c		jsr PrintHexByte
+.fcab	88		dey			dey
+.fcac	10 f6		bpl $fca4		bpl 	_loop1
+.fcae	a9 2a		lda #$2a		lda 	#42
+.fcb0	20 4c fc	jsr $fc4c		jsr 	PrintHexByte
+.fcb3	60		rts			rts
 >ff00	00 00 00 00 00 00 00 00			.word 	0,0,0,0,0,0,0,0
 >ff08	00 00 00 00 00 00 00 00
 
 ;******  Processing file: build/_vectors.inc
 
-.fff1	4c 13 fc	jmp $fc13		jmp	KReadCharacter
-.fff4	4c 00 fc	jmp $fc00		jmp	KWriteCharacter
-.fff7	4c 27 fc	jmp $fc27		jmp	KWaitProcess
+.ffee	4c 39 fc	jmp $fc39		jmp	KReadCharacter
+.fff1	4c 30 fc	jmp $fc30		jmp	KWriteCharacter
+.fff4	4c 44 fc	jmp $fc44		jmp	KWaitMessage
+.fff7	4c 00 fc	jmp $fc00		jmp	KSendMessage
 
 ;******  Return to file: kernel.asm
 
->fffa	46 fc					.word 	start
->fffc	46 fc					.word 	start
->fffe	46 fc					.word 	start
+>fffa	63 fc					.word 	start
+>fffc	63 fc					.word 	start
+>fffe	63 fc					.word 	start
 
 ;******  End of listing
