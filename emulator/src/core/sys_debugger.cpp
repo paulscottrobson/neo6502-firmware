@@ -18,6 +18,8 @@
 #include "debugger.h"
 #include "hardware.h"
 
+#include "common.h"
+
 #include "6502/__6502mnemonics.h"
 
 #define DBGC_ADDRESS 	(0x0F0)														// Colour scheme.
@@ -25,14 +27,22 @@
 #define DBGC_HIGHLIGHT 	(0xFF0)
 
 static int renderCount = 0;
-static BYTE8 videoRAM[320*240];														// VRAM simple pattern.
+static BYTE8 *videoRAM = NULL;														// VRAM simple pattern.
 
 // *******************************************************************************************************************************
-//												Access display VRAM
+//											Handle palette changes
 // *******************************************************************************************************************************
 
-BYTE8 *DBGXGetVideoRAM(void) {
-	return videoRAM;
+void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b) {
+
+}
+
+// *******************************************************************************************************************************
+//											Handle mode start
+// *******************************************************************************************************************************
+
+void RNDStartMode0(uint8_t *memConsole,uint8_t *memGraphics) {
+	videoRAM = memGraphics;
 }
 
 // *******************************************************************************************************************************
@@ -116,5 +126,12 @@ void DBGXRender(int *address,int showDisplay) {
 		rc2.w += 8;rc2.h += 8;rc2.x -=4;rc2.y -= 4;
 		GFXRectangle(&rc2,0xFFF);
 		GFXRectangle(&r,0);
+		BYTE8 *vPtr = videoRAM;
+		if (vPtr != NULL) {
+			for (int y = 0;y < 240;y++) {
+				for (int x = 0;x < 320;x++) {
+				}
+			}
+		}		
 	}
 }

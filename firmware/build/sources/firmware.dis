@@ -1083,12 +1083,12 @@ Disassembly of section .text:
 1000096c:	200010ac 	.word	0x200010ac
 
 10000970 <GFXSetMode>:
-10000970:	b5f0      	push	{r4, r5, r6, r7, lr}
-10000972:	46c6      	mov	lr, r8
-10000974:	2780      	movs	r7, #128	@ 0x80
+10000970:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+10000972:	46ce      	mov	lr, r9
+10000974:	4647      	mov	r7, r8
 10000976:	4e1c      	ldr	r6, [pc, #112]	@ (100009e8 <GFXSetMode+0x78>)
 10000978:	4b1c      	ldr	r3, [pc, #112]	@ (100009ec <GFXSetMode+0x7c>)
-1000097a:	b500      	push	{lr}
+1000097a:	b580      	push	{r7, lr}
 1000097c:	6033      	str	r3, [r6, #0]
 1000097e:	4b1c      	ldr	r3, [pc, #112]	@ (100009f0 <GFXSetMode+0x80>)
 10000980:	491c      	ldr	r1, [pc, #112]	@ (100009f4 <GFXSetMode+0x84>)
@@ -1102,44 +1102,44 @@ Disassembly of section .text:
 10000990:	4b1c      	ldr	r3, [pc, #112]	@ (10000a04 <GFXSetMode+0x94>)
 10000992:	6130      	str	r0, [r6, #16]
 10000994:	6173      	str	r3, [r6, #20]
-10000996:	2400      	movs	r4, #0
-10000998:	f7ff fd8e 	bl	100004b8 <RNDStartMode0>
-1000099c:	007f      	lsls	r7, r7, #1
-1000099e:	4d1a      	ldr	r5, [pc, #104]	@ (10000a08 <GFXSetMode+0x98>)
-100009a0:	e00d      	b.n	100009be <GFXSetMode+0x4e>
-100009a2:	1123      	asrs	r3, r4, #4
-100009a4:	0059      	lsls	r1, r3, #1
-100009a6:	6970      	ldr	r0, [r6, #20]
-100009a8:	18c9      	adds	r1, r1, r3
-100009aa:	186a      	adds	r2, r5, r1
-100009ac:	4680      	mov	r8, r0
+10000996:	f7ff fd8f 	bl	100004b8 <RNDStartMode0>
+1000099a:	2380      	movs	r3, #128	@ 0x80
+1000099c:	005b      	lsls	r3, r3, #1
+1000099e:	2400      	movs	r4, #0
+100009a0:	4699      	mov	r9, r3
+100009a2:	4d19      	ldr	r5, [pc, #100]	@ (10000a08 <GFXSetMode+0x98>)
+100009a4:	e00b      	b.n	100009be <GFXSetMode+0x4e>
+100009a6:	1123      	asrs	r3, r4, #4
+100009a8:	0059      	lsls	r1, r3, #1
+100009aa:	18c9      	adds	r1, r1, r3
+100009ac:	186a      	adds	r2, r5, r1
 100009ae:	7893      	ldrb	r3, [r2, #2]
-100009b0:	0020      	movs	r0, r4
+100009b0:	5c69      	ldrb	r1, [r5, r1]
 100009b2:	7852      	ldrb	r2, [r2, #1]
-100009b4:	5c69      	ldrb	r1, [r5, r1]
+100009b4:	6977      	ldr	r7, [r6, #20]
 100009b6:	3401      	adds	r4, #1
-100009b8:	47c0      	blx	r8
-100009ba:	42bc      	cmp	r4, r7
-100009bc:	d00d      	beq.n	100009da <GFXSetMode+0x6a>
-100009be:	2c0f      	cmp	r4, #15
-100009c0:	dcef      	bgt.n	100009a2 <GFXSetMode+0x32>
-100009c2:	0061      	lsls	r1, r4, #1
-100009c4:	6970      	ldr	r0, [r6, #20]
+100009b8:	47b8      	blx	r7
+100009ba:	454c      	cmp	r4, r9
+100009bc:	d00c      	beq.n	100009d8 <GFXSetMode+0x68>
+100009be:	b2e0      	uxtb	r0, r4
+100009c0:	2c0f      	cmp	r4, #15
+100009c2:	dcf0      	bgt.n	100009a6 <GFXSetMode+0x36>
+100009c4:	0061      	lsls	r1, r4, #1
 100009c6:	1909      	adds	r1, r1, r4
 100009c8:	186a      	adds	r2, r5, r1
-100009ca:	4680      	mov	r8, r0
-100009cc:	7893      	ldrb	r3, [r2, #2]
-100009ce:	0020      	movs	r0, r4
-100009d0:	7852      	ldrb	r2, [r2, #1]
-100009d2:	5c69      	ldrb	r1, [r5, r1]
-100009d4:	47c0      	blx	r8
-100009d6:	3401      	adds	r4, #1
-100009d8:	e7f1      	b.n	100009be <GFXSetMode+0x4e>
-100009da:	0030      	movs	r0, r6
-100009dc:	f000 f938 	bl	10000c50 <CONInitialise>
-100009e0:	bc80      	pop	{r7}
-100009e2:	46b8      	mov	r8, r7
-100009e4:	bdf0      	pop	{r4, r5, r6, r7, pc}
+100009ca:	7893      	ldrb	r3, [r2, #2]
+100009cc:	5c69      	ldrb	r1, [r5, r1]
+100009ce:	7852      	ldrb	r2, [r2, #1]
+100009d0:	6977      	ldr	r7, [r6, #20]
+100009d2:	47b8      	blx	r7
+100009d4:	3401      	adds	r4, #1
+100009d6:	e7f2      	b.n	100009be <GFXSetMode+0x4e>
+100009d8:	0030      	movs	r0, r6
+100009da:	f000 f939 	bl	10000c50 <CONInitialise>
+100009de:	bcc0      	pop	{r6, r7}
+100009e0:	46b9      	mov	r9, r7
+100009e2:	46b0      	mov	r8, r6
+100009e4:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
 100009e6:	46c0      	nop			@ (mov r8, r8)
 100009e8:	20022914 	.word	0x20022914
 100009ec:	001e0035 	.word	0x001e0035

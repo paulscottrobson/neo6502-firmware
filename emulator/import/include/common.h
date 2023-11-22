@@ -14,10 +14,6 @@
 #define _COMMON_H
 
 //
-//		Void Function Pointer.
-//
-typedef void (*VOIDFUNC)();
-//
 //		RP2040 specific includes
 //
 #ifdef PICO
