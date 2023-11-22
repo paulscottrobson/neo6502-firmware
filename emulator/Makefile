@@ -62,4 +62,5 @@ $(APPNAME): $(SOURCES)
 
 prebuild:
 	make -C processor
+	python scripts$(S)mapper.py >include$(S)hid2sdl.h
 	$(CCOPY) ..$(S)kernel$(S)build$(S)binary.h include
