@@ -33,4 +33,5 @@ void HWSync(void) {
 // *******************************************************************************************************************************
 
 void HWQueueKeyboardEvent(int sdlCode,int isDown) {
+	printf("%x %c %d\n",sdlCode,sdlCode,isDown);
 }

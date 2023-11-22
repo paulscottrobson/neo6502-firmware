@@ -1,32 +1,28 @@
-- major tidying session as we go headers, processor headers, normalise names, comments.
+TODO List
+---------
 
 	- Implement the emulator
-			Hardware support, enough to print.
+		Import remaining modules : graphics, console, keyboard (dummy), timer, sound (dummy)
+		Hardware support on display, w/o palette
+		Add palette.
+
+	- Loading files into emulator manually.
+
+	- Add keyboard I/O to kernel. (detect key, echo if pressed ?)
+
+	- Add keyboard functionality to emulator.
+
 	- Add basic vectors to kernel.
 			ConIn ConOut GeneralDispatch call. Wait for command clear.
 			Get them working in the emulator.
+
 	- add more functionality to dispatcher.
+
 	- Build tracker. Generate boot message.
 	- Implement NeoWozMon
 	- Implement NeoWozBasic
-	
-00 System
-		00 	Reset (happens by default as well)
-		01 	Read System Timer into P0-3
 
-01 Console
-		00 	Character out from P0
-*		01 	Is Character available -> P0
-*		02 	Read next character if available -> P0
-
-02 Graphics
-
-03 Sound
-
-04 File I/O
-
-05 Arithmetic
-
+	- It can go out to people to play with.	
 
 - Locale handling
 - Function key handling

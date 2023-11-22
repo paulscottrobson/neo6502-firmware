@@ -17,6 +17,7 @@
 #include "sys_processor.h"
 #include "sys_debug_system.h"
 #include "hardware.h"
+#include "interface/memory.h"
 
 // *******************************************************************************************************************************
 //														   Timing
@@ -34,7 +35,6 @@ static BYTE8 a,x,y,s;																// 6502 A,X,Y and Stack registers
 static BYTE8 carryFlag,interruptDisableFlag,breakFlag,								// Values representing status reg
 			 decimalFlag,overflowFlag,sValue,zValue;
 static WORD16 pc;																	// Program Counter.
-static BYTE8 ramMemory[MEMSIZE];													// Memory at $0000 upwards
 static int argumentCount;
 static char **argumentList;
 static LONG32 cycles;																// Cycle Count.
@@ -61,15 +61,15 @@ static inline void _Write(WORD16 address,BYTE8 data);								// used in support 
 // *******************************************************************************************************************************
 
 BYTE8 *CPUAccessMemory(void) {
-	return ramMemory;
+	return cpuMemory;
 }
 
 static inline BYTE8 _Read(WORD16 address) {
-	return ramMemory[address];
+	return cpuMemory[address];
 }
 
 static inline void _Write(WORD16 address,BYTE8 data) { 
-	 ramMemory[address] = data;			
+	 cpuMemory[address] = data;			
 }
 
 // *******************************************************************************************************************************
@@ -88,7 +88,7 @@ void CPUSaveArguments(int argc,char *argv[]) {
 #include "binary.h"
 
 void CPUReset(void) {
-	for (int i = 0;i < KERNEL_SIZE;i++) ramMemory[KERNEL_LOAD+i] = kernel_bin[i];  	// Load in the kernel as last built.
+	for (int i = 0;i < KERNEL_SIZE;i++) cpuMemory[KERNEL_LOAD+i] = kernel_bin[i];  	// Load in the kernel as last built.
 	HWReset();																		// Reset Hardware
 	resetProcessor();																// Reset CPU
 }
@@ -163,7 +163,7 @@ WORD16 CPUGetStepOverBreakpoint(void) {
 
 void CPUEndRun(void) {
 	FILE *f = fopen("memory.dump","wb");
-	fwrite(ramMemory,1,MEMSIZE,f);
+	fwrite(cpuMemory,1,MEMSIZE,f);
 	fclose(f);	
 }
 

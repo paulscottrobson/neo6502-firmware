@@ -31,6 +31,7 @@ TOUCH =
 PICO_SDK_PATH=<somewhere, god alone knows>
 else
 CCOPY = cp
+CCOPYREC = cp -r
 CDEL = rm -f
 CDELQ = 
 CMAKE = make
