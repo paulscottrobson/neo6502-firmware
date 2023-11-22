@@ -91,7 +91,7 @@ static void _GFXMainLoop(void *arg) {
 		}
 		if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {					// Handle other keys.
 			_GFXUpdateKeyRecord(event.key.keysym.sym,event.type == SDL_KEYDOWN);
-			HWQueueKeyboardEvent(event.key.keysym.sym,event.type == SDL_KEYDOWN);
+			HWQueueKeyboardEvent(event.key.keysym.scancode,event.type == SDL_KEYDOWN);
 		}
 	}
 	SDL_FillRect(mainSurface, NULL, 												// Draw the background.

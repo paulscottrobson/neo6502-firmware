@@ -20,7 +20,7 @@ loop2:
 	jsr 	lprinthex
 	lda 	#13
 	jsr 	lprintchar
-	lda 	#2
+	lda 	#200
 	jsr 	delay
 _opcode:	
 	bra 	loop2			

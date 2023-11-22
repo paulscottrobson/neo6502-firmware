@@ -14,6 +14,7 @@
 #include "gfx.h"
 #include <stdio.h>
 #include "common.h"
+#include "interface/kbdcodes.h"
 
 // *******************************************************************************************************************************
 //												Reset Hardware
@@ -59,5 +60,14 @@ int SNDInitialise(void) {
 #include "hid2sdl.h"
 
 void HWQueueKeyboardEvent(int sdlCode,int isDown) {
-//	printf("%x %c %d\n",sdlCode,sdlCode,isDown);
+	int found = -1;
+	for (int i = 0;i < SDL2HIDSIZE;i++) {
+		if (SDL2HIDMapping[i] == sdlCode) found = i;
+	}
+	if (found >= 0) {
+		int modifier = 0;
+		if (GFXIsKeyPressed(GFXKEY_SHIFT)) modifier |= KEY_SHIFT;
+		if (GFXIsKeyPressed(GFXKEY_CONTROL)) modifier |= KEY_CONTROL;
+		KBDEvent(isDown,found,modifier);
+	}
 }
