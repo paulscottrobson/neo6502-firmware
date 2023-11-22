@@ -31,6 +31,7 @@ kernel: always
 rebuild: clean build
 
 build: kernel always
+	python scripts$(S)prompt.py >include$(S)data$(S)prompt.h
 	make -C build
 
 clean: always

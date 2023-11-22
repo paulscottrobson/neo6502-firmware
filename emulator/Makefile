@@ -30,11 +30,12 @@ CC = g++
 
 all: emulator
 
-run: emulator
+always:
+	
+run: always emulator
 	$(EMULATOR) 
 	
-krun: emulator
-	make -C ..$(S)kernel
+krun: always kernel emulator
 	$(EMULATOR) $(BINDIR)kernel.bin@FC00
 
 emulator: prebuild $(APPNAME)
@@ -53,7 +54,7 @@ import: clean kernel always
 	$(CCOPYREC) $(FIRMWARE)sources$(S)interface import$(S)sources
 
 kernel:	
-	make -C ../kernel
+	make -B -C ../kernel
 	$(CCOPY) $(BINDIR)binary.h import$(S)include$(S)data
 	$(TOUCH) import$(S)sources$(S)interface$(S)memory.c
 

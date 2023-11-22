@@ -1,4 +1,26 @@
+; ***************************************************************************************
+; ***************************************************************************************
+;
+;      Name :      kernel.asm
+;      Authors :   Paul Robson (paul@robsons.org.uk)
+;      Date :      23rd November 2023
+;      Reviewed :  No
+;      Purpose :   Monitor main program
+;
+; ***************************************************************************************
+; ***************************************************************************************
+
 	* = $fc00
+
+	DCommand = $FF00
+	DFunction = $FF01
+	DError = $FF02
+	DControl = $FF03
+	DParameters = $FF04
+	DTopOfStack = $FF0C
+
+	.include 	"support.asm"
+	.include 	"wozmon.asm"
 
 start
 	cld
@@ -6,17 +28,18 @@ start
 	ldx #$ff
 	txs
 	lda 	#42
-	jsr 	lprintchar
-	jsr 	getecho
+	jsr 	KWriteCharacter
+	jsr 	KReadCharacter
+	jsr 	PrintHexByte
 	lda 	#-1
 	sta 	$81
 loop2:
 	jsr 	alphabet	
 	inc 	$81
 	lda 	$81
-	jsr 	lprinthex
+	jsr 	PrintHexByte
 	lda 	#13
-	jsr 	lprintchar
+	jsr 	KWriteCharacter
 	lda 	#10
 	jsr 	delay
 _opcode:	
@@ -42,71 +65,15 @@ _loop1:
 	tya
 	clc
 	adc 	#$1C
-	jsr lprinthex
+	jsr PrintHexByte
 	dey
 	bpl 	_loop1
 	lda 	#42
-	jsr 	lprinthex
+	jsr 	PrintHexByte
 	rts
 
-lprinthex:
-	pha
-	pha
-	lda 	#32
-	jsr 	lprintchar
-	pla
-	lsr 	a
-	lsr 	a
-	lsr 	a
-	lsr 	a
-	jsr 	lprintnibble
-	pla
-	jsr 	lprintnibble
-	rts
-
-lprintnibble:
-	and 	#15
-	cmp 	#10
-	bcc 	_nothex
-	adc 	#6
-_nothex:
-	adc 	#48
-	jsr 	lprintchar
-	rts
-
-waitfree:
-	pha
-waitfree1:
-	lda $FF00
-	bne waitfree1
-	pla
-	rts
-
-lprintchar:	
-	pha
-	jsr waitfree
-	and #$7f
-	sta $FF04
-	lda #0
-	sta $FF01
-	lda #1
-	sta $FF00
-	pla	
-	rts
-
-getecho:
-	jsr 	waitfree
-	lda 	#1
-	sta 	$FF01
-	lda 	#1
-	sta 	$FF00
-	jsr 	waitfree
-	lda 	$FF04
-	beq 	getecho
-	jsr 	lprinthex
-	rts
-
-
+	* = $FF00
+	.word 	0,0,0,0,0,0,0,0
 
 	* = $FFFA
 	.word 	start
