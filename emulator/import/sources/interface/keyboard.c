@@ -100,7 +100,6 @@ uint8_t *KBDGetStateArray(void) {
 // ***************************************************************************************
 
 static void KBDInsertQueue(uint8_t ascii) {
-	CONWriteHex(ascii);
 	if (queueSize < MAX_QUEUE_SIZE) {   										// Do we have a full queue ?
 		queue[queueSize] = ascii;  												// If not insert it.
 		queueSize++;
@@ -227,7 +226,7 @@ static uint8_t KBDDefaultControlKeys(uint8_t keyCode,uint8_t isShift) {
 // ***************************************************************************************
 
 static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers) {
-	CONWrite('F');CONWrite(funcNum+'0');
+	//CONWrite('F');CONWrite(funcNum+'0');
 }
 
 // ***************************************************************************************

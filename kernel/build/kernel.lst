@@ -1,22 +1,20 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Wed Nov 22 15:06:14 2023
+; Wed Nov 22 16:05:15 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
 ;******  Processing input file: kernel.asm
 
-.fc00	ea		nop			nop
-.fc01	ea		nop			nop
-.fc02					lfc00
-.fc02	d8		cld			cld
-.fc03	58		cli			cli
-.fc04	a2 ff		ldx #$ff		ldx #$ff
-.fc06	9a		txs			txs
-.fc07	ea		nop			nop
-.fc08	a9 2a		lda #$2a		lda 	#42
-.fc0a	20 6b fc	jsr $fc6b		jsr 	lprintchar
+.fc00					start
+.fc00	d8		cld			cld
+.fc01	58		cli			cli
+.fc02	a2 ff		ldx #$ff		ldx #$ff
+.fc04	9a		txs			txs
+.fc05	a9 2a		lda #$2a		lda 	#42
+.fc07	20 73 fc	jsr $fc73		jsr 	lprintchar
+.fc0a	20 88 fc	jsr $fc88		jsr 	getecho
 .fc0d	a9 ff		lda #$ff		lda 	#-1
 .fc0f	85 81		sta $81			sta 	$81
 .fc11					loop2:
@@ -25,7 +23,7 @@
 .fc16	a5 81		lda $81			lda 	$81
 .fc18	20 49 fc	jsr $fc49		jsr 	lprinthex
 .fc1b	a9 0d		lda #$0d		lda 	#13
-.fc1d	20 6b fc	jsr $fc6b		jsr 	lprintchar
+.fc1d	20 73 fc	jsr $fc73		jsr 	lprintchar
 .fc20	a9 0a		lda #$0a		lda 	#10
 .fc22	20 27 fc	jsr $fc27		jsr 	delay
 .fc25					_opcode:
@@ -59,7 +57,7 @@
 .fc49	48		pha			pha
 .fc4a	48		pha			pha
 .fc4b	a9 20		lda #$20		lda 	#32
-.fc4d	20 6b fc	jsr $fc6b		jsr 	lprintchar
+.fc4d	20 73 fc	jsr $fc73		jsr 	lprintchar
 .fc50	68		pla			pla
 .fc51	4a		lsr a			lsr 	a
 .fc52	4a		lsr a			lsr 	a
@@ -76,23 +74,39 @@
 .fc63	69 06		adc #$06		adc 	#6
 .fc65					_nothex:
 .fc65	69 30		adc #$30		adc 	#48
-.fc67	20 6b fc	jsr $fc6b		jsr 	lprintchar
+.fc67	20 73 fc	jsr $fc73		jsr 	lprintchar
 .fc6a	60		rts			rts
-.fc6b					lprintchar:
+.fc6b					waitfree:
 .fc6b	48		pha			pha
-.fc6c					waitfree:
+.fc6c					waitfree1:
 .fc6c	ad 00 ff	lda $ff00		lda $FF00
-.fc6f	d0 fb		bne $fc6c		bne waitfree
-.fc71	a9 01		lda #$01		lda #1
-.fc73	8d 00 ff	sta $ff00		sta $FF00
-.fc76	a9 00		lda #$00		lda #0
-.fc78	8d 01 ff	sta $ff01		sta $FF01
-.fc7b	68		pla			pla
-.fc7c	29 7f		and #$7f		and #$7f
-.fc7e	8d 04 ff	sta $ff04		sta $FF04
-.fc81	60		rts			rts
->fffa	02 fc					.word 	lfc00
->fffc	02 fc					.word 	lfc00
->fffe	02 fc					.word	lfc00
+.fc6f	d0 fb		bne $fc6c		bne waitfree1
+.fc71	68		pla			pla
+.fc72	60		rts			rts
+.fc73					lprintchar:
+.fc73	48		pha			pha
+.fc74	20 6b fc	jsr $fc6b		jsr waitfree
+.fc77	29 7f		and #$7f		and #$7f
+.fc79	8d 04 ff	sta $ff04		sta $FF04
+.fc7c	a9 00		lda #$00		lda #0
+.fc7e	8d 01 ff	sta $ff01		sta $FF01
+.fc81	a9 01		lda #$01		lda #1
+.fc83	8d 00 ff	sta $ff00		sta $FF00
+.fc86	68		pla			pla
+.fc87	60		rts			rts
+.fc88					getecho:
+.fc88	20 6b fc	jsr $fc6b		jsr 	waitfree
+.fc8b	a9 02		lda #$02		lda 	#2
+.fc8d	8d 01 ff	sta $ff01		sta 	$FF01
+.fc90	a9 01		lda #$01		lda 	#1
+.fc92	8d 00 ff	sta $ff00		sta 	$FF00
+.fc95	20 6b fc	jsr $fc6b		jsr 	waitfree
+.fc98	ad 04 ff	lda $ff04		lda 	$FF04
+.fc9b	f0 eb		beq $fc88		beq 	getecho
+.fc9d	20 49 fc	jsr $fc49		jsr 	lprinthex
+.fca0	60		rts			rts
+>fffa	00 fc					.word 	start
+>fffc	00 fc					.word 	start
+>fffe	00 fc					.word 	start
 
 ;******  End of listing

@@ -31,8 +31,12 @@ CC = g++
 all: emulator
 
 run: emulator
-	$(EMULATOR)
+	$(EMULATOR) 
 	
+krun: emulator
+	make -C ..$(S)kernel
+	$(EMULATOR) $(BINDIR)kernel.bin@FC00
+
 emulator: prebuild $(APPNAME)
 	$(CCOPY) $(APPNAME) ..$(S)bin
 	
@@ -68,3 +72,6 @@ prebuild:
 	make -C processor
 	python scripts$(S)mapper.py >include$(S)hid2sdl.h
 	$(CCOPY) ..$(S)kernel$(S)build$(S)binary.h include
+
+fwbuild:
+	make -C $(FIRMWARE)
