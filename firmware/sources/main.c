@@ -11,17 +11,10 @@
 // ***************************************************************************************
 
 #include "common.h"
-
-void writeCharacter(int n);
+#include "system/processor.h"
 
 int main() {
-    const char bootString[] = "NEO6502 Retrocomputer\r\r";
-    MEMInitialiseMemory();
-    GFXSetMode(0);
-    const char *c = bootString;
-    while (*c != '\0') CONWrite(*c++);
-    KBDInitialise();
-    SNDInitialise();
-    CPUStart();
+    DSPReset();                                                                 // Initialises everything.
+    while (1) CPUExecute();                                                     // Doesn't have to loop but can.
 }
 

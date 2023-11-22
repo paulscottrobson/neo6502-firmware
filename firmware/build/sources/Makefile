@@ -1632,6 +1632,30 @@ interface/console.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/console.c.s
 .PHONY : interface/console.c.s
 
+interface/dispatch.obj: interface/dispatch.c.obj
+.PHONY : interface/dispatch.obj
+
+# target to build an object file
+interface/dispatch.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/dispatch.c.obj
+.PHONY : interface/dispatch.c.obj
+
+interface/dispatch.i: interface/dispatch.c.i
+.PHONY : interface/dispatch.i
+
+# target to preprocess a source file
+interface/dispatch.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/dispatch.c.i
+.PHONY : interface/dispatch.c.i
+
+interface/dispatch.s: interface/dispatch.c.s
+.PHONY : interface/dispatch.s
+
+# target to generate assembly for a file
+interface/dispatch.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/dispatch.c.s
+.PHONY : interface/dispatch.c.s
+
 interface/graphics.obj: interface/graphics.c.obj
 .PHONY : interface/graphics.obj
 
@@ -1680,6 +1704,30 @@ interface/keyboard.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/keyboard.c.s
 .PHONY : interface/keyboard.c.s
 
+interface/memory.obj: interface/memory.c.obj
+.PHONY : interface/memory.obj
+
+# target to build an object file
+interface/memory.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/memory.c.obj
+.PHONY : interface/memory.c.obj
+
+interface/memory.i: interface/memory.c.i
+.PHONY : interface/memory.i
+
+# target to preprocess a source file
+interface/memory.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/memory.c.i
+.PHONY : interface/memory.c.i
+
+interface/memory.s: interface/memory.c.s
+.PHONY : interface/memory.s
+
+# target to generate assembly for a file
+interface/memory.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/memory.c.s
+.PHONY : interface/memory.c.s
+
 main.obj: main.c.obj
 .PHONY : main.obj
 
@@ -1703,30 +1751,6 @@ main.s: main.c.s
 main.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/main.c.s
 .PHONY : main.c.s
-
-system/memory.obj: system/memory.c.obj
-.PHONY : system/memory.obj
-
-# target to build an object file
-system/memory.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/system/memory.c.obj
-.PHONY : system/memory.c.obj
-
-system/memory.i: system/memory.c.i
-.PHONY : system/memory.i
-
-# target to preprocess a source file
-system/memory.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/system/memory.c.i
-.PHONY : system/memory.c.i
-
-system/memory.s: system/memory.c.s
-.PHONY : system/memory.s
-
-# target to generate assembly for a file
-system/memory.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/system/memory.c.s
-.PHONY : system/memory.c.s
 
 system/processor.obj: system/processor.c.obj
 .PHONY : system/processor.obj
@@ -1948,18 +1972,21 @@ help:
 	@echo "... interface/console.obj"
 	@echo "... interface/console.i"
 	@echo "... interface/console.s"
+	@echo "... interface/dispatch.obj"
+	@echo "... interface/dispatch.i"
+	@echo "... interface/dispatch.s"
 	@echo "... interface/graphics.obj"
 	@echo "... interface/graphics.i"
 	@echo "... interface/graphics.s"
 	@echo "... interface/keyboard.obj"
 	@echo "... interface/keyboard.i"
 	@echo "... interface/keyboard.s"
+	@echo "... interface/memory.obj"
+	@echo "... interface/memory.i"
+	@echo "... interface/memory.s"
 	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... system/memory.obj"
-	@echo "... system/memory.i"
-	@echo "... system/memory.s"
 	@echo "... system/processor.obj"
 	@echo "... system/processor.i"
 	@echo "... system/processor.s"

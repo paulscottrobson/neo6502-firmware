@@ -12,8 +12,10 @@
 // ***************************************************************************************
 
 #include "common.h"
+#include "stdlib.h"
 #include "hardware/pwm.h"
 #include "dvi.h"
+#include "system/dvi_video.h"
 
 #define SOUND_PIN 	(20) 					// Beeper pin.
 
@@ -41,15 +43,30 @@ static int32_t pwm_set_freq_duty(uint slice_num,uint chan,uint32_t f, int d)
 
 // ***************************************************************************************
 //
+// 					Makes a white noise by randomising the PWM values
+//
+// ***************************************************************************************
+
+bool repeating_timer_callback(struct repeating_timer *t) {
+ 	if (isChannelNoise) {
+ 		pwm_set_freq_duty(sliceNumber,channel, channelFrequency-50+random() % 100, random() % 80+10	);
+ 	}
+    return true;
+}
+// ***************************************************************************************
+//
 //				Initialise sound channel, return # of supported channels
 //
 // ***************************************************************************************
+
+struct repeating_timer timer;
 
 int SNDInitialise(void) {
 	gpio_set_function(SOUND_PIN, GPIO_FUNC_PWM);
 	sliceNumber = pwm_gpio_to_slice_num(SOUND_PIN);
 	channel = pwm_gpio_to_channel(SOUND_PIN);
 	SNDQuiet(0);
+    add_repeating_timer_ms(10, repeating_timer_callback, NULL, &timer);
 	return 1;
 }
 
@@ -83,8 +100,3 @@ void SNDQuiet(uint8_t channel) {
 //
 // ***************************************************************************************
 
-void SNDSync(void) {
-	if (isChannelNoise) {
-		pwm_set_freq_duty(sliceNumber,channel, channelFrequency-50+random() % 100, random() % 80+10	);
-	}
-}

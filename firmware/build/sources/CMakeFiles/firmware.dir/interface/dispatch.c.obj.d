@@ -1,5 +1,5 @@
-sources/CMakeFiles/firmware.dir/interface/console.c.obj: \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/console.c \
+sources/CMakeFiles/firmware.dir/interface/dispatch.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/dispatch.c \
  /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
  /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
@@ -67,5 +67,4 @@ sources/CMakeFiles/firmware.dir/interface/console.c.obj: \
  /usr/arm-none-eabi/include/sys/lock.h \
  /usr/arm-none-eabi/include/sys/_locale.h \
  /usr/arm-none-eabi/include/strings.h \
- /usr/arm-none-eabi/include/sys/string.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/data/font_5x7.h
+ /usr/arm-none-eabi/include/sys/string.h

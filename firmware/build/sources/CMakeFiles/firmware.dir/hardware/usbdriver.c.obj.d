@@ -51,6 +51,14 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/keyboard.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/memory.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/dispatch.h \
  /usr/arm-none-eabi/include/string.h \
  /usr/arm-none-eabi/include/sys/reent.h \
  /usr/arm-none-eabi/include/_ansi.h \
@@ -60,15 +68,6 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
  /usr/arm-none-eabi/include/sys/_locale.h \
  /usr/arm-none-eabi/include/strings.h \
  /usr/arm-none-eabi/include/sys/string.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/keyboard.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
  /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \

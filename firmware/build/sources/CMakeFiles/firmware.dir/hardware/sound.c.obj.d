@@ -51,6 +51,14 @@ sources/CMakeFiles/firmware.dir/hardware/sound.c.obj: \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h \
  /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/keyboard.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/memory.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/dispatch.h \
  /usr/arm-none-eabi/include/string.h \
  /usr/arm-none-eabi/include/sys/reent.h \
  /usr/arm-none-eabi/include/_ansi.h \
@@ -60,15 +68,9 @@ sources/CMakeFiles/firmware.dir/hardware/sound.c.obj: \
  /usr/arm-none-eabi/include/sys/_locale.h \
  /usr/arm-none-eabi/include/strings.h \
  /usr/arm-none-eabi/include/sys/string.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/memory.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/keyboard.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h \
+ /usr/arm-none-eabi/include/stdlib.h \
+ /usr/arm-none-eabi/include/machine/stdlib.h \
+ /usr/arm-none-eabi/include/alloca.h \
  /aux/pico/pico-sdk/src/rp2_common/hardware_pwm/include/hardware/pwm.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pwm.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pwm.h \
@@ -88,4 +90,5 @@ sources/CMakeFiles/firmware.dir/hardware/sound.c.obj: \
  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pio.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pio.h \
  /aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/system/dvi_video.h

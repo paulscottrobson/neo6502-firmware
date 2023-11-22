@@ -17,26 +17,26 @@
 //
 typedef void (*VOIDFUNC)();
 //
-//		RP2040 includes
+//		RP2040 specific includes
 //
+#ifdef PICO
 #include "pico/stdlib.h"
 #include "pico/stdio.h"
-#include "string.h"
 #include "hardware/gpio.h"
+#endif
 //
 //		Neo6502 Includes
 //
-#include "system/memory.h"
-#include "system/processor.h"
-
 #include "interface/keyboard.h"
 #include "interface/graphics.h"
 #include "interface/console.h"
 #include "interface/timer.h"
 #include "interface/sound.h"
+#include "interface/memory.h"
+#include "interface/dispatch.h"
 //
-//		RP2040 specific.
+//		Other Includes
 //
-#include "system/dvi_video.h"
+#include "string.h"
 
 #endif
