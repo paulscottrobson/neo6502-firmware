@@ -2,14 +2,13 @@ TODO List
 ---------
 
 	- Add basic vectors to kernel.
-			ConIn ConOut GeneralDispatch call. Wait for command clear.
+			GeneralDispatch 
 			Get them working in the emulator.
 
-	- add more functionality to dispatcher.
+	- add more functionality to dispatcher as required.
 
-	- Build tracker. Generate boot message.
 	- Implement NeoWozMon
-	- Implement NeoWozBasic
+	- Implement NeoWozBasic (?)
 
 	- It can go out to people to play with.	
 

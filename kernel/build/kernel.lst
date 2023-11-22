@@ -1,112 +1,123 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Wed Nov 22 16:05:15 2023
+; Wed Nov 22 17:01:56 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
 ;******  Processing input file: kernel.asm
 
-.fc00					start
-.fc00	d8		cld			cld
-.fc01	58		cli			cli
-.fc02	a2 ff		ldx #$ff		ldx #$ff
-.fc04	9a		txs			txs
-.fc05	a9 2a		lda #$2a		lda 	#42
-.fc07	20 73 fc	jsr $fc73		jsr 	lprintchar
-.fc0a	20 88 fc	jsr $fc88		jsr 	getecho
-.fc0d	a9 ff		lda #$ff		lda 	#-1
-.fc0f	85 81		sta $81			sta 	$81
-.fc11					loop2:
-.fc11	20 35 fc	jsr $fc35		jsr 	alphabet
-.fc14	e6 81		inc $81			inc 	$81
-.fc16	a5 81		lda $81			lda 	$81
-.fc18	20 49 fc	jsr $fc49		jsr 	lprinthex
-.fc1b	a9 0d		lda #$0d		lda 	#13
-.fc1d	20 73 fc	jsr $fc73		jsr 	lprintchar
-.fc20	a9 0a		lda #$0a		lda 	#10
-.fc22	20 27 fc	jsr $fc27		jsr 	delay
-.fc25					_opcode:
-.fc25	80 ea		bra $fc11		bra 	loop2
-.fc27					delay:
-.fc27	a0 00		ldy #$00		ldy 	#0
-.fc29	a2 00		ldx #$00		ldx 	#0
-.fc2b					loop1:
-.fc2b	88		dey			dey
-.fc2c	d0 fd		bne $fc2b		bne 	loop1
-.fc2e	ca		dex			dex
-.fc2f	d0 fa		bne $fc2b		bne 	loop1
-.fc31	3a		dec a			dec		a
-.fc32	d0 f7		bne $fc2b		bne 	loop1
-.fc34	60		rts			rts
-.fc35					alphabet:
-.fc35	a2 05		ldx #$05		ldx 	#5
-.fc37	da		phx			phx
-.fc38	7a		ply			ply
-.fc39					_loop1:
-.fc39	98		tya			tya
-.fc3a	18		clc			clc
-.fc3b	69 1c		adc #$1c		adc 	#$1C
-.fc3d	20 49 fc	jsr $fc49		jsr lprinthex
-.fc40	88		dey			dey
-.fc41	10 f6		bpl $fc39		bpl 	_loop1
-.fc43	a9 2a		lda #$2a		lda 	#42
-.fc45	20 49 fc	jsr $fc49		jsr 	lprinthex
-.fc48	60		rts			rts
-.fc49					lprinthex:
-.fc49	48		pha			pha
-.fc4a	48		pha			pha
-.fc4b	a9 20		lda #$20		lda 	#32
-.fc4d	20 73 fc	jsr $fc73		jsr 	lprintchar
-.fc50	68		pla			pla
-.fc51	4a		lsr a			lsr 	a
-.fc52	4a		lsr a			lsr 	a
-.fc53	4a		lsr a			lsr 	a
-.fc54	4a		lsr a			lsr 	a
-.fc55	20 5d fc	jsr $fc5d		jsr 	lprintnibble
-.fc58	68		pla			pla
-.fc59	20 5d fc	jsr $fc5d		jsr 	lprintnibble
-.fc5c	60		rts			rts
-.fc5d					lprintnibble:
-.fc5d	29 0f		and #$0f		and 	#15
-.fc5f	c9 0a		cmp #$0a		cmp 	#10
-.fc61	90 02		bcc $fc65		bcc 	_nothex
-.fc63	69 06		adc #$06		adc 	#6
-.fc65					_nothex:
-.fc65	69 30		adc #$30		adc 	#48
-.fc67	20 73 fc	jsr $fc73		jsr 	lprintchar
-.fc6a	60		rts			rts
-.fc6b					waitfree:
-.fc6b	48		pha			pha
-.fc6c					waitfree1:
-.fc6c	ad 00 ff	lda $ff00		lda $FF00
-.fc6f	d0 fb		bne $fc6c		bne waitfree1
-.fc71	68		pla			pla
-.fc72	60		rts			rts
-.fc73					lprintchar:
-.fc73	48		pha			pha
-.fc74	20 6b fc	jsr $fc6b		jsr waitfree
-.fc77	29 7f		and #$7f		and #$7f
-.fc79	8d 04 ff	sta $ff04		sta $FF04
-.fc7c	a9 00		lda #$00		lda #0
-.fc7e	8d 01 ff	sta $ff01		sta $FF01
-.fc81	a9 01		lda #$01		lda #1
-.fc83	8d 00 ff	sta $ff00		sta $FF00
-.fc86	68		pla			pla
-.fc87	60		rts			rts
-.fc88					getecho:
-.fc88	20 6b fc	jsr $fc6b		jsr 	waitfree
-.fc8b	a9 02		lda #$02		lda 	#2
-.fc8d	8d 01 ff	sta $ff01		sta 	$FF01
-.fc90	a9 01		lda #$01		lda 	#1
-.fc92	8d 00 ff	sta $ff00		sta 	$FF00
-.fc95	20 6b fc	jsr $fc6b		jsr 	waitfree
-.fc98	ad 04 ff	lda $ff04		lda 	$FF04
-.fc9b	f0 eb		beq $fc88		beq 	getecho
-.fc9d	20 49 fc	jsr $fc49		jsr 	lprinthex
-.fca0	60		rts			rts
->fffa	00 fc					.word 	start
->fffc	00 fc					.word 	start
->fffe	00 fc					.word 	start
+=$ff00						DCommand = $FF00
+=$ff01						DFunction = $FF01
+=$ff02						DError = $FF02
+=$ff03						DControl = $FF03
+=$ff04						DParameters = $FF04
+=$ff0c						DTopOfStack = $FF0C
+
+;******  Processing file: support.asm
+
+.fc00					KWriteCharacter:
+.fc00	20 27 fc	jsr $fc27		jsr KWaitProcess
+.fc03	29 7f		and #$7f		and #$7f
+.fc05	8d 04 ff	sta $ff04		sta $FF04
+.fc08	a9 00		lda #$00		lda #0
+.fc0a	8d 01 ff	sta $ff01		sta $FF01
+.fc0d	a9 01		lda #$01		lda #1
+.fc0f	8d 00 ff	sta $ff00		sta $FF00
+.fc12	60		rts			rts
+.fc13					KReadCharacter:
+.fc13	20 27 fc	jsr $fc27		jsr 	KWaitProcess
+.fc16	a9 01		lda #$01		lda 	#1
+.fc18	8d 01 ff	sta $ff01		sta		$FF01
+.fc1b	8d 00 ff	sta $ff00		sta 	$FF00
+.fc1e	20 27 fc	jsr $fc27		jsr 	KWaitProcess
+.fc21	ad 04 ff	lda $ff04		lda 	$FF04
+.fc24	f0 ed		beq $fc13		beq 	KReadCharacter
+.fc26	60		rts			rts
+.fc27					KWaitProcess:
+.fc27	48		pha			pha
+.fc28					KWaitProcess1:
+.fc28	ad 00 ff	lda $ff00		lda $FF00
+.fc2b	d0 fb		bne $fc28		bne KWaitProcess1
+.fc2d	68		pla			pla
+.fc2e	60		rts			rts
+
+;******  Return to file: kernel.asm
+
+
+;******  Processing file: wozmon.asm
+
+.fc2f					PrintHexByte:
+.fc2f	48		pha			pha
+.fc30	4a		lsr a			lsr 	a
+.fc31	4a		lsr a			lsr 	a
+.fc32	4a		lsr a			lsr 	a
+.fc33	4a		lsr a			lsr 	a
+.fc34	20 38 fc	jsr $fc38		jsr 	_PrintHexNibble
+.fc37	68		pla			pla
+.fc38					_PrintHexNibble:
+.fc38	29 0f		and #$0f		and 	#15
+.fc3a	c9 0a		cmp #$0a		cmp 	#10
+.fc3c	90 02		bcc $fc40		bcc 	_nothex
+.fc3e	69 06		adc #$06		adc 	#6
+.fc40					_nothex:
+.fc40	69 30		adc #$30		adc 	#48
+.fc42	20 00 fc	jsr $fc00		jsr 	KWriteCharacter
+.fc45	60		rts			rts
+
+;******  Return to file: kernel.asm
+
+.fc46					start
+.fc46	d8		cld			cld
+.fc47	58		cli			cli
+.fc48	a2 ff		ldx #$ff		ldx #$ff
+.fc4a	9a		txs			txs
+.fc4b	a9 2a		lda #$2a		lda 	#42
+.fc4d	20 00 fc	jsr $fc00		jsr 	KWriteCharacter
+.fc50	20 13 fc	jsr $fc13		jsr 	KReadCharacter
+.fc53	20 2f fc	jsr $fc2f		jsr 	PrintHexByte
+.fc56	a9 ff		lda #$ff		lda 	#-1
+.fc58	85 81		sta $81			sta 	$81
+.fc5a					loop2:
+.fc5a	20 7e fc	jsr $fc7e		jsr 	alphabet
+.fc5d	e6 81		inc $81			inc 	$81
+.fc5f	a5 81		lda $81			lda 	$81
+.fc61	20 2f fc	jsr $fc2f		jsr 	PrintHexByte
+.fc64	a9 0d		lda #$0d		lda 	#13
+.fc66	20 00 fc	jsr $fc00		jsr 	KWriteCharacter
+.fc69	a9 0a		lda #$0a		lda 	#10
+.fc6b	20 70 fc	jsr $fc70		jsr 	delay
+.fc6e					_opcode:
+.fc6e	80 ea		bra $fc5a		bra 	loop2
+.fc70					delay:
+.fc70	a0 00		ldy #$00		ldy 	#0
+.fc72	a2 00		ldx #$00		ldx 	#0
+.fc74					loop1:
+.fc74	88		dey			dey
+.fc75	d0 fd		bne $fc74		bne 	loop1
+.fc77	ca		dex			dex
+.fc78	d0 fa		bne $fc74		bne 	loop1
+.fc7a	3a		dec a			dec		a
+.fc7b	d0 f7		bne $fc74		bne 	loop1
+.fc7d	60		rts			rts
+.fc7e					alphabet:
+.fc7e	a2 05		ldx #$05		ldx 	#5
+.fc80	da		phx			phx
+.fc81	7a		ply			ply
+.fc82					_loop1:
+.fc82	98		tya			tya
+.fc83	18		clc			clc
+.fc84	69 1c		adc #$1c		adc 	#$1C
+.fc86	20 2f fc	jsr $fc2f		jsr PrintHexByte
+.fc89	88		dey			dey
+.fc8a	10 f6		bpl $fc82		bpl 	_loop1
+.fc8c	a9 2a		lda #$2a		lda 	#42
+.fc8e	20 2f fc	jsr $fc2f		jsr 	PrintHexByte
+.fc91	60		rts			rts
+>ff00	00 00 00 00 00 00 00 00			.word 	0,0,0,0,0,0,0,0
+>ff08	00 00 00 00 00 00 00 00
+>fffa	46 fc					.word 	start
+>fffc	46 fc					.word 	start
+>fffe	46 fc					.word 	start
 
 ;******  End of listing

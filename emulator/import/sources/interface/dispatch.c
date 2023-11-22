@@ -11,6 +11,7 @@
 // ***************************************************************************************
 
 #include "common.h"
+#include "data/prompt.h"
 
 #define DCOMMAND    (cBlock+0)
 #define DFUNCTION   (cBlock+1)
@@ -49,7 +50,7 @@ void DSPSync(void) {
 // ***************************************************************************************
 
 void DSPReset(void) {
-    const char bootString[] = "NEO6502 Retrocomputer\r\r";
+    const char bootString[] = PROMPT;
     MEMInitialiseMemory();                                                      // Set up memory, load kernel ROM
     GFXSetMode(0);                                                              // Initialise graphics
     KBDInitialise();                                                            // Initialise keyboard

@@ -68,4 +68,5 @@ sources/CMakeFiles/firmware.dir/interface/dispatch.c.obj: \
  /usr/arm-none-eabi/include/sys/_locale.h \
  /usr/arm-none-eabi/include/strings.h \
  /usr/arm-none-eabi/include/sys/string.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/data/prompt.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/data/dispatch_code.h
