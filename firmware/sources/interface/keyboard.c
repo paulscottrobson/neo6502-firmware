@@ -239,3 +239,10 @@ static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers) {
 static uint8_t KBDLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifiers) {
 	return asciiCode;
 }
+
+// ***************************************************************************************
+//
+//		Date 		Revision
+//		==== 		========
+//
+// ***************************************************************************************

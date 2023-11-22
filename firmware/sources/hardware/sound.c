@@ -95,8 +95,7 @@ void SNDQuiet(uint8_t channel) {
 
 // ***************************************************************************************
 //
-//				Sound synchroniser, use to generate a strange sort of noise.
-//						 (Note: this is called in DVI End of Frame)
+//		Date 		Revision
+//		==== 		========
 //
 // ***************************************************************************************
-

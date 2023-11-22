@@ -12,6 +12,12 @@
 
 #include "common.h"
 
+#define DCOMMAND    (cBlock+0)
+#define DFUNCTION   (cBlock+1)
+#define DERROR      (cBlock+2)
+#define DSTATUS     (cBlock+3)
+#define DPARAMS     (cBlock+4)
+#define DTOPSTACK   (cBlock+8)
 
 // ***************************************************************************************
 //
@@ -21,9 +27,9 @@
 
 void DSPHandler(uint8_t *cBlock,uint8_t *memory) {
 
-       CONWrite(*cBlock);                                                   // Execute the message (temp)
+       CONWrite(*DCOMMAND);    
 
-       *cBlock = 0;																// Clear the message indicating completion.
+       *DCOMMAND = 0;															// Clear the message indicating completion.
 }
 
 // ***************************************************************************************
@@ -44,11 +50,18 @@ void DSPSync(void) {
 
 void DSPReset(void) {
     const char bootString[] = "NEO6502 Retrocomputer\r\r";
-    MEMInitialiseMemory();
-    GFXSetMode(0);
-    KBDInitialise();
+    MEMInitialiseMemory();                                                      // Set up memory, load kernel ROM
+    GFXSetMode(0);                                                              // Initialise graphics
+    KBDInitialise();                                                            // Initialise keyboard
     KBDEvent(0,0xFF,0);                                                         // Reset the keyboard manager
-    SNDInitialise();
+    SNDInitialise();                                                            // Initialse sound
     const char *c = bootString;
     while (*c != '\0') CONWrite(*c++);	
 }
+
+// ***************************************************************************************
+//
+//      Date        Revision
+//      ====        ========
+//
+// ***************************************************************************************
