@@ -24,6 +24,7 @@ all: always
 	$(ASSEMBLER) $(KERNELSOURCES) -o build$(S)kernel.bin -L build$(S)kernel.lst $(ASMEND)
 	$(PYTHON) scripts$(S)hconvert.py build$(S)kernel.bin >build$(S)binary.h
 	$(CCOPY) build$(S)kernel.bin $(BINDIR)
+	$(CCOPY) build$(S)binary.h $(BINDIR)
 	
 always:
 

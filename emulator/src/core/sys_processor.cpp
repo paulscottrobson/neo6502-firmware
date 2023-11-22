@@ -88,10 +88,9 @@ void CPUSaveArguments(int argc,char *argv[]) {
 //														Reset the CPU
 // *******************************************************************************************************************************
 
-#include "binary.h"
+//#include "binary.h"
 
 void CPUReset(void) {
-	for (int i = 0;i < KERNEL_SIZE;i++) cpuMemory[KERNEL_LOAD+i] = kernel_bin[i];  	// Load in the kernel as last built.
 	HWReset();																		// Reset Hardware
 	resetProcessor();																// Reset CPU
 }

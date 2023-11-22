@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Wed Nov 22 14:25:55 2023
+; Wed Nov 22 15:06:14 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -26,7 +26,7 @@
 .fc18	20 49 fc	jsr $fc49		jsr 	lprinthex
 .fc1b	a9 0d		lda #$0d		lda 	#13
 .fc1d	20 6b fc	jsr $fc6b		jsr 	lprintchar
-.fc20	a9 c8		lda #$c8		lda 	#200
+.fc20	a9 0a		lda #$0a		lda 	#10
 .fc22	20 27 fc	jsr $fc27		jsr 	delay
 .fc25					_opcode:
 .fc25	80 ea		bra $fc11		bra 	loop2
