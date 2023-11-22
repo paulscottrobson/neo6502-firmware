@@ -12,23 +12,35 @@
 
 	* = $fc00
 
-	DCommand = $FF00
-	DFunction = $FF01
-	DError = $FF02
-	DControl = $FF03
-	DParameters = $FF04
-	DTopOfStack = $FF0C
+; ***************************************************************************************
+;
+;							Access the message control port
+;
+; ***************************************************************************************
+
+	ControlPort = $FF00
+
+	DCommand = ControlPort+0
+	DFunction = ControlPort+1
+	DError = ControlPort+2
+	DControl = ControlPort+3
+	DParameters = ControlPort+4
+	DTopOfStack = ControlPort+12
 
 	.include 	"support.asm"
 	.include 	"wozmon.asm"
 
 start
-	cld
-	cli
-	ldx #$ff
-	txs
+		cld 								; set up
+		sei
+		ldx 	#$ff
+		txs
+		
 	lda 	#42
-	jsr 	KWriteCharacter
+	sta 	DParameters
+	jsr 	KSendMessage
+	.byte  	1,0
+
 	jsr 	KReadCharacter
 	jsr 	PrintHexByte
 	lda 	#-1
@@ -72,7 +84,7 @@ _loop1:
 	jsr 	PrintHexByte
 	rts
 
-	* = $FF00
+	* = ControlPort
 	.word 	0,0,0,0,0,0,0,0
 
 	.include "build/_vectors.inc"

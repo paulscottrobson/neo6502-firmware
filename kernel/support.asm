@@ -12,19 +12,50 @@
 
 ; ***************************************************************************************
 ;
+;					  Send message in the following 2 bytes
+;
+; ***************************************************************************************
+
+KSendMessage:
+		jsr		KWaitMessage 				; wait for command to be released.
+
+		sta 	_KSMReturnA+1 				; save A reloaded at end.
+
+		pla 								; pop return address to the read instruction
+		sta 	_KSMRAddress+1 			
+		pla
+		sta 	_KSMRAddress+2
+
+		jsr 	_KSMReadAdvance 			; read the command.
+		pha 								; save, write it after the command.
+		jsr 	_KSMReadAdvance 			; read the function number
+		sta 	DFunction 					
+		pla
+		sta 	DCommand 					; save the command, starting the message.
+		jsr 	_KSMReadAdvance 			; use jmp indirect so advance it again.
+
+_KSMReturnA:		
+		lda 	#$FF 						; original A value
+		jmp 	(_KSMRAddress+1)
+
+_KSMReadAdvance:
+		inc 	_KSMRAddress+1 				; pre-inc because of 6502 RTS behaviour
+		bne 	_KSMRAddress
+		inc 	_KSMRAddress+2
+_KSMRAddress:
+		lda 	$FFFF 						; holds the return address.
+		rts
+
+; ***************************************************************************************
+;
 ;							Write A to the current console
 ;
 ; ***************************************************************************************
 
 KWriteCharacter:	
-		pha
-		jsr KWaitProcess
-		sta $FF04
-		lda #0
-		sta $FF01
-		lda #1
-		sta $FF00
-		pla
+		sta 	DParameters 				; sending A
+		jsr 	KSendMessage 				; command 1,0 write character
+		.byte 	1,0
 		rts
 
 ; ***************************************************************************************
@@ -34,13 +65,10 @@ KWriteCharacter:
 ; ***************************************************************************************
 
 KReadCharacter:
-		jsr 	KWaitProcess
-		lda 	#1
-		sta		$FF01
-		sta 	$FF00
-		jsr 	KWaitProcess
-		lda 	$FF04
-		beq 	KReadCharacter
+		jsr 	KSendMessage 				; send command 1,1 read keyboard
+		.byte 	1,1
+		lda 	DParameters 				; read result
+		beq 	KReadCharacter 				; no key, yet.
 		rts
 
 ; ***************************************************************************************
@@ -49,11 +77,11 @@ KReadCharacter:
 ;
 ; ***************************************************************************************
 
-KWaitProcess:
-	pha
-KWaitProcess1:
-	lda $FF00
-	bne KWaitProcess1
-	pla
-	rts
+KWaitMessage:
+		pha
+KWaitMessage1:
+		lda 	DCommand 					; wait until the handler has finished.
+		bne 	KWaitMessage1
+		pla
+		rts
 	
