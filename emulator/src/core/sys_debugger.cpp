@@ -28,13 +28,14 @@
 
 static int renderCount = 0;
 static BYTE8 *videoRAM = NULL;														// VRAM simple pattern.
+static uint16_t palette[256]; 														// Palette
 
 // *******************************************************************************************************************************
 //											Handle palette changes
 // *******************************************************************************************************************************
 
 void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b) {
-
+	palette[colour] = ((r >> 4) << 8) | (g & 0xF0) | (b >> 4);
 }
 
 // *******************************************************************************************************************************
@@ -124,12 +125,17 @@ void DBGXRender(int *address,int showDisplay) {
 		r.x = WIN_WIDTH/2-r.w/2;r.y = WIN_HEIGHT/2-r.h/2;
 		SDL_Rect rc2;rc2 = r;
 		rc2.w += 8;rc2.h += 8;rc2.x -=4;rc2.y -= 4;
-		GFXRectangle(&rc2,0xFFF);
-		GFXRectangle(&r,0);
+		GFXRectangle(&rc2,0);
+		//GFXRectangle(&r,0);
+		rc2.w = xs;rc2.h = ys;
 		BYTE8 *vPtr = videoRAM;
 		if (vPtr != NULL) {
 			for (int y = 0;y < 240;y++) {
+				rc2.y = r.y + y*ys;rc2.x = r.x;
 				for (int x = 0;x < 320;x++) {
+					int col = palette[*vPtr++];
+					if (col != 0) GFXRectangle(&rc2,col);
+					rc2.x += xs;
 				}
 			}
 		}		
