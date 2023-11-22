@@ -40,3 +40,4 @@ clean: always
 run: build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(UPLOADER) $(UPCONFIG) $(UPCOMMANDS)
+

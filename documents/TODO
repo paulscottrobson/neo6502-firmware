@@ -1,9 +1,6 @@
 TODO List
 ---------
 
-	- Loading files into emulator manually.
-	- Add keyboard I/O to kernel. (detect key, echo if pressed ?)
-
 	- Add basic vectors to kernel.
 			ConIn ConOut GeneralDispatch call. Wait for command clear.
 			Get them working in the emulator.
@@ -17,6 +14,8 @@ TODO List
 	- It can go out to people to play with.	
 
 	- Locale handling
+
+- Escape flag setting.
 - Function key handling
 - Console colour and cursor control / positioning.
 - Audio system driver on emulator, and audio.

@@ -17,9 +17,9 @@
 #include "common.h"
 
 int main(int argc,char *argv[]) {
+	DSPReset();
 	DEBUG_ARGUMENTS(argc,argv);
 	DEBUG_RESET();
-	DSPReset();
 	GFXOpenWindow(WIN_TITLE,WIN_WIDTH,WIN_HEIGHT,WIN_BACKCOLOUR);
 	GFXStart();
 	CPUEndRun();

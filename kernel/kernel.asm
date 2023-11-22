@@ -1,16 +1,13 @@
 	* = $fc00
 
-	nop
-	nop
-lfc00	
+start
 	cld
 	cli
 	ldx #$ff
 	txs
-	nop
 	lda 	#42
 	jsr 	lprintchar
-
+	jsr 	getecho
 	lda 	#-1
 	sta 	$81
 loop2:
@@ -77,22 +74,41 @@ _nothex:
 	jsr 	lprintchar
 	rts
 
-lprintchar:	
-	pha
 waitfree:
+	pha
+waitfree1:
 	lda $FF00
-	bne waitfree
-	lda #1
-	sta $FF00
-	lda #0
-	sta $FF01
-	pla	
-	and #$7f
-	sta $FF04
+	bne waitfree1
+	pla
 	rts
 
+lprintchar:	
+	pha
+	jsr waitfree
+	and #$7f
+	sta $FF04
+	lda #0
+	sta $FF01
+	lda #1
+	sta $FF00
+	pla	
+	rts
+
+getecho:
+	jsr 	waitfree
+	lda 	#1
+	sta 	$FF01
+	lda 	#1
+	sta 	$FF00
+	jsr 	waitfree
+	lda 	$FF04
+	beq 	getecho
+	jsr 	lprinthex
+	rts
+
+
+
 	* = $FFFA
-	.word 	lfc00
-	.word 	lfc00
-	.word	lfc00
-	
+	.word 	start
+	.word 	start
+	.word 	start
