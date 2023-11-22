@@ -61,6 +61,7 @@ ASMEND =
 UPLOADER = openocd 
 UPCONFIG = -f interface/cmsis-dap.cfg -f target/rp2040.cfg 
 UPCOMMANDS = -c "adapter speed 5000" -c "program $(BINARY).elf verify reset exit"
+EMULATOR = $(BINDIR)neo$(APPSTEM)
 #
 #		Export path to the common scripts.
 #

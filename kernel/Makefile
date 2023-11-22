@@ -18,6 +18,7 @@ endif
 
 BINARY = firmware
 KERNELSOURCES = kernel.asm
+
 all: always
 	$(CDEL) build$(S)binary.h
 	$(ASSEMBLER) $(KERNELSOURCES) -o build$(S)kernel.bin -L build$(S)kernel.lst $(ASMEND)
