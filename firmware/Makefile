@@ -21,6 +21,7 @@ BINARY = firmware
 all: build
 
 always:
+	python scripts$(S)makedispatch.py config$(S)dispatch.config >include$(S)data$(S)dispatch_code.h
 
 kernel: always
 	make -C ..$(S)kernel

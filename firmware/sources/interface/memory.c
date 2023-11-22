@@ -15,7 +15,7 @@
 
 #include "data/binary.h"                                                  		// Contains kernel image.
 
-uint8_t cpuMemory[MEMORY_SIZE];                                           		// Processor memory
+_Alignas(MEMORY_SIZE) uint8_t cpuMemory[MEMORY_SIZE];  							// Processor memory
 uint16_t controlPort = DEFAULT_PORT;       										// Control point.
 
 // ***************************************************************************************
@@ -40,3 +40,10 @@ void MEMInitialiseMemory(void) {
 	loadROM(kernel_bin,KERNEL_LOAD,KERNEL_SIZE);    							// Load in the kernel
 	cpuMemory[DEFAULT_PORT] = 0x00;               								// Clear the default command port
 }
+
+// ***************************************************************************************
+//
+//		Date 		Revision
+//		==== 		========
+//
+// ***************************************************************************************
