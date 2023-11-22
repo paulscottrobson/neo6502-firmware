@@ -31,8 +31,8 @@ static void GFXInitialise320x240x256(void) {
 	gMode.fontWidth = 6;gMode.fontHeight = 8;  									// Font size on display
 	gMode.graphicsMemory = graphicsMemory;  									// Set up memory pointers.
 	gMode.consoleMemory = consoleMemory;
-	gMode.startMode = (VOIDFUNC)RNDStartMode0;  								// Set up support functions.
-	gMode.setPalette = (VOIDFUNC)RNDSetPalette;
+	gMode.startMode = RNDStartMode0;  											// Set up support functions.
+	gMode.setPalette = RNDSetPalette;
 }
 
 // ***************************************************************************************

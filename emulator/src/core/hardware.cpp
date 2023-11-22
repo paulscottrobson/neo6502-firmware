@@ -13,6 +13,7 @@
 #include "hardware.h"
 #include "gfx.h"
 #include <stdio.h>
+#include "common.h"
 
 // *******************************************************************************************************************************
 //												Reset Hardware
@@ -34,4 +35,20 @@ void HWSync(void) {
 
 void HWQueueKeyboardEvent(int sdlCode,int isDown) {
 	printf("%x %c %d\n",sdlCode,sdlCode,isDown);
+}
+
+uint32_t TMRRead(void) {
+	return 0;
+}
+
+void KBDSync(void) {
+
+}
+
+void KBDInitialise(void) {
+
+}
+
+int SNDInitialise(void) {
+	return 1;
 }

@@ -23,16 +23,19 @@ struct GraphicsMode {
 
 	uint8_t *graphicsMemory,*consoleMemory;  									// Graphics & text memory.
 
-	VOIDFUNC setPalette; 	 													// Set the palette
-	VOIDFUNC startMode;  														// Start up the mode.
+	void  (*setPalette)(uint8_t,uint8_t,uint8_t,uint8_t); 						// Set the palette
+	void  (*startMode)(uint8_t *,uint8_t *); 									// Start up the mode.
 };
 
+//
+//		Void Function Pointer.
+//
+typedef void (*VOIDFUNC)();
 #define MAXCONSOLEWIDTH  	(80) 	 											// Max console size 
 #define MAXCONSOLEHEIGHT  	(31)
 #define MAXGRAPHICSMEMORY 	(320 * 240)  										// Max byte memory , graphics
 #define MAXCONSOLEMEMORY 	(MAXCONSOLEWIDTH * (MAXCONSOLEHEIGHT+1))			// Max byte memory, console text.
 																				// (extra line for scrolling.)
-
 void GFXSetMode(int Mode);
 
 #endif

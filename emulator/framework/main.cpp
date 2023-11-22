@@ -14,10 +14,12 @@
 #include "sys_processor.h"
 #include "sys_debug_system.h"
 #include "debugger.h"
+#include "common.h"
 
 int main(int argc,char *argv[]) {
 	DEBUG_ARGUMENTS(argc,argv);
 	DEBUG_RESET();
+	DSPReset();
 	GFXOpenWindow(WIN_TITLE,WIN_WIDTH,WIN_HEIGHT,WIN_BACKCOLOUR);
 	GFXStart();
 	CPUEndRun();
