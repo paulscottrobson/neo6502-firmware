@@ -1,50 +1,31 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//		Name : 		common.h	
+//		Name : 		memory.h
 //		Author :	Paul Robson (paul@robsons.org.uk)
 //		Date : 		20th November 2023
 //		Reviewed :	No
-//		Purpose :	General Include File.
+//		Purpose :	Setup for Memory
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-#ifndef _COMMON_H
-#define _COMMON_H
+#ifndef _MEMORY_h
+#define _MEMORY_h
+
+#define MEMORY_SIZE  0x10000 // 64k
+#define DEFAULT_PORT 0xFF00
+
+extern uint8_t  cpuMemory[];
+extern uint16_t controlPort;
 
 //
-//		Void Function Pointer.
+//		Access the control port address via this Macro !
 //
-typedef void (*VOIDFUNC)();
-//
-//		RP2040 specific includes
-//
-#ifdef PICO
-#include "pico/stdlib.h"
-#include "pico/stdio.h"
-#include "hardware/gpio.h"
-#endif
-//
-//		PC specific includes
-//
-#ifdef IBMPC
-#include <cstdint>
-#endif
-//
-//		Neo6502 Includes
-//
-#include "interface/keyboard.h"
-#include "interface/graphics.h"
-#include "interface/console.h"
-#include "interface/timer.h"
-#include "interface/sound.h"
-#include "interface/memory.h"
-#include "interface/dispatch.h"
-//
-//		Other Includes
-//
-#include "string.h"
+#define CONTROLPORT 	(controlPort)
+
+
+void MEMInitialiseMemory(void);
 
 #endif
 
