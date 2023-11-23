@@ -4,6 +4,8 @@ TODO List
 	- Implement Backspace in console (chr(8)), leave Wozmon :)
 
 	- Cursor ? In hardware :)
+			- Pass the structure not the pointers
+			- does the driver do it, or the graphics ? (driver, probably !)
 
 	- Implement NeoWozBasic (was Applesoft Basic) if not too heavy.
 
