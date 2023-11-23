@@ -12,7 +12,8 @@
 // ***************************************************************************************
 
 #include "common.h"
-#include "data/binary.h"                                                  		// Contains kernel image.
+#include "data/kernel_binary.h"                                            		// Contains kernel image.
+#include "data/kernel_a1basic.h"												// Contains Apple Integer BASIC
 
 #ifdef PICO
 _Alignas(MEMORY_SIZE) uint8_t cpuMemory[MEMORY_SIZE];  							// Processor memory, aligned for Pico
@@ -42,6 +43,7 @@ static void loadROM(const uint8_t *vROM, uint16_t startAddress, uint16_t romSize
 
 void MEMInitialiseMemory(void) {
 	loadROM(kernel_bin,KERNEL_LOAD,KERNEL_SIZE);    							// Load in the kernel
+	loadROM(a1basic_bin,A1BASIC_LOAD,A1BASIC_SIZE);
 	cpuMemory[DEFAULT_PORT] = 0x00;               								// Clear the default command port
 }
 
