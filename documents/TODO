@@ -1,17 +1,12 @@
 TODO List
 ---------
 
+
 	- Implement Backspace in console (chr(8)), leave Wozmon :)
-
 	- Case Reverse
-
-	- Cursor ? In hardware :)
-			- Pass the structure not the pointers
-			- does the driver do it, or the graphics ? (driver, probably !)
-
 	- Vector Includes => Basic
-	
-	- It can go out to people to play with.	
+
+- It can go out to people to play with.	
 
 
 - Locale handling

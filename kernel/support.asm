@@ -83,10 +83,15 @@ KWriteCharacter:
 ; ***************************************************************************************
 
 KReadCharacter:
+		jsr 	KWriteCharacterInline		; control X (reverse at cursor)
+		.byte 	24
+_KRCWait:		
 		jsr 	KSendMessage 				; send command 1,1 read keyboard
 		.byte 	1,1
 		lda 	DParameters 				; read result
-		beq 	KReadCharacter 				; no key, yet.
+		beq 	_KRCWait 					; no key, yet.
+		jsr 	KWriteCharacterInline		; control X (reverse at cursor)
+		.byte 	24
 		rts
 
 ; ***************************************************************************************

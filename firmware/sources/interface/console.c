@@ -93,6 +93,24 @@ void CONScrollUp(void) {
 
 // ***************************************************************************************
 //
+//								Reverse colours at cursor
+//
+// ***************************************************************************************
+
+static void CONReverseCursorBlock(void) {
+	for (int y = 0;y < graphMode->fontHeight;y++) {
+		uint8_t *p = graphMode->graphicsMemory + 
+					 (y + yCursor * graphMode->fontHeight) * graphMode->xGSize +
+					xCursor * graphMode->fontWidth;
+		for (int x = 0;x < graphMode->fontWidth;x++) {
+			*p ^= 7;
+			p++;
+		}
+	}
+}
+
+// ***************************************************************************************
+//
 //			Send command to console. Similar to BBC Micro, not all supported.
 //
 // ***************************************************************************************
@@ -110,8 +128,10 @@ void CONWrite(int c) {
 			CONClearScreen();break;
 		case CC_ENTER: 	 														// M/13 carriage return.
 			xCursor = 0;CONWrite(CC_LF);break;
-		case CC_HOME: 															// T/20 home cursor.
+		case CC_HOME: 															// T/20 home cursor.		
 			xCursor = yCursor = 0;break;
+		case CC_REVERSE:
+			CONReverseCursorBlock();break;
 		default:
 			if (c >= ' ' && c < 127) {  										// 32-126 output a character.
 				CONDrawCharacter(xCursor,yCursor,c,foreCol,backCol);
