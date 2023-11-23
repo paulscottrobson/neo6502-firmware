@@ -5,7 +5,7 @@
 #		Author :	Paul Robson (paul@robsons.org.uk)
 #		Date : 		20th November 2023
 #		Reviewed :	No
-#		Purpose :	Main firmware makefile, most of the work is done by CMake.
+#		Purpose :	Makefile for Apple 1 BASIC
 #
 # ***************************************************************************************
 # ***************************************************************************************
@@ -17,6 +17,6 @@ include ../../documents/common.make
 endif
 
 check:
-	$(ASSEMBLER) a1basic.asm.original -o build$(S)a1basic.original.bin
+	$(ASSEMBLER) -D NEO=0 a1basic.asm -o build$(S)a1basic.original.bin
 	cmp build$(S)a1basic.original.bin a1basic.bin.rom
 

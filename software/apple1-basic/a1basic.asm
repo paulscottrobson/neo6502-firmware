@@ -89,9 +89,12 @@ fstk_pverbh     =       $0158
 fstk_tol        =       $0160   ; "to" (limit) value
 fstk_toh        =       $0168
 buffer  =       $0200
+
+.if     NEO==0
 KBD     =       $D010
 KBDCR   =       $D011
 DSP     =       $D012
+.endif
 
 ; The program can be relocated to a different address but should be a
 ; multiple of $2000.
@@ -100,11 +103,7 @@ DSP     =       $D012
 
 START:  JMP     cold            ; BASIC cold start entry point
 
-; Get character for keyboard, return in A.
-rdkey:  LDA     KBDCR           ; Read control register
-        BPL     rdkey           ; Loop if no key pressed
-        LDA     KBD             ; Read key data
-        RTS                     ; and return
+        .include "hardware/keyboard.asm"
 
 Se00c:  TXA
         AND     #$20
@@ -651,11 +650,7 @@ crout:  LDA     #$00            ; character output
         LDA     #$8D
 Le3d3:  INC     ch
 
-; Send character to display. Char is in A.
-Le3d5:  BIT     DSP          ; See if display ready
-        BMI     Le3d5        ; Loop if not
-        STA     DSP          ; Write display data
-        RTS                  ; and return
+        .include "hardware/display.asm"
 
 too_long_err:   LDY     #$06
 
@@ -1349,8 +1344,9 @@ Le867:  LDA     p2
 ; loop to run a program
 run_loop:       STA     pline
         STY     pline+1
-        BIT     KBDCR
-        BMI     Le8c3
+
+        .include "hardware/break.asm"
+        
         CLC
         ADC     #$03
         BCC     Le87a

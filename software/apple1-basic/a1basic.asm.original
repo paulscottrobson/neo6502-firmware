@@ -62,7 +62,7 @@ pcon    =       $F2    ; temp used in decimal output (2 bytes)
 auto_inc =      $F4
 auto_ln =       $F6
 auto_flag =     $F8
-cchar   =       $F9
+cchar    =       $F9
 leadzr  =       $FA
 for_nest_count = $FB    ; count of active (nested) FOR loops
 gosub_nest_count = $FC  ; count of active (nested) subroutines calls (GOSUB)
@@ -101,6 +101,8 @@ DSP     =       $D012
 START:  JMP     cold            ; BASIC cold start entry point
 
 ; Get character for keyboard, return in A.
+
+        
 rdkey:  LDA     KBDCR           ; Read control register
         BPL     rdkey           ; Loop if no key pressed
         LDA     KBD             ; Read key data
