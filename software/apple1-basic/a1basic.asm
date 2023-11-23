@@ -2013,3 +2013,5 @@ Seff8:  CPX     #$80
         BNE     Leffd
         DEY
 Leffd:  JMP     Se00c
+
+        .include "hardware/reverse.asm"

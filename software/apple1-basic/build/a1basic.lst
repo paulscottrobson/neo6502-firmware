@@ -1,13 +1,20 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
-; 64tass -b --mr65c02 -Wall -D NEO=1 -o build/a1basic.bin -L build/a1basic.lst a1basic.asm
-; Thu Nov 23 14:49:55 2023
+; 64tass -b --mr65c02 -Wall -D NEO=1 -o build/a1basic.bin -L build/a1basic.lst build/neo6502.inc a1basic.asm
+; Thu Nov 23 16:33:52 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
 ;******  Command line definitions
 
 =1					NEO=1
+
+;******  Processing input file: build/neo6502.inc
+
+=$ffee					ReadCharacter = $ffee
+=$fff1					WriteCharacter = $fff1
+=$fff4					WaitMessage = $fff4
+=$fff7					SendMessage = $fff7
 
 ;******  Processing input file: a1basic.asm
 
@@ -73,12 +80,10 @@
 
 ;******  Processing file: hardware/keyboard.asm
 
-.e003	20 ee ff	jsr $ffee	rdkey:  jsr     $FFEE
-.e006	09 80		ora #$80	        ora     #$80
-.e008	60		rts		        rts
-.e009	ea		nop		        nop
-.e00a	ea		nop		        nop
-.e00b	ea		nop		        nop
+.e003	20 ee ff	jsr $ffee	rdkey:  jsr     ReadCharacter
+.e006	20 00 f0	jsr $f000	        jsr     FlipCharacterCase
+.e009	09 80		ora #$80	        ora     #$80
+.e00b	60		rts		        rts
 
 ;******  Return to file: a1basic.asm
 
@@ -577,7 +582,7 @@
 
 .e3d5	48		pha		Le3d5:  pha
 .e3d6	29 7f		and #$7f	        and     #$7F
-.e3d8	20 f1 ff	jsr $fff1	        jsr     $FFF1
+.e3d8	20 f1 ff	jsr $fff1	        jsr     WriteCharacter
 .e3db	68		pla		        pla
 .e3dc	60		rts		        rts
 .e3dd	ea		nop		        nop
@@ -1790,5 +1795,24 @@
 .effa	d0 01		bne $effd	        BNE     Leffd
 .effc	88		dey		        DEY
 .effd	4c 0c e0	jmp $e00c	Leffd:  JMP     Se00c
+
+;******  Processing file: hardware/reverse.asm
+
+.f000					FlipCharacterCase:
+.f000	c9 41		cmp #$41		cmp 	#"A"
+.f002	90 0e		bcc $f012		bcc 	_FCCExit
+.f004	c9 5b		cmp #$5b		cmp 	#"Z"+1
+.f006	90 08		bcc $f010		bcc 	_FCCFlip
+.f008	c9 61		cmp #$61		cmp 	#"a"
+.f00a	90 06		bcc $f012		bcc 	_FCCExit
+.f00c	c9 7b		cmp #$7b		cmp 	#"z"+1
+.f00e	b0 02		bcs $f012		bcs 	_FCCExit
+.f010					_FCCFlip:
+.f010	49 20		eor #$20		eor 	#$20
+.f012					_FCCExit:
+.f012	60		rts			rts
+
+;******  Return to file: a1basic.asm
+
 
 ;******  End of listing

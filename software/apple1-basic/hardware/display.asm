@@ -9,7 +9,7 @@
         .if     NEO!=0
 Le3d5:  pha
         and     #$7F
-        jsr     $FFF1
+        jsr     WriteCharacter
         pla
         rts
         nop

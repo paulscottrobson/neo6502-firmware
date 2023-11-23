@@ -10,12 +10,10 @@
 
         .if     NEO!=0
 
-rdkey:  jsr     $FFEE
+rdkey:  jsr     ReadCharacter
+        jsr     FlipCharacterCase
         ora     #$80
         rts        
-        nop
-        nop
-        nop
         .else
 
 rdkey:  LDA     KBDCR           ; Read control register
