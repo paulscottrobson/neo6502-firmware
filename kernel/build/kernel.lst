@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Thu Nov 23 07:51:36 2023
+; Thu Nov 23 07:55:37 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -87,7 +87,7 @@
 =$fd05					WMMode = WMModeAddress + 1 					; current mode of operation
 =$fd32					WMCurrent = WMCurrentAddress + 1  			; current address
 =$fcf5					WMCurrentWrite = WMCurrentWriteAddress+1 	; current store address
-=$200					lineBuffer = $200
+=$200					lineBuffer = $200  							; line stored here.
 .fc6c					WozMonStart:
 .fc6c	20 38 fc	jsr $fc38		jsr 	KWriteCharacterInline			; write \
 >fc6f	5c					.byte 	$5C
