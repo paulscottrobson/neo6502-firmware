@@ -1774,9 +1774,9 @@ Disassembly of section .text:
 10000f2c:	b510      	push	{r4, lr}
 10000f2e:	7803      	ldrb	r3, [r0, #0]
 10000f30:	0004      	movs	r4, r0
-10000f32:	2b00      	cmp	r3, #0
+10000f32:	2b01      	cmp	r3, #1
 10000f34:	d00e      	beq.n	10000f54 <DSPHandler+0x28>
-10000f36:	2b01      	cmp	r3, #1
+10000f36:	2b02      	cmp	r3, #2
 10000f38:	d109      	bne.n	10000f4e <DSPHandler+0x22>
 10000f3a:	7843      	ldrb	r3, [r0, #1]
 10000f3c:	2b01      	cmp	r3, #1

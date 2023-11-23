@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Thu Nov 23 17:44:28 2023
+; Thu Nov 23 20:46:56 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -61,7 +61,7 @@
 .fc4b	48		pha				pha
 .fc4c	8d 04 ff	sta $ff04			sta 	DParameters 				; sending A
 .fc4f	9c 01 ff	stz $ff01			stz 	DFunction 					; we don't inline it because inline uses it
-.fc52	a9 01		lda #$01			lda 	#1
+.fc52	a9 02		lda #$02			lda 	#2
 .fc54	8d 00 ff	sta $ff00			sta 	DCommand
 .fc57	68		pla				pla
 .fc58	60		rts				rts
@@ -70,7 +70,7 @@
 >fc5c	18						.byte 	24
 .fc5d					_KRCWait:
 .fc5d	20 08 fc	jsr $fc08			jsr 	KSendMessage 				; send command 1,1 read keyboard
->fc60	01 01						.byte 	1,1
+>fc60	02 01						.byte 	2,1
 .fc62	ad 04 ff	lda $ff04			lda 	DParameters 				; read result
 .fc65	f0 f6		beq $fc5d			beq 	_KRCWait 					; no key, yet.
 .fc67	20 38 fc	jsr $fc38			jsr 	KWriteCharacterInline		; control X (reverse at cursor)

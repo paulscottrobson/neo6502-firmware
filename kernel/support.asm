@@ -71,7 +71,7 @@ KWriteCharacter:
 		pha
 		sta 	DParameters 				; sending A
 		stz 	DFunction 					; we don't inline it because inline uses it
-		lda 	#1
+		lda 	#2
 		sta 	DCommand
 		pla
 		rts
@@ -86,8 +86,9 @@ KReadCharacter:
 		jsr 	KWriteCharacterInline		; control X (reverse at cursor)
 		.byte 	24
 _KRCWait:		
-		jsr 	KSendMessage 				; send command 1,1 read keyboard
-		.byte 	1,1
+		jsr 	KSendMessage 				; send command 2,1 read keyboard
+		.byte 	2,1
+		jsr 	KWaitMessage
 		lda 	DParameters 				; read result
 		beq 	_KRCWait 					; no key, yet.
 		jsr 	KWriteCharacterInline		; control X (reverse at cursor)
@@ -107,4 +108,3 @@ KWaitMessage1:
 		bne 	KWaitMessage1
 		pla
 		rts
-	
