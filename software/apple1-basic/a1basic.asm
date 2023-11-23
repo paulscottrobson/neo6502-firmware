@@ -90,7 +90,8 @@ fstk_tol        =       $0160   ; "to" (limit) value
 fstk_toh        =       $0168
 buffer  =       $0200
 
-.if     NEO==0
+.if     NEO!=0
+.else
 KBD     =       $D010
 KBDCR   =       $D011
 DSP     =       $D012
