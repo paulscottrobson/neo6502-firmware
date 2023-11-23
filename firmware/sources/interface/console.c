@@ -117,6 +117,14 @@ static void CONReverseCursorBlock(void) {
 
 void CONWrite(int c) {
 	switch (c) {
+
+		case CC_BACKSPACE: 														// H/8 backspace
+			if (xCursor > 0) {
+				xCursor--;
+				CONDrawCharacter(xCursor,yCursor,' ',backCol,backCol);
+			}
+			break;
+
 		case CC_LF:
 			yCursor++; 															// J/10 down with scrolling.
 			if (yCursor == graphMode->yCSize) {
@@ -124,14 +132,19 @@ void CONWrite(int c) {
 				CONScrollUp();
 			}
 			break;
+
 		case CC_CLS: 	 														// L/12 clears the screen
 			CONClearScreen();break;
+
 		case CC_ENTER: 	 														// M/13 carriage return.
 			xCursor = 0;CONWrite(CC_LF);break;
+
 		case CC_HOME: 															// T/20 home cursor.		
 			xCursor = yCursor = 0;break;
-		case CC_REVERSE:
+
+		case CC_REVERSE:  														// X/24 reverse character at cursor
 			CONReverseCursorBlock();break;
+
 		default:
 			if (c >= ' ' && c < 127) {  										// 32-126 output a character.
 				CONDrawCharacter(xCursor,yCursor,c,foreCol,backCol);

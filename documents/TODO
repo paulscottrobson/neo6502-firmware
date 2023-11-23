@@ -1,12 +1,12 @@
 TODO List
 ---------
 
-
-	- Implement Backspace in console (chr(8)), leave Wozmon :)
 	- Case Reverse
 	- Vector Includes => Basic
+	- Load BASIC in firmware
 
 - It can go out to people to play with.	
+- Change graphics call.
 
 
 - Locale handling

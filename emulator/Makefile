@@ -36,7 +36,7 @@ run: always emulator
 	$(EMULATOR) 
 	
 krun: always kernel emulator
-	$(EMULATOR) $(BINDIR)kernel.bin@FC00
+	$(EMULATOR) $(BINDIR)kernel.bin@FC00 $(BINDIR)a1basic.bin@E000
 
 emulator: prebuild $(APPNAME)
 	$(CCOPY) $(APPNAME) ..$(S)bin
