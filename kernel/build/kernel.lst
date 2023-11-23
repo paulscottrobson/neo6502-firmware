@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Thu Nov 23 07:55:37 2023
+; Thu Nov 23 15:52:05 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -19,12 +19,12 @@
 .fc01	78		sei			sei
 .fc02	a2 ff		ldx #$ff		ldx 	#$ff
 .fc04	9a		txs			txs
-.fc05	4c 6c fc	jmp $fc6c		jmp 	WozMonStart
+.fc05	4c 74 fc	jmp $fc74		jmp 	WozMonStart
 
 ;******  Processing file: support.asm
 
 .fc08					KSendMessage:
-.fc08	20 64 fc	jsr $fc64			jsr		KWaitMessage 				; wait for command to be released.
+.fc08	20 6c fc	jsr $fc6c			jsr		KWaitMessage 				; wait for command to be released.
 .fc0b	8d 28 fc	sta $fc28			sta 	KSMReturnA+1 				; save A reloaded at end.
 .fc0e	68		pla				pla 								; pop return address to the read instruction
 .fc0f	8d 35 fc	sta $fc35			sta 	KSMRAddress+1
@@ -66,175 +66,180 @@
 .fc57	68		pla				pla
 .fc58	60		rts				rts
 .fc59					KReadCharacter:
-.fc59	20 08 fc	jsr $fc08			jsr 	KSendMessage 				; send command 1,1 read keyboard
->fc5c	01 01						.byte 	1,1
-.fc5e	ad 04 ff	lda $ff04			lda 	DParameters 				; read result
-.fc61	f0 f6		beq $fc59			beq 	KReadCharacter 				; no key, yet.
-.fc63	60		rts				rts
-.fc64					KWaitMessage:
-.fc64	48		pha				pha
-.fc65					KWaitMessage1:
-.fc65	ad 00 ff	lda $ff00			lda 	DCommand 					; wait until the handler has finished.
-.fc68	d0 fb		bne $fc65			bne 	KWaitMessage1
-.fc6a	68		pla				pla
+.fc59	20 38 fc	jsr $fc38			jsr 	KWriteCharacterInline		; control X (reverse at cursor)
+>fc5c	18						.byte 	24
+.fc5d					_KRCWait:
+.fc5d	20 08 fc	jsr $fc08			jsr 	KSendMessage 				; send command 1,1 read keyboard
+>fc60	01 01						.byte 	1,1
+.fc62	ad 04 ff	lda $ff04			lda 	DParameters 				; read result
+.fc65	f0 f6		beq $fc5d			beq 	_KRCWait 					; no key, yet.
+.fc67	20 38 fc	jsr $fc38			jsr 	KWriteCharacterInline		; control X (reverse at cursor)
+>fc6a	18						.byte 	24
 .fc6b	60		rts				rts
+.fc6c					KWaitMessage:
+.fc6c	48		pha				pha
+.fc6d					KWaitMessage1:
+.fc6d	ad 00 ff	lda $ff00			lda 	DCommand 					; wait until the handler has finished.
+.fc70	d0 fb		bne $fc6d			bne 	KWaitMessage1
+.fc72	68		pla				pla
+.fc73	60		rts				rts
 
 ;******  Return to file: kernel.asm
 
 
 ;******  Processing file: wozmon.asm
 
-=$fd05					WMMode = WMModeAddress + 1 					; current mode of operation
-=$fd32					WMCurrent = WMCurrentAddress + 1  			; current address
-=$fcf5					WMCurrentWrite = WMCurrentWriteAddress+1 	; current store address
+=$fd0d					WMMode = WMModeAddress + 1 					; current mode of operation
+=$fd3a					WMCurrent = WMCurrentAddress + 1  			; current address
+=$fcfd					WMCurrentWrite = WMCurrentWriteAddress+1 	; current store address
 =$200					lineBuffer = $200  							; line stored here.
-.fc6c					WozMonStart:
-.fc6c	20 38 fc	jsr $fc38		jsr 	KWriteCharacterInline			; write \
->fc6f	5c					.byte 	$5C
-.fc70					WMNewCommand:
-.fc70	a9 0d		lda #$0d		lda 	#13								; write CR
-.fc72					WMStartOfLine:
-.fc72	a2 ff		ldx #$ff		ldx 	#$FF							; index into line.
-.fc74					WMNextCharacter:
-.fc74	e8		inx			inx
-.fc75					WMNoIncrement:
-.fc75	20 4b fc	jsr $fc4b		jsr 	KWriteCharacter 				; echo it.
-.fc78	20 59 fc	jsr $fc59		jsr 	KReadCharacter 					; get character
-.fc7b	29 7f		and #$7f		and 	#$7F 							; drop bit 7
-.fc7d	c9 61		cmp #$61		cmp 	#'a'							; capitalise.
-.fc7f	90 02		bcc $fc83		bcc 	WMNotUpper
-.fc81	49 20		eor #$20		eor 	#$20
-.fc83					WMNotUpper:
-.fc83	9d 00 02	sta $0200,x		sta 	lineBuffer,x 					; write character out.
-.fc86	c9 20		cmp #$20		cmp		#' '							; is it ASCII ?
-.fc88	b0 ea		bcs $fc74		bcs 	WMNextCharacter 				; echo, store and next.
-.fc8a	c9 08		cmp #$08		cmp 	#8  							; if not BS end of line
-.fc8c	d0 07		bne $fc95		bne 	WMCommand
-.fc8e	a9 5f		lda #$5f		lda 	#'_' 							; displayed character
-.fc90	ca		dex			dex
-.fc91	30 df		bmi $fc72		bmi 	WMStartOfLine 					; past the start
-.fc93	80 e0		bra $fc75		bra 	WMNoIncrement 					; otherwise do next character without preincrement
-.fc95					WMCommand:
-.fc95	20 4b fc	jsr $fc4b		jsr 	KWriteCharacter 				; write CR out
-.fc98	a2 ff		ldx #$ff		ldx 	#$FF							; line pointer.
-.fc9a	a9 80		lda #$80		lda 	#$80
-.fc9c					WMSetMode:
-.fc9c	69 08		adc #$08		adc 	#8 								; here $80 (display) $2E (list) $3A (store)
-.fc9e	8d 05 fd	sta $fd05		sta 	WMMode	 						; $88 (display) $36 (list) $42 (store) maybe +1 if carry set.
-.fca1					WMNextProcess:
-.fca1	e8		inx			inx
-.fca2					WMNextProcessNoInc:
-.fca2	bd 00 02	lda $0200,x		lda 	lineBuffer,x 					; next character
-.fca5	c9 0d		cmp #$0d		cmp 	#13 							; new line.
-.fca7	f0 c7		beq $fc70		beq 	WMNewCommand
-.fca9	c9 2e		cmp #$2e		cmp 	#'.' 							; '.' and ':' set mode.
-.fcab	f0 ef		beq $fc9c		beq 	WMSetMode
-.fcad	90 f2		bcc $fca1		bcc 	WMNextProcess 					; < '.' we ignore
-.fcaf	c9 3a		cmp #$3a		cmp 	#':'
-.fcb1	f0 e9		beq $fc9c		beq 	WMSetMode
-.fcb3	c9 52		cmp #$52		cmp 	#'R'
-.fcb5	f0 4a		beq $fd01		beq 	WMRunCode
-.fcb7	9c 54 fd	stz $fd54		stz 	WMNewHex 						; zero new hex
-.fcba	9c 55 fd	stz $fd55		stz 	WMNewHex+1
-.fcbd	a0 00		ldy #$00		ldy 	#0 								; count of hex digits
-.fcbf					WMHexLoop:
-.fcbf	c9 3a		cmp #$3a		cmp 	#'9'+1 							; Hex shift ?
-.fcc1	f0 25		beq $fce8		beq 	WHEndHex 						; if it is : then don't use it.
-.fcc3	90 02		bcc $fcc7		bcc 	WHNotHexAF
-.fcc5	e9 07		sbc #$07		sbc 	#7 								; adjust.
-.fcc7					WHNotHexAF:
-.fcc7	38		sec			sec 									; shift into range.
-.fcc8	e9 30		sbc #$30		sbc 	#'0'
-.fcca	c9 10		cmp #$10		cmp 	#16 							; out of range
-.fccc	b0 1a		bcs $fce8		bcs 	WHEndHex 						; decide what next
-.fcce	48		pha			pha 									; save
-.fccf	a9 04		lda #$04		lda 	#4 								; shift newhex left.
-.fcd1					WHShift:
-.fcd1	0e 54 fd	asl $fd54		asl 	WMNewHex
-.fcd4	2e 55 fd	rol $fd55		rol 	WMNewHex+1
-.fcd7	3a		dec a			dec 	a
-.fcd8	d0 f7		bne $fcd1		bne 	WHShift
-.fcda	68		pla			pla 									; OR the value in.
-.fcdb	0d 54 fd	ora $fd54		ora 	WMNewHex
-.fcde	8d 54 fd	sta $fd54		sta 	WMNewHex
-.fce1	c8		iny			iny 									; one more hex character.
-.fce2	e8		inx			inx 									; look at the next character
-.fce3	bd 00 02	lda $0200,x		lda 	lineBuffer,x
-.fce6	80 d7		bra $fcbf		bra 	WMHexLoop
-.fce8					WHEndHex:
-.fce8	c0 00		cpy #$00		cpy 	#0 								; received any hex digits
-.fcea	f0 80		beq $fc6c		beq 	WozMonStart 					; if so, restart,
-.fcec	2c 05 fd	bit $fd05		bit 	WMMode 							; is bit 6 set (e.g. : x 2, store mode)
-.fcef	50 13		bvc $fd04		bvc 	WMNotStore
-.fcf1	ad 54 fd	lda $fd54		lda 	WMNewHex 						; byte to save
-.fcf4					WMCurrentWriteAddress:
-.fcf4	8d 00 00	sta $0000		sta 	@w $0000 						; write at the current address.
-.fcf7	ee f5 fc	inc $fcf5		inc 	WMCurrentWrite 					; increment store pointer and do next command
-.fcfa	d0 a6		bne $fca2		bne 	WMNextProcessNoInc
-.fcfc	ee f6 fc	inc $fcf6		inc 	WMCurrentWrite+1
-.fcff					WMNextProcessNoInc2:
-.fcff	80 a1		bra $fca2		bra 	WMNextProcessNoInc
-.fd01					WMRunCode:
-.fd01	6c 32 fd	jmp ($fd32)	 	jmp 	(WMCurrent)
-.fd04					WMNotStore:
-.fd04					WMModeAddress:
-.fd04	a9 ff		lda #$ff		lda 	#$FF 							; get the mode
-.fd06	10 2f		bpl $fd37		bpl 	WMCheckCompare 				; if . mode then list from WMCurrent -> WMNewHex
-.fd08	a0 02		ldy #$02		ldy 	#2 								; copy WMNewHex -> WMCurrent & WMCurrentWrite
-.fd0a					WMCopyAddress:
-.fd0a	b9 53 fd	lda $fd53,y		lda 	WMNewHex-1,y
-.fd0d	99 31 fd	sta $fd31,y		sta 	WMCurrent-1,y
-.fd10	99 f4 fc	sta $fcf4,y		sta 	WMCurrentWrite-1,y
-.fd13	88		dey			dey
-.fd14	d0 f4		bne $fd0a		bne 	WMCopyAddress
-.fd16					WMNextDisplay:
-.fd16	d0 14		bne $fd2c		bne 	WMNoAddress
-.fd18	20 38 fc	jsr $fc38		jsr 	KWriteCharacterInline
->fd1b	0d					.byte 	13
-.fd1c	ad 33 fd	lda $fd33		lda 	WMCurrent+1 					; address
-.fd1f	20 56 fd	jsr $fd56		jsr 	PrintHexByte
-.fd22	ad 32 fd	lda $fd32		lda 	WMCurrent
-.fd25	20 56 fd	jsr $fd56		jsr 	PrintHexByte
-.fd28	20 38 fc	jsr $fc38		jsr 	KWriteCharacterInline
->fd2b	3a					.byte 	':'
-.fd2c					WMNoAddress:
-.fd2c	a9 20		lda #$20		lda 	#' ' 							; print space
-.fd2e	20 4b fc	jsr $fc4b		jsr 	KWriteCharacter
-.fd31					WMCurrentAddress:
-.fd31	ad 00 00	lda $0000		lda 	@w $0000 						; print current address
-.fd34	20 56 fd	jsr $fd56		jsr 	PrintHexByte
-.fd37					WMCheckCompare:
-.fd37	ad 32 fd	lda $fd32		lda 	WMCurrent 						; check current < newhex
-.fd3a	cd 54 fd	cmp $fd54		cmp 	WMNewHex
-.fd3d	ad 33 fd	lda $fd33		lda 	WMCurrent+1
-.fd40	ed 55 fd	sbc $fd55		sbc 	WMNewHex+1
-.fd43	b0 ba		bcs $fcff		bcs 	WMNextProcessNoInc2
-.fd45	ee 32 fd	inc $fd32		inc 	WMCurrent 						; and bump the pointer
-.fd48	d0 03		bne $fd4d		bne 	WMCheckAddressReqd
-.fd4a	ee 33 fd	inc $fd33		inc 	WMCurrent+1
-.fd4d					WMCheckAddressReqd:
-.fd4d	ad 32 fd	lda $fd32		lda 	WMCurrent
-.fd50	29 07		and #$07		and 	#7
-.fd52	80 c2		bra $fd16		bra 	WMNextDisplay
-.fd54					WMNewHex:
->fd54	00 00					.word 	0
-.fd56					PrintHexByte:
-.fd56	48		pha			pha
-.fd57	4a		lsr a			lsr 	a
-.fd58	4a		lsr a			lsr 	a
-.fd59	4a		lsr a			lsr 	a
-.fd5a	4a		lsr a			lsr 	a
-.fd5b	20 5f fd	jsr $fd5f		jsr 	PrintHexNibble
-.fd5e	68		pla			pla
-.fd5f					PrintHexNibble:
-.fd5f	29 0f		and #$0f		and 	#15
-.fd61	c9 0a		cmp #$0a		cmp 	#10
-.fd63	90 02		bcc $fd67		bcc 	nothex
-.fd65	69 06		adc #$06		adc 	#6
-.fd67					nothex:
-.fd67	69 30		adc #$30		adc 	#48
-.fd69	20 4b fc	jsr $fc4b		jsr 	KWriteCharacter
-.fd6c	60		rts			rts
+.fc74					WozMonStart:
+.fc74	20 38 fc	jsr $fc38		jsr 	KWriteCharacterInline			; write \
+>fc77	5c					.byte 	$5C
+.fc78					WMNewCommand:
+.fc78	a9 0d		lda #$0d		lda 	#13								; write CR
+.fc7a					WMStartOfLine:
+.fc7a	a2 ff		ldx #$ff		ldx 	#$FF							; index into line.
+.fc7c					WMNextCharacter:
+.fc7c	e8		inx			inx
+.fc7d					WMNoIncrement:
+.fc7d	20 4b fc	jsr $fc4b		jsr 	KWriteCharacter 				; echo it.
+.fc80	20 59 fc	jsr $fc59		jsr 	KReadCharacter 					; get character
+.fc83	29 7f		and #$7f		and 	#$7F 							; drop bit 7
+.fc85	c9 61		cmp #$61		cmp 	#'a'							; capitalise.
+.fc87	90 02		bcc $fc8b		bcc 	WMNotUpper
+.fc89	49 20		eor #$20		eor 	#$20
+.fc8b					WMNotUpper:
+.fc8b	9d 00 02	sta $0200,x		sta 	lineBuffer,x 					; write character out.
+.fc8e	c9 20		cmp #$20		cmp		#' '							; is it ASCII ?
+.fc90	b0 ea		bcs $fc7c		bcs 	WMNextCharacter 				; echo, store and next.
+.fc92	c9 08		cmp #$08		cmp 	#8  							; if not BS end of line
+.fc94	d0 07		bne $fc9d		bne 	WMCommand
+.fc96	a9 5f		lda #$5f		lda 	#'_' 							; displayed character
+.fc98	ca		dex			dex
+.fc99	30 df		bmi $fc7a		bmi 	WMStartOfLine 					; past the start
+.fc9b	80 e0		bra $fc7d		bra 	WMNoIncrement 					; otherwise do next character without preincrement
+.fc9d					WMCommand:
+.fc9d	20 4b fc	jsr $fc4b		jsr 	KWriteCharacter 				; write CR out
+.fca0	a2 ff		ldx #$ff		ldx 	#$FF							; line pointer.
+.fca2	a9 80		lda #$80		lda 	#$80
+.fca4					WMSetMode:
+.fca4	69 08		adc #$08		adc 	#8 								; here $80 (display) $2E (list) $3A (store)
+.fca6	8d 0d fd	sta $fd0d		sta 	WMMode	 						; $88 (display) $36 (list) $42 (store) maybe +1 if carry set.
+.fca9					WMNextProcess:
+.fca9	e8		inx			inx
+.fcaa					WMNextProcessNoInc:
+.fcaa	bd 00 02	lda $0200,x		lda 	lineBuffer,x 					; next character
+.fcad	c9 0d		cmp #$0d		cmp 	#13 							; new line.
+.fcaf	f0 c7		beq $fc78		beq 	WMNewCommand
+.fcb1	c9 2e		cmp #$2e		cmp 	#'.' 							; '.' and ':' set mode.
+.fcb3	f0 ef		beq $fca4		beq 	WMSetMode
+.fcb5	90 f2		bcc $fca9		bcc 	WMNextProcess 					; < '.' we ignore
+.fcb7	c9 3a		cmp #$3a		cmp 	#':'
+.fcb9	f0 e9		beq $fca4		beq 	WMSetMode
+.fcbb	c9 52		cmp #$52		cmp 	#'R'
+.fcbd	f0 4a		beq $fd09		beq 	WMRunCode
+.fcbf	9c 5c fd	stz $fd5c		stz 	WMNewHex 						; zero new hex
+.fcc2	9c 5d fd	stz $fd5d		stz 	WMNewHex+1
+.fcc5	a0 00		ldy #$00		ldy 	#0 								; count of hex digits
+.fcc7					WMHexLoop:
+.fcc7	c9 3a		cmp #$3a		cmp 	#'9'+1 							; Hex shift ?
+.fcc9	f0 25		beq $fcf0		beq 	WHEndHex 						; if it is : then don't use it.
+.fccb	90 02		bcc $fccf		bcc 	WHNotHexAF
+.fccd	e9 07		sbc #$07		sbc 	#7 								; adjust.
+.fccf					WHNotHexAF:
+.fccf	38		sec			sec 									; shift into range.
+.fcd0	e9 30		sbc #$30		sbc 	#'0'
+.fcd2	c9 10		cmp #$10		cmp 	#16 							; out of range
+.fcd4	b0 1a		bcs $fcf0		bcs 	WHEndHex 						; decide what next
+.fcd6	48		pha			pha 									; save
+.fcd7	a9 04		lda #$04		lda 	#4 								; shift newhex left.
+.fcd9					WHShift:
+.fcd9	0e 5c fd	asl $fd5c		asl 	WMNewHex
+.fcdc	2e 5d fd	rol $fd5d		rol 	WMNewHex+1
+.fcdf	3a		dec a			dec 	a
+.fce0	d0 f7		bne $fcd9		bne 	WHShift
+.fce2	68		pla			pla 									; OR the value in.
+.fce3	0d 5c fd	ora $fd5c		ora 	WMNewHex
+.fce6	8d 5c fd	sta $fd5c		sta 	WMNewHex
+.fce9	c8		iny			iny 									; one more hex character.
+.fcea	e8		inx			inx 									; look at the next character
+.fceb	bd 00 02	lda $0200,x		lda 	lineBuffer,x
+.fcee	80 d7		bra $fcc7		bra 	WMHexLoop
+.fcf0					WHEndHex:
+.fcf0	c0 00		cpy #$00		cpy 	#0 								; received any hex digits
+.fcf2	f0 80		beq $fc74		beq 	WozMonStart 					; if so, restart,
+.fcf4	2c 0d fd	bit $fd0d		bit 	WMMode 							; is bit 6 set (e.g. : x 2, store mode)
+.fcf7	50 13		bvc $fd0c		bvc 	WMNotStore
+.fcf9	ad 5c fd	lda $fd5c		lda 	WMNewHex 						; byte to save
+.fcfc					WMCurrentWriteAddress:
+.fcfc	8d 00 00	sta $0000		sta 	@w $0000 						; write at the current address.
+.fcff	ee fd fc	inc $fcfd		inc 	WMCurrentWrite 					; increment store pointer and do next command
+.fd02	d0 a6		bne $fcaa		bne 	WMNextProcessNoInc
+.fd04	ee fe fc	inc $fcfe		inc 	WMCurrentWrite+1
+.fd07					WMNextProcessNoInc2:
+.fd07	80 a1		bra $fcaa		bra 	WMNextProcessNoInc
+.fd09					WMRunCode:
+.fd09	6c 3a fd	jmp ($fd3a)	 	jmp 	(WMCurrent)
+.fd0c					WMNotStore:
+.fd0c					WMModeAddress:
+.fd0c	a9 ff		lda #$ff		lda 	#$FF 							; get the mode
+.fd0e	10 2f		bpl $fd3f		bpl 	WMCheckCompare 				; if . mode then list from WMCurrent -> WMNewHex
+.fd10	a0 02		ldy #$02		ldy 	#2 								; copy WMNewHex -> WMCurrent & WMCurrentWrite
+.fd12					WMCopyAddress:
+.fd12	b9 5b fd	lda $fd5b,y		lda 	WMNewHex-1,y
+.fd15	99 39 fd	sta $fd39,y		sta 	WMCurrent-1,y
+.fd18	99 fc fc	sta $fcfc,y		sta 	WMCurrentWrite-1,y
+.fd1b	88		dey			dey
+.fd1c	d0 f4		bne $fd12		bne 	WMCopyAddress
+.fd1e					WMNextDisplay:
+.fd1e	d0 14		bne $fd34		bne 	WMNoAddress
+.fd20	20 38 fc	jsr $fc38		jsr 	KWriteCharacterInline
+>fd23	0d					.byte 	13
+.fd24	ad 3b fd	lda $fd3b		lda 	WMCurrent+1 					; address
+.fd27	20 5e fd	jsr $fd5e		jsr 	PrintHexByte
+.fd2a	ad 3a fd	lda $fd3a		lda 	WMCurrent
+.fd2d	20 5e fd	jsr $fd5e		jsr 	PrintHexByte
+.fd30	20 38 fc	jsr $fc38		jsr 	KWriteCharacterInline
+>fd33	3a					.byte 	':'
+.fd34					WMNoAddress:
+.fd34	a9 20		lda #$20		lda 	#' ' 							; print space
+.fd36	20 4b fc	jsr $fc4b		jsr 	KWriteCharacter
+.fd39					WMCurrentAddress:
+.fd39	ad 00 00	lda $0000		lda 	@w $0000 						; print current address
+.fd3c	20 5e fd	jsr $fd5e		jsr 	PrintHexByte
+.fd3f					WMCheckCompare:
+.fd3f	ad 3a fd	lda $fd3a		lda 	WMCurrent 						; check current < newhex
+.fd42	cd 5c fd	cmp $fd5c		cmp 	WMNewHex
+.fd45	ad 3b fd	lda $fd3b		lda 	WMCurrent+1
+.fd48	ed 5d fd	sbc $fd5d		sbc 	WMNewHex+1
+.fd4b	b0 ba		bcs $fd07		bcs 	WMNextProcessNoInc2
+.fd4d	ee 3a fd	inc $fd3a		inc 	WMCurrent 						; and bump the pointer
+.fd50	d0 03		bne $fd55		bne 	WMCheckAddressReqd
+.fd52	ee 3b fd	inc $fd3b		inc 	WMCurrent+1
+.fd55					WMCheckAddressReqd:
+.fd55	ad 3a fd	lda $fd3a		lda 	WMCurrent
+.fd58	29 07		and #$07		and 	#7
+.fd5a	80 c2		bra $fd1e		bra 	WMNextDisplay
+.fd5c					WMNewHex:
+>fd5c	00 00					.word 	0
+.fd5e					PrintHexByte:
+.fd5e	48		pha			pha
+.fd5f	4a		lsr a			lsr 	a
+.fd60	4a		lsr a			lsr 	a
+.fd61	4a		lsr a			lsr 	a
+.fd62	4a		lsr a			lsr 	a
+.fd63	20 67 fd	jsr $fd67		jsr 	PrintHexNibble
+.fd66	68		pla			pla
+.fd67					PrintHexNibble:
+.fd67	29 0f		and #$0f		and 	#15
+.fd69	c9 0a		cmp #$0a		cmp 	#10
+.fd6b	90 02		bcc $fd6f		bcc 	nothex
+.fd6d	69 06		adc #$06		adc 	#6
+.fd6f					nothex:
+.fd6f	69 30		adc #$30		adc 	#48
+.fd71	20 4b fc	jsr $fc4b		jsr 	KWriteCharacter
+.fd74	60		rts			rts
 
 ;******  Return to file: kernel.asm
 
@@ -245,7 +250,7 @@
 
 .ffee	4c 59 fc	jmp $fc59		jmp	KReadCharacter
 .fff1	4c 4b fc	jmp $fc4b		jmp	KWriteCharacter
-.fff4	4c 64 fc	jmp $fc64		jmp	KWaitMessage
+.fff4	4c 6c fc	jmp $fc6c		jmp	KWaitMessage
 .fff7	4c 08 fc	jmp $fc08		jmp	KSendMessage
 
 ;******  Return to file: kernel.asm
