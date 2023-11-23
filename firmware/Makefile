@@ -25,7 +25,8 @@ always:
 
 kernel: always
 	make -C ..$(S)kernel
-	$(CCOPY) ..$(S)kernel$(S)build$(S)binary.h include$(S)data
+	$(CCOPY) $(BINDIR)kernel_binary.h include$(S)data
+	$(CCOPY) $(BINDIR)kernel_a1basic.h include$(S)data
 	$(TOUCH) sources$(S)memory.c*
 
 rebuild: clean build

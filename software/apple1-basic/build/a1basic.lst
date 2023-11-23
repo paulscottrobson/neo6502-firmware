@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -D NEO=1 -o build/a1basic.bin -L build/a1basic.lst build/neo6502.inc a1basic.asm
-; Thu Nov 23 16:33:52 2023
+; Thu Nov 23 17:44:18 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -11,6 +11,7 @@
 
 ;******  Processing input file: build/neo6502.inc
 
+=$ff00					ControlPort = $ff00
 =$ffee					ReadCharacter = $ffee
 =$fff1					WriteCharacter = $fff1
 =$fff4					WaitMessage = $fff4
