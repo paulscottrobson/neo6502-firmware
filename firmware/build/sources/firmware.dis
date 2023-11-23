@@ -1496,29 +1496,29 @@ Disassembly of section .text:
 10000cd2:	d001      	beq.n	10000cd8 <KBDEvent+0x60>
 10000cd4:	221f      	movs	r2, #31
 10000cd6:	4013      	ands	r3, r2
-10000cd8:	482b      	ldr	r0, [pc, #172]	@ (10000d88 <KBDEvent+0x110>)
-10000cda:	7802      	ldrb	r2, [r0, #0]
-10000cdc:	2a3f      	cmp	r2, #63	@ 0x3f
-10000cde:	d803      	bhi.n	10000ce8 <KBDEvent+0x70>
-10000ce0:	4c2a      	ldr	r4, [pc, #168]	@ (10000d8c <KBDEvent+0x114>)
-10000ce2:	54a3      	strb	r3, [r4, r2]
-10000ce4:	3201      	adds	r2, #1
-10000ce6:	7002      	strb	r2, [r0, #0]
-10000ce8:	4a29      	ldr	r2, [pc, #164]	@ (10000d90 <KBDEvent+0x118>)
-10000cea:	7013      	strb	r3, [r2, #0]
-10000cec:	4b25      	ldr	r3, [pc, #148]	@ (10000d84 <KBDEvent+0x10c>)
-10000cee:	7019      	strb	r1, [r3, #0]
+10000cd8:	4a2c      	ldr	r2, [pc, #176]	@ (10000d8c <KBDEvent+0x114>)
+10000cda:	7013      	strb	r3, [r2, #0]
+10000cdc:	4a29      	ldr	r2, [pc, #164]	@ (10000d84 <KBDEvent+0x10c>)
+10000cde:	7011      	strb	r1, [r2, #0]
+10000ce0:	4929      	ldr	r1, [pc, #164]	@ (10000d88 <KBDEvent+0x110>)
+10000ce2:	780a      	ldrb	r2, [r1, #0]
+10000ce4:	2a3f      	cmp	r2, #63	@ 0x3f
+10000ce6:	d803      	bhi.n	10000cf0 <KBDEvent+0x78>
+10000ce8:	4829      	ldr	r0, [pc, #164]	@ (10000d90 <KBDEvent+0x118>)
+10000cea:	5483      	strb	r3, [r0, r2]
+10000cec:	3201      	adds	r2, #1
+10000cee:	700a      	strb	r2, [r1, #0]
 10000cf0:	f7ff fc8c 	bl	1000060c <TMRRead>
 10000cf4:	4b27      	ldr	r3, [pc, #156]	@ (10000d94 <KBDEvent+0x11c>)
 10000cf6:	305a      	adds	r0, #90	@ 0x5a
 10000cf8:	6018      	str	r0, [r3, #0]
 10000cfa:	e7d3      	b.n	10000ca4 <KBDEvent+0x2c>
-10000cfc:	4b24      	ldr	r3, [pc, #144]	@ (10000d90 <KBDEvent+0x118>)
+10000cfc:	4b23      	ldr	r3, [pc, #140]	@ (10000d8c <KBDEvent+0x114>)
 10000cfe:	7018      	strb	r0, [r3, #0]
 10000d00:	e7d0      	b.n	10000ca4 <KBDEvent+0x2c>
 10000d02:	000b      	movs	r3, r1
 10000d04:	3b1e      	subs	r3, #30
-10000d06:	2b0a      	cmp	r3, #10
+10000d06:	2b09      	cmp	r3, #9
 10000d08:	d82d      	bhi.n	10000d66 <KBDEvent+0xee>
 10000d0a:	2927      	cmp	r1, #39	@ 0x27
 10000d0c:	d033      	beq.n	10000d76 <KBDEvent+0xfe>
@@ -1582,8 +1582,8 @@ Disassembly of section .text:
 10000d80:	20035544 	.word	0x20035544
 10000d84:	20035aad 	.word	0x20035aad
 10000d88:	20035ab3 	.word	0x20035ab3
-10000d8c:	20035828 	.word	0x20035828
-10000d90:	20035aac 	.word	0x20035aac
+10000d8c:	20035aac 	.word	0x20035aac
+10000d90:	20035828 	.word	0x20035828
 10000d94:	200355fc 	.word	0x200355fc
 10000d98:	100076c4 	.word	0x100076c4
 10000d9c:	1000799c 	.word	0x1000799c

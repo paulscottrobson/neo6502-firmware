@@ -56,9 +56,9 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 			keyboardState[keyCode >> 3] |= bit; 								// Set down bit.
 			uint8_t ascii = KBDMapToASCII(keyCode,modifiers);  					// What key ?
 			if (ascii != 0) {
-				KBDInsertQueue(ascii);											// Insert in queue 
 				currentASCII = ascii;  											// Remember code and time.
 				currentKeyCode = keyCode;
+				KBDInsertQueue(ascii);  										// Push in the queue
 				nextRepeat = TMRRead()+KBD_REPEAT_START;
 			}
 		} else {
@@ -150,7 +150,7 @@ static uint8_t KBDMapToASCII(uint8_t keyCode,uint8_t modifiers) {
 		if (isControl) ascii &= 0x1F; 											// Handle control
 	}
 
-	if (ascii == 0 && keyCode >= KEY_1 && keyCode <= KEY_1+10) { 				// Handle numbers - slightly mangled.
+	if (ascii == 0 && keyCode >= KEY_1 && keyCode < KEY_1+10) { 				// Handle numbers - slightly mangled.
 		ascii = (keyCode == KEY_1+9) ? '0' : keyCode - KEY_1 + '1'; 			// because the order on the keyboard isn't 0-9!
 		if (isShift) ascii = ")!@#$%^&*("[ascii - '0']; 						// Standard US mapping. of the top row
 	}
