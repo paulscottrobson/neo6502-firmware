@@ -1,4 +1,4 @@
-// ***************************************************************************************
+    // ***************************************************************************************
 // ***************************************************************************************
 //
 //      Name :      dispatch.c
@@ -28,9 +28,9 @@
 
 void DSPHandler(uint8_t *cBlock,uint8_t *memory) {
 
-       #include "data/dispatch_code.h"  
-
-       *DCOMMAND = 0;															// Clear the message indicating completion.
+    *DERROR = 0;                                                                // Clear error state.
+    #include "data/dispatch_code.h"  
+    *DCOMMAND = 0;					     										// Clear the message indicating completion.
 }
 
 // ***************************************************************************************

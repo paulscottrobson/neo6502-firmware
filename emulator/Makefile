@@ -55,7 +55,7 @@ import: clean kernel always
 
 kernel:	
 	make -B -C ../kernel
-	$(CCOPY) $(BINDIR)binary.h import$(S)include$(S)data
+	$(CCOPY) $(BINDIR)*_binary.h import$(S)include$(S)data
 	$(TOUCH) import$(S)sources$(S)interface$(S)memory.c
 
 always:
@@ -72,7 +72,7 @@ $(APPNAME): $(SOURCES)
 prebuild:
 	make -C processor
 	python scripts$(S)mapper.py >include$(S)hid2sdl.h
-	$(CCOPY) ..$(S)kernel$(S)build$(S)binary.h include
+	$(CCOPY) $(BINDIR)*_binary.h include
 
 fwbuild:
 	make -C $(FIRMWARE)
