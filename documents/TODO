@@ -1,9 +1,9 @@
 TODO List
 ---------
 
-	- Implement Backspace in console (chr(8))
+	- Implement Backspace in console (chr(8)), leave Wozmon :)
 
-	- Implement NeoWozMon
+	- Cursor ? In hardware :)
 
 	- Implement NeoWozBasic (was Applesoft Basic) if not too heavy.
 
@@ -17,3 +17,4 @@ TODO List
 - Audio system driver on emulator, and audio interface
 - File I/O
 - Mathematics system
+

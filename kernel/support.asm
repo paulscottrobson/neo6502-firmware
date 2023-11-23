@@ -19,32 +19,47 @@
 KSendMessage:
 		jsr		KWaitMessage 				; wait for command to be released.
 
-		sta 	_KSMReturnA+1 				; save A reloaded at end.
-
+		sta 	KSMReturnA+1 				; save A reloaded at end.
 		pla 								; pop return address to the read instruction
-		sta 	_KSMRAddress+1 			
+		sta 	KSMRAddress+1 			
 		pla
-		sta 	_KSMRAddress+2
+		sta 	KSMRAddress+2
 
-		jsr 	_KSMReadAdvance 			; read the command.
+		jsr 	KSMReadAdvance 				; read the command.
 		pha 								; save, write it after the command.
-		jsr 	_KSMReadAdvance 			; read the function number
+		jsr 	KSMReadAdvance 				; read the function number
 		sta 	DFunction 					
 		pla
 		sta 	DCommand 					; save the command, starting the message.
-		jsr 	_KSMReadAdvance 			; use jmp indirect so advance it again.
-
-_KSMReturnA:		
+KSMAdvanceReturn:		
+		jsr 	KSMReadAdvance 				; use jmp indirect so advance it again.
+KSMReturnA:		
 		lda 	#$FF 						; original A value
-		jmp 	(_KSMRAddress+1)
+		jmp 	(KSMRAddress+1)
 
-_KSMReadAdvance:
-		inc 	_KSMRAddress+1 				; pre-inc because of 6502 RTS behaviour
-		bne 	_KSMRAddress
-		inc 	_KSMRAddress+2
-_KSMRAddress:
+KSMReadAdvance:
+		inc 	KSMRAddress+1 				; pre-inc because of 6502 RTS behaviour
+		bne 	KSMRAddress
+		inc 	KSMRAddress+2
+KSMRAddress:
 		lda 	$FFFF 						; holds the return address.
 		rts
+
+; ***************************************************************************************
+;
+;							Write character inlined (following byte)
+;
+; ***************************************************************************************
+
+KWriteCharacterInLine:
+		sta 	KSMReturnA+1 				; save A reloaded at end.
+		pla 								; pop return address to the read instruction
+		sta 	KSMRAddress+1 			
+		pla
+		sta 	KSMRAddress+2
+		jsr 	KSMReadAdvance 				; output a character
+		jsr 	KWriteCharacter
+		bra 	KSMAdvanceReturn
 
 ; ***************************************************************************************
 ;
@@ -53,9 +68,12 @@ _KSMRAddress:
 ; ***************************************************************************************
 
 KWriteCharacter:	
+		pha
 		sta 	DParameters 				; sending A
-		jsr 	KSendMessage 				; command 1,0 write character
-		.byte 	1,0
+		stz 	DFunction 					; we don't inline it because inline uses it
+		lda 	#1
+		sta 	DCommand
+		pla
 		rts
 
 ; ***************************************************************************************
