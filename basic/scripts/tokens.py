@@ -76,7 +76,7 @@ class TokenSet(object):
 			assert tokenText not in self.nameToToken
 		token = Token(tokenID,tokenText)
 		self.idToToken[tokenID] = token 
-		self.nameToToken[tokenText] = token
+		self.nameToToken[token.getName()] = token
 
 	def create(self):
 		self.nextToken = None 
@@ -130,6 +130,6 @@ if __name__ == "__main__":
 	print(ts.nameToToken.keys())
 	print(ts.getByName("!!str"))
 
-
+	print(ts.nameToToken.keys())
 
 
