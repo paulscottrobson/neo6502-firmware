@@ -44,7 +44,7 @@ class TokenSet(object):
 	def getByID(self,id):
 		return self.idToToken if id in self.idToToken else None
 	def getByName(self,name):
-		name = name.strip().upper()
+		name = name.strip().lower()
 		return self.nameToToken[name] if name in self.nameToToken else None
 
 	def getRange(self,start):
@@ -55,6 +55,9 @@ class TokenSet(object):
 			start += 1
 		return ids 
 		
+	def getAllTokenNames(self):
+		return [x for x in self.nameToToken.keys() if x != ""]
+
 	def add(self,start,tokens,padSize = None):
 		self.nextToken = start if start is not None else self.nextToken
 		start = self.nextToken
@@ -124,7 +127,8 @@ if __name__ == "__main__":
 	print(ts.getRange(0x80))
 	print(ts.getRange(0x100))
 	print(ts.getRange(0x20))
-
+	print(ts.nameToToken.keys())
+	print(ts.getByName("!!str"))
 
 
 
