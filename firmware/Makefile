@@ -27,6 +27,7 @@ kernel: always
 	make -C ..$(S)kernel
 	$(CCOPY) $(BINDIR)kernel_binary.h include$(S)data
 	$(CCOPY) $(BINDIR)kernel_a1basic.h include$(S)data
+	$(CCOPY) $(BINDIR)kernel_figforth.h include$(S)data
 	$(TOUCH) sources$(S)memory.c*
 
 rebuild: clean build
@@ -34,12 +35,15 @@ rebuild: clean build
 build: kernel always
 	python scripts$(S)prompt.py >include$(S)data$(S)prompt.h
 	make -C build
+	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
+	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .
+	$(CCOPY) $(BINARY).uf2 $(BINDIR)
+	$(CCOPY) $(BINARY).elf $(BINDIR)
 
 clean: always
 	rm -Rf build
 	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S .
 
 run: build
-	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(UPLOADER) $(UPCONFIG) $(UPCOMMANDS)
 

@@ -45,16 +45,23 @@ UP        =W+2           ; user area pointer.
 XSAVE     =UP+2          ; temporary for X register.
 ;
 TIBX      =$0100         ; terminal input buffer of 84 bytes.
-ORIG      =$0200         ; origin of FORTH's Dictionary.
+ORIG      =$0400         ; origin of FORTH's Dictionary.
 MEM       =$4000         ; top of assigned memory+1 byte.
 UAREA     =MEM-128       ; 128 bytes of user area
 DAREA     =UAREA-BMAG    ; disk buffer space.
 ;
 ;         Monitor calls for terminal support
 ;
-OUTCH     =$D2C1         ; output one ASCII char. to term.
-INCH      =$D1DC         ; input one ASCII char. to term.
-TCR       =$D0F1         ; terminal return and line feed.
+; OUTCH     =$D2C1         ; output one ASCII char. to term.
+;
+; INCH      =$D1DC         ; input one ASCII char. to term.
+; TCR       =$D0F1         ; terminal return and line feed.
+
+.include "neo6502.inc"
+
+OUTCH = WriteCharacter
+INCH = ReadCharacter
+
 ;
 ;    From DAREA downward to the top of the dictionary is free
 ;    space where the user's applications are compiled.
@@ -70,21 +77,21 @@ ENTER     NOP            ; Vector to COLD entry
           JMP COLD+2     ;
 REENTR    NOP            ; User Warm entry point
           JMP WARM       ; Vector to WARM entry
-          .WORD $0004    ; 6502 in radix-36
-          .WORD $5ED2    ;
-          .WORD NTOP     ; Name address of MON
-          .WORD $7F      ; Backspace Character
-          .WORD UAREA    ; Initial User Area
-          .WORD TOS      ; Initial Top of Stack
-          .WORD $1FF     ; Initial Top of Return Stack
-          .WORD TIBX     ; Initial terminal input buffer
+          .word $0004    ; 6502 in radix-36
+          .word $5ED2    ;
+          .word NTOP     ; Name address of MON
+          .word $08      ; Backspace Character
+          .word UAREA    ; Initial User Area
+          .word TOS      ; Initial Top of Stack
+          .word $1FF     ; Initial Top of Return Stack
+          .word TIBX     ; Initial terminal input buffer
 ;
 ;
-          .WORD 31       ; Initial name field width
-          .WORD 0        ; 0=nod disk, 1=disk
-          .WORD TOP      ; Initial fence address
-          .WORD TOP      ; Initial top of dictionary
-          .WORD VL0      ; Initial Vocabulary link ptr.
+          .word 31       ; Initial name field width
+          .word 0        ; 0=nod disk, 1=disk
+          .word TOP      ; Initial fence address
+          .word TOP      ; Initial top of dictionary
+          .word VL0      ; Initial Vocabulary link ptr.
 ;
 ;    The following offset adjusts all code fields to avoid an
 ;    address ending $XXFF. This must be checked and altered on
@@ -94,6 +101,11 @@ REENTR    NOP            ; User Warm entry point
 ;
 ;          .fill     2
 
+TCR:    pha
+        lda     #13
+        jsr     WriteCharacter
+        pla
+        rts
 ;
 ;
 ;                                       LIT
@@ -101,8 +113,8 @@ REENTR    NOP            ; User Warm entry point
 ;
 L22       .TEXT $83,'LI',$D4            ; <--- name field
 ;                          <----- link field
-          .WORD 00       ; last link marked by zero
-LIT       .WORD *+2      ; <----- code address field
+          .word 0        ; last link marked by zero
+LIT       .word *+2      ; <----- code address field
           LDA (IP),Y     ; <----- start of parameter field
           PHA
           INC IP
@@ -129,7 +141,7 @@ NEXT      LDY #1
           DEY
           LDA (IP),Y
           STA W
-          JSR TRACE      ; Remove this when all is well
+;          JSR TRACE      ; Remove this when all is well
           CLC            ; Increment IP by two.
           LDA IP
           ADC #2
@@ -143,8 +155,8 @@ L54       JMP W-1        ; Jump to an indirect jump (W) which
 ;    CLIT pushes the next inline byte to data stack
 ;
 L35       .TEXT $84,'CLI',$D4
-          .WORD L22      ; Link to LIT
-CLIT      .WORD *+2
+          .word L22      ; Link to LIT
+CLIT      .word *+2
           LDA (IP),Y
           PHA
           TYA
@@ -172,7 +184,7 @@ XW        =$12           ; scratch reg. to next code field add
 NP        =$14           ; scratch reg. pointing to name field
 ;
 ;
-TRACE     STX XSAVE
+_TRACE     STX XSAVE
           JSR CRLF
           LDA IP+1
           JSR HEX2
@@ -189,7 +201,7 @@ TRACE     STX XSAVE
           LDA (IP),Y
           STA XW+1
           STA NP+1
-          JSR PRNAM      ; print dictionary name
+          JSR XPRNAM      ; print dictionary name
 ;
           LDA XW+1
           JSR HEX2       ; print code field address
@@ -217,7 +229,7 @@ TRACE     STX XSAVE
 ;    TCOLON is called from DOCOLON to label each point
 ;    where FORTH 'nests' one level.
 ;
-TCOLON    STX XSAVE
+_TCOLON    STX XSAVE
           LDA W
           STA NP         ; locate the name of the called word
           LDA W+1
@@ -226,17 +238,17 @@ TCOLON    STX XSAVE
           LDA #$3A       ; ':
           JSR LETTER
           JSR XBLANK
-          JSR PRNAM
+          JSR XPRNAM
           LDX XSAVE
           RTS
 ;
 ;    Print name by it's code field address in NP
 ;
-PRNAM     JSR DECNP
-          JSR DECNP
-          JSR DECNP
+XPRNAM    JSR XDECNP
+          JSR XDECNP
+          JSR XDECNP
           LDY #0
-PN1       JSR DECNP
+PN1       JSR XDECNP
           LDA (NP),Y     ; loop till D7 in name set
           BPL PN1
 PN2       INY
@@ -250,7 +262,7 @@ PN2       INY
 ;
 ;    Decrement name field pointer
 ;
-DECNP     LDA NP
+XDECNP     LDA NP
           BNE DECNP1
           DEC NP+1
 DECNP1    DEC NP
@@ -272,8 +284,8 @@ L63       LDA 0,X
 ;                                       SCREEN 14 LINE 11
 ;
 L75       .TEXT $87,'EXECUT',$C5
-          .WORD L35      ; link to CLIT
-EXEC      .WORD *+2
+          .word L35      ; link to CLIT
+EXEC      .word *+2
           LDA 0,X
           STA W
           LDA 1,X
@@ -286,8 +298,8 @@ EXEC      .WORD *+2
 ;                                       SCREEN 15 LINE 11
 ;
 L89       .TEXT $86,'BRANC',$C8
-          .WORD L75      ; link to EXCECUTE
-BRAN      .WORD *+2
+          .word L75      ; link to EXCECUTE
+BRAN      .word *+2
           CLC
           LDA (IP),Y
           ADC IP
@@ -304,8 +316,8 @@ BRAN      .WORD *+2
 ;                                       SCREEN 15 LINE 6
 ;
 L107      .TEXT $87,'0BRANC',$C8
-          .WORD L89      ; link to BRANCH
-ZBRAN     .WORD *+2
+          .word L89      ; link to BRANCH
+ZBRAN     .word *+2
           INX
           INX
           LDA $FE,X
@@ -324,8 +336,8 @@ L122      JMP NEXT
 ;                                       SCREEN 16 LINE 1
 ;
 L127      .TEXT $86,'(LOOP',$A9
-          .WORD L107     ; link to 0BRANCH
-PLOOP     .WORD L130
+          .word L107     ; link to 0BRANCH
+PLOOP     .word L130
 L130      STX  XSAVE
           TSX
           INC $101,X
@@ -351,8 +363,8 @@ PL2       LDX XSAVE
 ;                                       SCREEN 16 LINE 8
 ;
 L154      .TEXT $87,'(+LOOP',$A9
-          .WORD L127     ; link to (loop)
-PPLOO     .WORD *+2
+          .word L127     ; link to (loop)
+PPLOO     .word *+2
           INX
           INX
           STX XSAVE
@@ -382,8 +394,8 @@ PPLOO     .WORD *+2
 ;                                       SCREEN 17 LINE 2
 ;
 L185      .TEXT $84,'(DO',$A9
-          .WORD L154     ; link to (+LOOP)
-PDO       .WORD *+2
+          .word L154     ; link to (+LOOP)
+PDO       .word *+2
           LDA 3,X
           PHA
           LDA 2,X
@@ -406,15 +418,15 @@ POP       INX
 ;                                       SCREEN 17 LINE 9
 ;
 L207      .TEXT $81,$C9
-          .WORD L185     ; link to (DO)
-I         .WORD R+2      ; share the code for R
+          .word L185     ; link to (DO)
+I         .word R+2      ; share the code for R
 ;
 ;                                       DIGIT
 ;                                       SCREEN 18 LINE 1
 ;
 L214      .TEXT $85,'DIGI',$D4
-          .WORD L207     ; link to I
-DIGIT     .WORD *+2
+          .word L207     ; link to I
+DIGIT     .word *+2
           SEC
           LDA 2,X
           SBC #$30
@@ -442,8 +454,8 @@ L234      TYA
 ;                                       SCREEN 19 LINE 1
 ;
 L243      .TEXT $86,'(FIND',$A9
-          .WORD L214   ; Link to DIGIT
-PFIND     .WORD *+2
+          .word L214   ; Link to DIGIT
+PFIND     .word *+2
           LDA #2
           JSR SETUP
           STX XSAVE
@@ -502,8 +514,8 @@ L284      INY
 ;                                       SCREEN 20 LINE 1
 ;
 L301      .TEXT $87,'ENCLOS',$C5
-          .WORD L243     ; link to (FIND)
-ENCL      .WORD *+2
+          .word L243     ; link to (FIND)
+ENCL      .word *+2
           LDA #2
           JSR SETUP
           TXA
@@ -538,22 +550,22 @@ L327      STY 2,X
 ;                                       SCREEN 21 LINE 5
 ;
 L337      .TEXT $84,'EMI',$D4
-          .WORD L301     ; link to ENCLOSE
-EMIT      .WORD XEMIT    ; Vector to code for KEY
+          .word L301     ; link to ENCLOSE
+EMIT      .word XEMIT    ; Vector to code for KEY
 ;
 ;                                       KEY
 ;                                       SCREEN 21 LINE 7
 ;
 L344      .TEXT $83,'KE',$D9
-          .WORD L337     ; link to EMIT
-KEY       .WORD XKEY     ; Vector to code for KEY
+          .word L337     ; link to EMIT
+KEY       .word XKEY     ; Vector to code for KEY
 ;
 ;                                       ?TERMINAL
 ;                                       SCREEN 21 LINE 9
 ;
 L351      .TEXT $89,'?TERMINA',$CC
-          .WORD L344     ; link to KEY
-QTERM     .WORD XQTER    ; Vector to code for ?TERMINAL
+          .word L344     ; link to KEY
+QTERM     .word XQTER    ; Vector to code for ?TERMINAL
 ;
 ;
 ;
@@ -563,15 +575,15 @@ QTERM     .WORD XQTER    ; Vector to code for ?TERMINAL
 ;                                       SCREEN 21 LINE 11
 ;
 L358      .TEXT $82,'C',$D2
-          .WORD L351     ; link to ?TERMINAL
-CR        .WORD XCR      ; Vector to code for CR
+          .word L351     ; link to ?TERMINAL
+CR        .word XCR      ; Vector to code for CR
 ;
 ;                                       CMOVE
 ;                                       SCREEN 22 LINE 1
 ;
 L365      .TEXT $85,'CMOV',$C5
-          .WORD L358     ; link to CR
-CMOVE     .WORD *+2
+          .word L358     ; link to CR
+CMOVE     .word *+2
           LDA #3
           JSR SETUP
 L370      CPY N
@@ -591,8 +603,8 @@ L375      LDA (N+4),Y
 ;                                       SCREEN 23 LINE 1
 ;
 L386      .TEXT $82,'U',$AA
-          .WORD L365     ; link to CMOVE
-USTAR     .WORD *+2
+          .word L365     ; link to CMOVE
+USTAR     .word *+2
           LDA 2,X
           STA N
           STY 2,X
@@ -624,8 +636,8 @@ L411      DEY
 ;                                       SCREEN 24 LINE 1
 ;
 L418      .TEXT $82,'U',$AF
-          .WORD L386     ; link to U*
-USLAS     .WORD *+2
+          .word L386     ; link to U*
+USLAS     .word *+2
           LDA 4,X
           LDY 2,X
           STY 4,X
@@ -659,8 +671,8 @@ L444      ROL 2,X
 ;                                       SCREEN 25 LINE 2
 ;
 L453      .TEXT $83,'AN',$C4
-          .WORD L418     ; link to U/
-ANDD      .WORD *+2
+          .word L418     ; link to U/
+ANDD      .word *+2
           LDA 0,X
           AND 2,X
           PHA
@@ -675,8 +687,8 @@ BINARY    INX
 ;                                       SCREEN 25 LINE 7
 ;
 L469      .TEXT $82,'O',$D2
-          .WORD L453     ; link to AND
-OR        .WORD *+2
+          .word L453     ; link to AND
+OR        .word *+2
           LDA 0,X
           ORA 2,X
           PHA
@@ -690,8 +702,8 @@ OR        .WORD *+2
 ;                                       SCREEN 25 LINE 11
 ;
 L484      .TEXT $83,'XO',$D2
-          .WORD L469     ; link to OR
-XOR       .WORD *+2
+          .word L469     ; link to OR
+XOR       .word *+2
           LDA 0,X
           EOR 2,X
           PHA
@@ -705,8 +717,8 @@ XOR       .WORD *+2
 ;                                       SCREEN 26 LINE 1
 ;
 L499      .TEXT $83,'SP',$C0
-          .WORD L484     ; link  to XOR
-SPAT      .WORD *+2
+          .word L484     ; link  to XOR
+SPAT      .word *+2
           TXA
 ;
 PUSHOA    PHA
@@ -718,8 +730,8 @@ PUSHOA    PHA
 ;
 ;
 L511      .TEXT $83,'SP',$A1
-          .WORD L499     ; link to SP@
-SPSTO     .WORD *+2
+          .word L499     ; link to SP@
+SPSTO     .word *+2
           LDY #6
           LDA (UP),Y     ; load data stack pointer (X reg) from
           TAX            ; silent user variable S0.
@@ -729,8 +741,8 @@ SPSTO     .WORD *+2
 ;                                       SCREEN 26 LINE 8
 ;
 L522      .TEXT $83,'RP',$A1
-          .WORD L511     ; link to SP!
-RPSTO     .WORD *+2
+          .word L511     ; link to SP!
+RPSTO     .word *+2
           STX XSAVE      ; load return stack pointer (machine
           LDY #8         ; stack pointer) from silent user
           LDA (UP),Y     ; VARIABLE R0
@@ -743,8 +755,8 @@ RPSTO     .WORD *+2
 ;                                       SCREEN 26 LINE 12
 ;
 L536      .TEXT $82,';',$D3
-          .WORD L522     ; link to RP!
-SEMIS     .WORD *+2
+          .word L522     ; link to RP!
+SEMIS     .word *+2
           PLA
           STA IP
           PLA
@@ -755,8 +767,8 @@ SEMIS     .WORD *+2
 ;                                       SCREEN 27 LINE  1
 ;
 L548      .TEXT $85,'LEAV',$C5
-          .WORD L536     ; link to ;S
-LEAVE     .WORD *+2
+          .word L536     ; link to ;S
+LEAVE     .word *+2
           STX XSAVE
           TSX
           LDA $101,X
@@ -770,8 +782,8 @@ LEAVE     .WORD *+2
 ;                                       SCREEN 27 LINE 5
 ;
 L563      .TEXT $82,'>',$D2
-          .WORD L548     ; link to LEAVE
-TOR       .WORD *+2
+          .word L548     ; link to LEAVE
+TOR       .word *+2
           LDA 1,X        ; move high byte
           PHA
           LDA 0,X        ; then low byte
@@ -784,8 +796,8 @@ TOR       .WORD *+2
 ;                                       SCREEN 27 LINE 8
 ;
 L577      .TEXT $82,'R',$BE
-          .WORD L563     ; link to >R
-RFROM     .WORD *+2
+          .word L563     ; link to >R
+RFROM     .word *+2
           DEX            ; make room on data stack
           DEX
           PLA            ; high byte
@@ -798,8 +810,8 @@ RFROM     .WORD *+2
 ;                                       SCREEN 27 LINE 11
 ;
 L591      .TEXT $81,$D2
-          .WORD L577     ; link to R>
-R         .WORD *+2
+          .word L577     ; link to R>
+R         .word *+2
           STX XSAVE
           TSX            ; address return stack
           LDA $101,X     ; copy bottom value
@@ -812,8 +824,8 @@ R         .WORD *+2
 ;                                       SCREEN 28 LINE 2
 ;
 L605      .TEXT $82,'0',$BD
-          .WORD L591     ; link to R
-ZEQU      .WORD *+2
+          .word L591     ; link to R
+ZEQU      .word *+2
           LDA 1,X        ; Corrected from FD3/2 p69
           STY 1,X
           ORA 0,X
@@ -826,8 +838,8 @@ L613      STY 0,X
 ;                                       SCREEN 28 LINE 6
 ;
 L619      .TEXT $82,'0',$BC
-          .WORD L605     ; link to 0=
-ZLESS     .WORD *+2
+          .word L605     ; link to 0=
+ZLESS     .word *+2
           ASL 1,X
           TYA
           ROL A
@@ -839,8 +851,8 @@ ZLESS     .WORD *+2
 ;                                       SCREEN 29 LINE 1
 ;
 L632      .TEXT $81,$AB
-          .WORD L619     ; link to V-ADJ
-PLUS      .WORD *+2
+          .word L619     ; link to V-ADJ
+PLUS      .word *+2
           CLC
           LDA 0,X
           ADC 2,X
@@ -856,8 +868,8 @@ PLUS      .WORD *+2
 ;                                       SCREEN 29 LINE 4
 ;
 L649      .TEXT $82,'D',$AB
-          .WORD L632     ;    LINK TO +
-DPLUS     .WORD *+2
+          .word L632     ;    LINK TO +
+DPLUS     .word *+2
           CLC
           LDA 2,X
           ADC 6,X
@@ -877,8 +889,8 @@ DPLUS     .WORD *+2
 ;                                       SCREEN 29 LINE 9
 ;
 L670      .TEXT $85,'MINU',$D3
-          .WORD L649     ; link to D+
-MINUS     .WORD *+2
+          .word L649     ; link to D+
+MINUS     .word *+2
           SEC
           TYA
           SBC 0,X
@@ -892,8 +904,8 @@ MINUS     .WORD *+2
 ;                                       SCREEN 29 LINE 12
 ;
 L685      .TEXT $86,'DMINU',$D3
-          .WORD L670     ; link to  MINUS
-DMINU     .WORD *+2
+          .word L670     ; link to  MINUS
+DMINU     .word *+2
           SEC
           TYA
           SBC 2,X
@@ -907,8 +919,8 @@ DMINU     .WORD *+2
 ;                                       SCREEN 30 LINE 1
 ;
 L700      .TEXT $84,'OVE',$D2
-          .WORD L685     ; link to DMINUS
-OVER      .WORD *+2
+          .word L685     ; link to DMINUS
+OVER      .word *+2
           LDA 2,X
           PHA
           LDA 3,X
@@ -918,15 +930,15 @@ OVER      .WORD *+2
 ;                                       SCREEN 30 LINE 4
 ;
 L711      .TEXT $84,'DRO',$D0
-          .WORD L700     ; link to OVER
-DROP      .WORD POP
+          .word L700     ; link to OVER
+DROP      .word POP
 ;
 ;                                       SWAP
 ;                                       SCREEN 30 LINE 8
 ;
 L718      .TEXT $84,'SWA',$D0
-          .WORD L711     ; link to DROP
-SWAP      .WORD *+2
+          .word L711     ; link to DROP
+SWAP      .word *+2
           LDA 2,X
           PHA
           LDA 0,X
@@ -940,8 +952,8 @@ SWAP      .WORD *+2
 ;                                       SCREEN 30 LINE 21
 ;
 L733      .TEXT $83,'DU',$D0
-          .WORD L718     ; link to SWAP
-DUP       .WORD *+2
+          .word L718     ; link to SWAP
+DUP       .word *+2
           LDA 0,X
           PHA
           LDA 1,X
@@ -951,8 +963,8 @@ DUP       .WORD *+2
 ;                                       SCREEN 31 LINE 2
 ;
 L744      .TEXT $82,'+',$A1
-          .WORD L733     ; link to DUP
-PSTOR     .WORD *+2
+          .word L733     ; link to DUP
+PSTOR     .word *+2
           CLC
           LDA (0,X)      ; fetch 16 bit value addressed by
           ADC 2,X        ; bottom of  stack, adding to
@@ -969,8 +981,8 @@ L754      LDA (0,X)
 ;                                       SCREEN 31 LINE 7
 ;
 L762      .TEXT $81,'TOGGL',$C5
-          .WORD L744     ; link to +!
-TOGGL     .WORD *+2
+          .word L744     ; link to +!
+TOGGL     .word *+2
           LDA (2,X)      ; complement bits in memory address
           EOR 0,X        ; second on stack, by pattern on
           STA (2,X)      ; bottom of stack.
@@ -980,8 +992,8 @@ TOGGL     .WORD *+2
 ;                                       SCREEN 32 LINE 1
 ;
 L773      .TEXT $81,$C0
-          .WORD L762     ; link to TOGGLE
-AT        .WORD *+2
+          .word L762     ; link to TOGGLE
+AT        .word *+2
           LDA (0,X)
           PHA
           INC 0,X
@@ -994,8 +1006,8 @@ L781      LDA (0,X)
 ;                                       SCREEN 32 LINE 5
 ;
 L787      .TEXT $82,'C',$C0
-          .WORD L773     ; link to @
-CAT       .WORD *+2
+          .word L773     ; link to @
+CAT       .word *+2
           LDA (0,X)      ; fetch byte addressed by bottom of
           STA 0,X        ; stack to stack, zeroing the high
           STY 1,X        ; byte
@@ -1005,8 +1017,8 @@ CAT       .WORD *+2
 ;                                       SCREEN 32 LINE 8
 ;
 L798      .TEXT $81,$A1
-          .WORD L787     ; link to C@
-STORE     .WORD *+2
+          .word L787     ; link to C@
+STORE     .word *+2
           LDA 2,X
           STA (0,X)      ; store second 16bit value on stack
           INC 0,X        ; to memory as addressed by bottom
@@ -1020,8 +1032,8 @@ L806      LDA 3,X
 ;                                       SCREEN 32 LINE 12
 ;
 L813      .TEXT $82,'C',$A1
-          .WORD L798     ; link to !
-CSTOR     .WORD *+2
+          .word L798     ; link to !
+CSTOR     .word *+2
           LDA 2,X
           STA (0,X)
           JMP POPTWO
@@ -1030,23 +1042,23 @@ CSTOR     .WORD *+2
 ;                                       SCREEN 33 LINE 2
 ;
 L823      .TEXT $C1,$BA
-          .WORD L813     ; link to C!
-COLON     .WORD DOCOL
-          .WORD QEXEC
-          .WORD SCSP
-          .WORD CURR
-          .WORD AT
-          .WORD CON
-          .WORD STORE
-          .WORD CREAT
-          .WORD RBRAC
-          .WORD PSCOD
+          .word L813     ; link to C!
+COLON     .word DOCOL
+          .word QEXEC
+          .word SCSP
+          .word CURR
+          .word AT
+          .word CON
+          .word STORE
+          .word CREAT
+          .word RBRAC
+          .word PSCOD
 ;
 DOCOL     LDA IP+1
           PHA
           LDA IP
           PHA
-          JSR TCOLON     ; mark the start of a traced : def.
+          ; JSR TCOLON     ; mark the start of a traced : def.
           CLC
           LDA W
           ADC #2
@@ -1060,25 +1072,25 @@ DOCOL     LDA IP+1
 ;                                       SCREEN 33 LINE 9
 ;
 L853      .TEXT $C1,$BB
-          .WORD L823     ; link to :
-          .WORD DOCOL
-          .WORD QCSP
-          .WORD COMP
-          .WORD SEMIS
-          .WORD SMUDG
-          .WORD LBRAC
-          .WORD SEMIS
+          .word L823     ; link to :
+          .word DOCOL
+          .word QCSP
+          .word COMP
+          .word SEMIS
+          .word SMUDG
+          .word LBRAC
+          .word SEMIS
 ;
 ;                                       CONSTANT
 ;                                       SCREEN 34 LINE 1
 ;
 L867      .TEXT $88,'CONSTAN',$D4
-          .WORD L853     ; link to ;
-CONST     .WORD DOCOL
-          .WORD CREAT
-          .WORD SMUDG
-          .WORD COMMA
-          .WORD PSCOD
+          .word L853     ; link to ;
+CONST     .word DOCOL
+          .word CREAT
+          .word SMUDG
+          .word COMMA
+          .word PSCOD
 ;
 DOCON     LDY #2
           LDA (W),Y
@@ -1091,10 +1103,10 @@ DOCON     LDY #2
 ;                                       SCREEN 34 LINE 5
 ;
 L885      .TEXT $88,'VARIABL',$C5
-          .WORD L867     ; link to CONSTANT
-VAR       .WORD DOCOL
-          .WORD CONST
-          .WORD PSCOD
+          .word L867     ; link to CONSTANT
+VAR       .word DOCOL
+          .word CONST
+          .word PSCOD
 ;
 DOVAR     CLC
           LDA W
@@ -1108,10 +1120,10 @@ DOVAR     CLC
 ;                                       SCREEN 34 LINE 10
 ;
 L902      .TEXT $84,'USE',$D2
-          .WORD L885     ; link to VARIABLE
-USER      .WORD DOCOL
-          .WORD CONST
-          .WORD PSCOD
+          .word L885     ; link to VARIABLE
+USER      .word DOCOL
+          .word CONST
+          .word PSCOD
 ;
 DOUSE     LDY #2
           CLC
@@ -1126,83 +1138,83 @@ DOUSE     LDY #2
 ;                                       SCREEN 35 LINE 2
 ;
 L920      .TEXT $81,$B0
-          .WORD L902     ; link to USER
-ZERO      .WORD DOCON
-          .WORD 0
+          .word L902     ; link to USER
+ZERO      .word DOCON
+          .word 0
 ;
 ;                                       1
 ;                                       SCREEN 35 LINE 2
 ;
 L928      .TEXT $81,$B1
-          .WORD L920     ; link to 0
-ONE       .WORD DOCON
-          .WORD 1
+          .word L920     ; link to 0
+ONE       .word DOCON
+          .word 1
 ;
 ;                                       2
 ;                                       SCREEN 35 LINE 3
 ;
 L936      .TEXT $81,$B2
-          .WORD L928     ; link to 1
-TWO       .WORD DOCON
-          .WORD 2
+          .word L928     ; link to 1
+TWO       .word DOCON
+          .word 2
 ;
 ;                                       3
 ;                                       SCREEN 35 LINE 3
 ;
 L944      .TEXT $81,$B3
-          .WORD L936     ; link to 2
-THREE     .WORD DOCON
-          .WORD 3
+          .word L936     ; link to 2
+THREE     .word DOCON
+          .word 3
 ;
 ;                                       BL
 ;                                       SCREEN 35 LINE 4
 ;
 L952      .TEXT $82,'B',$CC
-          .WORD L944     ; link to 3
-BL        .WORD DOCON
-          .WORD $20
+          .word L944     ; link to 3
+BL        .word DOCON
+          .word $20
 ;
 ;                                       C/L
 ;                                       SCREEN 35 LINE 5
 ;                                       Characters per line
 L960      .TEXT $83,'C/',$CC
-          .WORD L952     ; link to BL
-CSLL      .WORD DOCON
-          .WORD 64
+          .word L952     ; link to BL
+CSLL      .word DOCON
+          .word 64
 ;
 ;                                       FIRST
 ;                                       SCREEN 35 LINE 7
 ;
 L968      .TEXT $85,'FIRS',$D4
-          .WORD L960     ; link to C/L
-FIRST     .WORD DOCON
-          .WORD DAREA    ; bottom of disk buffer area
+          .word L960     ; link to C/L
+FIRST     .word DOCON
+          .word DAREA    ; bottom of disk buffer area
 ;
 ;                                       LIMIT
 ;                                       SCREEN 35 LINE 8
 ;
 L976      .TEXT $85,'LIMI',$D4
-          .WORD L968     ; link to FIRST
-LIMIT     .WORD DOCON
-          .WORD UAREA    ; buffers end at user area
+          .word L968     ; link to FIRST
+LIMIT     .word DOCON
+          .word UAREA    ; buffers end at user area
 ;
 ;                                       B/BUF
 ;                                       SCREEN 35 LINE 9
 ;                                       Bytes per Buffer
 ;
 L984      .TEXT $85,'B/BU',$C6
-          .WORD L976     ; link to LIMIT
-BBUF      .WORD DOCON
-          .WORD SSIZE    ; sector size
+          .word L976     ; link to LIMIT
+BBUF      .word DOCON
+          .word SSIZE    ; sector size
 ;
 ;                                       B/SCR
 ;                                       SCREEN 35 LINE 10
 ;                                       Blocks per screen
 ;
 L992      .TEXT $85,'B/SC',$D2
-          .WORD L984     ; link to B/BUF
-BSCR      .WORD DOCON
-          .WORD 8        ; blocks to make one screen
+          .word L984     ; link to B/BUF
+BSCR      .word DOCON
+          .word 8        ; blocks to make one screen
 
 
 
@@ -1213,42 +1225,42 @@ BSCR      .WORD DOCON
 ;                                       SCREEN 35 LINE 12
 ;
 L1000     .TEXT $87,'+ORIGI',$CE
-          .WORD L992     ; link to B/SCR
-PORIG     .WORD DOCOL
-          .WORD LIT,ORIG
-          .WORD PLUS
-          .WORD SEMIS
+          .word L992     ; link to B/SCR
+PORIG     .word DOCOL
+          .word LIT,ORIG
+          .word PLUS
+          .word SEMIS
 ;
 ;                                       TIB
 ;                                       SCREEN 36 LINE 4
 ;
 L1010     .TEXT $83,'TI',$C2
-          .WORD L1000    ; link to +ORIGIN
-TIB       .WORD DOUSE
+          .word L1000    ; link to +ORIGIN
+TIB       .word DOUSE
           .TEXT $A
 ;
 ;                                       WIDTH
 ;                                       SCREEN 36 LINE 5
 ;
 L1018     .TEXT $85,'WIDT',$C8
-          .WORD L1010    ; link to TIB
-WIDTH     .WORD DOUSE
+          .word L1010    ; link to TIB
+WIDTH     .word DOUSE
           .TEXT $C
 ;
 ;                                       WARNING
 ;                                       SCREEN 36 LINE 6
 ;
 L1026     .TEXT $87,'WARNIN',$C7
-          .WORD L1018    ; link to WIDTH
-WARN      .WORD DOUSE
+          .word L1018    ; link to WIDTH
+WARN      .word DOUSE
           .TEXT $E
 ;
 ;                                       FENCE
 ;                                       SCREEN 36 LINE 7
 ;
 L1034     .TEXT $85,'FENC',$C5
-          .WORD L1026    ; link to WARNING
-FENCE     .WORD DOUSE
+          .word L1026    ; link to WARNING
+FENCE     .word DOUSE
           .TEXT $10
 ;
 ;
@@ -1256,104 +1268,104 @@ FENCE     .WORD DOUSE
 ;                                       SCREEN 36 LINE 8
 ;
 L1042     .TEXT $82,'D',$D0
-          .WORD L1034    ; link to FENCE
-DP        .WORD DOUSE
+          .word L1034    ; link to FENCE
+DP        .word DOUSE
           .TEXT $12
 ;
 ;                                       VOC-LINK
 ;                                       SCREEN 36 LINE 9
 ;
 L1050     .TEXT $88,'VOC-LIN',$CB
-          .WORD L1042    ; link to DP
-VOCL      .WORD DOUSE
+          .word L1042    ; link to DP
+VOCL      .word DOUSE
           .TEXT $14
 ;
 ;                                       BLK
 ;                                       SCREEN 36 LINE 10
 ;
 L1058     .TEXT $83,'BL',$CB
-          .WORD L1050    ; link to VOC-LINK
-BLK       .WORD DOUSE
+          .word L1050    ; link to VOC-LINK
+BLK       .word DOUSE
           .TEXT $16
 ;
 ;                                       IN
 ;                                       SCREEN 36 LINE 11
 ;
 L1066     .TEXT $82,'I',$CE
-          .WORD L1058    ; link to BLK
-IN        .WORD DOUSE
+          .word L1058    ; link to BLK
+IN        .word DOUSE
           .TEXT $18
 ;
 ;                                       OUT
 ;                                       SCREEN 36 LINE 12
 ;
 L1074     .TEXT $83,'OU',$D4
-          .WORD L1066    ; link to IN
-OUT       .WORD DOUSE
+          .word L1066    ; link to IN
+OUT       .word DOUSE
           .TEXT $1A
 ;
 ;                                       SCR
 ;                                       SCREEN 36 LINE 13
 ;
 L1082     .TEXT $83,'SC',$D2
-          .WORD L1074    ; link to OUT
-SCR       .WORD DOUSE
+          .word L1074    ; link to OUT
+SCR       .word DOUSE
           .TEXT $1C
 ;
 ;                                       OFFSET
 ;                                       SCREEN 37 LINE 1
 ;
 L1090     .TEXT $86,'OFFSE',$D4
-          .WORD L1082    ; link to SCR
-OFSET     .WORD DOUSE
+          .word L1082    ; link to SCR
+OFSET     .word DOUSE
           .TEXT $1E
 ;
 ;                                       CONTEXT
 ;                                       SCREEN 37 LINE 2
 ;
 L1098     .TEXT $87,'CONTEX',$D4
-          .WORD L1090    ; link to OFFSET
-CON       .WORD DOUSE
+          .word L1090    ; link to OFFSET
+CON       .word DOUSE
           .TEXT $20
 ;
 ;                                       CURRENT
 ;                                       SCREEN 37 LINE 3
 ;
 L1106     .TEXT $87,'CURREN',$D4
-          .WORD L1098    ; link to CONTEXT
-CURR      .WORD DOUSE
+          .word L1098    ; link to CONTEXT
+CURR      .word DOUSE
           .TEXT $22
 ;
 ;                                       STATE
 ;                                       SCREEN 37 LINE 4
 ;
 L1114     .TEXT $85,'STAT',$C5
-          .WORD L1106    ; link to CURRENT
-STATE     .WORD DOUSE
+          .word L1106    ; link to CURRENT
+STATE     .word DOUSE
           .TEXT $24
 ;
 ;                                       BASE
 ;                                       SCREEN 37 LINE 5
 ;
 L1122     .TEXT $84,'BAS',$C5
-          .WORD L1114    ; link to STATE
-BASE      .WORD DOUSE
+          .word L1114    ; link to STATE
+BASE      .word DOUSE
           .TEXT $26
 ;
 ;                                       DPL
 ;                                       SCREEN 37 LINE 6
 ;
 L1130     .TEXT $83,'DP',$CC
-          .WORD L1122    ; link to BASE
-DPL       .WORD DOUSE
+          .word L1122    ; link to BASE
+DPL       .word DOUSE
           .TEXT $28
 ;
 ;                                       FLD
 ;                                       SCREEN 37 LINE 7
 ;
 L1138     .TEXT $83,'FL',$C4
-          .WORD L1130    ; link to DPL
-FLD       .WORD DOUSE
+          .word L1130    ; link to DPL
+FLD       .word DOUSE
           .TEXT $2A
 ;
 ;
@@ -1362,127 +1374,127 @@ FLD       .WORD DOUSE
 ;                                       SCREEN 37 LINE 8
 ;
 L1146     .TEXT $83,'CS',$D0
-          .WORD L1138    ; link to FLD
-CSP       .WORD DOUSE
+          .word L1138    ; link to FLD
+CSP       .word DOUSE
           .TEXT $2C
 ;
 ;                                       R#
 ;                                       SCREEN 37  LINE 9
 ;
 L1154     .TEXT $82,'R',$A3
-          .WORD L1146    ; link to CSP
-RNUM      .WORD DOUSE
+          .word L1146    ; link to CSP
+RNUM      .word DOUSE
           .TEXT $2E
 ;
 ;                                       HLD
 ;                                       SCREEN 37 LINE 10
 ;
 L1162     .TEXT $83,'HL',$C4
-          .WORD L1154    ; link to R#
-HLD       .WORD DOUSE
+          .word L1154    ; link to R#
+HLD       .word DOUSE
           .TEXT $30
 ;
 ;                                       1+
 ;                                       SCREEN 38 LINE  1
 ;
 L1170     .TEXT $82,'1',$AB
-          .WORD L1162    ; link to HLD
-ONEP      .WORD DOCOL
-          .WORD ONE
-          .WORD PLUS
-          .WORD SEMIS
+          .word L1162    ; link to HLD
+ONEP      .word DOCOL
+          .word ONE
+          .word PLUS
+          .word SEMIS
 ;
 ;                                       2+
 ;                                       SCREEN 38 LINE 2
 ;
 L1180     .TEXT $82,'2',$AB
-          .WORD L1170    ; link to 1+
-TWOP      .WORD DOCOL
-          .WORD TWO
-          .WORD PLUS
-          .WORD SEMIS
+          .word L1170    ; link to 1+
+TWOP      .word DOCOL
+          .word TWO
+          .word PLUS
+          .word SEMIS
 ;
 ;                                       HERE
 ;                                       SCREEN 38 LINE 3
 ;
 L1190     .TEXT $84,'HER',$C5
-          .WORD L1180    ; link to 2+
-HERE      .WORD DOCOL
-          .WORD DP
-          .WORD AT
-          .WORD SEMIS
+          .word L1180    ; link to 2+
+HERE      .word DOCOL
+          .word DP
+          .word AT
+          .word SEMIS
 ;
 ;                                       ALLOT
 ;                                       SCREEN 38 LINE 4
 ;
 L1200     .TEXT $85,'ALLO',$D4
-          .WORD L1190    ; link to HERE
-ALLOT     .WORD DOCOL
-          .WORD DP
-          .WORD PSTOR
-          .WORD SEMIS
+          .word L1190    ; link to HERE
+ALLOT     .word DOCOL
+          .word DP
+          .word PSTOR
+          .word SEMIS
 ;
 ;                                       ,
 ;                                       SCREEN 38 LINE 5
 ;
 L1210     .TEXT $81,$AC
-          .WORD L1200    ; link to ALLOT
-COMMA     .WORD DOCOL
-          .WORD HERE
-          .WORD STORE
-          .WORD TWO
-          .WORD ALLOT
-          .WORD SEMIS
+          .word L1200    ; link to ALLOT
+COMMA     .word DOCOL
+          .word HERE
+          .word STORE
+          .word TWO
+          .word ALLOT
+          .word SEMIS
 ;
 ;                                       C,
 ;                                       SCREEN 38 LINE 6
 ;
 L1222     .TEXT $82,'C',$AC
-          .WORD L1210    ; link to ,
-CCOMM     .WORD DOCOL
-          .WORD HERE
-          .WORD CSTOR
-          .WORD ONE
-          .WORD ALLOT
-          .WORD SEMIS
+          .word L1210    ; link to ,
+CCOMM     .word DOCOL
+          .word HERE
+          .word CSTOR
+          .word ONE
+          .word ALLOT
+          .word SEMIS
 ;
 ;                                       -
 ;                                       SCREEN 38 LINE 7
 ;
 L1234     .TEXT $81,$AD
-          .WORD L1222    ; link to C,
-SUB       .WORD DOCOL
-          .WORD MINUS
-          .WORD PLUS
-          .WORD SEMIS
+          .word L1222    ; link to C,
+SUB       .word DOCOL
+          .word MINUS
+          .word PLUS
+          .word SEMIS
 ;
 ;                                       =
 ;                                       SCREEN 38 LINE 8
 ;
 L1244     .TEXT $81,$BD
-          .WORD L1234    ; link to -
-EQUAL     .WORD DOCOL
-          .WORD SUB
-          .WORD ZEQU
-          .WORD SEMIS
+          .word L1234    ; link to -
+EQUAL     .word DOCOL
+          .word SUB
+          .word ZEQU
+          .word SEMIS
 ;
 ;                                       U<
 ;                                       Unsigned less than
 ;
 L1246     .TEXT $82,'U',$BC
-          .WORD L1244    ; link to =
-ULESS     .WORD DOCOL
-          .WORD SUB      ; subtract two values
-          .WORD ZLESS    ; test sign
-          .WORD SEMIS
+          .word L1244    ; link to =
+ULESS     .word DOCOL
+          .word SUB      ; subtract two values
+          .word ZLESS    ; test sign
+          .word SEMIS
 ;
 ;                                       <
 ;                                       Altered from model
 ;                                       SCREEN 38 LINE 9
 ;
 L1254     .TEXT $81,$BC
-          .WORD L1246    ; link to U<
-LESS      .WORD *+2
+          .word L1246    ; link to U<
+LESS      .word *+2
           SEC
           LDA 2,X
           SBC 0,X        ; subtract
@@ -1499,292 +1511,292 @@ L1260     STY 2,X        ; leave boolean
 ;                                       >
 ;                                       SCREEN 38 LINE 10
 L1264     .TEXT $81,$BE
-          .WORD L1254    ; link to <
-GREAT     .WORD DOCOL
-          .WORD SWAP
-          .WORD LESS
-          .WORD SEMIS
+          .word L1254    ; link to <
+GREAT     .word DOCOL
+          .word SWAP
+          .word LESS
+          .word SEMIS
 ;
 ;                                       ROT
 ;                                       SCREEN 38 LINE 11
 ;
 L1274     .TEXT $83,'RO',$D4
-          .WORD L1264    ; link to >
-ROT       .WORD DOCOL
-          .WORD TOR
-          .WORD SWAP
-          .WORD RFROM
-          .WORD SWAP
-          .WORD SEMIS
+          .word L1264    ; link to >
+ROT       .word DOCOL
+          .word TOR
+          .word SWAP
+          .word RFROM
+          .word SWAP
+          .word SEMIS
 ;
 ;                                       SPACE
 ;                                       SCREEN 38 LINE 12
 ;
 L1286     .TEXT $85,'SPAC',$C5
-          .WORD L1274    ; link to ROT
-SPACE     .WORD DOCOL
-          .WORD BL
-          .WORD EMIT
-          .WORD SEMIS
+          .word L1274    ; link to ROT
+SPACE     .word DOCOL
+          .word BL
+          .word EMIT
+          .word SEMIS
 ;
 ;                                       -DUP
 ;                                       SCREEN 38 LINE 13
 ;
 L1296     .TEXT $84,'-DU',$D0
-          .WORD L1286    ; link to SPACE
-DDUP      .WORD DOCOL
-          .WORD DUP
-          .WORD ZBRAN
-L1301     .WORD $4       ; L1303-L1301
-          .WORD DUP
-L1303     .WORD SEMIS
+          .word L1286    ; link to SPACE
+DDUP      .word DOCOL
+          .word DUP
+          .word ZBRAN
+L1301     .word $4       ; L1303-L1301
+          .word DUP
+L1303     .word SEMIS
 ;
 ;                                       TRAVERSE
 ;                                       SCREEN 39 LINE 14
 ;
 L1308     .TEXT $88,'TRAVERS',$C5
-          .WORD L1296    ; link to -DUP
-TRAV      .WORD DOCOL
-          .WORD SWAP
-L1312     .WORD OVER
-          .WORD PLUS
-          .WORD CLIT
+          .word L1296    ; link to -DUP
+TRAV      .word DOCOL
+          .word SWAP
+L1312     .word OVER
+          .word PLUS
+          .word CLIT
           .TEXT $7F
-          .WORD OVER
-          .WORD CAT
-          .WORD LESS
-          .WORD ZBRAN
-L1320     .WORD $FFF1    ; L1312-L1320
-          .WORD SWAP
-          .WORD DROP
-          .WORD SEMIS
+          .word OVER
+          .word CAT
+          .word LESS
+          .word ZBRAN
+L1320     .word $FFF1    ; L1312-L1320
+          .word SWAP
+          .word DROP
+          .word SEMIS
 ;
 ;                                       LATEST
 ;                                       SCREEN 39 LINE 6
 ;
 L1328     .TEXT $86,'LATES',$D4
-          .WORD L1308    ; link to TRAVERSE
-LATES     .WORD DOCOL
-          .WORD CURR
-          .WORD AT
-          .WORD AT
-          .WORD SEMIS
+          .word L1308    ; link to TRAVERSE
+LATES     .word DOCOL
+          .word CURR
+          .word AT
+          .word AT
+          .word SEMIS
 ;
 ;
 ;                                       LFA
 ;                                       SCREEN 39 LINE 11
 ;
 L1339     .TEXT $83,'LF',$C1
-          .WORD L1328    ; link to LATEST
-LFA       .WORD DOCOL
-          .WORD CLIT
+          .word L1328    ; link to LATEST
+LFA       .word DOCOL
+          .word CLIT
           .TEXT 4
-          .WORD SUB
-          .WORD SEMIS
+          .word SUB
+          .word SEMIS
 ;
 ;                                       CFA
 ;                                       SCREEN 39 LINE 12
 ;
 L1350     .TEXT $83,'CF',$C1
-          .WORD L1339    ; link to LFA
-CFA       .WORD DOCOL
-          .WORD TWO
-          .WORD SUB
-          .WORD SEMIS
+          .word L1339    ; link to LFA
+CFA       .word DOCOL
+          .word TWO
+          .word SUB
+          .word SEMIS
 ;
 ;                                       NFA
 ;                                       SCREEN 39 LIINE 13
 ;
 L1360     .TEXT $83,'NF',$C1
-          .WORD L1350    ; link to CFA
-NFA       .WORD DOCOL
-          .WORD CLIT
+          .word L1350    ; link to CFA
+NFA       .word DOCOL
+          .word CLIT
           .TEXT $5
-          .WORD SUB
-          .WORD LIT,$FFFF
-          .WORD TRAV
-          .WORD SEMIS
+          .word SUB
+          .word LIT,$FFFF
+          .word TRAV
+          .word SEMIS
 ;
 ;                                       PFA
 ;                                       SCREEN 39 LINE 14
 ;
 L1373     .TEXT $83,'PF',$C1
-          .WORD L1360    ; link to NFA
-PFA       .WORD DOCOL
-          .WORD ONE
-          .WORD TRAV
-          .WORD CLIT
+          .word L1360    ; link to NFA
+PFA       .word DOCOL
+          .word ONE
+          .word TRAV
+          .word CLIT
           .TEXT 5
-          .WORD PLUS
-          .WORD SEMIS
+          .word PLUS
+          .word SEMIS
 ;
 ;                                       !CSP
 ;                                       SCREEN 40 LINE 1
 ;
 L1386     .TEXT $84,'!CS',$D0
-          .WORD L1373    ; link to PFA
-SCSP      .WORD DOCOL
-          .WORD SPAT
-          .WORD CSP
-          .WORD STORE
-          .WORD SEMIS
+          .word L1373    ; link to PFA
+SCSP      .word DOCOL
+          .word SPAT
+          .word CSP
+          .word STORE
+          .word SEMIS
 ;
 ;                                       ?ERROR
 ;                                       SCREEN 40 LINE 3
 ;
 L1397     .TEXT $86,'?ERRO',$D2
-          .WORD L1386    ; link to !CSP
-QERR      .WORD DOCOL
-          .WORD SWAP
-          .WORD ZBRAN
-L1402     .WORD 8        ; L1406-L1402
-          .WORD ERROR
-          .WORD BRAN
-L1405     .WORD 4        ; L1407-L1405
-L1406     .WORD DROP
-L1407     .WORD SEMIS
+          .word L1386    ; link to !CSP
+QERR      .word DOCOL
+          .word SWAP
+          .word ZBRAN
+L1402     .word 8        ; L1406-L1402
+          .word ERROR
+          .word BRAN
+L1405     .word 4        ; L1407-L1405
+L1406     .word DROP
+L1407     .word SEMIS
 ;
 ;                                       ?COMP
 ;                                       SCREEN 40 LINE 6
 ;
 L1412     .TEXT $85,'?COM',$D0
-          .WORD L1397    ; link to ?ERROR
-QCOMP     .WORD DOCOL
-          .WORD STATE
-          .WORD AT
-          .WORD ZEQU
-          .WORD CLIT
+          .word L1397    ; link to ?ERROR
+QCOMP     .word DOCOL
+          .word STATE
+          .word AT
+          .word ZEQU
+          .word CLIT
           .TEXT $11
-          .WORD QERR
-          .WORD SEMIS
+          .word QERR
+          .word SEMIS
 ;
 ;                                       ?EXEC
 ;                                       SCREEN 40 LINE 8
 ;
 L1426     .TEXT $85,'?EXE',$C3
-          .WORD L1412    ; link to ?COMP
-QEXEC     .WORD DOCOL
-          .WORD STATE
-          .WORD AT
-          .WORD CLIT
+          .word L1412    ; link to ?COMP
+QEXEC     .word DOCOL
+          .word STATE
+          .word AT
+          .word CLIT
           .TEXT $12
-          .WORD QERR
-          .WORD SEMIS
+          .word QERR
+          .word SEMIS
 ;
 ;                                       ?PAIRS
 ;                                       SCREEN 40 LINE 10
 ;
 L1439     .TEXT $86,'?PAIR',$D3
-          .WORD L1426    ; link to ?EXEC
-QPAIR     .WORD DOCOL
-          .WORD SUB
-          .WORD CLIT
+          .word L1426    ; link to ?EXEC
+QPAIR     .word DOCOL
+          .word SUB
+          .word CLIT
           .TEXT $13
-          .WORD QERR
-          .WORD SEMIS
+          .word QERR
+          .word SEMIS
 ;
 ;                                       ?CSP
 ;                                       SCREEN 40 LINE 12
 ;
 L1451     .TEXT $84,'?CS',$D0
-          .WORD L1439    ; link to ?PAIRS
-QCSP      .WORD DOCOL
-          .WORD SPAT
-          .WORD CSP
-          .WORD AT
-          .WORD SUB
-          .WORD CLIT
+          .word L1439    ; link to ?PAIRS
+QCSP      .word DOCOL
+          .word SPAT
+          .word CSP
+          .word AT
+          .word SUB
+          .word CLIT
           .TEXT $14
-          .WORD QERR
-          .WORD SEMIS
+          .word QERR
+          .word SEMIS
 ;
 ;                                       ?LOADING
 ;                                       SCREEN 40 LINE 14
 ;
 L1466     .TEXT $88,'?LOADIN',$C7
-          .WORD L1451    ; link to ?CSP
-QLOAD     .WORD DOCOL
-          .WORD BLK
-          .WORD AT
-          .WORD ZEQU
-          .WORD CLIT
+          .word L1451    ; link to ?CSP
+QLOAD     .word DOCOL
+          .word BLK
+          .word AT
+          .word ZEQU
+          .word CLIT
           .TEXT $16
-          .WORD QERR
-          .WORD SEMIS
+          .word QERR
+          .word SEMIS
 ;
 ;                                       COMPILE
 ;                                       SCREEN 41 LINE 2
 ;
 L1480     .TEXT $87,'COMPIL',$C5
-          .WORD L1466    ; link to ?LOADING
-COMP      .WORD DOCOL
-          .WORD QCOMP
-          .WORD RFROM
-          .WORD DUP
-          .WORD TWOP
-          .WORD TOR
-          .WORD AT
-          .WORD COMMA
-          .WORD SEMIS
+          .word L1466    ; link to ?LOADING
+COMP      .word DOCOL
+          .word QCOMP
+          .word RFROM
+          .word DUP
+          .word TWOP
+          .word TOR
+          .word AT
+          .word COMMA
+          .word SEMIS
 ;
 ;                                       [
 ;                                       SCREEN 41 LINE 5
 ;
 L1495     .TEXT $C1,$DB
-          .WORD L1480    ; link to COMPILE
-LBRAC     .WORD DOCOL
-          .WORD ZERO
-          .WORD STATE
-          .WORD STORE
-          .WORD SEMIS
+          .word L1480    ; link to COMPILE
+LBRAC     .word DOCOL
+          .word ZERO
+          .word STATE
+          .word STORE
+          .word SEMIS
 ;
 ;                                       ]
 ;                                       SCREEN 41 LINE 7
 ;
 L1507     .TEXT $81,$DD
-          .WORD L1495    ; link to [
-RBRAC     .WORD DOCOL
-          .WORD CLIT
+          .word L1495    ; link to [
+RBRAC     .word DOCOL
+          .word CLIT
           .TEXT $C0
-          .WORD STATE
-          .WORD STORE
-          .WORD SEMIS
+          .word STATE
+          .word STORE
+          .word SEMIS
 ;
 ;                                       SMUDGE
 ;                                       SCREEN 41 LINE 9
 ;
 L1519     .TEXT $86,'SMUDG',$C5
-          .WORD L1507    ; link to ]
-SMUDG     .WORD DOCOL
-          .WORD LATES
-          .WORD CLIT
+          .word L1507    ; link to ]
+SMUDG     .word DOCOL
+          .word LATES
+          .word CLIT
           .TEXT $20
-          .WORD TOGGL
-          .WORD SEMIS
+          .word TOGGL
+          .word SEMIS
 ;
 ;                                       HEX
 ;                                       SCREEN 41 LINE 11
 ;
 L1531     .TEXT $83,'HE',$D8
-          .WORD L1519    ; link to SMUDGE
-HEX       .WORD DOCOL
-          .WORD CLIT
+          .word L1519    ; link to SMUDGE
+HEX       .word DOCOL
+          .word CLIT
           .TEXT 16
-          .WORD BASE
-          .WORD STORE
-          .WORD SEMIS
+          .word BASE
+          .word STORE
+          .word SEMIS
 ;
 ;                                       DECIMAL
 ;                                       SCREEN 41 LINE 13
 ;
 L1543     .TEXT $87,'DECIMA',$CC
-          .WORD L1531    ; link to HEX
-DECIM     .WORD DOCOL
-          .WORD CLIT
+          .word L1531    ; link to HEX
+DECIM     .word DOCOL
+          .word CLIT
           .TEXT 10
-          .WORD BASE
-          .WORD STORE
-          .WORD SEMIS
+          .word BASE
+          .word STORE
+          .word SEMIS
 ;
 ;
 ;
@@ -1792,49 +1804,49 @@ DECIM     .WORD DOCOL
 ;                                       SCREEN 42 LINE 2
 ;
 L1555     .TEXT $87,'(;CODE',$A9
-          .WORD L1543    ; link to DECIMAL
-PSCOD     .WORD DOCOL
-          .WORD RFROM
-          .WORD LATES
-          .WORD PFA
-          .WORD CFA
-          .WORD STORE
-          .WORD SEMIS
+          .word L1543    ; link to DECIMAL
+PSCOD     .word DOCOL
+          .word RFROM
+          .word LATES
+          .word PFA
+          .word CFA
+          .word STORE
+          .word SEMIS
 ;
 ;                                       ;CODE
 ;                                       SCREEN 42 LINE 6
 ;
 L1568     .TEXT $C5,';COD',$C5
-          .WORD L1555    ; link to (;CODE)
-          .WORD DOCOL
-          .WORD QCSP
-          .WORD COMP
-          .WORD PSCOD
-          .WORD LBRAC
-          .WORD SMUDG
-          .WORD SEMIS
+          .word L1555    ; link to (;CODE)
+          .word DOCOL
+          .word QCSP
+          .word COMP
+          .word PSCOD
+          .word LBRAC
+          .word SMUDG
+          .word SEMIS
 ;
 ;                                       <BUILDS
 ;                                       SCREEN 43 LINE 2
 ;
 L1582     .TEXT $87,'<BUILD',$D3
-          .WORD L1568    ; link to ;CODE
-BUILD     .WORD DOCOL
-          .WORD ZERO
-          .WORD CONST
-          .WORD SEMIS
+          .word L1568    ; link to ;CODE
+BUILD     .word DOCOL
+          .word ZERO
+          .word CONST
+          .word SEMIS
 ;
 ;                                       DOES>
 ;                                       SCREEN 43 LINE 4
 ;
 L1592     .TEXT $85,'DOES',$BE
-          .WORD L1582    ; link to <BUILDS
-DOES      .WORD DOCOL
-          .WORD RFROM
-          .WORD LATES
-          .WORD PFA
-          .WORD STORE
-          .WORD PSCOD
+          .word L1582    ; link to <BUILDS
+DOES      .word DOCOL
+          .word RFROM
+          .word LATES
+          .word PFA
+          .word STORE
+          .word PSCOD
 ;
 DODOE     LDA IP+1
           PHA
@@ -1858,804 +1870,805 @@ DODOE     LDA IP+1
 ;                                       SCREEN 44 LINE 1
 ;
 L1622     .TEXT $85,'COUN',$D4
-          .WORD L1592    ; link to DOES>
-COUNT     .WORD DOCOL
-          .WORD DUP
-          .WORD ONEP
-          .WORD SWAP
-          .WORD CAT
-          .WORD SEMIS
+          .word L1592    ; link to DOES>
+COUNT     .word DOCOL
+          .word DUP
+          .word ONEP
+          .word SWAP
+          .word CAT
+          .word SEMIS
 ;
-;                                       TYPE
+;                                       TYPE_W
 ;                                       SCREEN 44 LINE 2
 ;
 L1634     .TEXT $84,'TYP',$C5
-          .WORD L1622    ; link to COUNT
-TYPE      .WORD DOCOL
-          .WORD DDUP
-          .WORD ZBRAN
-L1639     .WORD $18      ; L1651-L1639
-          .WORD OVER
-          .WORD PLUS
-          .WORD SWAP
-          .WORD PDO
-L1644     .WORD I
-          .WORD CAT
-          .WORD EMIT
-          .WORD PLOOP
-L1648     .WORD $FFF8    ; L1644-L1648
-          .WORD BRAN
-L1650     .WORD $4       ; L1652-L1650
-L1651     .WORD DROP
-L1652     .WORD SEMIS
+          .word L1622    ; link to COUNT
+TYPE_W      .word DOCOL
+          .word DDUP
+          .word ZBRAN
+L1639     .word $18      ; L1651-L1639
+          .word OVER
+          .word PLUS
+          .word SWAP
+          .word PDO
+L1644     .word I
+          .word CAT
+          .word EMIT
+          .word PLOOP
+L1648     .word $FFF8    ; L1644-L1648
+          .word BRAN
+L1650     .word $4       ; L1652-L1650
+L1651     .word DROP
+L1652     .word SEMIS
 ;
 ;                                       -TRAILING
 ;                                       SCREEN 44 LINE 5
 ;
 L1657     .TEXT $89,'-TRAILIN',$C7
-          .WORD L1634    ; link to TYPE
-DTRAI     .WORD DOCOL
-          .WORD DUP
-          .WORD ZERO
-          .WORD PDO
-L1663     .WORD OVER
-          .WORD OVER
-          .WORD PLUS
-          .WORD ONE
-          .WORD SUB
-          .WORD CAT
-          .WORD BL
-          .WORD SUB
-          .WORD ZBRAN
-L1672     .WORD 8        ; L1676-L1672
-          .WORD LEAVE
-          .WORD BRAN
-L1675     .WORD 6        ; L1678-L1675
-L1676     .WORD ONE
-          .WORD SUB
-L1678     .WORD PLOOP
-L1679     .WORD $FFE0    ; L1663-L1679
-          .WORD SEMIS
+          .word L1634    ; link to TYPE_W
+DTRAI     .word DOCOL
+          .word DUP
+          .word ZERO
+          .word PDO
+L1663     .word OVER
+          .word OVER
+          .word PLUS
+          .word ONE
+          .word SUB
+          .word CAT
+          .word BL
+          .word SUB
+          .word ZBRAN
+L1672     .word 8        ; L1676-L1672
+          .word LEAVE
+          .word BRAN
+L1675     .word 6        ; L1678-L1675
+L1676     .word ONE
+          .word SUB
+L1678     .word PLOOP
+L1679     .word $FFE0    ; L1663-L1679
+          .word SEMIS
 ;
 ;                                       (.")
 ;                                       SCREEN 44 LINE 8
 L1685     .TEXT $84,'(."',$A9
-          .WORD L1657    ; link to -TRAILING
-PDOTQ     .WORD DOCOL
-          .WORD R
-          .WORD COUNT
-          .WORD DUP
-          .WORD ONEP
-          .WORD RFROM
-          .WORD PLUS
-          .WORD TOR
-          .WORD TYPE
-          .WORD SEMIS
+          .word L1657    ; link to -TRAILING
+PDOTQ     .word DOCOL
+          .word R
+          .word COUNT
+          .word DUP
+          .word ONEP
+          .word RFROM
+          .word PLUS
+          .word TOR
+          .word TYPE_W
+          .word SEMIS
 ;
 ;                                       ."
 ;                                       SCREEN 44 LINE12
 ;
 L1701     .TEXT $C2,'.',$A2
-          .WORD L1685    ; link to PDOTQ
-          .WORD DOCOL
-          .WORD CLIT
+          .word L1685    ; link to PDOTQ
+          .word DOCOL
+          .word CLIT
           .TEXT $22
-          .WORD STATE
-          .WORD AT
-          .WORD ZBRAN
-L1709     .WORD $14      ;L1719-L1709
-          .WORD COMP
-          .WORD PDOTQ
-          .WORD WORD
-          .WORD HERE
-          .WORD CAT
-          .WORD ONEP
-          .WORD ALLOT
-          .WORD BRAN
-L1718     .WORD $A       ;L1723-L1718
-L1719     .WORD WORD
-          .WORD HERE
-          .WORD COUNT
-          .WORD TYPE
-L1723     .WORD SEMIS
+          .word STATE
+          .word AT
+          .word ZBRAN
+L1709     .word $14      ;L1719-L1709
+          .word COMP
+          .word PDOTQ
+          .word WORD_W
+          .word HERE
+          .word CAT
+          .word ONEP
+          .word ALLOT
+          .word BRAN
+L1718     .word $A       ;L1723-L1718
+L1719     .word WORD_W
+          .word HERE
+          .word COUNT
+          .word TYPE_W
+L1723     .word SEMIS
 ;
 ;                                       EXPECT
 ;                                       SCREEN 45 LINE 2
 ;
 L1729     .TEXT $86,'EXPEC',$D4
-          .WORD L1701    ; link to ."
-EXPEC     .WORD DOCOL
-          .WORD OVER
-          .WORD PLUS
-          .WORD OVER
-          .WORD PDO
-L1736     .WORD KEY
-          .WORD DUP
-          .WORD CLIT
+          .word L1701    ; link to ."
+EXPEC     .word DOCOL
+          .word OVER
+          .word PLUS
+          .word OVER
+          .word PDO
+L1736     .word KEY
+          .word DUP
+          .word CLIT
           .TEXT $E
-          .WORD PORIG
-          .WORD AT
-          .WORD EQUAL
-          .WORD ZBRAN
-L1744     .WORD $1F       ; L1760-L1744
-          .WORD DROP
-          .WORD CLIT
-          .TEXT 08
-          .WORD OVER
-          .WORD I
-          .WORD EQUAL
-          .WORD DUP
-          .WORD RFROM
-          .WORD TWO
-          .WORD SUB
-          .WORD PLUS
-          .WORD TOR
-          .WORD SUB
-          .WORD BRAN
-L1759     .WORD $27       ; L1779-L1759
-L1760     .WORD DUP
-          .WORD CLIT
+          .word PORIG
+          .word AT
+          .word EQUAL
+          .word ZBRAN
+L1744     .word $1F       ; L1760-L1744
+          .word DROP
+          .word CLIT
+          .TEXT 8
+          .word OVER
+          .word I
+          .word EQUAL
+          .word DUP
+          .word RFROM
+          .word TWO
+          .word SUB
+          .word PLUS
+          .word TOR
+          .word SUB
+          .word BRAN
+L1759     .word $27       ; L1779-L1759
+L1760     .word DUP
+          .word CLIT
           .TEXT $0D
-          .WORD EQUAL
-          .WORD ZBRAN
-L1765     .WORD $0E       ; L1772-L1765
-          .WORD LEAVE
-          .WORD DROP
-          .WORD BL
-          .WORD ZERO
-          .WORD BRAN
-L1771     .WORD 04        ; L1773-L1771
-L1772     .WORD DUP
-L1773     .WORD I
-          .WORD CSTOR
-          .WORD ZERO
-          .WORD I
-          .WORD ONEP
-          .WORD STORE
-L1779     .WORD EMIT
-          .WORD PLOOP
-L1781     .WORD $FFA9
-          .WORD DROP      ; L1736-L1781
-          .WORD SEMIS
+          .word EQUAL
+          .word ZBRAN
+L1765     .word $0E       ; L1772-L1765
+          .word LEAVE
+          .word DROP
+          .word BL
+          .word ZERO
+          .word BRAN
+L1771     .word 4         ; L1773-L1771
+L1772     .word DUP
+L1773     .word I
+          .word CSTOR
+          .word ZERO
+          .word I
+          .word ONEP
+          .word STORE
+L1779     .word EMIT
+          .word PLOOP
+L1781     .word $FFA9
+          .word DROP      ; L1736-L1781
+          .word SEMIS
 ;
 ;                                       QUERY
 ;                                       SCREEN 45 LINE 9
 ;
 L1788     .TEXT $85,'QUER',$D9
-          .WORD L1729    ; link to EXPECT
-QUERY     .WORD DOCOL
-          .WORD TIB
-          .WORD AT
-          .WORD CLIT
+          .word L1729    ; link to EXPECT
+QUERY     .word DOCOL
+          .word TIB
+          .word AT
+          .word CLIT
           .TEXT 80       ; 80 characters from terminal
-          .WORD EXPEC
-          .WORD ZERO
-          .WORD IN
-          .WORD STORE
-          .WORD SEMIS
+          .word EXPEC
+          .word ZERO
+          .word IN
+          .word STORE
+          .word SEMIS
 ;
 ;                                       X
 ;                                       SCREEN 45 LINE 11
 ;                                       Actually Ascii Null
 ;
 L1804     .TEXT $C1,$80
-          .WORD L1788    ; link to QUERY
-          .WORD DOCOL
-          .WORD BLK
-          .WORD AT
-          .WORD ZBRAN
-L1810     .WORD $2A      ; L1830-l1810
-          .WORD ONE
-          .WORD BLK
-          .WORD PSTOR
-          .WORD ZERO
-          .WORD IN
-          .WORD STORE
-          .WORD BLK
-          .WORD AT
-          .WORD ZERO,BSCR
-          .WORD USLAS
-          .WORD DROP     ; fixed from model
-          .WORD ZEQU
-          .WORD ZBRAN
-L1824     .WORD 8        ; L1828-L1824
-          .WORD QEXEC
-          .WORD RFROM
-          .WORD DROP
-L1828     .WORD BRAN
-L1829     .WORD 6        ; L1832-L1829
-L1830     .WORD RFROM
-          .WORD DROP
-L1832     .WORD SEMIS
+          .word L1788    ; link to QUERY
+          .word DOCOL
+          .word BLK
+          .word AT
+          .word ZBRAN
+L1810     .word $2A      ; L1830-l1810
+          .word ONE
+          .word BLK
+          .word PSTOR
+          .word ZERO
+          .word IN
+          .word STORE
+          .word BLK
+          .word AT
+          .word ZERO,BSCR
+          .word USLAS
+          .word DROP     ; fixed from model
+          .word ZEQU
+          .word ZBRAN
+L1824     .word 8        ; L1828-L1824
+          .word QEXEC
+          .word RFROM
+          .word DROP
+L1828     .word BRAN
+L1829     .word 6        ; L1832-L1829
+L1830     .word RFROM
+          .word DROP
+L1832     .word SEMIS
 ;
 ;                                       FILL
 ;                                       SCREEN 46 LINE 1
 ;
 ;
 L1838     .TEXT $84,'FIL',$CC
-          .WORD L1804    ; link to X
-FILL      .WORD DOCOL
-          .WORD SWAP
-          .WORD TOR
-          .WORD OVER
-          .WORD CSTOR
-          .WORD DUP
-          .WORD ONEP
-          .WORD RFROM
-          .WORD ONE
-          .WORD SUB
-          .WORD CMOVE
-          .WORD SEMIS
+          .word L1804    ; link to X
+FILL      .word DOCOL
+          .word SWAP
+          .word TOR
+          .word OVER
+          .word CSTOR
+          .word DUP
+          .word ONEP
+          .word RFROM
+          .word ONE
+          .word SUB
+          .word CMOVE
+          .word SEMIS
 ;
 ;                                       ERASE
 ;                                       SCREEN 46 LINE 4
 ;
 L1856     .TEXT $85,'ERAS',$C5
-          .WORD L1838    ; link to FILL
-ERASE     .WORD DOCOL
-          .WORD ZERO
-          .WORD FILL
-          .WORD SEMIS
+          .word L1838    ; link to FILL
+ERASE     .word DOCOL
+          .word ZERO
+          .word FILL
+          .word SEMIS
 ;
 ;                                       BLANKS
 ;                                       SCREEN 46 LINE 7
 ;
 L1866     .TEXT $86,'BLANK',$D3
-          .WORD L1856    ; link to ERASE
-BLANK     .WORD DOCOL
-          .WORD BL
-          .WORD FILL
-          .WORD SEMIS
+          .word L1856    ; link to ERASE
+BLANK     .word DOCOL
+          .word BL
+          .word FILL
+          .word SEMIS
 ;
 ;                                       HOLD
 ;                                       SCREEN 46 LINE 10
 ;
 L1876     .TEXT $84,'HOL',$C4
-          .WORD L1866    ; link to BLANKS
-HOLD      .WORD DOCOL
-          .WORD LIT,$FFFF
-          .WORD HLD
-          .WORD PSTOR
-          .WORD HLD
-          .WORD AT
-          .WORD CSTOR
-          .WORD SEMIS
+          .word L1866    ; link to BLANKS
+HOLD      .word DOCOL
+          .word LIT,$FFFF
+          .word HLD
+          .word PSTOR
+          .word HLD
+          .word AT
+          .word CSTOR
+          .word SEMIS
 ;
 ;                                       PAD
 ;                                       SCREEN 46 LINE 13
 ;
 L1890     .TEXT $83,'PA',$C4
-          .WORD L1876    ; link to HOLD
-PAD       .WORD DOCOL
-          .WORD HERE
-          .WORD CLIT
+          .word L1876    ; link to HOLD
+PAD       .word DOCOL
+          .word HERE
+          .word CLIT
           .TEXT 68       ; PAD is 68 bytes above here.
-          .WORD PLUS
-          .WORD SEMIS
+          .word PLUS
+          .word SEMIS
 ;
-;                                       WORD
+;                                       WORD_W
 ;                                       SCREEN 47 LINE 1
 ;
 L1902     .TEXT $84,'WOR',$C4
-          .WORD L1890    ; link to PAD
-WORD      .WORD DOCOL
-          .WORD BLK
-          .WORD AT
-          .WORD ZBRAN
-L1908     .WORD $C       ; L1914-L1908
-          .WORD BLK
-          .WORD AT
-          .WORD BLOCK
-          .WORD BRAN
-L1913     .WORD $6       ; L1916-L1913
-L1914     .WORD TIB
-          .WORD AT
-L1916     .WORD IN
-          .WORD AT
-          .WORD PLUS
-          .WORD SWAP
-          .WORD ENCL
-          .WORD HERE
-          .WORD CLIT
+          .word L1890    ; link to PAD
+WORD_W      .word DOCOL
+          .word BLK
+          .word AT
+          .word ZBRAN
+L1908     .word $C       ; L1914-L1908
+          .word BLK
+          .word AT
+          .word BLOCK
+          .word BRAN
+L1913     .word $6       ; L1916-L1913
+L1914     .word TIB
+          .word AT
+L1916     .word IN
+          .word AT
+          .word PLUS
+          .word SWAP
+          .word ENCL
+          .word HERE
+          .word CLIT
           .TEXT $22
-          .WORD BLANK
-          .WORD IN
-          .WORD PSTOR
-          .WORD OVER
-          .WORD SUB
-          .WORD TOR
-          .WORD R
-          .WORD HERE
-          .WORD CSTOR
-          .WORD PLUS
-          .WORD HERE
-          .WORD ONEP
-          .WORD RFROM
-          .WORD CMOVE
-          .WORD SEMIS
+          .word BLANK
+          .word IN
+          .word PSTOR
+          .word OVER
+          .word SUB
+          .word TOR
+          .word R
+          .word HERE
+          .word CSTOR
+          .word PLUS
+          .word HERE
+          .word ONEP
+          .word RFROM
+          .word CMOVE
+          .word SEMIS
 ;
 ;                                       UPPER
 ;                                       SCREEN 47 LINE 12
 ;
 L1943     .TEXT $85,'UPPE',$D2
-          .WORD L1902    ; link to WORD
-UPPER     .WORD DOCOL
-          .WORD OVER     ; This routine converts text to U case
-          .WORD PLUS     ; It allows interpretation from a term.
-          .WORD SWAP     ; without a shift-lock.
-          .WORD PDO
-L1950     .WORD I
-          .WORD CAT
-          .WORD CLIT
+          .word L1902    ; link to WORD_W
+UPPER     .word DOCOL
+          .word OVER     ; This routine converts text to U case
+          .word PLUS     ; It allows interpretation from a term.
+          .word SWAP     ; without a shift-lock.
+          .word PDO
+L1950     .word I
+          .word CAT
+          .word CLIT
           .TEXT $5F
-          .WORD GREAT
-          .WORD ZBRAN
-L1956     .WORD 09       ; L1961-L1956
-          .WORD I
-          .WORD CLIT
+          .word GREAT
+          .word ZBRAN
+L1956     .word 9       ; L1961-L1956
+          .word I
+          .word CLIT
           .TEXT $20
-          .WORD TOGGL
-L1961     .WORD PLOOP
-L1962     .WORD $FFEA    ; L1950-L1962
-          .WORD SEMIS
+          .word TOGGL
+L1961     .word PLOOP
+L1962     .word $FFEA    ; L1950-L1962
+          .word SEMIS
 ;
 ;                                       (NUMBER)
 ;                                       SCREEN 48 LINE 1
 ;
 L1968     .TEXT $88,'(NUMBER',$A9
-          .WORD L1943    ; link to UPPER
-PNUMB     .WORD DOCOL
-L1971     .WORD ONEP
-          .WORD DUP
-          .WORD TOR
-          .WORD CAT
-          .WORD BASE
-          .WORD AT
-          .WORD DIGIT
-          .WORD ZBRAN
-L1979     .WORD $2C      ; L2001-L1979
-          .WORD SWAP
-          .WORD BASE
-          .WORD AT
-          .WORD USTAR
-          .WORD DROP
-          .WORD ROT
-          .WORD BASE
-          .WORD AT
-          .WORD USTAR
-          .WORD DPLUS
-          .WORD DPL
-          .WORD AT
-          .WORD ONEP
-          .WORD ZBRAN
-L1994     .WORD 8        ; L1998-L1994
-          .WORD ONE
-          .WORD DPL
-          .WORD PSTOR
-L1998     .WORD RFROM
-          .WORD BRAN
-L2000     .WORD $FFC6    ; L1971-L2000
-L2001     .WORD RFROM
-          .WORD SEMIS
+          .word L1943    ; link to UPPER
+PNUMB     .word DOCOL
+L1971     .word ONEP
+          .word DUP
+          .word TOR
+          .word CAT
+          .word BASE
+          .word AT
+          .word DIGIT
+          .word ZBRAN
+L1979     .word $2C      ; L2001-L1979
+          .word SWAP
+          .word BASE
+          .word AT
+          .word USTAR
+          .word DROP
+          .word ROT
+          .word BASE
+          .word AT
+          .word USTAR
+          .word DPLUS
+          .word DPL
+          .word AT
+          .word ONEP
+          .word ZBRAN
+L1994     .word 8        ; L1998-L1994
+          .word ONE
+          .word DPL
+          .word PSTOR
+L1998     .word RFROM
+          .word BRAN
+L2000     .word $FFC6    ; L1971-L2000
+L2001     .word RFROM
+          .word SEMIS
 ;
 ;                                       NUMBER
 ;                                       SCREEN 48 LINE 6
 ;
 L2007     .TEXT $86,'NUMBE',$D2
-          .WORD L1968    ; link to (NUMBER)
-NUMBER    .WORD DOCOL
-          .WORD ZERO
-          .WORD ZERO
-          .WORD ROT
-          .WORD DUP
-          .WORD ONEP
-          .WORD CAT
-          .WORD CLIT
+          .word L1968    ; link to (NUMBER)
+NUMBER    .word DOCOL
+          .word ZERO
+          .word ZERO
+          .word ROT
+          .word DUP
+          .word ONEP
+          .word CAT
+          .word CLIT
           .TEXT $2D
-          .WORD EQUAL
-          .WORD DUP
-          .WORD TOR
-          .WORD PLUS
-          .WORD LIT,$FFFF
-L2023     .WORD DPL
-          .WORD STORE
-          .WORD PNUMB
-          .WORD DUP
-          .WORD CAT
-          .WORD BL
-          .WORD SUB
-          .WORD ZBRAN
-L2031     .WORD $15      ; L2042-L2031
-          .WORD DUP
-          .WORD CAT
-          .WORD CLIT
+          .word EQUAL
+          .word DUP
+          .word TOR
+          .word PLUS
+          .word LIT,$FFFF
+L2023     .word DPL
+          .word STORE
+          .word PNUMB
+          .word DUP
+          .word CAT
+          .word BL
+          .word SUB
+          .word ZBRAN
+L2031     .word $15      ; L2042-L2031
+          .word DUP
+          .word CAT
+          .word CLIT
           .TEXT $2E
-          .WORD SUB
-          .WORD ZERO
-          .WORD QERR
-          .WORD ZERO
-          .WORD BRAN
-L2041     .WORD $FFDD    ; L2023-L2041
-L2042     .WORD DROP
-          .WORD RFROM
-          .WORD ZBRAN
-L2045     .WORD 4        ; L2047-L2045
-          .WORD DMINU
-L2047     .WORD SEMIS
+          .word SUB
+          .word ZERO
+          .word QERR
+          .word ZERO
+          .word BRAN
+L2041     .word $FFDD    ; L2023-L2041
+L2042     .word DROP
+          .word RFROM
+          .word ZBRAN
+L2045     .word 4        ; L2047-L2045
+          .word DMINU
+L2047     .word SEMIS
 ;
 ;                                       -FIND
 ;                                       SCREEN 48 LINE 12
 ;
 L2052     .TEXT $85,'-FIN',$C4
-          .WORD L2007    ; link to NUMBER
-DFIND     .WORD DOCOL
-          .WORD BL
-          .WORD WORD
-          .WORD HERE     ; )
-          .WORD COUNT    ; |- Optional allowing free use of low
-          .WORD UPPER    ; )  case from terminal
-          .WORD HERE
-          .WORD CON
-          .WORD AT
-          .WORD AT
-          .WORD PFIND
-          .WORD DUP
-          .WORD ZEQU
-          .WORD ZBRAN
-L2068     .WORD $A       ; L2073-L2068
-          .WORD DROP
-          .WORD HERE
-          .WORD LATES
-          .WORD PFIND
-L2073     .WORD SEMIS
+          .word L2007    ; link to NUMBER
+DFIND     .word DOCOL
+          .word BL
+          .word WORD_W
+          .word HERE     ; )
+          .word COUNT    ; |- Optional allowing free use of low
+          .word UPPER    ; )  case from terminal
+          .word HERE
+          .word CON
+          .word AT
+          .word AT
+          .word PFIND
+          .word DUP
+          .word ZEQU
+          .word ZBRAN
+L2068     .word $A       ; L2073-L2068
+          .word DROP
+          .word HERE
+          .word LATES
+          .word PFIND
+L2073     .word SEMIS
 ;
 ;                                       (ABORT)
 ;                                       SCREEN 49 LINE 2
 ;
 L2078     .TEXT $87,'(ABORT',$A9
-          .WORD L2052    ; link to -FIND
-PABOR     .WORD DOCOL
-          .WORD ABORT
-          .WORD SEMIS
+          .word L2052    ; link to -FIND
+PABOR     .word DOCOL
+          .word ABORT
+          .word SEMIS
 ;
 ;                                       ERROR
 ;                                       SCREEN 49 LINE 4
 ;
 L2087     .TEXT $85,'ERRO',$D2
-          .WORD L2078    ; link to (ABORT)
-ERROR     .WORD DOCOL
-          .WORD WARN
-          .WORD AT
-          .WORD ZLESS
-          .WORD ZBRAN
-L2094     .WORD $4       ; L2096-L2094
-          .WORD PABOR
-L2096     .WORD HERE
-          .WORD COUNT
-          .WORD TYPE
-          .WORD PDOTQ
+          .word L2078    ; link to (ABORT)
+ERROR     .word DOCOL
+          .word WARN
+          .word AT
+          .word ZLESS
+          .word ZBRAN
+L2094     .word $4       ; L2096-L2094
+          .word PABOR
+L2096     .word HERE
+          .word COUNT
+          .word TYPE_W
+          .word PDOTQ
           .TEXT 4,'  ? '
-          .WORD MESS
-          .WORD SPSTO
-          .WORD DROP,DROP; make room for 2 error values
-          .WORD IN
-          .WORD AT
-          .WORD BLK
-          .WORD AT
-          .WORD QUIT
-          .WORD SEMIS
+          .word MESS
+          .word SPSTO
+          .word DROP,DROP; make room for 2 error values
+          .word IN
+          .word AT
+          .word BLK
+          .word AT
+          .word QUIT
+          .word SEMIS
 ;
 ;                                       ID.
 ;                                       SCREEN 49 LINE 9
 ;
 L2113     .TEXT $83,'ID',$AE
-          .WORD L2087    ; link to ERROR
-IDDOT     .WORD DOCOL
-          .WORD PAD
-          .WORD CLIT
+          .word L2087    ; link to ERROR
+IDDOT     .word DOCOL
+          .word PAD
+          .word CLIT
           .TEXT $20
-          .WORD CLIT
+          .word CLIT
           .TEXT $5F
-          .WORD FILL
-          .WORD DUP
-          .WORD PFA
-          .WORD LFA
-          .WORD OVER
-          .WORD SUB
-          .WORD PAD
-          .WORD SWAP
-          .WORD CMOVE
-          .WORD PAD
-          .WORD COUNT
-          .WORD CLIT
+          .word FILL
+          .word DUP
+          .word PFA
+          .word LFA
+          .word OVER
+          .word SUB
+          .word PAD
+          .word SWAP
+          .word CMOVE
+          .word PAD
+          .word COUNT
+          .word CLIT
           .TEXT $1F
-          .WORD ANDD
-          .WORD TYPE
-          .WORD SPACE
-          .WORD SEMIS
+          .word ANDD
+          .word TYPE_W
+          .word SPACE
+          .word SEMIS
 ;
 ;                                       CREATE
 ;                                       SCREEN 50 LINE 2
 ;
 L2142     .TEXT $86,'CREAT',$C5
-          .WORD L2113    ; link to ID
-CREAT     .WORD DOCOL
-          .WORD TIB      ;)
-          .WORD HERE     ;|
-          .WORD CLIT     ;|  6502 only, assures
+          .word L2113    ; link to ID
+CREAT     .word DOCOL
+          .word TIB      ;)
+          .word HERE     ;|
+          .word CLIT     ;|  6502 only, assures
           .TEXT $A0      ;|  room exists in dict.
-          .WORD PLUS     ;|
-          .WORD ULESS    ;|
-          .WORD TWO      ;|
-          .WORD QERR     ;)
-          .WORD DFIND
-          .WORD ZBRAN
-L2155     .WORD $0F
-          .WORD DROP
-          .WORD NFA
-          .WORD IDDOT
-          .WORD CLIT
+          .word PLUS     ;|
+          .word ULESS    ;|
+          .word TWO      ;|
+          .word QERR     ;)
+          .word DFIND
+          .word ZBRAN
+L2155     .word $0F
+          .word DROP
+          .word NFA
+          .word IDDOT
+          .word CLIT
           .TEXT 4
-          .WORD MESS
-          .WORD SPACE
-L2163     .WORD HERE
-          .WORD DUP
-          .WORD CAT
-          .WORD WIDTH
-          .WORD AT
-          .WORD MIN
-          .WORD ONEP
-          .WORD ALLOT
-          .WORD DP       ;)
-          .WORD CAT      ;| 6502 only. The code field
-          .WORD CLIT     ;| must not straddle page
+          .word MESS
+          .word SPACE
+L2163     .word HERE
+          .word DUP
+          .word CAT
+          .word WIDTH
+          .word AT
+          .word MIN
+          .word ONEP
+          .word ALLOT
+          .word DP       ;)
+          .word CAT      ;| 6502 only. The code field
+          .word CLIT     ;| must not straddle page
           .TEXT $FD      ;| boundaries
-          .WORD EQUAL    ;|
-          .WORD ALLOT    ;)
-          .WORD DUP
-          .WORD CLIT
+          .word EQUAL    ;|
+          .word ALLOT    ;)
+          .word DUP
+          .word CLIT
           .TEXT $A0
-          .WORD TOGGL
-          .WORD HERE
-          .WORD ONE
-          .WORD SUB
-          .WORD CLIT
+          .word TOGGL
+          .word HERE
+          .word ONE
+          .word SUB
+          .word CLIT
           .TEXT $80
-          .WORD TOGGL
-          .WORD LATES
-          .WORD COMMA
-          .WORD CURR
-          .WORD AT
-          .WORD STORE
-          .WORD HERE
-          .WORD TWOP
-          .WORD COMMA
-          .WORD SEMIS
+          .word TOGGL
+          .word LATES
+          .word COMMA
+          .word CURR
+          .word AT
+          .word STORE
+          .word HERE
+          .word TWOP
+          .word COMMA
+          .word SEMIS
 ;
 ;                                       [COMPILE]
 ;                                       SCREEN 51 LINE 2
 ;
 L2200     .TEXT $C9,'[COMPILE',$DD
-          .WORD L2142    ; link to CREATE
-          .WORD DOCOL
-          .WORD DFIND
-          .WORD ZEQU
-          .WORD ZERO
-          .WORD QERR
-          .WORD DROP
-          .WORD CFA
-          .WORD COMMA
-          .WORD SEMIS
+          .word L2142    ; link to CREATE
+          .word DOCOL
+          .word DFIND
+          .word ZEQU
+          .word ZERO
+          .word QERR
+          .word DROP
+          .word CFA
+          .word COMMA
+          .word SEMIS
 ;
 ;                                       LITERAL
 ;                                       SCREEN 51 LINE 2
 ;
 L2216     .TEXT $C7,'LITERA',$CC
-          .WORD L2200    ; link to [COMPILE]
-LITER     .WORD DOCOL
-          .WORD STATE
-          .WORD AT
-          .WORD ZBRAN
-L2222     .WORD 8        ; L2226-L2222
-          .WORD COMP
-          .WORD LIT
-          .WORD COMMA
-L2226     .WORD SEMIS
+          .word L2200    ; link to [COMPILE]
+LITER     .word DOCOL
+          .word STATE
+          .word AT
+          .word ZBRAN
+L2222     .word 8        ; L2226-L2222
+          .word COMP
+          .word LIT
+          .word COMMA
+L2226     .word SEMIS
 ;
 ;                                       DLITERAL
 ;                                       SCREEN 51 LINE 8
 ;
 L2232     .TEXT $C8,'DLITERA',$CC
-          .WORD L2216    ; link to LITERAL
-DLIT      .WORD DOCOL
-          .WORD STATE
-          .WORD AT
-          .WORD ZBRAN
-L2238     .WORD 8        ; L2242-L2238
-          .WORD SWAP
-          .WORD LITER
-          .WORD LITER
-L2242     .WORD SEMIS
+          .word L2216    ; link to LITERAL
+DLIT      .word DOCOL
+          .word STATE
+          .word AT
+          .word ZBRAN
+L2238     .word 8        ; L2242-L2238
+          .word SWAP
+          .word LITER
+          .word LITER
+L2242     .word SEMIS
 ;
 ;                                       ?STACK
 ;                                       SCREEN 51 LINE 13
 ;
 L2248     .TEXT $86,'?STAC',$CB
-          .WORD L2232    ; link to DLITERAL
-QSTAC     .WORD DOCOL
-          .WORD CLIT
+          .word L2232    ; link to DLITERAL
+QSTAC     .word DOCOL
+          .word CLIT
           .TEXT TOS
-          .WORD SPAT
-          .WORD ULESS
-          .WORD ONE
-          .WORD QERR
-          .WORD SPAT
-          .WORD CLIT
+          .word SPAT
+          .word ULESS
+          .word ONE
+          .word QERR
+          .word SPAT
+          .word CLIT
           .TEXT BOS
-          .WORD ULESS
-          .WORD CLIT
+          .word ULESS
+          .word CLIT
           .TEXT 7
-          .WORD QERR
-          .WORD SEMIS
+          .word QERR
+          .word SEMIS
 ;
 ;                                       INTERPRET
 ;                                       SCREEN 52 LINE 2
 ;
 L2269     .TEXT $89,'INTERPRE',$D4
-          .WORD L2248    ; link to ?STACK
-INTER     .WORD DOCOL
-L2272     .WORD DFIND
-          .WORD ZBRAN
-L2274     .WORD $1E      ; L2289-L2274
-          .WORD STATE
-          .WORD AT
-          .WORD LESS
-          .WORD ZBRAN
-L2279     .WORD $A       ; L2284-L2279
-          .WORD CFA
-          .WORD COMMA
-          .WORD BRAN
-L2283     .WORD $6       ; L2286-L2283
-L2284     .WORD CFA
-          .WORD EXEC
-L2286     .WORD QSTAC
-          .WORD BRAN
-L2288     .WORD $1C      ; L2302-L2288
-L2289     .WORD HERE
-          .WORD NUMBER
-          .WORD DPL
-          .WORD AT
-          .WORD ONEP
-          .WORD ZBRAN
-L2295     .WORD 8        ; L2299-L2295
-          .WORD DLIT
-          .WORD BRAN
-L2298     .WORD $6       ; L2301-L2298
-L2299     .WORD DROP
-          .WORD LITER
-L2301     .WORD QSTAC
-L2302     .WORD BRAN
-L2303     .WORD $FFC2    ; L2272-L2303
+          .word L2248    ; link to ?STACK
+INTER     .word DOCOL
+L2272     .word DFIND
+          .word ZBRAN
+L2274     .word $1E      ; L2289-L2274
+          .word STATE
+          .word AT
+          .word LESS
+          .word ZBRAN
+L2279     .word $A       ; L2284-L2279
+          .word CFA
+          .word COMMA
+          .word BRAN
+L2283     .word $6       ; L2286-L2283
+L2284     .word CFA
+          .word EXEC
+L2286     .word QSTAC
+          .word BRAN
+L2288     .word $1C      ; L2302-L2288
+L2289     .word HERE
+          .word NUMBER
+          .word DPL
+          .word AT
+          .word ONEP
+          .word ZBRAN
+L2295     .word 8        ; L2299-L2295
+          .word DLIT
+          .word BRAN
+L2298     .word $6       ; L2301-L2298
+L2299     .word DROP
+          .word LITER
+L2301     .word QSTAC
+L2302     .word BRAN
+L2303     .word $FFC2    ; L2272-L2303
 ;
 ;                                       IMMEDIATE
 ;                                       SCREEN 53 LINE 1
 ;
 L2309     .TEXT $89,'IMMEDIAT',$C5
-          .WORD L2269;   ; link to INTERPRET
-          .WORD DOCOL
-          .WORD LATES
-          .WORD CLIT
+          .word L2269;   ; link to INTERPRET
+          .word DOCOL
+          .word LATES
+          .word CLIT
           .TEXT $40
-          .WORD TOGGL
-          .WORD SEMIS
+          .word TOGGL
+          .word SEMIS
 ;
 ;                                       VOCABULARY
 ;                                       SCREEN 53 LINE 4
 ;
 L2321     .TEXT $8A,'VOCABULAR',$D9
-          .WORD L2309    ; link to IMMEDIATE
-          .WORD DOCOL
-          .WORD BUILD
-          .WORD LIT,$A081
-          .WORD COMMA
-          .WORD CURR
-          .WORD AT
-          .WORD CFA
-          .WORD COMMA
-          .WORD HERE
-          .WORD VOCL
-          .WORD AT
-          .WORD COMMA
-          .WORD VOCL
-          .WORD STORE
-          .WORD DOES
-DOVOC     .WORD TWOP
-          .WORD CON
-          .WORD STORE
-          .WORD SEMIS
+          .word L2309    ; link to IMMEDIATE
+          .word DOCOL
+          .word BUILD
+          .word LIT,$A081
+          .word COMMA
+          .word CURR
+          .word AT
+          .word CFA
+          .word COMMA
+          .word HERE
+          .word VOCL
+          .word AT
+          .word COMMA
+          .word VOCL
+          .word STORE
+          .word DOES
+DOVOC     .word TWOP
+          .word CON
+          .word STORE
+          .word SEMIS
 ;
 ;                                       FORTH
 ;                                       SCREEN 53 LINE 9
 ;
 L2346     .TEXT $C5,'FORT',$C8
-          .WORD L2321    ; link to VOCABULARY
-FORTH     .WORD DODOE
-          .WORD DOVOC
-          .WORD $A081
-XFOR      .WORD NTOP     ; points to top name in FORTH
-VL0       .WORD 0        ; last vocab link ends at zero
+          .word L2321    ; link to VOCABULARY
+FORTH     .word DODOE
+          .word DOVOC
+          .word $A081
+XFOR      .word NTOP     ; points to top name in FORTH
+VL0       .word 0        ; last vocab link ends at zero
 ;
 ;                                       DEFINITIONS
 ;                                       SCREEN 53 LINE 11
 ;
 ;
 L2357     .TEXT $8B,'DEFINITION',$D3
-          .WORD L2346    ; link to FORTH
-DEFIN     .WORD DOCOL
-          .WORD CON
-          .WORD AT
-          .WORD CURR
-          .WORD STORE
-          .WORD SEMIS
+          .word L2346    ; link to FORTH
+DEFIN     .word DOCOL
+          .word CON
+          .word AT
+          .word CURR
+          .word STORE
+          .word SEMIS
 ;
 ;                                       (
 ;                                       SCREEN 53 LINE 14
 ;
 L2369     .TEXT $C1,$A8
-          .WORD L2357    ; link to DEFINITIONS
-          .WORD DOCOL
-          .WORD CLIT
+          .word L2357    ; link to DEFINITIONS
+          .word DOCOL
+          .word CLIT
           .TEXT $29
-          .WORD WORD
-          .WORD SEMIS
+          .word WORD_W
+          .word SEMIS
 ;
 ;                                       QUIT
 ;                                       SCREEN 54 LINE 2
 ;
 L2381     .TEXT $84,'QUI',$D4
-          .WORD L2369    ; link to (
-QUIT      .WORD DOCOL
-          .WORD ZERO
-          .WORD BLK
-          .WORD STORE
-          .WORD LBRAC
-L2388     .WORD RPSTO
-          .WORD CR
-          .WORD QUERY
-          .WORD INTER
-          .WORD STATE
-          .WORD AT
-          .WORD ZEQU
-          .WORD ZBRAN
-L2396     .WORD 7        ; L2399-L2396
-          .WORD PDOTQ
+          .word L2369    ; link to (
+QUIT      .word DOCOL
+          .word ZERO
+          .word BLK
+          .word STORE
+          .word LBRAC
+L2388     .word RPSTO
+          .word CR
+          .word QUERY
+          .word INTER
+          .word STATE
+          .word AT
+          .word ZEQU
+          .word ZBRAN
+L2396     .word 7        ; L2399-L2396
+          .word PDOTQ
           .TEXT 2,'OK'
-L2399     .WORD BRAN
-L2400     .WORD $FFE7    ; L2388-L2400
-          .WORD SEMIS
+L2399     .word BRAN
+L2400     .word $FFE7    ; L2388-L2400
+          .word SEMIS
 ;
 ;                                       ABORT
 ;                                       SCREEN 54 LINE 7
 ;
 L2406     .TEXT $85,'ABOR',$D4
-          .WORD L2381    ; link to QUIT
-ABORT     .WORD DOCOL
-          .WORD SPSTO
-          .WORD DECIM
-          .WORD DR0
-          .WORD CR
-          .WORD PDOTQ
+          .word L2381    ; link to QUIT
+ABORT     .word DOCOL
+          .word SPSTO
+          .word DECIM
+          .word DR0
+          .word CR
+          .word PDOTQ
           .TEXT 14,'fig-FORTH  1.0'
-          .WORD FORTH
-          .WORD DEFIN
-          .WORD QUIT
+          .word FORTH
+          .word DEFIN
+          .word QUIT
 ;
 ;                                       COLD
 ;                                       SCREEN 55 LINE 1
 ;
 L2423     .TEXT $84,'COL',$C4
-          .WORD L2406    ; link to ABORT
-COLD      .WORD *+2
+          .word L2406    ; link to ABORT
+COLD      .word *+2
+
           LDA ORIG+$0C   ; from cold start area
           STA FORTH+6
           LDA ORIG+$0D
@@ -2684,509 +2697,509 @@ L2437     LDA ORIG+$0C,Y
 ;                                       SCREEN 56 LINE 1
 ;
 L2453     .TEXT $84,'S->',$C4
-          .WORD L2423    ; link to COLD
-STOD      .WORD DOCOL
-          .WORD DUP
-          .WORD ZLESS
-          .WORD MINUS
-          .WORD SEMIS
+          .word L2423    ; link to COLD
+STOD      .word DOCOL
+          .word DUP
+          .word ZLESS
+          .word MINUS
+          .word SEMIS
 ;
 ;                                       +-
 ;                                       SCREEN 56 LINE 4
 ;
 L2464     .TEXT $82,'+',$AD
-          .WORD L2453    ; link to S->D
-PM        .WORD DOCOL
-          .WORD ZLESS
-          .WORD ZBRAN
-L2469     .WORD 4
-          .WORD MINUS
-L2471     .WORD SEMIS
+          .word L2453    ; link to S->D
+PM        .word DOCOL
+          .word ZLESS
+          .word ZBRAN
+L2469     .word 4
+          .word MINUS
+L2471     .word SEMIS
 ;
 ;                                       D+-
 ;                                       SCREEN 56 LINE 6
 ;
 L2476     .TEXT $83,'D+',$AD
-          .WORD L2464    ; link to +-
-DPM       .WORD DOCOL
-          .WORD ZLESS
-          .WORD ZBRAN
-L2481     .WORD 4        ; L2483-L2481
-          .WORD DMINU
-L2483     .WORD SEMIS
+          .word L2464    ; link to +-
+DPM       .word DOCOL
+          .word ZLESS
+          .word ZBRAN
+L2481     .word 4        ; L2483-L2481
+          .word DMINU
+L2483     .word SEMIS
 ;
-;                                       ABS
+;                                       ABS_W
 ;                                       SCREEN 56 LINE 9
 ;
 L2488     .TEXT $83,'AB',$D3
-          .WORD L2476    ; link to D+-
-ABS       .WORD DOCOL
-          .WORD DUP
-          .WORD PM
-          .WORD SEMIS
+          .word L2476    ; link to D+-
+ABS_W       .word DOCOL
+          .word DUP
+          .word PM
+          .word SEMIS
 ;
-;                                       DABS
+;                                       DABS_W
 ;                                       SCREEN 56 LINE 10
 ;
 L2498     .TEXT $84,'DAB',$D3
-          .WORD L2488    ; link to ABS
-DABS      .WORD DOCOL
-          .WORD DUP
-          .WORD DPM
-          .WORD SEMIS
+          .word L2488    ; link to ABS_W
+DABS_W      .word DOCOL
+          .word DUP
+          .word DPM
+          .word SEMIS
 ;
 ;                                       MIN
 ;                                       SCREEN 56 LINE 12
 ;
 L2508     .TEXT $83,'MI',$CE
-          .WORD L2498    ; link to DABS
-MIN       .WORD DOCOL
-          .WORD OVER
-          .WORD OVER
-          .WORD GREAT
-          .WORD ZBRAN
-L2515     .WORD 4        ; L2517-L2515
-          .WORD SWAP
-L2517     .WORD DROP
-          .WORD SEMIS
+          .word L2498    ; link to DABS_W
+MIN       .word DOCOL
+          .word OVER
+          .word OVER
+          .word GREAT
+          .word ZBRAN
+L2515     .word 4        ; L2517-L2515
+          .word SWAP
+L2517     .word DROP
+          .word SEMIS
 ;
 ;                                       MAX
 ;                                       SCREEN 56 LINE 14
 ;
 L2523     .TEXT $83,'MA',$D8
-          .WORD L2508     ; link to MIN
-MAX       .WORD DOCOL
-          .WORD OVER
-          .WORD OVER
-          .WORD LESS
-          .WORD ZBRAN
-L2530     .WORD 4        ; L2532-L2530
-          .WORD SWAP
-L2532     .WORD DROP
-          .WORD SEMIS
+          .word L2508     ; link to MIN
+MAX       .word DOCOL
+          .word OVER
+          .word OVER
+          .word LESS
+          .word ZBRAN
+L2530     .word 4        ; L2532-L2530
+          .word SWAP
+L2532     .word DROP
+          .word SEMIS
 ;
 ;                                       M*
 ;                                       SCREEN 57 LINE 1
 ;
 L2538     .TEXT $82,'M',$AA
-          .WORD L2523    ; link to MAX
-MSTAR     .WORD DOCOL
-          .WORD OVER
-          .WORD OVER
-          .WORD XOR
-          .WORD TOR
-          .WORD ABS
-          .WORD SWAP
-          .WORD ABS
-          .WORD USTAR
-          .WORD RFROM
-          .WORD DPM
-          .WORD SEMIS
+          .word L2523    ; link to MAX
+MSTAR     .word DOCOL
+          .word OVER
+          .word OVER
+          .word XOR
+          .word TOR
+          .word ABS_W
+          .word SWAP
+          .word ABS_W
+          .word USTAR
+          .word RFROM
+          .word DPM
+          .word SEMIS
 ;
 ;                                       M/
 ;                                       SCREEN 57 LINE 3
 ;
 L2556     .TEXT $82,'M',$AF
-          .WORD L2538    ; link to M*
-MSLAS     .WORD DOCOL
-          .WORD OVER
-          .WORD TOR
-          .WORD TOR
-          .WORD DABS
-          .WORD R
-          .WORD ABS
-          .WORD USLAS
-          .WORD RFROM
-          .WORD R
-          .WORD XOR
-          .WORD PM
-          .WORD SWAP
-          .WORD RFROM
-          .WORD PM
-          .WORD SWAP
-          .WORD SEMIS
+          .word L2538    ; link to M*
+MSLAS     .word DOCOL
+          .word OVER
+          .word TOR
+          .word TOR
+          .word DABS_W
+          .word R
+          .word ABS_W
+          .word USLAS
+          .word RFROM
+          .word R
+          .word XOR
+          .word PM
+          .word SWAP
+          .word RFROM
+          .word PM
+          .word SWAP
+          .word SEMIS
 ;
 ;                                       *
 ;                                       SCREEN 57 LINE 7
 ;
 L2579     .TEXT $81,$AA
-          .WORD L2556    ; link to M/
-STAR      .WORD DOCOL
-          .WORD USTAR
-          .WORD DROP
-          .WORD SEMIS
+          .word L2556    ; link to M/
+STAR      .word DOCOL
+          .word USTAR
+          .word DROP
+          .word SEMIS
 ;
 ;                                       /MOD
 ;                                       SCREEN 57 LINE 8
 ;
 L2589     .TEXT $84,'/MO',$C4
-          .WORD L2579    ; link to *
-SLMOD     .WORD DOCOL
-          .WORD TOR
-          .WORD STOD
-          .WORD RFROM
-          .WORD MSLAS
-          .WORD SEMIS
+          .word L2579    ; link to *
+SLMOD     .word DOCOL
+          .word TOR
+          .word STOD
+          .word RFROM
+          .word MSLAS
+          .word SEMIS
 ;
 ;                                       /
 ;                                       SCREEN 57 LINE 9
 ;
 L2601     .TEXT $81,$AF
-          .WORD L2589    ; link to /MOD
-SLASH     .WORD DOCOL
-          .WORD SLMOD
-          .WORD SWAP
-          .WORD DROP
-          .WORD SEMIS
+          .word L2589    ; link to /MOD
+SLASH     .word DOCOL
+          .word SLMOD
+          .word SWAP
+          .word DROP
+          .word SEMIS
 ;
 ;                                       MOD
 ;                                       SCREEN 57 LINE 10
 ;
 L2612     .TEXT $83,'MO',$C4
-          .WORD L2601    ; link to /
-MOD       .WORD DOCOL
-          .WORD SLMOD
-          .WORD DROP
-          .WORD SEMIS
+          .word L2601    ; link to /
+MOD       .word DOCOL
+          .word SLMOD
+          .word DROP
+          .word SEMIS
 ;
 ;                                       */MOD
 ;                                       SCREEN 57 LINE 11
 ;
 L2622     .TEXT $85,'*/MO',$C4
-          .WORD L2612    ; link to MOD
-SSMOD     .WORD DOCOL
-          .WORD TOR
-          .WORD MSTAR
-          .WORD RFROM
-          .WORD MSLAS
-          .WORD SEMIS
+          .word L2612    ; link to MOD
+SSMOD     .word DOCOL
+          .word TOR
+          .word MSTAR
+          .word RFROM
+          .word MSLAS
+          .word SEMIS
 ;
 ;                                       */
 ;                                       SCREEN 57 LINE 13
 ;
 L2634     .TEXT $82,'*',$AF
-          .WORD L2622    ; link to */MOD
-SSLAS     .WORD DOCOL
-          .WORD SSMOD
-          .WORD SWAP
-          .WORD DROP
-          .WORD SEMIS
+          .word L2622    ; link to */MOD
+SSLAS     .word DOCOL
+          .word SSMOD
+          .word SWAP
+          .word DROP
+          .word SEMIS
 ;
 ;                                       M/MOD
 ;                                       SCREEN 57 LINE 14
 ;
 L2645     .TEXT $85,'M/MO',$C4
-          .WORD L2634    ; link to */
-MSMOD     .WORD DOCOL
-          .WORD TOR
-          .WORD ZERO
-          .WORD R
-          .WORD USLAS
-          .WORD RFROM
-          .WORD SWAP
-          .WORD TOR
-          .WORD USLAS
-          .WORD RFROM
-          .WORD SEMIS
+          .word L2634    ; link to */
+MSMOD     .word DOCOL
+          .word TOR
+          .word ZERO
+          .word R
+          .word USLAS
+          .word RFROM
+          .word SWAP
+          .word TOR
+          .word USLAS
+          .word RFROM
+          .word SEMIS
 ;
 ;                                       USE
 ;                                       SCREEN 58 LINE 1
 ;
 L2662     .TEXT $83,'US',$C5
-          .WORD L2645    ; link to M/MOD
-USE       .WORD DOVAR
-          .WORD DAREA
+          .word L2645    ; link to M/MOD
+USE       .word DOVAR
+          .word DAREA
 ;
 ;                                       PREV
 ;                                       SCREEN 58 LINE 2
 ;
 L2670     .TEXT $84,'PRE',$D6
-          .WORD L2662    ; link to USE
-PREV      .WORD DOVAR
-          .WORD DAREA
+          .word L2662    ; link to USE
+PREV      .word DOVAR
+          .word DAREA
 ;
 ;                                       +BUF
 ;                                       SCREEN 58 LINE 4
 ;
 ;
 L2678     .TEXT $84,'+BU',$C6
-          .WORD L2670    ; link to PREV
-PBUF      .WORD DOCOL
-          .WORD LIT
-          .WORD SSIZE+4  ; hold block #, one sector two num
-          .WORD PLUS
-          .WORD DUP
-          .WORD LIMIT
-          .WORD EQUAL
-          .WORD ZBRAN
-L2688     .WORD 6        ; L2691-L2688
-          .WORD DROP
-          .WORD FIRST
-L2691     .WORD DUP
-          .WORD PREV
-          .WORD AT
-          .WORD SUB
-          .WORD SEMIS
+          .word L2670    ; link to PREV
+PBUF      .word DOCOL
+          .word LIT
+          .word SSIZE+4  ; hold block #, one sector two num
+          .word PLUS
+          .word DUP
+          .word LIMIT
+          .word EQUAL
+          .word ZBRAN
+L2688     .word 6        ; L2691-L2688
+          .word DROP
+          .word FIRST
+L2691     .word DUP
+          .word PREV
+          .word AT
+          .word SUB
+          .word SEMIS
 ;
 ;                                       UPDATE
 ;                                       SCREEN 58 LINE 8
 ;
 L2700     .TEXT $86,'UPDAT',$C5
-          .WORD L2678    ; link to +BUF
-UPDAT     .WORD DOCOL
-          .WORD PREV
-          .WORD AT
-          .WORD AT
-          .WORD LIT,$8000
-          .WORD OR
-          .WORD PREV
-          .WORD AT
-          .WORD STORE
-          .WORD SEMIS
+          .word L2678    ; link to +BUF
+UPDAT     .word DOCOL
+          .word PREV
+          .word AT
+          .word AT
+          .word LIT,$8000
+          .word OR
+          .word PREV
+          .word AT
+          .word STORE
+          .word SEMIS
 ;
 ;                                       FLUSH
 ;
 L2705     .TEXT $85,'FLUS',$C8
-          .WORD L2700    ; link to UPDATE
-          .WORD DOCOL
-          .WORD LIMIT,FIRST,SUB
-          .WORD BBUF,CLIT
+          .word L2700    ; link to UPDATE
+          .word DOCOL
+          .word LIMIT,FIRST,SUB
+          .word BBUF,CLIT
           .TEXT 4
-          .WORD PLUS,SLASH,ONEP
-          .WORD ZERO,PDO
-L2835     .WORD LIT,$7FFF,BUFFR
-          .WORD DROP,PLOOP
-L2839     .WORD $FFF6    ; L2835-L2839
-          .WORD SEMIS
+          .word PLUS,SLASH,ONEP
+          .word ZERO,PDO
+L2835     .word LIT,$7FFF,BUFFR
+          .word DROP,PLOOP
+L2839     .word $FFF6    ; L2835-L2839
+          .word SEMIS
 ;
 ;                                       EMPTY-BUFFERS
 ;                                       SCREEN 58 LINE 11
 ;
 L2716     .TEXT $8D,'EMPTY-BUFFER',$D3
-          .WORD L2705    ; link to FLUSH
-          .WORD DOCOL
-          .WORD FIRST
-          .WORD LIMIT
-          .WORD OVER
-          .WORD SUB
-          .WORD ERASE
-          .WORD SEMIS
+          .word L2705    ; link to FLUSH
+          .word DOCOL
+          .word FIRST
+          .word LIMIT
+          .word OVER
+          .word SUB
+          .word ERASE
+          .word SEMIS
 ;
 ;                                       DR0
 ;                                       SCREEN 58 LINE 14
 ;
 L2729     .TEXT $83,'DR',$B0
-          .WORD L2716    ; link to EMPTY-BUFFERS
-DR0       .WORD DOCOL
-          .WORD ZERO
-          .WORD OFSET
-          .WORD STORE
-          .WORD SEMIS
+          .word L2716    ; link to EMPTY-BUFFERS
+DR0       .word DOCOL
+          .word ZERO
+          .word OFSET
+          .word STORE
+          .word SEMIS
 ;
 ;                                       DR1
 ;                                       SCREEN 58 LINE 15
 ;
 L2740     .TEXT $83,'DR',$B1
-          .WORD L2729    ; link to DR0
-          .WORD DOCOL
-          .WORD LIT,SECTR ; sectors per drive
-          .WORD OFSET
-          .WORD STORE
-          .WORD SEMIS
+          .word L2729    ; link to DR0
+          .word DOCOL
+          .word LIT,SECTR ; sectors per drive
+          .word OFSET
+          .word STORE
+          .word SEMIS
 ;
 ;                                       BUFFER
 ;                                       SCREEN 59 LINE 1
 ;
 L2751     .TEXT $86,'BUFFE',$D2
-          .WORD L2740    ; link to DR1
-BUFFR     .WORD DOCOL
-          .WORD USE
-          .WORD AT
-          .WORD DUP
-          .WORD TOR
-L2758     .WORD PBUF
-          .WORD ZBRAN
-L2760     .WORD $FFFC    ; L2758-L2760
-          .WORD USE
-          .WORD STORE
-          .WORD R
-          .WORD AT
-          .WORD ZLESS
-          .WORD ZBRAN
-L2767     .WORD $14      ; L2776-L2767
-          .WORD R
-          .WORD TWOP
-          .WORD R
-          .WORD AT
-          .WORD LIT,$7FFF
-          .WORD ANDD
-          .WORD ZERO
-          .WORD RSLW
-L2776     .WORD R
-          .WORD STORE
-          .WORD R
-          .WORD PREV
-          .WORD STORE
-          .WORD RFROM
-          .WORD TWOP
-          .WORD SEMIS
+          .word L2740    ; link to DR1
+BUFFR     .word DOCOL
+          .word USE
+          .word AT
+          .word DUP
+          .word TOR
+L2758     .word PBUF
+          .word ZBRAN
+L2760     .word $FFFC    ; L2758-L2760
+          .word USE
+          .word STORE
+          .word R
+          .word AT
+          .word ZLESS
+          .word ZBRAN
+L2767     .word $14      ; L2776-L2767
+          .word R
+          .word TWOP
+          .word R
+          .word AT
+          .word LIT,$7FFF
+          .word ANDD
+          .word ZERO
+          .word RSLW
+L2776     .word R
+          .word STORE
+          .word R
+          .word PREV
+          .word STORE
+          .word RFROM
+          .word TWOP
+          .word SEMIS
 ;
 ;                                       BLOCK
 ;                                       SCREEN 60 LINE 1
 ;
 L2788     .TEXT $85,'BLOC',$CB
-          .WORD L2751    ; link to BUFFER
-BLOCK     .WORD DOCOL
-          .WORD OFSET
-          .WORD AT
-          .WORD PLUS
-          .WORD TOR
-          .WORD PREV
-          .WORD AT
-          .WORD DUP
-          .WORD AT
-          .WORD R
-          .WORD SUB
-          .WORD DUP
-          .WORD PLUS
-          .WORD ZBRAN
-L2804     .WORD $34      ; L2830-L2804
-L2805     .WORD PBUF
-          .WORD ZEQU
-          .WORD ZBRAN
-L2808     .WORD $14      ; L2818-L2808
-          .WORD DROP
-          .WORD R
-          .WORD BUFFR
-          .WORD DUP
-          .WORD R
-          .WORD ONE
-          .WORD RSLW
-          .WORD TWO
-          .WORD SUB
-L2818     .WORD DUP
-          .WORD AT
-          .WORD R
-          .WORD SUB
-          .WORD DUP
-          .WORD PLUS
-          .WORD ZEQU
-          .WORD ZBRAN
-L2826     .WORD $FFD6    ; L2805-L2826
-          .WORD DUP
-          .WORD PREV
-          .WORD STORE
-L2830     .WORD RFROM
-          .WORD DROP
-          .WORD TWOP
-          .WORD SEMIS    ; end of BLOCK
+          .word L2751    ; link to BUFFER
+BLOCK     .word DOCOL
+          .word OFSET
+          .word AT
+          .word PLUS
+          .word TOR
+          .word PREV
+          .word AT
+          .word DUP
+          .word AT
+          .word R
+          .word SUB
+          .word DUP
+          .word PLUS
+          .word ZBRAN
+L2804     .word $34      ; L2830-L2804
+L2805     .word PBUF
+          .word ZEQU
+          .word ZBRAN
+L2808     .word $14      ; L2818-L2808
+          .word DROP
+          .word R
+          .word BUFFR
+          .word DUP
+          .word R
+          .word ONE
+          .word RSLW
+          .word TWO
+          .word SUB
+L2818     .word DUP
+          .word AT
+          .word R
+          .word SUB
+          .word DUP
+          .word PLUS
+          .word ZEQU
+          .word ZBRAN
+L2826     .word $FFD6    ; L2805-L2826
+          .word DUP
+          .word PREV
+          .word STORE
+L2830     .word RFROM
+          .word DROP
+          .word TWOP
+          .word SEMIS    ; end of BLOCK
 ;
 ;
 ;                                       (LINE)
 ;                                       SCREEN 61 LINE 2
 ;
 L2838     .TEXT $86,'(LINE',$A9
-          .WORD L2788    ; link to BLOCK
-PLINE     .WORD DOCOL
-          .WORD TOR
-          .WORD CSLL
-          .WORD BBUF
-          .WORD SSMOD
-          .WORD RFROM
-          .WORD BSCR
-          .WORD STAR
-          .WORD PLUS
-          .WORD BLOCK
-          .WORD PLUS
-          .WORD CSLL
-          .WORD SEMIS
+          .word L2788    ; link to BLOCK
+PLINE     .word DOCOL
+          .word TOR
+          .word CSLL
+          .word BBUF
+          .word SSMOD
+          .word RFROM
+          .word BSCR
+          .word STAR
+          .word PLUS
+          .word BLOCK
+          .word PLUS
+          .word CSLL
+          .word SEMIS
 ;
 ;                                       .LINE
 ;                                       SCREEN 61 LINE 6
 ;
 L2857     .TEXT $85,'.LIN',$C5
-          .WORD L2838    ; link to (LINE)
-DLINE     .WORD DOCOL
-          .WORD PLINE
-          .WORD DTRAI
-          .WORD TYPE
-          .WORD SEMIS
+          .word L2838    ; link to (LINE)
+DLINE     .word DOCOL
+          .word PLINE
+          .word DTRAI
+          .word TYPE_W
+          .word SEMIS
 ;
 ;                                       MESSAGE
 ;                                       SCREEN 61 LINE 9
 ;
 L2868     .TEXT $87,'MESSAG',$C5
-          .WORD L2857    ; link to .LINE
-MESS      .WORD DOCOL
-          .WORD WARN
-          .WORD AT
-          .WORD ZBRAN
-L2874     .WORD $1B      ; L2888-L2874
-          .WORD DDUP
-          .WORD ZBRAN
-L2877     .WORD $11      ; L2886-L2877
-          .WORD CLIT
+          .word L2857    ; link to .LINE
+MESS      .word DOCOL
+          .word WARN
+          .word AT
+          .word ZBRAN
+L2874     .word $1B      ; L2888-L2874
+          .word DDUP
+          .word ZBRAN
+L2877     .word $11      ; L2886-L2877
+          .word CLIT
           .TEXT 4
-          .WORD OFSET
-          .WORD AT
-          .WORD BSCR
-          .WORD SLASH
-          .WORD SUB
-          .WORD DLINE
-L2886     .WORD BRAN
-L2887     .WORD 13       ; L2891-L2887
-L2888     .WORD PDOTQ
+          .word OFSET
+          .word AT
+          .word BSCR
+          .word SLASH
+          .word SUB
+          .word DLINE
+L2886     .word BRAN
+L2887     .word 13       ; L2891-L2887
+L2888     .word PDOTQ
           .TEXT 6,'MSG # '
-          .WORD DOT
-L2891     .WORD SEMIS
+          .word DOT
+L2891     .word SEMIS
 ;
 ;                                       LOAD
 ;                                       SCREEN 62 LINE 2
 ;
 L2896     .TEXT $84,'LOA',$C4
-          .WORD L2868    ; link to MESSAGE
-LOAD      .WORD DOCOL
-          .WORD BLK
-          .WORD AT
-          .WORD TOR
-          .WORD IN
-          .WORD AT
-          .WORD TOR
-          .WORD ZERO
-          .WORD IN
-          .WORD STORE
-          .WORD BSCR
-          .WORD STAR
-          .WORD BLK
-          .WORD STORE
-          .WORD INTER
-          .WORD RFROM
-          .WORD IN
-          .WORD STORE
-          .WORD RFROM
-          .WORD BLK
-          .WORD STORE
-          .WORD SEMIS
+          .word L2868    ; link to MESSAGE
+LOAD      .word DOCOL
+          .word BLK
+          .word AT
+          .word TOR
+          .word IN
+          .word AT
+          .word TOR
+          .word ZERO
+          .word IN
+          .word STORE
+          .word BSCR
+          .word STAR
+          .word BLK
+          .word STORE
+          .word INTER
+          .word RFROM
+          .word IN
+          .word STORE
+          .word RFROM
+          .word BLK
+          .word STORE
+          .word SEMIS
 ;
 ;                                       -->
 ;                                       SCREEN 62 LINE 6
 ;
 L2924     .TEXT $C3,'--',$BE
-          .WORD L2896    ; link to LOAD
-          .WORD DOCOL
-          .WORD QLOAD
-          .WORD ZERO
-          .WORD IN
-          .WORD STORE
-          .WORD BSCR
-          .WORD BLK
-          .WORD AT
-          .WORD OVER
-          .WORD MOD
-          .WORD SUB
-          .WORD BLK
-          .WORD PSTOR
-          .WORD SEMIS
+          .word L2896    ; link to LOAD
+          .word DOCOL
+          .word QLOAD
+          .word ZERO
+          .word IN
+          .word STORE
+          .word BSCR
+          .word BLK
+          .word AT
+          .word OVER
+          .word MOD
+          .word SUB
+          .word BLK
+          .word PSTOR
+          .word SEMIS
 ;
 ;    XEMIT writes one ascii character to terminal
 ;
@@ -3234,8 +3247,8 @@ XCR       STX XSAVE
 ;                                       machine level sector R/W
 ;
 L3030     .TEXT $85,'-DIS',$C3
-          .WORD L2924    ; link to -->
-DDISC     .WORD *+2
+          .word L2924    ; link to -->
+DDISC     .word *+2
           LDA 0,X
           STA $C60C
           STA $C60D      ; store sector number
@@ -3261,563 +3274,563 @@ L3040     JSR $E3EF      ; head up motor off
 ;                             Convert binary value to BCD
 ;
 L3050     .TEXT $84,'-BC',$C4
-          .WORD L3030    ; link to -DISC
-DBCD      .WORD DOCOL
-          .WORD ZERO,CLIT
+          .word L3030    ; link to -DISC
+DBCD      .word DOCOL
+          .word ZERO,CLIT
           .TEXT 10
-          .WORD USLAS,CLIT
+          .word USLAS,CLIT
           .TEXT 16
-          .WORD STAR,OR,SEMIS
+          .word STAR,OR,SEMIS
 ;
 ;                                       R/W
 ;                              Read or write one sector
 ;
 L3060     .TEXT $83,'R/',$D7
-          .WORD L3050    ; link to -BCD
-RSLW      .WORD DOCOL
-          .WORD ZEQU,LIT,$C4DA,CSTOR
-          .WORD SWAP,ZERO,STORE
-          .WORD ZERO,OVER,GREAT,OVER
-          .WORD LIT,SECTL-1,GREAT,OR,CLIT
+          .word L3050    ; link to -BCD
+RSLW      .word DOCOL
+          .word ZEQU,LIT,$C4DA,CSTOR
+          .word SWAP,ZERO,STORE
+          .word ZERO,OVER,GREAT,OVER
+          .word LIT,SECTL-1,GREAT,OR,CLIT
           .TEXT 6
-          .WORD QERR
-          .WORD ZERO,LIT,SECTR,USLAS,ONEP
-          .WORD SWAP,ZERO,CLIT
+          .word QERR
+          .word ZERO,LIT,SECTR,USLAS,ONEP
+          .word SWAP,ZERO,CLIT
           .TEXT $12
-          .WORD USLAS,DBCD,SWAP,ONEP
-          .WORD DBCD,DDISC,CLIT
+          .word USLAS,DBCD,SWAP,ONEP
+          .word DBCD,DDISC,CLIT
           .TEXT 8
-          .WORD QERR
-          .WORD SEMIS
+          .word QERR
+          .word SEMIS
 ;
 ;
 ;
-          .WORD SEMIS
+          .word SEMIS
 ;
 ;                                       '
 ;                                       SCREEN 72 LINE 2
 ;
 L3202     .TEXT $C1,$A7
-          .WORD L3060    ; link to R/W
-TICK      .WORD DOCOL
-          .WORD DFIND
-          .WORD ZEQU
-          .WORD ZERO
-          .WORD QERR
-          .WORD DROP
-          .WORD LITER
-          .WORD SEMIS
+          .word L3060    ; link to R/W
+TICK      .word DOCOL
+          .word DFIND
+          .word ZEQU
+          .word ZERO
+          .word QERR
+          .word DROP
+          .word LITER
+          .word SEMIS
 ;
 ;                                       FORGET
 ;                                       Altered from model
 ;                                       SCREEN 72 LINE 6
 ;
 L3217     .TEXT $86,'FORGE',$D4
-          .WORD L3202    ; link to ' TICK
-FORG      .WORD DOCOL
-          .WORD TICK,NFA,DUP
-          .WORD FENCE,AT,ULESS,CLIT
+          .word L3202    ; link to ' TICK
+FORG      .word DOCOL
+          .word TICK,NFA,DUP
+          .word FENCE,AT,ULESS,CLIT
           .TEXT $15
-          .WORD QERR,TOR,VOCL,AT
-L3220     .WORD R,OVER,ULESS
-          .WORD ZBRAN,L3225-*
-          .WORD FORTH,DEFIN,AT,DUP
-          .WORD VOCL,STORE
-          .WORD BRAN,$FFFF-24+1 ; L3220-*
-L3225     .WORD DUP,CLIT
+          .word QERR,TOR,VOCL,AT
+L3220     .word R,OVER,ULESS
+          .word ZBRAN,L3225-*
+          .word FORTH,DEFIN,AT,DUP
+          .word VOCL,STORE
+          .word BRAN,$FFFF-24+1 ; L3220-*
+L3225     .word DUP,CLIT
           .TEXT 4
-          .WORD SUB
-L3228     .WORD PFA,LFA,AT
-          .WORD DUP
-          .WORD R
-          .WORD ULESS
-          .WORD ZBRAN,$FFFF-14+1 ; L3228-*
-          .WORD OVER,TWO,SUB,STORE
-          .WORD AT,DDUP,ZEQU
-          .WORD ZBRAN,$FFFF-39+1 ; L3225-*
-          .WORD RFROM,DP,STORE
-          .WORD SEMIS
+          .word SUB
+L3228     .word PFA,LFA,AT
+          .word DUP
+          .word R
+          .word ULESS
+          .word ZBRAN,$FFFF-14+1 ; L3228-*
+          .word OVER,TWO,SUB,STORE
+          .word AT,DDUP,ZEQU
+          .word ZBRAN,$FFFF-39+1 ; L3225-*
+          .word RFROM,DP,STORE
+          .word SEMIS
 ;
 ;                                       BACK
 ;                                       SCREEN 73 LINE 1
 ;
 L3250     .TEXT $84,'BAC',$CB
-          .WORD L3217    ; link to FORGET
-BACK      .WORD DOCOL
-          .WORD HERE
-          .WORD SUB
-          .WORD COMMA
-          .WORD SEMIS
+          .word L3217    ; link to FORGET
+BACK      .word DOCOL
+          .word HERE
+          .word SUB
+          .word COMMA
+          .word SEMIS
 ;
 ;                                       BEGIN
 ;                                       SCREEN 73 LINE 3
 ;
 L3261     .TEXT $C5,'BEGI',$CE
-          .WORD L3250    ; link to BACK
-          .WORD DOCOL
-          .WORD QCOMP
-          .WORD HERE
-          .WORD ONE
-          .WORD SEMIS
+          .word L3250    ; link to BACK
+          .word DOCOL
+          .word QCOMP
+          .word HERE
+          .word ONE
+          .word SEMIS
 ;
 ;                                       ENDIF
 ;                                       SCREEN 73 LINE 5
 ;
 L3273     .TEXT $C5,'ENDI',$C6
-          .WORD L3261    ; link to BEGIN
-ENDIF     .WORD DOCOL
-          .WORD QCOMP
-          .WORD TWO
-          .WORD QPAIR
-          .WORD HERE
-          .WORD OVER
-          .WORD SUB
-          .WORD SWAP
-          .WORD STORE
-          .WORD SEMIS
+          .word L3261    ; link to BEGIN
+ENDIF     .word DOCOL
+          .word QCOMP
+          .word TWO
+          .word QPAIR
+          .word HERE
+          .word OVER
+          .word SUB
+          .word SWAP
+          .word STORE
+          .word SEMIS
 ;
 ;                                       THEN
 ;                                       SCREEN 73 LINE 7
 ;
 L3290     .TEXT $C4,'THE',$CE
-          .WORD L3273    ; link to ENDIF
-          .WORD DOCOL
-          .WORD ENDIF
-          .WORD SEMIS
+          .word L3273    ; link to ENDIF
+          .word DOCOL
+          .word ENDIF
+          .word SEMIS
 ;
 ;                                       DO
 ;                                       SCREEN 73 LINE 9
 ;
 L3300     .TEXT $C2,'D',$CF
-          .WORD L3290    ; link to THEN
-          .WORD DOCOL
-          .WORD COMP
-          .WORD PDO
-          .WORD HERE
-          .WORD THREE
-          .WORD SEMIS
+          .word L3290    ; link to THEN
+          .word DOCOL
+          .word COMP
+          .word PDO
+          .word HERE
+          .word THREE
+          .word SEMIS
 ;
 ;                                       LOOP
 ;                                       SCREEN 73 LINE 11
 ;
 ;
 L3313     .TEXT $C4,'LOO',$D0
-          .WORD L3300    ; link to DO
-          .WORD DOCOL
-          .WORD THREE
-          .WORD QPAIR
-          .WORD COMP
-          .WORD PLOOP
-          .WORD BACK
-          .WORD SEMIS
+          .word L3300    ; link to DO
+          .word DOCOL
+          .word THREE
+          .word QPAIR
+          .word COMP
+          .word PLOOP
+          .word BACK
+          .word SEMIS
 ;
 ;                                       +LOOP
 ;                                       SCREEN 73 LINE 13
 ;
 L3327     .TEXT $C5,'+LOO',$D0
-          .WORD L3313    ; link to LOOP
-          .WORD DOCOL
-          .WORD THREE
-          .WORD QPAIR
-          .WORD COMP
-          .WORD PPLOO
-          .WORD BACK
-          .WORD SEMIS
+          .word L3313    ; link to LOOP
+          .word DOCOL
+          .word THREE
+          .word QPAIR
+          .word COMP
+          .word PPLOO
+          .word BACK
+          .word SEMIS
 ;
 ;                                       UNTIL
 ;                                       SCREEN 73 LINE 15
 ;
 L3341     .TEXT $C5,'UNTI',$CC
-          .WORD L3327    ; link to +LOOP
-UNTIL     .WORD DOCOL
-          .WORD ONE
-          .WORD QPAIR
-          .WORD COMP
-          .WORD ZBRAN
-          .WORD BACK
-          .WORD SEMIS
+          .word L3327    ; link to +LOOP
+UNTIL     .word DOCOL
+          .word ONE
+          .word QPAIR
+          .word COMP
+          .word ZBRAN
+          .word BACK
+          .word SEMIS
 ;
 ;                                       END
 ;                                       SCREEN 74 LINE 1
 ;
 L3355     .TEXT $C3,'EN',$C4
-          .WORD L3341    ; link to UNTIL
-          .WORD DOCOL
-          .WORD UNTIL
-          .WORD SEMIS
+          .word L3341    ; link to UNTIL
+          .word DOCOL
+          .word UNTIL
+          .word SEMIS
 ;
 ;                                       AGAIN
 ;                                       SCREEN 74 LINE 3
 ;
 L3365     .TEXT $C5,'AGAI',$CE
-          .WORD L3355    ; link to END
-AGAIN     .WORD DOCOL
-          .WORD ONE
-          .WORD QPAIR
-          .WORD COMP
-          .WORD BRAN
-          .WORD BACK
-          .WORD SEMIS
+          .word L3355    ; link to END
+AGAIN     .word DOCOL
+          .word ONE
+          .word QPAIR
+          .word COMP
+          .word BRAN
+          .word BACK
+          .word SEMIS
 ;
 ;                                       REPEAT
 ;                                       SCREEN 74 LINE 5
 ;
 L3379     .TEXT $C6,'REPEA',$D4
-          .WORD L3365    ; link to AGAIN
-          .WORD DOCOL
-          .WORD TOR
-          .WORD TOR
-          .WORD AGAIN
-          .WORD RFROM
-          .WORD RFROM
-          .WORD TWO
-          .WORD SUB
-          .WORD ENDIF
-          .WORD SEMIS
+          .word L3365    ; link to AGAIN
+          .word DOCOL
+          .word TOR
+          .word TOR
+          .word AGAIN
+          .word RFROM
+          .word RFROM
+          .word TWO
+          .word SUB
+          .word ENDIF
+          .word SEMIS
 ;
 ;                                       IF
 ;                                       SCREEN 74 LINE 8
 ;
 L3396     .TEXT $C2,'I',$C6
-          .WORD L3379    ; link to REPEAT
-IF        .WORD DOCOL
-          .WORD COMP
-          .WORD ZBRAN
-          .WORD HERE
-          .WORD ZERO
-          .WORD COMMA
-          .WORD TWO
-          .WORD SEMIS
+          .word L3379    ; link to REPEAT
+IF        .word DOCOL
+          .word COMP
+          .word ZBRAN
+          .word HERE
+          .word ZERO
+          .word COMMA
+          .word TWO
+          .word SEMIS
 ;
 ;                                       ELSE
 ;                                       SCREEN 74 LINE 10
 ;
 L3411     .TEXT $C4,'ELS',$C5
-          .WORD L3396    ; link to IF
-          .WORD DOCOL
-          .WORD TWO
-          .WORD QPAIR
-          .WORD COMP
-          .WORD BRAN
-          .WORD HERE
-          .WORD ZERO
-          .WORD COMMA
-          .WORD SWAP
-          .WORD TWO
-          .WORD ENDIF
-          .WORD TWO
-          .WORD SEMIS
+          .word L3396    ; link to IF
+          .word DOCOL
+          .word TWO
+          .word QPAIR
+          .word COMP
+          .word BRAN
+          .word HERE
+          .word ZERO
+          .word COMMA
+          .word SWAP
+          .word TWO
+          .word ENDIF
+          .word TWO
+          .word SEMIS
 ;
 ;                                       WHILE
 ;                                       SCREEN 74 LINE 13
 ;
 L3431     .TEXT $C5,'WHIL',$C5
-          .WORD L3411    ; link to ELSE
-          .WORD DOCOL
-          .WORD IF
-          .WORD TWOP
-          .WORD SEMIS
+          .word L3411    ; link to ELSE
+          .word DOCOL
+          .word IF
+          .word TWOP
+          .word SEMIS
 ;
 ;                                       SPACES
 ;                                       SCREEN 75 LINE 1
 ;
 L3442     .TEXT $86,'SPACE',$D3
-          .WORD L3431    ; link to WHILE
-SPACS     .WORD DOCOL
-          .WORD ZERO
-          .WORD MAX
-          .WORD DDUP
-          .WORD ZBRAN
-L3449     .WORD $0C      ; L3455-L3449
-          .WORD ZERO
-          .WORD PDO
-L3452     .WORD SPACE
-          .WORD PLOOP
-L3454     .WORD $FFFC    ; L3452-L3454
-L3455     .WORD SEMIS
+          .word L3431    ; link to WHILE
+SPACS     .word DOCOL
+          .word ZERO
+          .word MAX
+          .word DDUP
+          .word ZBRAN
+L3449     .word $0C      ; L3455-L3449
+          .word ZERO
+          .word PDO
+L3452     .word SPACE
+          .word PLOOP
+L3454     .word $FFFC    ; L3452-L3454
+L3455     .word SEMIS
 ;
 ;                                       <#
 ;                                       SCREEN 75 LINE 3
 ;
 L3460     .TEXT $82,'<',$A3
-          .WORD L3442    ; link to SPACES
-BDIGS     .WORD DOCOL
-          .WORD PAD
-          .WORD HLD
-          .WORD STORE
-          .WORD SEMIS
+          .word L3442    ; link to SPACES
+BDIGS     .word DOCOL
+          .word PAD
+          .word HLD
+          .word STORE
+          .word SEMIS
 ;
 ;                                       #>
 ;                                       SCREEN 75 LINE 5
 ;
 L3471     .TEXT $82,'#',$BE
-          .WORD L3460    ; link to <#
-EDIGS     .WORD DOCOL
-          .WORD DROP
-          .WORD DROP
-          .WORD HLD
-          .WORD AT
-          .WORD PAD
-          .WORD OVER
-          .WORD SUB
-          .WORD SEMIS
+          .word L3460    ; link to <#
+EDIGS     .word DOCOL
+          .word DROP
+          .word DROP
+          .word HLD
+          .word AT
+          .word PAD
+          .word OVER
+          .word SUB
+          .word SEMIS
 ;
-;                                       SIGN
+;                                       SIGN_W
 ;                                       SCREEN 75 LINE 7
 ;
 L3486     .TEXT $84,'SIG',$CE
-          .WORD L3471    ; link to #>
-SIGN      .WORD DOCOL
-          .WORD ROT
-          .WORD ZLESS
-          .WORD ZBRAN
-L3492     .WORD $7       ; L3496-L3492
-          .WORD CLIT
+          .word L3471    ; link to #>
+SIGN_W      .word DOCOL
+          .word ROT
+          .word ZLESS
+          .word ZBRAN
+L3492     .word $7       ; L3496-L3492
+          .word CLIT
           .TEXT $2D
-          .WORD HOLD
-L3496     .WORD SEMIS
+          .word HOLD
+L3496     .word SEMIS
 ;
 ;                                       #
 ;                                       SCREEN 75 LINE 9
 ;
 L3501     .TEXT $81,$A3
-          .WORD L3486    ; link to SIGN
-DIG       .WORD DOCOL
-          .WORD BASE
-          .WORD AT
-          .WORD MSMOD
-          .WORD ROT
-          .WORD CLIT
+          .word L3486    ; link to SIGN_W
+DIG       .word DOCOL
+          .word BASE
+          .word AT
+          .word MSMOD
+          .word ROT
+          .word CLIT
           .TEXT 9
-          .WORD OVER
-          .WORD LESS
-          .WORD ZBRAN
-L3513     .WORD 7        ; L3517-L3513
-          .WORD CLIT
+          .word OVER
+          .word LESS
+          .word ZBRAN
+L3513     .word 7        ; L3517-L3513
+          .word CLIT
           .TEXT 7
-          .WORD PLUS
-L3517     .WORD CLIT
+          .word PLUS
+L3517     .word CLIT
           .TEXT $30
-          .WORD PLUS
-          .WORD HOLD
-          .WORD SEMIS
+          .word PLUS
+          .word HOLD
+          .word SEMIS
 ;
 ;                                       #S
 ;                                       SCREEN 75 LINE 12
 ;
 L3526     .TEXT $82,'#',$D3
-          .WORD L3501    ; link to #
-DIGS      .WORD DOCOL
-L3529     .WORD DIG
-          .WORD OVER
-          .WORD OVER
-          .WORD OR
-          .WORD ZEQU
-          .WORD ZBRAN
-L3535     .WORD $FFF4    ; L3529-L3535
-          .WORD SEMIS
+          .word L3501    ; link to #
+DIGS      .word DOCOL
+L3529     .word DIG
+          .word OVER
+          .word OVER
+          .word OR
+          .word ZEQU
+          .word ZBRAN
+L3535     .word $FFF4    ; L3529-L3535
+          .word SEMIS
 ;
 ;                                       D.R
 ;                                       SCREEN 76 LINE 1
 ;
 L3541     .TEXT $83,'D.',$D2
-          .WORD L3526    ; link to #S
-DDOTR     .WORD DOCOL
-          .WORD TOR
-          .WORD SWAP
-          .WORD OVER
-          .WORD DABS
-          .WORD BDIGS
-          .WORD DIGS
-          .WORD SIGN
-          .WORD EDIGS
-          .WORD RFROM
-          .WORD OVER
-          .WORD SUB
-          .WORD SPACS
-          .WORD TYPE
-          .WORD SEMIS
+          .word L3526    ; link to #S
+DDOTR     .word DOCOL
+          .word TOR
+          .word SWAP
+          .word OVER
+          .word DABS_W
+          .word BDIGS
+          .word DIGS
+          .word SIGN_W
+          .word EDIGS
+          .word RFROM
+          .word OVER
+          .word SUB
+          .word SPACS
+          .word TYPE_W
+          .word SEMIS
 ;
 ;                                       D.
 ;                                       SCREEN 76 LINE 5
 ;
 L3562     .TEXT $82,'D',$AE
-          .WORD L3541    ; link to D.R
-DDOT      .WORD DOCOL
-          .WORD ZERO
-          .WORD DDOTR
-          .WORD SPACE
-          .WORD SEMIS
+          .word L3541    ; link to D.R
+DDOT      .word DOCOL
+          .word ZERO
+          .word DDOTR
+          .word SPACE
+          .word SEMIS
 ;
 ;                                       .R
 ;                                       SCREEN 76 LINE 7
 ;
 L3573     .TEXT $82,'.',$D2
-          .WORD L3562     ; link to D.
-DOTR      .WORD DOCOL
-          .WORD TOR
-          .WORD STOD
-          .WORD RFROM
-          .WORD DDOTR
-          .WORD SEMIS
+          .word L3562     ; link to D.
+DOTR      .word DOCOL
+          .word TOR
+          .word STOD
+          .word RFROM
+          .word DDOTR
+          .word SEMIS
 ;
 ;                                       .
 ;                                       SCREEN 76  LINE  9
 ;
 L3585     .TEXT $81,$AE
-          .WORD L3573    ; link to .R
-DOT       .WORD DOCOL
-          .WORD STOD
-          .WORD DDOT
-          .WORD SEMIS
+          .word L3573    ; link to .R
+DOT       .word DOCOL
+          .word STOD
+          .word DDOT
+          .word SEMIS
 ;
 ;                                       ?
 ;                                       SCREEN 76 LINE 11
 ;
 L3595     .TEXT $81,$BF
-          .WORD L3585    ; link to .
-QUES      .WORD DOCOL
-          .WORD AT
-          .WORD DOT
-          .WORD SEMIS
+          .word L3585    ; link to .
+QUES      .word DOCOL
+          .word AT
+          .word DOT
+          .word SEMIS
 ;
-;                                       LIST
+;                                       LIST_W
 ;                                       SCREEN 77 LINE 2
 ;
 L3605     .TEXT $84,'LIS',$D4
-          .WORD L3595    ; link to ?
-LIST      .WORD DOCOL
-          .WORD DECIM
-          .WORD CR
-          .WORD DUP
-          .WORD SCR
-          .WORD STORE
-          .WORD PDOTQ
+          .word L3595    ; link to ?
+LIST_W      .word DOCOL
+          .word DECIM
+          .word CR
+          .word DUP
+          .word SCR
+          .word STORE
+          .word PDOTQ
           .TEXT 6,'SCR # '
-          .WORD DOT
-          .WORD CLIT
+          .word DOT
+          .word CLIT
           .TEXT 16
-          .WORD ZERO
-          .WORD PDO
-L3620     .WORD CR
-          .WORD I
-          .WORD THREE
-          .WORD DOTR
-          .WORD SPACE
-          .WORD I
-          .WORD SCR
-          .WORD AT
-          .WORD DLINE
-          .WORD PLOOP
-L3630     .WORD $FFEC
-          .WORD CR
-          .WORD SEMIS
+          .word ZERO
+          .word PDO
+L3620     .word CR
+          .word I
+          .word THREE
+          .word DOTR
+          .word SPACE
+          .word I
+          .word SCR
+          .word AT
+          .word DLINE
+          .word PLOOP
+L3630     .word $FFEC
+          .word CR
+          .word SEMIS
 ;
 ;                                       INDEX
 ;                                       SCREEN 77 LINE 7
 ;
 L3637     .TEXT $85,'INDE',$D8
-          .WORD L3605    ; link to LIST
-          .WORD DOCOL
-          .WORD CR
-          .WORD ONEP
-          .WORD SWAP
-          .WORD PDO
-L3647     .WORD CR
-          .WORD I
-          .WORD THREE
-          .WORD DOTR
-          .WORD SPACE
-          .WORD ZERO
-          .WORD I
-          .WORD DLINE
-          .WORD QTERM
-          .WORD ZBRAN
-L3657     .WORD 4        ; L3659-L3657
-          .WORD LEAVE
-L3659     .WORD PLOOP
-L3660     .WORD $FFE6    ; L3647-L3660
-          .WORD CLIT
+          .word L3605    ; link to LIST_W
+          .word DOCOL
+          .word CR
+          .word ONEP
+          .word SWAP
+          .word PDO
+L3647     .word CR
+          .word I
+          .word THREE
+          .word DOTR
+          .word SPACE
+          .word ZERO
+          .word I
+          .word DLINE
+          .word QTERM
+          .word ZBRAN
+L3657     .word 4        ; L3659-L3657
+          .word LEAVE
+L3659     .word PLOOP
+L3660     .word $FFE6    ; L3647-L3660
+          .word CLIT
           .TEXT $0C      ; form feed for printer
-          .WORD EMIT
-          .WORD SEMIS
+          .word EMIT
+          .word SEMIS
 ;
 ;                                       TRIAD
 ;                                       SCREEN 77 LINE 12
 ;
 L3666     .TEXT $85,'TRIA',$C4
-          .WORD L3637    ; link to INDEX
-          .WORD DOCOL
-          .WORD THREE
-          .WORD SLASH
-          .WORD THREE
-          .WORD STAR
-          .WORD THREE
-          .WORD OVER
-          .WORD PLUS
-          .WORD SWAP
-          .WORD PDO
-L3681     .WORD CR
-          .WORD I
-          .WORD LIST
-          .WORD PLOOP
-L3685     .WORD $FFF8    ; L3681-L3685
-          .WORD CR
-          .WORD CLIT
+          .word L3637    ; link to INDEX
+          .word DOCOL
+          .word THREE
+          .word SLASH
+          .word THREE
+          .word STAR
+          .word THREE
+          .word OVER
+          .word PLUS
+          .word SWAP
+          .word PDO
+L3681     .word CR
+          .word I
+          .word LIST_W
+          .word PLOOP
+L3685     .word $FFF8    ; L3681-L3685
+          .word CR
+          .word CLIT
           .TEXT $F
-          .WORD MESS
-          .WORD CR
-          .WORD CLIT
+          .word MESS
+          .word CR
+          .word CLIT
           .TEXT $0C      ;  form feed for printer
-          .WORD EMIT
-          .WORD SEMIS
+          .word EMIT
+          .word SEMIS
 ;
-;                                       VLIST
+;                                       VLIST_W
 ;                                       SCREEN 78 LINE 2
 ;
 ;
 L3696     .TEXT $85,'VLIS',$D4
-          .WORD L3666    ; link to TRIAD
-VLIST     .WORD DOCOL
-          .WORD CLIT
+          .word L3666    ; link to TRIAD
+VLIST_W     .word DOCOL
+          .word CLIT
           .TEXT $80
-          .WORD OUT
-          .WORD STORE
-          .WORD CON
-          .WORD AT
-          .WORD AT
-L3706     .WORD OUT
-          .WORD AT
-          .WORD CSLL
-          .WORD GREAT
-          .WORD ZBRAN
-L3711     .WORD $A       ; L3716-L3711
-          .WORD CR
-          .WORD ZERO
-          .WORD OUT
-          .WORD STORE
-L3716     .WORD DUP
-          .WORD IDDOT
-          .WORD SPACE
-          .WORD SPACE
-          .WORD PFA
-          .WORD LFA
-          .WORD AT
-          .WORD DUP
-          .WORD ZEQU
-          .WORD QTERM
-          .WORD OR
-          .WORD ZBRAN
-L3728     .WORD $FFD4    ; L3706-L3728
-          .WORD DROP
-          .WORD SEMIS
+          .word OUT
+          .word STORE
+          .word CON
+          .word AT
+          .word AT
+L3706     .word OUT
+          .word AT
+          .word CSLL
+          .word GREAT
+          .word ZBRAN
+L3711     .word $A       ; L3716-L3711
+          .word CR
+          .word ZERO
+          .word OUT
+          .word STORE
+L3716     .word DUP
+          .word IDDOT
+          .word SPACE
+          .word SPACE
+          .word PFA
+          .word LFA
+          .word AT
+          .word DUP
+          .word ZEQU
+          .word QTERM
+          .word OR
+          .word ZBRAN
+L3728     .word $FFD4    ; L3706-L3728
+          .word DROP
+          .word SEMIS
 ;
 ;                                       MON
 ;                                       SCREEN 79 LINE 3
 ;
 NTOP      .TEXT $83,'MO',$CE
-          .WORD L3696    ; link to VLIST
-MON       .WORD *+2
+          .word L3696    ; link to VLIST_W
+MON       .word *+2
           STX XSAVE
           BRK       ; break to monitor which is assumed
           LDX XSAVE ; to save this as reentry point
