@@ -45,6 +45,9 @@ static void KBDInsertQueue(uint8_t ascii);
 
 void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 
+	if (isDown && keyCode == KEY_ESC) {   										// Pressed ESC
+		cpuMemory[controlPort+3] |= 0x80;  										// Set that flag.
+	}
 	if (keyCode == 0xFF) { 														// Reset request
 		queueSize = 0; 															// Empty keyboard queue
 		for (int i = 0;i < sizeof(keyboardState);i++) keyboardState[i] = 0; 	// No keys down.
