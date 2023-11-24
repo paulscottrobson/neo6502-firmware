@@ -30,6 +30,10 @@ class IdentifierStore(object):
 			render.append(0)
 		return render
 	#
+	def get(self,name):
+		name = name.upper()
+		return self.identifiers[name] if name in self.identifiers else None
+	#
 	def add(self,name):
 		name = name.upper()
 		assert name not in self.identifiers
@@ -119,7 +123,37 @@ class Tokeniser(object):
 				self.code.append(digits[0]*16+digits[1])
 				digits = digits[2:]
 			return m.group(2)
-		assert False,s
+		#
+		#		Identifier or Token
+		#
+		if s[0].upper() >= "A" and s[0].upper() <= "Z":
+			m = re.match("^([A-Za-z0-9\\_\\.]+\\$?\\(?)\\s*(.*)$",s)
+			t = self.ts.getByName(m.group(1))
+			if t is not None:
+				id = t.getID()
+				if id >= 0x100:
+					self.code.append(self.getTokenID("!!sh"+str(id >> 8)))
+				self.code.append(id & 0xFF)
+			else:
+				if self.iStore.get(m.group(1)) is None:
+					self.iStore.add(m.group(1))
+				id = self.iStore.get(m.group(1))
+				self.code.append(id >> 8)
+				self.code.append(id & 0xFF)
+			return m.group(2)
+		#
+		#		Punctuation
+		#
+		if len(s) >= 2:
+			id = self.ts.getByName(s[:2])
+			if id is not None:
+				self.code.append(id)
+				return s[2:]
+		#
+		id = self.ts.getByName(s[0])
+		assert id is not None
+		self.code.append(id)
+		return s[1:]
 	#
 	def getTokenID(self,name):
 		return self.ts.getByName(name).getID()
@@ -140,6 +174,9 @@ if __name__ == "__main__":
 	tk.test("12 300 $2A $43")
 	tk.test(' "" "Hello" ')
 	tk.test(".1 .4082 .251")
-
-# 		tokens / identifiers
+	tk.test("gosub return rnd( left$( while")
+	tk.test("name$ a.number fre.d")
+#	tk.test("+")
+	iStore.dump()
+# 		identifiers
 # 		punctuation
