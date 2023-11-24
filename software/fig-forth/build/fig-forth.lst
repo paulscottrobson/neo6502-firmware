@@ -1,0 +1,2812 @@
+
+; 64tass Turbo Assembler Macro V1.59.3120 listing file
+; 64tass -b --mr65c02 -Wall -o build/fig-forth.bin -L build/fig-forth.lst fig-forth.asm
+; Fri Nov 24 09:04:12 2023
+
+;Offset	;Hex		;Monitor	;Source
+
+;******  Processing input file: fig-forth.asm
+
+=128					SSIZE     =128           ; sector size in bytes
+=8					NBUF      =8             ; number of buffers desired in RAM
+=800					SECTR     =800           ; sector per drive
+=1600					SECTL     =1600          ; sector limit for two drives
+=1056					BMAG      =1056          ; total buffer magnitude, in bytes
+=$20					BOS       =$20           ; bottom of data stack, in zero-page.
+=$9e					TOS       =$9E           ; top of data stack, in zero-page.
+=166					N         =TOS+8         ; scratch workspace.
+=174					IP        =N+8           ; interpretive pointer.
+=177					W         =IP+3          ; code field pointer.
+=179					UP        =W+2           ; user area pointer.
+=181					XSAVE     =UP+2          ; temporary for X register.
+=$0100					TIBX      =$0100         ; terminal input buffer of 84 bytes.
+=$0200					ORIG      =$0200         ; origin of FORTH's Dictionary.
+=$4000					MEM       =$4000         ; top of assigned memory+1 byte.
+=16256					UAREA     =MEM-128       ; 128 bytes of user area
+=15200					DAREA     =UAREA-BMAG    ; disk buffer space.
+=$d2c1					OUTCH     =$D2C1         ; output one ASCII char. to term.
+=$d1dc					INCH      =$D1DC         ; input one ASCII char. to term.
+=$d0f1					TCR       =$D0F1         ; terminal return and line feed.
+.0200	ea		nop		ENTER     NOP            ; Vector to COLD entry
+.0201	4c 45 12	jmp $1245	          JMP COLD+2     ;
+.0204	ea		nop		REENTR    NOP            ; User Warm entry point
+.0205	4c 55 12	jmp $1255	          JMP WARM       ; Vector to WARM entry
+>0208	04 00				          .WORD $0004    ; 6502 in radix-36
+>020a	d2 5e				          .WORD $5ED2    ;
+>020c	62 1a				          .WORD NTOP     ; Name address of MON
+>020e	7f 00				          .WORD $7F      ; Backspace Character
+>0210	80 3f				          .WORD UAREA    ; Initial User Area
+>0212	9e 00				          .WORD TOS      ; Initial Top of Stack
+>0214	ff 01				          .WORD $1FF     ; Initial Top of Return Stack
+>0216	00 01				          .WORD TIBX     ; Initial terminal input buffer
+>0218	1f 00				          .WORD 31       ; Initial name field width
+>021a	00 00				          .WORD 0        ; 0=nod disk, 1=disk
+>021c	72 1a				          .WORD TOP      ; Initial fence address
+>021e	72 1a				          .WORD TOP      ; Initial top of dictionary
+>0220	bc 11				          .WORD VL0      ; Initial Vocabulary link ptr.
+>0222	83 4c 49 d4			L22       .TEXT $83,'LI',$D4            ; <--- name field
+>0226	00 00				          .WORD 00       ; last link marked by zero
+>0228	2a 02				LIT       .WORD *+2      ; <----- code address field
+.022a	b1 ae		lda ($ae),y	          LDA (IP),Y     ; <----- start of parameter field
+.022c	48		pha		          PHA
+.022d	e6 ae		inc $ae		          INC IP
+.022f	d0 02		bne $0233	          BNE L30
+.0231	e6 af		inc $af		          INC IP+1
+.0233	b1 ae		lda ($ae),y	L30       LDA (IP),Y
+.0235	e6 ae		inc $ae		L31       INC IP
+.0237	d0 02		bne $023b	          BNE PUSH
+.0239	e6 af		inc $af		          INC IP+1
+.023b	ca		dex		PUSH      DEX
+.023c	ca		dex		          DEX
+.023d	95 01		sta $01,x	PUT       STA 1,X
+.023f	68		pla		          PLA
+.0240	95 00		sta $00,x	          STA 0,X
+.0242	a0 01		ldy #$01	NEXT      LDY #1
+.0244	b1 ae		lda ($ae),y	          LDA (IP),Y     ; Fetch code field address pointed
+.0246	85 b2		sta $b2		          STA W+1        ; to by IP.
+.0248	88		dey		          DEY
+.0249	b1 ae		lda ($ae),y	          LDA (IP),Y
+.024b	85 b1		sta $b1		          STA W
+.024d	20 6d 02	jsr $026d	          JSR TRACE      ; Remove this when all is well
+.0250	18		clc		          CLC            ; Increment IP by two.
+.0251	a5 ae		lda $ae		          LDA IP
+.0253	69 02		adc #$02	          ADC #2
+.0255	85 ae		sta $ae		          STA IP
+.0257	90 02		bcc $025b	          BCC L54
+.0259	e6 af		inc $af		          INC IP+1
+.025b	4c b0 00	jmp $00b0	L54       JMP W-1        ; Jump to an indirect jump (W) which
+>025e	84 43 4c 49 d4			L35       .TEXT $84,'CLI',$D4
+>0263	22 02				          .WORD L22      ; Link to LIT
+>0265	67 02				CLIT      .WORD *+2
+.0267	b1 ae		lda ($ae),y	          LDA (IP),Y
+.0269	48		pha		          PHA
+.026a	98		tya		          TYA
+.026b	f0 c8		beq $0235	          BEQ L31        ; a forced branch into LIT
+=$d0af					XBLANK    =$D0AF         ; print one blank
+=$d0d2					CRLF      =$D0D2         ; print a carriage return and line feed.
+=$d2ce					HEX2      =$D2CE         ; print accum as two hex numbers
+=$d2c1					LETTER    =$D2C1         ; print accum as one ASCII character
+=$d1dc					ONEKEY    =$D1DC         ; wait for keystroke
+=$12					XW        =$12           ; scratch reg. to next code field add
+=$14					NP        =$14           ; scratch reg. pointing to name field
+.026d	86 b5		stx $b5		TRACE     STX XSAVE
+.026f	20 d2 d0	jsr $d0d2	          JSR CRLF
+.0272	a5 af		lda $af		          LDA IP+1
+.0274	20 ce d2	jsr $d2ce	          JSR HEX2
+.0277	a5 ae		lda $ae		          LDA IP
+.0279	20 ce d2	jsr $d2ce	          JSR HEX2       ; print IP, the interpreter pointer
+.027c	20 af d0	jsr $d0af	          JSR XBLANK
+.027f	a9 00		lda #$00	          LDA #0
+.0281	b1 ae		lda ($ae),y	          LDA (IP),Y
+.0283	85 12		sta $12		          STA XW
+.0285	85 14		sta $14		          STA NP         ; fetch the next code field pointer
+.0287	c8		iny		          INY
+.0288	b1 ae		lda ($ae),y	          LDA (IP),Y
+.028a	85 13		sta $13		          STA XW+1
+.028c	85 15		sta $15		          STA NP+1
+.028e	20 d7 02	jsr $02d7	          JSR PRNAM      ; print dictionary name
+.0291	a5 13		lda $13		          LDA XW+1
+.0293	20 ce d2	jsr $d2ce	          JSR HEX2       ; print code field address
+.0296	a5 12		lda $12		          LDA XW
+.0298	20 ce d2	jsr $d2ce	          JSR HEX2
+.029b	20 af d0	jsr $d0af	          JSR XBLANK
+.029e	a5 b5		lda $b5		          LDA XSAVE      ; print stack location in zero-page
+.02a0	20 ce d2	jsr $d2ce	          JSR HEX2
+.02a3	20 af d0	jsr $d0af	          JSR XBLANK
+.02a6	a9 01		lda #$01	          LDA #1         ; print return stack bottom in page 1
+.02a8	20 ce d2	jsr $d2ce	          JSR HEX2
+.02ab	ba		tsx		          TSX
+.02ac	e8		inx		          INX
+.02ad	8a		txa		          TXA
+.02ae	20 ce d2	jsr $d2ce	          JSR HEX2
+.02b1	20 af d0	jsr $d0af	          JSR XBLANK
+.02b4	20 dc d1	jsr $d1dc	          JSR ONEKEY     ; wait for operator keystroke
+.02b7	a6 b5		ldx $b5		          LDX XSAVE      ; just to pinpoint early problems
+.02b9	a0 00		ldy #$00	          LDY #0
+.02bb	60		rts		          RTS
+.02bc	86 b5		stx $b5		TCOLON    STX XSAVE
+.02be	a5 b1		lda $b1		          LDA W
+.02c0	85 14		sta $14		          STA NP         ; locate the name of the called word
+.02c2	a5 b2		lda $b2		          LDA W+1
+.02c4	85 15		sta $15		          STA NP+1
+.02c6	20 d2 d0	jsr $d0d2	          JSR CRLF
+.02c9	a9 3a		lda #$3a	          LDA #$3A       ; ':
+.02cb	20 c1 d2	jsr $d2c1	          JSR LETTER
+.02ce	20 af d0	jsr $d0af	          JSR XBLANK
+.02d1	20 d7 02	jsr $02d7	          JSR PRNAM
+.02d4	a6 b5		ldx $b5		          LDX XSAVE
+.02d6	60		rts		          RTS
+.02d7	20 f9 02	jsr $02f9	PRNAM     JSR DECNP
+.02da	20 f9 02	jsr $02f9	          JSR DECNP
+.02dd	20 f9 02	jsr $02f9	          JSR DECNP
+.02e0	a0 00		ldy #$00	          LDY #0
+.02e2	20 f9 02	jsr $02f9	PN1       JSR DECNP
+.02e5	b1 14		lda ($14),y	          LDA (NP),Y     ; loop till D7 in name set
+.02e7	10 f9		bpl $02e2	          BPL PN1
+.02e9	c8		iny		PN2       INY
+.02ea	b1 14		lda ($14),y	          LDA (NP),Y
+.02ec	20 c1 d2	jsr $d2c1	          JSR LETTER     ; print letters of name field
+.02ef	b1 14		lda ($14),y	          LDA (NP),Y
+.02f1	10 f6		bpl $02e9	          BPL PN2
+.02f3	20 af d0	jsr $d0af	          JSR XBLANK
+.02f6	a0 00		ldy #$00	          LDY #0
+.02f8	60		rts		          RTS
+.02f9	a5 14		lda $14		DECNP     LDA NP
+.02fb	d0 02		bne $02ff	          BNE DECNP1
+.02fd	c6 15		dec $15		          DEC NP+1
+.02ff	c6 14		dec $14		DECNP1    DEC NP
+.0301	60		rts		          RTS
+.0302	0a		asl a		SETUP     ASL A
+.0303	85 a5		sta $a5		          STA N-1
+.0305	b5 00		lda $00,x	L63       LDA 0,X
+.0307	99 a6 00	sta $00a6,y	          STA N,Y
+.030a	e8		inx		          INX
+.030b	c8		iny		          INY
+.030c	c4 a5		cpy $a5		          CPY N-1
+.030e	d0 f5		bne $0305	          BNE L63
+.0310	a0 00		ldy #$00	          LDY #0
+.0312	60		rts		          RTS
+>0313	87 45 58 45 43 55 54 c5		L75       .TEXT $87,'EXECUT',$C5
+>031b	5e 02				          .WORD L35      ; link to CLIT
+>031d	1f 03				EXEC      .WORD *+2
+.031f	b5 00		lda $00,x	          LDA 0,X
+.0321	85 b1		sta $b1		          STA W
+.0323	b5 01		lda $01,x	          LDA 1,X
+.0325	85 b2		sta $b2		          STA W+1
+.0327	e8		inx		          INX
+.0328	e8		inx		          INX
+.0329	4c b0 00	jmp $00b0	          JMP W-1        ; to JMP (W) in z-page
+>032c	86 42 52 41 4e 43 c8		L89       .TEXT $86,'BRANC',$C8
+>0333	13 03				          .WORD L75      ; link to EXCECUTE
+>0335	37 03				BRAN      .WORD *+2
+.0337	18		clc		          CLC
+.0338	b1 ae		lda ($ae),y	          LDA (IP),Y
+.033a	65 ae		adc $ae		          ADC IP
+.033c	48		pha		          PHA
+.033d	c8		iny		          INY
+.033e	b1 ae		lda ($ae),y	          LDA (IP),Y
+.0340	65 af		adc $af		          ADC IP+1
+.0342	85 af		sta $af		          STA IP+1
+.0344	68		pla		          PLA
+.0345	85 ae		sta $ae		          STA IP
+.0347	4c 44 02	jmp $0244	          JMP NEXT +2
+>034a	87 30 42 52 41 4e 43 c8		L107      .TEXT $87,'0BRANC',$C8
+>0352	2c 03				          .WORD L89      ; link to BRANCH
+>0354	56 03				ZBRAN     .WORD *+2
+.0356	e8		inx		          INX
+.0357	e8		inx		          INX
+.0358	b5 fe		lda $fe,x	          LDA $FE,X
+.035a	15 ff		ora $ff,x	          ORA $FF,X
+.035c	f0 d9		beq $0337	          BEQ BRAN+2
+.035e	18		clc		BUMP      CLC
+.035f	a5 ae		lda $ae		          LDA IP
+.0361	69 02		adc #$02	          ADC #2
+.0363	85 ae		sta $ae		          STA IP
+.0365	90 02		bcc $0369	          BCC L122
+.0367	e6 af		inc $af		          INC IP+1
+.0369	4c 42 02	jmp $0242	L122      JMP NEXT
+>036c	86 28 4c 4f 4f 50 a9		L127      .TEXT $86,'(LOOP',$A9
+>0373	4a 03				          .WORD L107     ; link to 0BRANCH
+>0375	77 03				PLOOP     .WORD L130
+.0377	86 b5		stx $b5		L130      STX  XSAVE
+.0379	ba		tsx		          TSX
+.037a	fe 01 01	inc $0101,x	          INC $101,X
+.037d	d0 03		bne $0382	          BNE PL1
+.037f	fe 02 01	inc $0102,x	          INC $102,X
+.0382	18		clc		PL1       CLC
+.0383	bd 03 01	lda $0103,x	          LDA $103,X
+.0386	fd 01 01	sbc $0101,x	          SBC $101,X
+.0389	bd 04 01	lda $0104,x	          LDA $104,X
+.038c	fd 02 01	sbc $0102,x	          SBC $102,X
+.038f	a6 b5		ldx $b5		PL2       LDX XSAVE
+.0391	0a		asl a		          ASL A
+.0392	90 a3		bcc $0337	          BCC BRAN+2
+.0394	68		pla		          PLA
+.0395	68		pla		          PLA
+.0396	68		pla		          PLA
+.0397	68		pla		          PLA
+.0398	4c 5e 03	jmp $035e	          JMP BUMP
+>039b	87 28 2b 4c 4f 4f 50 a9		L154      .TEXT $87,'(+LOOP',$A9
+>03a3	6c 03				          .WORD L127     ; link to (loop)
+>03a5	a7 03				PPLOO     .WORD *+2
+.03a7	e8		inx		          INX
+.03a8	e8		inx		          INX
+.03a9	86 b5		stx $b5		          STX XSAVE
+.03ab	b5 ff		lda $ff,x	          LDA $FF,X
+.03ad	48		pha		          PHA
+.03ae	48		pha		          PHA
+.03af	b5 fe		lda $fe,x	          LDA $FE,X
+.03b1	ba		tsx		          TSX
+.03b2	e8		inx		          INX
+.03b3	e8		inx		          INX
+.03b4	18		clc		          CLC
+.03b5	7d 01 01	adc $0101,x	          ADC $101,X
+.03b8	9d 01 01	sta $0101,x	          STA $101,X
+.03bb	68		pla		          PLA
+.03bc	7d 02 01	adc $0102,x	          ADC $102,X
+.03bf	9d 02 01	sta $0102,x	          STA $102,X
+.03c2	68		pla		          PLA
+.03c3	10 bd		bpl $0382	          BPL PL1
+.03c5	18		clc		          CLC
+.03c6	bd 01 01	lda $0101,x	          LDA $101,X
+.03c9	fd 03 01	sbc $0103,x	          SBC $103,X
+.03cc	bd 02 01	lda $0102,x	          LDA $102,X
+.03cf	fd 04 01	sbc $0104,x	          SBC $104,X
+.03d2	4c 8f 03	jmp $038f	          JMP PL2
+>03d5	84 28 44 4f a9			L185      .TEXT $84,'(DO',$A9
+>03da	9b 03				          .WORD L154     ; link to (+LOOP)
+>03dc	de 03				PDO       .WORD *+2
+.03de	b5 03		lda $03,x	          LDA 3,X
+.03e0	48		pha		          PHA
+.03e1	b5 02		lda $02,x	          LDA 2,X
+.03e3	48		pha		          PHA
+.03e4	b5 01		lda $01,x	          LDA 1,X
+.03e6	48		pha		          PHA
+.03e7	b5 00		lda $00,x	          LDA 0,X
+.03e9	48		pha		          PHA
+.03ea	e8		inx		POPTWO    INX
+.03eb	e8		inx		          INX
+.03ec	e8		inx		POP       INX
+.03ed	e8		inx		          INX
+.03ee	4c 42 02	jmp $0242	          JMP NEXT
+>03f1	81 c9				L207      .TEXT $81,$C9
+>03f3	d5 03				          .WORD L185     ; link to (DO)
+>03f5	5d 06				I         .WORD R+2      ; share the code for R
+>03f7	85 44 49 47 49 d4		L214      .TEXT $85,'DIGI',$D4
+>03fd	f1 03				          .WORD L207     ; link to I
+>03ff	01 04				DIGIT     .WORD *+2
+.0401	38		sec		          SEC
+.0402	b5 02		lda $02,x	          LDA 2,X
+.0404	e9 30		sbc #$30	          SBC #$30
+.0406	30 18		bmi $0420	          BMI L234
+.0408	c9 0a		cmp #$0a	          CMP #$A
+.040a	30 07		bmi $0413	          BMI L227
+.040c	38		sec		          SEC
+.040d	e9 07		sbc #$07	          SBC #7
+.040f	c9 0a		cmp #$0a	          CMP #$A
+.0411	30 0d		bmi $0420	          BMI L234
+.0413	d5 00		cmp $00,x	L227      CMP 0,X
+.0415	10 09		bpl $0420	          BPL L234
+.0417	95 02		sta $02,x	          STA 2,X
+.0419	a9 01		lda #$01	          LDA #1
+.041b	48		pha		          PHA
+.041c	98		tya		          TYA
+.041d	4c 3d 02	jmp $023d	          JMP PUT        ; exit true with converted value
+.0420	98		tya		L234      TYA
+.0421	48		pha		          PHA
+.0422	e8		inx		          INX
+.0423	e8		inx		          INX
+.0424	4c 3d 02	jmp $023d	          JMP PUT        ; exit false with bad conversion
+>0427	86 28 46 49 4e 44 a9		L243      .TEXT $86,'(FIND',$A9
+>042e	f7 03				          .WORD L214   ; Link to DIGIT
+>0430	32 04				PFIND     .WORD *+2
+.0432	a9 02		lda #$02	          LDA #2
+.0434	20 02 03	jsr $0302	          JSR SETUP
+.0437	86 b5		stx $b5		          STX XSAVE
+.0439	a0 00		ldy #$00	L249      LDY #0
+.043b	b1 a6		lda ($a6),y	          LDA (N),Y
+.043d	51 a8		eor ($a8),y	          EOR (N+2),Y
+.043f	29 3f		and #$3f	          AND #$3F
+.0441	d0 2d		bne $0470	          BNE L281
+.0443	c8		iny		L254      INY
+.0444	b1 a6		lda ($a6),y	          LDA (N),Y
+.0446	51 a8		eor ($a8),y	          EOR (N+2),Y
+.0448	0a		asl a		          ASL A
+.0449	d0 23		bne $046e	          BNE L280
+.044b	90 f6		bcc $0443	          BCC L254
+.044d	a6 b5		ldx $b5		          LDX XSAVE
+.044f	ca		dex		          DEX
+.0450	ca		dex		          DEX
+.0451	ca		dex		          DEX
+.0452	ca		dex		          DEX
+.0453	18		clc		          CLC
+.0454	98		tya		          TYA
+.0455	69 05		adc #$05	          ADC #5
+.0457	65 a6		adc $a6		          ADC N
+.0459	95 02		sta $02,x	          STA 2,X
+.045b	a0 00		ldy #$00	          LDY #0
+.045d	98		tya		          TYA
+.045e	65 a7		adc $a7		          ADC N+1
+.0460	95 03		sta $03,x	          STA 3,X
+.0462	94 01		sty $01,x	          STY 1,X
+.0464	b1 a6		lda ($a6),y	          LDA (N),Y
+.0466	95 00		sta $00,x	          STA 0,X
+.0468	a9 01		lda #$01	          LDA #1
+.046a	48		pha		          PHA
+.046b	4c 3b 02	jmp $023b	          JMP PUSH
+.046e	b0 05		bcs $0475	L280      BCS L284
+.0470	c8		iny		L281      INY
+.0471	b1 a6		lda ($a6),y	          LDA (N),Y
+.0473	10 fb		bpl $0470	          BPL L281
+.0475	c8		iny		L284      INY
+.0476	b1 a6		lda ($a6),y	          LDA (N),Y
+.0478	aa		tax		          TAX
+.0479	c8		iny		          INY
+.047a	b1 a6		lda ($a6),y	          LDA (N),Y
+.047c	85 a7		sta $a7		          STA N+1
+.047e	86 a6		stx $a6		          STX N
+.0480	05 a6		ora $a6		          ORA N
+.0482	d0 b5		bne $0439	          BNE L249
+.0484	a6 b5		ldx $b5		          LDX XSAVE
+.0486	a9 00		lda #$00	          LDA #0
+.0488	48		pha		          PHA
+.0489	4c 3b 02	jmp $023b	          JMP PUSH       ; exit false upon reading null link
+>048c	87 45 4e 43 4c 4f 53 c5		L301      .TEXT $87,'ENCLOS',$C5
+>0494	27 04				          .WORD L243     ; link to (FIND)
+>0496	98 04				ENCL      .WORD *+2
+.0498	a9 02		lda #$02	          LDA #2
+.049a	20 02 03	jsr $0302	          JSR SETUP
+.049d	8a		txa		          TXA
+.049e	38		sec		          SEC
+.049f	e9 08		sbc #$08	          SBC #8
+.04a1	aa		tax		          TAX
+.04a2	94 03		sty $03,x	          STY 3,X
+.04a4	94 01		sty $01,x	          STY 1,X
+.04a6	88		dey		          DEY
+.04a7	c8		iny		L313      INY
+.04a8	b1 a8		lda ($a8),y	          LDA (N+2),Y
+.04aa	c5 a6		cmp $a6		          CMP N
+.04ac	f0 f9		beq $04a7	          BEQ L313
+.04ae	94 04		sty $04,x	          STY 4,X
+.04b0	b1 a8		lda ($a8),y	L318      LDA (N+2),Y
+.04b2	d0 0e		bne $04c2	          BNE L327
+.04b4	94 02		sty $02,x	          STY 2,X
+.04b6	94 00		sty $00,x	          STY 0,X
+.04b8	98		tya		          TYA
+.04b9	d5 04		cmp $04,x	          CMP 4,X
+.04bb	d0 02		bne $04bf	          BNE L326
+.04bd	f6 02		inc $02,x	          INC 2,X
+.04bf	4c 42 02	jmp $0242	L326      JMP NEXT
+.04c2	94 02		sty $02,x	L327      STY 2,X
+.04c4	c8		iny		          INY
+.04c5	c5 a6		cmp $a6		          CMP N
+.04c7	d0 e7		bne $04b0	          BNE L318
+.04c9	94 00		sty $00,x	          STY 0,X
+.04cb	4c 42 02	jmp $0242	          JMP NEXT
+>04ce	84 45 4d 49 d4			L337      .TEXT $84,'EMI',$D4
+>04d3	8c 04				          .WORD L301     ; link to ENCLOSE
+>04d5	ef 15				EMIT      .WORD XEMIT    ; Vector to code for KEY
+>04d7	83 4b 45 d9			L344      .TEXT $83,'KE',$D9
+>04db	ce 04				          .WORD L337     ; link to EMIT
+>04dd	0a 16				KEY       .WORD XKEY     ; Vector to code for KEY
+>04df	89 3f 54 45 52 4d 49 4e		L351      .TEXT $89,'?TERMINA',$CC
+>04e7	41 cc
+>04e9	d7 04				          .WORD L344     ; link to KEY
+>04eb	14 16				QTERM     .WORD XQTER    ; Vector to code for ?TERMINAL
+>04ed	82 43 d2			L358      .TEXT $82,'C',$D2
+>04f0	df 04				          .WORD L351     ; link to ?TERMINAL
+>04f2	1f 16				CR        .WORD XCR      ; Vector to code for CR
+>04f4	85 43 4d 4f 56 c5		L365      .TEXT $85,'CMOV',$C5
+>04fa	ed 04				          .WORD L358     ; link to CR
+>04fc	fe 04				CMOVE     .WORD *+2
+.04fe	a9 03		lda #$03	          LDA #3
+.0500	20 02 03	jsr $0302	          JSR SETUP
+.0503	c4 a6		cpy $a6		L370      CPY N
+.0505	d0 07		bne $050e	          BNE L375
+.0507	c6 a7		dec $a7		          DEC N+1
+.0509	10 03		bpl $050e	          BPL L375
+.050b	4c 42 02	jmp $0242	          JMP NEXT
+.050e	b1 aa		lda ($aa),y	L375      LDA (N+4),Y
+.0510	91 a8		sta ($a8),y	          STA (N+2),Y
+.0512	c8		iny		          INY
+.0513	d0 ee		bne $0503	          BNE L370
+.0515	e6 ab		inc $ab		          INC N+5
+.0517	e6 a9		inc $a9		          INC N+3
+.0519	4c 03 05	jmp $0503	          JMP L370
+>051c	82 55 aa			L386      .TEXT $82,'U',$AA
+>051f	f4 04				          .WORD L365     ; link to CMOVE
+>0521	23 05				USTAR     .WORD *+2
+.0523	b5 02		lda $02,x	          LDA 2,X
+.0525	85 a6		sta $a6		          STA N
+.0527	94 02		sty $02,x	          STY 2,X
+.0529	b5 03		lda $03,x	          LDA 3,X
+.052b	85 a7		sta $a7		          STA N+1
+.052d	94 03		sty $03,x	          STY 3,X
+.052f	a0 10		ldy #$10	          LDY #16        ; for 16 bits
+.0531	16 02		asl $02,x	L396      ASL 2,X
+.0533	36 03		rol $03,x	          ROL 3,X
+.0535	36 00		rol $00,x	          ROL 0,X
+.0537	36 01		rol $01,x	          ROL 1,X
+.0539	90 13		bcc $054e	          BCC L411
+.053b	18		clc		          CLC
+.053c	a5 a6		lda $a6		          LDA N
+.053e	75 02		adc $02,x	          ADC 2,X
+.0540	95 02		sta $02,x	          STA 2,X
+.0542	a5 a7		lda $a7		          LDA N+1
+.0544	75 03		adc $03,x	          ADC 3,X
+.0546	95 03		sta $03,x	          STA 3,X
+.0548	a9 00		lda #$00	          LDA #0
+.054a	75 00		adc $00,x	          ADC 0,X
+.054c	95 00		sta $00,x	          STA 0,X
+.054e	88		dey		L411      DEY
+.054f	d0 e0		bne $0531	          BNE L396
+.0551	4c 42 02	jmp $0242	          JMP NEXT
+>0554	82 55 af			L418      .TEXT $82,'U',$AF
+>0557	1c 05				          .WORD L386     ; link to U*
+>0559	5b 05				USLAS     .WORD *+2
+.055b	b5 04		lda $04,x	          LDA 4,X
+.055d	b4 02		ldy $02,x	          LDY 2,X
+.055f	94 04		sty $04,x	          STY 4,X
+.0561	0a		asl a		          ASL A
+.0562	95 02		sta $02,x	          STA 2,X
+.0564	b5 05		lda $05,x	          LDA 5,X
+.0566	b4 03		ldy $03,x	          LDY 3,X
+.0568	94 05		sty $05,x	          STY 5,X
+.056a	2a		rol a		          ROL A
+.056b	95 03		sta $03,x	          STA 3,X
+.056d	a9 10		lda #$10	          LDA #16
+.056f	85 a6		sta $a6		          STA N
+.0571	36 04		rol $04,x	L433      ROL 4,X
+.0573	36 05		rol $05,x	          ROL 5,X
+.0575	38		sec		          SEC
+.0576	b5 04		lda $04,x	          LDA 4,X
+.0578	f5 00		sbc $00,x	          SBC 0,X
+.057a	a8		tay		          TAY
+.057b	b5 05		lda $05,x	          LDA 5,X
+.057d	f5 01		sbc $01,x	          SBC 1,X
+.057f	90 04		bcc $0585	          BCC L444
+.0581	94 04		sty $04,x	          STY 4,X
+.0583	95 05		sta $05,x	          STA 5,X
+.0585	36 02		rol $02,x	L444      ROL 2,X
+.0587	36 03		rol $03,x	          ROL 3,X
+.0589	c6 a6		dec $a6		          DEC N
+.058b	d0 e4		bne $0571	          BNE L433
+.058d	4c ec 03	jmp $03ec	          JMP POP
+>0590	83 41 4e c4			L453      .TEXT $83,'AN',$C4
+>0594	54 05				          .WORD L418     ; link to U/
+>0596	98 05				ANDD      .WORD *+2
+.0598	b5 00		lda $00,x	          LDA 0,X
+.059a	35 02		and $02,x	          AND 2,X
+.059c	48		pha		          PHA
+.059d	b5 01		lda $01,x	          LDA 1,X
+.059f	35 03		and $03,x	          AND 3,X
+.05a1	e8		inx		BINARY    INX
+.05a2	e8		inx		          INX
+.05a3	4c 3d 02	jmp $023d	          JMP PUT
+>05a6	82 4f d2			L469      .TEXT $82,'O',$D2
+>05a9	90 05				          .WORD L453     ; link to AND
+>05ab	ad 05				OR        .WORD *+2
+.05ad	b5 00		lda $00,x	          LDA 0,X
+.05af	15 02		ora $02,x	          ORA 2,X
+.05b1	48		pha		          PHA
+.05b2	b5 01		lda $01,x	          LDA 1,X
+.05b4	15 03		ora $03,x	          ORA 3,X
+.05b6	e8		inx		          INX
+.05b7	e8		inx		          INX
+.05b8	4c 3d 02	jmp $023d	          JMP PUT
+>05bb	83 58 4f d2			L484      .TEXT $83,'XO',$D2
+>05bf	a6 05				          .WORD L469     ; link to OR
+>05c1	c3 05				XOR       .WORD *+2
+.05c3	b5 00		lda $00,x	          LDA 0,X
+.05c5	55 02		eor $02,x	          EOR 2,X
+.05c7	48		pha		          PHA
+.05c8	b5 01		lda $01,x	          LDA 1,X
+.05ca	55 03		eor $03,x	          EOR 3,X
+.05cc	e8		inx		          INX
+.05cd	e8		inx		          INX
+.05ce	4c 3d 02	jmp $023d	          JMP PUT
+>05d1	83 53 50 c0			L499      .TEXT $83,'SP',$C0
+>05d5	bb 05				          .WORD L484     ; link  to XOR
+>05d7	d9 05				SPAT      .WORD *+2
+.05d9	8a		txa		          TXA
+.05da	48		pha		PUSHOA    PHA
+.05db	a9 00		lda #$00	          LDA #0
+.05dd	4c 3b 02	jmp $023b	          JMP PUSH
+>05e0	83 53 50 a1			L511      .TEXT $83,'SP',$A1
+>05e4	d1 05				          .WORD L499     ; link to SP@
+>05e6	e8 05				SPSTO     .WORD *+2
+.05e8	a0 06		ldy #$06	          LDY #6
+.05ea	b1 b3		lda ($b3),y	          LDA (UP),Y     ; load data stack pointer (X reg) from
+.05ec	aa		tax		          TAX            ; silent user variable S0.
+.05ed	4c 42 02	jmp $0242	          JMP NEXT
+>05f0	83 52 50 a1			L522      .TEXT $83,'RP',$A1
+>05f4	e0 05				          .WORD L511     ; link to SP!
+>05f6	f8 05				RPSTO     .WORD *+2
+.05f8	86 b5		stx $b5		          STX XSAVE      ; load return stack pointer (machine
+.05fa	a0 08		ldy #$08	          LDY #8         ; stack pointer) from silent user
+.05fc	b1 b3		lda ($b3),y	          LDA (UP),Y     ; VARIABLE R0
+.05fe	aa		tax		          TAX
+.05ff	9a		txs		          TXS
+.0600	a6 b5		ldx $b5		          LDX XSAVE
+.0602	4c 42 02	jmp $0242	          JMP NEXT
+>0605	82 3b d3			L536      .TEXT $82,';',$D3
+>0608	f0 05				          .WORD L522     ; link to RP!
+>060a	0c 06				SEMIS     .WORD *+2
+.060c	68		pla		          PLA
+.060d	85 ae		sta $ae		          STA IP
+.060f	68		pla		          PLA
+.0610	85 af		sta $af		          STA IP+1
+.0612	4c 42 02	jmp $0242	          JMP NEXT
+>0615	85 4c 45 41 56 c5		L548      .TEXT $85,'LEAV',$C5
+>061b	05 06				          .WORD L536     ; link to ;S
+>061d	1f 06				LEAVE     .WORD *+2
+.061f	86 b5		stx $b5		          STX XSAVE
+.0621	ba		tsx		          TSX
+.0622	bd 01 01	lda $0101,x	          LDA $101,X
+.0625	9d 03 01	sta $0103,x	          STA $103,X
+.0628	bd 02 01	lda $0102,x	          LDA $102,X
+.062b	9d 04 01	sta $0104,x	          STA $104,X
+.062e	a6 b5		ldx $b5		          LDX XSAVE
+.0630	4c 42 02	jmp $0242	          JMP NEXT
+>0633	82 3e d2			L563      .TEXT $82,'>',$D2
+>0636	15 06				          .WORD L548     ; link to LEAVE
+>0638	3a 06				TOR       .WORD *+2
+.063a	b5 01		lda $01,x	          LDA 1,X        ; move high byte
+.063c	48		pha		          PHA
+.063d	b5 00		lda $00,x	          LDA 0,X        ; then low byte
+.063f	48		pha		          PHA            ; to return stack
+.0640	e8		inx		          INX
+.0641	e8		inx		          INX            ; popping off data stack
+.0642	4c 42 02	jmp $0242	          JMP NEXT
+>0645	82 52 be			L577      .TEXT $82,'R',$BE
+>0648	33 06				          .WORD L563     ; link to >R
+>064a	4c 06				RFROM     .WORD *+2
+.064c	ca		dex		          DEX            ; make room on data stack
+.064d	ca		dex		          DEX
+.064e	68		pla		          PLA            ; high byte
+.064f	95 00		sta $00,x	          STA 0,X
+.0651	68		pla		          PLA            ; then low byte
+.0652	95 01		sta $01,x	          STA 1,X        ; restored to data stack
+.0654	4c 42 02	jmp $0242	          JMP NEXT
+>0657	81 d2				L591      .TEXT $81,$D2
+>0659	45 06				          .WORD L577     ; link to R>
+>065b	5d 06				R         .WORD *+2
+.065d	86 b5		stx $b5		          STX XSAVE
+.065f	ba		tsx		          TSX            ; address return stack
+.0660	bd 01 01	lda $0101,x	          LDA $101,X     ; copy bottom value
+.0663	48		pha		          PHA            ; to data stack
+.0664	bd 02 01	lda $0102,x	          LDA $102,X
+.0667	a6 b5		ldx $b5		          LDX XSAVE
+.0669	4c 3b 02	jmp $023b	          JMP PUSH
+>066c	82 30 bd			L605      .TEXT $82,'0',$BD
+>066f	57 06				          .WORD L591     ; link to R
+>0671	73 06				ZEQU      .WORD *+2
+.0673	b5 01		lda $01,x	          LDA 1,X        ; Corrected from FD3/2 p69
+.0675	94 01		sty $01,x	          STY 1,X
+.0677	15 00		ora $00,x	          ORA 0,X
+.0679	d0 01		bne $067c	          BNE L613
+.067b	c8		iny		          INY
+.067c	94 00		sty $00,x	L613      STY 0,X
+.067e	4c 42 02	jmp $0242	          JMP NEXT
+>0681	82 30 bc			L619      .TEXT $82,'0',$BC
+>0684	6c 06				          .WORD L605     ; link to 0=
+>0686	88 06				ZLESS     .WORD *+2
+.0688	16 01		asl $01,x	          ASL 1,X
+.068a	98		tya		          TYA
+.068b	2a		rol a		          ROL A
+.068c	94 01		sty $01,x	          STY 1,X
+.068e	95 00		sta $00,x	          STA 0,X
+.0690	4c 42 02	jmp $0242	          JMP NEXT
+>0693	81 ab				L632      .TEXT $81,$AB
+>0695	81 06				          .WORD L619     ; link to V-ADJ
+>0697	99 06				PLUS      .WORD *+2
+.0699	18		clc		          CLC
+.069a	b5 00		lda $00,x	          LDA 0,X
+.069c	75 02		adc $02,x	          ADC 2,X
+.069e	95 02		sta $02,x	          STA 2,X
+.06a0	b5 01		lda $01,x	          LDA 1,X
+.06a2	75 03		adc $03,x	          ADC 3,X
+.06a4	95 03		sta $03,x	          STA 3,X
+.06a6	e8		inx		          INX
+.06a7	e8		inx		          INX
+.06a8	4c 42 02	jmp $0242	          JMP NEXT
+>06ab	82 44 ab			L649      .TEXT $82,'D',$AB
+>06ae	93 06				          .WORD L632     ;    LINK TO +
+>06b0	b2 06				DPLUS     .WORD *+2
+.06b2	18		clc		          CLC
+.06b3	b5 02		lda $02,x	          LDA 2,X
+.06b5	75 06		adc $06,x	          ADC 6,X
+.06b7	95 06		sta $06,x	          STA 6,X
+.06b9	b5 03		lda $03,x	          LDA 3,X
+.06bb	75 07		adc $07,x	          ADC 7,X
+.06bd	95 07		sta $07,x	          STA 7,X
+.06bf	b5 00		lda $00,x	          LDA 0,X
+.06c1	75 04		adc $04,x	          ADC 4,X
+.06c3	95 04		sta $04,x	          STA 4,X
+.06c5	b5 01		lda $01,x	          LDA 1,X
+.06c7	75 05		adc $05,x	          ADC 5,X
+.06c9	95 05		sta $05,x	          STA 5,X
+.06cb	4c ea 03	jmp $03ea	          JMP POPTWO
+>06ce	85 4d 49 4e 55 d3		L670      .TEXT $85,'MINU',$D3
+>06d4	ab 06				          .WORD L649     ; link to D+
+>06d6	d8 06				MINUS     .WORD *+2
+.06d8	38		sec		          SEC
+.06d9	98		tya		          TYA
+.06da	f5 00		sbc $00,x	          SBC 0,X
+.06dc	95 00		sta $00,x	          STA 0,X
+.06de	98		tya		          TYA
+.06df	f5 01		sbc $01,x	          SBC 1,X
+.06e1	95 01		sta $01,x	          STA 1,X
+.06e3	4c 42 02	jmp $0242	          JMP NEXT
+>06e6	86 44 4d 49 4e 55 d3		L685      .TEXT $86,'DMINU',$D3
+>06ed	ce 06				          .WORD L670     ; link to  MINUS
+>06ef	f1 06				DMINU     .WORD *+2
+.06f1	38		sec		          SEC
+.06f2	98		tya		          TYA
+.06f3	f5 02		sbc $02,x	          SBC 2,X
+.06f5	95 02		sta $02,x	          STA 2,X
+.06f7	98		tya		          TYA
+.06f8	f5 03		sbc $03,x	          SBC 3,X
+.06fa	95 03		sta $03,x	          STA 3,X
+.06fc	4c d9 06	jmp $06d9	          JMP MINUS+3
+>06ff	84 4f 56 45 d2			L700      .TEXT $84,'OVE',$D2
+>0704	e6 06				          .WORD L685     ; link to DMINUS
+>0706	08 07				OVER      .WORD *+2
+.0708	b5 02		lda $02,x	          LDA 2,X
+.070a	48		pha		          PHA
+.070b	b5 03		lda $03,x	          LDA 3,X
+.070d	4c 3b 02	jmp $023b	          JMP PUSH
+>0710	84 44 52 4f d0			L711      .TEXT $84,'DRO',$D0
+>0715	ff 06				          .WORD L700     ; link to OVER
+>0717	ec 03				DROP      .WORD POP
+>0719	84 53 57 41 d0			L718      .TEXT $84,'SWA',$D0
+>071e	10 07				          .WORD L711     ; link to DROP
+>0720	22 07				SWAP      .WORD *+2
+.0722	b5 02		lda $02,x	          LDA 2,X
+.0724	48		pha		          PHA
+.0725	b5 00		lda $00,x	          LDA 0,X
+.0727	95 02		sta $02,x	          STA 2,X
+.0729	b5 03		lda $03,x	          LDA 3,X
+.072b	b4 01		ldy $01,x	          LDY 1,X
+.072d	94 03		sty $03,x	          STY 3,X
+.072f	4c 3d 02	jmp $023d	          JMP PUT
+>0732	83 44 55 d0			L733      .TEXT $83,'DU',$D0
+>0736	19 07				          .WORD L718     ; link to SWAP
+>0738	3a 07				DUP       .WORD *+2
+.073a	b5 00		lda $00,x	          LDA 0,X
+.073c	48		pha		          PHA
+.073d	b5 01		lda $01,x	          LDA 1,X
+.073f	4c 3b 02	jmp $023b	          JMP PUSH
+>0742	82 2b a1			L744      .TEXT $82,'+',$A1
+>0745	32 07				          .WORD L733     ; link to DUP
+>0747	49 07				PSTOR     .WORD *+2
+.0749	18		clc		          CLC
+.074a	a1 00		lda ($00,x)	          LDA (0,X)      ; fetch 16 bit value addressed by
+.074c	75 02		adc $02,x	          ADC 2,X        ; bottom of  stack, adding to
+.074e	81 00		sta ($00,x)	          STA (0,X)      ; second item on stack, and return
+.0750	f6 00		inc $00,x	          INC 0,X        ; to memory
+.0752	d0 02		bne $0756	          BNE L754
+.0754	f6 01		inc $01,x	          INC 1,X
+.0756	a1 00		lda ($00,x)	L754      LDA (0,X)
+.0758	75 03		adc $03,x	          ADC 3,X
+.075a	81 00		sta ($00,x)	          STA (0,X)
+.075c	4c ea 03	jmp $03ea	          JMP POPTWO
+>075f	81 54 4f 47 47 4c c5		L762      .TEXT $81,'TOGGL',$C5
+>0766	42 07				          .WORD L744     ; link to +!
+>0768	6a 07				TOGGL     .WORD *+2
+.076a	a1 02		lda ($02,x)	          LDA (2,X)      ; complement bits in memory address
+.076c	55 00		eor $00,x	          EOR 0,X        ; second on stack, by pattern on
+.076e	81 02		sta ($02,x)	          STA (2,X)      ; bottom of stack.
+.0770	4c ea 03	jmp $03ea	          JMP POPTWO
+>0773	81 c0				L773      .TEXT $81,$C0
+>0775	5f 07				          .WORD L762     ; link to TOGGLE
+>0777	79 07				AT        .WORD *+2
+.0779	a1 00		lda ($00,x)	          LDA (0,X)
+.077b	48		pha		          PHA
+.077c	f6 00		inc $00,x	          INC 0,X
+.077e	d0 02		bne $0782	          BNE L781
+.0780	f6 01		inc $01,x	          INC 1,X
+.0782	a1 00		lda ($00,x)	L781      LDA (0,X)
+.0784	4c 3d 02	jmp $023d	          JMP PUT
+>0787	82 43 c0			L787      .TEXT $82,'C',$C0
+>078a	73 07				          .WORD L773     ; link to @
+>078c	8e 07				CAT       .WORD *+2
+.078e	a1 00		lda ($00,x)	          LDA (0,X)      ; fetch byte addressed by bottom of
+.0790	95 00		sta $00,x	          STA 0,X        ; stack to stack, zeroing the high
+.0792	94 01		sty $01,x	          STY 1,X        ; byte
+.0794	4c 42 02	jmp $0242	          JMP NEXT
+>0797	81 a1				L798      .TEXT $81,$A1
+>0799	87 07				          .WORD L787     ; link to C@
+>079b	9d 07				STORE     .WORD *+2
+.079d	b5 02		lda $02,x	          LDA 2,X
+.079f	81 00		sta ($00,x)	          STA (0,X)      ; store second 16bit value on stack
+.07a1	f6 00		inc $00,x	          INC 0,X        ; to memory as addressed by bottom
+.07a3	d0 02		bne $07a7	          BNE L806       ; of stack.
+.07a5	f6 01		inc $01,x	          INC 1,X
+.07a7	b5 03		lda $03,x	L806      LDA 3,X
+.07a9	81 00		sta ($00,x)	          STA (0,X)
+.07ab	4c ea 03	jmp $03ea	          JMP POPTWO
+>07ae	82 43 a1			L813      .TEXT $82,'C',$A1
+>07b1	97 07				          .WORD L798     ; link to !
+>07b3	b5 07				CSTOR     .WORD *+2
+.07b5	b5 02		lda $02,x	          LDA 2,X
+.07b7	81 00		sta ($00,x)	          STA (0,X)
+.07b9	4c ea 03	jmp $03ea	          JMP POPTWO
+>07bc	c1 ba				L823      .TEXT $C1,$BA
+>07be	ae 07				          .WORD L813     ; link to C!
+>07c0	d4 07				COLON     .WORD DOCOL
+>07c2	40 0b				          .WORD QEXEC
+>07c4	fc 0a				          .WORD SCSP
+>07c6	56 09				          .WORD CURR
+>07c8	77 07				          .WORD AT
+>07ca	49 09				          .WORD CON
+>07cc	9b 07				          .WORD STORE
+>07ce	34 10				          .WORD CREAT
+>07d0	c1 0b				          .WORD RBRAC
+>07d2	10 0c				          .WORD PSCOD
+.07d4	a5 af		lda $af		DOCOL     LDA IP+1
+.07d6	48		pha		          PHA
+.07d7	a5 ae		lda $ae		          LDA IP
+.07d9	48		pha		          PHA
+.07da	20 bc 02	jsr $02bc	          JSR TCOLON     ; mark the start of a traced : def.
+.07dd	18		clc		          CLC
+.07de	a5 b1		lda $b1		          LDA W
+.07e0	69 02		adc #$02	          ADC #2
+.07e2	85 ae		sta $ae		          STA IP
+.07e4	98		tya		          TYA
+.07e5	65 b2		adc $b2		          ADC W+1
+.07e7	85 af		sta $af		          STA IP+1
+.07e9	4c 42 02	jmp $0242	          JMP NEXT
+>07ec	c1 bb				L853      .TEXT $C1,$BB
+>07ee	bc 07				          .WORD L823     ; link to :
+>07f0	d4 07				          .WORD DOCOL
+>07f2	68 0b				          .WORD QCSP
+>07f4	9d 0b				          .WORD COMP
+>07f6	0a 06				          .WORD SEMIS
+>07f8	d5 0b				          .WORD SMUDG
+>07fa	b3 0b				          .WORD LBRAC
+>07fc	0a 06				          .WORD SEMIS
+>07fe	88 43 4f 4e 53 54 41 4e		L867      .TEXT $88,'CONSTAN',$D4
+>0806	d4
+>0807	ec 07				          .WORD L853     ; link to ;
+>0809	d4 07				CONST     .WORD DOCOL
+>080b	34 10				          .WORD CREAT
+>080d	d5 0b				          .WORD SMUDG
+>080f	d7 09				          .WORD COMMA
+>0811	10 0c				          .WORD PSCOD
+.0813	a0 02		ldy #$02	DOCON     LDY #2
+.0815	b1 b1		lda ($b1),y	          LDA (W),Y
+.0817	48		pha		          PHA
+.0818	c8		iny		          INY
+.0819	b1 b1		lda ($b1),y	          LDA (W),Y
+.081b	4c 3b 02	jmp $023b	          JMP PUSH
+>081e	88 56 41 52 49 41 42 4c		L885      .TEXT $88,'VARIABL',$C5
+>0826	c5
+>0827	fe 07				          .WORD L867     ; link to CONSTANT
+>0829	d4 07				VAR       .WORD DOCOL
+>082b	09 08				          .WORD CONST
+>082d	10 0c				          .WORD PSCOD
+.082f	18		clc		DOVAR     CLC
+.0830	a5 b1		lda $b1		          LDA W
+.0832	69 02		adc #$02	          ADC #2
+.0834	48		pha		          PHA
+.0835	98		tya		          TYA
+.0836	65 b2		adc $b2		          ADC W+1
+.0838	4c 3b 02	jmp $023b	          JMP PUSH
+>083b	84 55 53 45 d2			L902      .TEXT $84,'USE',$D2
+>0840	1e 08				          .WORD L885     ; link to VARIABLE
+>0842	d4 07				USER      .WORD DOCOL
+>0844	09 08				          .WORD CONST
+>0846	10 0c				          .WORD PSCOD
+.0848	a0 02		ldy #$02	DOUSE     LDY #2
+.084a	18		clc		          CLC
+.084b	b1 b1		lda ($b1),y	          LDA (W),Y
+.084d	65 b3		adc $b3		          ADC UP
+.084f	48		pha		          PHA
+.0850	a9 00		lda #$00	          LDA #0
+.0852	65 b4		adc $b4		          ADC UP+1
+.0854	4c 3b 02	jmp $023b	          JMP PUSH
+>0857	81 b0				L920      .TEXT $81,$B0
+>0859	3b 08				          .WORD L902     ; link to USER
+>085b	13 08				ZERO      .WORD DOCON
+>085d	00 00				          .WORD 0
+>085f	81 b1				L928      .TEXT $81,$B1
+>0861	57 08				          .WORD L920     ; link to 0
+>0863	13 08				ONE       .WORD DOCON
+>0865	01 00				          .WORD 1
+>0867	81 b2				L936      .TEXT $81,$B2
+>0869	5f 08				          .WORD L928     ; link to 1
+>086b	13 08				TWO       .WORD DOCON
+>086d	02 00				          .WORD 2
+>086f	81 b3				L944      .TEXT $81,$B3
+>0871	67 08				          .WORD L936     ; link to 2
+>0873	13 08				THREE     .WORD DOCON
+>0875	03 00				          .WORD 3
+>0877	82 42 cc			L952      .TEXT $82,'B',$CC
+>087a	6f 08				          .WORD L944     ; link to 3
+>087c	13 08				BL        .WORD DOCON
+>087e	20 00				          .WORD $20
+>0880	83 43 2f cc			L960      .TEXT $83,'C/',$CC
+>0884	77 08				          .WORD L952     ; link to BL
+>0886	13 08				CSLL      .WORD DOCON
+>0888	40 00				          .WORD 64
+>088a	85 46 49 52 53 d4		L968      .TEXT $85,'FIRS',$D4
+>0890	80 08				          .WORD L960     ; link to C/L
+>0892	13 08				FIRST     .WORD DOCON
+>0894	60 3b				          .WORD DAREA    ; bottom of disk buffer area
+>0896	85 4c 49 4d 49 d4		L976      .TEXT $85,'LIMI',$D4
+>089c	8a 08				          .WORD L968     ; link to FIRST
+>089e	13 08				LIMIT     .WORD DOCON
+>08a0	80 3f				          .WORD UAREA    ; buffers end at user area
+>08a2	85 42 2f 42 55 c6		L984      .TEXT $85,'B/BU',$C6
+>08a8	96 08				          .WORD L976     ; link to LIMIT
+>08aa	13 08				BBUF      .WORD DOCON
+>08ac	80 00				          .WORD SSIZE    ; sector size
+>08ae	85 42 2f 53 43 d2		L992      .TEXT $85,'B/SC',$D2
+>08b4	a2 08				          .WORD L984     ; link to B/BUF
+>08b6	13 08				BSCR      .WORD DOCON
+>08b8	08 00				          .WORD 8        ; blocks to make one screen
+>08ba	87 2b 4f 52 49 47 49 ce		L1000     .TEXT $87,'+ORIGI',$CE
+>08c2	ae 08				          .WORD L992     ; link to B/SCR
+>08c4	d4 07				PORIG     .WORD DOCOL
+>08c6	28 02 00 02			          .WORD LIT,ORIG
+>08ca	97 06				          .WORD PLUS
+>08cc	0a 06				          .WORD SEMIS
+>08ce	83 54 49 c2			L1010     .TEXT $83,'TI',$C2
+>08d2	ba 08				          .WORD L1000    ; link to +ORIGIN
+>08d4	48 08				TIB       .WORD DOUSE
+>08d6	0a				          .TEXT $A
+>08d7	85 57 49 44 54 c8		L1018     .TEXT $85,'WIDT',$C8
+>08dd	ce 08				          .WORD L1010    ; link to TIB
+>08df	48 08				WIDTH     .WORD DOUSE
+>08e1	0c				          .TEXT $C
+>08e2	87 57 41 52 4e 49 4e c7		L1026     .TEXT $87,'WARNIN',$C7
+>08ea	d7 08				          .WORD L1018    ; link to WIDTH
+>08ec	48 08				WARN      .WORD DOUSE
+>08ee	0e				          .TEXT $E
+>08ef	85 46 45 4e 43 c5		L1034     .TEXT $85,'FENC',$C5
+>08f5	e2 08				          .WORD L1026    ; link to WARNING
+>08f7	48 08				FENCE     .WORD DOUSE
+>08f9	10				          .TEXT $10
+>08fa	82 44 d0			L1042     .TEXT $82,'D',$D0
+>08fd	ef 08				          .WORD L1034    ; link to FENCE
+>08ff	48 08				DP        .WORD DOUSE
+>0901	12				          .TEXT $12
+>0902	88 56 4f 43 2d 4c 49 4e		L1050     .TEXT $88,'VOC-LIN',$CB
+>090a	cb
+>090b	fa 08				          .WORD L1042    ; link to DP
+>090d	48 08				VOCL      .WORD DOUSE
+>090f	14				          .TEXT $14
+>0910	83 42 4c cb			L1058     .TEXT $83,'BL',$CB
+>0914	02 09				          .WORD L1050    ; link to VOC-LINK
+>0916	48 08				BLK       .WORD DOUSE
+>0918	16				          .TEXT $16
+>0919	82 49 ce			L1066     .TEXT $82,'I',$CE
+>091c	10 09				          .WORD L1058    ; link to BLK
+>091e	48 08				IN        .WORD DOUSE
+>0920	18				          .TEXT $18
+>0921	83 4f 55 d4			L1074     .TEXT $83,'OU',$D4
+>0925	19 09				          .WORD L1066    ; link to IN
+>0927	48 08				OUT       .WORD DOUSE
+>0929	1a				          .TEXT $1A
+>092a	83 53 43 d2			L1082     .TEXT $83,'SC',$D2
+>092e	21 09				          .WORD L1074    ; link to OUT
+>0930	48 08				SCR       .WORD DOUSE
+>0932	1c				          .TEXT $1C
+>0933	86 4f 46 46 53 45 d4		L1090     .TEXT $86,'OFFSE',$D4
+>093a	2a 09				          .WORD L1082    ; link to SCR
+>093c	48 08				OFSET     .WORD DOUSE
+>093e	1e				          .TEXT $1E
+>093f	87 43 4f 4e 54 45 58 d4		L1098     .TEXT $87,'CONTEX',$D4
+>0947	33 09				          .WORD L1090    ; link to OFFSET
+>0949	48 08				CON       .WORD DOUSE
+>094b	20				          .TEXT $20
+>094c	87 43 55 52 52 45 4e d4		L1106     .TEXT $87,'CURREN',$D4
+>0954	3f 09				          .WORD L1098    ; link to CONTEXT
+>0956	48 08				CURR      .WORD DOUSE
+>0958	22				          .TEXT $22
+>0959	85 53 54 41 54 c5		L1114     .TEXT $85,'STAT',$C5
+>095f	4c 09				          .WORD L1106    ; link to CURRENT
+>0961	48 08				STATE     .WORD DOUSE
+>0963	24				          .TEXT $24
+>0964	84 42 41 53 c5			L1122     .TEXT $84,'BAS',$C5
+>0969	59 09				          .WORD L1114    ; link to STATE
+>096b	48 08				BASE      .WORD DOUSE
+>096d	26				          .TEXT $26
+>096e	83 44 50 cc			L1130     .TEXT $83,'DP',$CC
+>0972	64 09				          .WORD L1122    ; link to BASE
+>0974	48 08				DPL       .WORD DOUSE
+>0976	28				          .TEXT $28
+>0977	83 46 4c c4			L1138     .TEXT $83,'FL',$C4
+>097b	6e 09				          .WORD L1130    ; link to DPL
+>097d	48 08				FLD       .WORD DOUSE
+>097f	2a				          .TEXT $2A
+>0980	83 43 53 d0			L1146     .TEXT $83,'CS',$D0
+>0984	77 09				          .WORD L1138    ; link to FLD
+>0986	48 08				CSP       .WORD DOUSE
+>0988	2c				          .TEXT $2C
+>0989	82 52 a3			L1154     .TEXT $82,'R',$A3
+>098c	80 09				          .WORD L1146    ; link to CSP
+>098e	48 08				RNUM      .WORD DOUSE
+>0990	2e				          .TEXT $2E
+>0991	83 48 4c c4			L1162     .TEXT $83,'HL',$C4
+>0995	89 09				          .WORD L1154    ; link to R#
+>0997	48 08				HLD       .WORD DOUSE
+>0999	30				          .TEXT $30
+>099a	82 31 ab			L1170     .TEXT $82,'1',$AB
+>099d	91 09				          .WORD L1162    ; link to HLD
+>099f	d4 07				ONEP      .WORD DOCOL
+>09a1	63 08				          .WORD ONE
+>09a3	97 06				          .WORD PLUS
+>09a5	0a 06				          .WORD SEMIS
+>09a7	82 32 ab			L1180     .TEXT $82,'2',$AB
+>09aa	9a 09				          .WORD L1170    ; link to 1+
+>09ac	d4 07				TWOP      .WORD DOCOL
+>09ae	6b 08				          .WORD TWO
+>09b0	97 06				          .WORD PLUS
+>09b2	0a 06				          .WORD SEMIS
+>09b4	84 48 45 52 c5			L1190     .TEXT $84,'HER',$C5
+>09b9	a7 09				          .WORD L1180    ; link to 2+
+>09bb	d4 07				HERE      .WORD DOCOL
+>09bd	ff 08				          .WORD DP
+>09bf	77 07				          .WORD AT
+>09c1	0a 06				          .WORD SEMIS
+>09c3	85 41 4c 4c 4f d4		L1200     .TEXT $85,'ALLO',$D4
+>09c9	b4 09				          .WORD L1190    ; link to HERE
+>09cb	d4 07				ALLOT     .WORD DOCOL
+>09cd	ff 08				          .WORD DP
+>09cf	47 07				          .WORD PSTOR
+>09d1	0a 06				          .WORD SEMIS
+>09d3	81 ac				L1210     .TEXT $81,$AC
+>09d5	c3 09				          .WORD L1200    ; link to ALLOT
+>09d7	d4 07				COMMA     .WORD DOCOL
+>09d9	bb 09				          .WORD HERE
+>09db	9b 07				          .WORD STORE
+>09dd	6b 08				          .WORD TWO
+>09df	cb 09				          .WORD ALLOT
+>09e1	0a 06				          .WORD SEMIS
+>09e3	82 43 ac			L1222     .TEXT $82,'C',$AC
+>09e6	d3 09				          .WORD L1210    ; link to ,
+>09e8	d4 07				CCOMM     .WORD DOCOL
+>09ea	bb 09				          .WORD HERE
+>09ec	b3 07				          .WORD CSTOR
+>09ee	63 08				          .WORD ONE
+>09f0	cb 09				          .WORD ALLOT
+>09f2	0a 06				          .WORD SEMIS
+>09f4	81 ad				L1234     .TEXT $81,$AD
+>09f6	e3 09				          .WORD L1222    ; link to C,
+>09f8	d4 07				SUB       .WORD DOCOL
+>09fa	d6 06				          .WORD MINUS
+>09fc	97 06				          .WORD PLUS
+>09fe	0a 06				          .WORD SEMIS
+>0a00	81 bd				L1244     .TEXT $81,$BD
+>0a02	f4 09				          .WORD L1234    ; link to -
+>0a04	d4 07				EQUAL     .WORD DOCOL
+>0a06	f8 09				          .WORD SUB
+>0a08	71 06				          .WORD ZEQU
+>0a0a	0a 06				          .WORD SEMIS
+>0a0c	82 55 bc			L1246     .TEXT $82,'U',$BC
+>0a0f	00 0a				          .WORD L1244    ; link to =
+>0a11	d4 07				ULESS     .WORD DOCOL
+>0a13	f8 09				          .WORD SUB      ; subtract two values
+>0a15	86 06				          .WORD ZLESS    ; test sign
+>0a17	0a 06				          .WORD SEMIS
+>0a19	81 bc				L1254     .TEXT $81,$BC
+>0a1b	0c 0a				          .WORD L1246    ; link to U<
+>0a1d	1f 0a				LESS      .WORD *+2
+.0a1f	38		sec		          SEC
+.0a20	b5 02		lda $02,x	          LDA 2,X
+.0a22	f5 00		sbc $00,x	          SBC 0,X        ; subtract
+.0a24	b5 03		lda $03,x	          LDA 3,X
+.0a26	f5 01		sbc $01,x	          SBC 1,X
+.0a28	94 03		sty $03,x	          STY 3,X        ; zero high byte
+.0a2a	50 02		bvc $0a2e	          BVC L1258
+.0a2c	49 80		eor #$80	          EOR #$80       ; correct overflow
+.0a2e	10 01		bpl $0a31	L1258     BPL L1260
+.0a30	c8		iny		          INY            ; invert boolean
+.0a31	94 02		sty $02,x	L1260     STY 2,X        ; leave boolean
+.0a33	4c ec 03	jmp $03ec	          JMP POP
+>0a36	81 be				L1264     .TEXT $81,$BE
+>0a38	19 0a				          .WORD L1254    ; link to <
+>0a3a	d4 07				GREAT     .WORD DOCOL
+>0a3c	20 07				          .WORD SWAP
+>0a3e	1d 0a				          .WORD LESS
+>0a40	0a 06				          .WORD SEMIS
+>0a42	83 52 4f d4			L1274     .TEXT $83,'RO',$D4
+>0a46	36 0a				          .WORD L1264    ; link to >
+>0a48	d4 07				ROT       .WORD DOCOL
+>0a4a	38 06				          .WORD TOR
+>0a4c	20 07				          .WORD SWAP
+>0a4e	4a 06				          .WORD RFROM
+>0a50	20 07				          .WORD SWAP
+>0a52	0a 06				          .WORD SEMIS
+>0a54	85 53 50 41 43 c5		L1286     .TEXT $85,'SPAC',$C5
+>0a5a	42 0a				          .WORD L1274    ; link to ROT
+>0a5c	d4 07				SPACE     .WORD DOCOL
+>0a5e	7c 08				          .WORD BL
+>0a60	d5 04				          .WORD EMIT
+>0a62	0a 06				          .WORD SEMIS
+>0a64	84 2d 44 55 d0			L1296     .TEXT $84,'-DU',$D0
+>0a69	54 0a				          .WORD L1286    ; link to SPACE
+>0a6b	d4 07				DDUP      .WORD DOCOL
+>0a6d	38 07				          .WORD DUP
+>0a6f	54 03				          .WORD ZBRAN
+>0a71	04 00				L1301     .WORD $4       ; L1303-L1301
+>0a73	38 07				          .WORD DUP
+>0a75	0a 06				L1303     .WORD SEMIS
+>0a77	88 54 52 41 56 45 52 53		L1308     .TEXT $88,'TRAVERS',$C5
+>0a7f	c5
+>0a80	64 0a				          .WORD L1296    ; link to -DUP
+>0a82	d4 07				TRAV      .WORD DOCOL
+>0a84	20 07				          .WORD SWAP
+>0a86	06 07				L1312     .WORD OVER
+>0a88	97 06				          .WORD PLUS
+>0a8a	65 02				          .WORD CLIT
+>0a8c	7f				          .TEXT $7F
+>0a8d	06 07				          .WORD OVER
+>0a8f	8c 07				          .WORD CAT
+>0a91	1d 0a				          .WORD LESS
+>0a93	54 03				          .WORD ZBRAN
+>0a95	f1 ff				L1320     .WORD $FFF1    ; L1312-L1320
+>0a97	20 07				          .WORD SWAP
+>0a99	17 07				          .WORD DROP
+>0a9b	0a 06				          .WORD SEMIS
+>0a9d	86 4c 41 54 45 53 d4		L1328     .TEXT $86,'LATES',$D4
+>0aa4	77 0a				          .WORD L1308    ; link to TRAVERSE
+>0aa6	d4 07				LATES     .WORD DOCOL
+>0aa8	56 09				          .WORD CURR
+>0aaa	77 07				          .WORD AT
+>0aac	77 07				          .WORD AT
+>0aae	0a 06				          .WORD SEMIS
+>0ab0	83 4c 46 c1			L1339     .TEXT $83,'LF',$C1
+>0ab4	9d 0a				          .WORD L1328    ; link to LATEST
+>0ab6	d4 07				LFA       .WORD DOCOL
+>0ab8	65 02				          .WORD CLIT
+>0aba	04				          .TEXT 4
+>0abb	f8 09				          .WORD SUB
+>0abd	0a 06				          .WORD SEMIS
+>0abf	83 43 46 c1			L1350     .TEXT $83,'CF',$C1
+>0ac3	b0 0a				          .WORD L1339    ; link to LFA
+>0ac5	d4 07				CFA       .WORD DOCOL
+>0ac7	6b 08				          .WORD TWO
+>0ac9	f8 09				          .WORD SUB
+>0acb	0a 06				          .WORD SEMIS
+>0acd	83 4e 46 c1			L1360     .TEXT $83,'NF',$C1
+>0ad1	bf 0a				          .WORD L1350    ; link to CFA
+>0ad3	d4 07				NFA       .WORD DOCOL
+>0ad5	65 02				          .WORD CLIT
+>0ad7	05				          .TEXT $5
+>0ad8	f8 09				          .WORD SUB
+>0ada	28 02 ff ff			          .WORD LIT,$FFFF
+>0ade	82 0a				          .WORD TRAV
+>0ae0	0a 06				          .WORD SEMIS
+>0ae2	83 50 46 c1			L1373     .TEXT $83,'PF',$C1
+>0ae6	cd 0a				          .WORD L1360    ; link to NFA
+>0ae8	d4 07				PFA       .WORD DOCOL
+>0aea	63 08				          .WORD ONE
+>0aec	82 0a				          .WORD TRAV
+>0aee	65 02				          .WORD CLIT
+>0af0	05				          .TEXT 5
+>0af1	97 06				          .WORD PLUS
+>0af3	0a 06				          .WORD SEMIS
+>0af5	84 21 43 53 d0			L1386     .TEXT $84,'!CS',$D0
+>0afa	e2 0a				          .WORD L1373    ; link to PFA
+>0afc	d4 07				SCSP      .WORD DOCOL
+>0afe	d7 05				          .WORD SPAT
+>0b00	86 09				          .WORD CSP
+>0b02	9b 07				          .WORD STORE
+>0b04	0a 06				          .WORD SEMIS
+>0b06	86 3f 45 52 52 4f d2		L1397     .TEXT $86,'?ERRO',$D2
+>0b0d	f5 0a				          .WORD L1386    ; link to !CSP
+>0b0f	d4 07				QERR      .WORD DOCOL
+>0b11	20 07				          .WORD SWAP
+>0b13	54 03				          .WORD ZBRAN
+>0b15	08 00				L1402     .WORD 8        ; L1406-L1402
+>0b17	cb 0f				          .WORD ERROR
+>0b19	35 03				          .WORD BRAN
+>0b1b	04 00				L1405     .WORD 4        ; L1407-L1405
+>0b1d	17 07				L1406     .WORD DROP
+>0b1f	0a 06				L1407     .WORD SEMIS
+>0b21	85 3f 43 4f 4d d0		L1412     .TEXT $85,'?COM',$D0
+>0b27	06 0b				          .WORD L1397    ; link to ?ERROR
+>0b29	d4 07				QCOMP     .WORD DOCOL
+>0b2b	61 09				          .WORD STATE
+>0b2d	77 07				          .WORD AT
+>0b2f	71 06				          .WORD ZEQU
+>0b31	65 02				          .WORD CLIT
+>0b33	11				          .TEXT $11
+>0b34	0f 0b				          .WORD QERR
+>0b36	0a 06				          .WORD SEMIS
+>0b38	85 3f 45 58 45 c3		L1426     .TEXT $85,'?EXE',$C3
+>0b3e	21 0b				          .WORD L1412    ; link to ?COMP
+>0b40	d4 07				QEXEC     .WORD DOCOL
+>0b42	61 09				          .WORD STATE
+>0b44	77 07				          .WORD AT
+>0b46	65 02				          .WORD CLIT
+>0b48	12				          .TEXT $12
+>0b49	0f 0b				          .WORD QERR
+>0b4b	0a 06				          .WORD SEMIS
+>0b4d	86 3f 50 41 49 52 d3		L1439     .TEXT $86,'?PAIR',$D3
+>0b54	38 0b				          .WORD L1426    ; link to ?EXEC
+>0b56	d4 07				QPAIR     .WORD DOCOL
+>0b58	f8 09				          .WORD SUB
+>0b5a	65 02				          .WORD CLIT
+>0b5c	13				          .TEXT $13
+>0b5d	0f 0b				          .WORD QERR
+>0b5f	0a 06				          .WORD SEMIS
+>0b61	84 3f 43 53 d0			L1451     .TEXT $84,'?CS',$D0
+>0b66	4d 0b				          .WORD L1439    ; link to ?PAIRS
+>0b68	d4 07				QCSP      .WORD DOCOL
+>0b6a	d7 05				          .WORD SPAT
+>0b6c	86 09				          .WORD CSP
+>0b6e	77 07				          .WORD AT
+>0b70	f8 09				          .WORD SUB
+>0b72	65 02				          .WORD CLIT
+>0b74	14				          .TEXT $14
+>0b75	0f 0b				          .WORD QERR
+>0b77	0a 06				          .WORD SEMIS
+>0b79	88 3f 4c 4f 41 44 49 4e		L1466     .TEXT $88,'?LOADIN',$C7
+>0b81	c7
+>0b82	61 0b				          .WORD L1451    ; link to ?CSP
+>0b84	d4 07				QLOAD     .WORD DOCOL
+>0b86	16 09				          .WORD BLK
+>0b88	77 07				          .WORD AT
+>0b8a	71 06				          .WORD ZEQU
+>0b8c	65 02				          .WORD CLIT
+>0b8e	16				          .TEXT $16
+>0b8f	0f 0b				          .WORD QERR
+>0b91	0a 06				          .WORD SEMIS
+>0b93	87 43 4f 4d 50 49 4c c5		L1480     .TEXT $87,'COMPIL',$C5
+>0b9b	79 0b				          .WORD L1466    ; link to ?LOADING
+>0b9d	d4 07				COMP      .WORD DOCOL
+>0b9f	29 0b				          .WORD QCOMP
+>0ba1	4a 06				          .WORD RFROM
+>0ba3	38 07				          .WORD DUP
+>0ba5	ac 09				          .WORD TWOP
+>0ba7	38 06				          .WORD TOR
+>0ba9	77 07				          .WORD AT
+>0bab	d7 09				          .WORD COMMA
+>0bad	0a 06				          .WORD SEMIS
+>0baf	c1 db				L1495     .TEXT $C1,$DB
+>0bb1	93 0b				          .WORD L1480    ; link to COMPILE
+>0bb3	d4 07				LBRAC     .WORD DOCOL
+>0bb5	5b 08				          .WORD ZERO
+>0bb7	61 09				          .WORD STATE
+>0bb9	9b 07				          .WORD STORE
+>0bbb	0a 06				          .WORD SEMIS
+>0bbd	81 dd				L1507     .TEXT $81,$DD
+>0bbf	af 0b				          .WORD L1495    ; link to [
+>0bc1	d4 07				RBRAC     .WORD DOCOL
+>0bc3	65 02				          .WORD CLIT
+>0bc5	c0				          .TEXT $C0
+>0bc6	61 09				          .WORD STATE
+>0bc8	9b 07				          .WORD STORE
+>0bca	0a 06				          .WORD SEMIS
+>0bcc	86 53 4d 55 44 47 c5		L1519     .TEXT $86,'SMUDG',$C5
+>0bd3	bd 0b				          .WORD L1507    ; link to ]
+>0bd5	d4 07				SMUDG     .WORD DOCOL
+>0bd7	a6 0a				          .WORD LATES
+>0bd9	65 02				          .WORD CLIT
+>0bdb	20				          .TEXT $20
+>0bdc	68 07				          .WORD TOGGL
+>0bde	0a 06				          .WORD SEMIS
+>0be0	83 48 45 d8			L1531     .TEXT $83,'HE',$D8
+>0be4	cc 0b				          .WORD L1519    ; link to SMUDGE
+>0be6	d4 07				HEX       .WORD DOCOL
+>0be8	65 02				          .WORD CLIT
+>0bea	10				          .TEXT 16
+>0beb	6b 09				          .WORD BASE
+>0bed	9b 07				          .WORD STORE
+>0bef	0a 06				          .WORD SEMIS
+>0bf1	87 44 45 43 49 4d 41 cc		L1543     .TEXT $87,'DECIMA',$CC
+>0bf9	e0 0b				          .WORD L1531    ; link to HEX
+>0bfb	d4 07				DECIM     .WORD DOCOL
+>0bfd	65 02				          .WORD CLIT
+>0bff	0a				          .TEXT 10
+>0c00	6b 09				          .WORD BASE
+>0c02	9b 07				          .WORD STORE
+>0c04	0a 06				          .WORD SEMIS
+>0c06	87 28 3b 43 4f 44 45 a9		L1555     .TEXT $87,'(;CODE',$A9
+>0c0e	f1 0b				          .WORD L1543    ; link to DECIMAL
+>0c10	d4 07				PSCOD     .WORD DOCOL
+>0c12	4a 06				          .WORD RFROM
+>0c14	a6 0a				          .WORD LATES
+>0c16	e8 0a				          .WORD PFA
+>0c18	c5 0a				          .WORD CFA
+>0c1a	9b 07				          .WORD STORE
+>0c1c	0a 06				          .WORD SEMIS
+>0c1e	c5 3b 43 4f 44 c5		L1568     .TEXT $C5,';COD',$C5
+>0c24	06 0c				          .WORD L1555    ; link to (;CODE)
+>0c26	d4 07				          .WORD DOCOL
+>0c28	68 0b				          .WORD QCSP
+>0c2a	9d 0b				          .WORD COMP
+>0c2c	10 0c				          .WORD PSCOD
+>0c2e	b3 0b				          .WORD LBRAC
+>0c30	d5 0b				          .WORD SMUDG
+>0c32	0a 06				          .WORD SEMIS
+>0c34	87 3c 42 55 49 4c 44 d3		L1582     .TEXT $87,'<BUILD',$D3
+>0c3c	1e 0c				          .WORD L1568    ; link to ;CODE
+>0c3e	d4 07				BUILD     .WORD DOCOL
+>0c40	5b 08				          .WORD ZERO
+>0c42	09 08				          .WORD CONST
+>0c44	0a 06				          .WORD SEMIS
+>0c46	85 44 4f 45 53 be		L1592     .TEXT $85,'DOES',$BE
+>0c4c	34 0c				          .WORD L1582    ; link to <BUILDS
+>0c4e	d4 07				DOES      .WORD DOCOL
+>0c50	4a 06				          .WORD RFROM
+>0c52	a6 0a				          .WORD LATES
+>0c54	e8 0a				          .WORD PFA
+>0c56	9b 07				          .WORD STORE
+>0c58	10 0c				          .WORD PSCOD
+.0c5a	a5 af		lda $af		DODOE     LDA IP+1
+.0c5c	48		pha		          PHA
+.0c5d	a5 ae		lda $ae		          LDA IP
+.0c5f	48		pha		          PHA
+.0c60	a0 02		ldy #$02	          LDY #2
+.0c62	b1 b1		lda ($b1),y	          LDA (W),Y
+.0c64	85 ae		sta $ae		          STA IP
+.0c66	c8		iny		          INY
+.0c67	b1 b1		lda ($b1),y	          LDA (W),Y
+.0c69	85 af		sta $af		          STA IP+1
+.0c6b	18		clc		          CLC
+.0c6c	a5 b1		lda $b1		          LDA W
+.0c6e	69 04		adc #$04	          ADC #4
+.0c70	48		pha		          PHA
+.0c71	a5 b2		lda $b2		          LDA W+1
+.0c73	69 00		adc #$00	          ADC #0
+.0c75	4c 3b 02	jmp $023b	          JMP PUSH
+>0c78	85 43 4f 55 4e d4		L1622     .TEXT $85,'COUN',$D4
+>0c7e	46 0c				          .WORD L1592    ; link to DOES>
+>0c80	d4 07				COUNT     .WORD DOCOL
+>0c82	38 07				          .WORD DUP
+>0c84	9f 09				          .WORD ONEP
+>0c86	20 07				          .WORD SWAP
+>0c88	8c 07				          .WORD CAT
+>0c8a	0a 06				          .WORD SEMIS
+>0c8c	84 54 59 50 c5			L1634     .TEXT $84,'TYP',$C5
+>0c91	78 0c				          .WORD L1622    ; link to COUNT
+>0c93	d4 07				TYPE      .WORD DOCOL
+>0c95	6b 0a				          .WORD DDUP
+>0c97	54 03				          .WORD ZBRAN
+>0c99	18 00				L1639     .WORD $18      ; L1651-L1639
+>0c9b	06 07				          .WORD OVER
+>0c9d	97 06				          .WORD PLUS
+>0c9f	20 07				          .WORD SWAP
+>0ca1	dc 03				          .WORD PDO
+>0ca3	f5 03				L1644     .WORD I
+>0ca5	8c 07				          .WORD CAT
+>0ca7	d5 04				          .WORD EMIT
+>0ca9	75 03				          .WORD PLOOP
+>0cab	f8 ff				L1648     .WORD $FFF8    ; L1644-L1648
+>0cad	35 03				          .WORD BRAN
+>0caf	04 00				L1650     .WORD $4       ; L1652-L1650
+>0cb1	17 07				L1651     .WORD DROP
+>0cb3	0a 06				L1652     .WORD SEMIS
+>0cb5	89 2d 54 52 41 49 4c 49		L1657     .TEXT $89,'-TRAILIN',$C7
+>0cbd	4e c7
+>0cbf	8c 0c				          .WORD L1634    ; link to TYPE
+>0cc1	d4 07				DTRAI     .WORD DOCOL
+>0cc3	38 07				          .WORD DUP
+>0cc5	5b 08				          .WORD ZERO
+>0cc7	dc 03				          .WORD PDO
+>0cc9	06 07				L1663     .WORD OVER
+>0ccb	06 07				          .WORD OVER
+>0ccd	97 06				          .WORD PLUS
+>0ccf	63 08				          .WORD ONE
+>0cd1	f8 09				          .WORD SUB
+>0cd3	8c 07				          .WORD CAT
+>0cd5	7c 08				          .WORD BL
+>0cd7	f8 09				          .WORD SUB
+>0cd9	54 03				          .WORD ZBRAN
+>0cdb	08 00				L1672     .WORD 8        ; L1676-L1672
+>0cdd	1d 06				          .WORD LEAVE
+>0cdf	35 03				          .WORD BRAN
+>0ce1	06 00				L1675     .WORD 6        ; L1678-L1675
+>0ce3	63 08				L1676     .WORD ONE
+>0ce5	f8 09				          .WORD SUB
+>0ce7	75 03				L1678     .WORD PLOOP
+>0ce9	e0 ff				L1679     .WORD $FFE0    ; L1663-L1679
+>0ceb	0a 06				          .WORD SEMIS
+>0ced	84 28 2e 22 a9			L1685     .TEXT $84,'(."',$A9
+>0cf2	b5 0c				          .WORD L1657    ; link to -TRAILING
+>0cf4	d4 07				PDOTQ     .WORD DOCOL
+>0cf6	5b 06				          .WORD R
+>0cf8	80 0c				          .WORD COUNT
+>0cfa	38 07				          .WORD DUP
+>0cfc	9f 09				          .WORD ONEP
+>0cfe	4a 06				          .WORD RFROM
+>0d00	97 06				          .WORD PLUS
+>0d02	38 06				          .WORD TOR
+>0d04	93 0c				          .WORD TYPE
+>0d06	0a 06				          .WORD SEMIS
+>0d08	c2 2e a2			L1701     .TEXT $C2,'.',$A2
+>0d0b	ed 0c				          .WORD L1685    ; link to PDOTQ
+>0d0d	d4 07				          .WORD DOCOL
+>0d0f	65 02				          .WORD CLIT
+>0d11	22				          .TEXT $22
+>0d12	61 09				          .WORD STATE
+>0d14	77 07				          .WORD AT
+>0d16	54 03				          .WORD ZBRAN
+>0d18	14 00				L1709     .WORD $14      ;L1719-L1709
+>0d1a	9d 0b				          .WORD COMP
+>0d1c	f4 0c				          .WORD PDOTQ
+>0d1e	6e 0e				          .WORD WORD
+>0d20	bb 09				          .WORD HERE
+>0d22	8c 07				          .WORD CAT
+>0d24	9f 09				          .WORD ONEP
+>0d26	cb 09				          .WORD ALLOT
+>0d28	35 03				          .WORD BRAN
+>0d2a	0a 00				L1718     .WORD $A       ;L1723-L1718
+>0d2c	6e 0e				L1719     .WORD WORD
+>0d2e	bb 09				          .WORD HERE
+>0d30	80 0c				          .WORD COUNT
+>0d32	93 0c				          .WORD TYPE
+>0d34	0a 06				L1723     .WORD SEMIS
+>0d36	86 45 58 50 45 43 d4		L1729     .TEXT $86,'EXPEC',$D4
+>0d3d	08 0d				          .WORD L1701    ; link to ."
+>0d3f	d4 07				EXPEC     .WORD DOCOL
+>0d41	06 07				          .WORD OVER
+>0d43	97 06				          .WORD PLUS
+>0d45	06 07				          .WORD OVER
+>0d47	dc 03				          .WORD PDO
+>0d49	dd 04				L1736     .WORD KEY
+>0d4b	38 07				          .WORD DUP
+>0d4d	65 02				          .WORD CLIT
+>0d4f	0e				          .TEXT $E
+>0d50	c4 08				          .WORD PORIG
+>0d52	77 07				          .WORD AT
+>0d54	04 0a				          .WORD EQUAL
+>0d56	54 03				          .WORD ZBRAN
+>0d58	1f 00				L1744     .WORD $1F       ; L1760-L1744
+>0d5a	17 07				          .WORD DROP
+>0d5c	65 02				          .WORD CLIT
+>0d5e	08				          .TEXT 08
+>0d5f	06 07				          .WORD OVER
+>0d61	f5 03				          .WORD I
+>0d63	04 0a				          .WORD EQUAL
+>0d65	38 07				          .WORD DUP
+>0d67	4a 06				          .WORD RFROM
+>0d69	6b 08				          .WORD TWO
+>0d6b	f8 09				          .WORD SUB
+>0d6d	97 06				          .WORD PLUS
+>0d6f	38 06				          .WORD TOR
+>0d71	f8 09				          .WORD SUB
+>0d73	35 03				          .WORD BRAN
+>0d75	27 00				L1759     .WORD $27       ; L1779-L1759
+>0d77	38 07				L1760     .WORD DUP
+>0d79	65 02				          .WORD CLIT
+>0d7b	0d				          .TEXT $0D
+>0d7c	04 0a				          .WORD EQUAL
+>0d7e	54 03				          .WORD ZBRAN
+>0d80	0e 00				L1765     .WORD $0E       ; L1772-L1765
+>0d82	1d 06				          .WORD LEAVE
+>0d84	17 07				          .WORD DROP
+>0d86	7c 08				          .WORD BL
+>0d88	5b 08				          .WORD ZERO
+>0d8a	35 03				          .WORD BRAN
+>0d8c	04 00				L1771     .WORD 04        ; L1773-L1771
+>0d8e	38 07				L1772     .WORD DUP
+>0d90	f5 03				L1773     .WORD I
+>0d92	b3 07				          .WORD CSTOR
+>0d94	5b 08				          .WORD ZERO
+>0d96	f5 03				          .WORD I
+>0d98	9f 09				          .WORD ONEP
+>0d9a	9b 07				          .WORD STORE
+>0d9c	d5 04				L1779     .WORD EMIT
+>0d9e	75 03				          .WORD PLOOP
+>0da0	a9 ff				L1781     .WORD $FFA9
+>0da2	17 07				          .WORD DROP      ; L1736-L1781
+>0da4	0a 06				          .WORD SEMIS
+>0da6	85 51 55 45 52 d9		L1788     .TEXT $85,'QUER',$D9
+>0dac	36 0d				          .WORD L1729    ; link to EXPECT
+>0dae	d4 07				QUERY     .WORD DOCOL
+>0db0	d4 08				          .WORD TIB
+>0db2	77 07				          .WORD AT
+>0db4	65 02				          .WORD CLIT
+>0db6	50				          .TEXT 80       ; 80 characters from terminal
+>0db7	3f 0d				          .WORD EXPEC
+>0db9	5b 08				          .WORD ZERO
+>0dbb	1e 09				          .WORD IN
+>0dbd	9b 07				          .WORD STORE
+>0dbf	0a 06				          .WORD SEMIS
+>0dc1	c1 80				L1804     .TEXT $C1,$80
+>0dc3	a6 0d				          .WORD L1788    ; link to QUERY
+>0dc5	d4 07				          .WORD DOCOL
+>0dc7	16 09				          .WORD BLK
+>0dc9	77 07				          .WORD AT
+>0dcb	54 03				          .WORD ZBRAN
+>0dcd	2a 00				L1810     .WORD $2A      ; L1830-l1810
+>0dcf	63 08				          .WORD ONE
+>0dd1	16 09				          .WORD BLK
+>0dd3	47 07				          .WORD PSTOR
+>0dd5	5b 08				          .WORD ZERO
+>0dd7	1e 09				          .WORD IN
+>0dd9	9b 07				          .WORD STORE
+>0ddb	16 09				          .WORD BLK
+>0ddd	77 07				          .WORD AT
+>0ddf	5b 08 b6 08			          .WORD ZERO,BSCR
+>0de3	59 05				          .WORD USLAS
+>0de5	17 07				          .WORD DROP     ; fixed from model
+>0de7	71 06				          .WORD ZEQU
+>0de9	54 03				          .WORD ZBRAN
+>0deb	08 00				L1824     .WORD 8        ; L1828-L1824
+>0ded	40 0b				          .WORD QEXEC
+>0def	4a 06				          .WORD RFROM
+>0df1	17 07				          .WORD DROP
+>0df3	35 03				L1828     .WORD BRAN
+>0df5	06 00				L1829     .WORD 6        ; L1832-L1829
+>0df7	4a 06				L1830     .WORD RFROM
+>0df9	17 07				          .WORD DROP
+>0dfb	0a 06				L1832     .WORD SEMIS
+>0dfd	84 46 49 4c cc			L1838     .TEXT $84,'FIL',$CC
+>0e02	c1 0d				          .WORD L1804    ; link to X
+>0e04	d4 07				FILL      .WORD DOCOL
+>0e06	20 07				          .WORD SWAP
+>0e08	38 06				          .WORD TOR
+>0e0a	06 07				          .WORD OVER
+>0e0c	b3 07				          .WORD CSTOR
+>0e0e	38 07				          .WORD DUP
+>0e10	9f 09				          .WORD ONEP
+>0e12	4a 06				          .WORD RFROM
+>0e14	63 08				          .WORD ONE
+>0e16	f8 09				          .WORD SUB
+>0e18	fc 04				          .WORD CMOVE
+>0e1a	0a 06				          .WORD SEMIS
+>0e1c	85 45 52 41 53 c5		L1856     .TEXT $85,'ERAS',$C5
+>0e22	fd 0d				          .WORD L1838    ; link to FILL
+>0e24	d4 07				ERASE     .WORD DOCOL
+>0e26	5b 08				          .WORD ZERO
+>0e28	04 0e				          .WORD FILL
+>0e2a	0a 06				          .WORD SEMIS
+>0e2c	86 42 4c 41 4e 4b d3		L1866     .TEXT $86,'BLANK',$D3
+>0e33	1c 0e				          .WORD L1856    ; link to ERASE
+>0e35	d4 07				BLANK     .WORD DOCOL
+>0e37	7c 08				          .WORD BL
+>0e39	04 0e				          .WORD FILL
+>0e3b	0a 06				          .WORD SEMIS
+>0e3d	84 48 4f 4c c4			L1876     .TEXT $84,'HOL',$C4
+>0e42	2c 0e				          .WORD L1866    ; link to BLANKS
+>0e44	d4 07				HOLD      .WORD DOCOL
+>0e46	28 02 ff ff			          .WORD LIT,$FFFF
+>0e4a	97 09				          .WORD HLD
+>0e4c	47 07				          .WORD PSTOR
+>0e4e	97 09				          .WORD HLD
+>0e50	77 07				          .WORD AT
+>0e52	b3 07				          .WORD CSTOR
+>0e54	0a 06				          .WORD SEMIS
+>0e56	83 50 41 c4			L1890     .TEXT $83,'PA',$C4
+>0e5a	3d 0e				          .WORD L1876    ; link to HOLD
+>0e5c	d4 07				PAD       .WORD DOCOL
+>0e5e	bb 09				          .WORD HERE
+>0e60	65 02				          .WORD CLIT
+>0e62	44				          .TEXT 68       ; PAD is 68 bytes above here.
+>0e63	97 06				          .WORD PLUS
+>0e65	0a 06				          .WORD SEMIS
+>0e67	84 57 4f 52 c4			L1902     .TEXT $84,'WOR',$C4
+>0e6c	56 0e				          .WORD L1890    ; link to PAD
+>0e6e	d4 07				WORD      .WORD DOCOL
+>0e70	16 09				          .WORD BLK
+>0e72	77 07				          .WORD AT
+>0e74	54 03				          .WORD ZBRAN
+>0e76	0c 00				L1908     .WORD $C       ; L1914-L1908
+>0e78	16 09				          .WORD BLK
+>0e7a	77 07				          .WORD AT
+>0e7c	d3 14				          .WORD BLOCK
+>0e7e	35 03				          .WORD BRAN
+>0e80	06 00				L1913     .WORD $6       ; L1916-L1913
+>0e82	d4 08				L1914     .WORD TIB
+>0e84	77 07				          .WORD AT
+>0e86	1e 09				L1916     .WORD IN
+>0e88	77 07				          .WORD AT
+>0e8a	97 06				          .WORD PLUS
+>0e8c	20 07				          .WORD SWAP
+>0e8e	96 04				          .WORD ENCL
+>0e90	bb 09				          .WORD HERE
+>0e92	65 02				          .WORD CLIT
+>0e94	22				          .TEXT $22
+>0e95	35 0e				          .WORD BLANK
+>0e97	1e 09				          .WORD IN
+>0e99	47 07				          .WORD PSTOR
+>0e9b	06 07				          .WORD OVER
+>0e9d	f8 09				          .WORD SUB
+>0e9f	38 06				          .WORD TOR
+>0ea1	5b 06				          .WORD R
+>0ea3	bb 09				          .WORD HERE
+>0ea5	b3 07				          .WORD CSTOR
+>0ea7	97 06				          .WORD PLUS
+>0ea9	bb 09				          .WORD HERE
+>0eab	9f 09				          .WORD ONEP
+>0ead	4a 06				          .WORD RFROM
+>0eaf	fc 04				          .WORD CMOVE
+>0eb1	0a 06				          .WORD SEMIS
+>0eb3	85 55 50 50 45 d2		L1943     .TEXT $85,'UPPE',$D2
+>0eb9	67 0e				          .WORD L1902    ; link to WORD
+>0ebb	d4 07				UPPER     .WORD DOCOL
+>0ebd	06 07				          .WORD OVER     ; This routine converts text to U case
+>0ebf	97 06				          .WORD PLUS     ; It allows interpretation from a term.
+>0ec1	20 07				          .WORD SWAP     ; without a shift-lock.
+>0ec3	dc 03				          .WORD PDO
+>0ec5	f5 03				L1950     .WORD I
+>0ec7	8c 07				          .WORD CAT
+>0ec9	65 02				          .WORD CLIT
+>0ecb	5f				          .TEXT $5F
+>0ecc	3a 0a				          .WORD GREAT
+>0ece	54 03				          .WORD ZBRAN
+>0ed0	09 00				L1956     .WORD 09       ; L1961-L1956
+>0ed2	f5 03				          .WORD I
+>0ed4	65 02				          .WORD CLIT
+>0ed6	20				          .TEXT $20
+>0ed7	68 07				          .WORD TOGGL
+>0ed9	75 03				L1961     .WORD PLOOP
+>0edb	ea ff				L1962     .WORD $FFEA    ; L1950-L1962
+>0edd	0a 06				          .WORD SEMIS
+>0edf	88 28 4e 55 4d 42 45 52		L1968     .TEXT $88,'(NUMBER',$A9
+>0ee7	a9
+>0ee8	b3 0e				          .WORD L1943    ; link to UPPER
+>0eea	d4 07				PNUMB     .WORD DOCOL
+>0eec	9f 09				L1971     .WORD ONEP
+>0eee	38 07				          .WORD DUP
+>0ef0	38 06				          .WORD TOR
+>0ef2	8c 07				          .WORD CAT
+>0ef4	6b 09				          .WORD BASE
+>0ef6	77 07				          .WORD AT
+>0ef8	ff 03				          .WORD DIGIT
+>0efa	54 03				          .WORD ZBRAN
+>0efc	2c 00				L1979     .WORD $2C      ; L2001-L1979
+>0efe	20 07				          .WORD SWAP
+>0f00	6b 09				          .WORD BASE
+>0f02	77 07				          .WORD AT
+>0f04	21 05				          .WORD USTAR
+>0f06	17 07				          .WORD DROP
+>0f08	48 0a				          .WORD ROT
+>0f0a	6b 09				          .WORD BASE
+>0f0c	77 07				          .WORD AT
+>0f0e	21 05				          .WORD USTAR
+>0f10	b0 06				          .WORD DPLUS
+>0f12	74 09				          .WORD DPL
+>0f14	77 07				          .WORD AT
+>0f16	9f 09				          .WORD ONEP
+>0f18	54 03				          .WORD ZBRAN
+>0f1a	08 00				L1994     .WORD 8        ; L1998-L1994
+>0f1c	63 08				          .WORD ONE
+>0f1e	74 09				          .WORD DPL
+>0f20	47 07				          .WORD PSTOR
+>0f22	4a 06				L1998     .WORD RFROM
+>0f24	35 03				          .WORD BRAN
+>0f26	c6 ff				L2000     .WORD $FFC6    ; L1971-L2000
+>0f28	4a 06				L2001     .WORD RFROM
+>0f2a	0a 06				          .WORD SEMIS
+>0f2c	86 4e 55 4d 42 45 d2		L2007     .TEXT $86,'NUMBE',$D2
+>0f33	df 0e				          .WORD L1968    ; link to (NUMBER)
+>0f35	d4 07				NUMBER    .WORD DOCOL
+>0f37	5b 08				          .WORD ZERO
+>0f39	5b 08				          .WORD ZERO
+>0f3b	48 0a				          .WORD ROT
+>0f3d	38 07				          .WORD DUP
+>0f3f	9f 09				          .WORD ONEP
+>0f41	8c 07				          .WORD CAT
+>0f43	65 02				          .WORD CLIT
+>0f45	2d				          .TEXT $2D
+>0f46	04 0a				          .WORD EQUAL
+>0f48	38 07				          .WORD DUP
+>0f4a	38 06				          .WORD TOR
+>0f4c	97 06				          .WORD PLUS
+>0f4e	28 02 ff ff			          .WORD LIT,$FFFF
+>0f52	74 09				L2023     .WORD DPL
+>0f54	9b 07				          .WORD STORE
+>0f56	ea 0e				          .WORD PNUMB
+>0f58	38 07				          .WORD DUP
+>0f5a	8c 07				          .WORD CAT
+>0f5c	7c 08				          .WORD BL
+>0f5e	f8 09				          .WORD SUB
+>0f60	54 03				          .WORD ZBRAN
+>0f62	15 00				L2031     .WORD $15      ; L2042-L2031
+>0f64	38 07				          .WORD DUP
+>0f66	8c 07				          .WORD CAT
+>0f68	65 02				          .WORD CLIT
+>0f6a	2e				          .TEXT $2E
+>0f6b	f8 09				          .WORD SUB
+>0f6d	5b 08				          .WORD ZERO
+>0f6f	0f 0b				          .WORD QERR
+>0f71	5b 08				          .WORD ZERO
+>0f73	35 03				          .WORD BRAN
+>0f75	dd ff				L2041     .WORD $FFDD    ; L2023-L2041
+>0f77	17 07				L2042     .WORD DROP
+>0f79	4a 06				          .WORD RFROM
+>0f7b	54 03				          .WORD ZBRAN
+>0f7d	04 00				L2045     .WORD 4        ; L2047-L2045
+>0f7f	ef 06				          .WORD DMINU
+>0f81	0a 06				L2047     .WORD SEMIS
+>0f83	85 2d 46 49 4e c4		L2052     .TEXT $85,'-FIN',$C4
+>0f89	2c 0f				          .WORD L2007    ; link to NUMBER
+>0f8b	d4 07				DFIND     .WORD DOCOL
+>0f8d	7c 08				          .WORD BL
+>0f8f	6e 0e				          .WORD WORD
+>0f91	bb 09				          .WORD HERE     ; )
+>0f93	80 0c				          .WORD COUNT    ; |- Optional allowing free use of low
+>0f95	bb 0e				          .WORD UPPER    ; )  case from terminal
+>0f97	bb 09				          .WORD HERE
+>0f99	49 09				          .WORD CON
+>0f9b	77 07				          .WORD AT
+>0f9d	77 07				          .WORD AT
+>0f9f	30 04				          .WORD PFIND
+>0fa1	38 07				          .WORD DUP
+>0fa3	71 06				          .WORD ZEQU
+>0fa5	54 03				          .WORD ZBRAN
+>0fa7	0a 00				L2068     .WORD $A       ; L2073-L2068
+>0fa9	17 07				          .WORD DROP
+>0fab	bb 09				          .WORD HERE
+>0fad	a6 0a				          .WORD LATES
+>0faf	30 04				          .WORD PFIND
+>0fb1	0a 06				L2073     .WORD SEMIS
+>0fb3	87 28 41 42 4f 52 54 a9		L2078     .TEXT $87,'(ABORT',$A9
+>0fbb	83 0f				          .WORD L2052    ; link to -FIND
+>0fbd	d4 07				PABOR     .WORD DOCOL
+>0fbf	1b 12				          .WORD ABORT
+>0fc1	0a 06				          .WORD SEMIS
+>0fc3	85 45 52 52 4f d2		L2087     .TEXT $85,'ERRO',$D2
+>0fc9	b3 0f				          .WORD L2078    ; link to (ABORT)
+>0fcb	d4 07				ERROR     .WORD DOCOL
+>0fcd	ec 08				          .WORD WARN
+>0fcf	77 07				          .WORD AT
+>0fd1	86 06				          .WORD ZLESS
+>0fd3	54 03				          .WORD ZBRAN
+>0fd5	04 00				L2094     .WORD $4       ; L2096-L2094
+>0fd7	bd 0f				          .WORD PABOR
+>0fd9	bb 09				L2096     .WORD HERE
+>0fdb	80 0c				          .WORD COUNT
+>0fdd	93 0c				          .WORD TYPE
+>0fdf	f4 0c				          .WORD PDOTQ
+>0fe1	04 20 20 3f 20			          .TEXT 4,'  ? '
+>0fe6	6a 15				          .WORD MESS
+>0fe8	e6 05				          .WORD SPSTO
+>0fea	17 07 17 07			          .WORD DROP,DROP; make room for 2 error values
+>0fee	1e 09				          .WORD IN
+>0ff0	77 07				          .WORD AT
+>0ff2	16 09				          .WORD BLK
+>0ff4	77 07				          .WORD AT
+>0ff6	ec 11				          .WORD QUIT
+>0ff8	0a 06				          .WORD SEMIS
+>0ffa	83 49 44 ae			L2113     .TEXT $83,'ID',$AE
+>0ffe	c3 0f				          .WORD L2087    ; link to ERROR
+>1000	d4 07				IDDOT     .WORD DOCOL
+>1002	5c 0e				          .WORD PAD
+>1004	65 02				          .WORD CLIT
+>1006	20				          .TEXT $20
+>1007	65 02				          .WORD CLIT
+>1009	5f				          .TEXT $5F
+>100a	04 0e				          .WORD FILL
+>100c	38 07				          .WORD DUP
+>100e	e8 0a				          .WORD PFA
+>1010	b6 0a				          .WORD LFA
+>1012	06 07				          .WORD OVER
+>1014	f8 09				          .WORD SUB
+>1016	5c 0e				          .WORD PAD
+>1018	20 07				          .WORD SWAP
+>101a	fc 04				          .WORD CMOVE
+>101c	5c 0e				          .WORD PAD
+>101e	80 0c				          .WORD COUNT
+>1020	65 02				          .WORD CLIT
+>1022	1f				          .TEXT $1F
+>1023	96 05				          .WORD ANDD
+>1025	93 0c				          .WORD TYPE
+>1027	5c 0a				          .WORD SPACE
+>1029	0a 06				          .WORD SEMIS
+>102b	86 43 52 45 41 54 c5		L2142     .TEXT $86,'CREAT',$C5
+>1032	fa 0f				          .WORD L2113    ; link to ID
+>1034	d4 07				CREAT     .WORD DOCOL
+>1036	d4 08				          .WORD TIB      ;)
+>1038	bb 09				          .WORD HERE     ;|
+>103a	65 02				          .WORD CLIT     ;|  6502 only, assures
+>103c	a0				          .TEXT $A0      ;|  room exists in dict.
+>103d	97 06				          .WORD PLUS     ;|
+>103f	11 0a				          .WORD ULESS    ;|
+>1041	6b 08				          .WORD TWO      ;|
+>1043	0f 0b				          .WORD QERR     ;)
+>1045	8b 0f				          .WORD DFIND
+>1047	54 03				          .WORD ZBRAN
+>1049	0f 00				L2155     .WORD $0F
+>104b	17 07				          .WORD DROP
+>104d	d3 0a				          .WORD NFA
+>104f	00 10				          .WORD IDDOT
+>1051	65 02				          .WORD CLIT
+>1053	04				          .TEXT 4
+>1054	6a 15				          .WORD MESS
+>1056	5c 0a				          .WORD SPACE
+>1058	bb 09				L2163     .WORD HERE
+>105a	38 07				          .WORD DUP
+>105c	8c 07				          .WORD CAT
+>105e	df 08				          .WORD WIDTH
+>1060	77 07				          .WORD AT
+>1062	d0 12				          .WORD MIN
+>1064	9f 09				          .WORD ONEP
+>1066	cb 09				          .WORD ALLOT
+>1068	ff 08				          .WORD DP       ;)
+>106a	8c 07				          .WORD CAT      ;| 6502 only. The code field
+>106c	65 02				          .WORD CLIT     ;| must not straddle page
+>106e	fd				          .TEXT $FD      ;| boundaries
+>106f	04 0a				          .WORD EQUAL    ;|
+>1071	cb 09				          .WORD ALLOT    ;)
+>1073	38 07				          .WORD DUP
+>1075	65 02				          .WORD CLIT
+>1077	a0				          .TEXT $A0
+>1078	68 07				          .WORD TOGGL
+>107a	bb 09				          .WORD HERE
+>107c	63 08				          .WORD ONE
+>107e	f8 09				          .WORD SUB
+>1080	65 02				          .WORD CLIT
+>1082	80				          .TEXT $80
+>1083	68 07				          .WORD TOGGL
+>1085	a6 0a				          .WORD LATES
+>1087	d7 09				          .WORD COMMA
+>1089	56 09				          .WORD CURR
+>108b	77 07				          .WORD AT
+>108d	9b 07				          .WORD STORE
+>108f	bb 09				          .WORD HERE
+>1091	ac 09				          .WORD TWOP
+>1093	d7 09				          .WORD COMMA
+>1095	0a 06				          .WORD SEMIS
+>1097	c9 5b 43 4f 4d 50 49 4c		L2200     .TEXT $C9,'[COMPILE',$DD
+>109f	45 dd
+>10a1	2b 10				          .WORD L2142    ; link to CREATE
+>10a3	d4 07				          .WORD DOCOL
+>10a5	8b 0f				          .WORD DFIND
+>10a7	71 06				          .WORD ZEQU
+>10a9	5b 08				          .WORD ZERO
+>10ab	0f 0b				          .WORD QERR
+>10ad	17 07				          .WORD DROP
+>10af	c5 0a				          .WORD CFA
+>10b1	d7 09				          .WORD COMMA
+>10b3	0a 06				          .WORD SEMIS
+>10b5	c7 4c 49 54 45 52 41 cc		L2216     .TEXT $C7,'LITERA',$CC
+>10bd	97 10				          .WORD L2200    ; link to [COMPILE]
+>10bf	d4 07				LITER     .WORD DOCOL
+>10c1	61 09				          .WORD STATE
+>10c3	77 07				          .WORD AT
+>10c5	54 03				          .WORD ZBRAN
+>10c7	08 00				L2222     .WORD 8        ; L2226-L2222
+>10c9	9d 0b				          .WORD COMP
+>10cb	28 02				          .WORD LIT
+>10cd	d7 09				          .WORD COMMA
+>10cf	0a 06				L2226     .WORD SEMIS
+>10d1	c8 44 4c 49 54 45 52 41		L2232     .TEXT $C8,'DLITERA',$CC
+>10d9	cc
+>10da	b5 10				          .WORD L2216    ; link to LITERAL
+>10dc	d4 07				DLIT      .WORD DOCOL
+>10de	61 09				          .WORD STATE
+>10e0	77 07				          .WORD AT
+>10e2	54 03				          .WORD ZBRAN
+>10e4	08 00				L2238     .WORD 8        ; L2242-L2238
+>10e6	20 07				          .WORD SWAP
+>10e8	bf 10				          .WORD LITER
+>10ea	bf 10				          .WORD LITER
+>10ec	0a 06				L2242     .WORD SEMIS
+>10ee	86 3f 53 54 41 43 cb		L2248     .TEXT $86,'?STAC',$CB
+>10f5	d1 10				          .WORD L2232    ; link to DLITERAL
+>10f7	d4 07				QSTAC     .WORD DOCOL
+>10f9	65 02				          .WORD CLIT
+>10fb	9e				          .TEXT TOS
+>10fc	d7 05				          .WORD SPAT
+>10fe	11 0a				          .WORD ULESS
+>1100	63 08				          .WORD ONE
+>1102	0f 0b				          .WORD QERR
+>1104	d7 05				          .WORD SPAT
+>1106	65 02				          .WORD CLIT
+>1108	20				          .TEXT BOS
+>1109	11 0a				          .WORD ULESS
+>110b	65 02				          .WORD CLIT
+>110d	07				          .TEXT 7
+>110e	0f 0b				          .WORD QERR
+>1110	0a 06				          .WORD SEMIS
+>1112	89 49 4e 54 45 52 50 52		L2269     .TEXT $89,'INTERPRE',$D4
+>111a	45 d4
+>111c	ee 10				          .WORD L2248    ; link to ?STACK
+>111e	d4 07				INTER     .WORD DOCOL
+>1120	8b 0f				L2272     .WORD DFIND
+>1122	54 03				          .WORD ZBRAN
+>1124	1e 00				L2274     .WORD $1E      ; L2289-L2274
+>1126	61 09				          .WORD STATE
+>1128	77 07				          .WORD AT
+>112a	1d 0a				          .WORD LESS
+>112c	54 03				          .WORD ZBRAN
+>112e	0a 00				L2279     .WORD $A       ; L2284-L2279
+>1130	c5 0a				          .WORD CFA
+>1132	d7 09				          .WORD COMMA
+>1134	35 03				          .WORD BRAN
+>1136	06 00				L2283     .WORD $6       ; L2286-L2283
+>1138	c5 0a				L2284     .WORD CFA
+>113a	1d 03				          .WORD EXEC
+>113c	f7 10				L2286     .WORD QSTAC
+>113e	35 03				          .WORD BRAN
+>1140	1c 00				L2288     .WORD $1C      ; L2302-L2288
+>1142	bb 09				L2289     .WORD HERE
+>1144	35 0f				          .WORD NUMBER
+>1146	74 09				          .WORD DPL
+>1148	77 07				          .WORD AT
+>114a	9f 09				          .WORD ONEP
+>114c	54 03				          .WORD ZBRAN
+>114e	08 00				L2295     .WORD 8        ; L2299-L2295
+>1150	dc 10				          .WORD DLIT
+>1152	35 03				          .WORD BRAN
+>1154	06 00				L2298     .WORD $6       ; L2301-L2298
+>1156	17 07				L2299     .WORD DROP
+>1158	bf 10				          .WORD LITER
+>115a	f7 10				L2301     .WORD QSTAC
+>115c	35 03				L2302     .WORD BRAN
+>115e	c2 ff				L2303     .WORD $FFC2    ; L2272-L2303
+>1160	89 49 4d 4d 45 44 49 41		L2309     .TEXT $89,'IMMEDIAT',$C5
+>1168	54 c5
+>116a	12 11				          .WORD L2269;   ; link to INTERPRET
+>116c	d4 07				          .WORD DOCOL
+>116e	a6 0a				          .WORD LATES
+>1170	65 02				          .WORD CLIT
+>1172	40				          .TEXT $40
+>1173	68 07				          .WORD TOGGL
+>1175	0a 06				          .WORD SEMIS
+>1177	8a 56 4f 43 41 42 55 4c		L2321     .TEXT $8A,'VOCABULAR',$D9
+>117f	41 52 d9
+>1182	60 11				          .WORD L2309    ; link to IMMEDIATE
+>1184	d4 07				          .WORD DOCOL
+>1186	3e 0c				          .WORD BUILD
+>1188	28 02 81 a0			          .WORD LIT,$A081
+>118c	d7 09				          .WORD COMMA
+>118e	56 09				          .WORD CURR
+>1190	77 07				          .WORD AT
+>1192	c5 0a				          .WORD CFA
+>1194	d7 09				          .WORD COMMA
+>1196	bb 09				          .WORD HERE
+>1198	0d 09				          .WORD VOCL
+>119a	77 07				          .WORD AT
+>119c	d7 09				          .WORD COMMA
+>119e	0d 09				          .WORD VOCL
+>11a0	9b 07				          .WORD STORE
+>11a2	4e 0c				          .WORD DOES
+>11a4	ac 09				DOVOC     .WORD TWOP
+>11a6	49 09				          .WORD CON
+>11a8	9b 07				          .WORD STORE
+>11aa	0a 06				          .WORD SEMIS
+>11ac	c5 46 4f 52 54 c8		L2346     .TEXT $C5,'FORT',$C8
+>11b2	77 11				          .WORD L2321    ; link to VOCABULARY
+>11b4	5a 0c				FORTH     .WORD DODOE
+>11b6	a4 11				          .WORD DOVOC
+>11b8	81 a0				          .WORD $A081
+>11ba	62 1a				XFOR      .WORD NTOP     ; points to top name in FORTH
+>11bc	00 00				VL0       .WORD 0        ; last vocab link ends at zero
+>11be	8b 44 45 46 49 4e 49 54		L2357     .TEXT $8B,'DEFINITION',$D3
+>11c6	49 4f 4e d3
+>11ca	ac 11				          .WORD L2346    ; link to FORTH
+>11cc	d4 07				DEFIN     .WORD DOCOL
+>11ce	49 09				          .WORD CON
+>11d0	77 07				          .WORD AT
+>11d2	56 09				          .WORD CURR
+>11d4	9b 07				          .WORD STORE
+>11d6	0a 06				          .WORD SEMIS
+>11d8	c1 a8				L2369     .TEXT $C1,$A8
+>11da	be 11				          .WORD L2357    ; link to DEFINITIONS
+>11dc	d4 07				          .WORD DOCOL
+>11de	65 02				          .WORD CLIT
+>11e0	29				          .TEXT $29
+>11e1	6e 0e				          .WORD WORD
+>11e3	0a 06				          .WORD SEMIS
+>11e5	84 51 55 49 d4			L2381     .TEXT $84,'QUI',$D4
+>11ea	d8 11				          .WORD L2369    ; link to (
+>11ec	d4 07				QUIT      .WORD DOCOL
+>11ee	5b 08				          .WORD ZERO
+>11f0	16 09				          .WORD BLK
+>11f2	9b 07				          .WORD STORE
+>11f4	b3 0b				          .WORD LBRAC
+>11f6	f6 05				L2388     .WORD RPSTO
+>11f8	f2 04				          .WORD CR
+>11fa	ae 0d				          .WORD QUERY
+>11fc	1e 11				          .WORD INTER
+>11fe	61 09				          .WORD STATE
+>1200	77 07				          .WORD AT
+>1202	71 06				          .WORD ZEQU
+>1204	54 03				          .WORD ZBRAN
+>1206	07 00				L2396     .WORD 7        ; L2399-L2396
+>1208	f4 0c				          .WORD PDOTQ
+>120a	02 4f 4b			          .TEXT 2,'OK'
+>120d	35 03				L2399     .WORD BRAN
+>120f	e7 ff				L2400     .WORD $FFE7    ; L2388-L2400
+>1211	0a 06				          .WORD SEMIS
+>1213	85 41 42 4f 52 d4		L2406     .TEXT $85,'ABOR',$D4
+>1219	e5 11				          .WORD L2381    ; link to QUIT
+>121b	d4 07				ABORT     .WORD DOCOL
+>121d	e6 05				          .WORD SPSTO
+>121f	fb 0b				          .WORD DECIM
+>1221	66 14				          .WORD DR0
+>1223	f2 04				          .WORD CR
+>1225	f4 0c				          .WORD PDOTQ
+>1227	0e 66 69 67 2d 46 4f 52		          .TEXT 14,'fig-FORTH  1.0'
+>122f	54 48 20 20 31 2e 30
+>1236	b4 11				          .WORD FORTH
+>1238	cc 11				          .WORD DEFIN
+>123a	ec 11				          .WORD QUIT
+>123c	84 43 4f 4c c4			L2423     .TEXT $84,'COL',$C4
+>1241	13 12				          .WORD L2406    ; link to ABORT
+>1243	45 12				COLD      .WORD *+2
+.1245	ad 0c 02	lda $020c	          LDA ORIG+$0C   ; from cold start area
+.1248	8d ba 11	sta $11ba	          STA FORTH+6
+.124b	ad 0d 02	lda $020d	          LDA ORIG+$0D
+.124e	8d bb 11	sta $11bb	          STA FORTH+7
+.1251	a0 15		ldy #$15	          LDY #$15
+.1253	d0 02		bne $1257	          BNE L2433
+.1255	a0 0f		ldy #$0f	WARM      LDY #$0F
+.1257	ad 10 02	lda $0210	L2433     LDA ORIG+$10
+.125a	85 b3		sta $b3		          STA UP
+.125c	ad 11 02	lda $0211	          LDA ORIG+$11
+.125f	85 b4		sta $b4		          STA UP+1
+.1261	b9 0c 02	lda $020c,y	L2437     LDA ORIG+$0C,Y
+.1264	91 b3		sta ($b3),y	          STA (UP),Y
+.1266	88		dey		          DEY
+.1267	10 f8		bpl $1261	          BPL  L2437
+.1269	a9 12		lda #$12	          LDA #>ABORT    ; actually #>(ABORT+2)
+.126b	85 af		sta $af		          STA IP+1
+.126d	a9 1d		lda #$1d	          LDA #<ABORT+2
+.126f	85 ae		sta $ae		          STA IP
+.1271	d8		cld		          CLD
+.1272	a9 6c		lda #$6c	          LDA #$6C
+.1274	85 b0		sta $b0		          STA W-1
+.1276	4c f8 05	jmp $05f8	          JMP RPSTO+2    ; And off we go !
+>1279	84 53 2d 3e c4			L2453     .TEXT $84,'S->',$C4
+>127e	3c 12				          .WORD L2423    ; link to COLD
+>1280	d4 07				STOD      .WORD DOCOL
+>1282	38 07				          .WORD DUP
+>1284	86 06				          .WORD ZLESS
+>1286	d6 06				          .WORD MINUS
+>1288	0a 06				          .WORD SEMIS
+>128a	82 2b ad			L2464     .TEXT $82,'+',$AD
+>128d	79 12				          .WORD L2453    ; link to S->D
+>128f	d4 07				PM        .WORD DOCOL
+>1291	86 06				          .WORD ZLESS
+>1293	54 03				          .WORD ZBRAN
+>1295	04 00				L2469     .WORD 4
+>1297	d6 06				          .WORD MINUS
+>1299	0a 06				L2471     .WORD SEMIS
+>129b	83 44 2b ad			L2476     .TEXT $83,'D+',$AD
+>129f	8a 12				          .WORD L2464    ; link to +-
+>12a1	d4 07				DPM       .WORD DOCOL
+>12a3	86 06				          .WORD ZLESS
+>12a5	54 03				          .WORD ZBRAN
+>12a7	04 00				L2481     .WORD 4        ; L2483-L2481
+>12a9	ef 06				          .WORD DMINU
+>12ab	0a 06				L2483     .WORD SEMIS
+>12ad	83 41 42 d3			L2488     .TEXT $83,'AB',$D3
+>12b1	9b 12				          .WORD L2476    ; link to D+-
+>12b3	d4 07				ABS       .WORD DOCOL
+>12b5	38 07				          .WORD DUP
+>12b7	8f 12				          .WORD PM
+>12b9	0a 06				          .WORD SEMIS
+>12bb	84 44 41 42 d3			L2498     .TEXT $84,'DAB',$D3
+>12c0	ad 12				          .WORD L2488    ; link to ABS
+>12c2	d4 07				DABS      .WORD DOCOL
+>12c4	38 07				          .WORD DUP
+>12c6	a1 12				          .WORD DPM
+>12c8	0a 06				          .WORD SEMIS
+>12ca	83 4d 49 ce			L2508     .TEXT $83,'MI',$CE
+>12ce	bb 12				          .WORD L2498    ; link to DABS
+>12d0	d4 07				MIN       .WORD DOCOL
+>12d2	06 07				          .WORD OVER
+>12d4	06 07				          .WORD OVER
+>12d6	3a 0a				          .WORD GREAT
+>12d8	54 03				          .WORD ZBRAN
+>12da	04 00				L2515     .WORD 4        ; L2517-L2515
+>12dc	20 07				          .WORD SWAP
+>12de	17 07				L2517     .WORD DROP
+>12e0	0a 06				          .WORD SEMIS
+>12e2	83 4d 41 d8			L2523     .TEXT $83,'MA',$D8
+>12e6	ca 12				          .WORD L2508     ; link to MIN
+>12e8	d4 07				MAX       .WORD DOCOL
+>12ea	06 07				          .WORD OVER
+>12ec	06 07				          .WORD OVER
+>12ee	1d 0a				          .WORD LESS
+>12f0	54 03				          .WORD ZBRAN
+>12f2	04 00				L2530     .WORD 4        ; L2532-L2530
+>12f4	20 07				          .WORD SWAP
+>12f6	17 07				L2532     .WORD DROP
+>12f8	0a 06				          .WORD SEMIS
+>12fa	82 4d aa			L2538     .TEXT $82,'M',$AA
+>12fd	e2 12				          .WORD L2523    ; link to MAX
+>12ff	d4 07				MSTAR     .WORD DOCOL
+>1301	06 07				          .WORD OVER
+>1303	06 07				          .WORD OVER
+>1305	c1 05				          .WORD XOR
+>1307	38 06				          .WORD TOR
+>1309	b3 12				          .WORD ABS
+>130b	20 07				          .WORD SWAP
+>130d	b3 12				          .WORD ABS
+>130f	21 05				          .WORD USTAR
+>1311	4a 06				          .WORD RFROM
+>1313	a1 12				          .WORD DPM
+>1315	0a 06				          .WORD SEMIS
+>1317	82 4d af			L2556     .TEXT $82,'M',$AF
+>131a	fa 12				          .WORD L2538    ; link to M*
+>131c	d4 07				MSLAS     .WORD DOCOL
+>131e	06 07				          .WORD OVER
+>1320	38 06				          .WORD TOR
+>1322	38 06				          .WORD TOR
+>1324	c2 12				          .WORD DABS
+>1326	5b 06				          .WORD R
+>1328	b3 12				          .WORD ABS
+>132a	59 05				          .WORD USLAS
+>132c	4a 06				          .WORD RFROM
+>132e	5b 06				          .WORD R
+>1330	c1 05				          .WORD XOR
+>1332	8f 12				          .WORD PM
+>1334	20 07				          .WORD SWAP
+>1336	4a 06				          .WORD RFROM
+>1338	8f 12				          .WORD PM
+>133a	20 07				          .WORD SWAP
+>133c	0a 06				          .WORD SEMIS
+>133e	81 aa				L2579     .TEXT $81,$AA
+>1340	17 13				          .WORD L2556    ; link to M/
+>1342	d4 07				STAR      .WORD DOCOL
+>1344	21 05				          .WORD USTAR
+>1346	17 07				          .WORD DROP
+>1348	0a 06				          .WORD SEMIS
+>134a	84 2f 4d 4f c4			L2589     .TEXT $84,'/MO',$C4
+>134f	3e 13				          .WORD L2579    ; link to *
+>1351	d4 07				SLMOD     .WORD DOCOL
+>1353	38 06				          .WORD TOR
+>1355	80 12				          .WORD STOD
+>1357	4a 06				          .WORD RFROM
+>1359	1c 13				          .WORD MSLAS
+>135b	0a 06				          .WORD SEMIS
+>135d	81 af				L2601     .TEXT $81,$AF
+>135f	4a 13				          .WORD L2589    ; link to /MOD
+>1361	d4 07				SLASH     .WORD DOCOL
+>1363	51 13				          .WORD SLMOD
+>1365	20 07				          .WORD SWAP
+>1367	17 07				          .WORD DROP
+>1369	0a 06				          .WORD SEMIS
+>136b	83 4d 4f c4			L2612     .TEXT $83,'MO',$C4
+>136f	5d 13				          .WORD L2601    ; link to /
+>1371	d4 07				MOD       .WORD DOCOL
+>1373	51 13				          .WORD SLMOD
+>1375	17 07				          .WORD DROP
+>1377	0a 06				          .WORD SEMIS
+>1379	85 2a 2f 4d 4f c4		L2622     .TEXT $85,'*/MO',$C4
+>137f	6b 13				          .WORD L2612    ; link to MOD
+>1381	d4 07				SSMOD     .WORD DOCOL
+>1383	38 06				          .WORD TOR
+>1385	ff 12				          .WORD MSTAR
+>1387	4a 06				          .WORD RFROM
+>1389	1c 13				          .WORD MSLAS
+>138b	0a 06				          .WORD SEMIS
+>138d	82 2a af			L2634     .TEXT $82,'*',$AF
+>1390	79 13				          .WORD L2622    ; link to */MOD
+>1392	d4 07				SSLAS     .WORD DOCOL
+>1394	81 13				          .WORD SSMOD
+>1396	20 07				          .WORD SWAP
+>1398	17 07				          .WORD DROP
+>139a	0a 06				          .WORD SEMIS
+>139c	85 4d 2f 4d 4f c4		L2645     .TEXT $85,'M/MO',$C4
+>13a2	8d 13				          .WORD L2634    ; link to */
+>13a4	d4 07				MSMOD     .WORD DOCOL
+>13a6	38 06				          .WORD TOR
+>13a8	5b 08				          .WORD ZERO
+>13aa	5b 06				          .WORD R
+>13ac	59 05				          .WORD USLAS
+>13ae	4a 06				          .WORD RFROM
+>13b0	20 07				          .WORD SWAP
+>13b2	38 06				          .WORD TOR
+>13b4	59 05				          .WORD USLAS
+>13b6	4a 06				          .WORD RFROM
+>13b8	0a 06				          .WORD SEMIS
+>13ba	83 55 53 c5			L2662     .TEXT $83,'US',$C5
+>13be	9c 13				          .WORD L2645    ; link to M/MOD
+>13c0	2f 08				USE       .WORD DOVAR
+>13c2	60 3b				          .WORD DAREA
+>13c4	84 50 52 45 d6			L2670     .TEXT $84,'PRE',$D6
+>13c9	ba 13				          .WORD L2662    ; link to USE
+>13cb	2f 08				PREV      .WORD DOVAR
+>13cd	60 3b				          .WORD DAREA
+>13cf	84 2b 42 55 c6			L2678     .TEXT $84,'+BU',$C6
+>13d4	c4 13				          .WORD L2670    ; link to PREV
+>13d6	d4 07				PBUF      .WORD DOCOL
+>13d8	28 02				          .WORD LIT
+>13da	84 00				          .WORD SSIZE+4  ; hold block #, one sector two num
+>13dc	97 06				          .WORD PLUS
+>13de	38 07				          .WORD DUP
+>13e0	9e 08				          .WORD LIMIT
+>13e2	04 0a				          .WORD EQUAL
+>13e4	54 03				          .WORD ZBRAN
+>13e6	06 00				L2688     .WORD 6        ; L2691-L2688
+>13e8	17 07				          .WORD DROP
+>13ea	92 08				          .WORD FIRST
+>13ec	38 07				L2691     .WORD DUP
+>13ee	cb 13				          .WORD PREV
+>13f0	77 07				          .WORD AT
+>13f2	f8 09				          .WORD SUB
+>13f4	0a 06				          .WORD SEMIS
+>13f6	86 55 50 44 41 54 c5		L2700     .TEXT $86,'UPDAT',$C5
+>13fd	cf 13				          .WORD L2678    ; link to +BUF
+>13ff	d4 07				UPDAT     .WORD DOCOL
+>1401	cb 13				          .WORD PREV
+>1403	77 07				          .WORD AT
+>1405	77 07				          .WORD AT
+>1407	28 02 00 80			          .WORD LIT,$8000
+>140b	ab 05				          .WORD OR
+>140d	cb 13				          .WORD PREV
+>140f	77 07				          .WORD AT
+>1411	9b 07				          .WORD STORE
+>1413	0a 06				          .WORD SEMIS
+>1415	85 46 4c 55 53 c8		L2705     .TEXT $85,'FLUS',$C8
+>141b	f6 13				          .WORD L2700    ; link to UPDATE
+>141d	d4 07				          .WORD DOCOL
+>141f	9e 08 92 08 f8 09		          .WORD LIMIT,FIRST,SUB
+>1425	aa 08 65 02			          .WORD BBUF,CLIT
+>1429	04				          .TEXT 4
+>142a	97 06 61 13 9f 09		          .WORD PLUS,SLASH,ONEP
+>1430	5b 08 dc 03			          .WORD ZERO,PDO
+>1434	28 02 ff 7f 8b 14		L2835     .WORD LIT,$7FFF,BUFFR
+>143a	17 07 75 03			          .WORD DROP,PLOOP
+>143e	f6 ff				L2839     .WORD $FFF6    ; L2835-L2839
+>1440	0a 06				          .WORD SEMIS
+>1442	8d 45 4d 50 54 59 2d 42		L2716     .TEXT $8D,'EMPTY-BUFFER',$D3
+>144a	55 46 46 45 52 d3
+>1450	15 14				          .WORD L2705    ; link to FLUSH
+>1452	d4 07				          .WORD DOCOL
+>1454	92 08				          .WORD FIRST
+>1456	9e 08				          .WORD LIMIT
+>1458	06 07				          .WORD OVER
+>145a	f8 09				          .WORD SUB
+>145c	24 0e				          .WORD ERASE
+>145e	0a 06				          .WORD SEMIS
+>1460	83 44 52 b0			L2729     .TEXT $83,'DR',$B0
+>1464	42 14				          .WORD L2716    ; link to EMPTY-BUFFERS
+>1466	d4 07				DR0       .WORD DOCOL
+>1468	5b 08				          .WORD ZERO
+>146a	3c 09				          .WORD OFSET
+>146c	9b 07				          .WORD STORE
+>146e	0a 06				          .WORD SEMIS
+>1470	83 44 52 b1			L2740     .TEXT $83,'DR',$B1
+>1474	60 14				          .WORD L2729    ; link to DR0
+>1476	d4 07				          .WORD DOCOL
+>1478	28 02 20 03			          .WORD LIT,SECTR ; sectors per drive
+>147c	3c 09				          .WORD OFSET
+>147e	9b 07				          .WORD STORE
+>1480	0a 06				          .WORD SEMIS
+>1482	86 42 55 46 46 45 d2		L2751     .TEXT $86,'BUFFE',$D2
+>1489	70 14				          .WORD L2740    ; link to DR1
+>148b	d4 07				BUFFR     .WORD DOCOL
+>148d	c0 13				          .WORD USE
+>148f	77 07				          .WORD AT
+>1491	38 07				          .WORD DUP
+>1493	38 06				          .WORD TOR
+>1495	d6 13				L2758     .WORD PBUF
+>1497	54 03				          .WORD ZBRAN
+>1499	fc ff				L2760     .WORD $FFFC    ; L2758-L2760
+>149b	c0 13				          .WORD USE
+>149d	9b 07				          .WORD STORE
+>149f	5b 06				          .WORD R
+>14a1	77 07				          .WORD AT
+>14a3	86 06				          .WORD ZLESS
+>14a5	54 03				          .WORD ZBRAN
+>14a7	14 00				L2767     .WORD $14      ; L2776-L2767
+>14a9	5b 06				          .WORD R
+>14ab	ac 09				          .WORD TWOP
+>14ad	5b 06				          .WORD R
+>14af	77 07				          .WORD AT
+>14b1	28 02 ff 7f			          .WORD LIT,$7FFF
+>14b5	96 05				          .WORD ANDD
+>14b7	5b 08				          .WORD ZERO
+>14b9	87 16				          .WORD RSLW
+>14bb	5b 06				L2776     .WORD R
+>14bd	9b 07				          .WORD STORE
+>14bf	5b 06				          .WORD R
+>14c1	cb 13				          .WORD PREV
+>14c3	9b 07				          .WORD STORE
+>14c5	4a 06				          .WORD RFROM
+>14c7	ac 09				          .WORD TWOP
+>14c9	0a 06				          .WORD SEMIS
+>14cb	85 42 4c 4f 43 cb		L2788     .TEXT $85,'BLOC',$CB
+>14d1	82 14				          .WORD L2751    ; link to BUFFER
+>14d3	d4 07				BLOCK     .WORD DOCOL
+>14d5	3c 09				          .WORD OFSET
+>14d7	77 07				          .WORD AT
+>14d9	97 06				          .WORD PLUS
+>14db	38 06				          .WORD TOR
+>14dd	cb 13				          .WORD PREV
+>14df	77 07				          .WORD AT
+>14e1	38 07				          .WORD DUP
+>14e3	77 07				          .WORD AT
+>14e5	5b 06				          .WORD R
+>14e7	f8 09				          .WORD SUB
+>14e9	38 07				          .WORD DUP
+>14eb	97 06				          .WORD PLUS
+>14ed	54 03				          .WORD ZBRAN
+>14ef	34 00				L2804     .WORD $34      ; L2830-L2804
+>14f1	d6 13				L2805     .WORD PBUF
+>14f3	71 06				          .WORD ZEQU
+>14f5	54 03				          .WORD ZBRAN
+>14f7	14 00				L2808     .WORD $14      ; L2818-L2808
+>14f9	17 07				          .WORD DROP
+>14fb	5b 06				          .WORD R
+>14fd	8b 14				          .WORD BUFFR
+>14ff	38 07				          .WORD DUP
+>1501	5b 06				          .WORD R
+>1503	63 08				          .WORD ONE
+>1505	87 16				          .WORD RSLW
+>1507	6b 08				          .WORD TWO
+>1509	f8 09				          .WORD SUB
+>150b	38 07				L2818     .WORD DUP
+>150d	77 07				          .WORD AT
+>150f	5b 06				          .WORD R
+>1511	f8 09				          .WORD SUB
+>1513	38 07				          .WORD DUP
+>1515	97 06				          .WORD PLUS
+>1517	71 06				          .WORD ZEQU
+>1519	54 03				          .WORD ZBRAN
+>151b	d6 ff				L2826     .WORD $FFD6    ; L2805-L2826
+>151d	38 07				          .WORD DUP
+>151f	cb 13				          .WORD PREV
+>1521	9b 07				          .WORD STORE
+>1523	4a 06				L2830     .WORD RFROM
+>1525	17 07				          .WORD DROP
+>1527	ac 09				          .WORD TWOP
+>1529	0a 06				          .WORD SEMIS    ; end of BLOCK
+>152b	86 28 4c 49 4e 45 a9		L2838     .TEXT $86,'(LINE',$A9
+>1532	cb 14				          .WORD L2788    ; link to BLOCK
+>1534	d4 07				PLINE     .WORD DOCOL
+>1536	38 06				          .WORD TOR
+>1538	86 08				          .WORD CSLL
+>153a	aa 08				          .WORD BBUF
+>153c	81 13				          .WORD SSMOD
+>153e	4a 06				          .WORD RFROM
+>1540	b6 08				          .WORD BSCR
+>1542	42 13				          .WORD STAR
+>1544	97 06				          .WORD PLUS
+>1546	d3 14				          .WORD BLOCK
+>1548	97 06				          .WORD PLUS
+>154a	86 08				          .WORD CSLL
+>154c	0a 06				          .WORD SEMIS
+>154e	85 2e 4c 49 4e c5		L2857     .TEXT $85,'.LIN',$C5
+>1554	2b 15				          .WORD L2838    ; link to (LINE)
+>1556	d4 07				DLINE     .WORD DOCOL
+>1558	34 15				          .WORD PLINE
+>155a	c1 0c				          .WORD DTRAI
+>155c	93 0c				          .WORD TYPE
+>155e	0a 06				          .WORD SEMIS
+>1560	87 4d 45 53 53 41 47 c5		L2868     .TEXT $87,'MESSAG',$C5
+>1568	4e 15				          .WORD L2857    ; link to .LINE
+>156a	d4 07				MESS      .WORD DOCOL
+>156c	ec 08				          .WORD WARN
+>156e	77 07				          .WORD AT
+>1570	54 03				          .WORD ZBRAN
+>1572	1b 00				L2874     .WORD $1B      ; L2888-L2874
+>1574	6b 0a				          .WORD DDUP
+>1576	54 03				          .WORD ZBRAN
+>1578	11 00				L2877     .WORD $11      ; L2886-L2877
+>157a	65 02				          .WORD CLIT
+>157c	04				          .TEXT 4
+>157d	3c 09				          .WORD OFSET
+>157f	77 07				          .WORD AT
+>1581	b6 08				          .WORD BSCR
+>1583	61 13				          .WORD SLASH
+>1585	f8 09				          .WORD SUB
+>1587	56 15				          .WORD DLINE
+>1589	35 03				L2886     .WORD BRAN
+>158b	0d 00				L2887     .WORD 13       ; L2891-L2887
+>158d	f4 0c				L2888     .WORD PDOTQ
+>158f	06 4d 53 47 20 23 20		          .TEXT 6,'MSG # '
+>1596	5b 19				          .WORD DOT
+>1598	0a 06				L2891     .WORD SEMIS
+>159a	84 4c 4f 41 c4			L2896     .TEXT $84,'LOA',$C4
+>159f	60 15				          .WORD L2868    ; link to MESSAGE
+>15a1	d4 07				LOAD      .WORD DOCOL
+>15a3	16 09				          .WORD BLK
+>15a5	77 07				          .WORD AT
+>15a7	38 06				          .WORD TOR
+>15a9	1e 09				          .WORD IN
+>15ab	77 07				          .WORD AT
+>15ad	38 06				          .WORD TOR
+>15af	5b 08				          .WORD ZERO
+>15b1	1e 09				          .WORD IN
+>15b3	9b 07				          .WORD STORE
+>15b5	b6 08				          .WORD BSCR
+>15b7	42 13				          .WORD STAR
+>15b9	16 09				          .WORD BLK
+>15bb	9b 07				          .WORD STORE
+>15bd	1e 11				          .WORD INTER
+>15bf	4a 06				          .WORD RFROM
+>15c1	1e 09				          .WORD IN
+>15c3	9b 07				          .WORD STORE
+>15c5	4a 06				          .WORD RFROM
+>15c7	16 09				          .WORD BLK
+>15c9	9b 07				          .WORD STORE
+>15cb	0a 06				          .WORD SEMIS
+>15cd	c3 2d 2d be			L2924     .TEXT $C3,'--',$BE
+>15d1	9a 15				          .WORD L2896    ; link to LOAD
+>15d3	d4 07				          .WORD DOCOL
+>15d5	84 0b				          .WORD QLOAD
+>15d7	5b 08				          .WORD ZERO
+>15d9	1e 09				          .WORD IN
+>15db	9b 07				          .WORD STORE
+>15dd	b6 08				          .WORD BSCR
+>15df	16 09				          .WORD BLK
+>15e1	77 07				          .WORD AT
+>15e3	06 07				          .WORD OVER
+>15e5	71 13				          .WORD MOD
+>15e7	f8 09				          .WORD SUB
+>15e9	16 09				          .WORD BLK
+>15eb	47 07				          .WORD PSTOR
+>15ed	0a 06				          .WORD SEMIS
+.15ef	98		tya		XEMIT     TYA
+.15f0	38		sec		          SEC
+.15f1	a0 1a		ldy #$1a	          LDY #$1A
+.15f3	71 b3		adc ($b3),y	          ADC (UP),Y
+.15f5	91 b3		sta ($b3),y	          STA (UP),Y
+.15f7	c8		iny		          INY            ; bump user varaible OUT
+.15f8	a9 00		lda #$00	          LDA #0
+.15fa	71 b3		adc ($b3),y	          ADC (UP),Y
+.15fc	91 b3		sta ($b3),y	          STA (UP),Y
+.15fe	b5 00		lda $00,x	          LDA 0,X        ; fetch character to output
+.1600	86 b5		stx $b5		          STX XSAVE
+.1602	20 c1 d2	jsr $d2c1	          JSR OUTCH      ; and display it
+.1605	a6 b5		ldx $b5		          LDX XSAVE
+.1607	4c ec 03	jmp $03ec	          JMP POP
+.160a	86 b5		stx $b5		XKEY      STX XSAVE
+.160c	20 dc d1	jsr $d1dc	          JSR INCH       ; might otherwise clobber it while
+.160f	a6 b5		ldx $b5		          LDX XSAVE      ; inputting a char to accumulator
+.1611	4c da 05	jmp $05da	          JMP PUSHOA
+.1614	ad 00 c0	lda $c000	XQTER     LDA $C000      ; system depend port test
+.1617	cd 01 c0	cmp $c001	          CMP $C001
+.161a	29 01		and #$01	          AND #1
+.161c	4c da 05	jmp $05da	          JMP PUSHOA
+.161f	86 b5		stx $b5		XCR       STX XSAVE
+.1621	20 f1 d0	jsr $d0f1	          JSR TCR        ; use monitor call
+.1624	a6 b5		ldx $b5		          LDX XSAVE
+.1626	4c 42 02	jmp $0242	          JMP NEXT
+>1629	85 2d 44 49 53 c3		L3030     .TEXT $85,'-DIS',$C3
+>162f	cd 15				          .WORD L2924    ; link to -->
+>1631	33 16				DDISC     .WORD *+2
+.1633	b5 00		lda $00,x	          LDA 0,X
+.1635	8d 0c c6	sta $c60c	          STA $C60C
+.1638	8d 0d c6	sta $c60d	          STA $C60D      ; store sector number
+.163b	b5 02		lda $02,x	          LDA 2,X
+.163d	8d 0a c6	sta $c60a	          STA $C60A
+.1640	8d 0b c6	sta $c60b	          STA $C60B      ; store track number
+.1643	b5 04		lda $04,x	          LDA 4,X
+.1645	8d cd c4	sta $c4cd	          STA $C4CD
+.1648	8d ce c4	sta $c4ce	          STA $C4CE      ; store drive number
+.164b	86 b5		stx $b5		          STX XSAVE
+.164d	ad da c4	lda $c4da	          LDA $C4DA      ; sense read or write
+.1650	d0 06		bne $1658	          BNE L3032
+.1652	20 fe e1	jsr $e1fe	          JSR $E1FE
+.1655	4c 5b 16	jmp $165b	          JMP L3040
+.1658	20 62 e2	jsr $e262	L3032     JSR $E262
+.165b	20 ef e3	jsr $e3ef	L3040     JSR $E3EF      ; head up motor off
+.165e	a6 b5		ldx $b5		          LDX XSAVE
+.1660	ad e1 c4	lda $c4e1	          LDA $C4E1      ; report error code
+.1663	95 04		sta $04,x	          STA 4,X
+.1665	4c ea 03	jmp $03ea	          JMP POPTWO
+>1668	84 2d 42 43 c4			L3050     .TEXT $84,'-BC',$C4
+>166d	29 16				          .WORD L3030    ; link to -DISC
+>166f	d4 07				DBCD      .WORD DOCOL
+>1671	5b 08 65 02			          .WORD ZERO,CLIT
+>1675	0a				          .TEXT 10
+>1676	59 05 65 02			          .WORD USLAS,CLIT
+>167a	10				          .TEXT 16
+>167b	42 13 ab 05 0a 06		          .WORD STAR,OR,SEMIS
+>1681	83 52 2f d7			L3060     .TEXT $83,'R/',$D7
+>1685	68 16				          .WORD L3050    ; link to -BCD
+>1687	d4 07				RSLW      .WORD DOCOL
+>1689	71 06 28 02 da c4 b3 07		          .WORD ZEQU,LIT,$C4DA,CSTOR
+>1691	20 07 5b 08 9b 07		          .WORD SWAP,ZERO,STORE
+>1697	5b 08 06 07 3a 0a 06 07		          .WORD ZERO,OVER,GREAT,OVER
+>169f	28 02 3f 06 3a 0a ab 05		          .WORD LIT,SECTL-1,GREAT,OR,CLIT
+>16a7	65 02
+>16a9	06				          .TEXT 6
+>16aa	0f 0b				          .WORD QERR
+>16ac	5b 08 28 02 20 03 59 05		          .WORD ZERO,LIT,SECTR,USLAS,ONEP
+>16b4	9f 09
+>16b6	20 07 5b 08 65 02		          .WORD SWAP,ZERO,CLIT
+>16bc	12				          .TEXT $12
+>16bd	59 05 6f 16 20 07 9f 09		          .WORD USLAS,DBCD,SWAP,ONEP
+>16c5	6f 16 31 16 65 02		          .WORD DBCD,DDISC,CLIT
+>16cb	08				          .TEXT 8
+>16cc	0f 0b				          .WORD QERR
+>16ce	0a 06				          .WORD SEMIS
+>16d0	0a 06				          .WORD SEMIS
+>16d2	c1 a7				L3202     .TEXT $C1,$A7
+>16d4	81 16				          .WORD L3060    ; link to R/W
+>16d6	d4 07				TICK      .WORD DOCOL
+>16d8	8b 0f				          .WORD DFIND
+>16da	71 06				          .WORD ZEQU
+>16dc	5b 08				          .WORD ZERO
+>16de	0f 0b				          .WORD QERR
+>16e0	17 07				          .WORD DROP
+>16e2	bf 10				          .WORD LITER
+>16e4	0a 06				          .WORD SEMIS
+>16e6	86 46 4f 52 47 45 d4		L3217     .TEXT $86,'FORGE',$D4
+>16ed	d2 16				          .WORD L3202    ; link to ' TICK
+>16ef	d4 07				FORG      .WORD DOCOL
+>16f1	d6 16 d3 0a 38 07		          .WORD TICK,NFA,DUP
+>16f7	f7 08 77 07 11 0a 65 02		          .WORD FENCE,AT,ULESS,CLIT
+>16ff	15				          .TEXT $15
+>1700	0f 0b 38 06 0d 09 77 07		          .WORD QERR,TOR,VOCL,AT
+>1708	5b 06 06 07 11 0a		L3220     .WORD R,OVER,ULESS
+>170e	54 03 14 00			          .WORD ZBRAN,L3225-*
+>1712	b4 11 cc 11 77 07 38 07		          .WORD FORTH,DEFIN,AT,DUP
+>171a	0d 09 9b 07			          .WORD VOCL,STORE
+>171e	35 03 e8 ff			          .WORD BRAN,$FFFF-24+1 ; L3220-*
+>1722	38 07 65 02			L3225     .WORD DUP,CLIT
+>1726	04				          .TEXT 4
+>1727	f8 09				          .WORD SUB
+>1729	e8 0a b6 0a 77 07		L3228     .WORD PFA,LFA,AT
+>172f	38 07				          .WORD DUP
+>1731	5b 06				          .WORD R
+>1733	11 0a				          .WORD ULESS
+>1735	54 03 f2 ff			          .WORD ZBRAN,$FFFF-14+1 ; L3228-*
+>1739	06 07 6b 08 f8 09 9b 07		          .WORD OVER,TWO,SUB,STORE
+>1741	77 07 6b 0a 71 06		          .WORD AT,DDUP,ZEQU
+>1747	54 03 d9 ff			          .WORD ZBRAN,$FFFF-39+1 ; L3225-*
+>174b	4a 06 ff 08 9b 07		          .WORD RFROM,DP,STORE
+>1751	0a 06				          .WORD SEMIS
+>1753	84 42 41 43 cb			L3250     .TEXT $84,'BAC',$CB
+>1758	e6 16				          .WORD L3217    ; link to FORGET
+>175a	d4 07				BACK      .WORD DOCOL
+>175c	bb 09				          .WORD HERE
+>175e	f8 09				          .WORD SUB
+>1760	d7 09				          .WORD COMMA
+>1762	0a 06				          .WORD SEMIS
+>1764	c5 42 45 47 49 ce		L3261     .TEXT $C5,'BEGI',$CE
+>176a	53 17				          .WORD L3250    ; link to BACK
+>176c	d4 07				          .WORD DOCOL
+>176e	29 0b				          .WORD QCOMP
+>1770	bb 09				          .WORD HERE
+>1772	63 08				          .WORD ONE
+>1774	0a 06				          .WORD SEMIS
+>1776	c5 45 4e 44 49 c6		L3273     .TEXT $C5,'ENDI',$C6
+>177c	64 17				          .WORD L3261    ; link to BEGIN
+>177e	d4 07				ENDIF     .WORD DOCOL
+>1780	29 0b				          .WORD QCOMP
+>1782	6b 08				          .WORD TWO
+>1784	56 0b				          .WORD QPAIR
+>1786	bb 09				          .WORD HERE
+>1788	06 07				          .WORD OVER
+>178a	f8 09				          .WORD SUB
+>178c	20 07				          .WORD SWAP
+>178e	9b 07				          .WORD STORE
+>1790	0a 06				          .WORD SEMIS
+>1792	c4 54 48 45 ce			L3290     .TEXT $C4,'THE',$CE
+>1797	76 17				          .WORD L3273    ; link to ENDIF
+>1799	d4 07				          .WORD DOCOL
+>179b	7e 17				          .WORD ENDIF
+>179d	0a 06				          .WORD SEMIS
+>179f	c2 44 cf			L3300     .TEXT $C2,'D',$CF
+>17a2	92 17				          .WORD L3290    ; link to THEN
+>17a4	d4 07				          .WORD DOCOL
+>17a6	9d 0b				          .WORD COMP
+>17a8	dc 03				          .WORD PDO
+>17aa	bb 09				          .WORD HERE
+>17ac	73 08				          .WORD THREE
+>17ae	0a 06				          .WORD SEMIS
+>17b0	c4 4c 4f 4f d0			L3313     .TEXT $C4,'LOO',$D0
+>17b5	9f 17				          .WORD L3300    ; link to DO
+>17b7	d4 07				          .WORD DOCOL
+>17b9	73 08				          .WORD THREE
+>17bb	56 0b				          .WORD QPAIR
+>17bd	9d 0b				          .WORD COMP
+>17bf	75 03				          .WORD PLOOP
+>17c1	5a 17				          .WORD BACK
+>17c3	0a 06				          .WORD SEMIS
+>17c5	c5 2b 4c 4f 4f d0		L3327     .TEXT $C5,'+LOO',$D0
+>17cb	b0 17				          .WORD L3313    ; link to LOOP
+>17cd	d4 07				          .WORD DOCOL
+>17cf	73 08				          .WORD THREE
+>17d1	56 0b				          .WORD QPAIR
+>17d3	9d 0b				          .WORD COMP
+>17d5	a5 03				          .WORD PPLOO
+>17d7	5a 17				          .WORD BACK
+>17d9	0a 06				          .WORD SEMIS
+>17db	c5 55 4e 54 49 cc		L3341     .TEXT $C5,'UNTI',$CC
+>17e1	c5 17				          .WORD L3327    ; link to +LOOP
+>17e3	d4 07				UNTIL     .WORD DOCOL
+>17e5	63 08				          .WORD ONE
+>17e7	56 0b				          .WORD QPAIR
+>17e9	9d 0b				          .WORD COMP
+>17eb	54 03				          .WORD ZBRAN
+>17ed	5a 17				          .WORD BACK
+>17ef	0a 06				          .WORD SEMIS
+>17f1	c3 45 4e c4			L3355     .TEXT $C3,'EN',$C4
+>17f5	db 17				          .WORD L3341    ; link to UNTIL
+>17f7	d4 07				          .WORD DOCOL
+>17f9	e3 17				          .WORD UNTIL
+>17fb	0a 06				          .WORD SEMIS
+>17fd	c5 41 47 41 49 ce		L3365     .TEXT $C5,'AGAI',$CE
+>1803	f1 17				          .WORD L3355    ; link to END
+>1805	d4 07				AGAIN     .WORD DOCOL
+>1807	63 08				          .WORD ONE
+>1809	56 0b				          .WORD QPAIR
+>180b	9d 0b				          .WORD COMP
+>180d	35 03				          .WORD BRAN
+>180f	5a 17				          .WORD BACK
+>1811	0a 06				          .WORD SEMIS
+>1813	c6 52 45 50 45 41 d4		L3379     .TEXT $C6,'REPEA',$D4
+>181a	fd 17				          .WORD L3365    ; link to AGAIN
+>181c	d4 07				          .WORD DOCOL
+>181e	38 06				          .WORD TOR
+>1820	38 06				          .WORD TOR
+>1822	05 18				          .WORD AGAIN
+>1824	4a 06				          .WORD RFROM
+>1826	4a 06				          .WORD RFROM
+>1828	6b 08				          .WORD TWO
+>182a	f8 09				          .WORD SUB
+>182c	7e 17				          .WORD ENDIF
+>182e	0a 06				          .WORD SEMIS
+>1830	c2 49 c6			L3396     .TEXT $C2,'I',$C6
+>1833	13 18				          .WORD L3379    ; link to REPEAT
+>1835	d4 07				IF        .WORD DOCOL
+>1837	9d 0b				          .WORD COMP
+>1839	54 03				          .WORD ZBRAN
+>183b	bb 09				          .WORD HERE
+>183d	5b 08				          .WORD ZERO
+>183f	d7 09				          .WORD COMMA
+>1841	6b 08				          .WORD TWO
+>1843	0a 06				          .WORD SEMIS
+>1845	c4 45 4c 53 c5			L3411     .TEXT $C4,'ELS',$C5
+>184a	30 18				          .WORD L3396    ; link to IF
+>184c	d4 07				          .WORD DOCOL
+>184e	6b 08				          .WORD TWO
+>1850	56 0b				          .WORD QPAIR
+>1852	9d 0b				          .WORD COMP
+>1854	35 03				          .WORD BRAN
+>1856	bb 09				          .WORD HERE
+>1858	5b 08				          .WORD ZERO
+>185a	d7 09				          .WORD COMMA
+>185c	20 07				          .WORD SWAP
+>185e	6b 08				          .WORD TWO
+>1860	7e 17				          .WORD ENDIF
+>1862	6b 08				          .WORD TWO
+>1864	0a 06				          .WORD SEMIS
+>1866	c5 57 48 49 4c c5		L3431     .TEXT $C5,'WHIL',$C5
+>186c	45 18				          .WORD L3411    ; link to ELSE
+>186e	d4 07				          .WORD DOCOL
+>1870	35 18				          .WORD IF
+>1872	ac 09				          .WORD TWOP
+>1874	0a 06				          .WORD SEMIS
+>1876	86 53 50 41 43 45 d3		L3442     .TEXT $86,'SPACE',$D3
+>187d	66 18				          .WORD L3431    ; link to WHILE
+>187f	d4 07				SPACS     .WORD DOCOL
+>1881	5b 08				          .WORD ZERO
+>1883	e8 12				          .WORD MAX
+>1885	6b 0a				          .WORD DDUP
+>1887	54 03				          .WORD ZBRAN
+>1889	0c 00				L3449     .WORD $0C      ; L3455-L3449
+>188b	5b 08				          .WORD ZERO
+>188d	dc 03				          .WORD PDO
+>188f	5c 0a				L3452     .WORD SPACE
+>1891	75 03				          .WORD PLOOP
+>1893	fc ff				L3454     .WORD $FFFC    ; L3452-L3454
+>1895	0a 06				L3455     .WORD SEMIS
+>1897	82 3c a3			L3460     .TEXT $82,'<',$A3
+>189a	76 18				          .WORD L3442    ; link to SPACES
+>189c	d4 07				BDIGS     .WORD DOCOL
+>189e	5c 0e				          .WORD PAD
+>18a0	97 09				          .WORD HLD
+>18a2	9b 07				          .WORD STORE
+>18a4	0a 06				          .WORD SEMIS
+>18a6	82 23 be			L3471     .TEXT $82,'#',$BE
+>18a9	97 18				          .WORD L3460    ; link to <#
+>18ab	d4 07				EDIGS     .WORD DOCOL
+>18ad	17 07				          .WORD DROP
+>18af	17 07				          .WORD DROP
+>18b1	97 09				          .WORD HLD
+>18b3	77 07				          .WORD AT
+>18b5	5c 0e				          .WORD PAD
+>18b7	06 07				          .WORD OVER
+>18b9	f8 09				          .WORD SUB
+>18bb	0a 06				          .WORD SEMIS
+>18bd	84 53 49 47 ce			L3486     .TEXT $84,'SIG',$CE
+>18c2	a6 18				          .WORD L3471    ; link to #>
+>18c4	d4 07				SIGN      .WORD DOCOL
+>18c6	48 0a				          .WORD ROT
+>18c8	86 06				          .WORD ZLESS
+>18ca	54 03				          .WORD ZBRAN
+>18cc	07 00				L3492     .WORD $7       ; L3496-L3492
+>18ce	65 02				          .WORD CLIT
+>18d0	2d				          .TEXT $2D
+>18d1	44 0e				          .WORD HOLD
+>18d3	0a 06				L3496     .WORD SEMIS
+>18d5	81 a3				L3501     .TEXT $81,$A3
+>18d7	bd 18				          .WORD L3486    ; link to SIGN
+>18d9	d4 07				DIG       .WORD DOCOL
+>18db	6b 09				          .WORD BASE
+>18dd	77 07				          .WORD AT
+>18df	a4 13				          .WORD MSMOD
+>18e1	48 0a				          .WORD ROT
+>18e3	65 02				          .WORD CLIT
+>18e5	09				          .TEXT 9
+>18e6	06 07				          .WORD OVER
+>18e8	1d 0a				          .WORD LESS
+>18ea	54 03				          .WORD ZBRAN
+>18ec	07 00				L3513     .WORD 7        ; L3517-L3513
+>18ee	65 02				          .WORD CLIT
+>18f0	07				          .TEXT 7
+>18f1	97 06				          .WORD PLUS
+>18f3	65 02				L3517     .WORD CLIT
+>18f5	30				          .TEXT $30
+>18f6	97 06				          .WORD PLUS
+>18f8	44 0e				          .WORD HOLD
+>18fa	0a 06				          .WORD SEMIS
+>18fc	82 23 d3			L3526     .TEXT $82,'#',$D3
+>18ff	d5 18				          .WORD L3501    ; link to #
+>1901	d4 07				DIGS      .WORD DOCOL
+>1903	d9 18				L3529     .WORD DIG
+>1905	06 07				          .WORD OVER
+>1907	06 07				          .WORD OVER
+>1909	ab 05				          .WORD OR
+>190b	71 06				          .WORD ZEQU
+>190d	54 03				          .WORD ZBRAN
+>190f	f4 ff				L3535     .WORD $FFF4    ; L3529-L3535
+>1911	0a 06				          .WORD SEMIS
+>1913	83 44 2e d2			L3541     .TEXT $83,'D.',$D2
+>1917	fc 18				          .WORD L3526    ; link to #S
+>1919	d4 07				DDOTR     .WORD DOCOL
+>191b	38 06				          .WORD TOR
+>191d	20 07				          .WORD SWAP
+>191f	06 07				          .WORD OVER
+>1921	c2 12				          .WORD DABS
+>1923	9c 18				          .WORD BDIGS
+>1925	01 19				          .WORD DIGS
+>1927	c4 18				          .WORD SIGN
+>1929	ab 18				          .WORD EDIGS
+>192b	4a 06				          .WORD RFROM
+>192d	06 07				          .WORD OVER
+>192f	f8 09				          .WORD SUB
+>1931	7f 18				          .WORD SPACS
+>1933	93 0c				          .WORD TYPE
+>1935	0a 06				          .WORD SEMIS
+>1937	82 44 ae			L3562     .TEXT $82,'D',$AE
+>193a	13 19				          .WORD L3541    ; link to D.R
+>193c	d4 07				DDOT      .WORD DOCOL
+>193e	5b 08				          .WORD ZERO
+>1940	19 19				          .WORD DDOTR
+>1942	5c 0a				          .WORD SPACE
+>1944	0a 06				          .WORD SEMIS
+>1946	82 2e d2			L3573     .TEXT $82,'.',$D2
+>1949	37 19				          .WORD L3562     ; link to D.
+>194b	d4 07				DOTR      .WORD DOCOL
+>194d	38 06				          .WORD TOR
+>194f	80 12				          .WORD STOD
+>1951	4a 06				          .WORD RFROM
+>1953	19 19				          .WORD DDOTR
+>1955	0a 06				          .WORD SEMIS
+>1957	81 ae				L3585     .TEXT $81,$AE
+>1959	46 19				          .WORD L3573    ; link to .R
+>195b	d4 07				DOT       .WORD DOCOL
+>195d	80 12				          .WORD STOD
+>195f	3c 19				          .WORD DDOT
+>1961	0a 06				          .WORD SEMIS
+>1963	81 bf				L3595     .TEXT $81,$BF
+>1965	57 19				          .WORD L3585    ; link to .
+>1967	d4 07				QUES      .WORD DOCOL
+>1969	77 07				          .WORD AT
+>196b	5b 19				          .WORD DOT
+>196d	0a 06				          .WORD SEMIS
+>196f	84 4c 49 53 d4			L3605     .TEXT $84,'LIS',$D4
+>1974	63 19				          .WORD L3595    ; link to ?
+>1976	d4 07				LIST      .WORD DOCOL
+>1978	fb 0b				          .WORD DECIM
+>197a	f2 04				          .WORD CR
+>197c	38 07				          .WORD DUP
+>197e	30 09				          .WORD SCR
+>1980	9b 07				          .WORD STORE
+>1982	f4 0c				          .WORD PDOTQ
+>1984	06 53 43 52 20 23 20		          .TEXT 6,'SCR # '
+>198b	5b 19				          .WORD DOT
+>198d	65 02				          .WORD CLIT
+>198f	10				          .TEXT 16
+>1990	5b 08				          .WORD ZERO
+>1992	dc 03				          .WORD PDO
+>1994	f2 04				L3620     .WORD CR
+>1996	f5 03				          .WORD I
+>1998	73 08				          .WORD THREE
+>199a	4b 19				          .WORD DOTR
+>199c	5c 0a				          .WORD SPACE
+>199e	f5 03				          .WORD I
+>19a0	30 09				          .WORD SCR
+>19a2	77 07				          .WORD AT
+>19a4	56 15				          .WORD DLINE
+>19a6	75 03				          .WORD PLOOP
+>19a8	ec ff				L3630     .WORD $FFEC
+>19aa	f2 04				          .WORD CR
+>19ac	0a 06				          .WORD SEMIS
+>19ae	85 49 4e 44 45 d8		L3637     .TEXT $85,'INDE',$D8
+>19b4	6f 19				          .WORD L3605    ; link to LIST
+>19b6	d4 07				          .WORD DOCOL
+>19b8	f2 04				          .WORD CR
+>19ba	9f 09				          .WORD ONEP
+>19bc	20 07				          .WORD SWAP
+>19be	dc 03				          .WORD PDO
+>19c0	f2 04				L3647     .WORD CR
+>19c2	f5 03				          .WORD I
+>19c4	73 08				          .WORD THREE
+>19c6	4b 19				          .WORD DOTR
+>19c8	5c 0a				          .WORD SPACE
+>19ca	5b 08				          .WORD ZERO
+>19cc	f5 03				          .WORD I
+>19ce	56 15				          .WORD DLINE
+>19d0	eb 04				          .WORD QTERM
+>19d2	54 03				          .WORD ZBRAN
+>19d4	04 00				L3657     .WORD 4        ; L3659-L3657
+>19d6	1d 06				          .WORD LEAVE
+>19d8	75 03				L3659     .WORD PLOOP
+>19da	e6 ff				L3660     .WORD $FFE6    ; L3647-L3660
+>19dc	65 02				          .WORD CLIT
+>19de	0c				          .TEXT $0C      ; form feed for printer
+>19df	d5 04				          .WORD EMIT
+>19e1	0a 06				          .WORD SEMIS
+>19e3	85 54 52 49 41 c4		L3666     .TEXT $85,'TRIA',$C4
+>19e9	ae 19				          .WORD L3637    ; link to INDEX
+>19eb	d4 07				          .WORD DOCOL
+>19ed	73 08				          .WORD THREE
+>19ef	61 13				          .WORD SLASH
+>19f1	73 08				          .WORD THREE
+>19f3	42 13				          .WORD STAR
+>19f5	73 08				          .WORD THREE
+>19f7	06 07				          .WORD OVER
+>19f9	97 06				          .WORD PLUS
+>19fb	20 07				          .WORD SWAP
+>19fd	dc 03				          .WORD PDO
+>19ff	f2 04				L3681     .WORD CR
+>1a01	f5 03				          .WORD I
+>1a03	76 19				          .WORD LIST
+>1a05	75 03				          .WORD PLOOP
+>1a07	f8 ff				L3685     .WORD $FFF8    ; L3681-L3685
+>1a09	f2 04				          .WORD CR
+>1a0b	65 02				          .WORD CLIT
+>1a0d	0f				          .TEXT $F
+>1a0e	6a 15				          .WORD MESS
+>1a10	f2 04				          .WORD CR
+>1a12	65 02				          .WORD CLIT
+>1a14	0c				          .TEXT $0C      ;  form feed for printer
+>1a15	d5 04				          .WORD EMIT
+>1a17	0a 06				          .WORD SEMIS
+>1a19	85 56 4c 49 53 d4		L3696     .TEXT $85,'VLIS',$D4
+>1a1f	e3 19				          .WORD L3666    ; link to TRIAD
+>1a21	d4 07				VLIST     .WORD DOCOL
+>1a23	65 02				          .WORD CLIT
+>1a25	80				          .TEXT $80
+>1a26	27 09				          .WORD OUT
+>1a28	9b 07				          .WORD STORE
+>1a2a	49 09				          .WORD CON
+>1a2c	77 07				          .WORD AT
+>1a2e	77 07				          .WORD AT
+>1a30	27 09				L3706     .WORD OUT
+>1a32	77 07				          .WORD AT
+>1a34	86 08				          .WORD CSLL
+>1a36	3a 0a				          .WORD GREAT
+>1a38	54 03				          .WORD ZBRAN
+>1a3a	0a 00				L3711     .WORD $A       ; L3716-L3711
+>1a3c	f2 04				          .WORD CR
+>1a3e	5b 08				          .WORD ZERO
+>1a40	27 09				          .WORD OUT
+>1a42	9b 07				          .WORD STORE
+>1a44	38 07				L3716     .WORD DUP
+>1a46	00 10				          .WORD IDDOT
+>1a48	5c 0a				          .WORD SPACE
+>1a4a	5c 0a				          .WORD SPACE
+>1a4c	e8 0a				          .WORD PFA
+>1a4e	b6 0a				          .WORD LFA
+>1a50	77 07				          .WORD AT
+>1a52	38 07				          .WORD DUP
+>1a54	71 06				          .WORD ZEQU
+>1a56	eb 04				          .WORD QTERM
+>1a58	ab 05				          .WORD OR
+>1a5a	54 03				          .WORD ZBRAN
+>1a5c	d4 ff				L3728     .WORD $FFD4    ; L3706-L3728
+>1a5e	17 07				          .WORD DROP
+>1a60	0a 06				          .WORD SEMIS
+>1a62	83 4d 4f ce			NTOP      .TEXT $83,'MO',$CE
+>1a66	19 1a				          .WORD L3696    ; link to VLIST
+>1a68	6a 1a				MON       .WORD *+2
+.1a6a	86 b5		stx $b5		          STX XSAVE
+.1a6c	00		brk #		          BRK       ; break to monitor which is assumed
+.1a6d	a6 b5		ldx $b5		          LDX XSAVE ; to save this as reentry point
+.1a6f	4c 42 02	jmp $0242	          JMP NEXT
+.1a72					TOP
+
+;******  End of listing

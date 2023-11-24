@@ -29,5 +29,6 @@ all: always
 	$(CCOPY) build$(S)kernel.bin $(BINDIR)
 	$(CCOPY) build$(S)kernel_binary.h $(BINDIR)
 	$(CCOPY) neo6502.inc $(BINDIR)
+	$(CCOPY) neo6502.inc $(ROOTDIR)documents$(S)release
 always:
 
