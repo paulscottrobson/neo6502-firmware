@@ -147,12 +147,12 @@ class Tokeniser(object):
 		if len(s) >= 2:
 			id = self.ts.getByName(s[:2])
 			if id is not None:
-				self.code.append(id)
+				self.code.append(id.getID())
 				return s[2:]
 		#
 		id = self.ts.getByName(s[0])
 		assert id is not None
-		self.code.append(id)
+		self.code.append(id.getID())
 		return s[1:]
 	#
 	def getTokenID(self,name):
