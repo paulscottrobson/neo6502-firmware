@@ -4,14 +4,14 @@ TODO List
 Pre Release Alpha 0.001
 	- It can go out to people to play with.	
 
-- Change graphics call.
 - Escape flag setting.
-- Function key handling
-- File I/O (files only)
 
 - Mathematics system
+- BASIC design
 - Locale handling
 - Console colour and cursor control / positioning.
+
 - Audio system driver on emulator, and audio interface
-- File I/O
+- Function key handling
+- File I/O - when I have the hardware.
 

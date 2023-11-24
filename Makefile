@@ -26,5 +26,6 @@ BINARIES = $(BINDIR)firmware.uf2 $(BINDIR)firmware.elf
 
 all: 
 	zip -r -j release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES)
+
 always:
 

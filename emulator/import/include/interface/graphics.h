@@ -13,24 +13,23 @@
 #ifndef _GRAPHICS_H
 #define _GRAPHICS_H
 
-void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b); 				// Implementation specific.
-void RNDStartMode0(uint8_t *memConsole,uint8_t *memGraphics);
+
 
 struct GraphicsMode {
 	uint16_t xCSize,yCSize;														// Size of console (chars)
 	uint16_t xGSize,yGSize;														// Size of console (pixels) [0,0 = no graphics]
 	uint8_t  fontWidth,fontHeight;  											// Font size in pixels.
-
+	uint8_t  xCursor,yCursor;  													// Cursor position
+	uint8_t  foreCol,backCol;  													// Current colours
 	uint8_t *graphicsMemory,*consoleMemory;  									// Graphics & text memory.
 
 	void  (*setPalette)(uint8_t,uint8_t,uint8_t,uint8_t); 						// Set the palette
-	void  (*startMode)(uint8_t *,uint8_t *); 									// Start up the mode.
+	void  (*startMode)(struct GraphicsMode *); 									// Start up the mode.
 };
 
-//
-//		Void Function Pointer.
-//
-typedef void (*VOIDFUNC)();
+void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b); 				// Implementation specific.
+void RNDStartMode0(struct GraphicsMode *gMode);
+
 #define MAXCONSOLEWIDTH  	(80) 	 											// Max console size 
 #define MAXCONSOLEHEIGHT  	(31)
 #define MAXGRAPHICSMEMORY 	(320 * 240)  										// Max byte memory , graphics

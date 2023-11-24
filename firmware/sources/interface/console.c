@@ -14,8 +14,6 @@
 #include "data/font_5x7.h"
 
 struct GraphicsMode *graphMode;                                         
-uint16_t xCursor = 0,yCursor = 0;
-uint16_t foreCol = 7,backCol = 0;
 
 // ***************************************************************************************
 //
@@ -49,9 +47,9 @@ static void CONDrawCharacter(uint16_t x,uint16_t y,uint16_t ch,uint16_t fcol,uin
 // ***************************************************************************************
 
 static void CONClearScreen(void) {
-	xCursor = yCursor = 0;  													// Home cursor
+	graphMode->xCursor = graphMode->yCursor = 0;  								// Home cursor
 	if (graphMode->xGSize != 0) {  												// Graphics present ?
-		memset(graphMode->graphicsMemory,backCol,MAXGRAPHICSMEMORY); 	 		// Erase graphics screen to black
+		memset(graphMode->graphicsMemory,graphMode->backCol,MAXGRAPHICSMEMORY); // Erase graphics screen to black
 	}
 	memset(graphMode->consoleMemory,' ',MAXCONSOLEMEMORY); 						// Erase character display to spaces.
 }
@@ -64,7 +62,7 @@ static void CONClearScreen(void) {
 
 void CONInitialise(struct GraphicsMode *gMode) {
 	graphMode = gMode;	
-	foreCol = 7;backCol = 0; 	 												// Reset colours
+	graphMode->foreCol = 7;graphMode->backCol = 0; 	 							// Reset colours
 	CONWrite(12);  																// Clear screen / home cursor.
 }
 
@@ -87,7 +85,7 @@ void CONScrollUp(void) {
 			   (graphMode->yCSize-1) * graphMode->fontHeight * 320);
 																				// Clear bottom line.
 		memset(graphMode->graphicsMemory + (graphMode->yCSize-1) * graphMode->fontHeight * 320,
-				backCol, graphMode->fontHeight * 320);		
+			   graphMode->backCol, graphMode->fontHeight * 320);		
 	}		
 }
 
@@ -100,8 +98,8 @@ void CONScrollUp(void) {
 static void CONReverseCursorBlock(void) {
 	for (int y = 0;y < graphMode->fontHeight;y++) {
 		uint8_t *p = graphMode->graphicsMemory + 
-					 (y + yCursor * graphMode->fontHeight) * graphMode->xGSize +
-					xCursor * graphMode->fontWidth;
+					 (y + graphMode->yCursor * graphMode->fontHeight) * graphMode->xGSize +
+					graphMode->xCursor * graphMode->fontWidth;
 		for (int x = 0;x < graphMode->fontWidth;x++) {
 			*p ^= 7;
 			p++;
@@ -119,16 +117,16 @@ void CONWrite(int c) {
 	switch (c) {
 
 		case CC_BACKSPACE: 														// H/8 backspace
-			if (xCursor > 0) {
-				xCursor--;
-				CONDrawCharacter(xCursor,yCursor,' ',backCol,backCol);
+			if (graphMode->xCursor > 0) {
+				graphMode->xCursor--;
+				CONDrawCharacter(graphMode->xCursor,graphMode->yCursor,' ',graphMode->backCol,graphMode->backCol);
 			}
 			break;
 
 		case CC_LF:
-			yCursor++; 															// J/10 down with scrolling.
-			if (yCursor == graphMode->yCSize) {
-				yCursor--;
+			graphMode->yCursor++; 												// J/10 down with scrolling.
+			if (graphMode->yCursor == graphMode->yCSize) {
+				graphMode->yCursor--;
 				CONScrollUp();
 			}
 			break;
@@ -137,19 +135,19 @@ void CONWrite(int c) {
 			CONClearScreen();break;
 
 		case CC_ENTER: 	 														// M/13 carriage return.
-			xCursor = 0;CONWrite(CC_LF);break;
+			graphMode->xCursor = 0;CONWrite(CC_LF);break;
 
 		case CC_HOME: 															// T/20 home cursor.		
-			xCursor = yCursor = 0;break;
+			graphMode->xCursor = graphMode->yCursor = 0;break;
 
 		case CC_REVERSE:  														// X/24 reverse character at cursor
 			CONReverseCursorBlock();break;
 
 		default:
 			if (c >= ' ' && c < 127) {  										// 32-126 output a character.
-				CONDrawCharacter(xCursor,yCursor,c,foreCol,backCol);
-				xCursor++;
-				if (xCursor == graphMode->xCSize) CONWrite(CC_ENTER);
+				CONDrawCharacter(graphMode->xCursor,graphMode->yCursor,c,graphMode->foreCol,graphMode->backCol);
+				graphMode->xCursor++;
+				if (graphMode->xCursor == graphMode->xCSize) CONWrite(CC_ENTER);
 			} else {
 
 			}

@@ -43,7 +43,7 @@ static void GFXInitialise320x240x256(void) {
 
 void GFXSetMode(int Mode) {
 	GFXInitialise320x240x256(); 												// Initialise mode 0
-	(*gMode.startMode)(consoleMemory,graphicsMemory);  							// Start it, telling it about memory.
+	(*gMode.startMode)(&gMode); 					 							// Start it
 	//
 	//		Default palette. For $0x, this is default colour x. For $yx it is default colour y. x doesn't matter
 	//		This is for the split layer sprites.

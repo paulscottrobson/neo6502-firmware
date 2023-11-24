@@ -42,8 +42,8 @@ void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b) {
 //											Handle mode start
 // *******************************************************************************************************************************
 
-void RNDStartMode0(uint8_t *memConsole,uint8_t *memGraphics) {
-	videoRAM = memGraphics;
+void RNDStartMode0(struct GraphicsMode *gMode) {
+	videoRAM = gMode->graphicsMemory;
 }
 
 // *******************************************************************************************************************************

@@ -104,8 +104,8 @@ static const struct dvi_serialiser_cfg pico_neo6502_cfg = {
 //
 // ***************************************************************************************
 
-void RNDStartMode0(uint8_t *memConsole,uint8_t *memGraphics) {
-   screenMemory = memGraphics; 	 						// Remember where drawing.
+void RNDStartMode0(struct GraphicsMode *gMode) {
+   screenMemory = gMode->graphicsMemory; 					// Remember where drawing.
    if (!isInitialised) DVIStart();    						// Start hardware, only once (!)
    isInitialised = true;
 }
