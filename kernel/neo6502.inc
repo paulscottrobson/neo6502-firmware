@@ -5,10 +5,10 @@ WaitMessage = $fff4
 SendMessage = $fff7
 
 
-SendMessage .macro
+DoSendMessage .macro
 	jsr 	SendMessage
 	.endm
 
-WaitMessage .macro
+DoWaitMessage .macro
 	jsr 	WaitMessage
 	.endm

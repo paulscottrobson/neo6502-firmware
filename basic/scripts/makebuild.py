@@ -13,7 +13,7 @@ import os,sys,math,re
 
 include = []
 assembler = []
-for root,dirs,files in os.walk("src"):
+for root,dirs,files in os.walk("sources"):
 	for f in files:
 		if f.endswith(".asm"):
 			assembler.append(root+os.sep+f)

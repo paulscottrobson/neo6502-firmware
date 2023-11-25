@@ -28,6 +28,7 @@ kernel: always
 	$(CCOPY) $(BINDIR)kernel_binary.h include$(S)data
 	$(CCOPY) $(BINDIR)kernel_a1basic.h include$(S)data
 	$(CCOPY) $(BINDIR)kernel_figforth.h include$(S)data
+	$(CCOPY) $(BINDIR)basic_binary.h include$(S)data
 	$(TOUCH) sources$(S)memory.c*
 
 rebuild: clean build
