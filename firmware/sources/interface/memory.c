@@ -13,9 +13,9 @@
 
 #include "common.h"
 #include "data/kernel_binary.h"                                            		// Contains kernel image.
-#include "data/kernel_a1basic.h"												// Contains Apple Integer BASIC
-#include "data/kernel_figforth.h"  												// Contains Fig-Forth (79)
-#include "data/basic_binary.h"
+#include "data/a1basic_binary.h"												// Contains Apple Integer BASIC
+#include "data/figforth_binary.h"  												// Contains Fig-Forth (79)
+#include "data/basic_binary.h" 													// NeoBasic
 
 #ifdef PICO
 _Alignas(MEMORY_SIZE) uint8_t cpuMemory[MEMORY_SIZE];  							// Processor memory, aligned for Pico

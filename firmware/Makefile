@@ -26,8 +26,8 @@ always:
 kernel: always
 	make -C ..$(S)kernel
 	$(CCOPY) $(BINDIR)kernel_binary.h include$(S)data
-	$(CCOPY) $(BINDIR)kernel_a1basic.h include$(S)data
-	$(CCOPY) $(BINDIR)kernel_figforth.h include$(S)data
+	$(CCOPY) $(BINDIR)a1basic_binary.h include$(S)data
+	$(CCOPY) $(BINDIR)figforth_binary.h include$(S)data
 	$(CCOPY) $(BINDIR)basic_binary.h include$(S)data
 	$(TOUCH) sources$(S)memory.c*
 
