@@ -10,7 +10,6 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-		.include "_include.inc"
 
 ; ************************************************************************************************
 ;
@@ -20,13 +19,27 @@
 
 		.section code
 
-boot:	.byte 	$03
-		bra 	boot
+boot:	jmp 	cold
+cold:	
+		lda 	#(Program & $FF)
+		sta 	codePtr
+		lda 	#(Program >> 8)+1
+		sta 	codePtr+1
+		ldx 	#$FF
+		ldy 	#4
+		jsr 	EvaluateTerm
 
+h1:		bra 	h1		
+		.send 	code
 
+		.include "_include.inc"
+
+		.section code
 		.align 	256
 Program:
 		.binary "build/tokenised.dat"
+
+
 		.send code
 
 
