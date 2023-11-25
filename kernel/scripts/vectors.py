@@ -18,11 +18,11 @@ vectors = [
 ]
 
 src = """
-SendMessage .macro
+DoSendMessage .macro
 	jsr 	SendMessage
 	.endm
 
-WaitMessage .macro
+DoWaitMessage .macro
 	jsr 	WaitMessage
 	.endm
 """.split("/r")

@@ -1,8 +1,8 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		basic.asm
-;		Purpose:	BASIC main program
+;		Name:		00data_config.inc
+;		Purpose:	BASIC memory usage configuration
 ;		Created:	25th November 2023
 ;		Reviewed:	No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
@@ -10,20 +10,23 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-		.include "_include.inc"
-
 ; ************************************************************************************************
-;
-;										   Main Program
+;	
+;	These can be overridden on the command line. tass64 doesn't support ifdef, god knows why not.
 ;
 ; ************************************************************************************************
 
-		.section code
+		.weak
+		.endweak
 
-boot:	.byte 	$03
-		bra 	boot
+		* = $10
+		.dsection zeropage
 
-		.send code
+		* = $200
+		.dsection storage
+
+		* = $C000 							; BASIC ROM goes here.
+		.dsection code
 
 
 ; ************************************************************************************************

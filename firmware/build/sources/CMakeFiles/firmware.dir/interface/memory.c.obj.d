@@ -70,4 +70,5 @@ sources/CMakeFiles/firmware.dir/interface/memory.c.obj: \
  /usr/arm-none-eabi/include/sys/string.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/data/kernel_binary.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/data/kernel_a1basic.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/data/kernel_figforth.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/data/kernel_figforth.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/include/data/basic_binary.h
