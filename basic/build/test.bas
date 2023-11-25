@@ -1,3 +1,1 @@
-print c		// a print 
-105  '
-print "Hello",23
+print 267

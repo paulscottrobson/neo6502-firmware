@@ -161,7 +161,7 @@ class Tokeniser(object):
 	def renderConstant(self,n):
 		if n >= 64:
 			self.renderConstant(n >> 6)
-		self.code.append(0x40|n)
+		self.code.append(0x40|(n & 0x3F))
 	#
 	def test(self,s):
 		code = self.tokenise(s)

@@ -12,8 +12,8 @@ Identifier
 +0 			Offset to next, or zero.
 
 +1 			Control bit
-				bit 7 		Reference
-				bit 6,5 	00 float 	01 integer 	10 string 	11 procedure
+				bit 7,6 	00 float 	01 integer 	10 string 	11 procedure
+				bit 5 		Reference
 
 +2..5 		Value of variable		
 
