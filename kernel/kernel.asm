@@ -23,10 +23,11 @@
 	DCommand = ControlPort+0
 	DFunction = ControlPort+1
 	DError = ControlPort+2
-	DControl = ControlPort+3
+	DStatus = ControlPort+3
 	DParameters = ControlPort+4
 	DTopOfStack = ControlPort+12
 
+	Test = 1
 
 start
 	cld 								; set up
