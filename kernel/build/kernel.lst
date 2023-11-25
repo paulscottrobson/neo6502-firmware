@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Fri Nov 24 12:59:54 2023
+; Sat Nov 25 09:09:33 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -11,9 +11,10 @@
 =65280						DCommand = ControlPort+0
 =65281						DFunction = ControlPort+1
 =65282						DError = ControlPort+2
-=65283						DControl = ControlPort+3
+=65283						DStatus = ControlPort+3
 =65284						DParameters = ControlPort+4
 =65292						DTopOfStack = ControlPort+12
+=1						Test = 1
 .fc00					start
 .fc00	d8		cld			cld 								; set up
 .fc01	78		sei			sei

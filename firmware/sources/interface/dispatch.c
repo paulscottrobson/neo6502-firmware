@@ -1,4 +1,4 @@
-    // ***************************************************************************************
+// ***************************************************************************************
 // ***************************************************************************************
 //
 //      Name :      dispatch.c
@@ -18,7 +18,6 @@
 #define DERROR      (cBlock+2)
 #define DSTATUS     (cBlock+3)
 #define DPARAMS     (cBlock+4)
-#define DTOPSTACK   (cBlock+8)
 
 // ***************************************************************************************
 //
@@ -55,7 +54,7 @@ void DSPReset(void) {
     GFXSetMode(0);                                                              // Initialise graphics
     KBDInitialise();                                                            // Initialise keyboard
     KBDEvent(0,0xFF,0);                                                         // Reset the keyboard manager
-    SNDInitialise();                                                            // Initialse sound
+    SNDInitialise();                                                            // Initialise sound
     const char *c = bootString;
     while (*c != '\0') CONWrite(*c++);	
 }
