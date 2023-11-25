@@ -17,6 +17,16 @@ vectors = [
 		"KSendMessage"
 ]
 
+src = """
+SendMessage .macro
+	jsr 	SendMessage
+	.endm
+
+WaitMessage .macro
+	jsr 	WaitMessage
+	.endm
+""".split("/r")
+
 base = 0xFFFA-len(vectors)*3
 
 h = open("build/_vectors.inc","w")
@@ -36,4 +46,7 @@ b = base
 for v in vectors:
 	h.write("{0} = ${1:04x}\n".format(v[1:],b))
 	b += 3
+h.write("\n")
+for	l in src:
+	h.write(l.rstrip()+"\n")
 h.close()
