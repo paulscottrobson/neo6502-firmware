@@ -21,9 +21,9 @@ all: build
 build:always
 	$(ASSEMBLER) fig-forth.asm -o build$(S)fig-forth.bin -L build$(S)fig-forth.lst $(ASMEND)
 	$(CCOPY) $(BINDIR)neo6502.inc .
-	$(PYTHON) $(BINDIR)hconvert.py build$(S)fig-forth.bin build$(S)kernel_figforth.h figforth 400
+	$(PYTHON) $(BINDIR)hconvert.py build$(S)fig-forth.bin build$(S)figforth_binary.h figforth 400
 	$(CCOPY) build$(S)fig-forth.bin $(BINDIR)figforth.bin
-	$(CCOPY) build$(S)kernel_figforth.h $(BINDIR)
+	$(CCOPY) build$(S)figforth_binary.h $(BINDIR)
 
 always:
 

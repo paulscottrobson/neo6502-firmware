@@ -1,8 +1,6 @@
 TODO List
 ---------
 
-- Change stupid binary names, kernel_xxx
-
 - BASIC implementation
 	- Mathematics system (not stack, too slow for + -)
 - Locale handling

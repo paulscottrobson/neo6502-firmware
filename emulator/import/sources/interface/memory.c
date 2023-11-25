@@ -13,8 +13,9 @@
 
 #include "common.h"
 #include "data/kernel_binary.h"                                            		// Contains kernel image.
-#include "data/kernel_a1basic.h"												// Contains Apple Integer BASIC
-#include "data/kernel_figforth.h"  												// Contains Fig-Forth (79)
+#include "data/a1basic_binary.h"												// Contains Apple Integer BASIC
+#include "data/figforth_binary.h"  												// Contains Fig-Forth (79)
+#include "data/basic_binary.h" 													// NeoBasic
 
 #ifdef PICO
 _Alignas(MEMORY_SIZE) uint8_t cpuMemory[MEMORY_SIZE];  							// Processor memory, aligned for Pico
@@ -46,6 +47,7 @@ void MEMInitialiseMemory(void) {
 	loadROM(kernel_bin,KERNEL_LOAD,KERNEL_SIZE);    							// Load in the kernel
 	loadROM(a1basic_bin,A1BASIC_LOAD,A1BASIC_SIZE);
 	loadROM(figforth_bin,FIGFORTH_LOAD,FIGFORTH_SIZE);
+	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);
 	cpuMemory[DEFAULT_PORT] = 0x00;               								// Clear the default command port
 }
 
