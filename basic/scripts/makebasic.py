@@ -69,5 +69,8 @@ class Program(object):
 output = "basic.tok"
 prog = Program()
 for f in sys.argv[1:]:
-	prog.addFile(f)
+	if f.startswith("-o"):
+		output = f[2:]
+	else:
+		prog.addFile(f)
 prog.render(output)

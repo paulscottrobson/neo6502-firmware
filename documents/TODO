@@ -1,8 +1,8 @@
 TODO List
 ---------
 
-- Mathematics system
-- BASIC design
+- BASIC implementation
+	- Mathematics system (not stack, too slow for + -)
 - Locale handling
 - Console colour and cursor control / positioning.
 
