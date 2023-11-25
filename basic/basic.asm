@@ -23,6 +23,10 @@
 boot:	.byte 	$03
 		bra 	boot
 
+
+		.align 	256
+Program:
+		.binary "build/tokenised.dat"
 		.send code
 
 
