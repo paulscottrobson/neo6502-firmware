@@ -60,3 +60,26 @@ Structure 	13
 Tokens 		25
 --------------
 Total 		86
+
+(all binaries are tos <op> tos-1)
+0 	add
+1  	subtract
+2 	multiply
+3 	divide
+4 	integer divide
+5 	integer modulus
+6 	compare
+
+16 	negate
+17 	random.float
+18  random.int
+19 	abs
+20 	int
+21 	frac
+22 	sqr
+23 	sin
+24 	cos
+25 	tan
+26 	atan
+27 	log
+28 	exp

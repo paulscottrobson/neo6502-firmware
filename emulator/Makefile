@@ -47,7 +47,7 @@ emulator: prebuild $(APPNAME)
 %.o:%.c
 	$(CC) $(CADDRESSES) $(CXXFLAGS) -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I framework -I include -I import$(S)include -c -o $@ $<
 
-import: clean kernel always
+import: always
 	$(CCOPY) $(FIRMWARE)include$(S)common.h import$(S)include
 	$(CCOPYREC) $(FIRMWARE)include$(S)interface import$(S)include
 	$(CCOPYREC) $(FIRMWARE)include$(S)data import$(S)include
