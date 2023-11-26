@@ -1,14 +1,15 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      processor.c
+//      Name :      processor_bitbang.c
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //                  Andre Weissflog
 //                  Rien Matthijsse
+//                  Sascha Schneider
 //                  Veselin Sladkov
 //      Date :      20th November 2023
 //      Reviewed :  No
-//      Purpose :   Drive the 65C02 processor
+//      Purpose :   Drive the 65C02 processor directly.
 //
 // ***************************************************************************************
 // ***************************************************************************************

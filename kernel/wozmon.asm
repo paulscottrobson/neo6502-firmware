@@ -72,8 +72,8 @@ WMNextProcess:
 	inx
 WMNextProcessNoInc: 
 	lda 	lineBuffer,x 					; next character
-	cmp 	#13 							; new line.
-	beq 	WMNewCommand
+	cmp 	#32+1 							; new line/control character
+	bcc 	WMNewCommand
 	cmp 	#'.' 							; '.' and ':' set mode.
 	beq 	WMSetMode
 	bcc 	WMNextProcess 					; < '.' we ignore
