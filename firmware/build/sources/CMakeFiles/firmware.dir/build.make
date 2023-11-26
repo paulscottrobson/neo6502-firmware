@@ -139,19 +139,19 @@ sources/CMakeFiles/firmware.dir/hardware/sound.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/hardware/sound.c.s"
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/sound.c -o CMakeFiles/firmware.dir/hardware/sound.c.s
 
-sources/CMakeFiles/firmware.dir/system/processor.c.obj: sources/CMakeFiles/firmware.dir/flags.make
-sources/CMakeFiles/firmware.dir/system/processor.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor.c
-sources/CMakeFiles/firmware.dir/system/processor.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object sources/CMakeFiles/firmware.dir/system/processor.c.obj"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/system/processor.c.obj -MF CMakeFiles/firmware.dir/system/processor.c.obj.d -o CMakeFiles/firmware.dir/system/processor.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor.c
+sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj: sources/CMakeFiles/firmware.dir/flags.make
+sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor_bitbang.c
+sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj: sources/CMakeFiles/firmware.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj -MF CMakeFiles/firmware.dir/system/processor_bitbang.c.obj.d -o CMakeFiles/firmware.dir/system/processor_bitbang.c.obj -c /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor_bitbang.c
 
-sources/CMakeFiles/firmware.dir/system/processor.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/system/processor.c.i"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor.c > CMakeFiles/firmware.dir/system/processor.c.i
+sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/firmware.dir/system/processor_bitbang.c.i"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor_bitbang.c > CMakeFiles/firmware.dir/system/processor_bitbang.c.i
 
-sources/CMakeFiles/firmware.dir/system/processor.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/system/processor.c.s"
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor.c -o CMakeFiles/firmware.dir/system/processor.c.s
+sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/firmware.dir/system/processor_bitbang.c.s"
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build/sources && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor_bitbang.c -o CMakeFiles/firmware.dir/system/processor_bitbang.c.s
 
 sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: sources/CMakeFiles/firmware.dir/flags.make
 sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/graphics.c
@@ -1128,7 +1128,7 @@ firmware_OBJECTS = \
 "CMakeFiles/firmware.dir/hardware/usbdriver.c.obj" \
 "CMakeFiles/firmware.dir/hardware/timer.c.obj" \
 "CMakeFiles/firmware.dir/hardware/sound.c.obj" \
-"CMakeFiles/firmware.dir/system/processor.c.obj" \
+"CMakeFiles/firmware.dir/system/processor_bitbang.c.obj" \
 "CMakeFiles/firmware.dir/interface/graphics.c.obj" \
 "CMakeFiles/firmware.dir/interface/console.c.obj" \
 "CMakeFiles/firmware.dir/interface/keyboard.c.obj" \
@@ -1208,7 +1208,7 @@ sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/timer.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/hardware/sound.c.obj
-sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/processor.c.obj
+sources/firmware.elf: sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/interface/graphics.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/interface/console.c.obj
 sources/firmware.elf: sources/CMakeFiles/firmware.dir/interface/keyboard.c.obj

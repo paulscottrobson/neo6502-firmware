@@ -45,4 +45,11 @@ build: prelim
 run:build	
 	$(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@C000 build$(S)wedge.bin@FFFA
 
+import:
+	make -C ..$(S)emulator import
+	make -C ..$(S)emulator
+
+firmware:
+	make -C ..$(S)firmware
+	
 always:

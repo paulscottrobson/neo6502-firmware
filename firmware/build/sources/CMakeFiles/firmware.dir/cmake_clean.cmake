@@ -137,8 +137,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/firmware.dir/interface/memory.c.obj.d"
   "CMakeFiles/firmware.dir/main.c.obj"
   "CMakeFiles/firmware.dir/main.c.obj.d"
-  "CMakeFiles/firmware.dir/system/processor.c.obj"
-  "CMakeFiles/firmware.dir/system/processor.c.obj.d"
+  "CMakeFiles/firmware.dir/system/processor_bitbang.c.obj"
+  "CMakeFiles/firmware.dir/system/processor_bitbang.c.obj.d"
   "firmware.elf"
   "firmware.pdb"
 )

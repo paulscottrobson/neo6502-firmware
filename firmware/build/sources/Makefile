@@ -131,6 +131,20 @@ firmware/fast:
 .PHONY : firmware/fast
 
 # Convenience name for target.
+sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/rule:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/rule
+.PHONY : sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/rule
+
+# Convenience name for target.
+firmware_sm0_memory_emulation_with_clock_pio_h: sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/rule
+.PHONY : firmware_sm0_memory_emulation_with_clock_pio_h
+
+# fast build rule for target.
+firmware_sm0_memory_emulation_with_clock_pio_h/fast:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/build.make sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/build
+.PHONY : firmware_sm0_memory_emulation_with_clock_pio_h/fast
+
+# Convenience name for target.
 sources/CMakeFiles/ELF2UF2Build.dir/rule:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sources/CMakeFiles/ELF2UF2Build.dir/rule
 .PHONY : sources/CMakeFiles/ELF2UF2Build.dir/rule
@@ -1752,29 +1766,29 @@ main.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/main.c.s
 .PHONY : main.c.s
 
-system/processor.obj: system/processor.c.obj
-.PHONY : system/processor.obj
+system/processor_bitbang.obj: system/processor_bitbang.c.obj
+.PHONY : system/processor_bitbang.obj
 
 # target to build an object file
-system/processor.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/system/processor.c.obj
-.PHONY : system/processor.c.obj
+system/processor_bitbang.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj
+.PHONY : system/processor_bitbang.c.obj
 
-system/processor.i: system/processor.c.i
-.PHONY : system/processor.i
+system/processor_bitbang.i: system/processor_bitbang.c.i
+.PHONY : system/processor_bitbang.i
 
 # target to preprocess a source file
-system/processor.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/system/processor.c.i
-.PHONY : system/processor.c.i
+system/processor_bitbang.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.i
+.PHONY : system/processor_bitbang.c.i
 
-system/processor.s: system/processor.c.s
-.PHONY : system/processor.s
+system/processor_bitbang.s: system/processor_bitbang.c.s
+.PHONY : system/processor_bitbang.s
 
 # target to generate assembly for a file
-system/processor.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/system/processor.c.s
-.PHONY : system/processor.c.s
+system/processor_bitbang.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.s
+.PHONY : system/processor_bitbang.c.s
 
 # Help Target
 help:
@@ -1785,6 +1799,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ELF2UF2Build"
+	@echo "... firmware_sm0_memory_emulation_with_clock_pio_h"
 	@echo "... firmware"
 	@echo "... __/libraries/PicoDVI/software/libdvi/dvi.obj"
 	@echo "... __/libraries/PicoDVI/software/libdvi/dvi.i"
@@ -1987,9 +2002,9 @@ help:
 	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... system/processor.obj"
-	@echo "... system/processor.i"
-	@echo "... system/processor.s"
+	@echo "... system/processor_bitbang.obj"
+	@echo "... system/processor_bitbang.i"
+	@echo "... system/processor_bitbang.s"
 .PHONY : help
 
 

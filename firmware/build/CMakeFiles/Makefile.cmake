@@ -346,5 +346,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/DependInfo.cmake"
   "libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/DependInfo.cmake"
   "sources/CMakeFiles/firmware.dir/DependInfo.cmake"
+  "sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/DependInfo.cmake"
   "sources/CMakeFiles/ELF2UF2Build.dir/DependInfo.cmake"
   )

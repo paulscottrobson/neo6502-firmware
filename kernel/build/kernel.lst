@@ -1,7 +1,7 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
 ; 64tass -b --mr65c02 -Wall -o build/kernel.bin -L build/kernel.lst kernel.asm
-; Sat Nov 25 16:39:10 2023
+; Sun Nov 26 08:30:00 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
@@ -132,8 +132,8 @@
 .fcac	e8		inx			inx
 .fcad					WMNextProcessNoInc:
 .fcad	bd 00 02	lda $0200,x		lda 	lineBuffer,x 					; next character
-.fcb0	c9 0d		cmp #$0d		cmp 	#13 							; new line.
-.fcb2	f0 c7		beq $fc7b		beq 	WMNewCommand
+.fcb0	c9 21		cmp #$21		cmp 	#32+1 							; new line/control character
+.fcb2	90 c7		bcc $fc7b		bcc 	WMNewCommand
 .fcb4	c9 2e		cmp #$2e		cmp 	#'.' 							; '.' and ':' set mode.
 .fcb6	f0 ef		beq $fca7		beq 	WMSetMode
 .fcb8	90 f2		bcc $fcac		bcc 	WMNextProcess 					; < '.' we ignore

@@ -74,6 +74,7 @@ set(CMAKE_TARGET_DEFINITIONS_ASM
 # The include file search paths:
 set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "/home/paulr/Projects/neo6502-firmware/firmware/include"
+  "sources"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources"
   "/aux/pico/pico-sdk/src/common/pico_stdlib/include"
   "/aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include"
@@ -189,7 +190,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/interface/keyboard.c" "sources/CMakeFiles/firmware.dir/interface/keyboard.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/interface/keyboard.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/interface/memory.c" "sources/CMakeFiles/firmware.dir/interface/memory.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/interface/memory.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/main.c" "sources/CMakeFiles/firmware.dir/main.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/main.c.obj.d"
-  "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor.c" "sources/CMakeFiles/firmware.dir/system/processor.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/processor.c.obj.d"
+  "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor_bitbang.c" "sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj.d"
   "/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj" "gcc" "sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj.d"
   )
 

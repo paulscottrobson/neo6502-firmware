@@ -20,6 +20,7 @@ b46539ee58f1260dc8d4bbd978e75d89 pico-sdk/src/rp2_common/pico_cyw43_driver/pioas
 07093285f0bf71fec3c7b7983c3fc7e8 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-update
 6ba99427331b487fedca174a8a1638bc sources/CMakeFiles/ELF2UF2Build
 ac08f8a8fd767270292e00cb1e416d44 sources/CMakeFiles/ELF2UF2Build-complete
+6ba99427331b487fedca174a8a1638bc sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h
 6c674dc27cdb45c0c2b0d9963f465634 sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-build
 79307472b7f1a561c722a421e764d7ff sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-configure
 b05e07c2e6c13d3382d93f5c9e1b046d sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-download
@@ -27,3 +28,4 @@ c4a5fb52ba93045e3221946ebfd5c056 sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2B
 44da5269660f319b6373d4b021d8c663 sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-mkdir
 2c6b504138baa0876e5741d29fd50621 sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-patch
 9a1dc48cf862808e5fd35b074b22534d sources/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-update
+387105c82615708260ddcf34e8ae7438 sources/sm0_memory_emulation_with_clock.pio.h
