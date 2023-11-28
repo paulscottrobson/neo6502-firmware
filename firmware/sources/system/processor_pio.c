@@ -24,7 +24,7 @@ uint pio_irq = PIO1_IRQ_1;
 uint pio_sm = 0;
 enum pio_interrupt_source irq_source = pis_sm0_rx_fifo_not_empty;
 
-void irq_handler() {
+void __time_critical_func(irq_handler)() {
   union u32
   {
     uint32_t value;
