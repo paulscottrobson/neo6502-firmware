@@ -57,6 +57,8 @@ class Group(object):
 	#
 	def render(self):
 		print("\tcase {0}:".format(self.groupID))
+		if self.groupID == 4:
+			print("\t\tMATHCommon(DPARAMS);")		
 		print("\t\tswitch (*DFUNCTION) {")
 		funcs = [x for x in self.functions.keys()]
 		funcs.sort()

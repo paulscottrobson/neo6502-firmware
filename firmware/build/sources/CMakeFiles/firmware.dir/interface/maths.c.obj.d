@@ -1,5 +1,5 @@
-sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
- /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbdriver.c \
+sources/CMakeFiles/firmware.dir/interface/maths.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/maths.c \
  /home/paulr/Projects/neo6502-firmware/firmware/include/common.h \
  /usr/arm-none-eabi/include/stdio.h /usr/arm-none-eabi/include/_ansi.h \
  /usr/arm-none-eabi/include/newlib.h \
@@ -71,35 +71,4 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/memory.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/dispatch.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/maths.h \
- /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
- /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
- /aux/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
- /aux/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
- /aux/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
- /aux/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
- /aux/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
- /home/paulr/Projects/neo6502-firmware/firmware/include/interface/kbdcodes.h
+ /home/paulr/Projects/neo6502-firmware/firmware/include/interface/maths.h

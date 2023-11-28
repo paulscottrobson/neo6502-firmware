@@ -133,6 +133,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/firmware.dir/interface/graphics.c.obj.d"
   "CMakeFiles/firmware.dir/interface/keyboard.c.obj"
   "CMakeFiles/firmware.dir/interface/keyboard.c.obj.d"
+  "CMakeFiles/firmware.dir/interface/maths.c.obj"
+  "CMakeFiles/firmware.dir/interface/maths.c.obj.d"
   "CMakeFiles/firmware.dir/interface/memory.c.obj"
   "CMakeFiles/firmware.dir/interface/memory.c.obj.d"
   "CMakeFiles/firmware.dir/main.c.obj"

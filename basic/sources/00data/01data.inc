@@ -19,6 +19,7 @@
 StackSize = 8
 
 		.section zeropage
+XSStack:
 		
 XSControl:	
 		.fill 	StackSize		

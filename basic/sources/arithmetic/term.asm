@@ -19,7 +19,6 @@
 ; ************************************************************************************************
 
 EvaluateTerm:	
-		.byte 	3
 		inx 								; new slot on stack
 		lda 	(CodePtr),y 				; get next token
 		bmi 	_ETKeyword 					; is it a keyword (80-FF) ?
@@ -100,6 +99,47 @@ _ETExit:
 ; ************************************************************************************************
 
 CheckFollowingDecimal:
+		lda 	(CodePtr),y 				; what follows ?
+		cmp 	#KWD_SYS_DEC 				; decimal ?
+		bne 	_CFDExit
+		;
+		tya
+		inc 	a
+		sec
+		adc 	CodePtr
+		sta 	ControlPort+8 				; param slot 2 = address of decimal data.
+		lda 	CodePtr+1
+		adc 	#0
+		sta 	ControlPort+9
+		lda 	#32 						; decimal expand code.
+		jsr 	DoMathCommand
+_CFDExit:		
+		rts
+
+; ************************************************************************************************
+;
+;					Send command A to math co processor, X is stack position
+;
+; ************************************************************************************************
+
+DoMathCommand:
+		pha
+		DoWaitMessage 						; wait till hardware free
+		sta 	ControlPort+1
+
+		txa
+		clc 
+		adc 	#XSStack & $FF
+		sta 	ControlPort+4
+		lda 	#XSStack >> 8
+		adc 	#0
+		sta 	ControlPort+5
+		lda 	#8
+		sta 	ControlPort+6
+		lda 	#4
+		sta 	ControlPort 				; do command
+		DoWaitMessage 		
+		pla				; wait for result.
 		rts
 
 		.send 		code

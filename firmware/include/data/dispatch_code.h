@@ -25,4 +25,16 @@ switch (*DCOMMAND) {
 				break;
 		}
 		break;
+	case 3:
+		switch (*DFUNCTION) {
+		}
+		break;
+	case 4:
+		MATHCommon(DPARAMS);
+		switch (*DFUNCTION) {
+			case 32:
+				MATHProcessDecimal(DCOMMAND);
+				break;
+		}
+		break;
 }

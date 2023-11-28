@@ -1718,6 +1718,30 @@ interface/keyboard.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/keyboard.c.s
 .PHONY : interface/keyboard.c.s
 
+interface/maths.obj: interface/maths.c.obj
+.PHONY : interface/maths.obj
+
+# target to build an object file
+interface/maths.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/maths.c.obj
+.PHONY : interface/maths.c.obj
+
+interface/maths.i: interface/maths.c.i
+.PHONY : interface/maths.i
+
+# target to preprocess a source file
+interface/maths.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/maths.c.i
+.PHONY : interface/maths.c.i
+
+interface/maths.s: interface/maths.c.s
+.PHONY : interface/maths.s
+
+# target to generate assembly for a file
+interface/maths.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/interface/maths.c.s
+.PHONY : interface/maths.c.s
+
 interface/memory.obj: interface/memory.c.obj
 .PHONY : interface/memory.obj
 
@@ -1996,6 +2020,9 @@ help:
 	@echo "... interface/keyboard.obj"
 	@echo "... interface/keyboard.i"
 	@echo "... interface/keyboard.s"
+	@echo "... interface/maths.obj"
+	@echo "... interface/maths.i"
+	@echo "... interface/maths.s"
 	@echo "... interface/memory.obj"
 	@echo "... interface/memory.i"
 	@echo "... interface/memory.s"

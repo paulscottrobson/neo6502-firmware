@@ -188,6 +188,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/interface/dispatch.c" "sources/CMakeFiles/firmware.dir/interface/dispatch.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/interface/dispatch.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/interface/graphics.c" "sources/CMakeFiles/firmware.dir/interface/graphics.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/interface/graphics.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/interface/keyboard.c" "sources/CMakeFiles/firmware.dir/interface/keyboard.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/interface/keyboard.c.obj.d"
+  "/home/paulr/Projects/neo6502-firmware/firmware/sources/interface/maths.c" "sources/CMakeFiles/firmware.dir/interface/maths.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/interface/maths.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/interface/memory.c" "sources/CMakeFiles/firmware.dir/interface/memory.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/interface/memory.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/main.c" "sources/CMakeFiles/firmware.dir/main.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/main.c.obj.d"
   "/home/paulr/Projects/neo6502-firmware/firmware/sources/system/processor_bitbang.c" "sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj" "gcc" "sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj.d"

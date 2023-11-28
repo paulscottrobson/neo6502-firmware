@@ -13,6 +13,8 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 
+#include <stdio.h>
+#include <string.h>
 //
 //		RP2040 specific includes
 //
@@ -37,6 +39,7 @@
 #include "interface/sound.h"
 #include "interface/memory.h"
 #include "interface/dispatch.h"
+#include "interface/maths.h"
 //
 //		Other Includes
 //
