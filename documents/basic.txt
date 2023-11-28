@@ -83,3 +83,5 @@ Total 		86
 26 	atan
 27 	log
 28 	exp
+
+32 	decimal expand
