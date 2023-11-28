@@ -105,7 +105,7 @@ void KBDInitialise(void) {
 //
 // ***************************************************************************************
 
-void KBDSync(void) {
+void __time_critical_func(KBDSync)(void) {
 	tuh_task();
 	KBDCheckTimer();
 }
