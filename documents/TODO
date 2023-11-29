@@ -2,7 +2,7 @@ TODO List
 ---------
 
 - BASIC implementation
-	- !? Terms
+- Remove magic constants in term.
 	- Expression evaluator.
 	- Dereference code.
 	- Unary functions.
