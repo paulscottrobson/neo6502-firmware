@@ -26,7 +26,7 @@ static uint8_t readOffset;
 //
 //		Converting byte groups to or from types.
 //
-static union _stackConvert {
+static union _regConvert {
 	uint8_t  bytes[4];
 	float 	 f;
 	uint32_t i;
@@ -39,12 +39,12 @@ static union _stackConvert {
 // ***************************************************************************************
 
 static uint8_t MATHRead(uint8_t offset) {
-	uint8_t *pStack = regAddress + offset * readOffset * 5;
-	sc.bytes[0] = pStack[readOffset*1];
-	sc.bytes[1] = pStack[readOffset*2];
-	sc.bytes[2] = pStack[readOffset*3];
-	sc.bytes[3] = pStack[readOffset*4];
-	return *pStack;
+	uint8_t *pReg = regAddress + offset;
+	sc.bytes[0] = pReg[readOffset*1];
+	sc.bytes[1] = pReg[readOffset*2];
+	sc.bytes[2] = pReg[readOffset*3];
+	sc.bytes[3] = pReg[readOffset*4];
+	return *pReg;
 }
 
 // ***************************************************************************************
@@ -54,12 +54,12 @@ static uint8_t MATHRead(uint8_t offset) {
 // ***************************************************************************************
 
 static void MATHWrite(uint8_t offset,uint8_t type) {
-	uint8_t *pStack = regAddress + offset * readOffset * 5;
-	pStack[0] = type;
-	pStack[readOffset*1] = sc.bytes[0];
-	pStack[readOffset*2] = sc.bytes[1];
-	pStack[readOffset*3] = sc.bytes[2];
-	pStack[readOffset*4] = sc.bytes[3];
+	uint8_t *pReg = regAddress + offset;
+	pReg[0] = type;
+	pReg[readOffset*1] = sc.bytes[0];
+	pReg[readOffset*2] = sc.bytes[1];
+	pReg[readOffset*3] = sc.bytes[2];
+	pReg[readOffset*4] = sc.bytes[3];
 }
 
 // ***************************************************************************************

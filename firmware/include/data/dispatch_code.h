@@ -32,6 +32,9 @@ switch (*DCOMMAND) {
 	case 4:
 		MATHCommon(DPARAMS);
 		switch (*DFUNCTION) {
+			case 1:
+				MATHWriteInt(MATHReadInt(MATH_REG1)-MATHReadInt(MATH_REG2),MATH_REG1);
+				break;
 			case 16:
 				if (MATHIsFloatUnary()) {
 				MATHWriteFloat(-MATHReadFloat(MATH_REG1),MATH_REG1);

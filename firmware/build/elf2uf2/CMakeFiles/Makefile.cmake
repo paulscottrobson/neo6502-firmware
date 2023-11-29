@@ -9,9 +9,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/aux/pico/pico-sdk/src/common/boot_uf2/CMakeLists.txt"
   "/aux/pico/pico-sdk/tools/elf2uf2/CMakeLists.txt"
-  "CMakeFiles/3.27.8/CMakeCCompiler.cmake"
-  "CMakeFiles/3.27.8/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.27.8/CMakeSystem.cmake"
+  "CMakeFiles/3.27.9/CMakeCCompiler.cmake"
+  "CMakeFiles/3.27.9/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.27.9/CMakeSystem.cmake"
   "/usr/share/cmake/Modules/CMakeCCompiler.cmake.in"
   "/usr/share/cmake/Modules/CMakeCCompilerABI.c"
   "/usr/share/cmake/Modules/CMakeCInformation.cmake"
@@ -114,11 +114,11 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "CMakeFiles/3.27.8/CMakeSystem.cmake"
-  "CMakeFiles/3.27.8/CMakeCCompiler.cmake"
-  "CMakeFiles/3.27.8/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.27.8/CMakeCCompiler.cmake"
-  "CMakeFiles/3.27.8/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.27.9/CMakeSystem.cmake"
+  "CMakeFiles/3.27.9/CMakeCCompiler.cmake"
+  "CMakeFiles/3.27.9/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.27.9/CMakeCCompiler.cmake"
+  "CMakeFiles/3.27.9/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "boot_uf2_headers/CMakeFiles/CMakeDirectoryInformation.cmake"
   )

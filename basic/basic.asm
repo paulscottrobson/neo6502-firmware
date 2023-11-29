@@ -27,12 +27,14 @@ cold:
 		sta 	codePtr+1
 		ldy 	#4
 		jsr 	EXPEvaluateExpressionRestart
-
+		.byte 	3
 h1:		bra 	h1		
 		.send 	code
 
 		.include "_include.inc"
 
+Unimplemented:
+		lda 	#$FF
 ErrorHandler:
 		ldx 	#$EE
 		ldy 	#$EE
