@@ -1,7 +1,7 @@
 Tokenising
 ==========
 
-00-1F xx 	Offset into identifier table.
+00-1F xx 	Offset into identifier table, points to offset 1.
 20-3F  		Binary Operator tokens.
 40-7F 		6 bit shift for constant.
 80-FF 		standard tokens
@@ -11,11 +11,12 @@ Identifier
 
 +0 			Offset to next, or zero.
 
-+1 			Control bit
-				bit 7,6 	00 float 	01 integer 	10 string 	11 procedure
-				bit 5 		Reference
++1..4 		Value of variable		
 
-+2..5 		Value of variable		
++5 			Control byte.
+				bit 7,6 	00 float 	01 integer 	10 string 	11 procedure
+				(bit 5 		Reference)
+				(bit 4 		Byte Reference)
 
 +6+ 		ASCII name of variable, bit 7 set of last. Stored in lower case.
 

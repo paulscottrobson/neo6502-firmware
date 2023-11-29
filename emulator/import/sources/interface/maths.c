@@ -81,12 +81,23 @@ uint32_t MATHReadInt(uint8_t stackOffset) {
 void MATHWriteFloat(float f,uint8_t stackOffset) {
 	sc.f = f;
 	MATHWrite(stackOffset,0x40);
-	printf("%f\n",f);
+	printf("Written %f f\n",f);
 }
 
 void MATHWriteInt(uint32_t i,uint8_t stackOffset) {
 	sc.i = i;
 	MATHWrite(stackOffset,0x00);
+	printf("Written %d i\n",i);
+}
+
+// ***************************************************************************************
+//
+//		Check Reg1 float - used for functs that have int/float commonalities like abs
+//
+// ***************************************************************************************
+
+bool MATHIsFloatUnary(void) {
+	return (*regAddress & 0x40) != 0;
 }
 
 // ***************************************************************************************
@@ -108,16 +119,16 @@ void MATHCommon(uint8_t *params) {
 
 void MATHProcessDecimal(uint8_t *command) {
 	float f = MATHReadFloat(MATH_REG1);  										// Current value as a float.
-	uint8_t *mem = cpuMemory + command[8] + (command[9] << 8);
+	uint8_t *mem = cpuMemory + command[8] + (command[9] << 8); 					// From here.
 	uint8_t done = false;
-	uint32_t decimal = 0,decimalDivide = 1;
-	while (!done) {
-		uint8_t nibble = (*mem) >> 4;
+	uint32_t decimal = 0,decimalDivide = 1;  									// Store dec as int, divide by 10^n at the end.
+	while (!done) {  													
+		uint8_t nibble = (*mem) >> 4; 											// Upper nibble
 		if (nibble != 0x0F) {
 			decimal = decimal * 10 + nibble;
 			decimalDivide *= 10;
 		}
-		nibble = (*mem & 0x0F);
+		nibble = (*mem & 0x0F);  												// Lower nibble
 		if (nibble != 0x0F) {
 			decimal = decimal * 10 + nibble;
 			decimalDivide *= 10;
@@ -125,7 +136,7 @@ void MATHProcessDecimal(uint8_t *command) {
 		mem++;
 		done = (nibble == 0x0F);
 	}
-	f += ((float)decimal / decimalDivide);
+	f += ((float)decimal / decimalDivide);  									// Work out result and store it.
 	MATHWriteFloat(f,MATH_REG1);
 }
 

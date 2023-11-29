@@ -2,7 +2,11 @@ TODO List
 ---------
 
 - BASIC implementation
-	- Mathematics system (not stack, too slow for + -)
+	- !? Terms
+	- Expression evaluator.
+	- Dereference code.
+	- Unary functions.
+	
 - Locale handling
 - Console colour and cursor control / positioning.
 
@@ -10,3 +14,4 @@ TODO List
 - Function key handling
 - File I/O - when I have the hardware.
 
+- Integer negation in term.

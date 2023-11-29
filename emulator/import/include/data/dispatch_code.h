@@ -32,6 +32,13 @@ switch (*DCOMMAND) {
 	case 4:
 		MATHCommon(DPARAMS);
 		switch (*DFUNCTION) {
+			case 16:
+				if (MATHIsFloatUnary()) {
+				MATHWriteFloat(-MATHReadFloat(MATH_REG1),MATH_REG1);
+				} else {
+				MATHWriteInt(-MATHReadInt(MATH_REG1),MATH_REG1);
+				}
+				break;
 			case 32:
 				MATHProcessDecimal(DCOMMAND);
 				break;

@@ -5,5 +5,6 @@
 	.include "sources/00data/01data.inc"
 	.include "sources/generated/kwdconst.inc"
 	.include "sources/generated/neo6502.inc"
+	.include "sources/arithmetic/dereference.asm"
 	.include "sources/arithmetic/term.asm"
 	.include "sources/generated/kwdtext.asm"
