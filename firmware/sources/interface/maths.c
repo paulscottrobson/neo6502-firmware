@@ -87,7 +87,7 @@ void MATHWriteFloat(float f,uint8_t stackOffset) {
 void MATHWriteInt(uint32_t i,uint8_t stackOffset) {
 	sc.i = i;
 	MATHWrite(stackOffset,0x00);
-	printf("Written %d i\n",i);
+	printf("Written %d i\n",(int)i);
 }
 
 // ***************************************************************************************
