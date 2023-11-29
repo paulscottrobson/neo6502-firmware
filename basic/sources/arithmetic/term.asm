@@ -64,18 +64,17 @@ _ETCheckReference:
 		beq 	_ETHaveReference
 		.error_syntax
 _ETHaveReference:							; A = 0 (!) #0 (?)		
-		.byte 	3
 		pha 								; save type.
 	 	jsr 	EvaluateTerm 				; get reference address
 	 	jsr 	DereferenceTerm 			
 	 	lda 	XSControl,x 				; must be integer
-	 	and 	#$C0
+	 	and 	#XS_TYPEMASK
 	 	bne 	_ETBadType
 	 	pla 								; get type of reference back
 	 	beq 	_ETIsWord 					; if zero, it's a word reference
-	 	lda 	#$10 						
+	 	lda 	#XS_ISBYTEREFERENCE
 _ETIsWord:	 								; now 0 for word, $20 for byte
-		ora 	#$20 						; now $20 / $30 for word/byte reference
+		ora 	#XS_ISREFERENCE 			; now $20 / $30 for word/byte reference
 		sta 	XSControl,x 				; update type
 		rts		
 _ETBadType:
@@ -100,8 +99,8 @@ _ETIsIdentifier:
 		phy 								; read and update the type/control
 		ldy 	#4
 		lda 	(zTemp0),y
-		and 	#$C0 						; type info
-		ora 	#$20 						; set reference bit (is word)
+		and 	#XS_TYPEMASK 				; type info
+		ora 	#XS_ISREFERENCE 			; set reference bit (is word)
 		ply
 		sta 	XSControl,x
 		rts
