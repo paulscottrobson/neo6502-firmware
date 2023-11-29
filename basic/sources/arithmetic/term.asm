@@ -51,6 +51,8 @@ _ETIdentifierOrSpecial:
 	 	;
 	 	jsr 	EvaluateTerm 				; it's minus *something*.
 	 	jsr 	DereferenceTerm 			; dereference it.
+	 	lda 	XSControl,x 				; numeric term ?
+	 	bmi 	_ETBadType
 	 	lda 	#16 						; negation function - needs optimising for ints 
 	 	jsr 	DoMathCommand 				; work it out
 	 	rts 	

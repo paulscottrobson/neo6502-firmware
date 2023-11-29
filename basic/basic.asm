@@ -25,9 +25,8 @@ cold:
 		sta 	codePtr
 		lda 	#(Program >> 8)+1
 		sta 	codePtr+1
-		ldx 	#0
 		ldy 	#4
-		jsr 	EvaluateTerm
+		jsr 	EXPEvaluateExpressionRestart
 
 h1:		bra 	h1		
 		.send 	code
