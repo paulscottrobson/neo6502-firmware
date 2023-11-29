@@ -30,14 +30,63 @@ EvaluateTerm:
 		jsr 	ExtractTokenisedInteger
 		jsr 	CheckFollowingDecimal
 		rts
-
-
+		;
+		;		Unary function.
+		;
 _ETKeyword:		
 		.byte 	3
 
+		;
+		;		Here token was 00-3F. A contains token x 2.
+		;		
 _ETIdentifierOrSpecial:
+	 	asl 	a 							; bit 5 now in sign slot
+	 	bpl 	_ETIsIdentifier  			; 0 it is 00-1F e.g. identifier
+	 	;
+	 	;		Here it's a special case, which is - ! or ? - binary tokens with unary functionality
+	 	;
+	 	lda 	(codePtr),y 				; get and consume. clearer than reuse
+	 	iny
+	 	cmp 	#KWD_MINUS 					; negation.
+	 	bne 	_ETCheckReference 		
+	 	;
+	 	jsr 	EvaluateTerm 				; it's minus *something*.
+	 	jsr 	DereferenceTerm 			; dereference it.
+	 	lda 	#16 						; negation function - needs optimising for ints 
+	 	jsr 	DoMathCommand 				; work it out
+	 	rts 	
+	 	;
+	 	; 		So here, we have either byte reference or word reference.
+	 	;
+_ETCheckReference:
 		.byte 	3
-		
+
+		;
+		;		Identifier found.
+		;
+_ETIsIdentifier:
+		.byte 	3
+		lda 	(codePtr),y 				; get the MSB of the identifier address.
+		iny
+		clc
+		adc 	#Program >> 8 				; convert to a real address.
+		sta 	XSNumber1,x
+		sta 	zTemp0+1
+		lda 	(codePtr),y 				; LSB - on a page boundary
+		sta 	XSNumber0,x
+		sta 	zTemp0
+		stz 	XSNumber2,x 				; neatness
+		stz 	XSNumber3,x
+		;
+		phy 								; read and update the type/control
+		ldy 	#4
+		lda 	(zTemp0),y
+		and 	#$C0 						; type info
+		ora 	#$40 						; set reference bit.
+		ply
+		sta 	XSControl,x
+		rts
+
 ; ************************************************************************************************
 ;
 ;				Found a integer token 40-7F, decode into current stack position.

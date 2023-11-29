@@ -37,8 +37,7 @@ class IdentifierStore(object):
 	def add(self,name):
 		name = name.upper()
 		assert name not in self.identifiers
-		self.identifiers[name] = len(self.store)
-
+		self.identifiers[name] = len(self.store)+1 											# Points to data, offset 1 in record.
 		isInteger = True																	# Identify type
 		if name.endswith("$"):
 			name = name[:-1]
@@ -47,10 +46,11 @@ class IdentifierStore(object):
 		if ((len(self.store) + len(name) + 6) & 0xFF) >= 0xFC:								# Close to overflow. $FC in text
 			self.store[0] += 1 																# Another page. 
 		self.store.append(len(name)+6)														# Offset byte
+		self.store += [0,0,0,0] 															# default value
 		self.store.append(0x00 if isInteger else 0x80) 										# control byte.
 		b = [ord(x) for x in name] 															# work out name
 		b[-1] |= 0x80
-		self.store += ([0,0,0,0] + b)														# default value & name
+		self.store += b																		#  name
 		return self
 	#
 	def dump(self):
@@ -64,7 +64,7 @@ class IdentifierStore(object):
 				name += chr(data[p1] & 0x7F)
 				done = (data[p1] & 0x80) != 0
 				p1 += 1
-			print("${0:04x} : ${1:02x} {2}{3}".format(pos,data[pos+1],name.lower(),"" if (data[pos+1] & 0xC0) == 0 else "$"))
+			print("Record ${0:04x} : ${1:02x} {2}{3}".format(pos,data[pos+5],name.lower(),"" if (data[pos+1] & 0xC0) == 0 else "$"))
 			pos += data[pos]
 
 # *******************************************************************************************
