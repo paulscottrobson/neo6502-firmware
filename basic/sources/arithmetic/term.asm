@@ -172,7 +172,7 @@ CheckFollowingDecimal:
 		cmp 	#KWD_SYS_DEC 				; decimal ?
 		bne 	_CFDExit
 		;
-		tya
+		tya 								; get address of decimal data
 		inc 	a
 		sec
 		adc 	CodePtr
@@ -182,6 +182,12 @@ CheckFollowingDecimal:
 		sta 	ControlPort+9
 		lda 	#32 						; decimal expand code.
 		jsr 	DoMathCommand
+		;
+		iny 								; get length and add it +1 for the length
+		tya
+		sec
+		adc 	(CodePtr),y 				
+		tay
 _CFDExit:		
 		rts
 

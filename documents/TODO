@@ -4,8 +4,13 @@ TODO List
 - BASIC implementation
 	- Expression evaluator.
 		- Proper - using RP2040		
-			- Dereference code seperate
-			- Type code, generalisable.
+			- Add * and test, generalise the support for * / -
+			- Add / \ and % which are all slightly different
+			- Add +,compare and test, skeleton supporting strings, compare returning int always.
+			- Add binary functions that are coded-integer, shifts and binops, indirection.
+			- Add unary functions ( first and check it works.
+			- Add the rest of the unary functions.
+			- Implement Dereference code seperate
 	- Unary functions.
 	
 - Locale handling

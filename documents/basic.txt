@@ -4,7 +4,8 @@ Tokenising
 00-1F xx 	Offset into identifier table, points to offset 1.
 20-3F  		Binary Operator tokens.
 40-7F 		6 bit shift for constant.
-80-FF 		standard tokens
+80-AF 		unary tokens
+B0-FF 		standard tokens
 
 Identifier
 ==========
@@ -23,66 +24,3 @@ Identifier
 Total size = 6 + len(name). Expands when this value is >= $FC, so it will
 allocate extra space, but only once.
 
-Tokens
-======
-
-Binary Operators (19)
-
-			 + 		- 		* 		/		>> 		<<		% 		\
-			 &	 	|		^		> 		>=		<		<=		<>	 
-			 = 		! 		? 		
-
-Unary Functions (48 padded out with unused)
-
-			!STR 	!DEC	$ 		(		RAND(	RND(	ISVAL(	FRAC(	INT(	
-			TIME	EVENT(	INKEY$(	ASC(	CHR$(	SQR( 	LEN(  	ABS(  	SGN( 	
-			VAL( 	STR$( 	MID$(	LEFT$( 	RIGHT$(	SIN( 	COS(	TAN(	ATAN(	
-			SQRT(	LOG(	EXP( 	KEY(		
-
-
-Structure Tokens (16)
-
-			REPEAT	UNTIL	WHILE 	WEND	IF		ENDIF	DO 		LOOP 	
-			THEN	PROC 	ENDPROC	FOR 	NEXT 	CASE 	ENDCASE WHEN
-
-Unshifted Tokens (26)
-
-			!!END 	!!SH1	!!SH2	TO 		STEP	LET 	PRINT	INPUT	
-			CALL 	SYS 	EXIT	, 		; 		: 		' 		)		
-			READ 	DATA 	[		]		# 		. 		ELSE
-
-Shifted Tokens (14)
-
-			CLEAR 	NEW 	RUN 	STOP 	END 	ASSERT 	LIST 	SAVE 	
-			LOAD	GOSUB 	GOTO	RETURN 	RESTORE	DIM		
-
-Unary : 	48 max
-Structure 	13
-Tokens 		25
---------------
-Total 		86
-
-(all binaries are tos <op> tos-1)
-0 	add
-1  	subtract
-2 	multiply
-3 	divide
-4 	integer divide
-5 	integer modulus
-6 	compare
-
-16 	negate
-17 	random.float
-18  random.int
-19 	abs
-20 	int
-21 	frac
-22 	sqr
-23 	sin
-24 	cos
-25 	tan
-26 	atan
-27 	log
-28 	exp
-
-32 	decimal expand
