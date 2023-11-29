@@ -73,28 +73,11 @@ _EEExit2:
 		rts
 
 ; (===================================================================================================)
-; Placeholder fix up.
-
-BinaryVectorTable:
-		.word 	0
-		.word 	BodgeMinus
-
 ; Placeholder TODO: Routine now does dereferencing, type testing, and similar, and preserves Y'
 		
-BodgeMinus: ;; [-]
-		sec
-		lda 	XSNumber0,x
-		sbc 	XSNumber0+1,x
-		sta 	XSNumber0,x
-		lda 	XSNumber1,x
-		sbc 	XSNumber1+1,x
-		sta 	XSNumber2,x
-		lda 	XSNumber2,x
-		sbc 	XSNumber2+1,x
-		sta 	XSNumber2,x
-		lda 	XSNumber3,x
-		sbc 	XSNumber3+1,x
-		sta 	XSNumber3,x
+SysTestMinus: ;; [-]
+		lda 	#1
+		jsr 	DoMathCommand
 		jmp 	EXPRMainLoop
 
 		.send code				

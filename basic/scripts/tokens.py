@@ -42,7 +42,7 @@ class TokenSet(object):
 		self.create()
 
 	def getByID(self,id):
-		return self.idToToken if id in self.idToToken else None
+		return self.idToToken[id] if id in self.idToToken else None
 	def getByName(self,name):
 		name = name.strip().lower()
 		return self.nameToToken[name] if name in self.nameToToken else None

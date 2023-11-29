@@ -3,8 +3,7 @@ TODO List
 
 - BASIC implementation
 	- Expression evaluator.
-		- Generic scanner.
-		- Proper * using RP2040		
+		- Proper - using RP2040		
 			- Dereference code seperate
 			- Type code, generalisable.
 	- Unary functions.

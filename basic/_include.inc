@@ -11,3 +11,4 @@
 	.include "sources/arithmetic/term.asm"
 	.include "sources/generated/errors.asm"
 	.include "sources/generated/kwdtext.asm"
+	.include "sources/generated/vectors_binary.asm"
