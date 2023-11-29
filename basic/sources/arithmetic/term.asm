@@ -14,12 +14,11 @@
 
 ; ************************************************************************************************
 ;
-;								Evaluate a term onto the stack.
+;							Evaluate a term onto the stack, current level.
 ;
 ; ************************************************************************************************
 
 EvaluateTerm:	
-		inx 								; new slot on stack
 		lda 	(CodePtr),y 				; get next token
 		bmi 	_ETKeyword 					; is it a keyword (80-FF) ?
 		asl		a							; is it a number (40-7F)
@@ -59,8 +58,28 @@ _ETIdentifierOrSpecial:
 	 	; 		So here, we have either byte reference or word reference.
 	 	;
 _ETCheckReference:
+		cmp 	#KWD_QMARK
+		beq 	_ETHaveReference
+		eor 	#KWD_PLING
+		beq 	_ETHaveReference
+		.error_syntax
+_ETHaveReference:							; A = 0 (!) #0 (?)		
 		.byte 	3
-
+		pha 								; save type.
+	 	jsr 	EvaluateTerm 				; get reference address
+	 	jsr 	DereferenceTerm 			
+	 	lda 	XSControl,x 				; must be integer
+	 	and 	#$C0
+	 	bne 	_ETBadType
+	 	pla 								; get type of reference back
+	 	beq 	_ETIsWord 					; if zero, it's a word reference
+	 	lda 	#$10 						
+_ETIsWord:	 								; now 0 for word, $20 for byte
+		ora 	#$20 						; now $20 / $30 for word/byte reference
+		sta 	XSControl,x 				; update type
+		rts		
+_ETBadType:
+		.error_type		
 		;
 		;		Identifier found.
 		;
@@ -82,7 +101,7 @@ _ETIsIdentifier:
 		ldy 	#4
 		lda 	(zTemp0),y
 		and 	#$C0 						; type info
-		ora 	#$40 						; set reference bit.
+		ora 	#$20 						; set reference bit (is word)
 		ply
 		sta 	XSControl,x
 		rts

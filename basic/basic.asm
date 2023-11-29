@@ -25,7 +25,7 @@ cold:
 		sta 	codePtr
 		lda 	#(Program >> 8)+1
 		sta 	codePtr+1
-		ldx 	#$FF
+		ldx 	#0
 		ldy 	#4
 		jsr 	EvaluateTerm
 
@@ -34,6 +34,12 @@ h1:		bra 	h1
 
 		.include "_include.inc"
 
+ErrorHandler:
+		ldx 	#$EE
+		ldy 	#$EE
+		.byte 	3
+_EHLoop:
+		bra 	_EHLoop		
 		.section code
 		.align 	256
 Program:

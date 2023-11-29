@@ -31,6 +31,7 @@ prelim: always
 	$(CDEL) sources$(S)generated$(S)*.*
 	$(CCOPY) $(BINDIR)neo6502.inc sources$(S)generated
 	$(PYTHON) scripts$(S)token_code.py
+	$(PYTHON) scripts$(S)errors.py
 	$(PYTHON) scripts$(S)makebuild.py >_include.inc
 	$(PYTHON) $(BINDIR)makebasic.zip build$(S)test.bas -obuild$(S)tokenised.dat
 
