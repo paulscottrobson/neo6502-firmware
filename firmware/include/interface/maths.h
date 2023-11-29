@@ -17,6 +17,7 @@
 #define MATH_REG2 	(1)
 
 bool MATHIsFloatUnary(void);
+bool MATHIsFloatBinary(void);
 void MATHCommon(uint8_t *params);
 void MATHProcessDecimal(uint8_t *params);
 float MATHReadFloat(uint8_t stackOffset);

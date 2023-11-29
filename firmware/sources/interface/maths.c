@@ -32,6 +32,11 @@ static union _regConvert {
 	uint32_t i;
 } sc;
 
+//
+//		Map offset to actual register start address (Placeholder)
+//
+#define REGADDR(ofst) (regAddress+(ofst))
+
 // ***************************************************************************************
 //
 //			Read a register 1/2 into the conversion structure, returns control byte
@@ -39,7 +44,7 @@ static union _regConvert {
 // ***************************************************************************************
 
 static uint8_t MATHRead(uint8_t offset) {
-	uint8_t *pReg = regAddress + offset;
+	uint8_t *pReg = REGADDR(offset);
 	sc.bytes[0] = pReg[readOffset*1];
 	sc.bytes[1] = pReg[readOffset*2];
 	sc.bytes[2] = pReg[readOffset*3];
@@ -54,7 +59,7 @@ static uint8_t MATHRead(uint8_t offset) {
 // ***************************************************************************************
 
 static void MATHWrite(uint8_t offset,uint8_t type) {
-	uint8_t *pReg = regAddress + offset;
+	uint8_t *pReg = REGADDR(offset);
 	pReg[0] = type;
 	pReg[readOffset*1] = sc.bytes[0];
 	pReg[readOffset*2] = sc.bytes[1];
@@ -68,25 +73,25 @@ static void MATHWrite(uint8_t offset,uint8_t type) {
 //
 // ***************************************************************************************
 
-float MATHReadFloat(uint8_t stackOffset) {
-	uint8_t type = MATHRead(stackOffset);
+float MATHReadFloat(uint8_t regOffset) {
+	uint8_t type = MATHRead(regOffset);
 	return (type & 0x40) ? sc.f : (float)sc.i;
 }
 
-uint32_t MATHReadInt(uint8_t stackOffset) {
-	uint8_t type = MATHRead(stackOffset);
+uint32_t MATHReadInt(uint8_t regOffset) {
+	uint8_t type = MATHRead(regOffset);
 	return (type & 0x40) ? (uint32_t)sc.f : sc.i ;
 }
 
-void MATHWriteFloat(float f,uint8_t stackOffset) {
+void MATHWriteFloat(float f,uint8_t regOffset) {
 	sc.f = f;
-	MATHWrite(stackOffset,0x40);
+	MATHWrite(regOffset,0x40);
 	printf("Written %f f\n",f);
 }
 
-void MATHWriteInt(uint32_t i,uint8_t stackOffset) {
+void MATHWriteInt(uint32_t i,uint8_t regOffset) {
 	sc.i = i;
-	MATHWrite(stackOffset,0x00);
+	MATHWrite(regOffset,0x00);
 	printf("Written %d i\n",(int)i);
 }
 
@@ -98,6 +103,16 @@ void MATHWriteInt(uint32_t i,uint8_t stackOffset) {
 
 bool MATHIsFloatUnary(void) {
 	return (*regAddress & 0x40) != 0;
+}
+
+// ***************************************************************************************
+//
+//				Check Reg1 or Reg2 float - if so, use float arithmetic
+//
+// ***************************************************************************************
+
+bool MATHIsFloatBinary(void) {
+	return ((*REGADDR(MATH_REG1)|(*REGADDR(MATH_REG2))) & 0x40) != 0;
 }
 
 // ***************************************************************************************
