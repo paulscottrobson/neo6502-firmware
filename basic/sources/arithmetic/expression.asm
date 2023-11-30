@@ -80,6 +80,11 @@ SysTestMinus: ;; [-]
 		jsr 	DoMathCommand
 		jmp 	EXPRMainLoop
 
+SysTestTimes: ;; [*]
+		lda 	#2
+		jsr 	DoMathCommand
+		jmp 	EXPRMainLoop
+
 		.send code				
 
 ; ************************************************************************************************

@@ -5,7 +5,7 @@
 BinaryVectorTable:
 	.word	Unimplemented            ; $20 +
 	.word	SysTestMinus             ; $21 -
-	.word	Unimplemented            ; $22 *
+	.word	SysTestTimes             ; $22 *
 	.word	Unimplemented            ; $23 /
 	.word	Unimplemented            ; $24 >>
 	.word	Unimplemented            ; $25 <<
