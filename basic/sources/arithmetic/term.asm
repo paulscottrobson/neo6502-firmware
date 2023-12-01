@@ -33,8 +33,19 @@ EvaluateTerm:
 		;		Unary function.
 		;
 _ETKeyword:		
-		.byte 	3
-
+		cmp 	#$B0 						; is it a unary function ?
+		bcs 	_ETSyntax
+		phx
+		asl 	a 							; access address to jump
+		tax
+		lda 	StandardVectorTable,x
+		sta 	_ETVector+1
+		lda 	StandardVectorTable+1,x
+		sta 	_ETVector+2
+		plx 								; restore stack pos and go there.
+		iny 								; consume
+_ETVector:
+		jmp 	$FFFF		
 		;
 		;		Here token was 00-3F. A contains token x 2.
 		;		
@@ -64,6 +75,7 @@ _ETCheckReference:
 		beq 	_ETHaveReference
 		eor 	#KWD_PLING
 		beq 	_ETHaveReference
+_ETSyntax:		
 		.error_syntax
 _ETHaveReference:							; A = 0 (!) #0 (?)		
 		pha 								; save type.

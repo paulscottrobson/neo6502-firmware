@@ -15,6 +15,7 @@ errors = """
 	syntax : 	syntax error
 	type : 		type mismatch error
 	divzero : 	division by zero error
+	range : 	out of range error
 """
 
 err = []
