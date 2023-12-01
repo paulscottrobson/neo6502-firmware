@@ -14,6 +14,7 @@ import sys
 errors = """
 	syntax : 	syntax error
 	type : 		type mismatch error
+	divzero : 	division by zero error
 """
 
 err = []

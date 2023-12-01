@@ -72,19 +72,6 @@ _EEExit:
 _EEExit2:		
 		rts
 
-; (===================================================================================================)
-; Placeholder TODO: Routine now does dereferencing, type testing, and similar, and preserves Y'
-		
-SysTestMinus: ;; [-]
-		lda 	#1
-		jsr 	DoMathCommand
-		jmp 	EXPRMainLoop
-
-SysTestTimes: ;; [*]
-		lda 	#2
-		jsr 	DoMathCommand
-		jmp 	EXPRMainLoop
-
 		.send code				
 
 ; ************************************************************************************************

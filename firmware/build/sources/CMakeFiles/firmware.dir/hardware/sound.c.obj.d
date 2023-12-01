@@ -17,7 +17,9 @@ sources/CMakeFiles/firmware.dir/hardware/sound.c.obj: \
  /usr/arm-none-eabi/include/machine/_types.h \
  /usr/arm-none-eabi/include/sys/lock.h \
  /usr/arm-none-eabi/include/sys/stdio.h \
- /usr/arm-none-eabi/include/string.h \
+ /usr/arm-none-eabi/include/stdlib.h \
+ /usr/arm-none-eabi/include/machine/stdlib.h \
+ /usr/arm-none-eabi/include/alloca.h /usr/arm-none-eabi/include/string.h \
  /usr/arm-none-eabi/include/sys/_locale.h \
  /usr/arm-none-eabi/include/strings.h \
  /usr/arm-none-eabi/include/sys/string.h \
@@ -72,9 +74,6 @@ sources/CMakeFiles/firmware.dir/hardware/sound.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/memory.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/dispatch.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/maths.h \
- /usr/arm-none-eabi/include/stdlib.h \
- /usr/arm-none-eabi/include/machine/stdlib.h \
- /usr/arm-none-eabi/include/alloca.h \
  /aux/pico/pico-sdk/src/rp2_common/hardware_pwm/include/hardware/pwm.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pwm.h \
  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pwm.h \

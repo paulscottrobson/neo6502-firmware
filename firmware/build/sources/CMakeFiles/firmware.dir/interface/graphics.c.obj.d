@@ -17,7 +17,9 @@ sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: \
  /usr/arm-none-eabi/include/machine/_types.h \
  /usr/arm-none-eabi/include/sys/lock.h \
  /usr/arm-none-eabi/include/sys/stdio.h \
- /usr/arm-none-eabi/include/string.h \
+ /usr/arm-none-eabi/include/stdlib.h \
+ /usr/arm-none-eabi/include/machine/stdlib.h \
+ /usr/arm-none-eabi/include/alloca.h /usr/arm-none-eabi/include/string.h \
  /usr/arm-none-eabi/include/sys/_locale.h \
  /usr/arm-none-eabi/include/strings.h \
  /usr/arm-none-eabi/include/sys/string.h \
