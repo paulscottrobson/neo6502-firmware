@@ -16,3 +16,8 @@ error_divzero .macro
 	jmp	ErrorHandler
 	.endm
 
+error_range .macro
+	lda	#4
+	jmp	ErrorHandler
+	.endm
+

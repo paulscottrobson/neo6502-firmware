@@ -2,8 +2,7 @@ TODO List
 ---------
 
 - BASIC implementation
-			- Add unary functions ( first, no string-returners.
-			- Add the rest of the unary functions.
+			- Add unary functions (list in simple.asm)
 			- Implement Dereference code seperate, think about arrays.
 
 - Put run loop in, ASSERT, and check the math functionality properly. Should be okay.

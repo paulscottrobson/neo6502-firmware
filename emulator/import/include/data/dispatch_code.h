@@ -101,6 +101,11 @@ switch (*DCOMMAND) {
 				MATHWriteInt(-MATHReadInt(MATH_REG1),MATH_REG1);
 				}
 				break;
+			case 17:
+				if (MATHIsFloatBinary()) {
+				MATHWriteInt(MATHReadInt(MATH_REG1),MATH_REG1);
+				}
+				break;
 			case 32:
 				MATHProcessDecimal(DCOMMAND);
 				break;

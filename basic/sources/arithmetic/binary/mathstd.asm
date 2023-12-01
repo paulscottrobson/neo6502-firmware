@@ -45,7 +45,7 @@ BinaryAdd: ;; [+]
 		jsr 	DereferenceCheckTypes
 		bmi 	DRCType
 		lda 	#0
-		jmp 	DoMathCommand
+		jsr 	DoMathCommand
 		jmp 	EXPRMainLoop
 
 ; ************************************************************************************************

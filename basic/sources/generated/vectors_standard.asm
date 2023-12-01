@@ -5,34 +5,34 @@
 StandardVectorTable:
 	.word	Unimplemented            ; $80 !!str
 	.word	Unimplemented            ; $81 $
-	.word	Unimplemented            ; $82 (
+	.word	UnaryParenthesis         ; $82 (
 	.word	Unimplemented            ; $83 rand(
 	.word	Unimplemented            ; $84 rnd(
 	.word	Unimplemented            ; $85 isval(
-	.word	Unimplemented            ; $86 frac(
-	.word	Unimplemented            ; $87 int(
-	.word	Unimplemented            ; $88 time
-	.word	Unimplemented            ; $89 event(
-	.word	Unimplemented            ; $8a inkey$(
-	.word	Unimplemented            ; $8b asc(
-	.word	Unimplemented            ; $8c chr$(
-	.word	Unimplemented            ; $8d sqr(
-	.word	Unimplemented            ; $8e len(
-	.word	Unimplemented            ; $8f abs(
-	.word	Unimplemented            ; $90 sgn(
-	.word	Unimplemented            ; $91 val(
-	.word	Unimplemented            ; $92 str$(
-	.word	Unimplemented            ; $93 mid$(
-	.word	Unimplemented            ; $94 left$(
-	.word	Unimplemented            ; $95 right$(
-	.word	Unimplemented            ; $96 sin(
-	.word	Unimplemented            ; $97 cos(
-	.word	Unimplemented            ; $98 tan(
-	.word	Unimplemented            ; $99 atan(
-	.word	Unimplemented            ; $9a sqrt(
-	.word	Unimplemented            ; $9b log(
-	.word	Unimplemented            ; $9c exp(
-	.word	Unimplemented            ; $9d key(
+	.word	Unimplemented            ; $86 int(
+	.word	Unimplemented            ; $87 time
+	.word	Unimplemented            ; $88 event(
+	.word	Unimplemented            ; $89 inkey$(
+	.word	Unimplemented            ; $8a asc(
+	.word	Unimplemented            ; $8b chr$(
+	.word	Unimplemented            ; $8c sqr(
+	.word	Unimplemented            ; $8d len(
+	.word	Unimplemented            ; $8e abs(
+	.word	Unimplemented            ; $8f sgn(
+	.word	Unimplemented            ; $90 val(
+	.word	Unimplemented            ; $91 str$(
+	.word	Unimplemented            ; $92 mid$(
+	.word	Unimplemented            ; $93 left$(
+	.word	Unimplemented            ; $94 right$(
+	.word	Unimplemented            ; $95 sin(
+	.word	Unimplemented            ; $96 cos(
+	.word	Unimplemented            ; $97 tan(
+	.word	Unimplemented            ; $98 atan(
+	.word	Unimplemented            ; $99 sqrt(
+	.word	Unimplemented            ; $9a log(
+	.word	Unimplemented            ; $9b exp(
+	.word	Unimplemented            ; $9c key(
+	.word	Unimplemented            ; $9d 
 	.word	Unimplemented            ; $9e 
 	.word	Unimplemented            ; $9f 
 	.word	Unimplemented            ; $a0 
