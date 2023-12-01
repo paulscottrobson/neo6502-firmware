@@ -118,6 +118,21 @@ BinaryModulus: ;; [%]
 		jsr 	DoMathCommand
 		bra 	BinaryCheckResult
 
+; ************************************************************************************************
+;
+;							Compare n1 vs n2 - A returns $FF,$00,$01
+;
+; ************************************************************************************************
+
+BinaryCompare: ;; [=]
+		jsr 	DereferenceCheckTypes
+		bmi 	DRCType
+		lda 	#6
+		jsr 	DoMathCommand
+		lda 	ControlStatus
+		.byte 	3
+		rts
+
 		.send 		code
 
 ; ************************************************************************************************

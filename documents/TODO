@@ -4,7 +4,6 @@ TODO List
 - BASIC implementation
 	- Expression evaluator.
 			- include files in maths.config
-			- Add compare and test, skeleton supporting strings, compare returning int always.
 			- Add binary functions that are coded-integer, shifts and binops, indirection.
 			- Add unary functions ( first 
 			- Add the rest of the unary functions.
@@ -19,3 +18,4 @@ TODO List
 - File I/O - when I have the hardware.
 
 - Integer negation in term. Add, Sub, Cmp in binary calculators.
+- String concatenation / matching.

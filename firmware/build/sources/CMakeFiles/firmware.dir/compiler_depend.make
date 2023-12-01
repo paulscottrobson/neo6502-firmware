@@ -2608,13 +2608,16 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: /home/paulr/Proj
   /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -2774,13 +2777,16 @@ sources/CMakeFiles/firmware.dir/hardware/timer.c.obj: /home/paulr/Projects/neo65
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -2872,13 +2878,16 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: /home/paulr/Projects/n
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -2945,13 +2954,16 @@ sources/CMakeFiles/firmware.dir/interface/console.c.obj: /home/paulr/Projects/ne
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -3019,13 +3031,16 @@ sources/CMakeFiles/firmware.dir/interface/dispatch.c.obj: /home/paulr/Projects/n
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -3092,13 +3107,16 @@ sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: /home/paulr/Projects/n
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -3165,13 +3183,16 @@ sources/CMakeFiles/firmware.dir/interface/keyboard.c.obj: /home/paulr/Projects/n
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -3237,13 +3258,16 @@ sources/CMakeFiles/firmware.dir/interface/maths.c.obj: /home/paulr/Projects/neo6
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -3313,13 +3337,16 @@ sources/CMakeFiles/firmware.dir/interface/memory.c.obj: /home/paulr/Projects/neo
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -3386,13 +3413,16 @@ sources/CMakeFiles/firmware.dir/main.c.obj: /home/paulr/Projects/neo6502-firmwar
   /home/paulr/Projects/neo6502-firmware/firmware/include/system/processor.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
@@ -3459,13 +3489,16 @@ sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj: /home/paulr/Proj
   /home/paulr/Projects/neo6502-firmware/firmware/include/system/wdc65C02cpu.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
+  /usr/arm-none-eabi/include/alloca.h \
   /usr/arm-none-eabi/include/assert.h \
   /usr/arm-none-eabi/include/machine/_default_types.h \
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
+  /usr/arm-none-eabi/include/machine/stdlib.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
+  /usr/arm-none-eabi/include/stdlib.h \
   /usr/arm-none-eabi/include/string.h \
   /usr/arm-none-eabi/include/strings.h \
   /usr/arm-none-eabi/include/sys/_intsup.h \
