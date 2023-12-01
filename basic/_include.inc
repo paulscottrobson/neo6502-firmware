@@ -3,9 +3,11 @@
 ;
 	.include "sources/00data/00data_config.inc"
 	.include "sources/00data/01data.inc"
+	.include "sources/arithmetic/binary/binary.inc"
 	.include "sources/generated/errors.inc"
 	.include "sources/generated/kwdconst.inc"
 	.include "sources/generated/neo6502.inc"
+	.include "sources/arithmetic/binary/compare.asm"
 	.include "sources/arithmetic/binary/mathint.asm"
 	.include "sources/arithmetic/binary/mathstd.asm"
 	.include "sources/arithmetic/dereference.asm"
@@ -14,3 +16,5 @@
 	.include "sources/generated/errors.asm"
 	.include "sources/generated/kwdtext.asm"
 	.include "sources/generated/vectors_binary.asm"
+	.include "sources/generated/vectors_extended.asm"
+	.include "sources/generated/vectors_standard.asm"

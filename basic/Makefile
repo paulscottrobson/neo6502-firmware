@@ -31,6 +31,8 @@ prelim: always
 	$(CDEL) sources$(S)generated$(S)*.*
 	$(CCOPY) $(BINDIR)neo6502.inc sources$(S)generated
 	$(PYTHON) scripts$(S)scanner.py 20 BinaryVectorTable > sources$(S)generated$(S)vectors_binary.asm
+	$(PYTHON) scripts$(S)scanner.py 80 StandardVectorTable > sources$(S)generated$(S)vectors_standard.asm
+	$(PYTHON) scripts$(S)scanner.py 180 ExtendedVectorTable > sources$(S)generated$(S)vectors_extended.asm
 	$(PYTHON) scripts$(S)token_code.py
 	$(PYTHON) scripts$(S)errors.py
 	$(PYTHON) scripts$(S)makebuild.py >_include.inc

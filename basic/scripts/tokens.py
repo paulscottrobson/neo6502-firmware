@@ -118,7 +118,7 @@ class TokenSet(object):
 		#
 		#		Keyword tokens (minor)
 		#
-		self.add(0x100,"""
+		self.add(0x180,"""
 			CLEAR 	NEW 	RUN 	STOP 	END 	ASSERT 	LIST 	SAVE 	
 			LOAD	GOSUB 	GOTO	RETURN 	RESTORE	DIM	
 			""")
@@ -126,7 +126,7 @@ class TokenSet(object):
 if __name__ == "__main__":
 	ts = TokenSet()
 	print(ts.getRange(0x80))
-	print(ts.getRange(0x100))
+	print(ts.getRange(0x180))
 	print(ts.getRange(0x20))
 	print(ts.nameToToken.keys())
 	print(ts.getByName("!!str"))

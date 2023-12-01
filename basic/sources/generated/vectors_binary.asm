@@ -7,19 +7,19 @@ BinaryVectorTable:
 	.word	BinaryMinus              ; $21 -
 	.word	BinaryTimes              ; $22 *
 	.word	BinaryFDiv               ; $23 /
-	.word	Unimplemented            ; $24 >>
-	.word	Unimplemented            ; $25 <<
+	.word	BinaryShiftRight         ; $24 >>
+	.word	BinaryShiftLeft          ; $25 <<
 	.word	BinaryModulus            ; $26 %
 	.word	BinaryUDiv               ; $27 \
-	.word	Unimplemented            ; $28 &
-	.word	Unimplemented            ; $29 |
-	.word	Unimplemented            ; $2a ^
-	.word	Unimplemented            ; $2b >
-	.word	Unimplemented            ; $2c >=
-	.word	Unimplemented            ; $2d <
-	.word	Unimplemented            ; $2e <=
-	.word	Unimplemented            ; $2f <>
-	.word	BinaryCompare            ; $30 =
-	.word	Unimplemented            ; $31 !
-	.word	Unimplemented            ; $32 ?
+	.word	BinaryAnd                ; $28 &
+	.word	BinaryOr                 ; $29 |
+	.word	BinaryXor                ; $2a ^
+	.word	CMPCompareGreater        ; $2b >
+	.word	CMPCompareGreaterEqual   ; $2c >=
+	.word	CMPCompareLess           ; $2d <
+	.word	CMPCompareLessEqual      ; $2e <=
+	.word	CMPCompareNotEqual       ; $2f <>
+	.word	CMPCompareEqual          ; $30 =
+	.word	BinRefWord               ; $31 !
+	.word	BinRefByte               ; $32 ?
 	.send code
