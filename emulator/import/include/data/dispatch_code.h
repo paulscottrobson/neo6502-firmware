@@ -79,6 +79,21 @@ switch (*DCOMMAND) {
 				MATHWriteInt(abs(i1) % abs(i2),MATH_REG1);
 				}
 				break;
+			case 6:
+				*DSTATUS = 0;
+				if (MATHIsFloatBinary()) {
+				f1 = MATHReadFloat(MATH_REG1);
+				f2 = MATHReadFloat(MATH_REG2);
+				float diff = (float_abs(f1)+float_abs(f2)) * 0.0000001f;
+				if (float_abs(f1-f2) >= diff) {
+				*DSTATUS = (f1 < f2 ? 0xFF:0x01);
+				}
+				} else {
+				i1 = MATHReadInt(MATH_REG1);
+				i2 = MATHReadInt(MATH_REG2);
+				if (i1 != i2) *DSTATUS = (i1 < i2 ? 0xFF:0x01);
+				}
+				break;
 			case 16:
 				if (MATHIsFloatUnary()) {
 				MATHWriteFloat(-MATHReadFloat(MATH_REG1),MATH_REG1);

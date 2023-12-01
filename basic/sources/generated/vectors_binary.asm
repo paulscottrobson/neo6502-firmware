@@ -19,7 +19,7 @@ BinaryVectorTable:
 	.word	Unimplemented            ; $2d <
 	.word	Unimplemented            ; $2e <=
 	.word	Unimplemented            ; $2f <>
-	.word	Unimplemented            ; $30 =
+	.word	BinaryCompare            ; $30 =
 	.word	Unimplemented            ; $31 !
 	.word	Unimplemented            ; $32 ?
 	.send code

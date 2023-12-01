@@ -19,6 +19,8 @@
 #define DSTATUS     (cBlock+3)
 #define DPARAMS     (cBlock+4)
 
+#define float_abs(n) (((n) < 0.0) ? -(n):(n))
+
 // ***************************************************************************************
 //
 //							Handle commands sent by message
@@ -26,7 +28,7 @@
 // ***************************************************************************************
 
 void DSPHandler(uint8_t *cBlock,uint8_t *memory) {
-    float f1;
+    float f1,f2;
     int i1,i2;
     *DERROR = 0;                                                                // Clear error state.
     #include "data/dispatch_code.h"  
