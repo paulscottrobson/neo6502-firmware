@@ -26,7 +26,8 @@
 // ***************************************************************************************
 
 void DSPHandler(uint8_t *cBlock,uint8_t *memory) {
-
+    float f1;
+    int i1,i2;
     *DERROR = 0;                                                                // Clear error state.
     #include "data/dispatch_code.h"  
     *DCOMMAND = 0;					     										// Clear the message indicating completion.

@@ -200,7 +200,7 @@ _CFDExit:
 DoMathCommand:
 		pha
 		DoWaitMessage 						; wait till hardware free
-		sta 	ControlPort+1
+		sta 	ControlFunction
 
 		txa
 		clc 
@@ -212,7 +212,7 @@ DoMathCommand:
 		lda 	#8
 		sta 	ControlPort+6
 		lda 	#4
-		sta 	ControlPort 				; do command
+		sta 	ControlCommand 				; do command
 		DoWaitMessage 		
 		pla				; wait for result.
 		rts

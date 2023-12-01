@@ -32,6 +32,13 @@ switch (*DCOMMAND) {
 	case 4:
 		MATHCommon(DPARAMS);
 		switch (*DFUNCTION) {
+			case 0:
+				if (MATHIsFloatBinary()) {
+				MATHWriteFloat(MATHReadFloat(MATH_REG1)+MATHReadFloat(MATH_REG2),MATH_REG1);
+				} else {
+				MATHWriteInt(MATHReadInt(MATH_REG1)+MATHReadInt(MATH_REG2),MATH_REG1);
+				}
+				break;
 			case 1:
 				if (MATHIsFloatBinary()) {
 				MATHWriteFloat(MATHReadFloat(MATH_REG1)-MATHReadFloat(MATH_REG2),MATH_REG1);
@@ -44,6 +51,32 @@ switch (*DCOMMAND) {
 				MATHWriteFloat(MATHReadFloat(MATH_REG1)*MATHReadFloat(MATH_REG2),MATH_REG1);
 				} else {
 				MATHWriteInt(MATHReadInt(MATH_REG1)*MATHReadInt(MATH_REG2),MATH_REG1);
+				}
+				break;
+			case 3:
+				f1 = MATHReadFloat(MATH_REG2);
+				if (f1 == 0.0) {
+				*DERROR = 1;
+				} else {
+				MATHWriteFloat(MATHReadFloat(MATH_REG1)/f1,MATH_REG1);
+				}
+				break;
+			case 4:
+				i1 = MATHReadInt(MATH_REG1);
+				i2 = MATHReadInt(MATH_REG2);
+				if (i2 == 0) {
+				*DERROR = 1;
+				} else {
+				MATHWriteInt(i1/i2,MATH_REG1);
+				}
+				break;
+			case 5:
+				i1 = MATHReadInt(MATH_REG1);
+				i2 = MATHReadInt(MATH_REG2);
+				if (i2 == 0) {
+				*DERROR = 1;
+				} else {
+				MATHWriteInt(abs(i1) % abs(i2),MATH_REG1);
 				}
 				break;
 			case 16:

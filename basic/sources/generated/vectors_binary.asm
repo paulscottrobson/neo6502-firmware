@@ -3,14 +3,14 @@
 ;
 	.section code
 BinaryVectorTable:
-	.word	Unimplemented            ; $20 +
-	.word	SysTestMinus             ; $21 -
-	.word	SysTestTimes             ; $22 *
-	.word	Unimplemented            ; $23 /
+	.word	BinaryAdd                ; $20 +
+	.word	BinaryMinus              ; $21 -
+	.word	BinaryTimes              ; $22 *
+	.word	BinaryFDiv               ; $23 /
 	.word	Unimplemented            ; $24 >>
 	.word	Unimplemented            ; $25 <<
-	.word	Unimplemented            ; $26 %
-	.word	Unimplemented            ; $27 \
+	.word	BinaryModulus            ; $26 %
+	.word	BinaryUDiv               ; $27 \
 	.word	Unimplemented            ; $28 &
 	.word	Unimplemented            ; $29 |
 	.word	Unimplemented            ; $2a ^

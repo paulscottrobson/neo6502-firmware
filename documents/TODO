@@ -3,10 +3,8 @@ TODO List
 
 - BASIC implementation
 	- Expression evaluator.
-		- Proper - using RP2040		
-			- Add * and test, generalise the support for * -
-			- Add / \ and % which are all slightly different
-			- Add +,compare and test, skeleton supporting strings, compare returning int always.
+			- include files in maths.config
+			- Add compare and test, skeleton supporting strings, compare returning int always.
 			- Add binary functions that are coded-integer, shifts and binops, indirection.
 			- Add unary functions ( first 
 			- Add the rest of the unary functions.

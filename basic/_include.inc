@@ -6,6 +6,7 @@
 	.include "sources/generated/errors.inc"
 	.include "sources/generated/kwdconst.inc"
 	.include "sources/generated/neo6502.inc"
+	.include "sources/arithmetic/binary/mathstd.asm"
 	.include "sources/arithmetic/dereference.asm"
 	.include "sources/arithmetic/expression.asm"
 	.include "sources/arithmetic/term.asm"
