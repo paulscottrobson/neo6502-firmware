@@ -117,20 +117,20 @@ BaseTokenText:
 	.byte	$FF
 
 Shift1TokenText:
-	.byte	$05,$43,$4c,$45,$41,$d2       	; $100 CLEAR
-	.byte	$03,$4e,$45,$d7               	; $101 NEW
-	.byte	$03,$52,$55,$ce               	; $102 RUN
-	.byte	$04,$53,$54,$4f,$d0           	; $103 STOP
-	.byte	$03,$45,$4e,$c4               	; $104 END
-	.byte	$06,$41,$53,$53,$45,$52,$d4   	; $105 ASSERT
-	.byte	$04,$4c,$49,$53,$d4           	; $106 LIST
-	.byte	$04,$53,$41,$56,$c5           	; $107 SAVE
-	.byte	$04,$4c,$4f,$41,$c4           	; $108 LOAD
-	.byte	$05,$47,$4f,$53,$55,$c2       	; $109 GOSUB
-	.byte	$04,$47,$4f,$54,$cf           	; $10a GOTO
-	.byte	$06,$52,$45,$54,$55,$52,$ce   	; $10b RETURN
-	.byte	$07,$52,$45,$53,$54,$4f,$52,$c5	; $10c RESTORE
-	.byte	$03,$44,$49,$cd               	; $10d DIM
+	.byte	$05,$43,$4c,$45,$41,$d2       	; $180 CLEAR
+	.byte	$03,$4e,$45,$d7               	; $181 NEW
+	.byte	$03,$52,$55,$ce               	; $182 RUN
+	.byte	$04,$53,$54,$4f,$d0           	; $183 STOP
+	.byte	$03,$45,$4e,$c4               	; $184 END
+	.byte	$06,$41,$53,$53,$45,$52,$d4   	; $185 ASSERT
+	.byte	$04,$4c,$49,$53,$d4           	; $186 LIST
+	.byte	$04,$53,$41,$56,$c5           	; $187 SAVE
+	.byte	$04,$4c,$4f,$41,$c4           	; $188 LOAD
+	.byte	$05,$47,$4f,$53,$55,$c2       	; $189 GOSUB
+	.byte	$04,$47,$4f,$54,$cf           	; $18a GOTO
+	.byte	$06,$52,$45,$54,$55,$52,$ce   	; $18b RETURN
+	.byte	$07,$52,$45,$53,$54,$4f,$52,$c5	; $18c RESTORE
+	.byte	$03,$44,$49,$cd               	; $18d DIM
 	.byte	$FF
 
 BinaryPrecedence:
