@@ -6,8 +6,8 @@ StandardVectorTable:
 	.word	Unimplemented            ; $80 !!str
 	.word	Unimplemented            ; $81 $
 	.word	UnaryParenthesis         ; $82 (
-	.word	Unimplemented            ; $83 rand(
-	.word	Unimplemented            ; $84 rnd(
+	.word	UnaryRand                ; $83 rand(
+	.word	UnaryRnd                 ; $84 rnd(
 	.word	Unimplemented            ; $85 isval(
 	.word	UnaryInt                 ; $86 int(
 	.word	Unimplemented            ; $87 time
@@ -28,10 +28,10 @@ StandardVectorTable:
 	.word	UnaryCos                 ; $96 cos(
 	.word	UnaryTan                 ; $97 tan(
 	.word	UnaryATan                ; $98 atan(
-	.word	Unimplemented            ; $99 sqrt(
-	.word	UnaryLog                 ; $9a log(
-	.word	UnaryExp                 ; $9b exp(
-	.word	Unimplemented            ; $9c key(
+	.word	UnaryLog                 ; $99 log(
+	.word	UnaryExp                 ; $9a exp(
+	.word	Unimplemented            ; $9b key(
+	.word	Unimplemented            ; $9c 
 	.word	Unimplemented            ; $9d 
 	.word	Unimplemented            ; $9e 
 	.word	Unimplemented            ; $9f 

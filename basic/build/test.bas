@@ -1,3 +1,3 @@
 
 
-print sgn(-0.4);	
+print rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)

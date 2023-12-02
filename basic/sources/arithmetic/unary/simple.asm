@@ -74,6 +74,12 @@ UnaryAbs: ;; [abs(]
 UnarySgn: ;; [sgn(]
 		.single 	26
 
+UnaryRnd: ;; [rnd(]
+		.single 	27
+
+UnaryRand: ;; [rand(]
+		.single 	28
+
 		.send 		code
 
 ; ************************************************************************************************

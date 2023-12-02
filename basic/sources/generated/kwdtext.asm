@@ -50,10 +50,10 @@ BaseTokenText:
 	.byte	$04,$43,$4f,$53,$a8           	; $ 96 COS(
 	.byte	$04,$54,$41,$4e,$a8           	; $ 97 TAN(
 	.byte	$05,$41,$54,$41,$4e,$a8       	; $ 98 ATAN(
-	.byte	$05,$53,$51,$52,$54,$a8       	; $ 99 SQRT(
-	.byte	$04,$4c,$4f,$47,$a8           	; $ 9a LOG(
-	.byte	$04,$45,$58,$50,$a8           	; $ 9b EXP(
-	.byte	$04,$4b,$45,$59,$a8           	; $ 9c KEY(
+	.byte	$04,$4c,$4f,$47,$a8           	; $ 99 LOG(
+	.byte	$04,$45,$58,$50,$a8           	; $ 9a EXP(
+	.byte	$04,$4b,$45,$59,$a8           	; $ 9b KEY(
+	.byte	$00                           	; $ 9c 
 	.byte	$00                           	; $ 9d 
 	.byte	$00                           	; $ 9e 
 	.byte	$00                           	; $ 9f 
