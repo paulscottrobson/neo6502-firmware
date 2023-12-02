@@ -165,6 +165,16 @@ switch (*DCOMMAND) {
 				}
 				MATHWriteInt(u1,MATH_REG1);
 				break;
+			case 27:
+				f1 = (rand() % 100000) / 100000.0;
+				MATHWriteFloat(f1,MATH_REG1);
+				break;
+			case 28:
+				u1 = MATHReadInt(MATH_REG1);
+				if (u1 > 0) {
+				MATHWriteInt(rand() % u1,MATH_REG1);
+				}
+				break;
 			case 32:
 				MATHProcessDecimal(DCOMMAND);
 				break;

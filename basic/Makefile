@@ -56,4 +56,6 @@ import:
 firmware:
 	make -C ..$(S)firmware
 	
+fi : firmware import
+	
 always:
