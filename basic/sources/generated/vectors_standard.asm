@@ -18,7 +18,7 @@ StandardVectorTable:
 	.word	UnarySqr                 ; $8c sqr(
 	.word	Unimplemented            ; $8d len(
 	.word	UnaryAbs                 ; $8e abs(
-	.word	Unimplemented            ; $8f sgn(
+	.word	UnarySgn                 ; $8f sgn(
 	.word	Unimplemented            ; $90 val(
 	.word	Unimplemented            ; $91 str$(
 	.word	Unimplemented            ; $92 mid$(

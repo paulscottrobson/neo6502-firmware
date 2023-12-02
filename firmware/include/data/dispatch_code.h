@@ -154,6 +154,17 @@ switch (*DCOMMAND) {
 				}
 				}
 				break;
+			case 26:
+				u1 = 0;
+				if (MATHIsFloatUnary()) {
+				f1 = MATHReadFloat(MATH_REG1);
+				if (f1 != 0.0) u1 = (f1 < 0) ? -1 : 1;
+				} else {
+				i1 = MATHReadInt(MATH_REG1);
+				if (i1 != 0) u1 = (i1 < 0) ? -1 : 1;
+				}
+				MATHWriteInt(u1,MATH_REG1);
+				break;
 			case 32:
 				MATHProcessDecimal(DCOMMAND);
 				break;
