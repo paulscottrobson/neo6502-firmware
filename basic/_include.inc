@@ -19,6 +19,7 @@
 	.include "sources/arithmetic/unary/len.asm"
 	.include "sources/arithmetic/unary/simple.asm"
 	.include "sources/arithmetic/unary/string.asm"
+	.include "sources/arithmetic/unary/val.asm"
 	.include "sources/generated/errors.asm"
 	.include "sources/generated/kwdtext.asm"
 	.include "sources/generated/vectors_binary.asm"

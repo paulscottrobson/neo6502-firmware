@@ -8,7 +8,7 @@ StandardVectorTable:
 	.word	UnaryParenthesis         ; $82 (
 	.word	UnaryRand                ; $83 rand(
 	.word	UnaryRnd                 ; $84 rnd(
-	.word	Unimplemented            ; $85 isval(
+	.word	EXPUnaryIsVal            ; $85 isval(
 	.word	UnaryInt                 ; $86 int(
 	.word	Unimplemented            ; $87 time
 	.word	Unimplemented            ; $88 event(
@@ -19,7 +19,7 @@ StandardVectorTable:
 	.word	EXPUnaryLen              ; $8d len(
 	.word	UnaryAbs                 ; $8e abs(
 	.word	UnarySgn                 ; $8f sgn(
-	.word	Unimplemented            ; $90 val(
+	.word	EXPUnaryVal              ; $90 val(
 	.word	Unimplemented            ; $91 str$(
 	.word	Unimplemented            ; $92 mid$(
 	.word	Unimplemented            ; $93 left$(

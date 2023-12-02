@@ -1,3 +1,3 @@
 
 
-print asc("")
+print isval("-21.1")

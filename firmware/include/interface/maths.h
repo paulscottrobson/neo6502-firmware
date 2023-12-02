@@ -19,11 +19,14 @@
 bool MATHIsFloatUnary(void);
 bool MATHIsFloatBinary(void);
 void MATHCommon(uint8_t *params);
-void MATHProcessDecimal(uint8_t *params);
 float MATHReadFloat(uint8_t stackOffset);
 uint32_t MATHReadInt(uint8_t stackOffset);
 void MATHWriteFloat(float f,uint8_t stackOffset);
 void MATHWriteInt(uint32_t i,uint8_t stackOffset);
+
+void MATHProcessDecimal(uint8_t *command);
+void MATHConvertStringToNumber(uint8_t *command);
+
 #endif
 
 // ***************************************************************************************

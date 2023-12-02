@@ -35,9 +35,6 @@ EXPUnaryReturnA:
 
 		.send code
 
-;: [len(string)]\
-; Returns the length of the string\
-; { print len("Hello") } prints 5
 
 ; ************************************************************************************************
 ;

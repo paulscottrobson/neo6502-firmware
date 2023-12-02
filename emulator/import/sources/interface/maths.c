@@ -155,7 +155,35 @@ void MATHProcessDecimal(uint8_t *command) {
 	MATHWriteFloat(f,MATH_REG1);
 }
 
+// ***************************************************************************************
+//
+//								Convert string to number
+//
+// ***************************************************************************************
 
+static bool _MATHStringToFloatChecked(const char *szBuffer,float *pfResult) {
+	char *endPtr;
+    *pfResult = (float)(strtod(szBuffer, &endPtr));
+    return endPtr != szBuffer && *endPtr == '\0';
+}
+
+void MATHConvertStringToNumber(uint8_t *command) {
+	char szBuffer[32];	
+	float f1;
+	uint8_t *mem = cpuMemory + command[8] + (command[9] << 8); 					// From here.
+	memcpy(szBuffer,mem+1,*mem);												// Make ASCIIZ string
+	szBuffer[*mem] = '\0';
+	if (_MATHStringToFloatChecked(szBuffer,&f1)) {  							// Try conversion
+		command[2] = 0;
+		if (f1 != floor(f1)) {
+			MATHWriteFloat(f1,MATH_REG1);
+		} else {
+			MATHWriteInt((int)f1,MATH_REG1);			
+		}
+	} else {
+		command[2] = 1;
+	}
+}
 
 // ***************************************************************************************
 //
