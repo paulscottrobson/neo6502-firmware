@@ -13,10 +13,10 @@ StandardVectorTable:
 	.word	Unimplemented            ; $87 time
 	.word	Unimplemented            ; $88 event(
 	.word	Unimplemented            ; $89 inkey$(
-	.word	Unimplemented            ; $8a asc(
+	.word	EXPUnaryAsc              ; $8a asc(
 	.word	Unimplemented            ; $8b chr$(
 	.word	UnarySqr                 ; $8c sqr(
-	.word	Unimplemented            ; $8d len(
+	.word	EXPUnaryLen              ; $8d len(
 	.word	UnaryAbs                 ; $8e abs(
 	.word	UnarySgn                 ; $8f sgn(
 	.word	Unimplemented            ; $90 val(

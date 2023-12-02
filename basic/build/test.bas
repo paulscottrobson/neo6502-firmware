@@ -1,3 +1,3 @@
 
 
-print $2A+1
+print asc("")
