@@ -3,7 +3,6 @@ TODO List
 
 - BASIC implementation
 			- Implement Dereference code seperate, think about arrays.
-			- Val, IsVal
 
 - Put run loop in, ASSERT, and check the math functionality properly. Should be okay.
 - String concatenation / matching

@@ -35,9 +35,6 @@ _EXAZero:
 		
 		.send code
 
-;: [asc(string)]\
-; Returns the ASCII code of the first character of the string or zero if empty.\
-; { print asc("!") } prints 33
 				
 ; ************************************************************************************************
 ;

@@ -178,6 +178,9 @@ switch (*DCOMMAND) {
 			case 32:
 				MATHProcessDecimal(DCOMMAND);
 				break;
+			case 33:
+				MATHConvertStringToNumber(DCOMMAND);
+				break;
 		}
 		break;
 }
