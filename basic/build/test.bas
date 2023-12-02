@@ -1,2 +1,3 @@
 
-print abs(-4)
+
+print sgn(-0.4);	
