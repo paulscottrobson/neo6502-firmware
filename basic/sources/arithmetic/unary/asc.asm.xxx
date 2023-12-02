@@ -1,67 +1,46 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		00data.inc
-;		Purpose:	Global Data Objects
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		asc.asm
+;		Purpose:	ASCII value of first character
+;		Created:	26th May 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-ControlCommand = ControlPort+0
-ControlFunction = ControlPort+1
-ControlError = ControlPort+2
-ControlStatus = ControlPort+3
-
 ; ************************************************************************************************
-;	
-;											Stack
+;
+;								ASCII code of first character
 ;
 ; ************************************************************************************************
 
-StackSize = 8
+		.section code	
 
-XS_TYPEMASK = $C0
-XS_TYPEBIT = $80
-XS_STRING = $40
-XS_ISREFERENCE = $20
-XS_ISBYTEREFERENCE = $10
+EXPUnaryAsc: ;; [ASC(]
+		jsr 	EXPEvalString 					; string to R0, zTemp0		
+		jsr 	ERRCheckRParen 					; )
 
-		.section zeropage
-XSStack:
-		
-XSControl:	
-		.fill 	StackSize		
-XSNumber0:
-		.fill 	StackSize
-XSNumber1:
-		.fill 	StackSize
-XSNumber2:
-		.fill 	StackSize
-XSNumber3:
-		.fill 	StackSize
+		lda 	(zTemp0) 						; length 0 ?
+		beq 	_EXAZero 						; if so return 0
 
-zTemp0:	
-		.fill 	2
-		
-		.send zeropage
+		phy 									; otherwise get first character
+		ldy 	#1 
+		lda 	(zTemp0),y
+		ply
 
-; ************************************************************************************************
-;	
-;											Zero Page
-;
-; ************************************************************************************************
+_EXAZero:		
+		ldx 	#IFR0
+		jsr 	IFSetByte
+		rts
 
-		.section zeropage
+		.send code
 
-CodePtr:
-		.fill 	2
-		
-		.send zeropage
-
-
+;: [asc(string)]\
+; Returns the ASCII code of the first character of the string or zero if empty.\
+; { print asc("!") } prints 33
+				
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

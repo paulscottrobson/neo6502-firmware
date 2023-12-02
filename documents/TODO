@@ -1,11 +1,9 @@
 TODO List
 ---------
 
-- Start documentation.
-
 - BASIC implementation
 			- Implement Dereference code seperate, think about arrays.
-			- String constant code, $ Val, IsVal asc len
+			- Val, IsVal asc len
 
 - Put run loop in, ASSERT, and check the math functionality properly. Should be okay.
 - String concatenation / matching
@@ -27,6 +25,3 @@ Optimise me (Integers)
 
 		
 Add to doc
-
-	All Binary operators
-	All Unary operatirs

@@ -1,66 +1,36 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		00data.inc
-;		Purpose:	Global Data Objects
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		len.asm
+;		Purpose:	String length
+;		Created:	26th May 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-ControlCommand = ControlPort+0
-ControlFunction = ControlPort+1
-ControlError = ControlPort+2
-ControlStatus = ControlPort+3
-
 ; ************************************************************************************************
-;	
-;											Stack
+;
+;									String length
 ;
 ; ************************************************************************************************
 
-StackSize = 8
+		.section code	
 
-XS_TYPEMASK = $C0
-XS_TYPEBIT = $80
-XS_STRING = $40
-XS_ISREFERENCE = $20
-XS_ISBYTEREFERENCE = $10
+EXPUnaryLen: ;; [LEN(]
+		jsr 	EXPEvalString 					; string to R0, zTemp0		
+		jsr 	ERRCheckRParen 					; )
+		lda 	(zTemp0) 						; first byte is the length
+		ldx 	#IFR0 							; write it out.
+		jsr 	IFSetByte
+		rts
 
-		.section zeropage
-XSStack:
-		
-XSControl:	
-		.fill 	StackSize		
-XSNumber0:
-		.fill 	StackSize
-XSNumber1:
-		.fill 	StackSize
-XSNumber2:
-		.fill 	StackSize
-XSNumber3:
-		.fill 	StackSize
+		.send code
 
-zTemp0:	
-		.fill 	2
-		
-		.send zeropage
-
-; ************************************************************************************************
-;	
-;											Zero Page
-;
-; ************************************************************************************************
-
-		.section zeropage
-
-CodePtr:
-		.fill 	2
-		
-		.send zeropage
-
+;: [len(string)]\
+; Returns the length of the string\
+; { print len("Hello") } prints 5
 
 ; ************************************************************************************************
 ;
