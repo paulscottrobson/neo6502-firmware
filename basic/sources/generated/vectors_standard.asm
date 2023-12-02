@@ -9,28 +9,28 @@ StandardVectorTable:
 	.word	Unimplemented            ; $83 rand(
 	.word	Unimplemented            ; $84 rnd(
 	.word	Unimplemented            ; $85 isval(
-	.word	Unimplemented            ; $86 int(
+	.word	UnaryInt                 ; $86 int(
 	.word	Unimplemented            ; $87 time
 	.word	Unimplemented            ; $88 event(
 	.word	Unimplemented            ; $89 inkey$(
 	.word	Unimplemented            ; $8a asc(
 	.word	Unimplemented            ; $8b chr$(
-	.word	Unimplemented            ; $8c sqr(
+	.word	UnarySqr                 ; $8c sqr(
 	.word	Unimplemented            ; $8d len(
-	.word	Unimplemented            ; $8e abs(
+	.word	UnaryAbs                 ; $8e abs(
 	.word	Unimplemented            ; $8f sgn(
 	.word	Unimplemented            ; $90 val(
 	.word	Unimplemented            ; $91 str$(
 	.word	Unimplemented            ; $92 mid$(
 	.word	Unimplemented            ; $93 left$(
 	.word	Unimplemented            ; $94 right$(
-	.word	Unimplemented            ; $95 sin(
-	.word	Unimplemented            ; $96 cos(
-	.word	Unimplemented            ; $97 tan(
-	.word	Unimplemented            ; $98 atan(
+	.word	UnarySin                 ; $95 sin(
+	.word	UnaryCos                 ; $96 cos(
+	.word	UnaryTan                 ; $97 tan(
+	.word	UnaryATan                ; $98 atan(
 	.word	Unimplemented            ; $99 sqrt(
-	.word	Unimplemented            ; $9a log(
-	.word	Unimplemented            ; $9b exp(
+	.word	UnaryLog                 ; $9a log(
+	.word	UnaryExp                 ; $9b exp(
 	.word	Unimplemented            ; $9c key(
 	.word	Unimplemented            ; $9d 
 	.word	Unimplemented            ; $9e 

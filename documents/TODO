@@ -6,7 +6,6 @@ TODO List
 			- Implement Dereference code seperate, think about arrays.
 
 - Put run loop in, ASSERT, and check the math functionality properly. Should be okay.
-- Integer negation in term. Add, Sub, Cmp in binary calculators.
 - String concatenation / matching.
 - String temp functionality, string unaries.
 
@@ -17,3 +16,8 @@ TODO List
 - Function key handling
 - File I/O - when I have the hardware.
 
+- Integer negation in term. 
+- Add, Sub, Cmp in binary calculators.
+- Abs and Sgn unary functions.
+
+		
