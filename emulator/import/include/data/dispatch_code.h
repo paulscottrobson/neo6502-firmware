@@ -93,6 +93,8 @@ switch (*DCOMMAND) {
 				i2 = MATHReadInt(MATH_REG2);
 				if (i1 != i2) *DSTATUS = (i1 < i2 ? 0xFF:0x01);
 				}
+				#define FROMRADIANS(n) 	((n) * 180.0 / M_PI)
+				#define TORADIANS(n) ((n) * M_PI / 180.0)
 				break;
 			case 16:
 				if (MATHIsFloatUnary()) {
@@ -104,6 +106,52 @@ switch (*DCOMMAND) {
 			case 17:
 				if (MATHIsFloatBinary()) {
 				MATHWriteInt(MATHReadInt(MATH_REG1),MATH_REG1);
+				}
+				break;
+			case 18:
+				f1 = MATHReadFloat(MATH_REG1);
+				if (f1 >= 0) {
+				MATHWriteFloat(sqrt(f1),MATH_REG1);
+				} else {
+				*DERROR = 1;
+				}
+				break;
+			case 19:
+				f1 = MATHReadFloat(MATH_REG1);
+				MATHWriteFloat(sin(TORADIANS(f1)),MATH_REG1);
+				break;
+			case 20:
+				f1 = MATHReadFloat(MATH_REG1);
+				MATHWriteFloat(cos(TORADIANS(f1)),MATH_REG1);
+				break;
+			case 21:
+				f1 = MATHReadFloat(MATH_REG1);
+				MATHWriteFloat(tan(TORADIANS(f1)),MATH_REG1);
+				break;
+			case 22:
+				f1 = MATHReadFloat(MATH_REG1);
+				MATHWriteFloat(FROMRADIANS(atan(f1)),MATH_REG1);
+				break;
+			case 23:
+				f1 = MATHReadFloat(MATH_REG1);
+				MATHWriteFloat(exp(f1),MATH_REG1);
+				break;
+			case 24:
+				f1 = MATHReadFloat(MATH_REG1);
+				if (f1 >= 0) {
+				MATHWriteFloat(log(f1),MATH_REG1);
+				} else {
+				*DERROR = 1;
+				}
+				break;
+			case 25:
+				if (MATHIsFloatUnary()) {
+				MATHWriteFloat(fabs(MATHReadFloat(MATH_REG1)),MATH_REG1);
+				} else {
+				u1 = MATHReadInt(MATH_REG1);
+				if (u1 & 0x80000000) {
+				MATHWriteInt(-u1,MATH_REG1);
+				}
 				}
 				break;
 			case 32:

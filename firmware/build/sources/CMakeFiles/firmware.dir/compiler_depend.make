@@ -2614,6 +2614,7 @@ sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: /home/paulr/Proj
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -2708,6 +2709,7 @@ sources/CMakeFiles/firmware.dir/hardware/sound.c.obj: /home/paulr/Projects/neo65
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -2783,6 +2785,7 @@ sources/CMakeFiles/firmware.dir/hardware/timer.c.obj: /home/paulr/Projects/neo65
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -2884,6 +2887,7 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: /home/paulr/Projects/n
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -2960,6 +2964,7 @@ sources/CMakeFiles/firmware.dir/interface/console.c.obj: /home/paulr/Projects/ne
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -3037,6 +3042,7 @@ sources/CMakeFiles/firmware.dir/interface/dispatch.c.obj: /home/paulr/Projects/n
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -3113,6 +3119,7 @@ sources/CMakeFiles/firmware.dir/interface/graphics.c.obj: /home/paulr/Projects/n
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -3189,6 +3196,7 @@ sources/CMakeFiles/firmware.dir/interface/keyboard.c.obj: /home/paulr/Projects/n
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -3264,6 +3272,7 @@ sources/CMakeFiles/firmware.dir/interface/maths.c.obj: /home/paulr/Projects/neo6
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -3343,6 +3352,7 @@ sources/CMakeFiles/firmware.dir/interface/memory.c.obj: /home/paulr/Projects/neo
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -3419,6 +3429,7 @@ sources/CMakeFiles/firmware.dir/main.c.obj: /home/paulr/Projects/neo6502-firmwar
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
@@ -3495,6 +3506,7 @@ sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj: /home/paulr/Proj
   /usr/arm-none-eabi/include/machine/_types.h \
   /usr/arm-none-eabi/include/machine/ieeefp.h \
   /usr/arm-none-eabi/include/machine/stdlib.h \
+  /usr/arm-none-eabi/include/math.h \
   /usr/arm-none-eabi/include/newlib.h \
   /usr/arm-none-eabi/include/stdint.h \
   /usr/arm-none-eabi/include/stdio.h \
