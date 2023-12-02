@@ -68,6 +68,10 @@ EXPEvalString:
 		jsr 	DereferenceTerm 			; dereference it
 		bit 	XSControl,x	 				; fail if string
 		bpl 	EVUType
+		lda 	XSNumber0,x
+		sta 	zTemp0
+		lda 	XSNumber1,x
+		sta 	zTemp0+1
 		rts
 
 EVURange:
