@@ -1,67 +1,48 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		00data.inc
-;		Purpose:	Global Data Objects
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		string.asm
+;		Purpose:	Unary string 'function' (e.g. [[EXPRING]])
+;		Created:	1st December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-ControlCommand = ControlPort+0
-ControlFunction = ControlPort+1
-ControlError = ControlPort+2
-ControlStatus = ControlPort+3
-
 ; ************************************************************************************************
-;	
-;											Stack
+;
+;							Inline immutable string
 ;
 ; ************************************************************************************************
 
-StackSize = 8
+		.section code	
 
-XS_TYPEMASK = $C0
-XS_TYPEBIT = $80
-XS_STRING = $40
-XS_ISREFERENCE = $20
-XS_ISBYTEREFERENCE = $10
+EXPUnaryInlineString: ;; [!!str]
+		clc 								; physical address -> TOS
+		tya 								
+		adc 	codePtr
+		sta 	XSNumber0,x
+		lda 	codePtr+1
+		adc 	#0
+		sta 	XSNumber1,x
+		stz 	XSNumber2,x 				; fill in the rest & type
+		stz 	XSNumber3,x
+		lda 	#XS_STRING 					; make it a string.
+		sta 	XSControl,x
+		;
+		tya	 								; skip over it.
+		sec
+		adc 	(codePtr),y
+		tay
+		;
+		rts
 
-		.section zeropage
-XSStack:
+		.send code
 		
-XSControl:	
-		.fill 	StackSize		
-XSNumber0:
-		.fill 	StackSize
-XSNumber1:
-		.fill 	StackSize
-XSNumber2:
-		.fill 	StackSize
-XSNumber3:
-		.fill 	StackSize
-
-zTemp0:	
-		.fill 	2
-		
-		.send zeropage
-
-; ************************************************************************************************
-;	
-;											Zero Page
-;
-; ************************************************************************************************
-
-		.section zeropage
-
-CodePtr:
-		.fill 	2
-		
-		.send zeropage
 
 
+				
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

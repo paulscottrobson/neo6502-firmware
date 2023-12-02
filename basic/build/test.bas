@@ -1,3 +1,3 @@
 
 
-print rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)+rand(6)
+print $2A+1

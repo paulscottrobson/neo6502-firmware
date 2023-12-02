@@ -3,8 +3,8 @@
 ;
 	.section code
 StandardVectorTable:
-	.word	Unimplemented            ; $80 !!str
-	.word	Unimplemented            ; $81 $
+	.word	EXPUnaryInlineString     ; $80 !!str
+	.word	EXPUnaryNull             ; $81 $
 	.word	UnaryParenthesis         ; $82 (
 	.word	UnaryRand                ; $83 rand(
 	.word	UnaryRnd                 ; $84 rnd(

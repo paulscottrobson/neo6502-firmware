@@ -1,67 +1,39 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		00data.inc
-;		Purpose:	Global Data Objects
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		chr.asm
+;		Purpose:	Convert integer to string
+;		Created:	26th May 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-ControlCommand = ControlPort+0
-ControlFunction = ControlPort+1
-ControlError = ControlPort+2
-ControlStatus = ControlPort+3
-
 ; ************************************************************************************************
-;	
-;											Stack
+;
+;							Byte to String with that ASCII character
 ;
 ; ************************************************************************************************
 
-StackSize = 8
+		.section code	
 
-XS_TYPEMASK = $C0
-XS_TYPEBIT = $80
-XS_STRING = $40
-XS_ISREFERENCE = $20
-XS_ISBYTEREFERENCE = $10
+EXPUnaryChr: ;; [CHR$(]
+		jsr 	EXPEvalInteger8 				; expr
+		pha 									; push on stack
+		jsr 	ERRCheckRParen 					; )
+		lda 	#1 								; alloc temp mem for result, 1 byte only.
+		jsr 	StringTempAllocate
+		pla 									; get value back
+		jsr 	StringTempWrite 				; write to string.
+		rts
 
-		.section zeropage
-XSStack:
-		
-XSControl:	
-		.fill 	StackSize		
-XSNumber0:
-		.fill 	StackSize
-XSNumber1:
-		.fill 	StackSize
-XSNumber2:
-		.fill 	StackSize
-XSNumber3:
-		.fill 	StackSize
+		.send code
 
-zTemp0:	
-		.fill 	2
-		
-		.send zeropage
-
-; ************************************************************************************************
-;	
-;											Zero Page
-;
-; ************************************************************************************************
-
-		.section zeropage
-
-CodePtr:
-		.fill 	2
-		
-		.send zeropage
-
-
+;: [chr$(n)]\
+; Returns a one character string containing the character whose ASCII code is n\
+; { print chr$(42) } prints *
+				
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

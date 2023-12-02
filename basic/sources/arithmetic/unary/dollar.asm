@@ -1,67 +1,30 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		00data.inc
-;		Purpose:	Global Data Objects
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		dollar.asm
+;		Purpose:	Dollar pass through
+;		Created:	2nd December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-ControlCommand = ControlPort+0
-ControlFunction = ControlPort+1
-ControlError = ControlPort+2
-ControlStatus = ControlPort+3
-
 ; ************************************************************************************************
-;	
-;											Stack
+;
+;								dollar pass through for hex
 ;
 ; ************************************************************************************************
 
-StackSize = 8
+		.section code	
 
-XS_TYPEMASK = $C0
-XS_TYPEBIT = $80
-XS_STRING = $40
-XS_ISREFERENCE = $20
-XS_ISBYTEREFERENCE = $10
+EXPUnaryNull: ;; [$]
+		jsr 	EXPEvaluateExpression 		; get a value
+		jsr 	DereferenceTerm 			; dereference it
+		rts
 
-		.section zeropage
-XSStack:
-		
-XSControl:	
-		.fill 	StackSize		
-XSNumber0:
-		.fill 	StackSize
-XSNumber1:
-		.fill 	StackSize
-XSNumber2:
-		.fill 	StackSize
-XSNumber3:
-		.fill 	StackSize
-
-zTemp0:	
-		.fill 	2
-		
-		.send zeropage
-
-; ************************************************************************************************
-;	
-;											Zero Page
-;
-; ************************************************************************************************
-
-		.section zeropage
-
-CodePtr:
-		.fill 	2
-		
-		.send zeropage
-
-
+		.send code
+				
 ; ************************************************************************************************
 ;
 ;									Changes and Updates
@@ -70,6 +33,7 @@ CodePtr:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		30/06/23 		Changed from $ to dollar, clarity with string marker.
 ;
 ; ************************************************************************************************
 
