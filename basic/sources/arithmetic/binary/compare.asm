@@ -36,7 +36,7 @@ CMPReturnTrue:
 		lda 	#$FF
 		bra 	CMPSetTOS
 CMPReturnFalse:		
-		ldx 	#0
+		lda 	#0
 CMPSetTOS:
 		sta 	XSNumber3,x
 		sta 	XSNumber2,x
@@ -82,10 +82,10 @@ CMPCompareGreaterEqual: 	;; [>=]
 ; ************************************************************************************************
 
 CMPCompareBaseCode:
-		.byte 	3
 		jsr 	DereferenceCheckTypes 		; dereference, check types match.
 		bmi 	_CMPTypeError
-		bvs 	_CMPString 					; string ?
+		lda 	XSControl,x 
+		bmi 	_CMPString 					; string ?
 		lda 	#6 							; use coprocessor to compare
 		jsr 	DOMathCommand
 		lda 	ControlStatus 				; get result.
@@ -98,7 +98,7 @@ _CMPTypeError:
 		;		String comparison
 		;
 _CMPString:
-		.byte 	3
+		.byte 	3 			; UNIMPLEMENTED
 ;		phy
 ;		;
 ;		lda 	(IFR1) 						; length of smaller of the two in X.
