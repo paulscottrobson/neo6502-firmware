@@ -1,61 +1,41 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		basic.asm
-;		Purpose:	BASIC main program
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		sys.asm
+;		Purpose:	Call machine code program
+;		Created:	3rd December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-
 ; ************************************************************************************************
 ;
-;										   Main Program
+;										SYS Command
 ;
 ; ************************************************************************************************
 
 		.section code
 
-boot:	jmp 	ColdStart
+Command_Sys:	;; [sys]
+		ldx 	#0
+		jsr 	EXPEvalInteger16 			; execution address
+		phy
 
-ColdStart:	
-		jmp 	Command_RUN
+		lda 	XSNumber0,x 				; copy address into subroutine call.
+		sta 	_SysCall+1
+		lda 	XSNumber1,x
+		sta 	_SysCall+2
 
-		.send 	code
+_SysCall:
+		jsr 	$FFFF 						; call the code
+		ply
+		rts
 
-		.include "_include.inc"
-
-
-		.section code
-;
-;									Temp bodges of various kinds.
-;
-WarmStart:
-		lda 	#$00
-		tax
-		tay
-		.byte 	3
-		bra 	WarmStart
-
-Unimplemented:
-		lda 	#$FF
-ErrorHandler:
-		ldx 	#$EE
-		ldy 	#$EE
-		.byte 	3
-_EHLoop:
-		bra 	_EHLoop		
-
-		.align 	256
-Program:
-		.binary "build/tokenised.dat"
-
+	
 		.send code
-
-
+						
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

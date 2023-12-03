@@ -16,6 +16,9 @@ errors = """
 	type : 		type mismatch error
 	divzero : 	division by zero error
 	range : 	out of range error
+	assert : 	assert failed
+	break : 	break pressed
+	stop : 		program stopped
 """
 
 err = []

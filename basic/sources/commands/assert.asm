@@ -1,60 +1,51 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		basic.asm
-;		Purpose:	BASIC main program
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		assert.asm
+;		Purpose:	Asserts an expression
+;		Created:	3rd December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-
 ; ************************************************************************************************
 ;
-;										   Main Program
+;										ASSERT Command
 ;
 ; ************************************************************************************************
 
 		.section code
 
-boot:	jmp 	ColdStart
+Command_ASSERT:	;; [assert]
+		ldx 	#0
+		jsr 	EXPEvalNumber 				; get a number to assert
+		jsr 	CheckIfZero
+		beq 	_CAFail 					; if so, the assert fails.
+		rts
+_CAFail:		
+		.error_assert
 
-ColdStart:	
-		jmp 	Command_RUN
-
-		.send 	code
-
-		.include "_include.inc"
-
-
-		.section code
+; ************************************************************************************************
 ;
-;									Temp bodges of various kinds.
+;										Check if TOS is zero
 ;
-WarmStart:
-		lda 	#$00
-		tax
-		tay
-		.byte 	3
-		bra 	WarmStart
+; ************************************************************************************************
+		
+CheckIfZero:
+		lda 	XSControl,x
+		bne 	_CAType
+		lda 	XSNumber0,x
+		ora 	XSNumber1,x
+		ora 	XSNumber2,x
+		ora 	XSNumber3,x
+		rts
 
-Unimplemented:
-		lda 	#$FF
-ErrorHandler:
-		ldx 	#$EE
-		ldy 	#$EE
-		.byte 	3
-_EHLoop:
-		bra 	_EHLoop		
-
-		.align 	256
-Program:
-		.binary "build/tokenised.dat"
+_CAType:
+		.error_type
 
 		.send code
-
 
 ; ************************************************************************************************
 ;

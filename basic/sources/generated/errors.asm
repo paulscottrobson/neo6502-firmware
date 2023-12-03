@@ -7,4 +7,7 @@ ErrorMessageText:
 	.text	"type mismatch error",0
 	.text	"division by zero error",0
 	.text	"out of range error",0
+	.text	"assert failed",0
+	.text	"break pressed",0
+	.text	"program stopped",0
 	.send code

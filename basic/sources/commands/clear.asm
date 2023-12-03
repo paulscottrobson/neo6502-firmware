@@ -1,60 +1,62 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		basic.asm
-;		Purpose:	BASIC main program
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		clear.asm
+;		Purpose:	Clear variables / general reset
+;		Created:	3rd December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-
 ; ************************************************************************************************
 ;
-;										   Main Program
+;										CLR Command
 ;
 ; ************************************************************************************************
 
 		.section code
 
-boot:	jmp 	ColdStart
+Command_CLEAR:	;; [clear]
+		jmp 	ClearCode
 
-ColdStart:	
-		jmp 	Command_RUN
+; ************************************************************************************************
+;
+;									Do CLEAR functionality
+;
+; ************************************************************************************************
+
+ClearCode:
+		;
+		;		Reset variable memory pointer
+		;
+;		jsr 	PGMEndProgram 				; end program => zTemp0
+;		;
+;		stz 	freeMemory 					; start on next free page
+;		lda 	zTemp0+1 					; for variables.
+;		inc 	a
+;		sta 	freeMemory+1
+		;
+		;		Reset stack
+		;
+;		lda 	PGMEndMemoryHigh
+;		jsr 	StackReset 					; page passed on in A
+		;
+		;		Initialise string usage.
+		;
+;		jsr 	StringSystemInitialise 		
+		;
+		;		Scan for procedures
+		;
+;		jsr 	ScanProcedures
+		;
+		;		Reset READ/DATA
+		;
+;		jsr 	Command_RESTORE
+		rts
 
 		.send 	code
-
-		.include "_include.inc"
-
-
-		.section code
-;
-;									Temp bodges of various kinds.
-;
-WarmStart:
-		lda 	#$00
-		tax
-		tay
-		.byte 	3
-		bra 	WarmStart
-
-Unimplemented:
-		lda 	#$FF
-ErrorHandler:
-		ldx 	#$EE
-		ldy 	#$EE
-		.byte 	3
-_EHLoop:
-		bra 	_EHLoop		
-
-		.align 	256
-Program:
-		.binary "build/tokenised.dat"
-
-		.send code
-
 
 ; ************************************************************************************************
 ;
