@@ -57,7 +57,7 @@ SRCDIR = $(ROOTDIR)kernel$(S)
 #		Current applications.
 # 
 PYTHON = python3
-ASSEMBLER = 64tass -b --mr65c02 -Wall
+ASSEMBLER = 64tass -q -b --mr65c02 -Wall
 ASMEND = 
 UPLOADER = openocd 
 UPCONFIG = -f interface/cmsis-dap.cfg -f target/rp2040.cfg 

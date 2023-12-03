@@ -1,61 +1,28 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		basic.asm
-;		Purpose:	BASIC main program
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		stop.asm
+;		Purpose:	Stop program
+;		Created:	3rd December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-
 ; ************************************************************************************************
 ;
-;										   Main Program
+;										STOP Command
 ;
 ; ************************************************************************************************
 
 		.section code
 
-boot:	jmp 	ColdStart
-
-ColdStart:	
-		jmp 	Command_RUN
-
-		.send 	code
-
-		.include "_include.inc"
-
-
-		.section code
-;
-;									Temp bodges of various kinds.
-;
-WarmStart:
-		lda 	#$00
-		tax
-		tay
-		.byte 	3
-		bra 	WarmStart
-
-Unimplemented:
-		lda 	#$FF
-ErrorHandler:
-		ldx 	#$EE
-		ldy 	#$EE
-		.byte 	3
-_EHLoop:
-		bra 	_EHLoop		
-
-		.align 	256
-Program:
-		.binary "build/tokenised.dat"
-
+Command_STOP:	;; [stop]
+		.error_stop
+		
 		.send code
-
-
+						
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

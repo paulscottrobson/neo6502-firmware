@@ -1,12 +1,12 @@
 TODO List
 ---------
 
-- BASIC implementation
-			- Implement Dereference code seperate, think about arrays.
-
-- Put run loop in, ASSERT, and check the math functionality properly. Should be okay.
+- Check the math functionality properly. Should be okay.
+- Default AXY
+- Dereferencing.
 - String concatenation / matching
 - String temp functionality, string unaries.
+- Variables, Assignment
 
 - Locale handling
 - Console colour and cursor control / positioning.
@@ -24,3 +24,12 @@ Optimise me (Integers)
 
 		
 Add to doc
+
+ASSERT
+RUN
+CLEAR
+END
+STOP
+SYS
+NEW
+' (comment)

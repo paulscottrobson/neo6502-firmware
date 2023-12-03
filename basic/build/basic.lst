@@ -1,22 +1,15 @@
 
 ; 64tass Turbo Assembler Macro V1.59.3120 listing file
-; 64tass -b --mr65c02 -Wall -L build/basic.lst -o build/basic.bin basic.asm
-; Sat Dec  2 20:16:30 2023
+; 64tass -q -b --mr65c02 -Wall -L build/basic.lst -o build/basic.bin basic.asm
+; Sun Dec  3 11:36:46 2023
 
 ;Offset	;Hex		;Monitor	;Source
 
 ;******  Processing input file: basic.asm
 
-.c000	4c 03 c0	jmp $c003	boot:	jmp 	cold
-.c003					cold:
-.c003	a9 00		lda #$00			lda 	#(Program & $FF)
-.c005	85 3a		sta $3a				sta 	codePtr
-.c007	a9 c9		lda #$c9			lda 	#(Program >> 8)+1
-.c009	85 3b		sta $3b				sta 	codePtr+1
-.c00b	a0 04		ldy #$04			ldy 	#4
-.c00d	20 ba c1	jsr $c1ba			jsr 	EXPEvaluateExpressionRestart
->c010	03						.byte 	3
-.c011	80 fe		bra $c011	h1:		bra 	h1
+.c000	4c 03 c0	jmp $c003	boot:	jmp 	ColdStart
+.c003					ColdStart:
+.c003	4c 55 c4	jmp $c455			jmp 	Command_RUN
 
 ;******  Processing file: _include.inc
 
@@ -54,6 +47,8 @@
 >0038							.fill 	2
 .003a					CodePtr:
 >003a							.fill 	2
+.0200					ERRLine:
+>0200							.fill 	2
 
 ;******  Return to file: _include.inc
 
@@ -191,1050 +186,1217 @@
 
 ;******  Processing file: sources/arithmetic/binary/compare.asm
 
-.c013					CMPReturnTrue:
-.c013	a9 ff		lda #$ff			lda 	#$FF
-.c015	80 02		bra $c019			bra 	CMPSetTOS
-.c017					CMPReturnFalse:
-.c017	a2 00		ldx #$00			ldx 	#0
-.c019					CMPSetTOS:
-.c019	95 30		sta $30,x			sta 	XSNumber3,x
-.c01b	95 28		sta $28,x			sta 	XSNumber2,x
-.c01d	95 20		sta $20,x			sta 	XSNumber1,x
-.c01f	95 18		sta $18,x			sta 	XSNumber0,x
-.c021	74 10		stz $10,x			stz 	XSControl,x
-.c023	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c026					CMPCompareEqual:
-.c026	20 5c c0	jsr $c05c			jsr 	CMPCompareBaseCode
-.c029	c9 00		cmp #$00			cmp 	#0
-.c02b	f0 e6		beq $c013			beq 	CMPReturnTrue
-.c02d	80 e8		bra $c017			bra 	CMPReturnFalse
-.c02f					CMPCompareLess:
-.c02f	20 5c c0	jsr $c05c			jsr 	CMPCompareBaseCode
-.c032	c9 ff		cmp #$ff			cmp 	#$FF
-.c034	f0 dd		beq $c013			beq 	CMPReturnTrue
-.c036	80 df		bra $c017			bra 	CMPReturnFalse
-.c038					CMPCompareGreater:
-.c038	20 5c c0	jsr $c05c			jsr 	CMPCompareBaseCode
-.c03b	c9 01		cmp #$01			cmp 	#1
-.c03d	f0 d4		beq $c013			beq 	CMPReturnTrue
-.c03f	80 d6		bra $c017			bra 	CMPReturnFalse
-.c041					CMPCompareNotEqual:
-.c041	20 5c c0	jsr $c05c			jsr 	CMPCompareBaseCode
-.c044	c9 00		cmp #$00			cmp 	#0
-.c046	d0 cb		bne $c013			bne 	CMPReturnTrue
-.c048	80 cd		bra $c017			bra 	CMPReturnFalse
-.c04a					CMPCompareLessEqual:
-.c04a	20 5c c0	jsr $c05c			jsr 	CMPCompareBaseCode
-.c04d	c9 01		cmp #$01			cmp 	#1
-.c04f	d0 c2		bne $c013			bne 	CMPReturnTrue
-.c051	80 c4		bra $c017			bra 	CMPReturnFalse
-.c053					CMPCompareGreaterEqual:
-.c053	20 5c c0	jsr $c05c			jsr 	CMPCompareBaseCode
-.c056	c9 ff		cmp #$ff			cmp 	#$FF
-.c058	d0 b9		bne $c013			bne 	CMPReturnTrue
-.c05a	80 bb		bra $c017			bra 	CMPReturnFalse
-.c05c					CMPCompareBaseCode:
->c05c	03						.byte 	3
-.c05d	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes 		; dereference, check types match.
-.c060	30 0b		bmi $c06d			bmi 	_CMPTypeError
-.c062	70 0e		bvs $c072			bvs 	_CMPString 					; string ?
-.c064	a9 06		lda #$06			lda 	#6 							; use coprocessor to compare
-.c066	20 35 c3	jsr $c335			jsr 	DOMathCommand
-.c069	ad 03 ff	lda $ff03			lda 	ControlStatus 				; get result.
-.c06c	60		rts				rts
-.c06d					_CMPTypeError:
-.c06d	a9 02		lda #$02		lda	#2
-.c06f	4c 11 c9	jmp $c911		jmp	ErrorHandler
-.c072					_CMPString:
->c072	03						.byte 	3
+.c006					CMPReturnTrue:
+.c006	a9 ff		lda #$ff			lda 	#$FF
+.c008	80 02		bra $c00c			bra 	CMPSetTOS
+.c00a					CMPReturnFalse:
+.c00a	a2 00		ldx #$00			ldx 	#0
+.c00c					CMPSetTOS:
+.c00c	95 30		sta $30,x			sta 	XSNumber3,x
+.c00e	95 28		sta $28,x			sta 	XSNumber2,x
+.c010	95 20		sta $20,x			sta 	XSNumber1,x
+.c012	95 18		sta $18,x			sta 	XSNumber0,x
+.c014	74 10		stz $10,x			stz 	XSControl,x
+.c016	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c019					CMPCompareEqual:
+.c019	20 4f c0	jsr $c04f			jsr 	CMPCompareBaseCode
+.c01c	c9 00		cmp #$00			cmp 	#0
+.c01e	f0 e6		beq $c006			beq 	CMPReturnTrue
+.c020	80 e8		bra $c00a			bra 	CMPReturnFalse
+.c022					CMPCompareLess:
+.c022	20 4f c0	jsr $c04f			jsr 	CMPCompareBaseCode
+.c025	c9 ff		cmp #$ff			cmp 	#$FF
+.c027	f0 dd		beq $c006			beq 	CMPReturnTrue
+.c029	80 df		bra $c00a			bra 	CMPReturnFalse
+.c02b					CMPCompareGreater:
+.c02b	20 4f c0	jsr $c04f			jsr 	CMPCompareBaseCode
+.c02e	c9 01		cmp #$01			cmp 	#1
+.c030	f0 d4		beq $c006			beq 	CMPReturnTrue
+.c032	80 d6		bra $c00a			bra 	CMPReturnFalse
+.c034					CMPCompareNotEqual:
+.c034	20 4f c0	jsr $c04f			jsr 	CMPCompareBaseCode
+.c037	c9 00		cmp #$00			cmp 	#0
+.c039	d0 cb		bne $c006			bne 	CMPReturnTrue
+.c03b	80 cd		bra $c00a			bra 	CMPReturnFalse
+.c03d					CMPCompareLessEqual:
+.c03d	20 4f c0	jsr $c04f			jsr 	CMPCompareBaseCode
+.c040	c9 01		cmp #$01			cmp 	#1
+.c042	d0 c2		bne $c006			bne 	CMPReturnTrue
+.c044	80 c4		bra $c00a			bra 	CMPReturnFalse
+.c046					CMPCompareGreaterEqual:
+.c046	20 4f c0	jsr $c04f			jsr 	CMPCompareBaseCode
+.c049	c9 ff		cmp #$ff			cmp 	#$FF
+.c04b	d0 b9		bne $c006			bne 	CMPReturnTrue
+.c04d	80 bb		bra $c00a			bra 	CMPReturnFalse
+.c04f					CMPCompareBaseCode:
+>c04f	03						.byte 	3
+.c050	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes 		; dereference, check types match.
+.c053	30 0b		bmi $c060			bmi 	_CMPTypeError
+.c055	70 0e		bvs $c065			bvs 	_CMPString 					; string ?
+.c057	a9 06		lda #$06			lda 	#6 							; use coprocessor to compare
+.c059	20 28 c3	jsr $c328			jsr 	DOMathCommand
+.c05c	ad 03 ff	lda $ff03			lda 	ControlStatus 				; get result.
+.c05f	60		rts				rts
+.c060					_CMPTypeError:
+.c060	a9 02		lda #$02		lda	#2
+.c062	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c065					_CMPString:
+>c065	03						.byte 	3
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/binary/mathint.asm
 
-.c073					BinaryAnd:
-.c073	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c076	20 3f c1	jsr $c13f			jsr 	MICheckBothInteger
-.c079	b5 18		lda $18,x			lda 	XSNumber0,x
-.c07b	35 19		and $19,x			and 		XSNumber0+1,x
-.c07d	95 18		sta $18,x			sta 	XSNumber0,x
-.c07f	b5 20		lda $20,x			lda 	XSNumber1,x
-.c081	35 21		and $21,x			and 		XSNumber1+1,x
-.c083	95 20		sta $20,x			sta 	XSNumber1,x
-.c085	b5 28		lda $28,x			lda 	XSNumber2,x
-.c087	35 29		and $29,x			and 		XSNumber2+1,x
-.c089	95 28		sta $28,x			sta 	XSNumber2,x
-.c08b	b5 30		lda $30,x			lda 	XSNumber3,x
-.c08d	35 31		and $31,x			and 		XSNumber3+1,x
-.c08f	95 30		sta $30,x			sta 	XSNumber3,x
-.c091	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c094					BinaryXor:
-.c094	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c097	20 3f c1	jsr $c13f			jsr 	MICheckBothInteger
-.c09a	b5 18		lda $18,x			lda 	XSNumber0,x
-.c09c	55 19		eor $19,x			eor 		XSNumber0+1,x
-.c09e	95 18		sta $18,x			sta 	XSNumber0,x
-.c0a0	b5 20		lda $20,x			lda 	XSNumber1,x
-.c0a2	55 21		eor $21,x			eor 		XSNumber1+1,x
-.c0a4	95 20		sta $20,x			sta 	XSNumber1,x
-.c0a6	b5 28		lda $28,x			lda 	XSNumber2,x
-.c0a8	55 29		eor $29,x			eor 		XSNumber2+1,x
-.c0aa	95 28		sta $28,x			sta 	XSNumber2,x
-.c0ac	b5 30		lda $30,x			lda 	XSNumber3,x
-.c0ae	55 31		eor $31,x			eor 		XSNumber3+1,x
-.c0b0	95 30		sta $30,x			sta 	XSNumber3,x
-.c0b2	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c0b5					BinaryOr:
-.c0b5	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c0b8	20 3f c1	jsr $c13f			jsr 	MICheckBothInteger
-.c0bb	b5 18		lda $18,x			lda 	XSNumber0,x
-.c0bd	15 19		ora $19,x			ora 		XSNumber0+1,x
-.c0bf	95 18		sta $18,x			sta 	XSNumber0,x
-.c0c1	b5 20		lda $20,x			lda 	XSNumber1,x
-.c0c3	15 21		ora $21,x			ora 		XSNumber1+1,x
-.c0c5	95 20		sta $20,x			sta 	XSNumber1,x
-.c0c7	b5 28		lda $28,x			lda 	XSNumber2,x
-.c0c9	15 29		ora $29,x			ora 		XSNumber2+1,x
-.c0cb	95 28		sta $28,x			sta 	XSNumber2,x
-.c0cd	b5 30		lda $30,x			lda 	XSNumber3,x
-.c0cf	15 31		ora $31,x			ora 		XSNumber3+1,x
-.c0d1	95 30		sta $30,x			sta 	XSNumber3,x
-.c0d3	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c0d6					BinaryShiftLeft:
-.c0d6	38		sec				sec
-.c0d7	80 01		bra $c0da			bra 	BinaryShift
-.c0d9					BinaryShiftRight:
-.c0d9	18		clc				clc
-.c0da					BinaryShift:
-.c0da	08		php				php									; save direction, CS left CC right.
-.c0db	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c0de	20 3f c1	jsr $c13f			jsr 	MICheckBothInteger
-.c0e1	b5 19		lda $19,x			lda 	XSNumber0+1,x 				; if shift >=32 will be zero
-.c0e3	29 e0		and #$e0			and 	#$E0
-.c0e5	15 21		ora $21,x			ora 	XSNumber1+1,x
-.c0e7	15 22		ora $22,x			ora 	XSNumber1+2,x
-.c0e9	15 23		ora $23,x			ora 	XSNumber1+3,x
-.c0eb	d0 20		bne $c10d			bne 	_BSIsZero
-.c0ed	b5 19		lda $19,x			lda 	XSNumber0+1,x 				; check zero at start
-.c0ef	f0 24		beq $c115			beq 	_BSExit
-.c0f1					_BSLoop:
-.c0f1	28		plp				plp 								; access diection
-.c0f2	08		php				php
-.c0f3	b0 0a		bcs $c0ff			bcs 	_BSLeft
-.c0f5	56 30		lsr $30,x			lsr 	XSNumber3,x 				; shift right
-.c0f7	76 28		ror $28,x			ror 	XSNumber2,x
-.c0f9	76 20		ror $20,x			ror 	XSNumber1,x
-.c0fb	76 18		ror $18,x			ror 	XSNumber0,x
-.c0fd	80 08		bra $c107			bra 	_BSExitLoop
-.c0ff					_BSLeft:
-.c0ff	16 18		asl $18,x			asl 	XSNumber0,x 				; shift left
-.c101	36 20		rol $20,x			rol 	XSNumber1,x
-.c103	36 28		rol $28,x			rol 	XSNumber2,x
-.c105	36 30		rol $30,x			rol 	XSNumber3,x
-.c107					_BSExitLoop:
-.c107	d6 19		dec $19,x			dec 	XSNumber0+1,x 				; do that many times
-.c109	d0 e6		bne $c0f1			bne 	_BSLoop
-.c10b	80 08		bra $c115			bra 	_BSExit
-.c10d					_BSIsZero:
-.c10d	74 18		stz $18,x			stz 	XSNumber0,x					; return zero.
-.c10f	74 20		stz $20,x			stz 	XSNumber1,x
-.c111	74 28		stz $28,x			stz 	XSNumber2,x
-.c113	74 30		stz $30,x			stz 	XSNumber3,x
-.c115					_BSExit:
-.c115	28		plp				plp 								; throw direction.
-.c116	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c119					BinRefWord:
-.c119	a9 20		lda #$20			lda 	#XS_ISREFERENCE
-.c11b	80 02		bra $c11f			bra 	BinRefMain
-.c11d					BinRefByte:
-.c11d	a9 30		lda #$30			lda 	#XS_ISREFERENCE|XS_ISBYTEREFERENCE
-.c11f					BinRefMain:
-.c11f	48		pha				pha
-.c120	18		clc				clc
-.c121	b5 18		lda $18,x			lda 	XSNumber0,x
-.c123	75 19		adc $19,x			adc 		XSNumber0+1,x
-.c125	95 18		sta $18,x			sta 	XSNumber0,x
-.c127	b5 20		lda $20,x			lda 	XSNumber1,x
-.c129	75 21		adc $21,x			adc 		XSNumber1+1,x
-.c12b	95 20		sta $20,x			sta 	XSNumber1,x
-.c12d	b5 28		lda $28,x			lda 	XSNumber2,x
-.c12f	75 29		adc $29,x			adc 		XSNumber2+1,x
-.c131	95 28		sta $28,x			sta 	XSNumber2,x
-.c133	b5 30		lda $30,x			lda 	XSNumber3,x
-.c135	75 31		adc $31,x			adc 		XSNumber3+1,x
-.c137	95 30		sta $30,x			sta 	XSNumber3,x
-.c139	68		pla				pla
-.c13a	95 10		sta $10,x			sta 	XSControl,x
-.c13c	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c13f					MICheckBothInteger:
-.c13f	b5 10		lda $10,x			lda 	XSControl,x
-.c141	15 10		ora $10,x			ora 	XSControl,x
-.c143	29 c0		and #$c0			and 	#$C0
-.c145	d0 01		bne $c148			bne 	_MICBIType
-.c147	60		rts				rts
-.c148					_MICBIType:
-.c148	a9 02		lda #$02		lda	#2
-.c14a	4c 11 c9	jmp $c911		jmp	ErrorHandler
+.c066					BinaryAnd:
+.c066	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c069	20 32 c1	jsr $c132			jsr 	MICheckBothInteger
+.c06c	b5 18		lda $18,x			lda 	XSNumber0,x
+.c06e	35 19		and $19,x			and 		XSNumber0+1,x
+.c070	95 18		sta $18,x			sta 	XSNumber0,x
+.c072	b5 20		lda $20,x			lda 	XSNumber1,x
+.c074	35 21		and $21,x			and 		XSNumber1+1,x
+.c076	95 20		sta $20,x			sta 	XSNumber1,x
+.c078	b5 28		lda $28,x			lda 	XSNumber2,x
+.c07a	35 29		and $29,x			and 		XSNumber2+1,x
+.c07c	95 28		sta $28,x			sta 	XSNumber2,x
+.c07e	b5 30		lda $30,x			lda 	XSNumber3,x
+.c080	35 31		and $31,x			and 		XSNumber3+1,x
+.c082	95 30		sta $30,x			sta 	XSNumber3,x
+.c084	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c087					BinaryXor:
+.c087	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c08a	20 32 c1	jsr $c132			jsr 	MICheckBothInteger
+.c08d	b5 18		lda $18,x			lda 	XSNumber0,x
+.c08f	55 19		eor $19,x			eor 		XSNumber0+1,x
+.c091	95 18		sta $18,x			sta 	XSNumber0,x
+.c093	b5 20		lda $20,x			lda 	XSNumber1,x
+.c095	55 21		eor $21,x			eor 		XSNumber1+1,x
+.c097	95 20		sta $20,x			sta 	XSNumber1,x
+.c099	b5 28		lda $28,x			lda 	XSNumber2,x
+.c09b	55 29		eor $29,x			eor 		XSNumber2+1,x
+.c09d	95 28		sta $28,x			sta 	XSNumber2,x
+.c09f	b5 30		lda $30,x			lda 	XSNumber3,x
+.c0a1	55 31		eor $31,x			eor 		XSNumber3+1,x
+.c0a3	95 30		sta $30,x			sta 	XSNumber3,x
+.c0a5	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c0a8					BinaryOr:
+.c0a8	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c0ab	20 32 c1	jsr $c132			jsr 	MICheckBothInteger
+.c0ae	b5 18		lda $18,x			lda 	XSNumber0,x
+.c0b0	15 19		ora $19,x			ora 		XSNumber0+1,x
+.c0b2	95 18		sta $18,x			sta 	XSNumber0,x
+.c0b4	b5 20		lda $20,x			lda 	XSNumber1,x
+.c0b6	15 21		ora $21,x			ora 		XSNumber1+1,x
+.c0b8	95 20		sta $20,x			sta 	XSNumber1,x
+.c0ba	b5 28		lda $28,x			lda 	XSNumber2,x
+.c0bc	15 29		ora $29,x			ora 		XSNumber2+1,x
+.c0be	95 28		sta $28,x			sta 	XSNumber2,x
+.c0c0	b5 30		lda $30,x			lda 	XSNumber3,x
+.c0c2	15 31		ora $31,x			ora 		XSNumber3+1,x
+.c0c4	95 30		sta $30,x			sta 	XSNumber3,x
+.c0c6	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c0c9					BinaryShiftLeft:
+.c0c9	38		sec				sec
+.c0ca	80 01		bra $c0cd			bra 	BinaryShift
+.c0cc					BinaryShiftRight:
+.c0cc	18		clc				clc
+.c0cd					BinaryShift:
+.c0cd	08		php				php									; save direction, CS left CC right.
+.c0ce	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c0d1	20 32 c1	jsr $c132			jsr 	MICheckBothInteger
+.c0d4	b5 19		lda $19,x			lda 	XSNumber0+1,x 				; if shift >=32 will be zero
+.c0d6	29 e0		and #$e0			and 	#$E0
+.c0d8	15 21		ora $21,x			ora 	XSNumber1+1,x
+.c0da	15 22		ora $22,x			ora 	XSNumber1+2,x
+.c0dc	15 23		ora $23,x			ora 	XSNumber1+3,x
+.c0de	d0 20		bne $c100			bne 	_BSIsZero
+.c0e0	b5 19		lda $19,x			lda 	XSNumber0+1,x 				; check zero at start
+.c0e2	f0 24		beq $c108			beq 	_BSExit
+.c0e4					_BSLoop:
+.c0e4	28		plp				plp 								; access diection
+.c0e5	08		php				php
+.c0e6	b0 0a		bcs $c0f2			bcs 	_BSLeft
+.c0e8	56 30		lsr $30,x			lsr 	XSNumber3,x 				; shift right
+.c0ea	76 28		ror $28,x			ror 	XSNumber2,x
+.c0ec	76 20		ror $20,x			ror 	XSNumber1,x
+.c0ee	76 18		ror $18,x			ror 	XSNumber0,x
+.c0f0	80 08		bra $c0fa			bra 	_BSExitLoop
+.c0f2					_BSLeft:
+.c0f2	16 18		asl $18,x			asl 	XSNumber0,x 				; shift left
+.c0f4	36 20		rol $20,x			rol 	XSNumber1,x
+.c0f6	36 28		rol $28,x			rol 	XSNumber2,x
+.c0f8	36 30		rol $30,x			rol 	XSNumber3,x
+.c0fa					_BSExitLoop:
+.c0fa	d6 19		dec $19,x			dec 	XSNumber0+1,x 				; do that many times
+.c0fc	d0 e6		bne $c0e4			bne 	_BSLoop
+.c0fe	80 08		bra $c108			bra 	_BSExit
+.c100					_BSIsZero:
+.c100	74 18		stz $18,x			stz 	XSNumber0,x					; return zero.
+.c102	74 20		stz $20,x			stz 	XSNumber1,x
+.c104	74 28		stz $28,x			stz 	XSNumber2,x
+.c106	74 30		stz $30,x			stz 	XSNumber3,x
+.c108					_BSExit:
+.c108	28		plp				plp 								; throw direction.
+.c109	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c10c					BinRefWord:
+.c10c	a9 20		lda #$20			lda 	#XS_ISREFERENCE
+.c10e	80 02		bra $c112			bra 	BinRefMain
+.c110					BinRefByte:
+.c110	a9 30		lda #$30			lda 	#XS_ISREFERENCE|XS_ISBYTEREFERENCE
+.c112					BinRefMain:
+.c112	48		pha				pha
+.c113	18		clc				clc
+.c114	b5 18		lda $18,x			lda 	XSNumber0,x
+.c116	75 19		adc $19,x			adc 		XSNumber0+1,x
+.c118	95 18		sta $18,x			sta 	XSNumber0,x
+.c11a	b5 20		lda $20,x			lda 	XSNumber1,x
+.c11c	75 21		adc $21,x			adc 		XSNumber1+1,x
+.c11e	95 20		sta $20,x			sta 	XSNumber1,x
+.c120	b5 28		lda $28,x			lda 	XSNumber2,x
+.c122	75 29		adc $29,x			adc 		XSNumber2+1,x
+.c124	95 28		sta $28,x			sta 	XSNumber2,x
+.c126	b5 30		lda $30,x			lda 	XSNumber3,x
+.c128	75 31		adc $31,x			adc 		XSNumber3+1,x
+.c12a	95 30		sta $30,x			sta 	XSNumber3,x
+.c12c	68		pla				pla
+.c12d	95 10		sta $10,x			sta 	XSControl,x
+.c12f	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c132					MICheckBothInteger:
+.c132	b5 10		lda $10,x			lda 	XSControl,x
+.c134	15 10		ora $10,x			ora 	XSControl,x
+.c136	29 c0		and #$c0			and 	#$C0
+.c138	d0 01		bne $c13b			bne 	_MICBIType
+.c13a	60		rts				rts
+.c13b					_MICBIType:
+.c13b	a9 02		lda #$02		lda	#2
+.c13d	4c 39 c8	jmp $c839		jmp	ErrorHandler
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/binary/mathstd.asm
 
-.c14d					DereferenceCheckTypes:
-.c14d	20 b9 c1	jsr $c1b9			jsr 	DereferenceTerm 			; dereference first
-.c150	e8		inx				inx
-.c151	20 b9 c1	jsr $c1b9			jsr 	DereferenceTerm 			; dereference second
-.c154	ca		dex				dex
-.c155	b5 10		lda $10,x			lda 	XSControl,x 				; eor top bits, so non zero if different.
-.c157	55 11		eor $11,x			eor 	XSControl+1,x
-.c159	30 03		bmi $c15e			bmi 	DRCType 					; type mismatch.
-.c15b	34 10		bit $10,x			bit 	XSControl,x 				; and set NV from the actual type
-.c15d	60		rts				rts
-.c15e					DRCType:
-.c15e	a9 02		lda #$02		lda	#2
-.c160	4c 11 c9	jmp $c911		jmp	ErrorHandler
-.c163					BinaryAdd:
-.c163	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c166	30 f6		bmi $c15e			bmi 	DRCType
-.c168	a9 00		lda #$00			lda 	#0
-.c16a	20 35 c3	jsr $c335			jsr 	DoMathCommand
-.c16d	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c170					BinaryMinus:
-.c170	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c173	30 e9		bmi $c15e			bmi 	DRCType
-.c175	a9 01		lda #$01			lda 	#1
-.c177	20 35 c3	jsr $c335			jsr 	DoMathCommand
-.c17a	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c17d					BinaryTimes:
-.c17d	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c180	30 dc		bmi $c15e			bmi 	DRCType
-.c182	a9 02		lda #$02			lda 	#2
-.c184	20 35 c3	jsr $c335			jsr 	DoMathCommand
-.c187	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c18a					BinaryFDiv:
-.c18a	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c18d	30 cf		bmi $c15e			bmi 	DRCType
-.c18f	a9 03		lda #$03			lda 	#3
-.c191	20 35 c3	jsr $c335			jsr 	DoMathCommand
-.c194					BinaryCheckResult:
-.c194	ad 02 ff	lda $ff02			lda 	ControlError
-.c197	d0 03		bne $c19c			bne 	_BCRError
-.c199	4c c2 c1	jmp $c1c2			jmp 	EXPRMainLoop
-.c19c					_BCRError:
-.c19c	a9 03		lda #$03		lda	#3
-.c19e	4c 11 c9	jmp $c911		jmp	ErrorHandler
-.c1a1					BinaryUDiv:
-.c1a1	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c1a4	30 b8		bmi $c15e			bmi 	DRCType
-.c1a6	a9 04		lda #$04			lda 	#4
-.c1a8	20 35 c3	jsr $c335			jsr 	DoMathCommand
-.c1ab	80 e7		bra $c194			bra 	BinaryCheckResult
-.c1ad					BinaryModulus:
-.c1ad	20 4d c1	jsr $c14d			jsr 	DereferenceCheckTypes
-.c1b0	30 ac		bmi $c15e			bmi 	DRCType
-.c1b2	a9 05		lda #$05			lda 	#5
-.c1b4	20 35 c3	jsr $c335			jsr 	DoMathCommand
-.c1b7	80 db		bra $c194			bra 	BinaryCheckResult
+.c140					DereferenceCheckTypes:
+.c140	20 ac c1	jsr $c1ac			jsr 	DereferenceTerm 			; dereference first
+.c143	e8		inx				inx
+.c144	20 ac c1	jsr $c1ac			jsr 	DereferenceTerm 			; dereference second
+.c147	ca		dex				dex
+.c148	b5 10		lda $10,x			lda 	XSControl,x 				; eor top bits, so non zero if different.
+.c14a	55 11		eor $11,x			eor 	XSControl+1,x
+.c14c	30 03		bmi $c151			bmi 	DRCType 					; type mismatch.
+.c14e	34 10		bit $10,x			bit 	XSControl,x 				; and set NV from the actual type
+.c150	60		rts				rts
+.c151					DRCType:
+.c151	a9 02		lda #$02		lda	#2
+.c153	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c156					BinaryAdd:
+.c156	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c159	30 f6		bmi $c151			bmi 	DRCType
+.c15b	a9 00		lda #$00			lda 	#0
+.c15d	20 28 c3	jsr $c328			jsr 	DoMathCommand
+.c160	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c163					BinaryMinus:
+.c163	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c166	30 e9		bmi $c151			bmi 	DRCType
+.c168	a9 01		lda #$01			lda 	#1
+.c16a	20 28 c3	jsr $c328			jsr 	DoMathCommand
+.c16d	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c170					BinaryTimes:
+.c170	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c173	30 dc		bmi $c151			bmi 	DRCType
+.c175	a9 02		lda #$02			lda 	#2
+.c177	20 28 c3	jsr $c328			jsr 	DoMathCommand
+.c17a	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c17d					BinaryFDiv:
+.c17d	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c180	30 cf		bmi $c151			bmi 	DRCType
+.c182	a9 03		lda #$03			lda 	#3
+.c184	20 28 c3	jsr $c328			jsr 	DoMathCommand
+.c187					BinaryCheckResult:
+.c187	ad 02 ff	lda $ff02			lda 	ControlError
+.c18a	d0 03		bne $c18f			bne 	_BCRError
+.c18c	4c b5 c1	jmp $c1b5			jmp 	EXPRMainLoop
+.c18f					_BCRError:
+.c18f	a9 03		lda #$03		lda	#3
+.c191	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c194					BinaryUDiv:
+.c194	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c197	30 b8		bmi $c151			bmi 	DRCType
+.c199	a9 04		lda #$04			lda 	#4
+.c19b	20 28 c3	jsr $c328			jsr 	DoMathCommand
+.c19e	80 e7		bra $c187			bra 	BinaryCheckResult
+.c1a0					BinaryModulus:
+.c1a0	20 40 c1	jsr $c140			jsr 	DereferenceCheckTypes
+.c1a3	30 ac		bmi $c151			bmi 	DRCType
+.c1a5	a9 05		lda #$05			lda 	#5
+.c1a7	20 28 c3	jsr $c328			jsr 	DoMathCommand
+.c1aa	80 db		bra $c187			bra 	BinaryCheckResult
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/dereference.asm
 
-.c1b9					DereferenceTerm:
-.c1b9	60		rts				rts
+.c1ac					DereferenceTerm:
+.c1ac	60		rts				rts
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/expression.asm
 
-.c1ba					EXPEvaluateExpressionRestart:
-.c1ba	a2 00		ldx #$00			ldx 	#0 							; start from base of stack.
-.c1bc					EXPEvaluateExpression:
-.c1bc	a9 00		lda #$00			lda 	#0 							; current precedence is 0.
-.c1be					EXPEvaluateExpressionPrecedenceA:
-.c1be	48		pha				pha		 							; push on stack.
-.c1bf	20 43 c2	jsr $c243			jsr 	EvaluateTerm 				; evaluate term at this level.
-.c1c2					EXPRMainLoop:
-.c1c2	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; what follows needs to be a binary operator
-.c1c4	29 e0		and #$e0			and 	#$E0 						; is it $20-$3F, e.g. a binary operator.
-.c1c6	c9 20		cmp #$20			cmp 	#$20
-.c1c8	d0 2e		bne $c1f8			bne 	_EEExit
-.c1ca	da		phx				phx 			 					; get binary precedence for current operator -> zTemp0+1
-.c1cb	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get the operator again
-.c1cd	aa		tax				tax
-.c1ce	bd 15 c6	lda $c615,x			lda 	BinaryPrecedence-$20,x 		; get the binary operator precedence.
-.c1d1	85 39		sta $39				sta 	zTemp0+1
-.c1d3	fa		plx				plx
-.c1d4	68		pla				pla 								; restore current precedence.
-.c1d5	c5 39		cmp $39				cmp 	zTemp0+1 					; if >= operator precedence then exit
-.c1d7	b0 20		bcs $c1f9			bcs 	_EEExit2
-.c1d9	48		pha				pha 								; save current precedence on the 6502 stack.
-.c1da	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get the operator back.
-.c1dc	c8		iny				iny 								; consume operator.
-.c1dd	48		pha				pha 								; save the operator.
-.c1de	a5 39		lda $39				lda 	zTemp0+1					; get precedence of operator
-.c1e0	e8		inx				inx 								; space for it on the stack and do the RHS.
-.c1e1	20 be c1	jsr $c1be			jsr 	EXPEvaluateExpressionPrecedenceA
-.c1e4	ca		dex				dex 								; back to original value.
-.c1e5	68		pla				pla 								; load operator
-.c1e6	29 1f		and #$1f			and 	#$1F 						; mask out bits
-.c1e8	0a		asl a				asl 	a 							; double as look up table, also Clear Carry
-.c1e9	69 48		adc #$48			adc 	#(BinaryVectorTable & $FF) 	; work out the address to do the indirect jump.
-.c1eb	8d f6 c1	sta $c1f6			sta 	_EXPRIndirectJump+1
-.c1ee	a9 c6		lda #$c6			lda 	#(BinaryVectorTable >> 8)
-.c1f0	69 00		adc #$00			adc 	#0
-.c1f2	8d f7 c1	sta $c1f7			sta 	_EXPRIndirectJump+2
-.c1f5					_EXPRIndirectJump:
-.c1f5	6c ff ff	jmp ($ffff)			jmp 	($FFFF) 					; jump to the code routine, loops back to EXPRMainLoop
-.c1f8					_EEExit:
-.c1f8	68		pla				pla 								; throw precedence
-.c1f9					_EEExit2:
-.c1f9	60		rts				rts
+.c1ad					EXPEvaluateExpressionRestart:
+.c1ad	a2 00		ldx #$00			ldx 	#0 							; start from base of stack.
+.c1af					EXPEvaluateExpression:
+.c1af	a9 00		lda #$00			lda 	#0 							; current precedence is 0.
+.c1b1					EXPEvaluateExpressionPrecedenceA:
+.c1b1	48		pha				pha		 							; push on stack.
+.c1b2	20 36 c2	jsr $c236			jsr 	EvaluateTerm 				; evaluate term at this level.
+.c1b5					EXPRMainLoop:
+.c1b5	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; what follows needs to be a binary operator
+.c1b7	29 e0		and #$e0			and 	#$E0 						; is it $20-$3F, e.g. a binary operator.
+.c1b9	c9 20		cmp #$20			cmp 	#$20
+.c1bb	d0 2e		bne $c1eb			bne 	_EEExit
+.c1bd	da		phx				phx 			 					; get binary precedence for current operator -> zTemp0+1
+.c1be	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get the operator again
+.c1c0	aa		tax				tax
+.c1c1	bd e6 c6	lda $c6e6,x			lda 	BinaryPrecedence-$20,x 		; get the binary operator precedence.
+.c1c4	85 39		sta $39				sta 	zTemp0+1
+.c1c6	fa		plx				plx
+.c1c7	68		pla				pla 								; restore current precedence.
+.c1c8	c5 39		cmp $39				cmp 	zTemp0+1 					; if >= operator precedence then exit
+.c1ca	b0 20		bcs $c1ec			bcs 	_EEExit2
+.c1cc	48		pha				pha 								; save current precedence on the 6502 stack.
+.c1cd	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get the operator back.
+.c1cf	c8		iny				iny 								; consume operator.
+.c1d0	48		pha				pha 								; save the operator.
+.c1d1	a5 39		lda $39				lda 	zTemp0+1					; get precedence of operator
+.c1d3	e8		inx				inx 								; space for it on the stack and do the RHS.
+.c1d4	20 b1 c1	jsr $c1b1			jsr 	EXPEvaluateExpressionPrecedenceA
+.c1d7	ca		dex				dex 								; back to original value.
+.c1d8	68		pla				pla 								; load operator
+.c1d9	29 1f		and #$1f			and 	#$1F 						; mask out bits
+.c1db	0a		asl a				asl 	a 							; double as look up table, also Clear Carry
+.c1dc	69 19		adc #$19			adc 	#(BinaryVectorTable & $FF) 	; work out the address to do the indirect jump.
+.c1de	8d e9 c1	sta $c1e9			sta 	_EXPRIndirectJump+1
+.c1e1	a9 c7		lda #$c7			lda 	#(BinaryVectorTable >> 8)
+.c1e3	69 00		adc #$00			adc 	#0
+.c1e5	8d ea c1	sta $c1ea			sta 	_EXPRIndirectJump+2
+.c1e8					_EXPRIndirectJump:
+.c1e8	6c ff ff	jmp ($ffff)			jmp 	($FFFF) 					; jump to the code routine, loops back to EXPRMainLoop
+.c1eb					_EEExit:
+.c1eb	68		pla				pla 								; throw precedence
+.c1ec					_EEExit2:
+.c1ec	60		rts				rts
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/exprutils.asm
 
-.c1fa					EXPEvalNumber:
-.c1fa	20 bc c1	jsr $c1bc			jsr 	EXPEvaluateExpression 		; get a value
-.c1fd	20 b9 c1	jsr $c1b9			jsr 	DereferenceTerm 			; dereference it
-.c200	34 10		bit $10,x			bit 	XSControl,x	 				; fail if string
-.c202	30 01		bmi $c205			bmi 	EVUType
-.c204	60		rts				rts
-.c205					EVUType:
-.c205	a9 02		lda #$02		lda	#2
-.c207	4c 11 c9	jmp $c911		jmp	ErrorHandler
-.c20a					EXPEvalInteger:
-.c20a	20 fa c1	jsr $c1fa			jsr 	EXPEvalNumber 				; get number, coeerce to integer.
-.c20d	34 10		bit $10,x			bit 	XSControl,x 				; integer ?
-.c20f	f0 05		beq $c216			beq 	_EEIExit
-.c211	a9 11		lda #$11			lda 	#17 						; no, make it integer
-.c213	20 35 c3	jsr $c335			jsr 	DOMathCommand
-.c216					_EEIExit:
-.c216	60		rts				rts
-.c217					EXPEvalInteger16:
-.c217	20 0a c2	jsr $c20a			jsr 	EXPEvalInteger 				; get integer
-.c21a	b5 30		lda $30,x			lda 	XSNumber3,x
-.c21c	15 28		ora $28,x			ora 	XSNumber2,x
-.c21e	d0 1e		bne $c23e			bne 	EVURange
-.c220	60		rts				rts
-.c221					EXPEvalInteger8:
-.c221	20 0a c2	jsr $c20a			jsr 	EXPEvalInteger 				; get integer
-.c224	b5 20		lda $20,x			lda 	XSNumber1,x 				; range 00-FF
-.c226	d0 16		bne $c23e			bne 	EVURange
+.c1ed					EXPEvalNumber:
+.c1ed	20 af c1	jsr $c1af			jsr 	EXPEvaluateExpression 		; get a value
+.c1f0	20 ac c1	jsr $c1ac			jsr 	DereferenceTerm 			; dereference it
+.c1f3	34 10		bit $10,x			bit 	XSControl,x	 				; fail if string
+.c1f5	30 01		bmi $c1f8			bmi 	EVUType
+.c1f7	60		rts				rts
+.c1f8					EVUType:
+.c1f8	a9 02		lda #$02		lda	#2
+.c1fa	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c1fd					EXPEvalInteger:
+.c1fd	20 ed c1	jsr $c1ed			jsr 	EXPEvalNumber 				; get number, coeerce to integer.
+.c200	34 10		bit $10,x			bit 	XSControl,x 				; integer ?
+.c202	f0 05		beq $c209			beq 	_EEIExit
+.c204	a9 11		lda #$11			lda 	#17 						; no, make it integer
+.c206	20 28 c3	jsr $c328			jsr 	DOMathCommand
+.c209					_EEIExit:
+.c209	60		rts				rts
+.c20a					EXPEvalInteger16:
+.c20a	20 fd c1	jsr $c1fd			jsr 	EXPEvalInteger 				; get integer
+.c20d	b5 30		lda $30,x			lda 	XSNumber3,x
+.c20f	15 28		ora $28,x			ora 	XSNumber2,x
+.c211	d0 1e		bne $c231			bne 	EVURange
+.c213	60		rts				rts
+.c214					EXPEvalInteger8:
+.c214	20 fd c1	jsr $c1fd			jsr 	EXPEvalInteger 				; get integer
+.c217	b5 20		lda $20,x			lda 	XSNumber1,x 				; range 00-FF
+.c219	d0 16		bne $c231			bne 	EVURange
+.c21b	b5 18		lda $18,x			lda 	XSNumber0,x
+.c21d	60		rts				rts
+.c21e					EXPEvalString:
+.c21e	20 af c1	jsr $c1af			jsr 	EXPEvaluateExpression 		; get a value
+.c221	20 ac c1	jsr $c1ac			jsr 	DereferenceTerm 			; dereference it
+.c224	34 10		bit $10,x			bit 	XSControl,x	 				; fail if string
+.c226	10 d0		bpl $c1f8			bpl 	EVUType
 .c228	b5 18		lda $18,x			lda 	XSNumber0,x
-.c22a	60		rts				rts
-.c22b					EXPEvalString:
-.c22b	20 bc c1	jsr $c1bc			jsr 	EXPEvaluateExpression 		; get a value
-.c22e	20 b9 c1	jsr $c1b9			jsr 	DereferenceTerm 			; dereference it
-.c231	34 10		bit $10,x			bit 	XSControl,x	 				; fail if string
-.c233	10 d0		bpl $c205			bpl 	EVUType
-.c235	b5 18		lda $18,x			lda 	XSNumber0,x
-.c237	85 38		sta $38				sta 	zTemp0
-.c239	b5 20		lda $20,x			lda 	XSNumber1,x
-.c23b	85 39		sta $39				sta 	zTemp0+1
-.c23d	60		rts				rts
-.c23e					EVURange:
-.c23e	a9 04		lda #$04		lda	#4
-.c240	4c 11 c9	jmp $c911		jmp	ErrorHandler
+.c22a	85 38		sta $38				sta 	zTemp0
+.c22c	b5 20		lda $20,x			lda 	XSNumber1,x
+.c22e	85 39		sta $39				sta 	zTemp0+1
+.c230	60		rts				rts
+.c231					EVURange:
+.c231	a9 04		lda #$04		lda	#4
+.c233	4c 39 c8	jmp $c839		jmp	ErrorHandler
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/term.asm
 
-.c243					EvaluateTerm:
-.c243	b1 3a		lda ($3a),y			lda 	(CodePtr),y 				; get next token
-.c245	30 0a		bmi $c251			bmi 	_ETKeyword 					; is it a keyword (80-FF) ?
-.c247	0a		asl a				asl		a							; is it a number (40-7F)
-.c248	10 1f		bpl $c269			bpl		_ETIdentifierOrSpecial 		; if 00-3F then it is an identifier, or a multi purpose unary ! ? -
-.c24a	20 ce c2	jsr $c2ce			jsr 	ExtractTokenisedInteger
-.c24d	20 14 c3	jsr $c314			jsr 	CheckFollowingDecimal
-.c250	60		rts				rts
-.c251					_ETKeyword:
-.c251	c9 b0		cmp #$b0			cmp 	#$B0 						; is it a unary function ?
-.c253	b0 36		bcs $c28b			bcs 	_ETSyntax
-.c255	da		phx				phx
-.c256	0a		asl a				asl 	a 							; access address to jump
-.c257	aa		tax				tax
-.c258	bd 8a c6	lda $c68a,x			lda 	StandardVectorTable,x
-.c25b	8d 67 c2	sta $c267			sta 	_ETVector+1
-.c25e	bd 8b c6	lda $c68b,x			lda 	StandardVectorTable+1,x
-.c261	8d 68 c2	sta $c268			sta 	_ETVector+2
-.c264	fa		plx				plx 								; restore stack pos and go there.
-.c265	c8		iny				iny 								; consume
-.c266					_ETVector:
-.c266	4c ff ff	jmp $ffff			jmp 	$FFFF
-.c269					_ETIdentifierOrSpecial:
-.c269	0a		asl a			 	asl 	a 							; bit 5 now in sign slot
-.c26a	10 40		bpl $c2ac		 	bpl 	_ETIsIdentifier  			; 0 it is 00-1F e.g. identifier
-.c26c	b1 3a		lda ($3a),y		 	lda 	(codePtr),y 				; get and consume. clearer than reuse
-.c26e	c8		iny			 	iny
-.c26f	c9 21		cmp #$21		 	cmp 	#KWD_MINUS 					; negation.
-.c271	d0 10		bne $c283		 	bne 	_ETCheckReference
-.c273	20 43 c2	jsr $c243		 	jsr 	EvaluateTerm 				; it's minus *something*.
-.c276	20 b9 c1	jsr $c1b9		 	jsr 	DereferenceTerm 			; dereference it.
-.c279	b5 10		lda $10,x		 	lda 	XSControl,x 				; numeric term ?
-.c27b	30 2a		bmi $c2a7		 	bmi 	_ETBadType
-.c27d	a9 10		lda #$10		 	lda 	#16 						; negation function - needs optimising for ints
-.c27f	20 35 c3	jsr $c335		 	jsr 	DoMathCommand 				; work it out
-.c282	60		rts			 	rts
-.c283					_ETCheckReference:
-.c283	c9 32		cmp #$32			cmp 	#KWD_QMARK
-.c285	f0 09		beq $c290			beq 	_ETHaveReference
-.c287	49 31		eor #$31			eor 	#KWD_PLING
-.c289	f0 05		beq $c290			beq 	_ETHaveReference
-.c28b					_ETSyntax:
-.c28b	a9 01		lda #$01		lda	#1
-.c28d	4c 11 c9	jmp $c911		jmp	ErrorHandler
-.c290					_ETHaveReference:
-.c290	48		pha				pha 								; save type.
-.c291	20 43 c2	jsr $c243		 	jsr 	EvaluateTerm 				; get reference address
-.c294	20 b9 c1	jsr $c1b9		 	jsr 	DereferenceTerm
-.c297	b5 10		lda $10,x		 	lda 	XSControl,x 				; must be integer
-.c299	29 c0		and #$c0		 	and 	#XS_TYPEMASK
-.c29b	d0 0a		bne $c2a7		 	bne 	_ETBadType
-.c29d	68		pla			 	pla 								; get type of reference back
-.c29e	f0 02		beq $c2a2		 	beq 	_ETIsWord 					; if zero, it's a word reference
-.c2a0	a9 10		lda #$10		 	lda 	#XS_ISBYTEREFERENCE
-.c2a2					_ETIsWord:
-.c2a2	09 20		ora #$20			ora 	#XS_ISREFERENCE 			; now $20 / $30 for word/byte reference
-.c2a4	95 10		sta $10,x			sta 	XSControl,x 				; update type
-.c2a6	60		rts				rts
-.c2a7					_ETBadType:
-.c2a7	a9 02		lda #$02		lda	#2
-.c2a9	4c 11 c9	jmp $c911		jmp	ErrorHandler
-.c2ac					_ETIsIdentifier:
->c2ac	03						.byte 	3
-.c2ad	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get the MSB of the identifier address.
-.c2af	c8		iny				iny
-.c2b0	18		clc				clc
-.c2b1	69 c8		adc #$c8			adc 	#Program >> 8 				; convert to a real address.
-.c2b3	95 20		sta $20,x			sta 	XSNumber1,x
-.c2b5	85 39		sta $39				sta 	zTemp0+1
-.c2b7	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; LSB - on a page boundary
-.c2b9	95 18		sta $18,x			sta 	XSNumber0,x
-.c2bb	85 38		sta $38				sta 	zTemp0
-.c2bd	74 28		stz $28,x			stz 	XSNumber2,x 				; neatness
-.c2bf	74 30		stz $30,x			stz 	XSNumber3,x
-.c2c1	5a		phy				phy 								; read and update the type/control
-.c2c2	a0 04		ldy #$04			ldy 	#4
-.c2c4	b1 38		lda ($38),y			lda 	(zTemp0),y
-.c2c6	29 c0		and #$c0			and 	#XS_TYPEMASK 				; type info
-.c2c8	09 20		ora #$20			ora 	#XS_ISREFERENCE 			; set reference bit (is word)
-.c2ca	7a		ply				ply
-.c2cb	95 10		sta $10,x			sta 	XSControl,x
-.c2cd	60		rts				rts
-.c2ce					ExtractTokenisedInteger:
-.c2ce	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get first token, known to be 40-7F
-.c2d0	29 3f		and #$3f			and 	#$3F 						; mask off upper bits
-.c2d2	95 18		sta $18,x			sta 	XSNumber0,x 				; initial value.
-.c2d4	74 20		stz $20,x			stz 	XSNumber1,x
-.c2d6	74 28		stz $28,x			stz 	XSNumber2,x
-.c2d8	74 30		stz $30,x			stz 	XSNumber3,x
-.c2da	74 10		stz $10,x			stz 	XSControl,x 				; integer constant
-.c2dc					_ETConstant:
-.c2dc	c8		iny				iny 								; look at next
-.c2dd	b1 3a		lda ($3a),y			lda 	(CodePtr),y
-.c2df	29 c0		and #$c0			and 	#$C0 						; is it $40..$7F
-.c2e1	c9 40		cmp #$40			cmp 	#$40
-.c2e3	d0 2e		bne $c313			bne 	_ETExit
-.c2e5	b5 30		lda $30,x			lda 	XSNumber3,x 				; save the upper byte.
-.c2e7	48		pha				pha
-.c2e8	b5 28		lda $28,x			lda 	XSNumber2,x 				; multiply old by 256
-.c2ea	95 30		sta $30,x			sta 	XSNumber3,x
-.c2ec	b5 20		lda $20,x			lda 	XSNumber1,x
-.c2ee	95 28		sta $28,x			sta 	XSNumber2,x
-.c2f0	b5 18		lda $18,x			lda 	XSNumber0,x
-.c2f2	95 20		sta $20,x			sta 	XSNumber1,x
-.c2f4	74 18		stz $18,x			stz 	XSNumber0,x
-.c2f6	68		pla				pla 								; old MS Byte
-.c2f7	4a		lsr a				lsr 	a 							; shift right twice
-.c2f8	76 30		ror $30,x			ror 	XSNumber3,x
-.c2fa	76 28		ror $28,x			ror 	XSNumber2,x
-.c2fc	76 20		ror $20,x			ror 	XSNumber1,x
-.c2fe	76 18		ror $18,x			ror 	XSNumber0,x
-.c300	4a		lsr a				lsr 	a
-.c301	76 30		ror $30,x			ror 	XSNumber3,x
-.c303	76 28		ror $28,x			ror 	XSNumber2,x
-.c305	76 20		ror $20,x			ror 	XSNumber1,x
-.c307	76 18		ror $18,x			ror 	XSNumber0,x
-.c309	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; or the lower 6 bits in.
-.c30b	29 3f		and #$3f			and 	#$3F
-.c30d	15 18		ora $18,x			ora 	XSNumber0,x
-.c30f	95 18		sta $18,x			sta 	XSNumber0,x
-.c311	80 c9		bra $c2dc			bra 	_ETConstant
-.c313					_ETExit:
-.c313	60		rts				rts
-.c314					CheckFollowingDecimal:
-.c314	b1 3a		lda ($3a),y			lda 	(CodePtr),y 				; what follows ?
-.c316	c9 c3		cmp #$c3			cmp 	#KWD_SYS_DEC 				; decimal ?
-.c318	d0 1a		bne $c334			bne 	_CFDExit
-.c31a	98		tya				tya 								; get address of decimal data
-.c31b	1a		inc a				inc 	a
-.c31c	38		sec				sec
-.c31d	65 3a		adc $3a				adc 	CodePtr
-.c31f	8d 08 ff	sta $ff08			sta 	ControlPort+8 				; param slot 2 = address of decimal data.
-.c322	a5 3b		lda $3b				lda 	CodePtr+1
-.c324	69 00		adc #$00			adc 	#0
-.c326	8d 09 ff	sta $ff09			sta 	ControlPort+9
-.c329	a9 20		lda #$20			lda 	#32 						; decimal expand code.
-.c32b	20 35 c3	jsr $c335			jsr 	DoMathCommand
-.c32e	c8		iny				iny 								; get length and add it +1 for the length
-.c32f	98		tya				tya
-.c330	38		sec				sec
-.c331	71 3a		adc ($3a),y			adc 	(CodePtr),y
-.c333	a8		tay				tay
-.c334					_CFDExit:
-.c334	60		rts				rts
-.c335					DoMathCommand:
-.c335	48		pha				pha
-.c336	20 f4 ff	jsr $fff4		jsr 	WaitMessage
-.c339	8d 01 ff	sta $ff01			sta 	ControlFunction
-.c33c	8a		txa				txa
-.c33d	18		clc				clc
-.c33e	69 10		adc #$10			adc 	#XSStack & $FF
-.c340	8d 04 ff	sta $ff04			sta 	ControlPort+4
-.c343	a9 00		lda #$00			lda 	#XSStack >> 8
-.c345	69 00		adc #$00			adc 	#0
-.c347	8d 05 ff	sta $ff05			sta 	ControlPort+5
-.c34a	a9 08		lda #$08			lda 	#8
-.c34c	8d 06 ff	sta $ff06			sta 	ControlPort+6
-.c34f	a9 04		lda #$04			lda 	#4
-.c351	8d 00 ff	sta $ff00			sta 	ControlCommand 				; do command
-.c354	20 f4 ff	jsr $fff4		jsr 	WaitMessage
-.c357	68		pla				pla				; wait for result.
-.c358	60		rts				rts
+.c236					EvaluateTerm:
+.c236	b1 3a		lda ($3a),y			lda 	(CodePtr),y 				; get next token
+.c238	30 0a		bmi $c244			bmi 	_ETKeyword 					; is it a keyword (80-FF) ?
+.c23a	0a		asl a				asl		a							; is it a number (40-7F)
+.c23b	10 1f		bpl $c25c			bpl		_ETIdentifierOrSpecial 		; if 00-3F then it is an identifier, or a multi purpose unary ! ? -
+.c23d	20 c1 c2	jsr $c2c1			jsr 	ExtractTokenisedInteger
+.c240	20 07 c3	jsr $c307			jsr 	CheckFollowingDecimal
+.c243	60		rts				rts
+.c244					_ETKeyword:
+.c244	c9 b0		cmp #$b0			cmp 	#$B0 						; is it a unary function ?
+.c246	b0 36		bcs $c27e			bcs 	_ETSyntax
+.c248	da		phx				phx
+.c249	0a		asl a				asl 	a 							; access address to jump
+.c24a	aa		tax				tax
+.c24b	bd 5b c7	lda $c75b,x			lda 	StandardVectorTable,x
+.c24e	8d 5a c2	sta $c25a			sta 	_ETVector+1
+.c251	bd 5c c7	lda $c75c,x			lda 	StandardVectorTable+1,x
+.c254	8d 5b c2	sta $c25b			sta 	_ETVector+2
+.c257	fa		plx				plx 								; restore stack pos and go there.
+.c258	c8		iny				iny 								; consume
+.c259					_ETVector:
+.c259	4c ff ff	jmp $ffff			jmp 	$FFFF
+.c25c					_ETIdentifierOrSpecial:
+.c25c	0a		asl a			 	asl 	a 							; bit 5 now in sign slot
+.c25d	10 40		bpl $c29f		 	bpl 	_ETIsIdentifier  			; 0 it is 00-1F e.g. identifier
+.c25f	b1 3a		lda ($3a),y		 	lda 	(codePtr),y 				; get and consume. clearer than reuse
+.c261	c8		iny			 	iny
+.c262	c9 21		cmp #$21		 	cmp 	#KWD_MINUS 					; negation.
+.c264	d0 10		bne $c276		 	bne 	_ETCheckReference
+.c266	20 36 c2	jsr $c236		 	jsr 	EvaluateTerm 				; it's minus *something*.
+.c269	20 ac c1	jsr $c1ac		 	jsr 	DereferenceTerm 			; dereference it.
+.c26c	b5 10		lda $10,x		 	lda 	XSControl,x 				; numeric term ?
+.c26e	30 2a		bmi $c29a		 	bmi 	_ETBadType
+.c270	a9 10		lda #$10		 	lda 	#16 						; negation function - needs optimising for ints
+.c272	20 28 c3	jsr $c328		 	jsr 	DoMathCommand 				; work it out
+.c275	60		rts			 	rts
+.c276					_ETCheckReference:
+.c276	c9 32		cmp #$32			cmp 	#KWD_QMARK
+.c278	f0 09		beq $c283			beq 	_ETHaveReference
+.c27a	49 31		eor #$31			eor 	#KWD_PLING
+.c27c	f0 05		beq $c283			beq 	_ETHaveReference
+.c27e					_ETSyntax:
+.c27e	a9 01		lda #$01		lda	#1
+.c280	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c283					_ETHaveReference:
+.c283	48		pha				pha 								; save type.
+.c284	20 36 c2	jsr $c236		 	jsr 	EvaluateTerm 				; get reference address
+.c287	20 ac c1	jsr $c1ac		 	jsr 	DereferenceTerm
+.c28a	b5 10		lda $10,x		 	lda 	XSControl,x 				; must be integer
+.c28c	29 c0		and #$c0		 	and 	#XS_TYPEMASK
+.c28e	d0 0a		bne $c29a		 	bne 	_ETBadType
+.c290	68		pla			 	pla 								; get type of reference back
+.c291	f0 02		beq $c295		 	beq 	_ETIsWord 					; if zero, it's a word reference
+.c293	a9 10		lda #$10		 	lda 	#XS_ISBYTEREFERENCE
+.c295					_ETIsWord:
+.c295	09 20		ora #$20			ora 	#XS_ISREFERENCE 			; now $20 / $30 for word/byte reference
+.c297	95 10		sta $10,x			sta 	XSControl,x 				; update type
+.c299	60		rts				rts
+.c29a					_ETBadType:
+.c29a	a9 02		lda #$02		lda	#2
+.c29c	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c29f					_ETIsIdentifier:
+>c29f	03						.byte 	3
+.c2a0	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get the MSB of the identifier address.
+.c2a2	c8		iny				iny
+.c2a3	18		clc				clc
+.c2a4	69 c9		adc #$c9			adc 	#Program >> 8 				; convert to a real address.
+.c2a6	95 20		sta $20,x			sta 	XSNumber1,x
+.c2a8	85 39		sta $39				sta 	zTemp0+1
+.c2aa	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; LSB - on a page boundary
+.c2ac	95 18		sta $18,x			sta 	XSNumber0,x
+.c2ae	85 38		sta $38				sta 	zTemp0
+.c2b0	74 28		stz $28,x			stz 	XSNumber2,x 				; neatness
+.c2b2	74 30		stz $30,x			stz 	XSNumber3,x
+.c2b4	5a		phy				phy 								; read and update the type/control
+.c2b5	a0 04		ldy #$04			ldy 	#4
+.c2b7	b1 38		lda ($38),y			lda 	(zTemp0),y
+.c2b9	29 c0		and #$c0			and 	#XS_TYPEMASK 				; type info
+.c2bb	09 20		ora #$20			ora 	#XS_ISREFERENCE 			; set reference bit (is word)
+.c2bd	7a		ply				ply
+.c2be	95 10		sta $10,x			sta 	XSControl,x
+.c2c0	60		rts				rts
+.c2c1					ExtractTokenisedInteger:
+.c2c1	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get first token, known to be 40-7F
+.c2c3	29 3f		and #$3f			and 	#$3F 						; mask off upper bits
+.c2c5	95 18		sta $18,x			sta 	XSNumber0,x 				; initial value.
+.c2c7	74 20		stz $20,x			stz 	XSNumber1,x
+.c2c9	74 28		stz $28,x			stz 	XSNumber2,x
+.c2cb	74 30		stz $30,x			stz 	XSNumber3,x
+.c2cd	74 10		stz $10,x			stz 	XSControl,x 				; integer constant
+.c2cf					_ETConstant:
+.c2cf	c8		iny				iny 								; look at next
+.c2d0	b1 3a		lda ($3a),y			lda 	(CodePtr),y
+.c2d2	29 c0		and #$c0			and 	#$C0 						; is it $40..$7F
+.c2d4	c9 40		cmp #$40			cmp 	#$40
+.c2d6	d0 2e		bne $c306			bne 	_ETExit
+.c2d8	b5 30		lda $30,x			lda 	XSNumber3,x 				; save the upper byte.
+.c2da	48		pha				pha
+.c2db	b5 28		lda $28,x			lda 	XSNumber2,x 				; multiply old by 256
+.c2dd	95 30		sta $30,x			sta 	XSNumber3,x
+.c2df	b5 20		lda $20,x			lda 	XSNumber1,x
+.c2e1	95 28		sta $28,x			sta 	XSNumber2,x
+.c2e3	b5 18		lda $18,x			lda 	XSNumber0,x
+.c2e5	95 20		sta $20,x			sta 	XSNumber1,x
+.c2e7	74 18		stz $18,x			stz 	XSNumber0,x
+.c2e9	68		pla				pla 								; old MS Byte
+.c2ea	4a		lsr a				lsr 	a 							; shift right twice
+.c2eb	76 30		ror $30,x			ror 	XSNumber3,x
+.c2ed	76 28		ror $28,x			ror 	XSNumber2,x
+.c2ef	76 20		ror $20,x			ror 	XSNumber1,x
+.c2f1	76 18		ror $18,x			ror 	XSNumber0,x
+.c2f3	4a		lsr a				lsr 	a
+.c2f4	76 30		ror $30,x			ror 	XSNumber3,x
+.c2f6	76 28		ror $28,x			ror 	XSNumber2,x
+.c2f8	76 20		ror $20,x			ror 	XSNumber1,x
+.c2fa	76 18		ror $18,x			ror 	XSNumber0,x
+.c2fc	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; or the lower 6 bits in.
+.c2fe	29 3f		and #$3f			and 	#$3F
+.c300	15 18		ora $18,x			ora 	XSNumber0,x
+.c302	95 18		sta $18,x			sta 	XSNumber0,x
+.c304	80 c9		bra $c2cf			bra 	_ETConstant
+.c306					_ETExit:
+.c306	60		rts				rts
+.c307					CheckFollowingDecimal:
+.c307	b1 3a		lda ($3a),y			lda 	(CodePtr),y 				; what follows ?
+.c309	c9 c3		cmp #$c3			cmp 	#KWD_SYS_DEC 				; decimal ?
+.c30b	d0 1a		bne $c327			bne 	_CFDExit
+.c30d	98		tya				tya 								; get address of decimal data
+.c30e	1a		inc a				inc 	a
+.c30f	38		sec				sec
+.c310	65 3a		adc $3a				adc 	CodePtr
+.c312	8d 08 ff	sta $ff08			sta 	ControlPort+8 				; param slot 2 = address of decimal data.
+.c315	a5 3b		lda $3b				lda 	CodePtr+1
+.c317	69 00		adc #$00			adc 	#0
+.c319	8d 09 ff	sta $ff09			sta 	ControlPort+9
+.c31c	a9 20		lda #$20			lda 	#32 						; decimal expand code.
+.c31e	20 28 c3	jsr $c328			jsr 	DoMathCommand
+.c321	c8		iny				iny 								; get length and add it +1 for the length
+.c322	98		tya				tya
+.c323	38		sec				sec
+.c324	71 3a		adc ($3a),y			adc 	(CodePtr),y
+.c326	a8		tay				tay
+.c327					_CFDExit:
+.c327	60		rts				rts
+.c328					DoMathCommand:
+.c328	48		pha				pha
+.c329	20 f4 ff	jsr $fff4		jsr 	WaitMessage
+.c32c	8d 01 ff	sta $ff01			sta 	ControlFunction
+.c32f	8a		txa				txa
+.c330	18		clc				clc
+.c331	69 10		adc #$10			adc 	#XSStack & $FF
+.c333	8d 04 ff	sta $ff04			sta 	ControlPort+4
+.c336	a9 00		lda #$00			lda 	#XSStack >> 8
+.c338	69 00		adc #$00			adc 	#0
+.c33a	8d 05 ff	sta $ff05			sta 	ControlPort+5
+.c33d	a9 08		lda #$08			lda 	#8
+.c33f	8d 06 ff	sta $ff06			sta 	ControlPort+6
+.c342	a9 04		lda #$04			lda 	#4
+.c344	8d 00 ff	sta $ff00			sta 	ControlCommand 				; do command
+.c347	20 f4 ff	jsr $fff4		jsr 	WaitMessage
+.c34a	68		pla				pla				; wait for result.
+.c34b	60		rts				rts
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/unary/asc.asm
 
-.c359					EXPUnaryAsc:
-.c359	20 2b c2	jsr $c22b			jsr 	EXPEvalString 					; string to R0, zTemp0
-.c35c	20 44 c7	jsr $c744			jsr 	ERRCheckRParen 					; )
-.c35f	b2 38		lda ($38)			lda 	(zTemp0) 						; length 0 ?
-.c361	f0 06		beq $c369			beq 	_EXAZero 						; if so return 0
-.c363	5a		phy				phy 									; otherwise get first character
-.c364	a0 01		ldy #$01			ldy 	#1
-.c366	b1 38		lda ($38),y			lda 	(zTemp0),y
-.c368	7a		ply				ply
-.c369					_EXAZero:
-.c369	4c 7b c3	jmp $c37b			jmp 	EXPUnaryReturnA
+.c34c					EXPUnaryAsc:
+.c34c	20 1e c2	jsr $c21e			jsr 	EXPEvalString 					; string to R0, zTemp0
+.c34f	20 15 c8	jsr $c815			jsr 	ERRCheckRParen 					; )
+.c352	b2 38		lda ($38)			lda 	(zTemp0) 						; length 0 ?
+.c354	f0 06		beq $c35c			beq 	_EXAZero 						; if so return 0
+.c356	5a		phy				phy 									; otherwise get first character
+.c357	a0 01		ldy #$01			ldy 	#1
+.c359	b1 38		lda ($38),y			lda 	(zTemp0),y
+.c35b	7a		ply				ply
+.c35c					_EXAZero:
+.c35c	4c 6e c3	jmp $c36e			jmp 	EXPUnaryReturnA
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/unary/dollar.asm
 
-.c36c					EXPUnaryNull:
-.c36c	20 bc c1	jsr $c1bc			jsr 	EXPEvaluateExpression 		; get a value
-.c36f	20 b9 c1	jsr $c1b9			jsr 	DereferenceTerm 			; dereference it
-.c372	60		rts				rts
+.c35f					EXPUnaryNull:
+.c35f	20 af c1	jsr $c1af			jsr 	EXPEvaluateExpression 		; get a value
+.c362	20 ac c1	jsr $c1ac			jsr 	DereferenceTerm 			; dereference it
+.c365	60		rts				rts
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/unary/len.asm
 
-.c373					EXPUnaryLen:
-.c373	20 2b c2	jsr $c22b			jsr 	EXPEvalString 					; string to R0, zTemp0
-.c376	20 44 c7	jsr $c744			jsr 	ERRCheckRParen 					; )
-.c379	b2 38		lda ($38)			lda 	(zTemp0) 						; first byte is the length
-.c37b					EXPUnaryReturnA:
-.c37b	95 18		sta $18,x			sta 	XSNumber0,x
-.c37d	74 20		stz $20,x			stz 	XSNumber1,x
-.c37f	74 28		stz $28,x			stz 	XSNumber2,x
-.c381	74 30		stz $30,x			stz 	XSNumber3,x
-.c383	74 10		stz $10,x			stz 	XSControl,x
-.c385	60		rts				rts
+.c366					EXPUnaryLen:
+.c366	20 1e c2	jsr $c21e			jsr 	EXPEvalString 					; string to R0, zTemp0
+.c369	20 15 c8	jsr $c815			jsr 	ERRCheckRParen 					; )
+.c36c	b2 38		lda ($38)			lda 	(zTemp0) 						; first byte is the length
+.c36e					EXPUnaryReturnA:
+.c36e	95 18		sta $18,x			sta 	XSNumber0,x
+.c370	74 20		stz $20,x			stz 	XSNumber1,x
+.c372	74 28		stz $28,x			stz 	XSNumber2,x
+.c374	74 30		stz $30,x			stz 	XSNumber3,x
+.c376	74 10		stz $10,x			stz 	XSControl,x
+.c378	60		rts				rts
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/unary/simple.asm
 
-.c386					UnaryParenthesis:
-.c386	20 bc c1	jsr $c1bc			jsr 	EXPEvaluateExpression 		; evaluate at stack level X
-.c389	4c 44 c7	jmp $c744			jmp 	ERRCheckRParen	 			; check )
-.c38c					DoUnaryFunction:
-.c38c	48		pha				pha
-.c38d	20 bc c1	jsr $c1bc			jsr 	EXPEvaluateExpression 		; one operand
-.c390	68		pla				pla
-.c391	20 35 c3	jsr $c335			jsr 	DoMathCommand
-.c394	ad 02 ff	lda $ff02			lda 	ControlError
-.c397	d0 03		bne $c39c			bne 	_DUFError
-.c399	4c 44 c7	jmp $c744			jmp 	ERRCheckRParen 				; closing )
-.c39c					_DUFError:
-.c39c	a9 04		lda #$04		lda	#4
-.c39e	4c 11 c9	jmp $c911		jmp	ErrorHandler
-.c3a1					UnaryInt:
-.c3a1	a9 11		lda #$11			lda 	#17 						; do appropriate command
-.c3a3	80 e7		bra $c38c			bra 	DoUnaryFunction
-.c3a5					UnarySqr:
-.c3a5	a9 12		lda #$12			lda 	#18 						; do appropriate command
-.c3a7	80 e3		bra $c38c			bra 	DoUnaryFunction
-.c3a9					UnarySin:
-.c3a9	a9 13		lda #$13			lda 	#19 						; do appropriate command
-.c3ab	80 df		bra $c38c			bra 	DoUnaryFunction
-.c3ad					UnaryCos:
-.c3ad	a9 14		lda #$14			lda 	#20 						; do appropriate command
-.c3af	80 db		bra $c38c			bra 	DoUnaryFunction
-.c3b1					UnaryTan:
-.c3b1	a9 15		lda #$15			lda 	#21 						; do appropriate command
-.c3b3	80 d7		bra $c38c			bra 	DoUnaryFunction
-.c3b5					UnaryATan:
-.c3b5	a9 16		lda #$16			lda 	#22 						; do appropriate command
-.c3b7	80 d3		bra $c38c			bra 	DoUnaryFunction
-.c3b9					UnaryExp:
-.c3b9	a9 17		lda #$17			lda 	#23 						; do appropriate command
-.c3bb	80 cf		bra $c38c			bra 	DoUnaryFunction
-.c3bd					UnaryLog:
-.c3bd	a9 18		lda #$18			lda 	#24 						; do appropriate command
-.c3bf	80 cb		bra $c38c			bra 	DoUnaryFunction
-.c3c1					UnaryAbs:
-.c3c1	a9 19		lda #$19			lda 	#25 						; do appropriate command
-.c3c3	80 c7		bra $c38c			bra 	DoUnaryFunction
-.c3c5					UnarySgn:
-.c3c5	a9 1a		lda #$1a			lda 	#26 						; do appropriate command
-.c3c7	80 c3		bra $c38c			bra 	DoUnaryFunction
-.c3c9					UnaryRnd:
-.c3c9	a9 1b		lda #$1b			lda 	#27 						; do appropriate command
-.c3cb	80 bf		bra $c38c			bra 	DoUnaryFunction
-.c3cd					UnaryRand:
-.c3cd	a9 1c		lda #$1c			lda 	#28 						; do appropriate command
-.c3cf	80 bb		bra $c38c			bra 	DoUnaryFunction
+.c379					UnaryParenthesis:
+.c379	20 af c1	jsr $c1af			jsr 	EXPEvaluateExpression 		; evaluate at stack level X
+.c37c	4c 15 c8	jmp $c815			jmp 	ERRCheckRParen	 			; check )
+.c37f					DoUnaryFunction:
+.c37f	48		pha				pha
+.c380	20 af c1	jsr $c1af			jsr 	EXPEvaluateExpression 		; one operand
+.c383	68		pla				pla
+.c384	20 28 c3	jsr $c328			jsr 	DoMathCommand
+.c387	ad 02 ff	lda $ff02			lda 	ControlError
+.c38a	d0 03		bne $c38f			bne 	_DUFError
+.c38c	4c 15 c8	jmp $c815			jmp 	ERRCheckRParen 				; closing )
+.c38f					_DUFError:
+.c38f	a9 04		lda #$04		lda	#4
+.c391	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c394					UnaryInt:
+.c394	a9 11		lda #$11			lda 	#17 						; do appropriate command
+.c396	80 e7		bra $c37f			bra 	DoUnaryFunction
+.c398					UnarySqr:
+.c398	a9 12		lda #$12			lda 	#18 						; do appropriate command
+.c39a	80 e3		bra $c37f			bra 	DoUnaryFunction
+.c39c					UnarySin:
+.c39c	a9 13		lda #$13			lda 	#19 						; do appropriate command
+.c39e	80 df		bra $c37f			bra 	DoUnaryFunction
+.c3a0					UnaryCos:
+.c3a0	a9 14		lda #$14			lda 	#20 						; do appropriate command
+.c3a2	80 db		bra $c37f			bra 	DoUnaryFunction
+.c3a4					UnaryTan:
+.c3a4	a9 15		lda #$15			lda 	#21 						; do appropriate command
+.c3a6	80 d7		bra $c37f			bra 	DoUnaryFunction
+.c3a8					UnaryATan:
+.c3a8	a9 16		lda #$16			lda 	#22 						; do appropriate command
+.c3aa	80 d3		bra $c37f			bra 	DoUnaryFunction
+.c3ac					UnaryExp:
+.c3ac	a9 17		lda #$17			lda 	#23 						; do appropriate command
+.c3ae	80 cf		bra $c37f			bra 	DoUnaryFunction
+.c3b0					UnaryLog:
+.c3b0	a9 18		lda #$18			lda 	#24 						; do appropriate command
+.c3b2	80 cb		bra $c37f			bra 	DoUnaryFunction
+.c3b4					UnaryAbs:
+.c3b4	a9 19		lda #$19			lda 	#25 						; do appropriate command
+.c3b6	80 c7		bra $c37f			bra 	DoUnaryFunction
+.c3b8					UnarySgn:
+.c3b8	a9 1a		lda #$1a			lda 	#26 						; do appropriate command
+.c3ba	80 c3		bra $c37f			bra 	DoUnaryFunction
+.c3bc					UnaryRnd:
+.c3bc	a9 1b		lda #$1b			lda 	#27 						; do appropriate command
+.c3be	80 bf		bra $c37f			bra 	DoUnaryFunction
+.c3c0					UnaryRand:
+.c3c0	a9 1c		lda #$1c			lda 	#28 						; do appropriate command
+.c3c2	80 bb		bra $c37f			bra 	DoUnaryFunction
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/unary/string.asm
 
-.c3d1					EXPUnaryInlineString:
-.c3d1	18		clc				clc 								; physical address -> TOS
-.c3d2	98		tya				tya
-.c3d3	65 3a		adc $3a				adc 	codePtr
-.c3d5	95 18		sta $18,x			sta 	XSNumber0,x
-.c3d7	a5 3b		lda $3b				lda 	codePtr+1
-.c3d9	69 00		adc #$00			adc 	#0
-.c3db	95 20		sta $20,x			sta 	XSNumber1,x
-.c3dd	74 28		stz $28,x			stz 	XSNumber2,x 				; fill in the rest & type
-.c3df	74 30		stz $30,x			stz 	XSNumber3,x
-.c3e1	a9 80		lda #$80			lda 	#XS_STRING 					; make it a string.
-.c3e3	95 10		sta $10,x			sta 	XSControl,x
-.c3e5	98		tya				tya	 								; skip over it.
-.c3e6	38		sec				sec
-.c3e7	71 3a		adc ($3a),y			adc 	(codePtr),y
-.c3e9	a8		tay				tay
-.c3ea	60		rts				rts
+.c3c4					EXPUnaryInlineString:
+.c3c4	18		clc				clc 								; physical address -> TOS
+.c3c5	98		tya				tya
+.c3c6	65 3a		adc $3a				adc 	codePtr
+.c3c8	95 18		sta $18,x			sta 	XSNumber0,x
+.c3ca	a5 3b		lda $3b				lda 	codePtr+1
+.c3cc	69 00		adc #$00			adc 	#0
+.c3ce	95 20		sta $20,x			sta 	XSNumber1,x
+.c3d0	74 28		stz $28,x			stz 	XSNumber2,x 				; fill in the rest & type
+.c3d2	74 30		stz $30,x			stz 	XSNumber3,x
+.c3d4	a9 80		lda #$80			lda 	#XS_STRING 					; make it a string.
+.c3d6	95 10		sta $10,x			sta 	XSControl,x
+.c3d8	98		tya				tya	 								; skip over it.
+.c3d9	38		sec				sec
+.c3da	71 3a		adc ($3a),y			adc 	(codePtr),y
+.c3dc	a8		tay				tay
+.c3dd	60		rts				rts
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/arithmetic/unary/val.asm
 
-.c3eb					EXPUnaryVal:
-.c3eb	20 0d c4	jsr $c40d			jsr 	EXPValBody 						; do the main bit.
-.c3ee	d0 01		bne $c3f1			bne 	_EXPUVExit 						; check error.
-.c3f0	60		rts				rts
-.c3f1					_EXPUVExit:
-.c3f1	a9 04		lda #$04		lda	#4
-.c3f3	4c 11 c9	jmp $c911		jmp	ErrorHandler
-.c3f6					EXPUnaryIsVal:
-.c3f6	20 0d c4	jsr $c40d			jsr 	EXPValBody 						; do the main bit.
-.c3f9	f0 05		beq $c400			beq 	EXPUnaryReturnMinus1 			; error code.
-.c3fb					EXPUnaryReturnZero:
-.c3fb	a9 00		lda #$00		 	lda 	#0 								; returns zerozero no error
-.c3fd	4c 7b c3	jmp $c37b		 	jmp 	EXPUnaryReturnA
-.c400					EXPUnaryReturnMinus1:
-.c400	a9 ff		lda #$ff			lda 	#$FF 							; returns -1
-.c402	95 18		sta $18,x			sta 	XSNumber0,x
-.c404	95 20		sta $20,x			sta 	XSNumber1,x
-.c406	95 28		sta $28,x			sta 	XSNumber2,x
-.c408	95 30		sta $30,x			sta 	XSNumber3,x
-.c40a	74 10		stz $10,x			stz 	XSControl,x
-.c40c	60		rts				rts
-.c40d					EXPValBody:
-.c40d	20 2b c2	jsr $c22b			jsr 	EXPEvalString 					; string to R0, zTemp0
-.c410	20 44 c7	jsr $c744			jsr 	ERRCheckRParen 					; )
-.c413	a5 38		lda $38				lda 	zTemp0 							; copy address to offset 8/9
-.c415	8d 08 ff	sta $ff08			sta 	ControlCommand+8
-.c418	a5 39		lda $39				lda 	zTemp0+1
-.c41a	8d 09 ff	sta $ff09			sta 	ControlCommand+9
-.c41d	a9 21		lda #$21			lda 	#33
-.c41f	20 35 c3	jsr $c335			jsr 	DoMathCommand
-.c422	ad 02 ff	lda $ff02			lda 	ControlError 					; error occurred
-.c425	60		rts				rts
+.c3de					EXPUnaryVal:
+.c3de	20 00 c4	jsr $c400			jsr 	EXPValBody 						; do the main bit.
+.c3e1	d0 01		bne $c3e4			bne 	_EXPUVExit 						; check error.
+.c3e3	60		rts				rts
+.c3e4					_EXPUVExit:
+.c3e4	a9 04		lda #$04		lda	#4
+.c3e6	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c3e9					EXPUnaryIsVal:
+.c3e9	20 00 c4	jsr $c400			jsr 	EXPValBody 						; do the main bit.
+.c3ec	f0 05		beq $c3f3			beq 	EXPUnaryReturnMinus1 			; error code.
+.c3ee					EXPUnaryReturnZero:
+.c3ee	a9 00		lda #$00		 	lda 	#0 								; returns zerozero no error
+.c3f0	4c 6e c3	jmp $c36e		 	jmp 	EXPUnaryReturnA
+.c3f3					EXPUnaryReturnMinus1:
+.c3f3	a9 ff		lda #$ff			lda 	#$FF 							; returns -1
+.c3f5	95 18		sta $18,x			sta 	XSNumber0,x
+.c3f7	95 20		sta $20,x			sta 	XSNumber1,x
+.c3f9	95 28		sta $28,x			sta 	XSNumber2,x
+.c3fb	95 30		sta $30,x			sta 	XSNumber3,x
+.c3fd	74 10		stz $10,x			stz 	XSControl,x
+.c3ff	60		rts				rts
+.c400					EXPValBody:
+.c400	20 1e c2	jsr $c21e			jsr 	EXPEvalString 					; string to R0, zTemp0
+.c403	20 15 c8	jsr $c815			jsr 	ERRCheckRParen 					; )
+.c406	a5 38		lda $38				lda 	zTemp0 							; copy address to offset 8/9
+.c408	8d 08 ff	sta $ff08			sta 	ControlCommand+8
+.c40b	a5 39		lda $39				lda 	zTemp0+1
+.c40d	8d 09 ff	sta $ff09			sta 	ControlCommand+9
+.c410	a9 21		lda #$21			lda 	#33
+.c412	20 28 c3	jsr $c328			jsr 	DoMathCommand
+.c415	ad 02 ff	lda $ff02			lda 	ControlError 					; error occurred
+.c418	60		rts				rts
+
+;******  Return to file: _include.inc
+
+
+;******  Processing file: sources/commands/assert.asm
+
+.c419					Command_ASSERT:
+.c419	a2 00		ldx #$00			ldx 	#0
+.c41b	20 ed c1	jsr $c1ed			jsr 	EXPEvalNumber 				; get a number to assert
+.c41e	20 29 c4	jsr $c429			jsr 	CheckIfZero
+.c421	f0 01		beq $c424			beq 	_CAFail 					; if so, the assert fails.
+.c423	60		rts				rts
+.c424					_CAFail:
+.c424	a9 05		lda #$05		lda	#5
+.c426	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c429					CheckIfZero:
+.c429	b5 10		lda $10,x			lda 	XSControl,x
+.c42b	d0 09		bne $c436			bne 	_CAType
+.c42d	b5 18		lda $18,x			lda 	XSNumber0,x
+.c42f	15 20		ora $20,x			ora 	XSNumber1,x
+.c431	15 28		ora $28,x			ora 	XSNumber2,x
+.c433	15 30		ora $30,x			ora 	XSNumber3,x
+.c435	60		rts				rts
+.c436					_CAType:
+.c436	a9 02		lda #$02		lda	#2
+.c438	4c 39 c8	jmp $c839		jmp	ErrorHandler
+
+;******  Return to file: _include.inc
+
+
+;******  Processing file: sources/commands/clear.asm
+
+.c43b					Command_CLEAR:
+.c43b	4c 3e c4	jmp $c43e			jmp 	ClearCode
+.c43e					ClearCode:
+.c43e	60		rts				rts
+
+;******  Return to file: _include.inc
+
+
+;******  Processing file: sources/commands/comment.asm
+
+.c43f					Command_Comment:
+.c43f	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; optional string parameter
+.c441	c9 80		cmp #$80			cmp 	#KWD_SYS_STR
+.c443	d0 06		bne $c44b			bne 	_CRExit
+.c445	c8		iny				iny 								; skip over it, it's a comment.
+.c446	98		tya				tya
+.c447	38		sec				sec
+.c448	71 3a		adc ($3a),y			adc 	(codePtr),y
+.c44a	a8		tay				tay
+.c44b					_CRExit:
+.c44b	60		rts				rts
+
+;******  Return to file: _include.inc
+
+
+;******  Processing file: sources/commands/new.asm
+
+.c44c					Command_NEW:
+.c44c	9c 00 c9	stz $c900			stz 	Program 					; Erase current program
+.c44f	20 3e c4	jsr $c43e			jsr 	ClearCode 					; Run CLR
+.c452	4c a6 c4	jmp $c4a6			jmp 	Command_END 				; Run END
+
+;******  Return to file: _include.inc
+
+
+;******  Processing file: sources/commands/run.asm
+
+.c455					Command_RUN:
+.c455	20 3e c4	jsr $c43e			jsr 	ClearCode					; clear everything out.
+>c458	03						.byte 	3
+.c459	ad 00 c9	lda $c900			lda 	Program 					; back to the program start, get the count of var pages.
+.c45c	18		clc				clc 								; make an actual address.
+.c45d	69 c9		adc #$c9			adc 	#(Program >> 8)
+.c45f	85 3b		sta $3b				sta 	codePtr+1
+.c461	64 3a		stz $3a				stz 	codePtr
+.c463	80 0b		bra $c470			bra 	RUNNewLine
+.c465					RUNEndOfLine:
+.c465	18		clc				clc 								; advance to next line.
+.c466	b2 3a		lda ($3a)			lda 	(codePtr)
+.c468	65 3a		adc $3a				adc 	codePtr
+.c46a	85 3a		sta $3a				sta 	codePtr
+.c46c	90 02		bcc $c470			bcc 	_RELNoCarry
+.c46e	e6 3b		inc $3b				inc 	codePtr+1
+.c470					_RELNoCarry:
+.c470					RUNNewLine:
+.c470	a2 ff		ldx #$ff			ldx 	#$FF 						; 6502 stack reset.
+.c472	9a		txs				txs
+.c473	b2 3a		lda ($3a)			lda 	(codePtr) 					; check off end of program
+.c475	f0 2f		beq $c4a6			beq 	Command_END
+.c477	a0 01		ldy #$01			ldy 	#1 							; copy error line#
+.c479	b1 3a		lda ($3a),y			lda 	(codePtr),y
+.c47b	8d 00 02	sta $0200			sta 	ERRLine
+.c47e	c8		iny				iny
+.c47f	b1 3a		lda ($3a),y			lda 	(codePtr),y
+.c481	8d 01 02	sta $0201			sta 	ERRLine+1
+.c484	c8		iny				iny 								; offset into codePtr for start of line.
+.c485					RUNNewCommand:
+.c485					_RNCNoCheck:
+.c485	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get next token
+.c487	10 1d		bpl $c4a6			bpl		_RUNNotToken 				; probably an identifier
+.c489	c8		iny				iny 								; consume token
+.c48a	c9 cd		cmp #$cd			cmp 	#KWD_COLON 					; fast skip colon
+.c48c	f0 f7		beq $c485			beq 	RUNNewCommand
+.c48e	c9 b0		cmp #$b0			cmp 	#$B0 				 		; check unary function ?
+.c490	90 0a		bcc $c49c			bcc 	_RUNSyntax
+.c492	0a		asl a				asl 	a 							; double into X.
+.c493	aa		tax				tax
+.c494	20 99 c4	jsr $c499			jsr 	_RUNDispatchMain			; call the main dispatcher
+.c497	80 ec		bra $c485			bra 	RUNNewCommand
+.c499					_RUNDispatchMain:
+.c499	7c 5b c7	jmp ($c75b,x)			jmp 	(StandardVectorTable,x)
+.c49c					_RUNSyntax:
+.c49c	a9 01		lda #$01		lda	#1
+.c49e	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c4a1					_RUNBreak:
+.c4a1	a9 06		lda #$06		lda	#6
+.c4a3	4c 39 c8	jmp $c839		jmp	ErrorHandler
+.c4a6					_RUNNotToken:
+.c4a6					Command_END:
+.c4a6	4c 30 c8	jmp $c830			jmp 	WarmStart
+.c4a9					Command_Shift1_Handler:
+.c4a9	b1 3a		lda ($3a),y			lda 	(codePtr),y 				; get token shifted
+.c4ab	c8		iny				iny
+.c4ac	0a		asl a				asl 	a 							; double into X
+.c4ad	aa		tax				tax
+.c4ae	7c 3f c7	jmp ($c73f,x)			jmp 	(ExtendedVectorTable,x) 	; and go there.
+
+;******  Return to file: _include.inc
+
+
+;******  Processing file: sources/commands/stop.asm
+
+.c4b1					Command_STOP:
+.c4b1	a9 07		lda #$07		lda	#7
+.c4b3	4c 39 c8	jmp $c839		jmp	ErrorHandler
+
+;******  Return to file: _include.inc
+
+
+;******  Processing file: sources/commands/sys.asm
+
+.c4b6					Command_Sys:
+.c4b6	a2 00		ldx #$00			ldx 	#0
+.c4b8	20 0a c2	jsr $c20a			jsr 	EXPEvalInteger16 			; execution address
+.c4bb	5a		phy				phy
+.c4bc	b5 18		lda $18,x			lda 	XSNumber0,x 				; copy address into subroutine call.
+.c4be	8d c7 c4	sta $c4c7			sta 	_SysCall+1
+.c4c1	b5 20		lda $20,x			lda 	XSNumber1,x
+.c4c3	8d c8 c4	sta $c4c8			sta 	_SysCall+2
+.c4c6					_SysCall:
+.c4c6	20 ff ff	jsr $ffff			jsr 	$FFFF 						; call the code
+.c4c9	7a		ply				ply
+.c4ca	60		rts				rts
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/generated/errors.asm
 
-.c426					ErrorMessageText:
->c426	73 79 6e 74 61 78 20 65			.text	"syntax error",0
->c42e	72 72 6f 72 00
->c433	74 79 70 65 20 6d 69 73			.text	"type mismatch error",0
->c43b	6d 61 74 63 68 20 65 72 72 6f 72 00
->c447	64 69 76 69 73 69 6f 6e			.text	"division by zero error",0
->c44f	20 62 79 20 7a 65 72 6f 20 65 72 72 6f 72 00
->c45e	6f 75 74 20 6f 66 20 72			.text	"out of range error",0
->c466	61 6e 67 65 20 65 72 72 6f 72 00
+.c4cb					ErrorMessageText:
+>c4cb	73 79 6e 74 61 78 20 65			.text	"syntax error",0
+>c4d3	72 72 6f 72 00
+>c4d8	74 79 70 65 20 6d 69 73			.text	"type mismatch error",0
+>c4e0	6d 61 74 63 68 20 65 72 72 6f 72 00
+>c4ec	64 69 76 69 73 69 6f 6e			.text	"division by zero error",0
+>c4f4	20 62 79 20 7a 65 72 6f 20 65 72 72 6f 72 00
+>c503	6f 75 74 20 6f 66 20 72			.text	"out of range error",0
+>c50b	61 6e 67 65 20 65 72 72 6f 72 00
+>c516	61 73 73 65 72 74 20 66			.text	"assert failed",0
+>c51e	61 69 6c 65 64 00
+>c524	62 72 65 61 6b 20 70 72			.text	"break pressed",0
+>c52c	65 73 73 65 64 00
+>c532	70 72 6f 67 72 61 6d 20			.text	"program stopped",0
+>c53a	73 74 6f 70 70 65 64 00
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/generated/kwdtext.asm
 
-.c471					BinaryTokenText:
->c471	01 ab					.byte	$01,$ab                       	; $ 20 +
->c473	01 ad					.byte	$01,$ad                       	; $ 21 -
->c475	01 aa					.byte	$01,$aa                       	; $ 22 *
->c477	01 af					.byte	$01,$af                       	; $ 23 /
->c479	02 3e be				.byte	$02,$3e,$be                   	; $ 24 >>
->c47c	02 3c bc				.byte	$02,$3c,$bc                   	; $ 25 <<
->c47f	01 a5					.byte	$01,$a5                       	; $ 26 %
->c481	01 dc					.byte	$01,$dc                       	; $ 27 \
->c483	01 a6					.byte	$01,$a6                       	; $ 28 &
->c485	01 fc					.byte	$01,$fc                       	; $ 29 |
->c487	01 de					.byte	$01,$de                       	; $ 2a ^
->c489	01 be					.byte	$01,$be                       	; $ 2b >
->c48b	02 3e bd				.byte	$02,$3e,$bd                   	; $ 2c >=
->c48e	01 bc					.byte	$01,$bc                       	; $ 2d <
->c490	02 3c bd				.byte	$02,$3c,$bd                   	; $ 2e <=
->c493	02 3c be				.byte	$02,$3c,$be                   	; $ 2f <>
->c496	01 bd					.byte	$01,$bd                       	; $ 30 =
->c498	01 a1					.byte	$01,$a1                       	; $ 31 !
->c49a	01 bf					.byte	$01,$bf                       	; $ 32 ?
->c49c	ff					.byte	$FF
-.c49d					BaseTokenText:
->c49d	00					.byte	$00                           	; $ 80
->c49e	01 a4					.byte	$01,$a4                       	; $ 81 $
->c4a0	01 a8					.byte	$01,$a8                       	; $ 82 (
->c4a2	05 52 41 4e 44 a8			.byte	$05,$52,$41,$4e,$44,$a8       	; $ 83 RAND(
->c4a8	04 52 4e 44 a8				.byte	$04,$52,$4e,$44,$a8           	; $ 84 RND(
->c4ad	06 49 53 56 41 4c a8			.byte	$06,$49,$53,$56,$41,$4c,$a8   	; $ 85 ISVAL(
->c4b4	04 49 4e 54 a8				.byte	$04,$49,$4e,$54,$a8           	; $ 86 INT(
->c4b9	04 54 49 4d c5				.byte	$04,$54,$49,$4d,$c5           	; $ 87 TIME
->c4be	06 45 56 45 4e 54 a8			.byte	$06,$45,$56,$45,$4e,$54,$a8   	; $ 88 EVENT(
->c4c5	07 49 4e 4b 45 59 24 a8			.byte	$07,$49,$4e,$4b,$45,$59,$24,$a8	; $ 89 INKEY$(
->c4cd	04 41 53 43 a8				.byte	$04,$41,$53,$43,$a8           	; $ 8a ASC(
->c4d2	05 43 48 52 24 a8			.byte	$05,$43,$48,$52,$24,$a8       	; $ 8b CHR$(
->c4d8	04 53 51 52 a8				.byte	$04,$53,$51,$52,$a8           	; $ 8c SQR(
->c4dd	04 4c 45 4e a8				.byte	$04,$4c,$45,$4e,$a8           	; $ 8d LEN(
->c4e2	04 41 42 53 a8				.byte	$04,$41,$42,$53,$a8           	; $ 8e ABS(
->c4e7	04 53 47 4e a8				.byte	$04,$53,$47,$4e,$a8           	; $ 8f SGN(
->c4ec	04 56 41 4c a8				.byte	$04,$56,$41,$4c,$a8           	; $ 90 VAL(
->c4f1	05 53 54 52 24 a8			.byte	$05,$53,$54,$52,$24,$a8       	; $ 91 STR$(
->c4f7	05 4d 49 44 24 a8			.byte	$05,$4d,$49,$44,$24,$a8       	; $ 92 MID$(
->c4fd	06 4c 45 46 54 24 a8			.byte	$06,$4c,$45,$46,$54,$24,$a8   	; $ 93 LEFT$(
->c504	07 52 49 47 48 54 24 a8			.byte	$07,$52,$49,$47,$48,$54,$24,$a8	; $ 94 RIGHT$(
->c50c	04 53 49 4e a8				.byte	$04,$53,$49,$4e,$a8           	; $ 95 SIN(
->c511	04 43 4f 53 a8				.byte	$04,$43,$4f,$53,$a8           	; $ 96 COS(
->c516	04 54 41 4e a8				.byte	$04,$54,$41,$4e,$a8           	; $ 97 TAN(
->c51b	05 41 54 41 4e a8			.byte	$05,$41,$54,$41,$4e,$a8       	; $ 98 ATAN(
->c521	04 4c 4f 47 a8				.byte	$04,$4c,$4f,$47,$a8           	; $ 99 LOG(
->c526	04 45 58 50 a8				.byte	$04,$45,$58,$50,$a8           	; $ 9a EXP(
->c52b	04 4b 45 59 a8				.byte	$04,$4b,$45,$59,$a8           	; $ 9b KEY(
->c530	00					.byte	$00                           	; $ 9c
->c531	00					.byte	$00                           	; $ 9d
->c532	00					.byte	$00                           	; $ 9e
->c533	00					.byte	$00                           	; $ 9f
->c534	00					.byte	$00                           	; $ a0
->c535	00					.byte	$00                           	; $ a1
->c536	00					.byte	$00                           	; $ a2
->c537	00					.byte	$00                           	; $ a3
->c538	00					.byte	$00                           	; $ a4
->c539	00					.byte	$00                           	; $ a5
->c53a	00					.byte	$00                           	; $ a6
->c53b	00					.byte	$00                           	; $ a7
->c53c	00					.byte	$00                           	; $ a8
->c53d	00					.byte	$00                           	; $ a9
->c53e	00					.byte	$00                           	; $ aa
->c53f	00					.byte	$00                           	; $ ab
->c540	00					.byte	$00                           	; $ ac
->c541	00					.byte	$00                           	; $ ad
->c542	00					.byte	$00                           	; $ ae
->c543	00					.byte	$00                           	; $ af
->c544	05 57 48 49 4c c5			.byte	$05,$57,$48,$49,$4c,$c5       	; $ b0 WHILE
->c54a	04 57 45 4e c4				.byte	$04,$57,$45,$4e,$c4           	; $ b1 WEND
->c54f	02 49 c6				.byte	$02,$49,$c6                   	; $ b2 IF
->c552	05 45 4e 44 49 c6			.byte	$05,$45,$4e,$44,$49,$c6       	; $ b3 ENDIF
->c558	02 44 cf				.byte	$02,$44,$cf                   	; $ b4 DO
->c55b	04 4c 4f 4f d0				.byte	$04,$4c,$4f,$4f,$d0           	; $ b5 LOOP
->c560	06 52 45 50 45 41 d4			.byte	$06,$52,$45,$50,$45,$41,$d4   	; $ b6 REPEAT
->c567	05 55 4e 54 49 cc			.byte	$05,$55,$4e,$54,$49,$cc       	; $ b7 UNTIL
->c56d	04 50 52 4f c3				.byte	$04,$50,$52,$4f,$c3           	; $ b8 PROC
->c572	07 45 4e 44 50 52 4f c3			.byte	$07,$45,$4e,$44,$50,$52,$4f,$c3	; $ b9 ENDPROC
->c57a	03 46 4f d2				.byte	$03,$46,$4f,$d2               	; $ ba FOR
->c57e	04 4e 45 58 d4				.byte	$04,$4e,$45,$58,$d4           	; $ bb NEXT
->c583	04 43 41 53 c5				.byte	$04,$43,$41,$53,$c5           	; $ bc CASE
->c588	07 45 4e 44 43 41 53 c5			.byte	$07,$45,$4e,$44,$43,$41,$53,$c5	; $ bd ENDCASE
->c590	00					.byte	$00                           	; $ be
->c591	04 54 48 45 ce				.byte	$04,$54,$48,$45,$ce           	; $ bf THEN
->c596	00					.byte	$00                           	; $ c0
->c597	00					.byte	$00                           	; $ c1
->c598	00					.byte	$00                           	; $ c2
->c599	00					.byte	$00                           	; $ c3
->c59a	02 54 cf				.byte	$02,$54,$cf                   	; $ c4 TO
->c59d	03 4c 45 d4				.byte	$03,$4c,$45,$d4               	; $ c5 LET
->c5a1	05 50 52 49 4e d4			.byte	$05,$50,$52,$49,$4e,$d4       	; $ c6 PRINT
->c5a7	05 49 4e 50 55 d4			.byte	$05,$49,$4e,$50,$55,$d4       	; $ c7 INPUT
->c5ad	04 43 41 4c cc				.byte	$04,$43,$41,$4c,$cc           	; $ c8 CALL
->c5b2	03 53 59 d3				.byte	$03,$53,$59,$d3               	; $ c9 SYS
->c5b6	04 45 58 49 d4				.byte	$04,$45,$58,$49,$d4           	; $ ca EXIT
->c5bb	01 ac					.byte	$01,$ac                       	; $ cb ,
->c5bd	01 bb					.byte	$01,$bb                       	; $ cc ;
->c5bf	01 ba					.byte	$01,$ba                       	; $ cd :
->c5c1	01 a7					.byte	$01,$a7                       	; $ ce '
->c5c3	01 a9					.byte	$01,$a9                       	; $ cf )
->c5c5	04 52 45 41 c4				.byte	$04,$52,$45,$41,$c4           	; $ d0 READ
->c5ca	04 44 41 54 c1				.byte	$04,$44,$41,$54,$c1           	; $ d1 DATA
->c5cf	01 db					.byte	$01,$db                       	; $ d2 [
->c5d1	01 dd					.byte	$01,$dd                       	; $ d3 ]
->c5d3	01 a3					.byte	$01,$a3                       	; $ d4 #
->c5d5	01 ae					.byte	$01,$ae                       	; $ d5 .
->c5d7	04 45 4c 53 c5				.byte	$04,$45,$4c,$53,$c5           	; $ d6 ELSE
->c5dc	04 57 48 45 ce				.byte	$04,$57,$48,$45,$ce           	; $ d7 WHEN
->c5e1	06 44 4f 57 4e 54 cf			.byte	$06,$44,$4f,$57,$4e,$54,$cf   	; $ d8 DOWNTO
->c5e8	ff					.byte	$FF
-.c5e9					Shift1TokenText:
->c5e9	05 43 4c 45 41 d2			.byte	$05,$43,$4c,$45,$41,$d2       	; $180 CLEAR
->c5ef	03 4e 45 d7				.byte	$03,$4e,$45,$d7               	; $181 NEW
->c5f3	03 52 55 ce				.byte	$03,$52,$55,$ce               	; $182 RUN
->c5f7	04 53 54 4f d0				.byte	$04,$53,$54,$4f,$d0           	; $183 STOP
->c5fc	03 45 4e c4				.byte	$03,$45,$4e,$c4               	; $184 END
->c600	06 41 53 53 45 52 d4			.byte	$06,$41,$53,$53,$45,$52,$d4   	; $185 ASSERT
->c607	04 4c 49 53 d4				.byte	$04,$4c,$49,$53,$d4           	; $186 LIST
->c60c	04 53 41 56 c5				.byte	$04,$53,$41,$56,$c5           	; $187 SAVE
->c611	04 4c 4f 41 c4				.byte	$04,$4c,$4f,$41,$c4           	; $188 LOAD
->c616	05 47 4f 53 55 c2			.byte	$05,$47,$4f,$53,$55,$c2       	; $189 GOSUB
->c61c	04 47 4f 54 cf				.byte	$04,$47,$4f,$54,$cf           	; $18a GOTO
->c621	06 52 45 54 55 52 ce			.byte	$06,$52,$45,$54,$55,$52,$ce   	; $18b RETURN
->c628	07 52 45 53 54 4f 52 c5			.byte	$07,$52,$45,$53,$54,$4f,$52,$c5	; $18c RESTORE
->c630	03 44 49 cd				.byte	$03,$44,$49,$cd               	; $18d DIM
->c634	ff					.byte	$FF
-.c635					BinaryPrecedence:
->c635	03					.byte	3		; +
->c636	03					.byte	3		; -
->c637	04					.byte	4		; *
->c638	04					.byte	4		; /
->c639	04					.byte	4		; >>
->c63a	04					.byte	4		; <<
->c63b	04					.byte	4		; %
->c63c	04					.byte	4		; \
->c63d	01					.byte	1		; &
->c63e	01					.byte	1		; |
->c63f	01					.byte	1		; ^
->c640	02					.byte	2		; >
->c641	02					.byte	2		; >=
->c642	02					.byte	2		; <
->c643	02					.byte	2		; <=
->c644	02					.byte	2		; <>
->c645	02					.byte	2		; =
->c646	05					.byte	5		; !
->c647	05					.byte	5		; ?
+.c542					BinaryTokenText:
+>c542	01 ab					.byte	$01,$ab                       	; $ 20 +
+>c544	01 ad					.byte	$01,$ad                       	; $ 21 -
+>c546	01 aa					.byte	$01,$aa                       	; $ 22 *
+>c548	01 af					.byte	$01,$af                       	; $ 23 /
+>c54a	02 3e be				.byte	$02,$3e,$be                   	; $ 24 >>
+>c54d	02 3c bc				.byte	$02,$3c,$bc                   	; $ 25 <<
+>c550	01 a5					.byte	$01,$a5                       	; $ 26 %
+>c552	01 dc					.byte	$01,$dc                       	; $ 27 \
+>c554	01 a6					.byte	$01,$a6                       	; $ 28 &
+>c556	01 fc					.byte	$01,$fc                       	; $ 29 |
+>c558	01 de					.byte	$01,$de                       	; $ 2a ^
+>c55a	01 be					.byte	$01,$be                       	; $ 2b >
+>c55c	02 3e bd				.byte	$02,$3e,$bd                   	; $ 2c >=
+>c55f	01 bc					.byte	$01,$bc                       	; $ 2d <
+>c561	02 3c bd				.byte	$02,$3c,$bd                   	; $ 2e <=
+>c564	02 3c be				.byte	$02,$3c,$be                   	; $ 2f <>
+>c567	01 bd					.byte	$01,$bd                       	; $ 30 =
+>c569	01 a1					.byte	$01,$a1                       	; $ 31 !
+>c56b	01 bf					.byte	$01,$bf                       	; $ 32 ?
+>c56d	ff					.byte	$FF
+.c56e					BaseTokenText:
+>c56e	00					.byte	$00                           	; $ 80
+>c56f	01 a4					.byte	$01,$a4                       	; $ 81 $
+>c571	01 a8					.byte	$01,$a8                       	; $ 82 (
+>c573	05 52 41 4e 44 a8			.byte	$05,$52,$41,$4e,$44,$a8       	; $ 83 RAND(
+>c579	04 52 4e 44 a8				.byte	$04,$52,$4e,$44,$a8           	; $ 84 RND(
+>c57e	06 49 53 56 41 4c a8			.byte	$06,$49,$53,$56,$41,$4c,$a8   	; $ 85 ISVAL(
+>c585	04 49 4e 54 a8				.byte	$04,$49,$4e,$54,$a8           	; $ 86 INT(
+>c58a	04 54 49 4d c5				.byte	$04,$54,$49,$4d,$c5           	; $ 87 TIME
+>c58f	06 45 56 45 4e 54 a8			.byte	$06,$45,$56,$45,$4e,$54,$a8   	; $ 88 EVENT(
+>c596	07 49 4e 4b 45 59 24 a8			.byte	$07,$49,$4e,$4b,$45,$59,$24,$a8	; $ 89 INKEY$(
+>c59e	04 41 53 43 a8				.byte	$04,$41,$53,$43,$a8           	; $ 8a ASC(
+>c5a3	05 43 48 52 24 a8			.byte	$05,$43,$48,$52,$24,$a8       	; $ 8b CHR$(
+>c5a9	04 53 51 52 a8				.byte	$04,$53,$51,$52,$a8           	; $ 8c SQR(
+>c5ae	04 4c 45 4e a8				.byte	$04,$4c,$45,$4e,$a8           	; $ 8d LEN(
+>c5b3	04 41 42 53 a8				.byte	$04,$41,$42,$53,$a8           	; $ 8e ABS(
+>c5b8	04 53 47 4e a8				.byte	$04,$53,$47,$4e,$a8           	; $ 8f SGN(
+>c5bd	04 56 41 4c a8				.byte	$04,$56,$41,$4c,$a8           	; $ 90 VAL(
+>c5c2	05 53 54 52 24 a8			.byte	$05,$53,$54,$52,$24,$a8       	; $ 91 STR$(
+>c5c8	05 4d 49 44 24 a8			.byte	$05,$4d,$49,$44,$24,$a8       	; $ 92 MID$(
+>c5ce	06 4c 45 46 54 24 a8			.byte	$06,$4c,$45,$46,$54,$24,$a8   	; $ 93 LEFT$(
+>c5d5	07 52 49 47 48 54 24 a8			.byte	$07,$52,$49,$47,$48,$54,$24,$a8	; $ 94 RIGHT$(
+>c5dd	04 53 49 4e a8				.byte	$04,$53,$49,$4e,$a8           	; $ 95 SIN(
+>c5e2	04 43 4f 53 a8				.byte	$04,$43,$4f,$53,$a8           	; $ 96 COS(
+>c5e7	04 54 41 4e a8				.byte	$04,$54,$41,$4e,$a8           	; $ 97 TAN(
+>c5ec	05 41 54 41 4e a8			.byte	$05,$41,$54,$41,$4e,$a8       	; $ 98 ATAN(
+>c5f2	04 4c 4f 47 a8				.byte	$04,$4c,$4f,$47,$a8           	; $ 99 LOG(
+>c5f7	04 45 58 50 a8				.byte	$04,$45,$58,$50,$a8           	; $ 9a EXP(
+>c5fc	04 4b 45 59 a8				.byte	$04,$4b,$45,$59,$a8           	; $ 9b KEY(
+>c601	00					.byte	$00                           	; $ 9c
+>c602	00					.byte	$00                           	; $ 9d
+>c603	00					.byte	$00                           	; $ 9e
+>c604	00					.byte	$00                           	; $ 9f
+>c605	00					.byte	$00                           	; $ a0
+>c606	00					.byte	$00                           	; $ a1
+>c607	00					.byte	$00                           	; $ a2
+>c608	00					.byte	$00                           	; $ a3
+>c609	00					.byte	$00                           	; $ a4
+>c60a	00					.byte	$00                           	; $ a5
+>c60b	00					.byte	$00                           	; $ a6
+>c60c	00					.byte	$00                           	; $ a7
+>c60d	00					.byte	$00                           	; $ a8
+>c60e	00					.byte	$00                           	; $ a9
+>c60f	00					.byte	$00                           	; $ aa
+>c610	00					.byte	$00                           	; $ ab
+>c611	00					.byte	$00                           	; $ ac
+>c612	00					.byte	$00                           	; $ ad
+>c613	00					.byte	$00                           	; $ ae
+>c614	00					.byte	$00                           	; $ af
+>c615	05 57 48 49 4c c5			.byte	$05,$57,$48,$49,$4c,$c5       	; $ b0 WHILE
+>c61b	04 57 45 4e c4				.byte	$04,$57,$45,$4e,$c4           	; $ b1 WEND
+>c620	02 49 c6				.byte	$02,$49,$c6                   	; $ b2 IF
+>c623	05 45 4e 44 49 c6			.byte	$05,$45,$4e,$44,$49,$c6       	; $ b3 ENDIF
+>c629	02 44 cf				.byte	$02,$44,$cf                   	; $ b4 DO
+>c62c	04 4c 4f 4f d0				.byte	$04,$4c,$4f,$4f,$d0           	; $ b5 LOOP
+>c631	06 52 45 50 45 41 d4			.byte	$06,$52,$45,$50,$45,$41,$d4   	; $ b6 REPEAT
+>c638	05 55 4e 54 49 cc			.byte	$05,$55,$4e,$54,$49,$cc       	; $ b7 UNTIL
+>c63e	04 50 52 4f c3				.byte	$04,$50,$52,$4f,$c3           	; $ b8 PROC
+>c643	07 45 4e 44 50 52 4f c3			.byte	$07,$45,$4e,$44,$50,$52,$4f,$c3	; $ b9 ENDPROC
+>c64b	03 46 4f d2				.byte	$03,$46,$4f,$d2               	; $ ba FOR
+>c64f	04 4e 45 58 d4				.byte	$04,$4e,$45,$58,$d4           	; $ bb NEXT
+>c654	04 43 41 53 c5				.byte	$04,$43,$41,$53,$c5           	; $ bc CASE
+>c659	07 45 4e 44 43 41 53 c5			.byte	$07,$45,$4e,$44,$43,$41,$53,$c5	; $ bd ENDCASE
+>c661	00					.byte	$00                           	; $ be
+>c662	04 54 48 45 ce				.byte	$04,$54,$48,$45,$ce           	; $ bf THEN
+>c667	00					.byte	$00                           	; $ c0
+>c668	00					.byte	$00                           	; $ c1
+>c669	00					.byte	$00                           	; $ c2
+>c66a	00					.byte	$00                           	; $ c3
+>c66b	02 54 cf				.byte	$02,$54,$cf                   	; $ c4 TO
+>c66e	03 4c 45 d4				.byte	$03,$4c,$45,$d4               	; $ c5 LET
+>c672	05 50 52 49 4e d4			.byte	$05,$50,$52,$49,$4e,$d4       	; $ c6 PRINT
+>c678	05 49 4e 50 55 d4			.byte	$05,$49,$4e,$50,$55,$d4       	; $ c7 INPUT
+>c67e	04 43 41 4c cc				.byte	$04,$43,$41,$4c,$cc           	; $ c8 CALL
+>c683	03 53 59 d3				.byte	$03,$53,$59,$d3               	; $ c9 SYS
+>c687	04 45 58 49 d4				.byte	$04,$45,$58,$49,$d4           	; $ ca EXIT
+>c68c	01 ac					.byte	$01,$ac                       	; $ cb ,
+>c68e	01 bb					.byte	$01,$bb                       	; $ cc ;
+>c690	01 ba					.byte	$01,$ba                       	; $ cd :
+>c692	01 a7					.byte	$01,$a7                       	; $ ce '
+>c694	01 a9					.byte	$01,$a9                       	; $ cf )
+>c696	04 52 45 41 c4				.byte	$04,$52,$45,$41,$c4           	; $ d0 READ
+>c69b	04 44 41 54 c1				.byte	$04,$44,$41,$54,$c1           	; $ d1 DATA
+>c6a0	01 db					.byte	$01,$db                       	; $ d2 [
+>c6a2	01 dd					.byte	$01,$dd                       	; $ d3 ]
+>c6a4	01 a3					.byte	$01,$a3                       	; $ d4 #
+>c6a6	01 ae					.byte	$01,$ae                       	; $ d5 .
+>c6a8	04 45 4c 53 c5				.byte	$04,$45,$4c,$53,$c5           	; $ d6 ELSE
+>c6ad	04 57 48 45 ce				.byte	$04,$57,$48,$45,$ce           	; $ d7 WHEN
+>c6b2	06 44 4f 57 4e 54 cf			.byte	$06,$44,$4f,$57,$4e,$54,$cf   	; $ d8 DOWNTO
+>c6b9	ff					.byte	$FF
+.c6ba					Shift1TokenText:
+>c6ba	05 43 4c 45 41 d2			.byte	$05,$43,$4c,$45,$41,$d2       	; $180 CLEAR
+>c6c0	03 4e 45 d7				.byte	$03,$4e,$45,$d7               	; $181 NEW
+>c6c4	03 52 55 ce				.byte	$03,$52,$55,$ce               	; $182 RUN
+>c6c8	04 53 54 4f d0				.byte	$04,$53,$54,$4f,$d0           	; $183 STOP
+>c6cd	03 45 4e c4				.byte	$03,$45,$4e,$c4               	; $184 END
+>c6d1	06 41 53 53 45 52 d4			.byte	$06,$41,$53,$53,$45,$52,$d4   	; $185 ASSERT
+>c6d8	04 4c 49 53 d4				.byte	$04,$4c,$49,$53,$d4           	; $186 LIST
+>c6dd	04 53 41 56 c5				.byte	$04,$53,$41,$56,$c5           	; $187 SAVE
+>c6e2	04 4c 4f 41 c4				.byte	$04,$4c,$4f,$41,$c4           	; $188 LOAD
+>c6e7	05 47 4f 53 55 c2			.byte	$05,$47,$4f,$53,$55,$c2       	; $189 GOSUB
+>c6ed	04 47 4f 54 cf				.byte	$04,$47,$4f,$54,$cf           	; $18a GOTO
+>c6f2	06 52 45 54 55 52 ce			.byte	$06,$52,$45,$54,$55,$52,$ce   	; $18b RETURN
+>c6f9	07 52 45 53 54 4f 52 c5			.byte	$07,$52,$45,$53,$54,$4f,$52,$c5	; $18c RESTORE
+>c701	03 44 49 cd				.byte	$03,$44,$49,$cd               	; $18d DIM
+>c705	ff					.byte	$FF
+.c706					BinaryPrecedence:
+>c706	03					.byte	3		; +
+>c707	03					.byte	3		; -
+>c708	04					.byte	4		; *
+>c709	04					.byte	4		; /
+>c70a	04					.byte	4		; >>
+>c70b	04					.byte	4		; <<
+>c70c	04					.byte	4		; %
+>c70d	04					.byte	4		; \
+>c70e	01					.byte	1		; &
+>c70f	01					.byte	1		; |
+>c710	01					.byte	1		; ^
+>c711	02					.byte	2		; >
+>c712	02					.byte	2		; >=
+>c713	02					.byte	2		; <
+>c714	02					.byte	2		; <=
+>c715	02					.byte	2		; <>
+>c716	02					.byte	2		; =
+>c717	05					.byte	5		; !
+>c718	05					.byte	5		; ?
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/generated/vectors_binary.asm
 
-.c648					BinaryVectorTable:
->c648	63 c1					.word	BinaryAdd                ; $20 +
->c64a	70 c1					.word	BinaryMinus              ; $21 -
->c64c	7d c1					.word	BinaryTimes              ; $22 *
->c64e	8a c1					.word	BinaryFDiv               ; $23 /
->c650	d9 c0					.word	BinaryShiftRight         ; $24 >>
->c652	d6 c0					.word	BinaryShiftLeft          ; $25 <<
->c654	ad c1					.word	BinaryModulus            ; $26 %
->c656	a1 c1					.word	BinaryUDiv               ; $27 \
->c658	73 c0					.word	BinaryAnd                ; $28 &
->c65a	b5 c0					.word	BinaryOr                 ; $29 |
->c65c	94 c0					.word	BinaryXor                ; $2a ^
->c65e	38 c0					.word	CMPCompareGreater        ; $2b >
->c660	53 c0					.word	CMPCompareGreaterEqual   ; $2c >=
->c662	2f c0					.word	CMPCompareLess           ; $2d <
->c664	4a c0					.word	CMPCompareLessEqual      ; $2e <=
->c666	41 c0					.word	CMPCompareNotEqual       ; $2f <>
->c668	26 c0					.word	CMPCompareEqual          ; $30 =
->c66a	19 c1					.word	BinRefWord               ; $31 !
->c66c	1d c1					.word	BinRefByte               ; $32 ?
+.c719					BinaryVectorTable:
+>c719	56 c1					.word	BinaryAdd                ; $20 +
+>c71b	63 c1					.word	BinaryMinus              ; $21 -
+>c71d	70 c1					.word	BinaryTimes              ; $22 *
+>c71f	7d c1					.word	BinaryFDiv               ; $23 /
+>c721	cc c0					.word	BinaryShiftRight         ; $24 >>
+>c723	c9 c0					.word	BinaryShiftLeft          ; $25 <<
+>c725	a0 c1					.word	BinaryModulus            ; $26 %
+>c727	94 c1					.word	BinaryUDiv               ; $27 \
+>c729	66 c0					.word	BinaryAnd                ; $28 &
+>c72b	a8 c0					.word	BinaryOr                 ; $29 |
+>c72d	87 c0					.word	BinaryXor                ; $2a ^
+>c72f	2b c0					.word	CMPCompareGreater        ; $2b >
+>c731	46 c0					.word	CMPCompareGreaterEqual   ; $2c >=
+>c733	22 c0					.word	CMPCompareLess           ; $2d <
+>c735	3d c0					.word	CMPCompareLessEqual      ; $2e <=
+>c737	34 c0					.word	CMPCompareNotEqual       ; $2f <>
+>c739	19 c0					.word	CMPCompareEqual          ; $30 =
+>c73b	0c c1					.word	BinRefWord               ; $31 !
+>c73d	10 c1					.word	BinRefByte               ; $32 ?
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/generated/vectors_extended.asm
 
-.c66e					ExtendedVectorTable:
->c66e	0f c9					.word	Unimplemented            ; $180 clear
->c670	0f c9					.word	Unimplemented            ; $181 new
->c672	0f c9					.word	Unimplemented            ; $182 run
->c674	0f c9					.word	Unimplemented            ; $183 stop
->c676	0f c9					.word	Unimplemented            ; $184 end
->c678	0f c9					.word	Unimplemented            ; $185 assert
->c67a	0f c9					.word	Unimplemented            ; $186 list
->c67c	0f c9					.word	Unimplemented            ; $187 save
->c67e	0f c9					.word	Unimplemented            ; $188 load
->c680	0f c9					.word	Unimplemented            ; $189 gosub
->c682	0f c9					.word	Unimplemented            ; $18a goto
->c684	0f c9					.word	Unimplemented            ; $18b return
->c686	0f c9					.word	Unimplemented            ; $18c restore
->c688	0f c9					.word	Unimplemented            ; $18d dim
+.c73f					ExtendedVectorTable:
+>c73f	3b c4					.word	Command_CLEAR            ; $180 clear
+>c741	4c c4					.word	Command_NEW              ; $181 new
+>c743	55 c4					.word	Command_RUN              ; $182 run
+>c745	b1 c4					.word	Command_STOP             ; $183 stop
+>c747	a6 c4					.word	Command_END              ; $184 end
+>c749	19 c4					.word	Command_ASSERT           ; $185 assert
+>c74b	37 c8					.word	Unimplemented            ; $186 list
+>c74d	37 c8					.word	Unimplemented            ; $187 save
+>c74f	37 c8					.word	Unimplemented            ; $188 load
+>c751	37 c8					.word	Unimplemented            ; $189 gosub
+>c753	37 c8					.word	Unimplemented            ; $18a goto
+>c755	37 c8					.word	Unimplemented            ; $18b return
+>c757	37 c8					.word	Unimplemented            ; $18c restore
+>c759	37 c8					.word	Unimplemented            ; $18d dim
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/generated/vectors_standard.asm
 
-.c68a					StandardVectorTable:
->c68a	d1 c3					.word	EXPUnaryInlineString     ; $80 !!str
->c68c	6c c3					.word	EXPUnaryNull             ; $81 $
->c68e	86 c3					.word	UnaryParenthesis         ; $82 (
->c690	cd c3					.word	UnaryRand                ; $83 rand(
->c692	c9 c3					.word	UnaryRnd                 ; $84 rnd(
->c694	f6 c3					.word	EXPUnaryIsVal            ; $85 isval(
->c696	a1 c3					.word	UnaryInt                 ; $86 int(
->c698	0f c9					.word	Unimplemented            ; $87 time
->c69a	0f c9					.word	Unimplemented            ; $88 event(
->c69c	0f c9					.word	Unimplemented            ; $89 inkey$(
->c69e	59 c3					.word	EXPUnaryAsc              ; $8a asc(
->c6a0	0f c9					.word	Unimplemented            ; $8b chr$(
->c6a2	a5 c3					.word	UnarySqr                 ; $8c sqr(
->c6a4	73 c3					.word	EXPUnaryLen              ; $8d len(
->c6a6	c1 c3					.word	UnaryAbs                 ; $8e abs(
->c6a8	c5 c3					.word	UnarySgn                 ; $8f sgn(
->c6aa	eb c3					.word	EXPUnaryVal              ; $90 val(
->c6ac	0f c9					.word	Unimplemented            ; $91 str$(
->c6ae	0f c9					.word	Unimplemented            ; $92 mid$(
->c6b0	0f c9					.word	Unimplemented            ; $93 left$(
->c6b2	0f c9					.word	Unimplemented            ; $94 right$(
->c6b4	a9 c3					.word	UnarySin                 ; $95 sin(
->c6b6	ad c3					.word	UnaryCos                 ; $96 cos(
->c6b8	b1 c3					.word	UnaryTan                 ; $97 tan(
->c6ba	b5 c3					.word	UnaryATan                ; $98 atan(
->c6bc	bd c3					.word	UnaryLog                 ; $99 log(
->c6be	b9 c3					.word	UnaryExp                 ; $9a exp(
->c6c0	0f c9					.word	Unimplemented            ; $9b key(
->c6c2	0f c9					.word	Unimplemented            ; $9c
->c6c4	0f c9					.word	Unimplemented            ; $9d
->c6c6	0f c9					.word	Unimplemented            ; $9e
->c6c8	0f c9					.word	Unimplemented            ; $9f
->c6ca	0f c9					.word	Unimplemented            ; $a0
->c6cc	0f c9					.word	Unimplemented            ; $a1
->c6ce	0f c9					.word	Unimplemented            ; $a2
->c6d0	0f c9					.word	Unimplemented            ; $a3
->c6d2	0f c9					.word	Unimplemented            ; $a4
->c6d4	0f c9					.word	Unimplemented            ; $a5
->c6d6	0f c9					.word	Unimplemented            ; $a6
->c6d8	0f c9					.word	Unimplemented            ; $a7
->c6da	0f c9					.word	Unimplemented            ; $a8
->c6dc	0f c9					.word	Unimplemented            ; $a9
->c6de	0f c9					.word	Unimplemented            ; $aa
->c6e0	0f c9					.word	Unimplemented            ; $ab
->c6e2	0f c9					.word	Unimplemented            ; $ac
->c6e4	0f c9					.word	Unimplemented            ; $ad
->c6e6	0f c9					.word	Unimplemented            ; $ae
->c6e8	0f c9					.word	Unimplemented            ; $af
->c6ea	0f c9					.word	Unimplemented            ; $b0 while
->c6ec	0f c9					.word	Unimplemented            ; $b1 wend
->c6ee	0f c9					.word	Unimplemented            ; $b2 if
->c6f0	0f c9					.word	Unimplemented            ; $b3 endif
->c6f2	0f c9					.word	Unimplemented            ; $b4 do
->c6f4	0f c9					.word	Unimplemented            ; $b5 loop
->c6f6	0f c9					.word	Unimplemented            ; $b6 repeat
->c6f8	0f c9					.word	Unimplemented            ; $b7 until
->c6fa	0f c9					.word	Unimplemented            ; $b8 proc
->c6fc	0f c9					.word	Unimplemented            ; $b9 endproc
->c6fe	0f c9					.word	Unimplemented            ; $ba for
->c700	0f c9					.word	Unimplemented            ; $bb next
->c702	0f c9					.word	Unimplemented            ; $bc case
->c704	0f c9					.word	Unimplemented            ; $bd endcase
->c706	0f c9					.word	Unimplemented            ; $be !!un1
->c708	0f c9					.word	Unimplemented            ; $bf then
->c70a	0f c9					.word	Unimplemented            ; $c0 !!end
->c70c	0f c9					.word	Unimplemented            ; $c1 !!sh1
->c70e	0f c9					.word	Unimplemented            ; $c2 !!sh2
->c710	0f c9					.word	Unimplemented            ; $c3 !!dec
->c712	0f c9					.word	Unimplemented            ; $c4 to
->c714	0f c9					.word	Unimplemented            ; $c5 let
->c716	0f c9					.word	Unimplemented            ; $c6 print
->c718	0f c9					.word	Unimplemented            ; $c7 input
->c71a	0f c9					.word	Unimplemented            ; $c8 call
->c71c	0f c9					.word	Unimplemented            ; $c9 sys
->c71e	0f c9					.word	Unimplemented            ; $ca exit
->c720	0f c9					.word	Unimplemented            ; $cb ,
->c722	0f c9					.word	Unimplemented            ; $cc ;
->c724	0f c9					.word	Unimplemented            ; $cd :
->c726	0f c9					.word	Unimplemented            ; $ce '
->c728	0f c9					.word	Unimplemented            ; $cf )
->c72a	0f c9					.word	Unimplemented            ; $d0 read
->c72c	0f c9					.word	Unimplemented            ; $d1 data
->c72e	0f c9					.word	Unimplemented            ; $d2 [
->c730	0f c9					.word	Unimplemented            ; $d3 ]
->c732	0f c9					.word	Unimplemented            ; $d4 #
->c734	0f c9					.word	Unimplemented            ; $d5 .
->c736	0f c9					.word	Unimplemented            ; $d6 else
->c738	0f c9					.word	Unimplemented            ; $d7 when
->c73a	0f c9					.word	Unimplemented            ; $d8 downto
+.c75b					StandardVectorTable:
+>c75b	c4 c3					.word	EXPUnaryInlineString     ; $80 !!str
+>c75d	5f c3					.word	EXPUnaryNull             ; $81 $
+>c75f	79 c3					.word	UnaryParenthesis         ; $82 (
+>c761	c0 c3					.word	UnaryRand                ; $83 rand(
+>c763	bc c3					.word	UnaryRnd                 ; $84 rnd(
+>c765	e9 c3					.word	EXPUnaryIsVal            ; $85 isval(
+>c767	94 c3					.word	UnaryInt                 ; $86 int(
+>c769	37 c8					.word	Unimplemented            ; $87 time
+>c76b	37 c8					.word	Unimplemented            ; $88 event(
+>c76d	37 c8					.word	Unimplemented            ; $89 inkey$(
+>c76f	4c c3					.word	EXPUnaryAsc              ; $8a asc(
+>c771	37 c8					.word	Unimplemented            ; $8b chr$(
+>c773	98 c3					.word	UnarySqr                 ; $8c sqr(
+>c775	66 c3					.word	EXPUnaryLen              ; $8d len(
+>c777	b4 c3					.word	UnaryAbs                 ; $8e abs(
+>c779	b8 c3					.word	UnarySgn                 ; $8f sgn(
+>c77b	de c3					.word	EXPUnaryVal              ; $90 val(
+>c77d	37 c8					.word	Unimplemented            ; $91 str$(
+>c77f	37 c8					.word	Unimplemented            ; $92 mid$(
+>c781	37 c8					.word	Unimplemented            ; $93 left$(
+>c783	37 c8					.word	Unimplemented            ; $94 right$(
+>c785	9c c3					.word	UnarySin                 ; $95 sin(
+>c787	a0 c3					.word	UnaryCos                 ; $96 cos(
+>c789	a4 c3					.word	UnaryTan                 ; $97 tan(
+>c78b	a8 c3					.word	UnaryATan                ; $98 atan(
+>c78d	b0 c3					.word	UnaryLog                 ; $99 log(
+>c78f	ac c3					.word	UnaryExp                 ; $9a exp(
+>c791	37 c8					.word	Unimplemented            ; $9b key(
+>c793	37 c8					.word	Unimplemented            ; $9c
+>c795	37 c8					.word	Unimplemented            ; $9d
+>c797	37 c8					.word	Unimplemented            ; $9e
+>c799	37 c8					.word	Unimplemented            ; $9f
+>c79b	37 c8					.word	Unimplemented            ; $a0
+>c79d	37 c8					.word	Unimplemented            ; $a1
+>c79f	37 c8					.word	Unimplemented            ; $a2
+>c7a1	37 c8					.word	Unimplemented            ; $a3
+>c7a3	37 c8					.word	Unimplemented            ; $a4
+>c7a5	37 c8					.word	Unimplemented            ; $a5
+>c7a7	37 c8					.word	Unimplemented            ; $a6
+>c7a9	37 c8					.word	Unimplemented            ; $a7
+>c7ab	37 c8					.word	Unimplemented            ; $a8
+>c7ad	37 c8					.word	Unimplemented            ; $a9
+>c7af	37 c8					.word	Unimplemented            ; $aa
+>c7b1	37 c8					.word	Unimplemented            ; $ab
+>c7b3	37 c8					.word	Unimplemented            ; $ac
+>c7b5	37 c8					.word	Unimplemented            ; $ad
+>c7b7	37 c8					.word	Unimplemented            ; $ae
+>c7b9	37 c8					.word	Unimplemented            ; $af
+>c7bb	37 c8					.word	Unimplemented            ; $b0 while
+>c7bd	37 c8					.word	Unimplemented            ; $b1 wend
+>c7bf	37 c8					.word	Unimplemented            ; $b2 if
+>c7c1	37 c8					.word	Unimplemented            ; $b3 endif
+>c7c3	37 c8					.word	Unimplemented            ; $b4 do
+>c7c5	37 c8					.word	Unimplemented            ; $b5 loop
+>c7c7	37 c8					.word	Unimplemented            ; $b6 repeat
+>c7c9	37 c8					.word	Unimplemented            ; $b7 until
+>c7cb	37 c8					.word	Unimplemented            ; $b8 proc
+>c7cd	37 c8					.word	Unimplemented            ; $b9 endproc
+>c7cf	37 c8					.word	Unimplemented            ; $ba for
+>c7d1	37 c8					.word	Unimplemented            ; $bb next
+>c7d3	37 c8					.word	Unimplemented            ; $bc case
+>c7d5	37 c8					.word	Unimplemented            ; $bd endcase
+>c7d7	37 c8					.word	Unimplemented            ; $be !!un1
+>c7d9	37 c8					.word	Unimplemented            ; $bf then
+>c7db	65 c4					.word	RUNEndOfLine             ; $c0 !!end
+>c7dd	a9 c4					.word	Command_Shift1_Handler   ; $c1 !!sh1
+>c7df	37 c8					.word	Unimplemented            ; $c2 !!sh2
+>c7e1	37 c8					.word	Unimplemented            ; $c3 !!dec
+>c7e3	37 c8					.word	Unimplemented            ; $c4 to
+>c7e5	37 c8					.word	Unimplemented            ; $c5 let
+>c7e7	37 c8					.word	Unimplemented            ; $c6 print
+>c7e9	37 c8					.word	Unimplemented            ; $c7 input
+>c7eb	37 c8					.word	Unimplemented            ; $c8 call
+>c7ed	b6 c4					.word	Command_Sys              ; $c9 sys
+>c7ef	37 c8					.word	Unimplemented            ; $ca exit
+>c7f1	37 c8					.word	Unimplemented            ; $cb ,
+>c7f3	37 c8					.word	Unimplemented            ; $cc ;
+>c7f5	37 c8					.word	Unimplemented            ; $cd :
+>c7f7	3f c4					.word	Command_Comment          ; $ce '
+>c7f9	37 c8					.word	Unimplemented            ; $cf )
+>c7fb	37 c8					.word	Unimplemented            ; $d0 read
+>c7fd	37 c8					.word	Unimplemented            ; $d1 data
+>c7ff	37 c8					.word	Unimplemented            ; $d2 [
+>c801	37 c8					.word	Unimplemented            ; $d3 ]
+>c803	37 c8					.word	Unimplemented            ; $d4 #
+>c805	37 c8					.word	Unimplemented            ; $d5 .
+>c807	37 c8					.word	Unimplemented            ; $d6 else
+>c809	37 c8					.word	Unimplemented            ; $d7 when
+>c80b	37 c8					.word	Unimplemented            ; $d8 downto
 
 ;******  Return to file: _include.inc
 
 
 ;******  Processing file: sources/support/errors/syntax.asm
 
-.c73c					ERRCheckLParen:
-.c73c	b1 3a		lda ($3a),y			lda 	(CodePtr),y
-.c73e	c9 82		cmp #$82			cmp 	#KWD_LPAREN
-.c740	d0 18		bne $c75a			bne 	ERRSyntaxError
-.c742	c8		iny				iny
-.c743	60		rts				rts
-.c744					ERRCheckRParen:
-.c744	b1 3a		lda ($3a),y			lda 	(CodePtr),y
-.c746	c9 cf		cmp #$cf			cmp 	#KWD_RPAREN
-.c748	d0 10		bne $c75a			bne 	ERRSyntaxError
-.c74a	c8		iny				iny
-.c74b	60		rts				rts
-.c74c					ERRCheckComma:
-.c74c	b1 3a		lda ($3a),y			lda 	(CodePtr),y
-.c74e	c9 cb		cmp #$cb			cmp 	#KWD_COMMA
-.c750	d0 08		bne $c75a			bne 	ERRSyntaxError
-.c752	c8		iny				iny
-.c753	60		rts				rts
-.c754					ERRCheckA:
-.c754	d1 3a		cmp ($3a),y			cmp 	(codePtr),y
-.c756	d0 02		bne $c75a			bne 	ERRSyntaxError
-.c758	c8		iny				iny
-.c759	60		rts				rts
-.c75a					ERRSyntaxError:
-.c75a	a9 01		lda #$01		lda	#1
-.c75c	4c 11 c9	jmp $c911		jmp	ErrorHandler
+.c80d					ERRCheckLParen:
+.c80d	b1 3a		lda ($3a),y			lda 	(CodePtr),y
+.c80f	c9 82		cmp #$82			cmp 	#KWD_LPAREN
+.c811	d0 18		bne $c82b			bne 	ERRSyntaxError
+.c813	c8		iny				iny
+.c814	60		rts				rts
+.c815					ERRCheckRParen:
+.c815	b1 3a		lda ($3a),y			lda 	(CodePtr),y
+.c817	c9 cf		cmp #$cf			cmp 	#KWD_RPAREN
+.c819	d0 10		bne $c82b			bne 	ERRSyntaxError
+.c81b	c8		iny				iny
+.c81c	60		rts				rts
+.c81d					ERRCheckComma:
+.c81d	b1 3a		lda ($3a),y			lda 	(CodePtr),y
+.c81f	c9 cb		cmp #$cb			cmp 	#KWD_COMMA
+.c821	d0 08		bne $c82b			bne 	ERRSyntaxError
+.c823	c8		iny				iny
+.c824	60		rts				rts
+.c825					ERRCheckA:
+.c825	d1 3a		cmp ($3a),y			cmp 	(codePtr),y
+.c827	d0 02		bne $c82b			bne 	ERRSyntaxError
+.c829	c8		iny				iny
+.c82a	60		rts				rts
+.c82b					ERRSyntaxError:
+.c82b	a9 01		lda #$01		lda	#1
+.c82d	4c 39 c8	jmp $c839		jmp	ErrorHandler
 
 ;******  Return to file: _include.inc
 
 
 ;******  Return to file: basic.asm
 
-.c90f					Unimplemented:
-.c90f	a9 ff		lda #$ff			lda 	#$FF
-.c911					ErrorHandler:
-.c911	a2 ee		ldx #$ee			ldx 	#$EE
-.c913	a0 ee		ldy #$ee			ldy 	#$EE
->c915	03						.byte 	3
-.c916					_EHLoop:
-.c916	80 fe		bra $c916			bra 	_EHLoop
->c75f							.align 	256
-.c800					Program:
->c800	01 00 00 00 00 00 00 00				.binary "build/tokenised.dat"
->c808	00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+.c830					WarmStart:
+.c830	a9 00		lda #$00			lda 	#$00
+.c832	aa		tax				tax
+.c833	a8		tay				tay
+>c834	03						.byte 	3
+.c835	80 f9		bra $c830			bra 	WarmStart
+.c837					Unimplemented:
+.c837	a9 ff		lda #$ff			lda 	#$FF
+.c839					ErrorHandler:
+.c839	a2 ee		ldx #$ee			ldx 	#$EE
+.c83b	a0 ee		ldy #$ee			ldy 	#$EE
+>c83d	03						.byte 	3
+.c83e					_EHLoop:
+.c83e	80 fe		bra $c83e			bra 	_EHLoop
+>c840							.align 	256
+.c900					Program:
+>c900	01 00 00 00 00 00 00 00				.binary "build/tokenised.dat"
+>c908	00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 ;	...repeated 14 times (224 bytes)...
->c8f8	00 00 00 00 00 00 00 00 0e 64 00 c6 85 80 05 2d
->c908	32 31 2e 31 cf c0 00
+>c9f8	00 00 00 00 00 00 00 00 09 64 00 c9 81 4f 7f 7f
+>ca08	c0 00
 
 ;******  End of listing

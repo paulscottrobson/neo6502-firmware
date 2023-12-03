@@ -1,3 +1,1 @@
-
-
-print isval("-21.1")
+sys $FFFF

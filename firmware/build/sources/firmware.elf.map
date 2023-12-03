@@ -166,7 +166,7 @@ Discarded input sections
  .data          0x00000000        0x0 CMakeFiles/firmware.dir/interface/memory.c.obj
  .bss           0x00000000        0x0 CMakeFiles/firmware.dir/interface/memory.c.obj
  .rodata.basic_bin
-                0x00000000      0x918 CMakeFiles/firmware.dir/interface/memory.c.obj
+                0x00000000      0xa0f CMakeFiles/firmware.dir/interface/memory.c.obj
  .rodata.figforth_bin
                 0x00000000     0x1874 CMakeFiles/firmware.dir/interface/memory.c.obj
  .rodata.a1basic_bin
@@ -1325,9 +1325,9 @@ Discarded input sections
                 0x00000000       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .text.board_getchar
                 0x00000000        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
- .text          0x00000000        0x0 /tmp/cckp8UM0.o
- .data          0x00000000        0x0 /tmp/cckp8UM0.o
- .bss           0x00000000        0x0 /tmp/cckp8UM0.o
+ .text          0x00000000        0x0 /tmp/cc70HvoY.o
+ .data          0x00000000        0x0 /tmp/cc70HvoY.o
+ .bss           0x00000000        0x0 /tmp/cc70HvoY.o
  .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .text          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o)
@@ -1790,7 +1790,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
 .boot2          0x10000000      0x100
                 0x10000000                        __boot2_start__ = .
  *(.boot2)
- .boot2         0x10000000      0x100 /tmp/cckp8UM0.o
+ .boot2         0x10000000      0x100 /tmp/cc70HvoY.o
                 0x10000100                        __boot2_end__ = .
                 0x00000001                        ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -2988,7 +2988,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
 .iplt           0x1000cee0        0x0
  .iplt          0x1000cee0        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
 
-.rodata         0x1000cee0     0x417c
+.rodata         0x1000cee0     0x4274
  *(EXCLUDE_FILE(*libm.a: *libc.a:*lib_a-mem*.o *libgcc.a:) .rodata*)
  .rodata.DVIStart.str1.4
                 0x1000cee0      0x3c3 CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj
@@ -3009,150 +3009,151 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  .rodata.kernel_bin
                 0x1000d360      0x400 CMakeFiles/firmware.dir/interface/memory.c.obj
                 0x1000d360                kernel_bin
- .rodata        0x1000d760     0x31a0 CMakeFiles/firmware.dir/interface/memory.c.obj
+ .rodata        0x1000d760     0x3297 CMakeFiles/firmware.dir/interface/memory.c.obj
  .rodata.DSPReset.str1.4
-                0x10010900       0x3e CMakeFiles/firmware.dir/interface/dispatch.c.obj
+                0x100109f7       0x3e CMakeFiles/firmware.dir/interface/dispatch.c.obj
+ *fill*         0x100109f7        0x1 
  .rodata.DSPHandler
-                0x10010900       0x88 CMakeFiles/firmware.dir/interface/dispatch.c.obj
+                0x100109f8       0x88 CMakeFiles/firmware.dir/interface/dispatch.c.obj
  .rodata.MATHWriteFloat.str1.4
-                0x10010988        0xe CMakeFiles/firmware.dir/interface/maths.c.obj
+                0x10010a80        0xe CMakeFiles/firmware.dir/interface/maths.c.obj
  .rodata.MATHWriteInt.str1.4
-                0x10010988        0xe CMakeFiles/firmware.dir/interface/maths.c.obj
+                0x10010a80        0xe CMakeFiles/firmware.dir/interface/maths.c.obj
  .rodata.spin_lock_claim_unused.str1.4
-                0x10010988       0x1b CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x10010a80       0x1b CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
  .rodata.hardware_alarm_claim.str1.4
-                0x10010988       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10010a80       0x22 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  .rodata.__assert_func.str1.4
-                0x10010988       0x43 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10010a80       0x43 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
  .rodata.panic.str1.4
-                0x10010988       0x12 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10010a80       0x12 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
  .rodata.hard_assertion_failure.str1.4
-                0x10010988        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10010a80        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
  .rodata._ftoa.str1.4
-                0x10010988       0x15 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10010a80       0x15 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .rodata._vsnprintf
-                0x10010988      0x19c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- *fill*         0x10010b24        0x4 
+                0x10010a80      0x19c CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ *fill*         0x10010c1c        0x4 
  .rodata.pow10.0
-                0x10010b28       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10010c20       0x50 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .rodata.__wrap_malloc.str1.4
-                0x10010b78        0xe CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+                0x10010c70        0xe CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
  .rodata.str1.4
-                0x10010b78       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10010c70       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.__bi_81
-                0x10010b78        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10010c70        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.__bi_75
-                0x10010b84        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10010c7c        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.__bi_44
-                0x10010b90        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10010c88        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.crlf_str.0
-                0x10010b9c        0x2 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10010c94        0x2 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .rodata.str1.4
-                0x10010b9e       0x1d CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
+                0x10010c96       0x1d CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
  .rodata.dvi_init.str1.4
-                0x10010b9e       0x1e CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
- *fill*         0x10010b9e        0x2 
+                0x10010c96       0x1e CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi.c.obj
+ *fill*         0x10010c96        0x2 
  .rodata.dvi_serialiser_program
-                0x10010ba0        0x6 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
- *fill*         0x10010ba6        0x2 
+                0x10010c98        0x6 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
+ *fill*         0x10010c9e        0x2 
  .rodata.dvi_serialiser_program_instructions
-                0x10010ba8        0x4 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
+                0x10010ca0        0x4 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/dvi_serialiser.c.obj
  .rodata.dma_claim_unused_channel.str1.4
-                0x10010bac       0x1e CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+                0x10010ca4       0x1e CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
  .rodata._pio_add_program_at_offset.str1.4
-                0x10010bac       0x11 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10010ca4       0x11 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .rodata.pio_sm_claim.str1.4
-                0x10010bac       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
+                0x10010ca4       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .rodata._hw_endpoint_init.str1.4
-                0x10010bac        0xf CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10010ca4        0xf CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .rodata.hcd_rp2040_irq.str1.4
-                0x10010bac       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10010ca4       0x40 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .rodata._hw_endpoint_buffer_control_update32.part.0.isra.0.str1.4
-                0x10010bac       0x1f CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10010ca4       0x1f CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .rodata.hw_endpoint_xfer_continue.str1.4
-                0x10010bac       0x29 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10010ca4       0x29 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .rodata.str1.4
-                0x10010bac        0x7 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10010ca4        0x7 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .rodata.process_enumeration.part.0
-                0x10010bac       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10010ca4       0x34 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .rodata.usbh_class_drivers
-                0x10010be0       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
- .rodata        0x10010c1c        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+                0x10010cd8       0x3c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+ .rodata        0x10010d14        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
  .rodata.str1.4
-                0x10010c24        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10010d1c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .rodata.__bi_142.0
-                0x10010c24        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10010d1c        0xc CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .rodata.__bi_152.1
-                0x10010c30        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10010d28        0x8 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .rodata._strtod_l.str1.4
-                0x10010c38       0x15 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
+                0x10010d30       0x15 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
  .rodata._strtod_l
-                0x10010c38       0xd0 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
+                0x10010d30       0xd0 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
  .rodata.fpinan.0
-                0x10010d08       0x14 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
- .rodata.fpi.1  0x10010d1c       0x14 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
+                0x10010e00       0x14 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
+ .rodata.fpi.1  0x10010e14       0x14 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
  .rodata.tinytens
-                0x10010d30       0x28 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
+                0x10010e28       0x28 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-strtod.o)
  .rodata._setlocale_r.str1.4
-                0x10010d58        0xd /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-locale.o)
+                0x10010e50        0xd /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-locale.o)
  .rodata.str1.4
-                0x10010d58        0x2 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-locale.o)
+                0x10010e50        0x2 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-locale.o)
  .rodata.__gethex.str1.4
-                0x10010d58       0x62 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-gdtoa-gethex.o)
+                0x10010e50       0x62 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-gdtoa-gethex.o)
  .rodata.__hexdig
-                0x10010d58      0x100 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-gdtoa-gethex.o)
-                0x10010d58                __hexdig
+                0x10010e50      0x100 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-gdtoa-gethex.o)
+                0x10010e50                __hexdig
  .rodata.__multadd.str1.4
-                0x10010e58       0x57 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mprec.o)
- .rodata.p05.0  0x10010e58        0xc /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mprec.o)
- *fill*         0x10010e64        0x4 
+                0x10010f50       0x57 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mprec.o)
+ .rodata.p05.0  0x10010f50        0xc /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mprec.o)
+ *fill*         0x10010f5c        0x4 
  .rodata.__mprec_bigtens
-                0x10010e68       0x28 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mprec.o)
-                0x10010e68                __mprec_bigtens
+                0x10010f60       0x28 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mprec.o)
+                0x10010f60                __mprec_bigtens
  .rodata.__mprec_tens
-                0x10010e90       0xc8 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mprec.o)
-                0x10010e90                __mprec_tens
+                0x10010f88       0xc8 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mprec.o)
+                0x10010f88                __mprec_tens
  .rodata._ctype_
-                0x10010f58      0x101 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-ctype_.o)
-                0x10010f58                _ctype_
-                0x1001105c                        . = ALIGN (0x4)
- *fill*         0x10011059        0x3 
+                0x10011050      0x101 /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-ctype_.o)
+                0x10011050                _ctype_
+                0x10011154                        . = ALIGN (0x4)
+ *fill*         0x10011151        0x3 
  *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.flashdata*)))
-                0x1001105c                        . = ALIGN (0x4)
+                0x10011154                        . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x1001105c                        __exidx_start = .
+                0x10011154                        __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x1001105c                        __exidx_end = .
-                0x1001105c                        . = ALIGN (0x4)
-                0x1001105c                        __binary_info_start = .
+                0x10011154                        __exidx_end = .
+                0x10011154                        . = ALIGN (0x4)
+                0x10011154                        __binary_info_start = .
 
-.binary_info    0x1001105c       0x24
+.binary_info    0x10011154       0x24
  *(.binary_info.keep.*)
  .binary_info.keep.__bi_ptr81
-                0x1001105c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10011154        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr75
-                0x10011060        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10011158        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr50
-                0x10011064        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1001115c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr44
-                0x10011068        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10011160        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr38
-                0x1001106c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10011164        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr30
-                0x10011070        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x10011168        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr22
-                0x10011074        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1001116c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr152
-                0x10011078        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10011170        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .binary_info.keep.__bi_ptr142
-                0x1001107c        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10011174        0x4 CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  *(.binary_info.*)
-                0x10011080                        __binary_info_end = .
-                0x10011080                        . = ALIGN (0x4)
+                0x10011178                        __binary_info_end = .
+                0x10011178                        . = ALIGN (0x4)
 
 .ram_vector_table
                 0x20000000       0xc0
@@ -3161,7 +3162,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x20000000       0xc0 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
                 0x20000000                ram_vector_table
 
-.data           0x200000c0     0x178c load address 0x10011080
+.data           0x200000c0     0x178c load address 0x10011178
                 0x200000c0                        __data_start__ = .
  *(vtable)
  *(.time_critical*)
@@ -3319,17 +3320,17 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  *(.jcr)
                 0x2000184c                        . = ALIGN (0x4)
                 0x2000184c                        __data_end__ = .
-                0x10011080                        __etext = LOADADDR (.data)
+                0x10011178                        __etext = LOADADDR (.data)
 
-.igot.plt       0x2000184c        0x0 load address 0x1001280c
+.igot.plt       0x2000184c        0x0 load address 0x10012904
  .igot.plt      0x2000184c        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
 
 .uninitialized_data
-                0x2000184c        0x0 load address 0x1001280c
+                0x2000184c        0x0 load address 0x10012904
                 0x2000184c                        . = ALIGN (0x4)
  *(.uninitialized_data*)
 
-.scratch_x      0x20040000      0x164 load address 0x1001280c
+.scratch_x      0x20040000      0x164 load address 0x10012904
                 0x20040000                        __scratch_x_start__ = .
  *(.scratch_x.*)
  .scratch_x.tmds_encode_loop_16bpp
@@ -3342,17 +3343,17 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
                 0x20040064      0x100 CMakeFiles/firmware.dir/__/libraries/PicoDVI/software/libdvi/tmds_encode.c.obj
                 0x20040164                        . = ALIGN (0x4)
                 0x20040164                        __scratch_x_end__ = .
-                0x1001280c                        __scratch_x_source__ = LOADADDR (.scratch_x)
+                0x10012904                        __scratch_x_source__ = LOADADDR (.scratch_x)
 
-.rel.dyn        0x20040164        0x0 load address 0x10012970
+.rel.dyn        0x20040164        0x0 load address 0x10012a68
  .rel.iplt      0x20040164        0x0 /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/crtbegin.o
 
-.scratch_y      0x20041000        0x0 load address 0x10012970
+.scratch_y      0x20041000        0x0 load address 0x10012a68
                 0x20041000                        __scratch_y_start__ = .
  *(.scratch_y.*)
                 0x20041000                        . = ALIGN (0x4)
                 0x20041000                        __scratch_y_end__ = .
-                0x10012970                        __scratch_y_source__ = LOADADDR (.scratch_y)
+                0x10012a68                        __scratch_y_source__ = LOADADDR (.scratch_y)
 
 .bss            0x20010000    0x25ac0
                 0x20010000                        . = ALIGN (0x4)
@@ -3561,8 +3562,8 @@ LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
  *(.stack*)
  .stack         0x20041000      0x800 CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
 
-.flash_end      0x10012970        0x0
-                0x10012970                        PROVIDE (__flash_binary_end = .)
+.flash_end      0x10012a68        0x0
+                0x10012a68                        PROVIDE (__flash_binary_end = .)
                 0x20040000                        __StackLimit = (ORIGIN (RAM) + LENGTH (RAM))
                 0x20041000                        __StackOneTop = (ORIGIN (SCRATCH_X) + LENGTH (SCRATCH_X))
                 0x20042000                        __StackTop = (ORIGIN (SCRATCH_Y) + LENGTH (SCRATCH_Y))
@@ -3648,7 +3649,7 @@ LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vend
 LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 LOAD CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
-LOAD /tmp/cckp8UM0.o
+LOAD /tmp/cc70HvoY.o
 LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a
 LOAD /usr/lib/gcc/arm-none-eabi/13.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 START GROUP
@@ -3810,7 +3811,7 @@ LOAD linker stubs
  .ARM.attributes
                 0x00000b8c       0x2c CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .ARM.attributes
-                0x00000bb8       0x22 /tmp/cckp8UM0.o
+                0x00000bb8       0x22 /tmp/cc70HvoY.o
  .ARM.attributes
                 0x00000bda       0x1e /usr/lib/gcc/arm-none-eabi/13.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
  .ARM.attributes

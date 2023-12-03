@@ -3,12 +3,12 @@
 ;
 	.section code
 ExtendedVectorTable:
-	.word	Unimplemented            ; $180 clear
-	.word	Unimplemented            ; $181 new
-	.word	Unimplemented            ; $182 run
-	.word	Unimplemented            ; $183 stop
-	.word	Unimplemented            ; $184 end
-	.word	Unimplemented            ; $185 assert
+	.word	Command_CLEAR            ; $180 clear
+	.word	Command_NEW              ; $181 new
+	.word	Command_RUN              ; $182 run
+	.word	Command_STOP             ; $183 stop
+	.word	Command_END              ; $184 end
+	.word	Command_ASSERT           ; $185 assert
 	.word	Unimplemented            ; $186 list
 	.word	Unimplemented            ; $187 save
 	.word	Unimplemented            ; $188 load

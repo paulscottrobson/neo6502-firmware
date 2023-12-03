@@ -21,3 +21,18 @@ error_range .macro
 	jmp	ErrorHandler
 	.endm
 
+error_assert .macro
+	lda	#5
+	jmp	ErrorHandler
+	.endm
+
+error_break .macro
+	lda	#6
+	jmp	ErrorHandler
+	.endm
+
+error_stop .macro
+	lda	#7
+	jmp	ErrorHandler
+	.endm
+

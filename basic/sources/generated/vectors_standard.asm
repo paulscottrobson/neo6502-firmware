@@ -67,8 +67,8 @@ StandardVectorTable:
 	.word	Unimplemented            ; $bd endcase
 	.word	Unimplemented            ; $be !!un1
 	.word	Unimplemented            ; $bf then
-	.word	Unimplemented            ; $c0 !!end
-	.word	Unimplemented            ; $c1 !!sh1
+	.word	RUNEndOfLine             ; $c0 !!end
+	.word	Command_Shift1_Handler   ; $c1 !!sh1
 	.word	Unimplemented            ; $c2 !!sh2
 	.word	Unimplemented            ; $c3 !!dec
 	.word	Unimplemented            ; $c4 to
@@ -76,12 +76,12 @@ StandardVectorTable:
 	.word	Unimplemented            ; $c6 print
 	.word	Unimplemented            ; $c7 input
 	.word	Unimplemented            ; $c8 call
-	.word	Unimplemented            ; $c9 sys
+	.word	Command_Sys              ; $c9 sys
 	.word	Unimplemented            ; $ca exit
 	.word	Unimplemented            ; $cb ,
 	.word	Unimplemented            ; $cc ;
 	.word	Unimplemented            ; $cd :
-	.word	Unimplemented            ; $ce '
+	.word	Command_Comment          ; $ce '
 	.word	Unimplemented            ; $cf )
 	.word	Unimplemented            ; $d0 read
 	.word	Unimplemented            ; $d1 data
