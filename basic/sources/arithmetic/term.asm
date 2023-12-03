@@ -97,7 +97,6 @@ _ETBadType:
 		;		Identifier found.
 		;
 _ETIsIdentifier:
-		.byte 	3
 		lda 	(codePtr),y 				; get the MSB of the identifier address.
 		iny
 		clc
