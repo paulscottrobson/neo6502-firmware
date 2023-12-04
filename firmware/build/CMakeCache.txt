@@ -287,12 +287,6 @@ PICO_OBJDUMP:FILEPATH=/usr/bin/arm-none-eabi-objdump
 //PICO Build platform (e.g. rp2040, host)
 PICO_PLATFORM:STRING=rp2040
 
-//Set to ON to fetch copy of SDK from git if not otherwise locatable
-PICO_SDK_FETCH_FROM_GIT:BOOL=
-
-//location to download SDK
-PICO_SDK_FETCH_FROM_GIT_PATH:FILEPATH=
-
 //Path to the Raspberry Pi Pico SDK
 PICO_SDK_PATH:PATH=/aux/pico/pico-sdk
 
@@ -450,7 +444,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=83
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=84
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -499,14 +493,13 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_EXECUTABLE
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
-FAMILY_MCUS:INTERNAL=RP2040
 //Details about finding Python3
 FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/usr/bin/python3.11][cfound components: Interpreter ][v3.11.6()]
 PICO_BOOT_STAGE2_DIR:INTERNAL=/aux/pico/pico-sdk/src/rp2_common/boot_stage2
 PICO_CMAKE_PRELOAD_PLATFORM_DIR:INTERNAL=/aux/pico/pico-sdk/cmake/preload/platforms
 PICO_CMAKE_PRELOAD_PLATFORM_FILE:INTERNAL=/aux/pico/pico-sdk/cmake/preload/platforms/rp2040.cmake
 PICO_COMPILER_ASM:INTERNAL=/usr/bin/arm-none-eabi-gcc
-PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /aux/pico/pico-sdk/src/rp2_common/cmsis /aux/pico/pico-sdk/src/rp2040/hardware_regs /aux/pico/pico-sdk/src/rp2_common/cmsis /aux/pico/pico-sdk/src/rp2040/hardware_regs
+PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /aux/pico/pico-sdk/src/rp2_common/cmsis /aux/pico/pico-sdk/src/rp2040/hardware_regs
 PICO_DOXYGEN_PATHS:INTERNAL= /aux/pico/pico-sdk/src/common /aux/pico/pico-sdk/lib/cyw43-driver/src /aux/pico/pico-sdk/src/rp2_common /aux/pico/pico-sdk/src/rp2040
 PICO_NO_HARDWARE:INTERNAL=0
 PICO_ON_DEVICE:INTERNAL=1

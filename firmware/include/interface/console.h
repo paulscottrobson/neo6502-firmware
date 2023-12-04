@@ -17,8 +17,8 @@
 
 void CONInitialise(struct GraphicsMode *gMode);
 void CONWrite(int c);
-
-void CONWriteHex(uint16_t h);	// See note
+void CONWriteHex(uint16_t h);	
+void CONWriteString(char *s);
 
 #define CONTROL(c) 	((c) & 0x1F)
 
