@@ -1,11 +1,11 @@
-sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: \
- /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c \
- /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/hid/hid_host.c.obj: \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.c \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h \
  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h \
  /usr/arm-none-eabi/include/stdint.h \
@@ -31,15 +31,14 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: \
  /usr/arm-none-eabi/include/stdio.h \
  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdarg.h \
  /usr/arm-none-eabi/include/sys/stdio.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh_pvt.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
  /aux/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
@@ -65,15 +64,7 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: \
  /aux/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh_classdriver.h \
- /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_private.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.h \
+ /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h

@@ -1560,12 +1560,12 @@ sources/clean: sources/CMakeFiles/ELF2UF2Build.dir/clean
 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/all:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/depend
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/build.make pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=15,16 "Built target bs2_default"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=16 "Built target bs2_default"
 .PHONY : pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/all
 
 # Build rule for subdir invocation for target.
 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 0
 .PHONY : pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default.dir/rule
@@ -1591,7 +1591,7 @@ pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/all: pico-sdk
 
 # Build rule for subdir invocation for target.
 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 0
 .PHONY : pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_bin.dir/rule
@@ -1617,7 +1617,7 @@ pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_as
 
 # Build rule for subdir invocation for target.
 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 0
 .PHONY : pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/rule
@@ -1638,12 +1638,12 @@ pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_as
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/all:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/depend
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=8,9,10,11,12,13,14 "Built target PioasmBuild"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles --progress-num=8,9,10,11,12,13,14,15 "Built target PioasmBuild"
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/all
 
 # Build rule for subdir invocation for target.
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 0
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/rule
@@ -1669,7 +1669,7 @@ pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bu
 
 # Build rule for subdir invocation for target.
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 0
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/rule
@@ -1695,7 +1695,7 @@ libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
 
 # Build rule for subdir invocation for target.
 libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 0
 .PHONY : libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_dvi_serialiser_pio_h.dir/rule
@@ -1721,7 +1721,7 @@ libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/a
 
 # Build rule for subdir invocation for target.
 libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 0
 .PHONY : libraries/PicoDVI/software/libdvi/CMakeFiles/libdvi_tmds_encode_1bpp_pio_h.dir/rule
@@ -1777,7 +1777,7 @@ sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/all: pico-
 
 # Build rule for subdir invocation for target.
 sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/paulr/Projects/neo6502-firmware/firmware/build/CMakeFiles 0
 .PHONY : sources/CMakeFiles/firmware_sm0_memory_emulation_with_clock_pio_h.dir/rule
