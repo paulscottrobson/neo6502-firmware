@@ -59,3 +59,7 @@ firmware:
 fi : firmware import
 	
 always:
+
+binary:
+	$(PYTHON) tests$(S)binary.py >build$(S)test.bas
+	make run

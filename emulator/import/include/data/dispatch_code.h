@@ -54,11 +54,11 @@ switch (*DCOMMAND) {
 				}
 				break;
 			case 3:
-				f1 = MATHReadFloat(MATH_REG2);
-				if (f1 == 0.0) {
+				f2 = MATHReadFloat(MATH_REG2);
+				if (f2 == 0.0) {
 				*DERROR = 1;
 				} else {
-				MATHWriteFloat(MATHReadFloat(MATH_REG1)/f1,MATH_REG1);
+				MATHWriteFloat(MATHReadFloat(MATH_REG1)/f2,MATH_REG1);
 				}
 				break;
 			case 4:
