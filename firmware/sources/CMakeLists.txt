@@ -20,10 +20,9 @@ target_link_libraries(firmware
 	pico_stdlib
 	pico_multicore
 	pico_util
-	fatfs
 	libdvi
 	tinyusb_host
-	tinyusb_board
+	fatfs
 )
 
 target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})
