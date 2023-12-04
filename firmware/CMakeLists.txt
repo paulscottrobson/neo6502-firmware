@@ -20,4 +20,5 @@ include_directories(
 	)
 
 add_subdirectory(libraries/PicoDVI/software/libdvi)
+add_subdirectory(libraries/fatfs/source)
 add_subdirectory(sources)
