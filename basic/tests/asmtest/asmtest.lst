@@ -1,0 +1,190 @@
+
+; 64tass Turbo Assembler Macro V1.57.2900 listing file
+; 64tass -q -b -c -L output/asmtest.lst -o output/asmtest.bin common/generated/asmtest.tass
+; Fri Dec  2 17:37:24 2022
+
+;Offset	;Hex		;Monitor	;Source
+
+;******  Processing input file: common/generated/asmtest.tass
+
+.6000					start:
+.6000	90 fe		bcc $6000			bcc start
+.6002	b0 fc		bcs $6000			bcs start
+.6004	f0 fa		beq $6000			beq start
+.6006	89 89		bit #$89			bit #$89
+.6008	24 05		bit $05				bit $05
+.600a	2c 0e 0d	bit $0d0e			bit $0d0e
+.600d	34 34		bit $34,x			bit $34, x
+.600f	3c 3c 3c	bit $3c3c,x			bit $3c3c, x
+.6012	30 ec		bmi $6000			bmi start
+.6014	d0 ea		bne $6000			bne start
+.6016	10 e8		bpl $6000			bpl start
+.6018	80 e6		bra $6000			bra start
+.601a	00		brk #				brk
+.601b	50 e3		bvc $6000			bvc start
+.601d	70 e1		bvs $6000			bvs start
+.601f	69 09		adc #$09			adc #$09
+.6021	65 05		adc $05				adc $05
+.6023	6d 0e 0d	adc $0d0e			adc $0d0e
+.6026	75 15		adc $15,x			adc $15, x
+.6028	79 19 19	adc $1919,y			adc $1919, y
+.602b	7d 1e 1d	adc $1d1e,x			adc $1d1e, x
+.602e	61 01		adc ($01,x)			adc ($01,x)
+.6030	71 11		adc ($11),y			adc ($11), y
+.6032	72 12		adc ($12)			adc ($12)
+.6034	29 09		and #$09			and #$09
+.6036	25 05		and $05				and $05
+.6038	2d 0e 0d	and $0d0e			and $0d0e
+.603b	35 15		and $15,x			and $15, x
+.603d	39 19 19	and $1919,y			and $1919, y
+.6040	3d 1e 1d	and $1d1e,x			and $1d1e, x
+.6043	21 01		and ($01,x)			and ($01,x)
+.6045	31 11		and ($11),y			and ($11), y
+.6047	32 12		and ($12)			and ($12)
+.6049	0a		asl a				asl
+.604a	06 05		asl $05				asl $05
+.604c	0e 0e 0d	asl $0d0e			asl $0d0e
+.604f	16 15		asl $15,x			asl $15, x
+.6051	1e 1e 1d	asl $1d1e,x			asl $1d1e, x
+.6054	18		clc				clc
+.6055	d8		cld				cld
+.6056	58		cli				cli
+.6057	b8		clv				clv
+.6058	c9 09		cmp #$09			cmp #$09
+.605a	c5 05		cmp $05				cmp $05
+.605c	cd 0e 0d	cmp $0d0e			cmp $0d0e
+.605f	d5 15		cmp $15,x			cmp $15, x
+.6061	d9 19 19	cmp $1919,y			cmp $1919, y
+.6064	dd 1e 1d	cmp $1d1e,x			cmp $1d1e, x
+.6067	c1 01		cmp ($01,x)			cmp ($01,x)
+.6069	d1 11		cmp ($11),y			cmp ($11), y
+.606b	d2 12		cmp ($12)			cmp ($12)
+.606d	e0 09		cpx #$09			cpx #$09
+.606f	e4 05		cpx $05				cpx $05
+.6071	ec 0e 0d	cpx $0d0e			cpx $0d0e
+.6074	c0 09		cpy #$09			cpy #$09
+.6076	c4 05		cpy $05				cpy $05
+.6078	cc 0e 0d	cpy $0d0e			cpy $0d0e
+.607b	3a		dec a				dec a
+.607c	c6 05		dec $05				dec $05
+.607e	ce 0e 0d	dec $0d0e			dec $0d0e
+.6081	d6 15		dec $15,x			dec $15, x
+.6083	de 1e 1d	dec $1d1e,x			dec $1d1e, x
+.6086	ca		dex				dex
+.6087	88		dey				dey
+.6088	49 09		eor #$09			eor #$09
+.608a	45 05		eor $05				eor $05
+.608c	4d 0e 0d	eor $0d0e			eor $0d0e
+.608f	55 15		eor $15,x			eor $15, x
+.6091	59 19 19	eor $1919,y			eor $1919, y
+.6094	5d 1e 1d	eor $1d1e,x			eor $1d1e, x
+.6097	41 01		eor ($01,x)			eor ($01,x)
+.6099	51 11		eor ($11),y			eor ($11), y
+.609b	52 12		eor ($12)			eor ($12)
+.609d	1a		inc a				inc a
+.609e	e6 05		inc $05				inc $05
+.60a0	ee 0e 0d	inc $0d0e			inc $0d0e
+.60a3	f6 15		inc $15,x			inc $15, x
+.60a5	fe 1e 1d	inc $1d1e,x			inc $1d1e, x
+.60a8	e8		inx				inx
+.60a9	c8		iny				iny
+.60aa	4c 0e 0d	jmp $0d0e			jmp $0d0e
+.60ad	6c 6c 6c	jmp ($6c6c)			jmp ($6c6c)
+.60b0	7c 7c 7c	jmp ($7c7c,x)			jmp ($7c7c,x)
+.60b3	20 0e 0d	jsr $0d0e			jsr $0d0e
+.60b6	a9 09		lda #$09			lda #$09
+.60b8	a5 05		lda $05				lda $05
+.60ba	ad 0e 0d	lda $0d0e			lda $0d0e
+.60bd	b5 15		lda $15,x			lda $15, x
+.60bf	b9 19 19	lda $1919,y			lda $1919, y
+.60c2	bd 1e 1d	lda $1d1e,x			lda $1d1e, x
+.60c5	a1 01		lda ($01,x)			lda ($01,x)
+.60c7	b1 11		lda ($11),y			lda ($11), y
+.60c9	b2 12		lda ($12)			lda ($12)
+.60cb	a2 09		ldx #$09			ldx #$09
+.60cd	a6 05		ldx $05				ldx $05
+.60cf	ae 0e 0d	ldx $0d0e			ldx $0d0e
+.60d2	be 19 19	ldx $1919,y			ldx $1919, y
+.60d5	b6 96		ldx $96,y			ldx $96, y
+.60d7	a0 09		ldy #$09			ldy #$09
+.60d9	a4 05		ldy $05				ldy $05
+.60db	ac 0e 0d	ldy $0d0e			ldy $0d0e
+.60de	b4 15		ldy $15,x			ldy $15, x
+.60e0	bc 1e 1d	ldy $1d1e,x			ldy $1d1e, x
+.60e3	4a		lsr a				lsr
+.60e4	46 05		lsr $05				lsr $05
+.60e6	4e 0e 0d	lsr $0d0e			lsr $0d0e
+.60e9	56 15		lsr $15,x			lsr $15, x
+.60eb	5e 1e 1d	lsr $1d1e,x			lsr $1d1e, x
+.60ee	ea		nop				nop
+.60ef	09 09		ora #$09			ora #$09
+.60f1	05 05		ora $05				ora $05
+.60f3	0d 0e 0d	ora $0d0e			ora $0d0e
+.60f6	15 15		ora $15,x			ora $15, x
+.60f8	19 19 19	ora $1919,y			ora $1919, y
+.60fb	1d 1e 1d	ora $1d1e,x			ora $1d1e, x
+.60fe	01 01		ora ($01,x)			ora ($01,x)
+.6100	11 11		ora ($11),y			ora ($11), y
+.6102	12 12		ora ($12)			ora ($12)
+.6104	48		pha				pha
+.6105	08		php				php
+.6106	da		phx				phx
+.6107	5a		phy				phy
+.6108	68		pla				pla
+.6109	28		plp				plp
+.610a	fa		plx				plx
+.610b	7a		ply				ply
+.610c	2a		rol a				rol
+.610d	26 05		rol $05				rol $05
+.610f	2e 0e 0d	rol $0d0e			rol $0d0e
+.6112	36 15		rol $15,x			rol $15, x
+.6114	3e 1e 1d	rol $1d1e,x			rol $1d1e, x
+.6117	6a		ror a				ror
+.6118	66 05		ror $05				ror $05
+.611a	6e 0e 0d	ror $0d0e			ror $0d0e
+.611d	76 15		ror $15,x			ror $15, x
+.611f	7e 1e 1d	ror $1d1e,x			ror $1d1e, x
+.6122	40		rti				rti
+.6123	60		rts				rts
+.6124	e9 09		sbc #$09			sbc #$09
+.6126	e5 05		sbc $05				sbc $05
+.6128	ed 0e 0d	sbc $0d0e			sbc $0d0e
+.612b	f5 15		sbc $15,x			sbc $15, x
+.612d	f9 19 19	sbc $1919,y			sbc $1919, y
+.6130	fd 1e 1d	sbc $1d1e,x			sbc $1d1e, x
+.6133	e1 01		sbc ($01,x)			sbc ($01,x)
+.6135	f1 11		sbc ($11),y			sbc ($11), y
+.6137	f2 12		sbc ($12)			sbc ($12)
+.6139	38		sec				sec
+.613a	f8		sed				sed
+.613b	78		sei				sei
+.613c	85 05		sta $05				sta $05
+.613e	8d 0e 0d	sta $0d0e			sta $0d0e
+.6141	95 15		sta $15,x			sta $15, x
+.6143	99 19 19	sta $1919,y			sta $1919, y
+.6146	9d 1e 1d	sta $1d1e,x			sta $1d1e, x
+.6149	81 01		sta ($01,x)			sta ($01,x)
+.614b	91 11		sta ($11),y			sta ($11), y
+.614d	92 12		sta ($12)			sta ($12)
+.614f	86 05		stx $05				stx $05
+.6151	8e 0e 0d	stx $0d0e			stx $0d0e
+.6154	96 96		stx $96,y			stx $96, y
+.6156	84 05		sty $05				sty $05
+.6158	8c 0e 0d	sty $0d0e			sty $0d0e
+.615b	94 15		sty $15,x			sty $15, x
+.615d	64 04		stz $04				stz $04
+.615f	9c 0c 0c	stz $0c0c			stz $0c0c
+.6162	74 34		stz $34,x			stz $34, x
+.6164	9e 3c 3c	stz $3c3c,x			stz $3c3c, x
+.6167	aa		tax				tax
+.6168	a8		tay				tay
+.6169	14 04		trb $04				trb $04
+.616b	1c 0c 0c	trb $0c0c			trb $0c0c
+.616e	04 04		tsb $04				tsb $04
+.6170	0c 0c 0c	tsb $0c0c			tsb $0c0c
+.6173	ba		tsx				tsx
+.6174	8a		txa				txa
+.6175	9a		txs				txs
+.6176	98		tya				tya
+
+;******  End of listing

@@ -75,7 +75,7 @@ static void MATHWrite(uint8_t offset,uint8_t type) {
 
 float MATHReadFloat(uint8_t regOffset) {
 	uint8_t type = MATHRead(regOffset);
-	return (type & 0x40) ? sc.f : (float)sc.i;
+	return (type & 0x40) ? sc.f : (float)(int)sc.i;
 }
 
 uint32_t MATHReadInt(uint8_t regOffset) {
@@ -86,13 +86,13 @@ uint32_t MATHReadInt(uint8_t regOffset) {
 void MATHWriteFloat(float f,uint8_t regOffset) {
 	sc.f = f;
 	MATHWrite(regOffset,0x40);
-	printf("Written %f f\n",f);
+	//printf("Written %f f\n",f);
 }
 
 void MATHWriteInt(uint32_t i,uint8_t regOffset) {
 	sc.i = i;
 	MATHWrite(regOffset,0x00);
-	printf("Written %d i\n",(int)i);
+	//printf("Written %d i\n",(int)i);
 }
 
 // ***************************************************************************************
