@@ -3,4 +3,4 @@
 	url = https://github.com/Wren6991/PicoDVI
 [submodule "firmware/libraries/tinyusb"]
 	path = firmware/libraries/tinyusb
-	url = https://github.com/vsladkov/tinyusb.git
+	url = https://github.com/hathach/tinyusb

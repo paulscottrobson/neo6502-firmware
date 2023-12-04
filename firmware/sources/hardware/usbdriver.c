@@ -12,7 +12,7 @@
 // ***************************************************************************************
 
 #include "common.h"
-#include "hw/bsp/rp2040/board.h"
+// #include "bsp/rp2040/board.h"
 #include "tusb.h"
 #include "interface/kbdcodes.h"
 
