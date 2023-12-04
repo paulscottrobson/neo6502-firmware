@@ -1,11 +1,9 @@
 TODO List
 ---------
 
-- Check the math functionality properly. Should be okay.
 - Default AXY
 - Dereferencing.
-- String concatenation / matching
-- String temp functionality, string unaries.
+- String temp functionality, string unaries, string concatenation / matching
 - Variables, Assignment
 
 - Locale handling
