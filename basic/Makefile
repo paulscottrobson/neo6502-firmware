@@ -60,6 +60,17 @@ fi : firmware import
 	
 always:
 
+test:
+	make binary 
+	make brackets
+	make unary
+	
 binary:
 	$(PYTHON) tests$(S)binary.py >build$(S)test.bas
+	make run
+brackets:	
+	$(PYTHON) tests$(S)brackets.py >build$(S)test.bas
+	make run
+unary:
+	$(PYTHON) tests$(S)unary.py >build$(S)test.bas
 	make run
