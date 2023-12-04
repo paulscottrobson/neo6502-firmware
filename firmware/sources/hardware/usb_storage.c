@@ -14,7 +14,7 @@ bool msc_inquiry_complete = false;
 
 bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_data) {
     if (cb_data->csw->status != 0) {
-        CONWriteString("MSC SCSI inquiry failed\r\n");
+        CONWriteString("MSC SCSI inquiry failed\n");
         return false;
     }
 
@@ -23,7 +23,7 @@ bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_dat
     uint32_t size = block_count / ((1024 * 1024) / block_size);
 
     char szBuffer[64];
-    sprintf(szBuffer,"MSC %luMB %.8s %.16s rev %.4s\r\n", size, msc_inquiry_resp.vendor_id, msc_inquiry_resp.product_id,
+    sprintf(szBuffer,"MSC %luMB %.8s %.16s rev %.4s\n", size, msc_inquiry_resp.vendor_id, msc_inquiry_resp.product_id,
            msc_inquiry_resp.product_rev);
     CONWriteString(szBuffer);
 
@@ -31,7 +31,7 @@ bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_dat
     drive_path[0] += dev_addr;
     FRESULT result = f_mount(&msc_fatfs_volumes[dev_addr], drive_path, 1);
     if (result != FR_OK) {
-        CONWriteString("MSC filesystem mount failed (%d)\r\n");
+        CONWriteString("MSC filesystem mount failed (%d)\n");
         return false;
     }
 
@@ -48,7 +48,7 @@ bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_dat
 
 void tuh_msc_mount_cb(uint8_t dev_addr) {
     uint8_t const lun = 0;
-    CONWriteString("MSC mounted, inquiring\r\n");
+    CONWriteString("MSC mounted, inquiring\n");
     tuh_msc_inquiry(dev_addr, lun, &msc_inquiry_resp, inquiry_complete_cb, 0);
 }
 

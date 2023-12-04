@@ -287,6 +287,12 @@ PICO_OBJDUMP:FILEPATH=/usr/bin/arm-none-eabi-objdump
 //PICO Build platform (e.g. rp2040, host)
 PICO_PLATFORM:STRING=rp2040
 
+//Set to ON to fetch copy of SDK from git if not otherwise locatable
+PICO_SDK_FETCH_FROM_GIT:BOOL=
+
+//location to download SDK
+PICO_SDK_FETCH_FROM_GIT_PATH:FILEPATH=
+
 //Path to the Raspberry Pi Pico SDK
 PICO_SDK_PATH:PATH=/aux/pico/pico-sdk
 
@@ -493,6 +499,7 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_EXECUTABLE
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
+FAMILY_MCUS:INTERNAL=RP2040
 //Details about finding Python3
 FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/usr/bin/python3.11][cfound components: Interpreter ][v3.11.6()]
 PICO_BOOT_STAGE2_DIR:INTERNAL=/aux/pico/pico-sdk/src/rp2_common/boot_stage2
