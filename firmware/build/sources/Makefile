@@ -334,269 +334,269 @@ __/libraries/fatfs/source/ffunicode.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/fatfs/source/ffunicode.c.s
 .PHONY : __/libraries/fatfs/source/ffunicode.c.s
 
-__/libraries/tinyusb/hw/bsp/rp2040/family.obj: __/libraries/tinyusb/hw/bsp/rp2040/family.c.obj
-.PHONY : __/libraries/tinyusb/hw/bsp/rp2040/family.obj
+aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.obj: aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.obj
 
 # target to build an object file
-__/libraries/tinyusb/hw/bsp/rp2040/family.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/hw/bsp/rp2040/family.c.obj
-.PHONY : __/libraries/tinyusb/hw/bsp/rp2040/family.c.obj
+aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
 
-__/libraries/tinyusb/hw/bsp/rp2040/family.i: __/libraries/tinyusb/hw/bsp/rp2040/family.c.i
-.PHONY : __/libraries/tinyusb/hw/bsp/rp2040/family.i
+aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.i: aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/hw/bsp/rp2040/family.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/hw/bsp/rp2040/family.c.i
-.PHONY : __/libraries/tinyusb/hw/bsp/rp2040/family.c.i
+aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
 
-__/libraries/tinyusb/hw/bsp/rp2040/family.s: __/libraries/tinyusb/hw/bsp/rp2040/family.c.s
-.PHONY : __/libraries/tinyusb/hw/bsp/rp2040/family.s
+aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.s: aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/hw/bsp/rp2040/family.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/hw/bsp/rp2040/family.c.s
-.PHONY : __/libraries/tinyusb/hw/bsp/rp2040/family.c.s
+aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
 
-__/libraries/tinyusb/src/class/cdc/cdc_host.obj: __/libraries/tinyusb/src/class/cdc/cdc_host.c.obj
-.PHONY : __/libraries/tinyusb/src/class/cdc/cdc_host.obj
+aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.obj: aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/class/cdc/cdc_host.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/cdc/cdc_host.c.obj
-.PHONY : __/libraries/tinyusb/src/class/cdc/cdc_host.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj
 
-__/libraries/tinyusb/src/class/cdc/cdc_host.i: __/libraries/tinyusb/src/class/cdc/cdc_host.c.i
-.PHONY : __/libraries/tinyusb/src/class/cdc/cdc_host.i
+aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.i: aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/class/cdc/cdc_host.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/cdc/cdc_host.c.i
-.PHONY : __/libraries/tinyusb/src/class/cdc/cdc_host.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.i
 
-__/libraries/tinyusb/src/class/cdc/cdc_host.s: __/libraries/tinyusb/src/class/cdc/cdc_host.c.s
-.PHONY : __/libraries/tinyusb/src/class/cdc/cdc_host.s
+aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.s: aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/class/cdc/cdc_host.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/cdc/cdc_host.c.s
-.PHONY : __/libraries/tinyusb/src/class/cdc/cdc_host.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.s
 
-__/libraries/tinyusb/src/class/hid/hid_host.obj: __/libraries/tinyusb/src/class/hid/hid_host.c.obj
-.PHONY : __/libraries/tinyusb/src/class/hid/hid_host.obj
+aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.obj: aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/class/hid/hid_host.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/hid/hid_host.c.obj
-.PHONY : __/libraries/tinyusb/src/class/hid/hid_host.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
 
-__/libraries/tinyusb/src/class/hid/hid_host.i: __/libraries/tinyusb/src/class/hid/hid_host.c.i
-.PHONY : __/libraries/tinyusb/src/class/hid/hid_host.i
+aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.i: aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/class/hid/hid_host.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/hid/hid_host.c.i
-.PHONY : __/libraries/tinyusb/src/class/hid/hid_host.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.i
 
-__/libraries/tinyusb/src/class/hid/hid_host.s: __/libraries/tinyusb/src/class/hid/hid_host.c.s
-.PHONY : __/libraries/tinyusb/src/class/hid/hid_host.s
+aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.s: aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/class/hid/hid_host.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/hid/hid_host.c.s
-.PHONY : __/libraries/tinyusb/src/class/hid/hid_host.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.s
 
-__/libraries/tinyusb/src/class/msc/msc_host.obj: __/libraries/tinyusb/src/class/msc/msc_host.c.obj
-.PHONY : __/libraries/tinyusb/src/class/msc/msc_host.obj
+aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.obj: aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/class/msc/msc_host.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/msc/msc_host.c.obj
-.PHONY : __/libraries/tinyusb/src/class/msc/msc_host.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj
 
-__/libraries/tinyusb/src/class/msc/msc_host.i: __/libraries/tinyusb/src/class/msc/msc_host.c.i
-.PHONY : __/libraries/tinyusb/src/class/msc/msc_host.i
+aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.i: aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/class/msc/msc_host.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/msc/msc_host.c.i
-.PHONY : __/libraries/tinyusb/src/class/msc/msc_host.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.i
 
-__/libraries/tinyusb/src/class/msc/msc_host.s: __/libraries/tinyusb/src/class/msc/msc_host.c.s
-.PHONY : __/libraries/tinyusb/src/class/msc/msc_host.s
+aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.s: aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/class/msc/msc_host.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/msc/msc_host.c.s
-.PHONY : __/libraries/tinyusb/src/class/msc/msc_host.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.s
 
-__/libraries/tinyusb/src/class/vendor/vendor_host.obj: __/libraries/tinyusb/src/class/vendor/vendor_host.c.obj
-.PHONY : __/libraries/tinyusb/src/class/vendor/vendor_host.obj
+aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.obj: aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/class/vendor/vendor_host.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/vendor/vendor_host.c.obj
-.PHONY : __/libraries/tinyusb/src/class/vendor/vendor_host.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj
 
-__/libraries/tinyusb/src/class/vendor/vendor_host.i: __/libraries/tinyusb/src/class/vendor/vendor_host.c.i
-.PHONY : __/libraries/tinyusb/src/class/vendor/vendor_host.i
+aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.i: aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/class/vendor/vendor_host.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/vendor/vendor_host.c.i
-.PHONY : __/libraries/tinyusb/src/class/vendor/vendor_host.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.i
 
-__/libraries/tinyusb/src/class/vendor/vendor_host.s: __/libraries/tinyusb/src/class/vendor/vendor_host.c.s
-.PHONY : __/libraries/tinyusb/src/class/vendor/vendor_host.s
+aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.s: aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/class/vendor/vendor_host.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/vendor/vendor_host.c.s
-.PHONY : __/libraries/tinyusb/src/class/vendor/vendor_host.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.s
 
-__/libraries/tinyusb/src/common/tusb_fifo.obj: __/libraries/tinyusb/src/common/tusb_fifo.c.obj
-.PHONY : __/libraries/tinyusb/src/common/tusb_fifo.obj
+aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj: aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/common/tusb_fifo.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/common/tusb_fifo.c.obj
-.PHONY : __/libraries/tinyusb/src/common/tusb_fifo.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 
-__/libraries/tinyusb/src/common/tusb_fifo.i: __/libraries/tinyusb/src/common/tusb_fifo.c.i
-.PHONY : __/libraries/tinyusb/src/common/tusb_fifo.i
+aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i: aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/common/tusb_fifo.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/common/tusb_fifo.c.i
-.PHONY : __/libraries/tinyusb/src/common/tusb_fifo.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
 
-__/libraries/tinyusb/src/common/tusb_fifo.s: __/libraries/tinyusb/src/common/tusb_fifo.c.s
-.PHONY : __/libraries/tinyusb/src/common/tusb_fifo.s
+aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s: aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/common/tusb_fifo.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/common/tusb_fifo.c.s
-.PHONY : __/libraries/tinyusb/src/common/tusb_fifo.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
 
-__/libraries/tinyusb/src/host/hub.obj: __/libraries/tinyusb/src/host/hub.c.obj
-.PHONY : __/libraries/tinyusb/src/host/hub.obj
+aux/pico/pico-sdk/lib/tinyusb/src/host/hub.obj: aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/hub.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/host/hub.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/hub.c.obj
-.PHONY : __/libraries/tinyusb/src/host/hub.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj
 
-__/libraries/tinyusb/src/host/hub.i: __/libraries/tinyusb/src/host/hub.c.i
-.PHONY : __/libraries/tinyusb/src/host/hub.i
+aux/pico/pico-sdk/lib/tinyusb/src/host/hub.i: aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/hub.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/host/hub.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/hub.c.i
-.PHONY : __/libraries/tinyusb/src/host/hub.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.i
 
-__/libraries/tinyusb/src/host/hub.s: __/libraries/tinyusb/src/host/hub.c.s
-.PHONY : __/libraries/tinyusb/src/host/hub.s
+aux/pico/pico-sdk/lib/tinyusb/src/host/hub.s: aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/hub.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/host/hub.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/hub.c.s
-.PHONY : __/libraries/tinyusb/src/host/hub.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.s
 
-__/libraries/tinyusb/src/host/usbh.obj: __/libraries/tinyusb/src/host/usbh.c.obj
-.PHONY : __/libraries/tinyusb/src/host/usbh.obj
+aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.obj: aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/host/usbh.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/usbh.c.obj
-.PHONY : __/libraries/tinyusb/src/host/usbh.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
 
-__/libraries/tinyusb/src/host/usbh.i: __/libraries/tinyusb/src/host/usbh.c.i
-.PHONY : __/libraries/tinyusb/src/host/usbh.i
+aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.i: aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/host/usbh.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/usbh.c.i
-.PHONY : __/libraries/tinyusb/src/host/usbh.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.i
 
-__/libraries/tinyusb/src/host/usbh.s: __/libraries/tinyusb/src/host/usbh.c.s
-.PHONY : __/libraries/tinyusb/src/host/usbh.s
+aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.s: aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/host/usbh.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/usbh.c.s
-.PHONY : __/libraries/tinyusb/src/host/usbh.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.s
 
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.obj: __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.obj
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.obj: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
 
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.i: __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.i
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.i: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.i
 
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.s: __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.s
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.s: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.s
 
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj: __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
 
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i: __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
 
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s: __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s: aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
-.PHONY : __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
 
-__/libraries/tinyusb/src/tusb.obj: __/libraries/tinyusb/src/tusb.c.obj
-.PHONY : __/libraries/tinyusb/src/tusb.obj
+aux/pico/pico-sdk/lib/tinyusb/src/tusb.obj: aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/tusb.obj
 
 # target to build an object file
-__/libraries/tinyusb/src/tusb.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/tusb.c.obj
-.PHONY : __/libraries/tinyusb/src/tusb.c.obj
+aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
 
-__/libraries/tinyusb/src/tusb.i: __/libraries/tinyusb/src/tusb.c.i
-.PHONY : __/libraries/tinyusb/src/tusb.i
+aux/pico/pico-sdk/lib/tinyusb/src/tusb.i: aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/tusb.i
 
 # target to preprocess a source file
-__/libraries/tinyusb/src/tusb.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/tusb.c.i
-.PHONY : __/libraries/tinyusb/src/tusb.c.i
+aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
 
-__/libraries/tinyusb/src/tusb.s: __/libraries/tinyusb/src/tusb.c.s
-.PHONY : __/libraries/tinyusb/src/tusb.s
+aux/pico/pico-sdk/lib/tinyusb/src/tusb.s: aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/tusb.s
 
 # target to generate assembly for a file
-__/libraries/tinyusb/src/tusb.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/tusb.c.s
-.PHONY : __/libraries/tinyusb/src/tusb.c.s
+aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s:
+	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
+.PHONY : aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
 
 aux/pico/pico-sdk/src/common/pico_sync/critical_section.obj: aux/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
 .PHONY : aux/pico/pico-sdk/src/common/pico_sync/critical_section.obj
@@ -893,30 +893,6 @@ aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.s: aux/pico/pico-sdk/src/rp2_c
 aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.s
-
-aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.obj: aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
-.PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.obj
-
-# target to build an object file
-aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
-.PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj
-
-aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.i: aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
-.PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.i
-
-# target to preprocess a source file
-aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
-.PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.i
-
-aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.s: aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
-.PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.s
-
-# target to generate assembly for a file
-aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
-.PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.s
 
 aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.obj: aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 .PHONY : aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.obj
@@ -1622,30 +1598,6 @@ aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s:
 	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 .PHONY : aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.s
 
-aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.obj: aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
-.PHONY : aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.obj
-
-# target to build an object file
-aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
-.PHONY : aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj
-
-aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i: aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
-.PHONY : aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i
-
-# target to preprocess a source file
-aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
-.PHONY : aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.i
-
-aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s: aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
-.PHONY : aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s
-
-# target to generate assembly for a file
-aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s:
-	cd /home/paulr/Projects/neo6502-firmware/firmware/build && $(MAKE) $(MAKESILENT) -f sources/CMakeFiles/firmware.dir/build.make sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
-.PHONY : aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
-
 hardware/dvi_320x240x256.obj: hardware/dvi_320x240x256.c.obj
 .PHONY : hardware/dvi_320x240x256.obj
 
@@ -1991,39 +1943,39 @@ help:
 	@echo "... __/libraries/fatfs/source/ffunicode.obj"
 	@echo "... __/libraries/fatfs/source/ffunicode.i"
 	@echo "... __/libraries/fatfs/source/ffunicode.s"
-	@echo "... __/libraries/tinyusb/hw/bsp/rp2040/family.obj"
-	@echo "... __/libraries/tinyusb/hw/bsp/rp2040/family.i"
-	@echo "... __/libraries/tinyusb/hw/bsp/rp2040/family.s"
-	@echo "... __/libraries/tinyusb/src/class/cdc/cdc_host.obj"
-	@echo "... __/libraries/tinyusb/src/class/cdc/cdc_host.i"
-	@echo "... __/libraries/tinyusb/src/class/cdc/cdc_host.s"
-	@echo "... __/libraries/tinyusb/src/class/hid/hid_host.obj"
-	@echo "... __/libraries/tinyusb/src/class/hid/hid_host.i"
-	@echo "... __/libraries/tinyusb/src/class/hid/hid_host.s"
-	@echo "... __/libraries/tinyusb/src/class/msc/msc_host.obj"
-	@echo "... __/libraries/tinyusb/src/class/msc/msc_host.i"
-	@echo "... __/libraries/tinyusb/src/class/msc/msc_host.s"
-	@echo "... __/libraries/tinyusb/src/class/vendor/vendor_host.obj"
-	@echo "... __/libraries/tinyusb/src/class/vendor/vendor_host.i"
-	@echo "... __/libraries/tinyusb/src/class/vendor/vendor_host.s"
-	@echo "... __/libraries/tinyusb/src/common/tusb_fifo.obj"
-	@echo "... __/libraries/tinyusb/src/common/tusb_fifo.i"
-	@echo "... __/libraries/tinyusb/src/common/tusb_fifo.s"
-	@echo "... __/libraries/tinyusb/src/host/hub.obj"
-	@echo "... __/libraries/tinyusb/src/host/hub.i"
-	@echo "... __/libraries/tinyusb/src/host/hub.s"
-	@echo "... __/libraries/tinyusb/src/host/usbh.obj"
-	@echo "... __/libraries/tinyusb/src/host/usbh.i"
-	@echo "... __/libraries/tinyusb/src/host/usbh.s"
-	@echo "... __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.obj"
-	@echo "... __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.i"
-	@echo "... __/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.s"
-	@echo "... __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj"
-	@echo "... __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i"
-	@echo "... __/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s"
-	@echo "... __/libraries/tinyusb/src/tusb.obj"
-	@echo "... __/libraries/tinyusb/src/tusb.i"
-	@echo "... __/libraries/tinyusb/src/tusb.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/host/hub.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/host/hub.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/host/hub.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/tusb.obj"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/tusb.i"
+	@echo "... aux/pico/pico-sdk/lib/tinyusb/src/tusb.s"
 	@echo "... aux/pico/pico-sdk/src/common/pico_sync/critical_section.obj"
 	@echo "... aux/pico/pico-sdk/src/common/pico_sync/critical_section.i"
 	@echo "... aux/pico/pico-sdk/src/common/pico_sync/critical_section.s"
@@ -2061,9 +2013,6 @@ help:
 	@echo "... aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.obj"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.i"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.s"
-	@echo "... aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.obj"
-	@echo "... aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.i"
-	@echo "... aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.s"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.obj"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.i"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.s"
@@ -2152,9 +2101,6 @@ help:
 	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.i"
 	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s"
-	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.obj"
-	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i"
-	@echo "... aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s"
 	@echo "... hardware/dvi_320x240x256.obj"
 	@echo "... hardware/dvi_320x240x256.i"
 	@echo "... hardware/dvi_320x240x256.s"

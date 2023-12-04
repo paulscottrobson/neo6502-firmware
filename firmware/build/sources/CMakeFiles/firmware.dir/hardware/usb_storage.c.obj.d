@@ -76,34 +76,34 @@ sources/CMakeFiles/firmware.dir/hardware/usb_storage.c.obj: \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/dispatch.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/interface/maths.h \
  /usr/arm-none-eabi/include/inttypes.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
  /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
  /aux/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
  /aux/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.h \
- /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
+ /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
  /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/ff.h \
  /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/ffconf.h \
  /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/diskio.h

@@ -294,7 +294,27 @@ sources/CMakeFiles/firmware.dir/__/libraries/fatfs/source/ffunicode.c.obj: /home
   /usr/arm-none-eabi/include/sys/features.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/hw/bsp/rp2040/family.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/hw/bsp/rp2040/family.c \
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj: /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c \
+  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
+  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
+  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/board.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -339,29 +359,9 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/hw/bsp/rp2040/family.c.obj:
   /aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
   /aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
   /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h \
-  /aux/pico/pico-sdk/src/rp2_common/pico_unique_id/include/pico/unique_id.h \
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/hw/bsp/board_api.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/hw/bsp/rp2040/board.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
@@ -389,13 +389,29 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/hw/bsp/rp2040/family.c.obj:
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/cdc/cdc_host.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/cdc/cdc_host.c \
-  /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/hid/hid_host.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.c \
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh_classdriver.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -420,22 +436,6 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/hid/hid_host.c.ob
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_private.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh_pvt.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
@@ -463,7 +463,23 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/hid/hid_host.c.ob
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/msc/msc_host.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.c \
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh_classdriver.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -488,22 +504,6 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/msc/msc_host.c.ob
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_private.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh_pvt.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
@@ -531,13 +531,24 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/msc/msc_host.c.ob
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/class/vendor/vendor_host.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/vendor/vendor_host.c \
-  /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/common/tusb_fifo.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.c \
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -562,17 +573,6 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/common/tusb_fifo.c.obj:
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
@@ -600,7 +600,23 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/common/tusb_fifo.c.obj:
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/hub.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/hub.c \
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/hcd.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh_classdriver.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -625,22 +641,6 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/hub.c.obj: /home/p
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_private.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/hcd.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/hub.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh_pvt.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
@@ -668,7 +668,28 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/hub.c.obj: /home/p
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/usbh.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.c \
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/hcd.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/hub.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh_classdriver.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -693,27 +714,6 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/usbh.c.obj: /home/
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_private.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/hcd.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/hub.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh_pvt.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
@@ -741,7 +741,21 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/host/usbh.c.obj: /home/
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c \
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/hcd.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -774,20 +788,6 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/hcd.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
@@ -815,7 +815,16 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c \
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -842,15 +851,6 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/alloca.h \
@@ -881,7 +881,26 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/portable/raspberrypi/rp
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/tusb.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb.c \
+sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj: /aux/pico/pico-sdk/lib/tinyusb/src/tusb.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh_classdriver.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -906,25 +925,6 @@ sources/CMakeFiles/firmware.dir/__/libraries/tinyusb/src/tusb.c.obj: /home/paulr
   generated/pico_base/pico/config_autogen.h \
   generated/pico_base/pico/version.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_private.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh_pvt.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/assert.h \
@@ -1451,43 +1451,6 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_dma/dm
   /usr/arm-none-eabi/include/sys/reent.h \
   /usr/arm-none-eabi/include/sys/stdio.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdarg.h \
-  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h \
-  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
-  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
-
-sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj: /aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c \
-  /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_qspi.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/ssi.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/ioqspi.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/ssi.h \
-  /aux/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
-  /aux/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
-  /aux/pico/pico-sdk/src/rp2_common/hardware_flash/include/hardware/flash.h \
-  /aux/pico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom.h \
-  /aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
-  generated/pico_base/pico/config_autogen.h \
-  generated/pico_base/pico/version.h \
-  /usr/arm-none-eabi/include/_ansi.h \
-  /usr/arm-none-eabi/include/_newlib_version.h \
-  /usr/arm-none-eabi/include/assert.h \
-  /usr/arm-none-eabi/include/machine/_default_types.h \
-  /usr/arm-none-eabi/include/machine/ieeefp.h \
-  /usr/arm-none-eabi/include/newlib.h \
-  /usr/arm-none-eabi/include/stdint.h \
-  /usr/arm-none-eabi/include/sys/_intsup.h \
-  /usr/arm-none-eabi/include/sys/_stdint.h \
-  /usr/arm-none-eabi/include/sys/cdefs.h \
-  /usr/arm-none-eabi/include/sys/config.h \
-  /usr/arm-none-eabi/include/sys/features.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
@@ -2623,38 +2586,6 @@ sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/std
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
-sources/CMakeFiles/firmware.dir/aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj: /aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c \
-  /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
-  /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
-  /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
-  /aux/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
-  /aux/pico/pico-sdk/src/rp2_common/hardware_flash/include/hardware/flash.h \
-  /aux/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
-  /aux/pico/pico-sdk/src/rp2_common/pico_unique_id/include/pico/unique_id.h \
-  generated/pico_base/pico/config_autogen.h \
-  generated/pico_base/pico/version.h \
-  /usr/arm-none-eabi/include/_ansi.h \
-  /usr/arm-none-eabi/include/_newlib_version.h \
-  /usr/arm-none-eabi/include/assert.h \
-  /usr/arm-none-eabi/include/machine/_default_types.h \
-  /usr/arm-none-eabi/include/machine/ieeefp.h \
-  /usr/arm-none-eabi/include/newlib.h \
-  /usr/arm-none-eabi/include/stdint.h \
-  /usr/arm-none-eabi/include/sys/_intsup.h \
-  /usr/arm-none-eabi/include/sys/_stdint.h \
-  /usr/arm-none-eabi/include/sys/cdefs.h \
-  /usr/arm-none-eabi/include/sys/config.h \
-  /usr/arm-none-eabi/include/sys/features.h \
-  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h \
-  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
-  /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
-
 sources/CMakeFiles/firmware.dir/hardware/dvi_320x240x256.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_320x240x256.c \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
@@ -2928,6 +2859,23 @@ sources/CMakeFiles/firmware.dir/hardware/timer.c.obj: /home/paulr/Projects/neo65
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
 sources/CMakeFiles/firmware.dir/hardware/usb_storage.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usb_storage.c \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -2981,23 +2929,6 @@ sources/CMakeFiles/firmware.dir/hardware/usb_storage.c.obj: /home/paulr/Projects
   /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/diskio.h \
   /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/ff.h \
   /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/ffconf.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/alloca.h \
@@ -3031,6 +2962,25 @@ sources/CMakeFiles/firmware.dir/hardware/usb_storage.c.obj: /home/paulr/Projects
   /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h
 
 sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/usbdriver.c \
+  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
+  /aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
   /aux/pico/pico-sdk/src/boards/include/boards/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico.h \
   /aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
@@ -3082,23 +3032,6 @@ sources/CMakeFiles/firmware.dir/hardware/usbdriver.c.obj: /home/paulr/Projects/n
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h \
   /home/paulr/Projects/neo6502-firmware/firmware/include/tusb_config.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb.h \
-  /home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h \
   /usr/arm-none-eabi/include/_ansi.h \
   /usr/arm-none-eabi/include/_newlib_version.h \
   /usr/arm-none-eabi/include/alloca.h \
@@ -3782,49 +3715,17 @@ sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj: /home/paulr/Proj
 
 /home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/timer.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/sound.c:
-
 /home/paulr/Projects/neo6502-firmware/firmware/include/interface/timer.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/include/interface/sound.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/include/interface/memory.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/include/interface/dispatch.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_320x240x256.c:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb_option.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_unique_id/include/pico/unique_id.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_types.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c:
-
-/aux/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_compiler.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.h:
-
 /home/paulr/Projects/neo6502-firmware/firmware/include/interface/keyboard.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/hw/bsp/board_api.h:
 
 /aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/include/pico/stdio_uart.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h:
+/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/dvi_320x240x256.c:
 
 /aux/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c:
 
@@ -3838,33 +3739,27 @@ sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj: /home/paulr/Proj
 
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/ffconf.h:
 
-/aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.h:
-
 /aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/code.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c:
+/usr/arm-none-eabi/include/machine/_default_types.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/osal/osal.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c:
+/aux/pico/pico-sdk/src/common/pico_sync/sem.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/hw/bsp/rp2040/family.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h:
 
-/aux/pico/pico-sdk/src/boards/include/boards/pico.h:
+/home/paulr/Projects/neo6502-firmware/firmware/include/interface/graphics.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_flash/include/hardware/flash.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_claim/include/hardware/claim.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_float/include/pico/float.h:
+/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/ffunicode.c:
 
@@ -3872,7 +3767,7 @@ sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj: /home/paulr/Proj
 
 /usr/arm-none-eabi/include/sys/_types.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_common.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/tusb.c:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/uart.h:
 
@@ -3884,15 +3779,13 @@ sources/CMakeFiles/firmware.dir/system/processor_bitbang.c.obj: /home/paulr/Proj
 
 /usr/arm-none-eabi/include/sys/_locale.h:
 
-/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c:
+/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/ff.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal.h:
-
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.c:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h:
 
 libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
 
@@ -3900,9 +3793,23 @@ libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/iobank0.h:
 
+/aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c:
+
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.c:
 
 /aux/pico/pico-sdk/src/rp2_common/hardware_interp/include/hardware/interp.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/include/interface/dispatch.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c:
+
+/aux/pico/pico-sdk/src/common/pico_sync/include/pico/sync.h:
 
 /usr/arm-none-eabi/include/sys/features.h:
 
@@ -3911,6 +3818,8 @@ libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/intctrl.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/ffsystem.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_host.c:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/psm.h:
 
@@ -3926,13 +3835,7 @@ libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
 
 /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pll.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/hw/bsp/rp2040/board.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h:
+/usr/arm-none-eabi/include/c++/13.2.0/bits/std_abs.h:
 
 /aux/pico/pico-sdk/src/common/pico_time/include/pico/time.h:
 
@@ -3940,21 +3843,27 @@ libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
 
 /aux/pico/pico-sdk/src/rp2_common/hardware_gpio/include/hardware/gpio.h:
 
+/aux/pico/pico-sdk/lib/tinyusb/src/tusb_option.h:
+
 /aux/pico/pico-sdk/src/rp2_common/boot_stage2/include/boot_stage2/config.h:
 
 /aux/pico/pico-sdk/src/common/pico_base/include/pico/types.h:
 
 /usr/arm-none-eabi/include/alloca.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc_host.c:
-
 /home/paulr/Projects/neo6502-firmware/firmware/include/system/common_dvi_pin_configs.h:
 
 /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdbool.h:
 
+/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/board.h:
+
 /aux/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c:
 
+/aux/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h:
+
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pio.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h:
 
 /aux/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c:
 
@@ -3964,6 +3873,12 @@ libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
 
 /usr/arm-none-eabi/include/c++/13.2.0/cassert:
 
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/util_queue_u32_inline.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/tusb.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h:
+
 /usr/arm-none-eabi/include/sys/config.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/io_bank0.h:
@@ -3971,6 +3886,10 @@ libraries/PicoDVI/software/libdvi/dvi_serialiser.pio.h:
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/fatfs/source/ff.h:
 
 /aux/pico/pico-sdk/src/common/pico_util/include/pico/util/pheap.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/include/interface/console.h:
+
+/aux/pico/pico-sdk/src/boards/include/boards/pico.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pwm.h:
 
@@ -3982,25 +3901,27 @@ generated/pico_base/pico/config_autogen.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_serialiser.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h:
 
-/usr/arm-none-eabi/include/sys/unistd.h:
+/usr/arm-none-eabi/include/machine/_types.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio.h:
-
-/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/structure.h:
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/psm.h:
 
 /usr/arm-none-eabi/include/stdlib.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h:
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/dma.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio.h:
+
+/aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/structure.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/sio.h:
 
@@ -4032,13 +3953,15 @@ generated/pico_base/pico/config_autogen.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/include/hardware/xosc.h:
-
-/aux/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h:
-
 /aux/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info.h:
 
 /aux/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/padsbank0.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/class/msc/msc.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h:
 
 /usr/arm-none-eabi/include/string.h:
 
@@ -4048,7 +3971,9 @@ generated/pico_base/pico/config_autogen.h:
 
 /aux/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h:
 
-/usr/arm-none-eabi/include/machine/_types.h:
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi.h:
+
+/aux/pico/pico-sdk/src/common/pico_base/include/pico/assert.h:
 
 /usr/arm-none-eabi/include/strings.h:
 
@@ -4062,25 +3987,17 @@ generated/pico_base/pico/config_autogen.h:
 
 /aux/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_table.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h:
+/aux/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h:
 
 generated/pico_base/pico/version.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_debug.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c:
 
 /aux/pico/pico-sdk/src/common/pico_stdlib/include/pico/stdlib.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/dvi_config_defs.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/msc/msc.h:
+/usr/arm-none-eabi/include/math.h:
 
 /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h:
-
-/usr/arm-none-eabi/include/math.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/watchdog.h:
 
@@ -4094,13 +4011,17 @@ generated/pico_base/pico/version.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pll.h:
 
-/usr/arm-none-eabi/include/machine/_default_types.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c:
-
 /usr/arm-none-eabi/include/machine/ieeefp.h:
 
 /aux/pico/pico-sdk/src/common/pico_sync/mutex.c:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_float/float_math.c:
+
+/usr/arm-none-eabi/include/sys/unistd.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_double/double_math.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh.c:
 
 /usr/arm-none-eabi/include/sys/_intsup.h:
 
@@ -4108,11 +4029,17 @@ generated/pico_base/pico/version.h:
 
 /usr/lib/gcc/arm-none-eabi/13.2.0/include/syslimits.h:
 
+/usr/arm-none-eabi/include/sys/lock.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/host/hcd.h:
+
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_encode.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_mcu.h:
 
 /home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_table_fullres.h:
 
@@ -4138,33 +4065,29 @@ generated/pico_base/pico/version.h:
 
 /usr/arm-none-eabi/include/sys/stdio.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_host.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_private.h:
+/aux/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio_instructions.h:
 
-/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c:
+/home/paulr/Projects/neo6502-firmware/firmware/libraries/PicoDVI/software/libdvi/tmds_table.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh_pvt.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/vendor/vendor_host.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_private.h:
 
-/usr/arm-none-eabi/include/c++/13.2.0/pstl/pstl_config.h:
+/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/sound.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/hub.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/host/usbh_classdriver.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_fifo.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_host.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/hcd.h:
+/aux/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_multicore/include/pico/multicore.h:
+/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/hub.h:
+/aux/pico/pico-sdk/src/rp2_common/hardware_uart/include/hardware/uart.h:
 
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/ssi.h:
-
-/usr/arm-none-eabi/include/sys/lock.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/host/usbh.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/resets.h:
 
@@ -4174,11 +4097,11 @@ generated/pico_base/pico/version.h:
 
 /aux/pico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h:
 
-/aux/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c:
+/aux/pico/pico-sdk/src/common/pico_time/timeout_helper.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/tusb.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c:
 
-/usr/lib/gcc/arm-none-eabi/13.2.0/include/float.h:
+/usr/arm-none-eabi/include/sys/_pthreadtypes.h:
 
 /aux/pico/pico-sdk/src/common/pico_sync/critical_section.c:
 
@@ -4192,11 +4115,13 @@ generated/pico_base/pico/version.h:
 
 /usr/arm-none-eabi/include/limits.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_timeout.h:
-
-/aux/pico/pico-sdk/src/common/pico_sync/sem.c:
-
 /usr/arm-none-eabi/include/inttypes.h:
+
+/usr/arm-none-eabi/include/c++/13.2.0/cstdlib:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/clocks.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h:
 
 /usr/arm-none-eabi/include/machine/_endian.h:
 
@@ -4218,6 +4143,18 @@ generated/pico_base/pico/version.h:
 
 /aux/pico/pico-sdk/src/common/pico_util/queue.c:
 
+/aux/pico/pico-sdk/src/rp2_common/hardware_claim/include/hardware/claim.h:
+
+/aux/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_xosc/include/hardware/xosc.h:
+
+/aux/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c:
+
+/aux/pico/pico-sdk/src/rp2_common/pico_float/include/pico/float.h:
+
+/aux/pico/pico-sdk/lib/tinyusb/src/host/hub.h:
+
 /aux/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c:
 
 /aux/pico/pico-sdk/src/common/pico_base/include/pico/error.h:
@@ -4228,13 +4165,11 @@ generated/pico_base/pico/version.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/xosc.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/cdc/cdc_host.c:
+/aux/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h:
+
+/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pll.h:
 
 /aux/pico/pico-sdk/src/rp2_common/hardware_clocks/include/hardware/clocks.h:
-
-/aux/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/ssi.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/pio.h:
 
@@ -4250,11 +4185,11 @@ generated/pico_base/pico/version.h:
 
 /aux/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c:
 
+/aux/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c:
+
 /home/paulr/Projects/neo6502-firmware/firmware/sources/interface/dispatch.c:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/vreg_and_chip_reset.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/osal/osal_pico.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/vreg_and_chip_reset.h:
 
@@ -4268,11 +4203,7 @@ generated/pico_base/pico/version.h:
 
 /aux/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c:
 
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/class/hid/hid_host.h:
-
 /aux/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/common/tusb_verify.h:
 
 /aux/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c:
 
@@ -4280,13 +4211,15 @@ generated/pico_base/pico/version.h:
 
 /aux/pico/pico-sdk/src/rp2_common/pico_double/include/pico/double.h:
 
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/float.h:
+
 /aux/pico/pico-sdk/src/rp2_common/pico_platform/platform.c:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sysinfo.h:
 
-/home/paulr/Projects/neo6502-firmware/firmware/include/common.h:
-
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/pwm.h:
+
+/home/paulr/Projects/neo6502-firmware/firmware/include/common.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/tbman.h:
 
@@ -4302,15 +4235,11 @@ generated/pico_base/pico/version.h:
 
 /usr/arm-none-eabi/include/machine/time.h:
 
-/usr/arm-none-eabi/include/sys/_pthreadtypes.h:
-
 /usr/arm-none-eabi/include/sys/_timespec.h:
 
 /usr/arm-none-eabi/include/sys/_timeval.h:
 
 /usr/arm-none-eabi/include/sys/time.h:
-
-/home/paulr/Projects/neo6502-firmware/firmware/libraries/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h:
 
 /usr/arm-none-eabi/include/sys/types.h:
 
@@ -4324,16 +4253,10 @@ generated/pico_base/pico/version.h:
 
 /usr/arm-none-eabi/include/c++/13.2.0/arm-none-eabi/thumb/v6-m/nofp/bits/os_defines.h:
 
-/usr/arm-none-eabi/include/c++/13.2.0/bits/std_abs.h:
-
-/aux/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/clocks.h:
-
-/usr/arm-none-eabi/include/c++/13.2.0/cstdlib:
+/usr/arm-none-eabi/include/c++/13.2.0/pstl/pstl_config.h:
 
 /aux/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/clocks.h:
 
 /aux/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio/driver.h:
 
 /usr/arm-none-eabi/include/sys/stat.h:
-
-/aux/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c:
