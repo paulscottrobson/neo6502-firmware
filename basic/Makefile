@@ -11,9 +11,9 @@
 # ***************************************************************************************
 
 ifeq ($(OS),Windows_NT)
-include ..\documents\common.make
+include ..\build_env\common.make
 else
-include ../documents/common.make
+include ../build_env/common.make
 endif
 
 BASPROG = test.bas 
