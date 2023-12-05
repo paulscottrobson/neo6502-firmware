@@ -1,41 +1,41 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		dereference.asm
-;		Purpose:	Dereference ... references
-;		Created:	29th November 2023
-;		Reviewed:	No
+;		Name:		setup.asm
+;		Purpose:	Reset the BASIC stack
+;		Created:	5th December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-		.section 	code
+		.section code
 
 ; ************************************************************************************************
 ;
-;								Dereference a term
+;			Reset the BASIC stack. Return in A the MSB of the bottom of stack space
 ;
 ; ************************************************************************************************
 
-DereferenceTOS:	
-		lda 	XSControl,x 				; check if reference ?
-		and 	#XS_ISREFERENCE
-		beq 	_DRTExit 					; no, exit
-		;
-		lda 	XSNumber0,x 				; copy address to zTemp0
-		sta 	zTemp0
-		lda 	XSNumber1,x
-		sta 	zTemp0+1
-		;
-		lda 	XSControl,x 				; clear reference bits.
-		and 	#$FF-XS_ISREFERENCE-XS_ISBYTEREFERENCE
-		sta 	XSControl,x
+StackReset:
+		pha 								; save top of memory
+		dec 	a  							; end of stack = previous byte
+		sta 	basicStack+1
+		lda 	#$FF
+		sta 	basicStack
+		
+		lda 	#$F0 						; impossible frame marker - cannot have one with 0 bytes.
+		sta 	(basicStack) 				; puts a dummy marker at TOS which will never match things like NEXT/RETURN
+											; any attempt to pop it will cause an error
 
-_DRTExit:		
+		pla 								; allocate pages for stack.
+		sec
+		sbc 	#STACKPAGES											
+		sta 	basicStackEnd 				; when stack MSB hits this, it's out of memory.
 		rts
 
-		.send 		code
+		.send code
 
 ; ************************************************************************************************
 ;
@@ -47,4 +47,3 @@ _DRTExit:
 ;		==== 			=====
 ;
 ; ************************************************************************************************
-

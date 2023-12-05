@@ -70,7 +70,7 @@ RUNNewLine:
 		; ----------------------------------------------------------------------------------------
 
 RUNNewCommand:		
-;		stz 	stringInitialised 			; reset string system flag.
+		stz 	stringInitialised 			; reset string system flag.
 ;		jsr 	OSCheckBreak 				; check escape.
 
 _RNCNoCheck:		

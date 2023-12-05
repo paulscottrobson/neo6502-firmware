@@ -40,12 +40,12 @@ ClearCode:
 		;
 		;		Reset stack
 		;
-;		lda 	PGMEndMemoryHigh
-;		jsr 	StackReset 					; page passed on in A
+		lda 	#HIGHMEMORY >> 8 			; reset the stack.
+		jsr 	StackReset 			
 		;
 		;		Initialise string usage.
 		;
-;		jsr 	StringSystemInitialise 		
+		jsr 	StringSystemInitialise 		
 		;
 		;		Scan for procedures
 		;

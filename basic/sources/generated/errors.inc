@@ -36,3 +36,18 @@ error_stop .macro
 	jmp	ErrorHandler
 	.endm
 
+error_structure .macro
+	lda	#8
+	jmp	ErrorHandler
+	.endm
+
+error_stack .macro
+	lda	#9
+	jmp	ErrorHandler
+	.endm
+
+error_string .macro
+	lda	#10
+	jmp	ErrorHandler
+	.endm
+

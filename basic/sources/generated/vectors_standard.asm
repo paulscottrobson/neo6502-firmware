@@ -73,8 +73,8 @@ StandardVectorTable:
 	.word	Unimplemented            ; $c3 !!dec
 	.word	Unimplemented            ; $c4 to
 	.word	Unimplemented            ; $c5 let
-	.word	Unimplemented            ; $c6 print
-	.word	Unimplemented            ; $c7 input
+	.word	Command_Print            ; $c6 print
+	.word	Command_Input            ; $c7 input
 	.word	Unimplemented            ; $c8 call
 	.word	Command_Sys              ; $c9 sys
 	.word	Unimplemented            ; $ca exit

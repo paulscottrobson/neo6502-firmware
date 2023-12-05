@@ -1,41 +1,49 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		dereference.asm
-;		Purpose:	Dereference ... references
-;		Created:	29th November 2023
+;		Name:		bytes.asm
+;		Purpose:	Push/Pull single bytes on the stack
+;		Created:	5th December 2023
 ;		Reviewed:	No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-		.section 	code
+		.section code
 
 ; ************************************************************************************************
 ;
-;								Dereference a term
+;								Push A on the BASIC stack
 ;
 ; ************************************************************************************************
 
-DereferenceTOS:	
-		lda 	XSControl,x 				; check if reference ?
-		and 	#XS_ISREFERENCE
-		beq 	_DRTExit 					; no, exit
-		;
-		lda 	XSNumber0,x 				; copy address to zTemp0
-		sta 	zTemp0
-		lda 	XSNumber1,x
-		sta 	zTemp0+1
-		;
-		lda 	XSControl,x 				; clear reference bits.
-		and 	#$FF-XS_ISREFERENCE-XS_ISBYTEREFERENCE
-		sta 	XSControl,x
+StackPushByte:
+		pha 								; save byte on stack
+		lda 	basicStack 					; decrement basic stack pointer
+		bne 	_SPBNoBorrow
+		dec 	basicStack+1 				; borrow
+_SPBNoBorrow:
+		dec 	basicStack
+		pla 								; get back and write
+		sta 	(basicStack)
+		rts				
+		
+; ************************************************************************************************
+;
+;								Pop A off the BASIC stack
+;
+; ************************************************************************************************				
 
-_DRTExit:		
+StackPopByte:
+		lda 	(basicStack) 				; bump the stack pointer.
+		inc 	basicStack
+		bne 	_SPBNoCarry
+		inc 	basicStack+1
+_SPBNoCarry:
 		rts
-
-		.send 		code
+					
+		.send code
 
 ; ************************************************************************************************
 ;
@@ -47,4 +55,3 @@ _DRTExit:
 ;		==== 			=====
 ;
 ; ************************************************************************************************
-

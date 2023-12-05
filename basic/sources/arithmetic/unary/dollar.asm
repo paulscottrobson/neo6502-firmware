@@ -19,8 +19,7 @@
 		.section code	
 
 EXPUnaryNull: ;; [$]
-		jsr 	EXPEvaluateExpression 		; get a value
-		jsr 	DereferenceTerm 			; dereference it
+		jsr 	EXPEvalInteger 				; get a value
 		rts
 
 		.send code

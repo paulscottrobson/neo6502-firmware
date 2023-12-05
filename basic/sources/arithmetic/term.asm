@@ -61,7 +61,7 @@ _ETIdentifierOrSpecial:
 	 	bne 	_ETCheckReference 		
 	 	;
 	 	jsr 	EvaluateTerm 				; it's minus *something*.
-	 	jsr 	DereferenceTerm 			; dereference it.
+	 	jsr 	DereferenceTOS 				; dereference it.
 	 	lda 	XSControl,x 				; numeric term ?
 	 	bmi 	_ETBadType
 	 	lda 	#16 						; negation function - needs optimising for ints 
@@ -80,7 +80,7 @@ _ETSyntax:
 _ETHaveReference:							; A = 0 (!) #0 (?)		
 		pha 								; save type.
 	 	jsr 	EvaluateTerm 				; get reference address
-	 	jsr 	DereferenceTerm 			
+	 	jsr 	DereferenceTOS 			
 	 	lda 	XSControl,x 				; must be integer
 	 	and 	#XS_TYPEMASK
 	 	bne 	_ETBadType

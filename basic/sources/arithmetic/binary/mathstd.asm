@@ -21,9 +21,9 @@
 ; ************************************************************************************************
 
 DereferenceCheckTypes:
-		jsr 	DereferenceTerm 			; dereference first
+		jsr 	DereferenceTOS 				; dereference first
 		inx
-		jsr 	DereferenceTerm 			; dereference second
+		jsr 	DereferenceTOS 				; dereference second
 		dex
 		;
 		lda 	XSControl,x 				; eor top bits, so non zero if different.

@@ -1,41 +1,32 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		dereference.asm
-;		Purpose:	Dereference ... references
-;		Created:	29th November 2023
-;		Reviewed:	No
+;		Name:		stack.inc
+;		Purpose:	Stack Constants
+;		Created:	5th December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-		.section 	code
-
 ; ************************************************************************************************
 ;
-;								Dereference a term
+;								Marker IDs for stacked values
+;
+;
+;					Bits 7..4 ID Bits 0..3 allocate 2 x for stack space
+;
+;	$Fx is reserved.
 ;
 ; ************************************************************************************************
 
-DereferenceTOS:	
-		lda 	XSControl,x 				; check if reference ?
-		and 	#XS_ISREFERENCE
-		beq 	_DRTExit 					; no, exit
-		;
-		lda 	XSNumber0,x 				; copy address to zTemp0
-		sta 	zTemp0
-		lda 	XSNumber1,x
-		sta 	zTemp0+1
-		;
-		lda 	XSControl,x 				; clear reference bits.
-		and 	#$FF-XS_ISREFERENCE-XS_ISBYTEREFERENCE
-		sta 	XSControl,x
-
-_DRTExit:		
-		rts
-
-		.send 		code
+STK_REPEAT = $02 			
+STK_WHILE = $12
+STK_DO = $22
+STK_FOR = $39
+STK_CALL = $42
+STK_GOSUB = $52
 
 ; ************************************************************************************************
 ;
@@ -47,4 +38,3 @@ _DRTExit:
 ;		==== 			=====
 ;
 ; ************************************************************************************************
-
