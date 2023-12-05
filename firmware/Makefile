@@ -11,9 +11,10 @@
 # ***************************************************************************************
 
 ifeq ($(OS),Windows_NT)
-include ..\documents\common.make
+#is this really needed?  WSL2 is the 2023.
+include ..\build_env\common.make
 else
-include ../documents/common.make
+include ../build_env/common.make
 endif
 
 BINARY = firmware
@@ -21,7 +22,7 @@ BINARY = firmware
 all: build
 
 always:
-	python scripts$(S)makedispatch.py dispatch.config >include$(S)data$(S)dispatch_code.h
+	$(PYTHON) scripts$(S)makedispatch.py dispatch.config >include$(S)data$(S)dispatch_code.h
 
 kernel: always
 	make -C ..$(S)kernel
@@ -34,7 +35,7 @@ kernel: always
 rebuild: clean build
 
 build: kernel always
-	python scripts$(S)prompt.py >include$(S)data$(S)prompt.h
+	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
 	make -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .

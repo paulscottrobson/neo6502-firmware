@@ -10,9 +10,9 @@
 # *******************************************************************************************
 
 ifeq ($(OS),Windows_NT)
-include ..\documents\common.make
+include ..\build_env\common.make
 else
-include ../documents/common.make
+include ../build_env/common.make
 endif
 
 APPNAME = neo$(APPSTEM)
@@ -72,7 +72,7 @@ $(APPNAME): $(SOURCES)
 
 prebuild:
 	make -C processor
-	python scripts$(S)mapper.py >include$(S)hid2sdl.h
+	$(PYTHON) scripts$(S)mapper.py >include$(S)hid2sdl.h
 	$(CCOPY) $(BINDIR)*_binary.h include
 
 fwbuild:
