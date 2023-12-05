@@ -20,6 +20,7 @@
 	.include "sources/arithmetic/unary/len.asm"
 	.include "sources/arithmetic/unary/simple.asm"
 	.include "sources/arithmetic/unary/string.asm"
+	.include "sources/arithmetic/unary/substring.asm"
 	.include "sources/arithmetic/unary/val.asm"
 	.include "sources/commands/assert.asm"
 	.include "sources/commands/clear.asm"

@@ -1,298 +1,211 @@
-assert abs((541.99+-37.76)-504.23) <= 0.001
-assert abs((541.99--37.76)-579.75) <= 0.001
-assert abs((541.99*-37.76)--20465.5424) <= 204.655
-assert abs((541.99/-37.76)--14.3535) <= 0.287
-assert abs((541.99<-37.76)-0) <= 0.001
-assert abs((541.99<=-37.76)-0) <= 0.001
-assert abs((541.99=-37.76)-0) <= 0.001
-assert abs((541.99>-37.76)--1) <= 0.001
-assert abs((541.99>=-37.76)--1) <= 0.001
-assert abs((541.99<>-37.76)--1) <= 0.001
-assert abs((617 & 974)-584) <= 0.001
-assert abs((617 | 974)-1007) <= 0.002
-assert abs((617 ^ 974)-423) <= 0.001
-assert abs((617 >> 13)-0) <= 0.001
-assert abs((-662+376)--286) <= 0.001
-assert abs((-662-376)--1038) <= 0.002
-assert abs((-662*376)--248912) <= 2489.12
-assert abs((-662/376)--1.7606) <= 0.035
-assert abs((376<376)-0) <= 0.001
-assert abs((376<=376)--1) <= 0.001
-assert abs((376=376)--1) <= 0.001
-assert abs((376>376)-0) <= 0.001
-assert abs((376>=376)--1) <= 0.001
-assert abs((376<>376)-0) <= 0.001
-assert abs((343 & 704)-64) <= 0.001
-assert abs((343 | 704)-983) <= 0.002
-assert abs((343 ^ 704)-919) <= 0.002
-assert abs((343 >> 6)-5) <= 0.001
-assert abs((343 << 6)-21952) <= 0.044
-assert abs((718.56+-696.55)-22.01) <= 0.001
-assert abs((718.56--696.55)-1415.11) <= 0.003
-assert abs((718.56*-696.55)--500512.968) <= 5005.13
-assert abs((718.56/-696.55)--1.0316) <= 0.021
-assert abs((718.56<-696.55)-0) <= 0.001
-assert abs((718.56<=-696.55)-0) <= 0.001
-assert abs((718.56=-696.55)-0) <= 0.001
-assert abs((718.56>-696.55)--1) <= 0.001
-assert abs((718.56>=-696.55)--1) <= 0.001
-assert abs((718.56<>-696.55)--1) <= 0.001
-assert abs((796 & 975)-780) <= 0.002
-assert abs((796 | 975)-991) <= 0.002
-assert abs((796 ^ 975)-211) <= 0.001
-assert abs((796 >> 3)-99) <= 0.001
-assert abs((796 << 3)-6368) <= 0.013
-assert abs((-760+-3.4)--763.4) <= 0.002
-assert abs((-760--3.4)--756.6) <= 0.002
-assert abs((-760*-3.4)-2584.0) <= 25.84
-assert abs((-760/-3.4)-223.5294) <= 4.471
-assert abs((-760<-3.4)--1) <= 0.001
-assert abs((-760<=-3.4)--1) <= 0.001
-assert abs((-760=-3.4)-0) <= 0.001
-assert abs((-760>-3.4)-0) <= 0.001
-assert abs((-760>=-3.4)-0) <= 0.001
-assert abs((-760<>-3.4)--1) <= 0.001
-assert abs((487 & 868)-356) <= 0.001
-assert abs((487 | 868)-999) <= 0.002
-assert abs((487 ^ 868)-643) <= 0.001
-assert abs((487 >> 7)-3) <= 0.001
-assert abs((487 << 7)-62336) <= 0.125
-assert abs((-656+428.42)--227.58) <= 0.001
-assert abs((-656-428.42)--1084.42) <= 0.002
-assert abs((-656*428.42)--281043.52) <= 2810.435
-assert abs((-656/428.42)--1.5312) <= 0.031
-assert abs((-656<428.42)--1) <= 0.001
-assert abs((-656<=428.42)--1) <= 0.001
-assert abs((-656=428.42)-0) <= 0.001
-assert abs((-656>428.42)-0) <= 0.001
-assert abs((-656>=428.42)-0) <= 0.001
-assert abs((-656<>428.42)--1) <= 0.001
-assert abs((745 & 781)-521) <= 0.001
-assert abs((745 | 781)-1005) <= 0.002
-assert abs((745 ^ 781)-484) <= 0.001
-assert abs((745 >> 12)-0) <= 0.001
-assert abs((745 << 12)-3051520) <= 6.103
-assert abs((-872.92+373.02)--499.9) <= 0.001
-assert abs((-872.92-373.02)--1245.94) <= 0.002
-assert abs((-872.92*373.02)--325616.6184) <= 3256.166
-assert abs((-872.92/373.02)--2.3401) <= 0.047
-assert abs((-872.92<373.02)--1) <= 0.001
-assert abs((-872.92<=373.02)--1) <= 0.001
-assert abs((-872.92=373.02)-0) <= 0.001
-assert abs((-872.92>373.02)-0) <= 0.001
-assert abs((-872.92>=373.02)-0) <= 0.001
-assert abs((-872.92<>373.02)--1) <= 0.001
-assert abs((564 & 166)-36) <= 0.001
-assert abs((564 | 166)-694) <= 0.001
-assert abs((564 ^ 166)-658) <= 0.001
-assert abs((564 >> 5)-17) <= 0.001
-assert abs((564 << 5)-18048) <= 0.036
-assert abs((-614+-512.87)--1126.87) <= 0.002
-assert abs((-614--512.87)--101.13) <= 0.001
-assert abs((-614*-512.87)-314902.18) <= 3149.022
-assert abs((-614/-512.87)-1.1972) <= 0.024
-assert abs((-614<-512.87)--1) <= 0.001
-assert abs((-614<=-512.87)--1) <= 0.001
-assert abs((-614=-512.87)-0) <= 0.001
-assert abs((-614>-512.87)-0) <= 0.001
-assert abs((-614>=-512.87)-0) <= 0.001
-assert abs((-614<>-512.87)--1) <= 0.001
-assert abs((32 & 133)-0) <= 0.001
-assert abs((32 | 133)-165) <= 0.001
-assert abs((32 ^ 133)-165) <= 0.001
-assert abs((32 >> 10)-0) <= 0.001
-assert abs((32 << 10)-32768) <= 0.066
-assert abs((-398+-605)--1003) <= 0.002
-assert abs((-398--605)-207) <= 0.001
-assert abs((-398*-605)-240790) <= 2407.9
-assert abs((-398/-605)-0.6579) <= 0.013
-assert abs((-398<-605)-0) <= 0.001
-assert abs((-398<=-605)-0) <= 0.001
-assert abs((-398=-605)-0) <= 0.001
-assert abs((-398>-605)--1) <= 0.001
-assert abs((-398>=-605)--1) <= 0.001
-assert abs((-398<>-605)--1) <= 0.001
-assert abs((970 & 996)-960) <= 0.002
-assert abs((970 | 996)-1006) <= 0.002
-assert abs((970 ^ 996)-46) <= 0.001
-assert abs((970 >> 4)-60) <= 0.001
-assert abs((970 << 4)-15520) <= 0.031
-assert abs((434+-877.86)--443.86) <= 0.001
-assert abs((434--877.86)-1311.86) <= 0.003
-assert abs((434*-877.86)--380991.24) <= 3809.912
-assert abs((434/-877.86)--0.4944) <= 0.01
-assert abs((434<-877.86)-0) <= 0.001
-assert abs((434<=-877.86)-0) <= 0.001
-assert abs((434=-877.86)-0) <= 0.001
-assert abs((434>-877.86)--1) <= 0.001
-assert abs((434>=-877.86)--1) <= 0.001
-assert abs((434<>-877.86)--1) <= 0.001
-assert abs((684 & 365)-44) <= 0.001
-assert abs((684 | 365)-1005) <= 0.002
-assert abs((684 ^ 365)-961) <= 0.002
-assert abs((684 >> 13)-0) <= 0.001
-assert abs((-448.28+240)--208.28) <= 0.001
-assert abs((-448.28-240)--688.28) <= 0.001
-assert abs((-448.28*240)--107587.2) <= 1075.872
-assert abs((-448.28/240)--1.8678) <= 0.037
-assert abs((-448.28<240)--1) <= 0.001
-assert abs((-448.28<=240)--1) <= 0.001
-assert abs((-448.28=240)-0) <= 0.001
-assert abs((-448.28>240)-0) <= 0.001
-assert abs((-448.28>=240)-0) <= 0.001
-assert abs((-448.28<>240)--1) <= 0.001
-assert abs((687 & 901)-645) <= 0.001
-assert abs((687 | 901)-943) <= 0.002
-assert abs((687 ^ 901)-298) <= 0.001
-assert abs((687 >> 12)-0) <= 0.001
-assert abs((687 << 12)-2813952) <= 5.628
-assert abs((924.72+923)-1847.72) <= 0.004
-assert abs((924.72-923)-1.72) <= 0.001
-assert abs((924.72*923)-853516.56) <= 8535.166
-assert abs((924.72/923)-1.0019) <= 0.02
-assert abs((923<923)-0) <= 0.001
-assert abs((923<=923)--1) <= 0.001
-assert abs((923=923)--1) <= 0.001
-assert abs((923>923)-0) <= 0.001
-assert abs((923>=923)--1) <= 0.001
-assert abs((923<>923)-0) <= 0.001
-assert abs((561 & 60)-48) <= 0.001
-assert abs((561 | 60)-573) <= 0.001
-assert abs((561 ^ 60)-525) <= 0.001
-assert abs((561 >> 9)-1) <= 0.001
-assert abs((561 << 9)-287232) <= 0.574
-assert abs((-719.67+-832.75)--1552.42) <= 0.003
-assert abs((-719.67--832.75)-113.08) <= 0.001
-assert abs((-719.67*-832.75)-599305.1925) <= 5993.052
-assert abs((-719.67/-832.75)-0.8642) <= 0.017
-assert abs((-719.67<-832.75)-0) <= 0.001
-assert abs((-719.67<=-832.75)-0) <= 0.001
-assert abs((-719.67=-832.75)-0) <= 0.001
-assert abs((-719.67>-832.75)--1) <= 0.001
-assert abs((-719.67>=-832.75)--1) <= 0.001
-assert abs((-719.67<>-832.75)--1) <= 0.001
-assert abs((166 & 961)-128) <= 0.001
-assert abs((166 | 961)-999) <= 0.002
-assert abs((166 ^ 961)-871) <= 0.002
-assert abs((166 >> 0)-166) <= 0.001
-assert abs((166 << 0)-166) <= 0.001
-assert abs((-555.98+514.77)--41.21) <= 0.001
-assert abs((-555.98-514.77)--1070.75) <= 0.002
-assert abs((-555.98*514.77)--286201.8246) <= 2862.018
-assert abs((-555.98/514.77)--1.0801) <= 0.022
-assert abs((514.77<514.77)-0) <= 0.001
-assert abs((514.77<=514.77)--1) <= 0.001
-assert abs((514.77=514.77)--1) <= 0.001
-assert abs((514.77>514.77)-0) <= 0.001
-assert abs((514.77>=514.77)--1) <= 0.001
-assert abs((514.77<>514.77)-0) <= 0.001
-assert abs((441 & 493)-425) <= 0.001
-assert abs((441 | 493)-509) <= 0.001
-assert abs((441 ^ 493)-84) <= 0.001
-assert abs((441 >> 12)-0) <= 0.001
-assert abs((441 << 12)-1806336) <= 3.613
-assert abs((-60+861)-801) <= 0.002
-assert abs((-60-861)--921) <= 0.002
-assert abs((-60*861)--51660) <= 516.6
-assert abs((-60/861)--0.0697) <= 0.001
-assert abs((861<861)-0) <= 0.001
-assert abs((861<=861)--1) <= 0.001
-assert abs((861=861)--1) <= 0.001
-assert abs((861>861)-0) <= 0.001
-assert abs((861>=861)--1) <= 0.001
-assert abs((861<>861)-0) <= 0.001
-assert abs((19 & 627)-19) <= 0.001
-assert abs((19 | 627)-627) <= 0.001
-assert abs((19 ^ 627)-608) <= 0.001
-assert abs((19 >> 1)-9) <= 0.001
-assert abs((19 << 1)-38) <= 0.001
-assert abs((37.32+457)-494.32) <= 0.001
-assert abs((37.32-457)--419.68) <= 0.001
-assert abs((37.32*457)-17055.24) <= 170.552
-assert abs((37.32/457)-0.0817) <= 0.002
-assert abs((457<457)-0) <= 0.001
-assert abs((457<=457)--1) <= 0.001
-assert abs((457=457)--1) <= 0.001
-assert abs((457>457)-0) <= 0.001
-assert abs((457>=457)--1) <= 0.001
-assert abs((457<>457)-0) <= 0.001
-assert abs((936 & 906)-904) <= 0.002
-assert abs((936 | 906)-938) <= 0.002
-assert abs((936 ^ 906)-34) <= 0.001
-assert abs((936 >> 12)-0) <= 0.001
-assert abs((936 << 12)-3833856) <= 7.668
-assert abs((-247+317.61)-70.61) <= 0.001
-assert abs((-247-317.61)--564.61) <= 0.001
-assert abs((-247*317.61)--78449.67) <= 784.497
-assert abs((-247/317.61)--0.7777) <= 0.016
-assert abs((-247<317.61)--1) <= 0.001
-assert abs((-247<=317.61)--1) <= 0.001
-assert abs((-247=317.61)-0) <= 0.001
-assert abs((-247>317.61)-0) <= 0.001
-assert abs((-247>=317.61)-0) <= 0.001
-assert abs((-247<>317.61)--1) <= 0.001
-assert abs((471 & 701)-149) <= 0.001
-assert abs((471 | 701)-1023) <= 0.002
-assert abs((471 ^ 701)-874) <= 0.002
-assert abs((471 >> 11)-0) <= 0.001
-assert abs((471 << 11)-964608) <= 1.929
-assert abs((-153+-698.92)--851.92) <= 0.002
-assert abs((-153--698.92)-545.92) <= 0.001
-assert abs((-153*-698.92)-106934.76) <= 1069.348
-assert abs((-153/-698.92)-0.2189) <= 0.004
-assert abs((-698.92<-698.92)-0) <= 0.001
-assert abs((-698.92<=-698.92)--1) <= 0.001
-assert abs((-698.92=-698.92)--1) <= 0.001
-assert abs((-698.92>-698.92)-0) <= 0.001
-assert abs((-698.92>=-698.92)--1) <= 0.001
-assert abs((-698.92<>-698.92)-0) <= 0.001
-assert abs((426 & 975)-394) <= 0.001
-assert abs((426 | 975)-1007) <= 0.002
-assert abs((426 ^ 975)-613) <= 0.001
-assert abs((426 >> 3)-53) <= 0.001
-assert abs((426 << 3)-3408) <= 0.007
-assert abs((98+188.42)-286.42) <= 0.001
-assert abs((98-188.42)--90.42) <= 0.001
-assert abs((98*188.42)-18465.16) <= 184.652
-assert abs((98/188.42)-0.5201) <= 0.01
-assert abs((98<188.42)--1) <= 0.001
-assert abs((98<=188.42)--1) <= 0.001
-assert abs((98=188.42)-0) <= 0.001
-assert abs((98>188.42)-0) <= 0.001
-assert abs((98>=188.42)-0) <= 0.001
-assert abs((98<>188.42)--1) <= 0.001
-assert abs((804 & 4)-4) <= 0.001
-assert abs((804 | 4)-804) <= 0.002
-assert abs((804 ^ 4)-800) <= 0.002
-assert abs((804 >> 13)-0) <= 0.001
-assert abs((922.27+-281.1)-641.17) <= 0.001
-assert abs((922.27--281.1)-1203.37) <= 0.002
-assert abs((922.27*-281.1)--259250.097) <= 2592.501
-assert abs((922.27/-281.1)--3.2809) <= 0.066
-assert abs((922.27<-281.1)-0) <= 0.001
-assert abs((922.27<=-281.1)-0) <= 0.001
-assert abs((922.27=-281.1)-0) <= 0.001
-assert abs((922.27>-281.1)--1) <= 0.001
-assert abs((922.27>=-281.1)--1) <= 0.001
-assert abs((922.27<>-281.1)--1) <= 0.001
-assert abs((517 & 578)-512) <= 0.001
-assert abs((517 | 578)-583) <= 0.001
-assert abs((517 ^ 578)-71) <= 0.001
-assert abs((517 >> 2)-129) <= 0.001
-assert abs((517 << 2)-2068) <= 0.004
-assert abs((-916.1+317.13)--598.97) <= 0.001
-assert abs((-916.1-317.13)--1233.23) <= 0.002
-assert abs((-916.1*317.13)--290522.793) <= 2905.228
-assert abs((-916.1/317.13)--2.8887) <= 0.058
-assert abs((317.13<317.13)-0) <= 0.001
-assert abs((317.13<=317.13)--1) <= 0.001
-assert abs((317.13=317.13)--1) <= 0.001
-assert abs((317.13>317.13)-0) <= 0.001
-assert abs((317.13>=317.13)--1) <= 0.001
-assert abs((317.13<>317.13)-0) <= 0.001
-assert abs((772 & 507)-256) <= 0.001
-assert abs((772 | 507)-1023) <= 0.002
-assert abs((772 ^ 507)-767) <= 0.002
-assert abs((772 >> 5)-24) <= 0.001
-assert abs((772 << 5)-24704) <= 0.049
+assert abs((abs(-741))-741) <= 0.001
+assert abs((len("CQYEFB"))-6) <= 0.001
+assert abs((sgn(-741))--1) <= 0.001
+assert abs((int(-741))--741) <= 0.001
+assert abs((sqr(934.14))-30.5637) <= 0.245
+assert abs((asc("CQYEFB"))-67) <= 0.001
+assert abs((val("408.14"))-408.14) <= 0.001
+assert abs((abs(813))-813) <= 0.001
+assert abs((len(""))-0) <= 0.001
+assert abs((sgn(813))-1) <= 0.001
+assert abs((int(813))-813) <= 0.001
+assert abs((sqr(788.86))-28.0867) <= 0.225
+assert abs((asc(""))-0) <= 0.001
+assert abs((val("-781"))--781) <= 0.001
+assert abs((abs(950.82))-950.82) <= 0.001
+assert abs((len("ICKSQ"))-5) <= 0.001
+assert abs((sgn(950.82))-1) <= 0.001
+assert abs((int(950.82))-950) <= 0.001
+assert abs((sqr(632.68))-25.1531) <= 0.201
+assert abs((asc("ICKSQ"))-73) <= 0.001
+assert abs((val("110.46"))-110.46) <= 0.001
+assert abs((abs(679))-679) <= 0.001
+assert abs((len("KYQBA"))-5) <= 0.001
+assert abs((sgn(679))-1) <= 0.001
+assert abs((int(679))-679) <= 0.001
+assert abs((sqr(720))-26.8328) <= 0.215
+assert abs((asc("KYQBA"))-75) <= 0.001
+assert abs((val("867.04"))-867.04) <= 0.001
+assert abs((abs(445.42))-445.42) <= 0.001
+assert abs((len("UPTTYAY"))-7) <= 0.001
+assert abs((sgn(445.42))-1) <= 0.001
+assert abs((int(445.42))-445) <= 0.001
+assert abs((sqr(766.54))-27.6865) <= 0.221
+assert abs((asc("UPTTYAY"))-85) <= 0.001
+assert abs((val("-794"))--794) <= 0.001
+assert abs((abs(119.75))-119.75) <= 0.001
+assert abs((len("YIAJXCXN"))-8) <= 0.001
+assert abs((sgn(119.75))-1) <= 0.001
+assert abs((int(119.75))-119) <= 0.001
+assert abs((sqr(673.65))-25.9548) <= 0.208
+assert abs((asc("YIAJXCXN"))-89) <= 0.001
+assert abs((val("729.76"))-729.76) <= 0.001
+assert abs((abs(-961))-961) <= 0.001
+assert abs((len("VHYIIL"))-6) <= 0.001
+assert abs((sgn(-961))--1) <= 0.001
+assert abs((int(-961))--961) <= 0.001
+assert abs((sqr(857))-29.2746) <= 0.234
+assert abs((asc("VHYIIL"))-86) <= 0.001
+assert abs((val("-186.68"))--186.68) <= 0.001
+assert abs((abs(-775.39))-775.39) <= 0.001
+assert abs((len("MY"))-2) <= 0.001
+assert abs((sgn(-775.39))--1) <= 0.001
+assert abs((int(-775.39))--775) <= 0.001
+assert abs((sqr(17.39))-4.1701) <= 0.033
+assert abs((asc("MY"))-77) <= 0.001
+assert abs((val("579.46"))-579.46) <= 0.001
+assert abs((abs(-664.4))-664.4) <= 0.001
+assert abs((len(""))-0) <= 0.001
+assert abs((sgn(-664.4))--1) <= 0.001
+assert abs((int(-664.4))--664) <= 0.001
+assert abs((sqr(997))-31.5753) <= 0.253
+assert abs((asc(""))-0) <= 0.001
+assert abs((val("-689.19"))--689.19) <= 0.001
+assert abs((abs(-623.22))-623.22) <= 0.001
+assert abs((len("AMH"))-3) <= 0.001
+assert abs((sgn(-623.22))--1) <= 0.001
+assert abs((int(-623.22))--623) <= 0.001
+assert abs((sqr(335))-18.303) <= 0.146
+assert abs((asc("AMH"))-65) <= 0.001
+assert abs((val("-787"))--787) <= 0.001
+assert abs((abs(300.4))-300.4) <= 0.001
+assert abs((len("JIOZ"))-4) <= 0.001
+assert abs((sgn(300.4))-1) <= 0.001
+assert abs((int(300.4))-300) <= 0.001
+assert abs((sqr(653))-25.5539) <= 0.204
+assert abs((asc("JIOZ"))-74) <= 0.001
+assert abs((val("-870"))--870) <= 0.001
+assert abs((abs(-79))-79) <= 0.001
+assert abs((len("YAK"))-3) <= 0.001
+assert abs((sgn(-79))--1) <= 0.001
+assert abs((int(-79))--79) <= 0.001
+assert abs((sqr(320))-17.8885) <= 0.143
+assert abs((asc("YAK"))-89) <= 0.001
+assert abs((val("-613"))--613) <= 0.001
+assert abs((abs(152))-152) <= 0.001
+assert abs((len("MQD"))-3) <= 0.001
+assert abs((sgn(152))-1) <= 0.001
+assert abs((int(152))-152) <= 0.001
+assert abs((sqr(180.14))-13.4216) <= 0.107
+assert abs((asc("MQD"))-77) <= 0.001
+assert abs((val("428.2"))-428.2) <= 0.001
+assert abs((abs(707.92))-707.92) <= 0.001
+assert abs((len("NKAENRJTM"))-9) <= 0.001
+assert abs((sgn(707.92))-1) <= 0.001
+assert abs((int(707.92))-707) <= 0.001
+assert abs((sqr(485.48))-22.0336) <= 0.176
+assert abs((asc("NKAENRJTM"))-78) <= 0.001
+assert abs((val("-955.78"))--955.78) <= 0.001
+assert abs((abs(-360.99))-360.99) <= 0.001
+assert abs((len("UONOO"))-5) <= 0.001
+assert abs((sgn(-360.99))--1) <= 0.001
+assert abs((int(-360.99))--360) <= 0.001
+assert abs((sqr(9.57))-3.0935) <= 0.025
+assert abs((asc("UONOO"))-85) <= 0.001
+assert abs((val("-999"))--999) <= 0.001
+assert abs((abs(427))-427) <= 0.001
+assert abs((len(""))-0) <= 0.001
+assert abs((sgn(427))-1) <= 0.001
+assert abs((int(427))-427) <= 0.001
+assert abs((sqr(840.87))-28.9978) <= 0.232
+assert abs((asc(""))-0) <= 0.001
+assert abs((val("-411"))--411) <= 0.001
+assert abs((abs(549))-549) <= 0.001
+assert abs((len("BHH"))-3) <= 0.001
+assert abs((sgn(549))-1) <= 0.001
+assert abs((int(549))-549) <= 0.001
+assert abs((sqr(459))-21.4243) <= 0.171
+assert abs((asc("BHH"))-66) <= 0.001
+assert abs((val("826.46"))-826.46) <= 0.001
+assert abs((abs(163.63))-163.63) <= 0.001
+assert abs((len("OCJYGJWIN"))-9) <= 0.001
+assert abs((sgn(163.63))-1) <= 0.001
+assert abs((int(163.63))-163) <= 0.001
+assert abs((sqr(160.37))-12.6637) <= 0.101
+assert abs((asc("OCJYGJWIN"))-79) <= 0.001
+assert abs((val("605"))-605) <= 0.001
+assert abs((abs(-968))-968) <= 0.001
+assert abs((len("RSEJOXW"))-7) <= 0.001
+assert abs((sgn(-968))--1) <= 0.001
+assert abs((int(-968))--968) <= 0.001
+assert abs((sqr(901.52))-30.0253) <= 0.24
+assert abs((asc("RSEJOXW"))-82) <= 0.001
+assert abs((val("387"))-387) <= 0.001
+assert abs((abs(551))-551) <= 0.001
+assert abs((len("FGK"))-3) <= 0.001
+assert abs((sgn(551))-1) <= 0.001
+assert abs((int(551))-551) <= 0.001
+assert abs((sqr(168))-12.9615) <= 0.104
+assert abs((asc("FGK"))-70) <= 0.001
+assert abs((val("604"))-604) <= 0.001
+assert abs((abs(-863))-863) <= 0.001
+assert abs((len("DWQOOFBQS"))-9) <= 0.001
+assert abs((sgn(-863))--1) <= 0.001
+assert abs((int(-863))--863) <= 0.001
+assert abs((sqr(427))-20.664) <= 0.165
+assert abs((asc("DWQOOFBQS"))-68) <= 0.001
+assert abs((val("-656.64"))--656.64) <= 0.001
+assert abs((abs(41))-41) <= 0.001
+assert abs((len("DHGKHV"))-6) <= 0.001
+assert abs((sgn(41))-1) <= 0.001
+assert abs((int(41))-41) <= 0.001
+assert abs((sqr(421))-20.5183) <= 0.164
+assert abs((asc("DHGKHV"))-68) <= 0.001
+assert abs((val("335.49"))-335.49) <= 0.001
+assert abs((abs(998))-998) <= 0.001
+assert abs((len("SZTZAMWG"))-8) <= 0.001
+assert abs((sgn(998))-1) <= 0.001
+assert abs((int(998))-998) <= 0.001
+assert abs((sqr(429.67))-20.7285) <= 0.166
+assert abs((asc("SZTZAMWG"))-83) <= 0.001
+assert abs((val("641.15"))-641.15) <= 0.001
+assert abs((abs(-534))-534) <= 0.001
+assert abs((len("WVPZEUYEGP"))-10) <= 0.001
+assert abs((sgn(-534))--1) <= 0.001
+assert abs((int(-534))--534) <= 0.001
+assert abs((sqr(970))-31.1448) <= 0.249
+assert abs((asc("WVPZEUYEGP"))-87) <= 0.001
+assert abs((val("903"))-903) <= 0.001
+assert abs((abs(-46.3))-46.3) <= 0.001
+assert abs((len("DTTOA"))-5) <= 0.001
+assert abs((sgn(-46.3))--1) <= 0.001
+assert abs((int(-46.3))--46) <= 0.001
+assert abs((sqr(666))-25.807) <= 0.206
+assert abs((asc("DTTOA"))-68) <= 0.001
+assert abs((val("-808"))--808) <= 0.001
+assert abs((abs(-880.84))-880.84) <= 0.001
+assert abs((len("AXUFXBW"))-7) <= 0.001
+assert abs((sgn(-880.84))--1) <= 0.001
+assert abs((int(-880.84))--880) <= 0.001
+assert abs((sqr(66.01))-8.1247) <= 0.065
+assert abs((asc("AXUFXBW"))-65) <= 0.001
+assert abs((val("971"))-971) <= 0.001
+assert abs((abs(-966))-966) <= 0.001
+assert abs((len(""))-0) <= 0.001
+assert abs((sgn(-966))--1) <= 0.001
+assert abs((int(-966))--966) <= 0.001
+assert abs((sqr(5))-2.2361) <= 0.018
+assert abs((asc(""))-0) <= 0.001
+assert abs((val("577"))-577) <= 0.001
+assert abs((abs(-529.23))-529.23) <= 0.001
+assert abs((len("HCYPHRY"))-7) <= 0.001
+assert abs((sgn(-529.23))--1) <= 0.001
+assert abs((int(-529.23))--529) <= 0.001
+assert abs((sqr(553.8))-23.533) <= 0.188
+assert abs((asc("HCYPHRY"))-72) <= 0.001
+assert abs((val("191.83"))-191.83) <= 0.001
+assert abs((abs(724.96))-724.96) <= 0.001
+assert abs((len("TZGWUNHK"))-8) <= 0.001
+assert abs((sgn(724.96))-1) <= 0.001
+assert abs((int(724.96))-724) <= 0.001
+assert abs((sqr(532.78))-23.082) <= 0.185
+assert abs((asc("TZGWUNHK"))-84) <= 0.001
+assert abs((val("410"))-410) <= 0.001
+assert abs((abs(-970))-970) <= 0.001
+assert abs((len("WMKQ"))-4) <= 0.001
+assert abs((sgn(-970))--1) <= 0.001
+assert abs((int(-970))--970) <= 0.001
+assert abs((sqr(528.63))-22.992) <= 0.184
+assert abs((asc("WMKQ"))-87) <= 0.001
+assert abs((val("469"))-469) <= 0.001
 sys 65535
