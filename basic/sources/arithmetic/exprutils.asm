@@ -19,8 +19,8 @@
 ; ************************************************************************************************
 
 EXPEvalNumber:
-		jsr 	EXPEvaluateExpression 		; get a value
-		jsr 	DereferenceTerm 			; dereference it
+		jsr 	EXPEvaluateExpressionAtX	; get a value
+		jsr 	DereferenceTOS				; dereference it
 		bit 	XSControl,x	 				; fail if string
 		bmi 	EVUType
 		rts
@@ -64,9 +64,9 @@ EXPEvalInteger8:
 ; ************************************************************************************************
 
 EXPEvalString:
-		jsr 	EXPEvaluateExpression 		; get a value
-		jsr 	DereferenceTerm 			; dereference it
-		bit 	XSControl,x	 				; fail if string
+		jsr 	EXPEvaluateExpressionAtX 	; get a value
+		jsr 	DereferenceTOS 				; dereference it
+		bit 	XSControl,x	 				; fail if not string
 		bpl 	EVUType
 		lda 	XSNumber0,x
 		sta 	zTemp0

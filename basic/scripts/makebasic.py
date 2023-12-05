@@ -25,6 +25,9 @@ class Program(object):
 		self.lineStep = 10
 		self.code = []
 		self.store = IdentifierStore()
+		self.store.add("A")
+		self.store.add("X")
+		self.store.add("Y")
 		self.ts = TokenSet()
 		self.tw = Tokeniser(self.store)
 	#

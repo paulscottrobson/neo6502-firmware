@@ -18,9 +18,9 @@
 
 		.section code	
 
-EXPEvaluateExpressionRestart:
+EXPEvaluateExpressionAt0:
 		ldx 	#0 							; start from base of stack.
-EXPEvaluateExpression:
+EXPEvaluateExpressionAtX:
 		lda 	#0 							; current precedence is 0.
 EXPEvaluateExpressionPrecedenceA:
 		pha		 							; push on stack.

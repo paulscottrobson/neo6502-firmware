@@ -19,7 +19,8 @@
 ; ************************************************************************************************
 
 UnaryParenthesis: ;; [(]
-		jsr 	EXPEvaluateExpression 		; evaluate at stack level X
+		jsr 	EXPEvaluateExpressionAtX	; evaluate at stack level X
+		jsr 	DereferenceTOS 				; dereference it.
 		jmp 	ERRCheckRParen	 			; check )
 
 ; ************************************************************************************************
@@ -35,7 +36,7 @@ single 	.macro
 
 DoUnaryFunction:	
 		pha	
-		jsr 	EXPEvaluateExpression 		; one operand
+		jsr 	EXPEvalNumber 				; one operand
 		pla
 		jsr 	DoMathCommand
 		lda 	ControlError

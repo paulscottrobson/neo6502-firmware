@@ -19,6 +19,9 @@ errors = """
 	assert : 	assert failed
 	break : 	break pressed
 	stop : 		program stopped
+	structure :	structure imbalance
+	stack : 	out of stack space.
+	string : 	out of string memory.
 """
 
 err = []

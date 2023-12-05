@@ -10,4 +10,7 @@ ErrorMessageText:
 	.text	"assert failed",0
 	.text	"break pressed",0
 	.text	"program stopped",0
+	.text	"structure imbalance",0
+	.text	"out of stack space.",0
+	.text	"out of string memory.",0
 	.send code

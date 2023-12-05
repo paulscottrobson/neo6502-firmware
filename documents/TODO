@@ -1,10 +1,14 @@
 TODO List
 ---------
 
-- Default AXY
-- Dereferencing.
-- String temp functionality, string unaries, string concatenation / matching
+- Dereferencing test.
+- String unaries, String concatenation / matching
 - Variables, Assignment
+
+- Print/Input
+	Print Number
+	Input Number
+	Input String
 
 - Locale handling
 - Console colour and cursor control / positioning.
@@ -12,7 +16,8 @@ TODO List
 - Audio system driver on emulator, and audio interface
 - Function key handling
 - File I/O - when I have the hardware.
-
+- A,X,Y in Sys.
+- Tokeniser does comments.
 
 Optimise me (Integers)
 ----------------------
@@ -23,11 +28,4 @@ Optimise me (Integers)
 		
 Add to doc
 
-ASSERT
-RUN
-CLEAR
-END
-STOP
-SYS
-NEW
-' (comment)
+PRINT/INPUT

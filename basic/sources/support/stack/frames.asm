@@ -1,91 +1,78 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		00data.inc
-;		Purpose:	Global Data Objects
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		frames.asm
+;		Purpose:	Open/Close Frames on the BASIC stack
+;		Created:	5th December2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-ControlCommand = ControlPort+0
-ControlFunction = ControlPort+1
-ControlError = ControlPort+2
-ControlStatus = ControlPort+3
+		.section code
 
 ; ************************************************************************************************
-;	
-;											Stack
+;
+;		Open a frame. A contains the identifier in the upper nibl, and the bytes to claim is
+; 		double the lower nibble (includes frame marker) doubled
 ;
 ; ************************************************************************************************
 
-StackSize = 8
+StackOpen:
+		pha 								; save frame byte
+		and 	#$0F 						; shows the bytes to subtract.
+		asl 	a 							; claim twice this for storage
+		;
+		eor 	#$FF 						; 2's complement addition
+		sec 								; so basically subtracting from
+		adc 	basicStack 	 				; basicStack
+		sta 	basicStack
+		bcs 	_SONoBorrow
 
-XS_TYPEMASK = $C0
-XS_TYPEBIT = $80
-XS_STRING = $80
-XS_ISREFERENCE = $20
-XS_ISBYTEREFERENCE = $10
-
-		.section zeropage
-XSStack:
-		
-XSControl:	
-		.fill 	StackSize		
-XSNumber0:
-		.fill 	StackSize
-XSNumber1:
-		.fill 	StackSize
-XSNumber2:
-		.fill 	StackSize
-XSNumber3:
-		.fill 	StackSize
-
+		dec 	basicStack+1
+		lda 	basicStack+1 				; reached the bottom ?
+		cmp 	basicStackEnd
+		beq 	_SOMemory
+_SONoBorrow:
+		pla 								; get marker back and write at TOS
+		sta 	(basicStack)		
+		rts
 	
-		.send zeropage
-
+_SOMemory:
+		.error_stack
+			
 ; ************************************************************************************************
-;	
-;											Zero Page
+;
+;										Close a frame
 ;
 ; ************************************************************************************************
 
-		.section zeropage
-
-CodePtr: 									; basic code
-		.fill 	2 
-basicStack: 								; basic stack
-		.fill 	2		
-zsTemp: 									; general string pointer
-		.fill 	2
-zTemp0:	
-		.fill 	2
-		
-		.send zeropage
+StackClose:
+		lda 	(basicStack) 				; get TOS marker
+		and 	#$0F 						; bytes to add back
+		asl 	a 							; claim twice this.
+		adc 	basicStack 					; add to the stack pointer.
+		sta 	basicStack
+		bcc 	_SCExit
+		inc 	basicStack+1
+_SCExit:
+		rts		
 
 ; ************************************************************************************************
-;	
-;										Normal Memory
+;
+;								Check in Frame A, if not report Error
 ;
 ; ************************************************************************************************
 
-		.section storage
-ERRLine: 									; line number for errors.
-		.fill 	2		
-InputFlag: 									; Flag indicating input/print.
-		.fill 	1
-stringInitialised:							; temp string alloc set up
-		.fill 	1		
-stringMemory: 								; highest string memory concreted.
-		.fill 	2		
-stringTempPointer: 							; take temp string from here.
-		.fill 	2	
-basicStackEnd: 								; bottom limit of stack.
-		.fill 	1
-
-		.send storage
+StackCheckFrame:
+		cmp		(basicStack) 				; check  frames match
+		bne 	_SCFError 					; different, we have structures mixed up
+		rts
+_SCFError:
+		.error_structure
+				
+		.send code
 
 ; ************************************************************************************************
 ;
@@ -97,4 +84,3 @@ basicStackEnd: 								; bottom limit of stack.
 ;		==== 			=====
 ;
 ; ************************************************************************************************
-
