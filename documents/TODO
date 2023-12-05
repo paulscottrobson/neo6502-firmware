@@ -1,8 +1,18 @@
 TODO List
 ---------
 
-- Dereferencing test.
-- String unaries, String concatenation / matching
+- String unaries
+		LEFT$ MID$ RIGHT$ (unary test)
+- String comparison.
+		(String test)
+- String concatenation
+		(String test)
+- CHR$		
+		(String test)
+- STR$		
+		(String test)
+- INKEY$
+
 - Variables, Assignment
 
 - Print/Input
