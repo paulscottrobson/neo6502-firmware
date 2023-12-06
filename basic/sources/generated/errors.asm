@@ -13,4 +13,5 @@ ErrorMessageText:
 	.text	"structure imbalance",0
 	.text	"out of stack space.",0
 	.text	"out of string memory.",0
+	.text	"bad argument",0
 	.send code

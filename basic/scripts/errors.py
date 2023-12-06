@@ -22,6 +22,7 @@ errors = """
 	structure :	structure imbalance
 	stack : 	out of stack space.
 	string : 	out of string memory.
+	argument : 	bad argument
 """
 
 err = []

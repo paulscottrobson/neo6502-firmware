@@ -39,7 +39,7 @@ prelim: always
 	$(PYTHON) $(BINDIR)makebasic.zip build$(S)test.bas -obuild$(S)tokenised.dat
 
 wedge:
-	$(ASSEMBLER) build$(S)wedge.asm -o build$(S)wedge.bin
+	$(ASSEMBLER) wedge.asm -o build$(S)wedge.bin
 
 build: prelim
 	$(ASSEMBLER) basic.asm -L build/basic.lst -o build/basic.bin
