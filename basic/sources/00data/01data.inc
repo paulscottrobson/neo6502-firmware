@@ -62,6 +62,8 @@ zsTemp: 									; general string pointer
 		.fill 	2
 zTemp0:	
 		.fill 	2
+zTemp1:
+		.fill 	2		
 		
 		.send zeropage
 

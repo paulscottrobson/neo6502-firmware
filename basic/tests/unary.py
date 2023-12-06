@@ -18,7 +18,7 @@ def sign(n):
 	return -1 if n < 0 else 1
 
 uc = UnaryChecker()
-for i in range(0,30):
+for i in range(0,20):
 	n1 = TestNumber()
 	s1 = TestString()
 	uc.generate(n1,"abs",abs(n1.get()))
@@ -34,12 +34,13 @@ for i in range(0,30):
 	sc1 = TestNumberString()
 	uc.generate(sc1,"val",sc1.get())
 
-	# s1 = s1.get()
-	# n2 = random.randint(0,len(s1)+1)
-	# n3 = random.randint(0,len(s1)+1)
-	# print('assert left$("{0}",{1}) = "{2}"'.format(s1,n2,s1[:n2]))
-	# print('assert right$("{0}",{1}) = "{2}"'.format(s1,n2,s1[max(0,len(s1)-n2):]))
-	# if n2 > 0:
-	# 	print('assert mid$("{0}",{1}) = "{2}"'.format(s1,n2,s1[n2-1:]))
-	# 	print('assert mid$("{0}",{1},{2}) = "{3}"'.format(s1,n2,n3,s1[n2-1:n2-1+n3]))
+	s1 = s1.get()
+	n2 = random.randint(0,len(s1)+1)
+	n3 = random.randint(0,len(s1)+1)
+	print('assert left$("{0}",{1}) = "{2}"'.format(s1,n2,s1[:n2]))
+	print('assert right$("{0}",{1}) = "{2}"'.format(s1,n2,s1[max(0,len(s1)-n2):]))
+	if n2 > 0:
+		print('assert mid$("{0}",{1}) = "{2}"'.format(s1,n2,s1[n2-1:]))
+		print('assert mid$("{0}",{1},{2}) = "{3}"'.format(s1,n2,n3,s1[n2-1:n2-1+n3]))
+		
 print("sys 65535")	

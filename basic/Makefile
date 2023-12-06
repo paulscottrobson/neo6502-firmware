@@ -64,6 +64,7 @@ test:
 	make binary 
 	make brackets
 	make unary
+	make string
 	
 binary:
 	$(PYTHON) tests$(S)binary.py >build$(S)test.bas
@@ -73,4 +74,7 @@ brackets:
 	make run
 unary:
 	$(PYTHON) tests$(S)unary.py >build$(S)test.bas
+	make run
+string:
+	$(PYTHON) tests$(S)string.py >build$(S)test.bas
 	make run
