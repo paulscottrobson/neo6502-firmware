@@ -156,7 +156,7 @@ void CONWrite(int c) {
 
 // ***************************************************************************************
 //
-//			Rubbish debugging tool - don't use it for printing hex numbers.
+//								Rubbish debugging tools.
 //
 // ***************************************************************************************
 
@@ -166,6 +166,10 @@ void CONWriteHex(uint16_t h) {
 		CONWrite("0123456789ABCDEF"[(h >> 12) & 0x0F]);
 		h = h << 4;
 	}
+}
+
+void CONWriteString(char *s) {
+	while (*s != '\0') CONWrite(*s++);
 }
 
 // ***************************************************************************************

@@ -1,10 +1,12 @@
 TODO List
 ---------
 
-- String unaries
-		LEFT$ MID$ RIGHT$ (unary test)
 - String comparison.
-		(String test)
+
+- Test
+		LEFT$ MID$ RIGHT$ (unary)
+		Comparison
+
 - String concatenation
 		(String test)
 - CHR$		

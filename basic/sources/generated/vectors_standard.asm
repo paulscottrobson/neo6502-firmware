@@ -21,9 +21,9 @@ StandardVectorTable:
 	.word	UnarySgn                 ; $8f sgn(
 	.word	EXPUnaryVal              ; $90 val(
 	.word	Unimplemented            ; $91 str$(
-	.word	EXPUnaryMid              ; $92 mid$(
-	.word	EXPUnaryLeft             ; $93 left$(
-	.word	EXPUnaryRight            ; $94 right$(
+	.word	Unary_Mid                ; $92 mid$(
+	.word	Unary_Left               ; $93 left$(
+	.word	Unary_Right              ; $94 right$(
 	.word	UnarySin                 ; $95 sin(
 	.word	UnaryCos                 ; $96 cos(
 	.word	UnaryTan                 ; $97 tan(
