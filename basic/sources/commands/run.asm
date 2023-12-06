@@ -71,7 +71,6 @@ RUNNewLine:
 
 RUNNewCommand:		
 		stz 	stringInitialised 			; reset string system flag.
-;		jsr 	OSCheckBreak 				; check escape.
 
 _RNCNoCheck:		
 		lda 	(codePtr),y 				; get next token
@@ -102,7 +101,8 @@ _RUNBreak:
 		;
 		; ----------------------------------------------------------------------------------------
 
-_RUNNotToken:		
+_RUNNotToken:	
+		.byte 	3	
 
 ; ************************************************************************************************
 ;

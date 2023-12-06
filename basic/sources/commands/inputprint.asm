@@ -90,8 +90,8 @@ _CPNotInput:
 		;
 _CPNumber:
 		phy
-;		jsr 	IFFloatToString 			; convert to string at YX 
-;		jsr 	CPPrintYX 					; print string at YX
+		jsr 	_CPFloatToString 			; convert to string at YA 
+		jsr 	CPPrintYA 					; print string at YA
 		ply		
 		bra 	Command_IP_Main				; loop round clearing carry so NL if end		
 		;
@@ -112,6 +112,21 @@ _CPExit:
 		lda 	#13 						; print new line
 		jsr 	CPPrintA
 _CPExit2:		
+		rts
+		;
+		;		Convert number to string at YA
+		;
+_CPFloatToString:
+		lda 	#tempBuffer & $FF  			; set up pointer.
+		sta 	ControlCommand+8		
+		pha
+		lda 	#tempBuffer >> 8
+		sta 	ControlCommand+9
+		pha
+		lda 	#34 						; convert number to string
+		jsr 	DoMathCommand		
+		ply
+		pla
 		rts
 		;
 		;		Input code

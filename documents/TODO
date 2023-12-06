@@ -1,14 +1,20 @@
 TODO List
 ---------
 
-- STR$		
-		(String test)
-- INKEY$
+- Reference becomes
+	XS_ISVARIABLE
+	XS_BYTEREFERENCE
+	XS_WORDREFERENCE
+
+- OR use PEEK POKE DEEK DOKE etc.
+
+- Fix term to work correctly and check it.
+
+- Update dereference code to suit - 3 options, variables, word, byte. 
 
 - Variables, Assignment
 
-- Print/Input
-	Print Number
+- Input
 	Input Number
 	Input String
 
@@ -18,8 +24,12 @@ TODO List
 - Audio system driver on emulator, and audio interface
 - Function key handling
 - File I/O - when I have the hardware.
-- A,X,Y in Sys.
-- Tokeniser does comments.
+
+Notes
+----
+	- Break check
+	- A,X,Y in Sys.
+	- Tokeniser does comments.
 
 Optimise me (Integers)
 ----------------------
@@ -31,3 +41,5 @@ Optimise me (Integers)
 Add to doc
 
 PRINT/INPUT
+LET
+

@@ -35,7 +35,7 @@ for i in range(0,20):
 	n1.set(random.randint(64,95))
 	uc.generate(n1,"asc(chr$",n1.get())
 
-#	n1 = TestNumber()
-#	uc.generate(n1,"val(str$",n1.get(),0.5)
+	n1 = TestNumber()
+	uc.generate(n1,"val(str$",n1.get(),0.5)
 
 print("sys 65535")	

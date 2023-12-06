@@ -104,6 +104,7 @@ _ETIsIdentifier:
 		sta 	XSNumber1,x
 		sta 	zTemp0+1
 		lda 	(codePtr),y 				; LSB - on a page boundary
+		iny
 		sta 	XSNumber0,x
 		sta 	zTemp0
 		stz 	XSNumber2,x 				; neatness

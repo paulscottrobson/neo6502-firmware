@@ -20,7 +20,7 @@ StandardVectorTable:
 	.word	UnaryAbs                 ; $8e abs(
 	.word	UnarySgn                 ; $8f sgn(
 	.word	EXPUnaryVal              ; $90 val(
-	.word	Unimplemented            ; $91 str$(
+	.word	StrUnary                 ; $91 str$(
 	.word	Unary_Mid                ; $92 mid$(
 	.word	Unary_Left               ; $93 left$(
 	.word	Unary_Right              ; $94 right$(
@@ -72,7 +72,7 @@ StandardVectorTable:
 	.word	Unimplemented            ; $c2 !!sh2
 	.word	Unimplemented            ; $c3 !!dec
 	.word	Unimplemented            ; $c4 to
-	.word	Unimplemented            ; $c5 let
+	.word	Command_Let              ; $c5 let
 	.word	Command_Print            ; $c6 print
 	.word	Command_Input            ; $c7 input
 	.word	Unimplemented            ; $c8 call

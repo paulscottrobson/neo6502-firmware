@@ -181,6 +181,9 @@ switch (*DCOMMAND) {
 			case 33:
 				MATHConvertStringToNumber(DCOMMAND);
 				break;
+			case 34:
+				MATHConvertNumberToString(DCOMMAND);
+				break;
 		}
 		break;
 }

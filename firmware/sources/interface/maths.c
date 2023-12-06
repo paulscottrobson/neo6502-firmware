@@ -187,6 +187,22 @@ void MATHConvertStringToNumber(uint8_t *command) {
 
 // ***************************************************************************************
 //
+//								Convert number to string
+//
+// ***************************************************************************************
+
+void MATHConvertNumberToString(uint8_t *command) {
+	uint8_t *mem = cpuMemory + command[8] + (command[9] << 8); 					// To here.
+	if (MATHIsFloatUnary()) {  													// Convert accordingly
+		sprintf((char *)(mem+1),"%f",MATHReadFloat(MATH_REG1));
+	} else {
+		sprintf((char *)(mem+1),"%d",(int)MATHReadInt(MATH_REG1));
+	}
+	mem[0] = strlen((char *)(mem+1)); 													// Length of string.
+}
+
+// ***************************************************************************************
+//
 //		Date 		Revision
 //		==== 		========
 //

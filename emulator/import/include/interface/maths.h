@@ -26,6 +26,7 @@ void MATHWriteInt(uint32_t i,uint8_t stackOffset);
 
 void MATHProcessDecimal(uint8_t *command);
 void MATHConvertStringToNumber(uint8_t *command);
+void MATHConvertNumberToString(uint8_t *command);
 
 #endif
 
