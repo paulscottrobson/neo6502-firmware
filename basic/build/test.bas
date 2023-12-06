@@ -1,1 +1,19 @@
-assert right$("abcde",2)
+assert abs((""<"VJRWIMQMRR")--1) <= 0.001
+assert abs((""<="VJRWIMQMRR")--1) <= 0.001
+assert abs((""="VJRWIMQMRR")-0) <= 0.001
+assert abs(("">"VJRWIMQMRR")-0) <= 0.001
+assert abs(("">="VJRWIMQMRR")-0) <= 0.001
+assert abs((""<>"VJRWIMQMRR")--1) <= 0.001
+assert abs(("K"<"YUQYTDCJKO")--1) <= 0.001
+assert abs(("K"<="YUQYTDCJKO")--1) <= 0.001
+assert abs(("K"="YUQYTDCJKO")-0) <= 0.001
+assert abs(("K">"YUQYTDCJKO")-0) <= 0.001
+assert abs(("K">="YUQYTDCJKO")-0) <= 0.001
+assert abs(("K"<>"YUQYTDCJKO")--1) <= 0.001
+assert abs(("APDMCKXSC"<"EGU")--1) <= 0.001
+assert abs(("APDMCKXSC"<="EGU")--1) <= 0.001
+assert abs(("APDMCKXSC"="EGU")-0) <= 0.001
+assert abs(("APDMCKXSC">"EGU")-0) <= 0.001
+assert abs(("APDMCKXSC">="EGU")-0) <= 0.001
+assert abs(("APDMCKXSC"<>"EGU")--1) <= 0.001
+sys 65535

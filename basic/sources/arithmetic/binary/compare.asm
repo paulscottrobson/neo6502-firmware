@@ -83,65 +83,68 @@ CMPCompareGreaterEqual: 	;; [>=]
 
 CMPCompareBaseCode:
 		jsr 	DereferenceCheckTypes 		; dereference, check types match.
-		bmi 	_CMPTypeError
-		lda 	XSControl,x 
 		bmi 	_CMPString 					; string ?
 		lda 	#6 							; use coprocessor to compare
 		jsr 	DOMathCommand
 		lda 	ControlStatus 				; get result.
 		rts
-
-_CMPTypeError:
-		.error_type
-
 		;
 		;		String comparison
 		;
 _CMPString:
-		.byte 	3 			; UNIMPLEMENTED
-;		phy
-;		;
-;		lda 	(IFR1) 						; length of smaller of the two in X.
-;		cmp 	(IFR0) 						; check it matches so far normally.
-;		bcc 	_EXCBCSmaller
-;		lda 	(IFR0)
-;_EXCBCSmaller:
-;		tax
-;		beq 	_EXCBCMatches 				; if zero common length matches
-;		;
-;		;		Check the common length parts match.
-;		;
-;		ldy 	#0 							; match the strings.		
-;_EXCBCCheckSmallerMatches:
-;		iny 								; compare directly as far as common length
-;		sec
-;		lda 	(IFR0),y
-;		sbc 	(IFR1),y
-;		bne 	_EXCBCExit2
-;		dex 
-;		bne 	_EXCBCCheckSmallerMatches
+		phy
+		phx 					
+
+		lda 	XSNumber0,x
+		sta 	zTemp0
+		lda 	XSNumber1,x
+		sta 	zTemp0+1
+
+		lda 	XSNumber0+1,x
+		sta 	zTemp1
+		lda 	XSNumber1+1,x
+		sta 	zTemp1+1
+
+		lda 	(zTemp1) 					; length of smaller of the two in X.
+		cmp 	(zTemp0) 					; check it matches so far normally.
+		bcc 	_EXCBCSmaller
+		lda 	(zTemp0)
+_EXCBCSmaller:
+		cmp 	#0							; if zero common length matches
+		beq 	_EXCBCMatches 
+		tax
+		;
+		;		Check the common length parts match.
+		;
+		ldy 	#0 							; match the strings.		
+_EXCBCCheckSmallerMatches:
+		iny 								; compare directly as far as common length
+		sec
+		lda 	(zTemp0),y
+		sbc 	(zTemp1),y
+		bne 	_EXCBCExit2
+		dex 
+		bne 	_EXCBCCheckSmallerMatches
 		;
 		;		The common length parts match, so we compare the lengths.
 		;
-;_EXCBCMatches:
-;		sec
-;		lda 	(IFR0) 						; common length matches. If same length equal
-;		sbc 	(IFR1)						; if len(r1) > len(r0) then r1 is longer
+_EXCBCMatches:
+		sec
+		lda 	(zTemp0) 					; common length matches. If same length equal
+		sbc 	(zTemp1)					; if len(r1) > len(r0) then r1 is longer
 
-;_EXCBCExit2:
-;		ply
-;		cmp 	#0 							; 0 equal.
-;		beq 	_EXCBCReturn
-;		bmi 	_EXCBCFF 					; return $FF if <
-;		lda 	#1 							; return 1 if >
-;_EXCBCReturn:
-;		rts
-;_EXCBCFF:
-;		lda 	#$FF
-;		rts				
-;
-;_EXCBCRange:
-;		.error_range				
+_EXCBCExit2:
+		plx 								; restore X & Y
+		ply
+		cmp 	#0 							; 0 equal.
+		beq 	_EXCBCReturn
+		bmi 	_EXCBCFF 					; return $FF if <
+		lda 	#1 							; return 1 if >
+_EXCBCReturn:
+		rts
+_EXCBCFF:
+		lda 	#$FF
+		rts				
 		.send code
 				
 
