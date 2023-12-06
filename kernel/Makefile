@@ -11,9 +11,10 @@
 # ***************************************************************************************
 
 ifeq ($(OS),Windows_NT)
-include ..\documents\common.make
+#is this really needed? Windows user may use WSL2
+include ..\build_env\common.make
 else
-include ../documents/common.make
+include ../build_env/common.make
 endif
 
 BINARY = firmware
