@@ -15,4 +15,5 @@ ErrorMessageText:
 	.text	"out of string memory",0
 	.text	"bad argument",0
 	.text	"string too long",0
+	.text	"cannot assign",0
 	.send code

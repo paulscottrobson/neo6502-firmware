@@ -24,6 +24,7 @@ errors = """
 	string : 	out of string memory
 	argument : 	bad argument
 	stringsize: string too long
+	reference: 	cannot assign
 
 """
 

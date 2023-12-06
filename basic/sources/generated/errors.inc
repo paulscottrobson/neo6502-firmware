@@ -61,3 +61,8 @@ error_stringsize .macro
 	jmp	ErrorHandler
 	.endm
 
+error_reference .macro
+	lda	#13
+	jmp	ErrorHandler
+	.endm
+
