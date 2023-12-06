@@ -14,7 +14,7 @@ StandardVectorTable:
 	.word	Unimplemented            ; $88 event(
 	.word	Unimplemented            ; $89 inkey$(
 	.word	EXPUnaryAsc              ; $8a asc(
-	.word	Unimplemented            ; $8b chr$(
+	.word	ChrUnary                 ; $8b chr$(
 	.word	UnarySqr                 ; $8c sqr(
 	.word	EXPUnaryLen              ; $8d len(
 	.word	UnaryAbs                 ; $8e abs(
