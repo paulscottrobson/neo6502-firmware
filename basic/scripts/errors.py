@@ -20,9 +20,11 @@ errors = """
 	break : 	break pressed
 	stop : 		program stopped
 	structure :	structure imbalance
-	stack : 	out of stack space.
-	string : 	out of string memory.
+	stack : 	out of stack space
+	string : 	out of string memory
 	argument : 	bad argument
+	stringsize: string too long
+
 """
 
 err = []

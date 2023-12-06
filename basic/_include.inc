@@ -16,6 +16,7 @@
 	.include "sources/arithmetic/exprutils.asm"
 	.include "sources/arithmetic/term.asm"
 	.include "sources/arithmetic/unary/asc.asm"
+	.include "sources/arithmetic/unary/chr.asm"
 	.include "sources/arithmetic/unary/dollar.asm"
 	.include "sources/arithmetic/unary/len.asm"
 	.include "sources/arithmetic/unary/simple.asm"

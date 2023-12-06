@@ -37,19 +37,6 @@ DRCType:
 
 ; ************************************************************************************************
 ;
-; 											Add
-;
-; ************************************************************************************************
-
-BinaryAdd: ;; [+]
-		jsr 	DereferenceCheckTypes
-		bmi 	DRCType
-		lda 	#0
-		jsr 	DoMathCommand
-		jmp 	EXPRMainLoop
-
-; ************************************************************************************************
-;
 ; 											Subtract
 ;
 ; ************************************************************************************************
@@ -118,6 +105,74 @@ BinaryModulus: ;; [%]
 		jsr 	DoMathCommand
 		bra 	BinaryCheckResult
 
+; ************************************************************************************************
+;
+; 											Add
+;
+; ************************************************************************************************
+
+BinaryAdd: ;; [+]
+		jsr 	DereferenceCheckTypes
+		bmi 	_BAConcatenate
+		lda 	#0
+		jsr 	DoMathCommand
+		jmp 	EXPRMainLoop
+
+_BAConcatenate:
+		phy
+
+		lda 	XSNumber0+1,x 				; work out the length of the concatenated string.
+		sta 	zTemp0 						; pushing addresses onto the stack
+		pha
+		lda 	XSNumber1+1,x
+		sta 	zTemp0+1
+		pha
+		lda 	XSNumber0,x
+		sta 	zTemp1
+		pha
+		lda 	XSNumber1,x
+		sta 	zTemp1+1
+		pha
+		;
+		clc
+		lda 	(zTemp0)
+		adc 	(zTemp1)
+		bcs 	_BALength
+		cmp 	#252
+		bcs 	_BALength
+		jsr 	StringTempAllocate 			; allocate slot for it.
+
+		ply
+		pla
+		jsr 	_BAOutString 				; output strings
+		
+		ply
+		pla
+		jsr 	_BAOutString
+
+		ply
+		jmp 	EXPRMainLoop 				; and loop round.
+
+_BALength:
+		.error_stringsize		
+
+_BAOutString: 								; output string at stack,X
+		sta 	zTemp0
+		sty 	zTemp0+1
+		phx
+		lda 	(zTemp0) 					; get length
+		beq 	_BAOSExit
+		tax 								; count in X
+		ldy 	#1 							; index to read
+_BAOSLoop:
+		lda 	(zTemp0),y
+		jsr 	StringTempWrite
+		iny
+		dex
+		bne 	_BAOSLoop		
+_BAOSExit:
+		plx
+		rts
 		.send 		code
 
 ; ************************************************************************************************

@@ -16,7 +16,7 @@ bc = BinaryChecker()
 bbc = BinaryBooleanChecker()
 uc = UnaryChecker()
 
-for i in range(0,3):
+for i in range(0,20):
 	s1 = TestString()
 	s2 = TestString()
 	if random.randint(0,4) == 0:
@@ -29,11 +29,11 @@ for i in range(0,3):
 	bbc.generate(s1,">=",s2,s1.get() >= s2.get())
 	bbc.generate(s1,"<>",s2,s1.get() != s2.get())
 	
-#	print('assert "{0}"+"{1}" = "{0}{1}"'.format(s1.get(),s2.get()))
+	print('assert "{0}"+"{1}" = "{0}{1}"'.format(s1.get(),s2.get()))
 
-#	n1 = TestNumber(True)
-#	n1.set(random.randint(64,95))
-#	uc.generate(n1,"asc(chr$",n1.get())
+	n1 = TestNumber(True)
+	n1.set(random.randint(64,95))
+	uc.generate(n1,"asc(chr$",n1.get())
 
 #	n1 = TestNumber()
 #	uc.generate(n1,"val(str$",n1.get(),0.5)
