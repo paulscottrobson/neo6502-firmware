@@ -37,7 +37,46 @@ Command_Let: ;; [let]
 ; ************************************************************************************************
 
 AssignValueToReference:
-		.byte 	3
+		lda 	XSControl,x 				; do the types match ?
+		eor 	XSControl+1,x
+		bmi 	_AVTRType 					; no, error.
+		lda 	XSControl,x
+		bmi 	_AVTRString
+		;
+		;		Number assign.
+		;
+		lda 	XSNumber0,x 				; copy address to zTemp0
+		sta 	zTemp0
+		lda 	XSNumber1,x
+		sta 	zTemp0+1
+		;
+		;		Copy data and type out.
+		;
+		phy
+		lda 	XSNumber0+1,x 				; copy the value into the slot.
+		sta 	(zTemp0)
+		ldy 	#1 				
+		lda 	XSNumber1+1,x
+		sta 	(zTemp0),y
+		iny
+		lda 	XSNumber2+1,x
+		sta 	(zTemp0),y
+		iny
+		lda 	XSNumber3+1,x
+		sta 	(zTemp0),y
+		iny
+		lda 	XSControl+1,x 				; copy the type
+		and 	#$FF-XS_ISVARIABLE 			; without the variable bit set
+		sta 	(zTemp0),y
+		ply
+		rts
+
+_AVTRType:
+		.error_type		
+		;
+		;		Concrete string into variable address.
+		;
+_AVTRString:
 
 		.send code
 				

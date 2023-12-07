@@ -18,7 +18,7 @@ def sign(n):
 	return -1 if n < 0 else 1
 
 uc = UnaryChecker()
-for i in range(0,20):
+for i in range(0,40):
 	n1 = TestNumber()
 	s1 = TestString()
 	uc.generate(n1,"abs",abs(n1.get()))

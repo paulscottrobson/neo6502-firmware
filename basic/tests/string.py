@@ -16,7 +16,7 @@ bc = BinaryChecker()
 bbc = BinaryBooleanChecker()
 uc = UnaryChecker()
 
-for i in range(0,20):
+for i in range(0,50):
 	s1 = TestString()
 	s2 = TestString()
 	if random.randint(0,4) == 0:

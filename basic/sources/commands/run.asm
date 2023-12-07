@@ -102,7 +102,10 @@ _RUNBreak:
 		; ----------------------------------------------------------------------------------------
 
 _RUNNotToken:	
-		.byte 	3	
+		cmp 	#$20 						; error if not identifier
+		bcs 	_RUNSyntax
+		jsr 	Command_Let 				; do a LET implied	
+		bra 	RUNNewCommand
 
 ; ************************************************************************************************
 ;
