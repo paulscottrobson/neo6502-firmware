@@ -14,7 +14,7 @@ from testutils import *
 
 bc = BinaryChecker()
 bbc = BinaryBooleanChecker()
-for i in range(0,20):
+for i in range(0,40):
 	n1 = TestNumber()
 	n2 = TestNumber()
 	bc.generate(n1,"+",n2,n1.get()+n2.get())

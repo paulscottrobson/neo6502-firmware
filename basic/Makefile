@@ -43,11 +43,11 @@ wedge:
 
 build: prelim
 	$(ASSEMBLER) basic.asm -L build/basic.lst -o build/basic.bin
-	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic C000
+	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 1000
 	$(CCOPY) build$(S)basic_binary.h $(BINDIR)
 
 run:build	
-	$(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@C000 build$(S)wedge.bin@FFFA
+	$(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@1000 build$(S)wedge.bin@FFFA
 
 import:
 	make -C ..$(S)emulator import
@@ -65,7 +65,8 @@ test:
 	make brackets
 	make unary
 	make string
-	
+	make assign
+
 binary:
 	$(PYTHON) tests$(S)binary.py >build$(S)test.bas
 	make run
@@ -77,4 +78,7 @@ unary:
 	make run
 string:
 	$(PYTHON) tests$(S)string.py >build$(S)test.bas
+	make run
+assign:
+	$(PYTHON) tests$(S)assign.py >build$(S)test.bas
 	make run

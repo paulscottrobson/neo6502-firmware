@@ -25,10 +25,10 @@
 		* = $200
 		.dsection storage
 
-		* = $C000 							; BASIC ROM goes here.
+		* = $1000 							; BASIC ROM goes here.
 		.dsection code
 
-		HIGHMEMORY = $C000
+		HIGHMEMORY = $8000
 		STACKPAGES = 8 
 
 ; ************************************************************************************************

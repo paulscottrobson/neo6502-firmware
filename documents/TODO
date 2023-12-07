@@ -1,9 +1,6 @@
 TODO List
 ---------
 
-- Variables, Assignment
-- Default (e.g. not using LET)
-- Assignment test (no strings)
 - String concrete/assign
 - Assignment test all
 - Erasing variables on clear. 

@@ -43,7 +43,7 @@ class IdentifierStore(object):
 			name = name[:-1]
 			isInteger = False
 
-		if ((len(self.store) + len(name) + 6) & 0xFF) >= 0xFC:								# Close to overflow. $FC in text
+		if (len(self.store) & 0xFF) + len(name) + 6 >= 0xFC:								# Close to overflow. $FC in text
 			self.store[0] += 1 																# Another page. 
 		self.store.append(len(name)+6)														# Offset byte
 		self.store += [0,0,0,0] 															# default value

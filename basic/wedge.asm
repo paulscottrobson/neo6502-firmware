@@ -1,5 +1,5 @@
 
-		Start = $C000
+		Start = $1000
 
 		* = $FFFA
 		.word 	Start
