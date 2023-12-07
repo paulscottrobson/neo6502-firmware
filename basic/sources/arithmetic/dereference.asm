@@ -20,7 +20,7 @@
 
 DereferenceTOS:	
 		lda 	XSControl,x 				; check if reference ?
-		and 	#XS_ISREFERENCE
+		and 	#XS_ISVARIABLE
 		beq 	_DRTExit 					; no, exit
 		;
 		lda 	XSNumber0,x 				; copy address to zTemp0
@@ -28,15 +28,13 @@ DereferenceTOS:
 		lda 	XSNumber1,x
 		sta 	zTemp0+1
 		;
-		lda 	XSControl,x 				; clear reference bits.
-		pha 								; preserve ref bits so we can check byte.
-		and 	#$FF-XS_ISREFERENCE-XS_ISBYTEREFERENCE
+		lda 	XSControl,x 				; clear reference bit.
+		and 	#$FF-XS_ISVARIABLE
 		sta 	XSControl,x
-		pla
-		and 	#XS_ISBYTEREFERENCE
-		bne 	_DRTByteRef
 
-		phy 								; word reference.
+		bmi 	_DRTString
+
+		phy 								; dereference a number.
 		lda 	(zTemp0)
 		sta 	XSNumber0,x
 		ldy 	#1
@@ -51,14 +49,33 @@ DereferenceTOS:
 		ply
 		bra 	_DRTExit
 
-_DRTByteRef:		 						; byte reference
-		lda 	(zTemp0)
+_DRTString:		
+		phy
+		ldy 	#1
+		lda 	(zTemp0) 				; is it $0000 e.g. unassigned string ?
+		ora 	(zTemp0),y
+		beq 	_DRTNullString
+
+		lda 	(zTemp0) 				; dereference assigned string.
 		sta 	XSNumber0,x
-		stz 	XSNumber1,x
-		stz 	XSNumber2,x
-		stz 	XSNumber3,x
+		ldy 	#1
+		lda 	(zTemp0),y
+		sta 	XSNumber1,x
+		ply
+		bra 	_DRTExit
+
+_DRTNullString: 							; string dereferenced is $0000 e.g. unassigned.
+		lda 	#_DRTNullStringAddr & $FF
+		sta 	XSNumber0,x
+		lda 	#_DRTNullStringAddr >> 8
+		sta 	XSNumber1,x
+		ply
+
 _DRTExit:		
 		rts
+
+_DRTNullStringAddr:
+		.byte 	0
 
 		.send 		code
 
@@ -72,4 +89,3 @@ _DRTExit:
 ;		==== 			=====
 ;
 ; ************************************************************************************************
-

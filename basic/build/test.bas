@@ -1,1 +1,1 @@
-let result = 22
+let result$ = fred$

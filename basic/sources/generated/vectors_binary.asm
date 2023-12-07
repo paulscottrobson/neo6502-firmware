@@ -20,6 +20,4 @@ BinaryVectorTable:
 	.word	CMPCompareLessEqual      ; $2e <=
 	.word	CMPCompareNotEqual       ; $2f <>
 	.word	CMPCompareEqual          ; $30 =
-	.word	BinRefWord               ; $31 !
-	.word	BinRefByte               ; $32 ?
 	.send code

@@ -88,7 +88,7 @@ class TokenSet(object):
 		self.add(0x20,"""
 			 +:3	-:3 	*:4 	/:4		>>:4	<<:4	%:4 	\\:4
 			 &:1	|:1		^:1		>:2		>=:2	<:2		<=:2	<>:2
-			 =:2 	!:5 	?:5
+			 =:2 	
 			""") 		
 		#
 		#		Unary tokens from $80-$B0
@@ -97,7 +97,7 @@ class TokenSet(object):
 			!!STR 	$ 		(		RAND(	RND(	ISVAL(	INT(	
 			TIME	EVENT(	INKEY$(	ASC(	CHR$(	SQR( 	LEN(  	ABS(  	SGN( 	
 			VAL( 	STR$( 	MID$(	LEFT$( 	RIGHT$(	SIN( 	COS(	TAN(	ATAN(	
-			LOG(	EXP( 	KEY(		
+			LOG(	EXP( 	KEY(	PEEK(	DEEK(
 			""",48)
 		#
 		#		Structure tokens
@@ -113,7 +113,7 @@ class TokenSet(object):
 			!!END 	!!SH1	!!SH2	!!DEC 	TO 		LET 	PRINT	INPUT	
 			CALL 	SYS 	EXIT	, 		; 		: 		' 		)		
 			READ 	DATA 	[		]		# 		. 		ELSE	WHEN
-			DOWNTO
+			DOWNTO 	POKE	DOKE
 			""")
 		#
 		#		Keyword tokens (minor)

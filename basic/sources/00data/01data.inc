@@ -26,8 +26,7 @@ StackSize = 8
 XS_TYPEMASK = $C0
 XS_TYPEBIT = $80
 XS_STRING = $80
-XS_ISREFERENCE = $20
-XS_ISBYTEREFERENCE = $10
+XS_ISVARIABLE = $20
 
 		.section zeropage
 XSStack:
