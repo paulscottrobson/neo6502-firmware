@@ -21,8 +21,8 @@ for i in range(0,80):
 			newID += chr(random.randint(65,90))
 		else:
 			newID += chr(random.randint(48,57))
-#	if random.randint(0,1) == 0:
-#		newID += "$"
+	if random.randint(0,1) == 0:
+		newID += "$"
 
 	if newID not in idValues:
 		identifiers.append(newID)
