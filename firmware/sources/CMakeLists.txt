@@ -17,6 +17,7 @@ target_compile_definitions(firmware
 )
 
 target_link_libraries(firmware
+	hardware_pio
 	pico_stdlib
 	pico_multicore
 	pico_util
