@@ -77,6 +77,17 @@ _AVTRType:
 		;		Concrete string into variable address.
 		;
 _AVTRString:
+		lda 	XSNumber0+1,x 				; copy target string to zsTemp
+		sta 	zsTemp
+		lda 	XSNumber1+1,x
+		sta 	zsTemp+1
+		;
+		phy
+		ldy 	XSNumber1,x 				; YA is the address of the current concreted string if any
+		lda 	XSNumber0,x
+		jsr 	StringConcrete
+		ply
+		rts
 
 		.send code
 				
