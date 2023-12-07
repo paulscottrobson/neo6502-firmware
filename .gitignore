@@ -1,6 +1,3 @@
-
-
-
 basic/build/basic.bin
 basic/build/basic_binary.h
 basic/build/basic.lst
@@ -42,3 +39,7 @@ release/*
 scripts/build.count
 software/apple1-basic/build/a1basic.lst
 software/fig-forth/build/fig-forth.lst
+build
+.vscode
+*.nix
+.envrc
