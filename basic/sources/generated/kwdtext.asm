@@ -20,8 +20,6 @@ BinaryTokenText:
 	.byte	$02,$3c,$bd                   	; $ 2e <=
 	.byte	$02,$3c,$be                   	; $ 2f <>
 	.byte	$01,$bd                       	; $ 30 =
-	.byte	$01,$a1                       	; $ 31 !
-	.byte	$01,$bf                       	; $ 32 ?
 	.byte	$FF
 
 BaseTokenText:
@@ -53,8 +51,8 @@ BaseTokenText:
 	.byte	$04,$4c,$4f,$47,$a8           	; $ 99 LOG(
 	.byte	$04,$45,$58,$50,$a8           	; $ 9a EXP(
 	.byte	$04,$4b,$45,$59,$a8           	; $ 9b KEY(
-	.byte	$00                           	; $ 9c 
-	.byte	$00                           	; $ 9d 
+	.byte	$05,$50,$45,$45,$4b,$a8       	; $ 9c PEEK(
+	.byte	$05,$44,$45,$45,$4b,$a8       	; $ 9d DEEK(
 	.byte	$00                           	; $ 9e 
 	.byte	$00                           	; $ 9f 
 	.byte	$00                           	; $ a0 
@@ -114,6 +112,8 @@ BaseTokenText:
 	.byte	$04,$45,$4c,$53,$c5           	; $ d6 ELSE
 	.byte	$04,$57,$48,$45,$ce           	; $ d7 WHEN
 	.byte	$06,$44,$4f,$57,$4e,$54,$cf   	; $ d8 DOWNTO
+	.byte	$04,$50,$4f,$4b,$c5           	; $ d9 POKE
+	.byte	$04,$44,$4f,$4b,$c5           	; $ da DOKE
 	.byte	$FF
 
 Shift1TokenText:
@@ -151,6 +151,4 @@ BinaryPrecedence:
 	.byte	2		; <=
 	.byte	2		; <>
 	.byte	2		; =
-	.byte	5		; !
-	.byte	5		; ?
 	.send code

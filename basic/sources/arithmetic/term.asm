@@ -53,12 +53,12 @@ _ETIdentifierOrSpecial:
 	 	asl 	a 							; bit 5 now in sign slot
 	 	bpl 	_ETIsIdentifier  			; 0 it is 00-1F e.g. identifier
 	 	;
-	 	;		Here it's a special case, which is - ! or ? - binary tokens with unary functionality
+	 	;		Here it's a special case of -, a binary token with unary functionality
 	 	;
 	 	lda 	(codePtr),y 				; get and consume. clearer than reuse
 	 	iny
 	 	cmp 	#KWD_MINUS 					; negation.
-	 	bne 	_ETCheckReference 		
+	 	bne 	_ETSyntax
 	 	;
 	 	jsr 	EvaluateTerm 				; it's minus *something*.
 	 	jsr 	DereferenceTOS 				; dereference it.
@@ -67,30 +67,8 @@ _ETIdentifierOrSpecial:
 	 	lda 	#16 						; negation function - needs optimising for ints 
 	 	jsr 	DoMathCommand 				; work it out
 	 	rts 	
-	 	;
-	 	; 		So here, we have either byte reference or word reference.
-	 	;
-_ETCheckReference:
-		cmp 	#KWD_QMARK
-		beq 	_ETHaveReference
-		eor 	#KWD_PLING
-		beq 	_ETHaveReference
 _ETSyntax:		
 		.error_syntax
-_ETHaveReference:							; A = 0 (!) #0 (?)		
-		pha 								; save type.
-	 	jsr 	EvaluateTerm 				; get reference address
-	 	jsr 	DereferenceTOS 			
-	 	lda 	XSControl,x 				; must be integer
-	 	and 	#XS_TYPEMASK
-	 	bne 	_ETBadType
-	 	pla 								; get type of reference back
-	 	beq 	_ETIsWord 					; if zero, it's a word reference
-	 	lda 	#XS_ISBYTEREFERENCE
-_ETIsWord:	 								; now 0 for word, $20 for byte
-		ora 	#XS_ISREFERENCE 			; now $20 / $30 for word/byte reference
-		sta 	XSControl,x 				; update type
-		rts		
 _ETBadType:
 		.error_type		
 		;
@@ -114,7 +92,7 @@ _ETIsIdentifier:
 		ldy 	#4
 		lda 	(zTemp0),y
 		and 	#XS_TYPEMASK 				; type info
-		ora 	#XS_ISREFERENCE 			; set reference bit (is word)
+		ora 	#XS_ISVARIABLE 				; set variable reference bit (is word)
 		ply
 		sta 	XSControl,x
 		rts

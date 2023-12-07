@@ -102,30 +102,7 @@ _BSIsZero:
 _BSExit:
 		plp 								; throw direction.
 		jmp 	EXPRMainLoop
-
-; ************************************************************************************************
-;
-; 									 Reference operators
-;
-; ************************************************************************************************
-
-BinRefWord: ;; [!]
-		lda 	#XS_ISREFERENCE
-		bra 	BinRefMain
-BinRefByte: ;; [?]
-		lda 	#XS_ISREFERENCE|XS_ISBYTEREFERENCE		
-BinRefMain:
-		pha
-		jsr 	DereferenceCheckTypes
-		bmi 	_BRWType
-		clc
-		.binop 	adc
-		pla
-		sta 	XSControl,x
-		jmp 	EXPRMainLoop
-_BRWType:
-		.error_type
-		
+	
 ; ************************************************************************************************
 ;
 ; 										Check top two integer.

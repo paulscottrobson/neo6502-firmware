@@ -20,13 +20,12 @@
 
 Command_Let: ;; [let]
 		ldx 	#0 							; slot 0, same precedence as ! operator -1
-		lda 	KWD_PLING-$20+BinaryPrecedence		
-		dec 	a
-		jsr 	EXPEvaluateExpressionPrecedenceA
+		jsr 	EvaluateTerm 				; term, which is the variable to assign to in slot 0.
 		lda 	#KWD_EQUAL 					; check '=' operator.
 		jsr 	ERRCheckA
 		inx
-		jsr 	EXPEvalNumber 				; rhs in slot 1.
+		jsr 	EXPEvaluateExpressionAtX	; get a value
+		jsr 	DereferenceTOS				; dereference it
 		dex
 		jsr 	AssignValueToReference
 		rts
@@ -39,28 +38,6 @@ Command_Let: ;; [let]
 
 AssignValueToReference:
 		.byte 	3
-		lda 	XSControl,x 				; check types match
-		eor 	XSControl+1,x
-		bmi 	_AVTType 					; they don't.
-
-		lda 	XSControl,x 				; check it's a reference.
-		and 	#XS_ISREFERENCE 			
-		beq 	_AVTRReference
-
-		lda 	XSControl,x 				; check type.
-		bmi 	_AVTRString
-		;
-		;		Number assignment. Different code for indirection and variable access.
-		;
-
-
-
-_AVTType:
-		.error_type
-_AVTRReference:
-		.error_reference
-
-_AVTRString:
 
 		.send code
 				

@@ -18,8 +18,6 @@ KWD_LESS                           = $2d ; <
 KWD_LESSEQUAL                      = $2e ; <=
 KWD_LESSGREATER                    = $2f ; <>
 KWD_EQUAL                          = $30 ; =
-KWD_PLING                          = $31 ; !
-KWD_QMARK                          = $32 ; ?
 KWD_SYS_STR                        = $80 ; !!str
 KWD_DOLLAR                         = $81 ; $
 KWD_LPAREN                         = $82 ; (
@@ -48,6 +46,8 @@ KWD_ATANLPAREN                     = $98 ; atan(
 KWD_LOGLPAREN                      = $99 ; log(
 KWD_EXPLPAREN                      = $9a ; exp(
 KWD_KEYLPAREN                      = $9b ; key(
+KWD_PEEKLPAREN                     = $9c ; peek(
+KWD_DEEKLPAREN                     = $9d ; deek(
 KWD_WHILE                          = $b0 ; while
 KWD_WEND                           = $b1 ; wend
 KWD_IF                             = $b2 ; if
@@ -89,6 +89,8 @@ KWD_PERIOD                         = $d5 ; .
 KWD_ELSE                           = $d6 ; else
 KWD_WHEN                           = $d7 ; when
 KWD_DOWNTO                         = $d8 ; downto
+KWD_POKE                           = $d9 ; poke
+KWD_DOKE                           = $da ; doke
 KWD_CLEAR                          = $180 ; clear
 KWD_NEW                            = $181 ; new
 KWD_RUN                            = $182 ; run

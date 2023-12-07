@@ -31,8 +31,8 @@ StandardVectorTable:
 	.word	UnaryLog                 ; $99 log(
 	.word	UnaryExp                 ; $9a exp(
 	.word	Unimplemented            ; $9b key(
-	.word	Unimplemented            ; $9c 
-	.word	Unimplemented            ; $9d 
+	.word	Unimplemented            ; $9c peek(
+	.word	Unimplemented            ; $9d deek(
 	.word	Unimplemented            ; $9e 
 	.word	Unimplemented            ; $9f 
 	.word	Unimplemented            ; $a0 
@@ -92,4 +92,6 @@ StandardVectorTable:
 	.word	Unimplemented            ; $d6 else
 	.word	Unimplemented            ; $d7 when
 	.word	Unimplemented            ; $d8 downto
+	.word	Unimplemented            ; $d9 poke
+	.word	Unimplemented            ; $da doke
 	.send code

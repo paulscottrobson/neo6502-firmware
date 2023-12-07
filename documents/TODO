@@ -1,18 +1,13 @@
 TODO List
 ---------
 
-- Reference becomes
-	XS_ISVARIABLE
-	XS_BYTEREFERENCE
-	XS_WORDREFERENCE
-
-- OR use PEEK POKE DEEK DOKE etc.
-
-- Fix term to work correctly and check it.
-
-- Update dereference code to suit - 3 options, variables, word, byte. 
-
 - Variables, Assignment
+- Default (e.g. not using LET)
+- Assignment test (no strings)
+- String concrete/assign
+- Assignment test all
+- Erasing variables on clear. 
+- Peek and Poke, Deek and Doke
 
 - Input
 	Input Number
