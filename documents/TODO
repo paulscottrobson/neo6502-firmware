@@ -1,19 +1,23 @@
 TODO List
 ---------
 
-- Erasing variables on clear. 
-- Peek and Poke, Deek and Doke
+- Change timer to be updated automatically, remove the dispatcher call.
+
+- Structures
+
+- Inkey$() and Key()
 
 - Input
-	Input Number
-	Input String
+	Input Number/String
+
+- Arrays
 
 - Locale handling
 - Console colour and cursor control / positioning.
 
 - Audio system driver on emulator, and audio interface
 - Function key handling
-- File I/O - when I have the hardware.
+- File I/O stuff.
 
 Notes
 ----
@@ -26,10 +30,9 @@ Optimise me (Integers)
 	- negation in term. 
 	- Add, Sub, Cmp in binary calculators.
 	- Abs and Sgn unary functions.
-
 		
 Add to doc
+----------
 
-PRINT/INPUT
-LET
+INPUT
 
