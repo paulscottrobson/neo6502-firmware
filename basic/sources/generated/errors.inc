@@ -66,3 +66,8 @@ error_reference .macro
 	jmp	ErrorHandler
 	.endm
 
+error_line .macro
+	lda	#14
+	jmp	ErrorHandler
+	.endm
+

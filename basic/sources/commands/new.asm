@@ -19,7 +19,10 @@
 		.section code
 
 Command_NEW:	;; [new]
-		stz 	Program 					; Erase current program
+		lda 	#1 							; 1 page of identifiers
+		sta 	Program
+		stz 	Program+1 					; empty it.
+		stz 	Program+256 				; Erase current program
 		jsr 	ClearCode 					; Run CLR
 		jmp 	Command_END 				; Run END
 		.send code

@@ -2,13 +2,13 @@ TODO List
 ---------
 
 - Structures
-	GOTO/GOSUB/RETURN
+	GOSUB/RETURN
 	FOR/NEXT
 	IF
 	WHILE/WEND
 	DO/EXIT/LOOP
 	Procedure scan
-	CALL
+	CALL / PROC / ENDPROC
 
 - Change timer to be updated automatically, remove the dispatcher call.
 - Break test in loops.

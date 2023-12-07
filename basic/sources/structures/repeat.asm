@@ -33,6 +33,7 @@ Command_REPEAT:	;; [repeat]
 Command_UNTIL:	;; [until]
 		lda 	#STK_REPEAT 				; check REPEAT			
 		jsr 	StackCheckFrame
+		ldx 	#0
 		jsr 	EXPEvalNumber 				; work out the test
 		jsr 	CheckIfZero
 		beq 	_CULoopBack 				; if so keep looping

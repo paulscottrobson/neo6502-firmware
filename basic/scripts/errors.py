@@ -25,6 +25,7 @@ errors = """
 	argument : 	bad argument
 	stringsize: string too long
 	reference: 	cannot assign
+	line : 		unknown line number
 
 """
 
