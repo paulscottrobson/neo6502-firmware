@@ -72,6 +72,7 @@ _CPLoop:
 		;
 _CPNotInput:		
 		jsr 	EXPEvaluateExpressionAt0 	; evaluate expression.
+		jsr 	DereferenceTOS
 		bit 	XSControl,x 				; is it a number ?
 		bpl 	_CPNumber
 		;
