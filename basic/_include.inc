@@ -40,6 +40,7 @@
 	.include "sources/generated/vectors_binary.asm"
 	.include "sources/generated/vectors_extended.asm"
 	.include "sources/generated/vectors_standard.asm"
+	.include "sources/structures/repeat.asm"
 	.include "sources/support/errors/syntax.asm"
 	.include "sources/support/stack/bytes.asm"
 	.include "sources/support/stack/frames.asm"

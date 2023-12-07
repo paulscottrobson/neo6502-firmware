@@ -57,8 +57,8 @@ StandardVectorTable:
 	.word	Unimplemented            ; $b3 endif
 	.word	Unimplemented            ; $b4 do
 	.word	Unimplemented            ; $b5 loop
-	.word	Unimplemented            ; $b6 repeat
-	.word	Unimplemented            ; $b7 until
+	.word	Command_REPEAT           ; $b6 repeat
+	.word	Command_UNTIL            ; $b7 until
 	.word	Unimplemented            ; $b8 proc
 	.word	Unimplemented            ; $b9 endproc
 	.word	Unimplemented            ; $ba for

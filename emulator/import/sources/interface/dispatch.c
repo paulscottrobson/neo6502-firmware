@@ -56,11 +56,11 @@ void DSPReset(void) {
     const char bootString[] = PROMPT;
     MEMInitialiseMemory();                                                      // Set up memory, load kernel ROM
     GFXSetMode(0);                                                              // Initialise graphics
-    KBDInitialise();                                                            // Initialise keyboard
-    KBDEvent(0,0xFF,0);                                                         // Reset the keyboard manager
-    SNDInitialise();                                                            // Initialise sound
     const char *c = bootString;
     while (*c != '\0') CONWrite(*c++);	
+    KBDInitialise();                                                            // Initialise keyboard & USB system.
+    KBDEvent(0,0xFF,0);                                                         // Reset the keyboard manager
+    SNDInitialise();                                                            // Initialise sound
 }
 
 // ***************************************************************************************

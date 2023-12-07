@@ -1,0 +1,325 @@
+; ************************************************************************************************
+; ************************************************************************************************
+;
+;		Name:		for.asm
+;		Purpose:	For/Next loops
+;		Created:	2nd June 2023
+;		Reviewed:   No
+;		Author:		Paul Robson (paul@robsons.org.uk)
+;
+; ************************************************************************************************
+; ************************************************************************************************
+
+		.section code
+
+; ************************************************************************************************
+;
+;										FOR command
+;
+; ************************************************************************************************
+
+Command_FOR:	;; [for]
+
+		lda 	#STK_FOR 					; create frame
+		jsr 	StackOpen 
+		jsr 	CommandLET 					; do "I = 1" bit
+
+		phy 								; save variable address to +4,+5
+		ldy 	#4
+		lda 	zTemp0
+		sta 	(basicStack),y
+		iny
+		lda 	zTemp0+1
+		sta 	(basicStack),y
+		ply
+
+		lda 	#PR_TO 						; TO symbol required.
+		jsr 	ERRCheckA
+		;
+		jsr 	EXPEvalNumber 				; evaluate the terminal value.
+		lda 	#12 						; save in slots 12-17
+		ldx 	#IFR0
+		jsr 	CFSaveR0X
+		;
+		lda 	(codePtr),y 				; STEP here ?
+		cmp 	#PR_STEP
+		bne 	_CFStep1
+		iny 								; consume step
+		jsr 	EXPEvalNumber 				; evaluate STEP
+		bra 	_CFWriteStep
+
+_CFStep1:
+		ldx 	#IFR0 						; default R0, 1
+		lda 	#1
+		jsr 	IFSetByte
+		;
+		phy 								; check for fast loop,step 1, integer start/end.
+		ldy 	#4 							; get variable address
+		lda 	(basicStack),y
+		sta 	zTemp0
+		iny
+		lda 	(basicStack),y
+		sta 	zTemp0+1
+		ldy 	#IFExponent 				; check that's an integer
+		lda 	(zTemp0),y
+		bne 	_CFNotOptimised
+		ldy 	#12+IFExponent 				; check terminal value is integer.
+		lda 	(basicStack),y
+		bne 	_CFNotOptimised
+
+		lda 	#$FF 						; set the flags to $FF in the step, which we never use.
+		sta 	IFR0+IFFlags
+_CFNotOptimised:
+		ply		
+
+_CFWriteStep:
+	
+		ldx 	#IFR0 						; Write to additive.
+		lda 	#6
+		jsr 	CFSaveR0X
+		
+		jsr 	STKSaveCodePosition 		; save loop position
+		rts
+
+;:[for .. next]
+; Repeats a block of code a given number of times. The index variable (I in the examples) starts 
+; at the first value and counts towards the second. The step is 1 by default, but can be any 
+; number.
+; { for i = 1 to 10:print i:next }
+; { for i = 1 to 20 step 2:print i:next }
+
+; ************************************************************************************************
+;
+;							Load RX from (Stack),Y passed in A
+;
+; ************************************************************************************************
+
+CFLoadR0X:
+		phy
+		tay
+		lda 	(basicStack),y
+		sta 	IFMantissa0,x
+		iny
+		lda 	(basicStack),y
+		sta 	IFMantissa1,x
+		iny
+		lda 	(basicStack),y
+		sta 	IFMantissa2,x
+		.if 	IFMSize == 4
+		iny
+		lda 	(basicStack),y
+		sta 	IFMantissa3,x
+		.endif
+		iny
+		lda 	(basicStack),y
+		sta 	IFExponent,x
+		iny
+		lda 	(basicStack),y
+		sta 	IFFlags,x
+		iny
+		ply
+		rts
+
+; ************************************************************************************************
+;
+;									Save RX to (Stack),Y
+;
+; ************************************************************************************************
+
+CFSaveR0X:
+		phy
+		tay
+		lda 	IFMantissa0,x
+		sta 	(basicStack),y
+		iny
+		lda 	IFMantissa1,x
+		sta 	(basicStack),y
+		iny
+		lda 	IFMantissa2,x
+		sta 	(basicStack),y
+		.if 	IFMSize == 4
+		iny
+		lda 	IFMantissa3,x
+		sta 	(basicStack),y
+		.endif
+		iny
+		lda 	IFExponent,x
+		sta 	(basicStack),y
+		iny
+		lda 	IFFlags,x
+		sta 	(basicStack),y
+		ply
+		rts
+
+; ************************************************************************************************
+;
+;										NEXT command
+;
+; ************************************************************************************************
+
+Command_NEXT:	;; [next]
+		lda 	#STK_FOR
+		jsr 	StackCheckFrame
+		;
+		phy 								; check optimised loop
+		ldy 	#6+IFFlags
+		lda 	(basicStack),y
+		ply
+		cmp 	#$FF
+		beq 	_CNOptimised
+		;
+		jsr 	_CNLoadValue 				; load index value to R0.
+
+		ldx 	#IFR1 						; load adding value to R1.
+		lda 	#6
+		jsr 	CFLoadR0X
+		jsr 	IFAdd 						; add them together and write back.
+		jsr 	_CNSaveValue 
+
+		lda 	#12 						; terminal value in R1
+		ldx 	#IFR1
+		jsr 	CFLoadR0X
+		jsr 	IFCompare 					; compare terminal vs current
+
+		ldx 	#IFR0 						; if zero, e.g. equal, loop back.
+		jsr 	IFCheckZero
+		beq 	_CNLoopBack
+		;
+		lda 	IFR0+IFFlags 				; if sign compare and sign add match, loop back.
+		phy
+		ldy 	#6+IFFlags
+		eor 	(basicStack),y
+		ply
+		and 	#$80
+		bne 	_CNLoopBack
+_CNExitLoop:		
+		jsr 	StackClose		 			; return
+		rts
+
+_CNLoopBack:		
+		jsr 	STKLoadCodePosition 		; loop back
+		rts
+		;
+		;		Optimised version (step 1, integer values)
+		;
+_CNOptimised:
+		phy
+
+		ldy 	#4 							; copy address of index variable to zTemp2
+		lda 	(basicStack),y
+		sta 	zTemp2
+		iny
+		lda 	(basicStack),y
+		sta 	zTemp2+1
+		;
+		ldy 	#$FF 						; increment that value. this won't go round 
+_CNIncrement: 								; for ever because maxint is $7FFFF
+		iny		
+		lda 	(zTemp2),y
+		inc 	a
+		sta 	(zTemp2),y
+		beq 	_CNIncrement
+		;
+		clc 								; point zTemp0 to terminal value
+		lda 	basicStack
+		adc 	#12
+		sta 	zTemp0
+		lda 	basicStack+1
+		adc 	#0
+		sta 	zTemp0+1
+		;
+		ldy 	#1 							; compare value to terminal.
+		clc 								; borrow 1, we want > not >=
+		lda 	(zTemp2) 		
+		sbc 	(zTemp0)
+		lda 	(zTemp2),y
+		sbc 	(zTemp0),y
+		iny
+		lda 	(zTemp2),y
+		sbc 	(zTemp0),y
+		ply
+		bcs 	_CNExitLoop
+		bra 	_CNLoopBack
+
+; ************************************************************************************************
+
+_CNLoadValue:
+		phy
+		ldy 	#4 							; copy address to zTemp2
+		lda 	(basicStack),y
+		sta 	zTemp2
+		iny
+		lda 	(basicStack),y
+		sta 	zTemp2+1
+		;
+		ldy 	#0 							; copy dword at zTemp2 to IFR0
+		lda 	(zTemp2),y
+		sta 	IFR0+IFMantissa0
+		iny
+		lda 	(zTemp2),y
+		sta 	IFR0+IFMantissa1
+		iny
+		lda 	(zTemp2),y
+		sta 	IFR0+IFMantissa2
+		.if 	IFMSize == 4
+		iny
+		lda 	(zTemp2),y
+		sta 	IFR0+IFMantissa3
+		.endif
+		iny
+		lda 	(zTemp2),y
+		sta 	IFR0+IFExponent
+		iny
+		lda 	(zTemp2),y
+		sta 	IFR0+IFFlags
+		ply
+		rts
+
+_CNSaveValue:
+		phy
+		ldy 	#0
+		lda 	IFR0+IFMantissa0
+		sta 	(zTemp2),y
+		iny		
+		lda 	IFR0+IFMantissa1
+		sta 	(zTemp2),y
+		iny		
+		lda 	IFR0+IFMantissa2
+		sta 	(zTemp2),y
+		.if 	IFMSize == 4
+		iny		
+		lda 	IFR0+IFMantissa3
+		sta 	(zTemp2),y
+		.endif
+		iny		
+		lda 	IFR0+IFExponent
+		sta 	(zTemp2),y
+		iny		
+		lda 	IFR0+IFFlags
+		sta 	(zTemp2),y
+		ply
+		rts
+
+; ************************************************************************************************
+;
+;		+0 		Token
+;		+1,2,3 	Loop back position
+;		+4,+5 	Address of the index variable (numeric)
+;		+6..11	Additive value.
+;		+12..17 Terminal value.
+;
+;		If Bit 31 of the additive value is set (would normally indicate a string), this means
+; 		that the index value is an integer, the additive value is 1, and the terminal value
+;		is an integer, allowing for optimisation.
+;
+; ************************************************************************************************
+
+		.send code
+
+; ************************************************************************************************
+;
+;		Date			Notes
+;		==== 			=====
+;		28/06/23 		Fixed NEXT bug one short :( how did I miss that ?
+;
+; ************************************************************************************************

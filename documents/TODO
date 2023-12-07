@@ -1,11 +1,19 @@
 TODO List
 ---------
 
-- Change timer to be updated automatically, remove the dispatcher call.
-
 - Structures
+	GOTO/GOSUB/RETURN
+	FOR/NEXT
+	IF
+	WHILE/WEND
+	DO/EXIT/LOOP
+	Procedure scan
+	CALL
 
-- Inkey$() and Key()
+- Change timer to be updated automatically, remove the dispatcher call.
+- Break test in loops.
+
+- Inkey$() and Key() and Time
 
 - Input
 	Input Number/String
@@ -19,20 +27,21 @@ TODO List
 - Function key handling
 - File I/O stuff.
 
+Optimise me (Integers)
+----------------------
+	- negation in term. 
+	- Add, Sub, Cmp in binary calculators.
+	- Abs and Sgn unary functions.
+
 Notes
 ----
 	- Break check
 	- A,X,Y in Sys.
 	- Tokeniser does comments.
 
-Optimise me (Integers)
-----------------------
-	- negation in term. 
-	- Add, Sub, Cmp in binary calculators.
-	- Abs and Sgn unary functions.
 		
 Add to doc
 ----------
 
 INPUT
-
+REPEAT/UNTIL

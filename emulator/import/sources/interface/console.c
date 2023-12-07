@@ -123,6 +123,12 @@ void CONWrite(int c) {
 			}
 			break;
 
+		case CC_TAB:  															// I/9 Tab
+			do {
+				CONWrite(' ');
+			} while ((graphMode->xCursor % 8) != 0);
+			break;
+			
 		case CC_LF:
 			graphMode->yCursor++; 												// J/10 down with scrolling.
 			if (graphMode->yCursor == graphMode->yCSize) {
