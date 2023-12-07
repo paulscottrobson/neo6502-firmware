@@ -3,7 +3,7 @@
 ;
 ;		Name:		goto.asm
 ;		Purpose:	GOTO line number
-;		Created:	20th June 2023
+;		Created:	7th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -19,9 +19,12 @@
 		.section code
 
 Command_GOTO:	;; [goto]
-		jsr 	EXPEvalInteger16 			; get line number
+		ldx 	#0
+		jsr 	EXPEvalInteger16 			; get line number to level 0.
 GotoR0:		
-		lda 	PGMBaseHigh 				; back to the program start
+		lda 	Program 					; back to the program start
+		clc
+		adc 	#(Program >> 8)
 		sta 	codePtr+1
 		stz 	codePtr
 		;
@@ -30,11 +33,11 @@ _GOSearch:
 		beq 	_GOError
 		ldy 	#1 							; found line #
 		lda 	(codePtr),y
-		cmp 	IFR0+IFMantissa0
+		cmp 	XSNumber0
 		bne 	_GONext
 		iny
 		lda 	(codePtr),y
-		cmp 	IFR0+IFMantissa1
+		cmp 	XSNumber1
 		bne 	_GONext
 		jmp 	RUNNewLine
 
@@ -51,11 +54,7 @@ _GOError:
 		.error_line
 
 		.send code
-		
-;:[GOTO line]
-; Transfer execution to given line number. Not recommended except for old software.
-; Please use the structures provided.
-				
+					
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

@@ -13,7 +13,7 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $187 save
 	.word	Unimplemented            ; $188 load
 	.word	Unimplemented            ; $189 gosub
-	.word	Unimplemented            ; $18a goto
+	.word	Command_GOTO             ; $18a goto
 	.word	Unimplemented            ; $18b return
 	.word	Unimplemented            ; $18c restore
 	.word	Unimplemented            ; $18d dim

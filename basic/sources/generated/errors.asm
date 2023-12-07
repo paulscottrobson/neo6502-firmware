@@ -16,4 +16,5 @@ ErrorMessageText:
 	.text	"bad argument",0
 	.text	"string too long",0
 	.text	"cannot assign",0
+	.text	"unknown line number",0
 	.send code
