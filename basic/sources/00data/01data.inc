@@ -73,6 +73,8 @@ zTemp1:
 ; ************************************************************************************************
 
 		.section storage
+freeMemory: 								; free memory address
+		.fill 	2
 ERRLine: 									; line number for errors.
 		.fill 	2		
 InputFlag: 									; Flag indicating input/print.
