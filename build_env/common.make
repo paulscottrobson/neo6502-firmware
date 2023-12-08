@@ -45,7 +45,7 @@ OSNAME = linux
 EXTRAFILES = 
 PYTHON = python3
 TOUCH = touch -c
-PICO_SDK_LOCATION=/aux/pico/pico-sdk
+PICO_SDK_LOCATION=/usr/share/pico_sdk
 endif
 #
 #		Directories

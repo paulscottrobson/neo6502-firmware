@@ -3,7 +3,7 @@
 ;
 ;		Name:		if.asm
 ;		Purpose:	IF command
-;		Created:	2nd June 2023
+;		Created:	8th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -18,10 +18,11 @@
 		.section code
 
 IfCommand: ;; [if]
-		jsr 	EXPEvalNumber 				; Get the if test.
+		ldx 	#0
+		jsr 	EXPEvalNumber 				; work out the test
 		;
 		lda 	(codePtr),y					; what follows ?
-		cmp 	#PR_THEN  					; could be THEN <stuff> 
+		cmp 	#KWD_THEN  					; could be THEN <stuff> 
 		bne 	_IfStructured 				; we still support it.
 
 		; ------------------------------------------------------------------------
@@ -31,8 +32,7 @@ IfCommand: ;; [if]
 		; ------------------------------------------------------------------------
 
 		iny 								; consume THEN
-		ldx 	#IFR0
-		jsr 	IFCheckZero 			; is it zero
+		jsr 	CheckIfZero
 		beq 	_IfFail 					; if fail, go to next line
 		rts 								; if THEN just continue
 _IfFail:
@@ -45,24 +45,13 @@ _IfFail:
 		; ------------------------------------------------------------------------
 
 _IfStructured:
-		jsr 	IFCheckZero 			; is it zero
+		jsr 	CheckIfZero 				; is it zero
 		bne 	_IfExit 					; if not, then continue normally.
-		lda 	#PR_ELSE 					; look for else/endif 
-		ldx 	#PR_ENDIF
+		lda 	#KWD_ELSE 					; look for else/endif 
+		ldx 	#KWD_ENDIF
 		jsr 	ScanForward 				; and run from there
 _IfExit: 
 		rts
-
-;:[if (test) then (code)]
-; Executes the rest of the line if the test is true, otherwise goes to the next line.
-; Same as standard BASIC.
-; { if n % 2 = 0 then print n;" is even" }
-
-;:[if test :(code):else (code):endif]
-; An extended multi line nestable if .. then ... else ... endif structure. The else clause is
-; optional. An example is shown below ; this could be spread out over multiple lines. Note the
-; absence of THEN ; this is the syntactic difference between the two.
-; { if n % 2 = 0:print n;" is even":else:print n;"is odd":endif }
 
 ; ************************************************************************************************
 ;
@@ -71,7 +60,7 @@ _IfExit:
 ; ************************************************************************************************
 
 ElseCode: ;; [else] 					
-		lda 	#PR_ENDIF 					; else is only run after the if clause succeeds
+		lda 	#KWD_ENDIF 					; else is only run after the if clause succeeds
 		tax 								; so just go to the structure exit
 		jsr 	ScanForward
 		rts

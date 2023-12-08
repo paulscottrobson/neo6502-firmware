@@ -1,3 +1,8 @@
-100 for i = 1 to 10
-110 print i,i*i
-120 next
+
+c = 0
+do
+	c = c + 1
+	if c = 10 then exit
+	print c
+loop 
+print "Done"
