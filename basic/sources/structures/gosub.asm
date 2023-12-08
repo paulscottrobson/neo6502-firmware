@@ -3,7 +3,7 @@
 ;
 ;		Name:		gosub.asm
 ;		Purpose:	Gosub/Return
-;		Created:	23rd June 2023
+;		Created:	8th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -19,14 +19,12 @@
 ; ************************************************************************************************
 
 Command_GOSUB:	;; [gosub]
+		ldx 	#0
 		jsr 	EXPEvalInteger16 			; get line number
 		lda 	#STK_GOSUB
 		jsr 	StackOpen 
 		jsr 	STKSaveCodePosition 		; save return address on stack.
 		jmp 	GotoR0
-
-;:[gosub...return]
-; Subroutine call. Provided for backward compatibility ; please use PROC and CALL.
 
 ; ************************************************************************************************
 ;

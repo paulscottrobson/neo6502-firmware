@@ -61,8 +61,8 @@ StandardVectorTable:
 	.word	Command_UNTIL            ; $b7 until
 	.word	Unimplemented            ; $b8 proc
 	.word	Unimplemented            ; $b9 endproc
-	.word	Unimplemented            ; $ba for
-	.word	Unimplemented            ; $bb next
+	.word	Command_FOR              ; $ba for
+	.word	Command_NEXT             ; $bb next
 	.word	Unimplemented            ; $bc case
 	.word	Unimplemented            ; $bd endcase
 	.word	Unimplemented            ; $be !!un1

@@ -12,9 +12,9 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $186 list
 	.word	Unimplemented            ; $187 save
 	.word	Unimplemented            ; $188 load
-	.word	Unimplemented            ; $189 gosub
+	.word	Command_GOSUB            ; $189 gosub
 	.word	Command_GOTO             ; $18a goto
-	.word	Unimplemented            ; $18b return
+	.word	Command_RETURN           ; $18b return
 	.word	Unimplemented            ; $18c restore
 	.word	Unimplemented            ; $18d dim
 	.send code
