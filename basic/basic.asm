@@ -22,6 +22,7 @@
 boot:	jmp 	ColdStart
 
 ColdStart:	
+		jmp 	CheckSpeed
 		jmp 	Command_RUN
 
 		.send 	code
@@ -30,6 +31,25 @@ ColdStart:
 
 
 		.section code
+
+
+CheckSpeed:
+		pha
+		lda 	#100
+		ldx 	#0
+		ldy 	#0
+_Loop1:	dey
+		bne 	_Loop1
+		dex
+		bne 	_Loop1
+		dec 	a
+		bne 	_Loop1		
+		pla
+		inc 	a
+		and 	#7
+		adc		#48
+		jsr 	$FFF1
+		bra 	CheckSpeed
 ;
 ;									Temp bodges of various kinds.
 ;
