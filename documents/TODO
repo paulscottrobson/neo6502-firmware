@@ -2,9 +2,7 @@ TODO List
 ---------
 
 - Structures
-	GOSUB/RETURN
-	FOR/NEXT
-	IF
+	IF and so on.
 	WHILE/WEND
 	DO/EXIT/LOOP
 	Procedure scan
@@ -42,6 +40,6 @@ Notes
 		
 Add to doc
 ----------
-
-INPUT
 REPEAT/UNTIL
+GOSUB/RETURN
+FOR/NEXT (integer, TO/DOWNTO, no index chucking)
