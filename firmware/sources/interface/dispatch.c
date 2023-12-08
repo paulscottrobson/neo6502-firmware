@@ -27,7 +27,7 @@
 //
 // ***************************************************************************************
 
-void DSPHandler(uint8_t *cBlock,uint8_t *memory) {
+void __time_critical_func(DSPHandler)(uint8_t *cBlock, uint8_t *memory) {
     float f1,f2;
     int i1,i2;
     uint32_t u1;
@@ -42,7 +42,7 @@ void DSPHandler(uint8_t *cBlock,uint8_t *memory) {
 //
 // ***************************************************************************************
 
-void DSPSync(void) {
+void __time_critical_func(DSPSync)(void) {
     KBDSync();
 }
 
