@@ -3,7 +3,7 @@
 ;
 ;		Name:		scanforward.asm
 ;		Purpose:	Scan Forward
-;		Created:	2nd June 2023
+;		Created:	8th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -17,7 +17,6 @@
 ;		Scan forward looking for A or X, skipping complete structures, A contains match
 ;
 ; ************************************************************************************************
-
 
 ScanForward:
 		stz 	zTemp1 						; clear structure count.
@@ -56,32 +55,39 @@ SkipOneInstruction:
 		lda 	(codePtr),y 				; get the token and consume it.
 		iny
 		;
-		cmp 	#PR_LSQLSQDECIMALRSQRSQ 	; check for special multi-byte elements
+		cmp 	#KWD_SYS_DEC 				; check for special multi-byte elements
 		beq		_ScanDataItem
-		cmp 	#PR_LSQLSQSTRINGRSQRSQ
+		cmp 	#KWD_SYS_STR
 		beq 	_ScanDataItem
 		;
-		cmp 	#PR_LSQLSQENDRSQRSQ 		; handle end of line.
+		cmp 	#KWD_SYS_END 				; handle end of line.
 		beq 	_ScanNextLine
 		;
-		cmp 	#PR_LSQLSQSHIFTRSQRSQ 		; if shift, skip one.
+		cmp 	#$20 						; identifier $00xx-$1Fxx
+		bcc 	_ScanSkip2
+		cmp 	#KWD_SYS_SH1 				; shift 1 and 2
+		beq 	_ScanSkip2
+		cmp 	#KWD_SYS_SH2
 		bne 	_ScanNoShift
+_ScanSkip2:		
 		iny
 _ScanNoShift:		
 ;
 ;		Handle structures open/close
 ;
-		cmp 	#PR_STRUCTURE_LAST+1 		; nested structures
-		bcs 	_SOIExit
-		cmp 	#PR_STRUCTURE_FIRST
-		bcc 	_SOIExit
+		tax 								; save in X
+		and 	#$F0						; nested structures $Bx
+		cmp 	#$B0
+		bne 	_SOIExit
 		;
-		tax 								; access the table to get the adjustment.
-		clc
-		lda 	zTemp1 						; add it to structure count.
-		adc 	StructureOffsets-PR_STRUCTURE_FIRST,x
+		txa 								; shift.
+		and 	#1 							; bit 0 0 = up, 1 = down
+		eor 	#1 							; now 1 up 0 down
+		asl 	a 							; now 2 up 0 down and clc
+		dec 	a 							; now 1 up -1 down.
+		adc 	zTemp1 						; add to structure depth.
 		sta 	zTemp1
-		bpl		_SOIExit 		 			; error if -ve ?
+		bpl		_SOIExit 		 			; error if -ve
 		sec
 		rts
 
@@ -121,7 +127,5 @@ _SOIExit:
 ;
 ;		Date			Notes
 ;		==== 			=====
-;		07/07/2013 		Factored out the 'advance forward' code, which now returns CS on underflow.
-;						(for getting the LIST)
 ;
 ; ************************************************************************************************

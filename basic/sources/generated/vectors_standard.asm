@@ -51,12 +51,12 @@ StandardVectorTable:
 	.word	Unimplemented            ; $ad 
 	.word	Unimplemented            ; $ae 
 	.word	Unimplemented            ; $af 
-	.word	Unimplemented            ; $b0 while
-	.word	Unimplemented            ; $b1 wend
-	.word	Unimplemented            ; $b2 if
-	.word	Unimplemented            ; $b3 endif
-	.word	Unimplemented            ; $b4 do
-	.word	Unimplemented            ; $b5 loop
+	.word	Command_WHILE            ; $b0 while
+	.word	Command_WEND             ; $b1 wend
+	.word	IfCommand                ; $b2 if
+	.word	EndIf                    ; $b3 endif
+	.word	Command_DO               ; $b4 do
+	.word	Command_LOOP             ; $b5 loop
 	.word	Command_REPEAT           ; $b6 repeat
 	.word	Command_UNTIL            ; $b7 until
 	.word	Unimplemented            ; $b8 proc
@@ -77,7 +77,7 @@ StandardVectorTable:
 	.word	Command_Input            ; $c7 input
 	.word	Unimplemented            ; $c8 call
 	.word	Command_Sys              ; $c9 sys
-	.word	Unimplemented            ; $ca exit
+	.word	Command_EXIT             ; $ca exit
 	.word	Unimplemented            ; $cb ,
 	.word	Unimplemented            ; $cc ;
 	.word	Unimplemented            ; $cd :
@@ -89,7 +89,7 @@ StandardVectorTable:
 	.word	Unimplemented            ; $d3 ]
 	.word	Unimplemented            ; $d4 #
 	.word	Unimplemented            ; $d5 .
-	.word	Unimplemented            ; $d6 else
+	.word	ElseCode                 ; $d6 else
 	.word	Unimplemented            ; $d7 when
 	.word	Unimplemented            ; $d8 downto
 	.word	PokeCommand              ; $d9 poke

@@ -2,17 +2,15 @@ TODO List
 ---------
 
 - Structures
-	IF and so on.
-	WHILE/WEND
-	DO/EXIT/LOOP
 	Procedure scan
 	CALL / PROC / ENDPROC
 
 - Change timer to be updated automatically, remove the dispatcher call.
 - Break test in loops.
-
 - Inkey$() and Key() and Time
-
+- Tokenising 
+- Listing
+- Screen editor.
 - Input
 	Input Number/String
 
@@ -20,7 +18,6 @@ TODO List
 
 - Locale handling
 - Console colour and cursor control / positioning.
-
 - Audio system driver on emulator, and audio interface
 - Function key handling
 - File I/O stuff.
@@ -40,6 +37,6 @@ Notes
 		
 Add to doc
 ----------
-REPEAT/UNTIL
-GOSUB/RETURN
-FOR/NEXT (integer, TO/DOWNTO, no index chucking)
+WHILE WEND
+IF THEN / IF ELSE ENDIF
+;:[do .. loop .. exit]
