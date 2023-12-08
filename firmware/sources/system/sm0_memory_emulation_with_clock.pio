@@ -1,16 +1,14 @@
 .program memory_emulation_with_clock
 .side_set 1 opt
 .wrap_target
-    set pins, 0b110 side 1 [7] ; activate A0-A7, side 1 is clock high
+    set pins, 0b110 side 1[7] ; activate A0-A7, side 1 is clock high
     in  pins, 8     ; read 8 bits
     set pins, 0b101[5] ; activate A8-A15
     in  pins, 8     ; read 8 bits
     set pins, 0b011[5] ; activate D0-D7
-    in  pins, 12     ; read 12 bits data and r/w bit
-    in  null, 4
+    in  pins, 16     ; read data, OEs, r/w bit and some random bits
     mov osr, ~null ; set pins 0-7 to OUT
     out pindirs, 8
-    pull block
     out pins, 8 ; Write out data
     mov osr, null ; set pins 0-7 to IN
     out pindirs, 8 side 0[7] ; side 0 is clock low
@@ -46,7 +44,9 @@ void memory_emulation_with_clock_program_init(PIO pio, uint sm, uint offset) {
 
    sm_config_set_sideset_pins(&c, 21);
 
-   sm_config_set_in_shift(&c, true, true, 32);		
+   sm_config_set_in_shift(&c, true, true, 32);
+
+   sm_config_set_out_shift(&c, true, true, 8);
 
    pio_sm_init(pio, sm, offset, &c);
 }
