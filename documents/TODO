@@ -1,5 +1,7 @@
 TODO List
 ---------
+- Why is WozMon behaving oddly ? Scrolling up broken ?
+- Try Veselin's flash fix.
 
 - Structures
 	PROC / ENDPROC / CALL get working w/o params.
