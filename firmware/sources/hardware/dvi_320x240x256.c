@@ -20,7 +20,7 @@
 #include "dvi.h"
 #include "dvi_serialiser.h"
 #include "system/common_dvi_pin_configs.h"
-
+#include "hardware/structs/bus_ctrl.h"
 // ***************************************************************************************
 //
 //                                Configuration for DVI
@@ -141,6 +141,7 @@ void DVIStart(void) {
    uint16_t *scanline;                       					// Send junk, only lasts one frame.
    scanline = buffer1;queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
    scanline = buffer2;queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
+// hw_set_bits(&bus_ctrl_hw->priority, BUSCTRL_BUS_PRIORITY_PROC1_BITS);
    multicore_launch_core1(core1_main);                   			// Start DVI worker core (RP2040 core 1)
 }
 
