@@ -64,6 +64,8 @@ void CONInitialise(struct GraphicsMode *gMode) {
 	graphMode = gMode;	
 	graphMode->foreCol = 7;graphMode->backCol = 0; 	 							// Reset colours
 	CONWrite(12);  																// Clear screen / home cursor.
+
+	stdio_uart_init_full(uart0, 115200, 28, 29);
 }
 
 // ***************************************************************************************
@@ -135,6 +137,9 @@ void CONWrite(int c) {
 				graphMode->yCursor--;
 				CONScrollUp();
 			}
+
+			putchar('\n');
+
 			break;
 
 		case CC_CLS: 	 														// L/12 clears the screen
@@ -154,6 +159,9 @@ void CONWrite(int c) {
 				CONDrawCharacter(graphMode->xCursor,graphMode->yCursor,c,graphMode->foreCol,graphMode->backCol);
 				graphMode->xCursor++;
 				if (graphMode->xCursor == graphMode->xCSize) CONWrite(CC_ENTER);
+
+				putchar(c);
+				
 			} else {
 
 			}
