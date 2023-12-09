@@ -2,17 +2,19 @@ TODO List
 ---------
 
 - Structures
-	Procedure scan
-	CALL / PROC / ENDPROC
+	PROC / ENDPROC / CALL get working w/o params.
+	Locals / Parameters code.
 
-- Change timer to be updated automatically, remove the dispatcher call.
 - Break test in loops.
-- Inkey$() and Key() and Time
+- Change timer to be updated automatically, remove the dispatcher call.
+- DIM and Arrays.
+- Inkey$() and Key() and Time and Event
+- INPUT simple Number/String
 - Tokenising 
 - Listing
+- READ/DATA/RESTORE
 - Screen editor.
-- Input
-	Input Number/String
+- Assembler
 
 - Arrays
 

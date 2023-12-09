@@ -45,7 +45,7 @@ ClearCode:
 		;
 		;		Scan for procedures
 		;
-;		jsr 	ScanProcedures
+		jsr 	ScanProcedures
 		;
 		;		Reset READ/DATA
 		;

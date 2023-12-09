@@ -95,25 +95,22 @@ BaseTokenText:
 	.byte	$03,$4c,$45,$d4               	; $ c5 LET
 	.byte	$05,$50,$52,$49,$4e,$d4       	; $ c6 PRINT
 	.byte	$05,$49,$4e,$50,$55,$d4       	; $ c7 INPUT
-	.byte	$04,$43,$41,$4c,$cc           	; $ c8 CALL
-	.byte	$03,$53,$59,$d3               	; $ c9 SYS
-	.byte	$04,$45,$58,$49,$d4           	; $ ca EXIT
-	.byte	$01,$ac                       	; $ cb ,
-	.byte	$01,$bb                       	; $ cc ;
-	.byte	$01,$ba                       	; $ cd :
-	.byte	$01,$a7                       	; $ ce '
-	.byte	$01,$a9                       	; $ cf )
-	.byte	$04,$52,$45,$41,$c4           	; $ d0 READ
-	.byte	$04,$44,$41,$54,$c1           	; $ d1 DATA
-	.byte	$01,$db                       	; $ d2 [
-	.byte	$01,$dd                       	; $ d3 ]
-	.byte	$01,$a3                       	; $ d4 #
-	.byte	$01,$ae                       	; $ d5 .
-	.byte	$04,$45,$4c,$53,$c5           	; $ d6 ELSE
-	.byte	$04,$57,$48,$45,$ce           	; $ d7 WHEN
-	.byte	$06,$44,$4f,$57,$4e,$54,$cf   	; $ d8 DOWNTO
-	.byte	$04,$50,$4f,$4b,$c5           	; $ d9 POKE
-	.byte	$04,$44,$4f,$4b,$c5           	; $ da DOKE
+	.byte	$03,$53,$59,$d3               	; $ c8 SYS
+	.byte	$04,$45,$58,$49,$d4           	; $ c9 EXIT
+	.byte	$01,$ac                       	; $ ca ,
+	.byte	$01,$bb                       	; $ cb ;
+	.byte	$01,$ba                       	; $ cc :
+	.byte	$01,$a7                       	; $ cd '
+	.byte	$01,$a9                       	; $ ce )
+	.byte	$04,$52,$45,$41,$c4           	; $ cf READ
+	.byte	$04,$44,$41,$54,$c1           	; $ d0 DATA
+	.byte	$04,$45,$4c,$53,$c5           	; $ d1 ELSE
+	.byte	$04,$57,$48,$45,$ce           	; $ d2 WHEN
+	.byte	$06,$44,$4f,$57,$4e,$54,$cf   	; $ d3 DOWNTO
+	.byte	$04,$50,$4f,$4b,$c5           	; $ d4 POKE
+	.byte	$04,$44,$4f,$4b,$c5           	; $ d5 DOKE
+	.byte	$05,$4c,$4f,$43,$41,$cc       	; $ d6 LOCAL
+	.byte	$04,$43,$41,$4c,$cc           	; $ d7 CALL
 	.byte	$FF
 
 Shift1TokenText:
@@ -131,6 +128,10 @@ Shift1TokenText:
 	.byte	$06,$52,$45,$54,$55,$52,$ce   	; $18b RETURN
 	.byte	$07,$52,$45,$53,$54,$4f,$52,$c5	; $18c RESTORE
 	.byte	$03,$44,$49,$cd               	; $18d DIM
+	.byte	$FF
+
+Shift2TokenText:
+	.byte	$03,$41,$44,$c3               	; $280 ADC
 	.byte	$FF
 
 BinaryPrecedence:
