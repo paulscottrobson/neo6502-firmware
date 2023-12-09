@@ -1,8 +1,3 @@
-
-c = 0
-do
-	c = c + 1
-	if c = 10 then exit
-	print c
-loop 
-print "Done"
+10 demo()
+20 proc demo()
+30 endproc

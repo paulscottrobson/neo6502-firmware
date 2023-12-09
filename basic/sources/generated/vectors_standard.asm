@@ -59,39 +59,36 @@ StandardVectorTable:
 	.word	Command_LOOP             ; $b5 loop
 	.word	Command_REPEAT           ; $b6 repeat
 	.word	Command_UNTIL            ; $b7 until
-	.word	Unimplemented            ; $b8 proc
+	.word	Command_SN1              ; $b8 proc
 	.word	Unimplemented            ; $b9 endproc
 	.word	Command_FOR              ; $ba for
 	.word	Command_NEXT             ; $bb next
 	.word	Unimplemented            ; $bc case
 	.word	Unimplemented            ; $bd endcase
-	.word	Unimplemented            ; $be !!un1
-	.word	Unimplemented            ; $bf then
+	.word	Command_SN11             ; $be !!un1
+	.word	Command_SN2              ; $bf then
 	.word	RUNEndOfLine             ; $c0 !!end
 	.word	Command_Shift1_Handler   ; $c1 !!sh1
-	.word	Unimplemented            ; $c2 !!sh2
-	.word	Unimplemented            ; $c3 !!dec
-	.word	Unimplemented            ; $c4 to
+	.word	Command_Shift2_Handler   ; $c2 !!sh2
+	.word	Command_SN3              ; $c3 !!dec
+	.word	Command_SN4              ; $c4 to
 	.word	Command_Let              ; $c5 let
 	.word	Command_Print            ; $c6 print
 	.word	Command_Input            ; $c7 input
-	.word	Unimplemented            ; $c8 call
-	.word	Command_Sys              ; $c9 sys
-	.word	Command_EXIT             ; $ca exit
-	.word	Unimplemented            ; $cb ,
-	.word	Unimplemented            ; $cc ;
-	.word	Unimplemented            ; $cd :
-	.word	Command_Comment          ; $ce '
-	.word	Unimplemented            ; $cf )
-	.word	Unimplemented            ; $d0 read
-	.word	Unimplemented            ; $d1 data
-	.word	Unimplemented            ; $d2 [
-	.word	Unimplemented            ; $d3 ]
-	.word	Unimplemented            ; $d4 #
-	.word	Unimplemented            ; $d5 .
-	.word	ElseCode                 ; $d6 else
-	.word	Unimplemented            ; $d7 when
-	.word	Unimplemented            ; $d8 downto
-	.word	PokeCommand              ; $d9 poke
-	.word	DokeCommand              ; $da doke
+	.word	Command_Sys              ; $c8 sys
+	.word	Command_EXIT             ; $c9 exit
+	.word	Command_SN10             ; $ca ,
+	.word	Command_SN7              ; $cb ;
+	.word	Command_SN8              ; $cc :
+	.word	Command_Comment          ; $cd '
+	.word	Command_SN9              ; $ce )
+	.word	Unimplemented            ; $cf read
+	.word	Unimplemented            ; $d0 data
+	.word	ElseCode                 ; $d1 else
+	.word	Unimplemented            ; $d2 when
+	.word	Command_SN5              ; $d3 downto
+	.word	PokeCommand              ; $d4 poke
+	.word	DokeCommand              ; $d5 doke
+	.word	Unimplemented            ; $d6 local
+	.word	Unimplemented            ; $d7 call
 	.send code

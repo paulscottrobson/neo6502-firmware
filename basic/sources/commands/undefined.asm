@@ -1,61 +1,39 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		basic.asm
-;		Purpose:	BASIC main program
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		undefined.asm
+;		Purpose:	Undefined keywords
+;		Created:	9th December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-
 ; ************************************************************************************************
 ;
-;										   Main Program
+;										STOP Command
 ;
 ; ************************************************************************************************
 
 		.section code
 
-boot:	jmp 	ColdStart
+Command_SN1:	;; [proc]
+Command_SN2:	;; [then]
+Command_SN3:	;; [!!dec]
+Command_SN4:	;; [to]
+Command_SN5:	;; [downto]
+Command_SN6:	;; [.]
+Command_SN7:	;; [;]
+Command_SN8:	;; [:]
+Command_SN9:	;; [)]
+Command_SN10:	;; [,]
+Command_SN11:	;; [!!un1]
 
-ColdStart:	
-		jmp 	Command_RUN
-
-		.send 	code
-
-		.include "_include.inc"
-
-
-		.section code
-;
-;									Temp bodges of various kinds.
-;
-WarmStart:
-		lda 	#$00
-		tax
-		tay
-		.byte 	3
-		bra 	WarmStart
-
-Unimplemented:
-		lda 	#$FF
-ErrorHandler:
-		ldx 	#$EE
-		ldy 	#$EE
-		.byte 	3
-_EHLoop:
-		bra 	_EHLoop		
-
-		.align 	256
-Program:
-		.binary "build/tokenised.dat"
-
+		.error_syntax
+		
 		.send code
-
-
+						
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

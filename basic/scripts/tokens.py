@@ -94,10 +94,10 @@ class TokenSet(object):
 		#		Unary tokens from $80-$B0
 		#
 		self.add(0x80,"""
-			!!STR 	$ 		(		RAND(	RND(	ISVAL(	INT(	
-			TIME	EVENT(	INKEY$(	ASC(	CHR$(	SQR( 	LEN(  	ABS(  	SGN( 	
-			VAL( 	STR$( 	MID$(	LEFT$( 	RIGHT$(	SIN( 	COS(	TAN(	ATAN(	
-			LOG(	EXP( 	KEY(	PEEK(	DEEK(
+			!!STR 	$ 		(		RAND(	RND(	ISVAL(	INT(	TIME	EVENT(	
+			INKEY$(	ASC(	CHR$(	SQR( 	LEN(  	ABS(  	SGN( 	VAL( 	STR$( 	
+			MID$(	LEFT$( 	RIGHT$(	SIN( 	COS(	TAN(	ATAN(	LOG(	EXP( 	
+			KEY(	PEEK(	DEEK(
 			""",48)
 		#
 		#		Structure tokens
@@ -111,9 +111,8 @@ class TokenSet(object):
 		#
 		self.add(None,"""
 			!!END 	!!SH1	!!SH2	!!DEC 	TO 		LET 	PRINT	INPUT	
-			CALL 	SYS 	EXIT	, 		; 		: 		' 		)		
-			READ 	DATA 	[		]		# 		. 		ELSE	WHEN
-			DOWNTO 	POKE	DOKE
+			SYS 	EXIT	, 		; 		: 		' 		)		READ 	
+			DATA 	ELSE	WHEN	DOWNTO 	POKE	DOKE 	LOCAL	CALL
 			""")
 		#
 		#		Keyword tokens (minor)
@@ -122,6 +121,12 @@ class TokenSet(object):
 			CLEAR 	NEW 	RUN 	STOP 	END 	ASSERT 	LIST 	SAVE 	
 			LOAD	GOSUB 	GOTO	RETURN 	RESTORE	DIM	
 			""")
+		#
+		#		Keyword tokens (assembler)
+		#
+		self.add(0x280,"""
+			ADC
+		""")
 
 if __name__ == "__main__":
 	ts = TokenSet()

@@ -118,7 +118,7 @@ Command_END: ;; [end]
 
 ; ************************************************************************************************
 ;
-;										Shifted command
+;										Shifted commands
 ;
 ; ************************************************************************************************
 
@@ -128,6 +128,13 @@ Command_Shift1_Handler: ;; [!!sh1]
 		asl 	a 							; double into X
 		tax
 		jmp 	(ExtendedVectorTable,x) 	; and go there.
+
+Command_Shift2_Handler: ;; [!!sh2]
+		lda 	(codePtr),y 				; get token shifted
+		iny
+		asl 	a 							; double into X
+		tax
+		jmp 	(AssemblerVectorTable,x) 	; and go there.
 
 		.send code
 

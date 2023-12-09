@@ -3,7 +3,7 @@
 ;
 ;		Name:		call.asm
 ;		Purpose:	Call procedure
-;		Created:	4th June 2023
+;		Created:	9th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -23,44 +23,23 @@ Command_CALL:	;; [call]
 		jsr 	StackOpen 
 
 		lda 	(codePtr),y 				; check identifier follows.
-		and 	#$C0
-		cmp 	#$40
-		bne 	_CCSyntax
+		cmp 	#$20 
+		bcs 	_CCSyntax
 		;
-		jsr 	VARGetInfo 					; get the information
-		jsr 	ERRCheckRParen 				; check right bracket follows.
-		jsr 	VARFind 					; exists ?
-		bcc 	_CCUnknown
+		; 		check actually defined e.g. proc is filled in.
 
-		stx 	zTemp0+1 					; save target in XA
-		sta 	zTemp0
+		; 		L8R:Evaluate expressions on stack leaving slot at bottom.
 
-		jsr 	STKSaveCodePosition 		; save return address on stack.
-
-		ldy 	#3 							; check $FF marker
-		lda 	(zTemp0),y
-		cmp 	#$FF
-		bne 	_CCUnknown
-
-		dey 								; get Y offset to stack
-		lda 	(zTemp0),y
-		pha
-		dey 								; get address
-		lda 	(zTemp0),y
-		sta 	codePtr+1
-		lda 	(zTemp0)
-		sta 	codePtr
-		ply 								; restore Y
+		; 		Check Right Parenthesis, save position.
+		; 		L8R:Evaluate terms localising/copying and updating from stack.
+		; 		Continue execution
+		;
 		rts
 
 _CCSyntax:
 		.error_syntax
 _CCUnknown:
 		.error_unknown
-
-;:[call]
-; Call a named procedure. The brackets are required.
-; { call draw.everything() }
 
 ; ************************************************************************************************
 ;
@@ -69,15 +48,14 @@ _CCUnknown:
 ; ************************************************************************************************
 
 Command_ENDPROC:	;; [endproc]
+		; 		
+		;		Unwind locals.
+		;
 		lda 	#STK_CALL
 		jsr 	StackCheckFrame
-		jsr 	STKLoadCodePosition 		; return
+		jsr 	STKLoadCodePosition 		
 		jsr 	StackClose		 			
 		rts
-
-;:[proc (name)() ... endproc]
-; Defines a procedure. A procedure definition must be the first thing on the line.
-; { proc bump.me():a = a+1:endproc }
 
 		.send code
 
