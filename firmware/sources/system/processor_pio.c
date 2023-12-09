@@ -43,30 +43,28 @@ void __time_critical_func(CPUExecute)(void) {
         uint32_t value;
         struct {
             uint16_t address;
-            uint8_t data;
             uint8_t flags;
         } data;
     } value;
     uint16_t count = 0;
-    uint8_t data = 0;
 
     while (1) {
         value.value = pio_sm_get_blocking(pio1, 0);
 
-        if (value.data.flags & 0x8) {
+        if (value.data.flags & 0x8) { // 65C02 Read
 
-            data = cpuMemory[value.data.address];
+            pio_sm_put(pio1, 0, cpuMemory[value.data.address]);
 
-        } else {
+        } else { // 65C02 Write
 
-            cpuMemory[value.data.address] = value.data.data;
-            if (value.data.address == CONTROLPORT && value.data.data) {
+            uint8_t data = pio_sm_get_blocking(pio1, 0);
+
+            cpuMemory[value.data.address] = data;
+            if (value.data.address == CONTROLPORT && data) {
                 DSPHandler(cpuMemory + controlPort, cpuMemory);
             }
 
         }
-
-        pio_sm_put(pio1, 0, data);
 
         if (!count++) {
             DSPSync();
