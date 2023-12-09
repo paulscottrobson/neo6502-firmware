@@ -19,49 +19,12 @@
 #include "system/wdc65C02cpu.h"
 #include "sm0_memory_emulation_with_clock.pio.h"
 
-PIO pio = pio1;
-uint pio_irq = PIO1_IRQ_1;
-uint pio_sm = 0;
-enum pio_interrupt_source irq_source = pis_sm0_rx_fifo_not_empty;
-
-void __time_critical_func(irq_handler)() {
-  union u32
-  {
-    uint32_t value;
-    struct {
-      uint16_t address;
-      uint8_t data;
-      uint8_t flags;
-    } data;
-  } value;
-
-  value.value = pio->rxf[pio_sm];
-
-  const bool write = (value.data.flags & 0x8) == 0;
-
-  if(write)
-  {
-    *(cpuMemory + value.data.address) = value.data.data;
-  }
-
-  uint8_t* address = cpuMemory + value.data.address;
-  uint8_t data = *address;
-
-  pio->txf[pio_sm] = data;
-}
-
 void initPio() {
-  uint offset = 0;
+    uint offset = 0;
 
-  offset = pio_add_program(pio, &memory_emulation_with_clock_program);
-  
-  pio_set_irq1_source_enabled(pio, irq_source, true);
-  irq_set_exclusive_handler(pio_irq, irq_handler);
-  irq_set_priority(pio_irq, 0);
-  irq_set_enabled(pio_irq, true);
-
-  memory_emulation_with_clock_program_init(pio, pio_sm, offset);
-  pio_sm_set_enabled(pio, pio_sm, true);
+    offset = pio_add_program(pio1, &memory_emulation_with_clock_program);
+    memory_emulation_with_clock_program_init(pio1, 0, offset);
+    pio_sm_set_enabled(pio1, 0, true);
 }
 
 // ***************************************************************************************
@@ -70,19 +33,44 @@ void initPio() {
 //
 // ***************************************************************************************
 
-void CPUExecute(void) {
+void __time_critical_func(CPUExecute)(void) {
     wdc65C02cpu_init();
     initPio();
     wdc65C02cpu_reset();
 
+    union u32
+    {
+        uint32_t value;
+        struct {
+            uint16_t address;
+            uint8_t data;
+            uint8_t flags;
+        } data;
+    } value;
     uint16_t count = 0;
-    while(1) {
-      if(cpuMemory[CONTROLPORT] != 0) {
-        DSPHandler(cpuMemory + controlPort, cpuMemory);
-      }
-      if(count++ == 0) {
-          DSPSync();
-      }
+    uint8_t data = 0;
+
+    while (1) {
+        value.value = pio_sm_get_blocking(pio1, 0);
+
+        if (value.data.flags & 0x8) {
+
+            data = cpuMemory[value.data.address];
+
+        } else {
+
+            cpuMemory[value.data.address] = value.data.data;
+            if (value.data.address == CONTROLPORT && value.data.data) {
+                DSPHandler(cpuMemory + controlPort, cpuMemory);
+            }
+
+        }
+
+        pio_sm_put(pio1, 0, data);
+
+        if (!count++) {
+            DSPSync();
+        }
     }
 }
 
