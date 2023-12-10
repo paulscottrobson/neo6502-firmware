@@ -5,7 +5,7 @@ TODO List
 
 - Integer Optimisations.
 	- Cmp in binary calculators.
-	- Abs and Sgn unary functions.
+	- Sgn unary functions.
 
 - PROC / ENDPROC / CALL get working w/o params.
 
