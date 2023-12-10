@@ -1,18 +1,28 @@
 TODO List
 ---------
-- Why is WozMon behaving oddly ? Scrolling up broken ?
+
 - Try Veselin's flash fix.
 
-- Structures
-	PROC / ENDPROC / CALL get working w/o params.
-	Locals / Parameters code.
+- Integer Optimisations.
+	- negation in term. 
+	- Add, Sub, Cmp in binary calculators.
+	- Abs and Sgn unary functions.
+
+- PROC / ENDPROC / CALL get working w/o params.
+
+- PCW Benchmarks.
+
+- Locals / Parameters code.
 
 - Break test in loops.
 - Change timer to be updated automatically, remove the dispatcher call.
 - DIM and Arrays.
 - Inkey$() and Key() and Time and Event
 - INPUT simple Number/String
+- NEW Creates AXY
+- A,X,Y in Sys.
 - Tokenising 
+	- Tokeniser does comments.
 - Listing
 - READ/DATA/RESTORE
 - Screen editor.
@@ -26,21 +36,10 @@ TODO List
 - Function key handling
 - File I/O stuff.
 
-Optimise me (Integers)
-----------------------
-	- negation in term. 
-	- Add, Sub, Cmp in binary calculators.
-	- Abs and Sgn unary functions.
-
 Notes
 ----
-	- Break check
-	- A,X,Y in Sys.
-	- Tokeniser does comments.
 
 		
 Add to doc
 ----------
-WHILE WEND
-IF THEN / IF ELSE ENDIF
-;:[do .. loop .. exit]
+PROC/ENDPROC/CALL 
