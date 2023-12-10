@@ -108,10 +108,34 @@ _UAAbsInteger: 								; integer optimised.
 UnarySgn: ;; [sgn(]
 		jsr 	EXPEvalNumber 				; one operand
 		jsr 	ERRCheckRParen 				; closing )
+		lda 	XSControl,x
+		and 	#XS_TYPEMASK
+		beq 	_UASgnInteger
 		lda 	#26
 		jsr 	DoMathCommand
 		lda 	ControlError
 		bne 	DUFError
+_UASGNExit:		
+		rts
+
+_UASGNInteger:
+		lda 	XSNumber0,x		
+		ora 	XSNumber1,x		
+		ora 	XSNumber2,x		
+		ora 	XSNumber3,x		
+		beq 	_UASGNExit
+		;
+		lda 	XSNumber3,x
+		and 	#$80
+		beq 	_USIsPositive
+		lda 	#$FF
+_USIsPositive:
+		sta 	XSNumber0,x		
+		sta 	XSNumber1,x		
+		sta 	XSNumber2,x		
+		sta 	XSNumber3,x		
+		bne 	_UASGNExit
+		inc 	XSNumber0,x
 		rts
 
 		.send 		code
