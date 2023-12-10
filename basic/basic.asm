@@ -20,7 +20,8 @@
 		.section code
 
 boot:	jmp 	ColdStart
-
+		jmp 	CheckSpeed
+		
 ColdStart:	
 		jmp 	Command_RUN
 
@@ -33,6 +34,25 @@ ColdStart:
 ;
 ;									Temp bodges of various kinds.
 ;
+
+CheckSpeed:
+        pha
+        lda     #100
+        ldx     #0
+        ldy     #0
+_Loop1:    dey
+        bne     _Loop1
+        dex
+        bne     _Loop1
+        dec     a
+        bne     _Loop1
+        pla
+        inc     a
+        and     #7
+        adc        #48
+        jsr     $FFF1
+        bra     CheckSpeed
+
 WarmStart:
 		lda 	#$00
 		tax
