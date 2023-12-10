@@ -4,8 +4,7 @@ TODO List
 - Try Veselin's flash fix.
 
 - Integer Optimisations.
-	- negation in term. 
-	- Add, Sub, Cmp in binary calculators.
+	- Cmp in binary calculators.
 	- Abs and Sgn unary functions.
 
 - PROC / ENDPROC / CALL get working w/o params.

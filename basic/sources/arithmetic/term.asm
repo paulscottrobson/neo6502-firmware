@@ -64,6 +64,8 @@ _ETIdentifierOrSpecial:
 	 	jsr 	DereferenceTOS 				; dereference it.
 	 	lda 	XSControl,x 				; numeric term ?
 	 	bmi 	_ETBadType
+	 	and 	#XS_TYPEMASK 				; integer
+	 	beq 	UnaryNegateInteger
 	 	lda 	#16 						; negation function - needs optimising for ints 
 	 	jsr 	DoMathCommand 				; work it out
 	 	rts 	
@@ -95,6 +97,28 @@ _ETIsIdentifier:
 		ora 	#XS_ISVARIABLE 				; set variable reference bit (is word)
 		ply
 		sta 	XSControl,x
+		rts
+
+; ************************************************************************************************
+;
+;											Unary Negate Integer
+;
+; ************************************************************************************************
+
+UnaryNegateInteger:
+		sec
+		lda 	#0
+		sbc 	XSNumber0,x
+		sta 	XSNumber0,x
+		lda 	#0
+		sbc 	XSNumber1,x
+		sta 	XSNumber1,x
+		lda 	#0
+		sbc 	XSNumber2,x
+		sta 	XSNumber2,x
+		lda 	#0
+		sbc 	XSNumber3,x
+		sta 	XSNumber3,x
 		rts
 
 ; ************************************************************************************************
