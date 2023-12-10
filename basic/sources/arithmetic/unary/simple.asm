@@ -40,9 +40,9 @@ DoUnaryFunction:
 		pla
 		jsr 	DoMathCommand
 		lda 	ControlError
-		bne 	_DUFError
+		bne 	DUFError
 		jmp 	ERRCheckRParen 				; closing )
-_DUFError:
+DUFError:
 		.error_range
 
 UnaryInt: ;; [int(]
@@ -69,17 +69,50 @@ UnaryExp: ;; [exp(]
 UnaryLog: ;; [log(]
 		.single 	24
 
-UnaryAbs: ;; [abs(]
-		.single 	25
-
-UnarySgn: ;; [sgn(]
-		.single 	26
-
 UnaryRnd: ;; [rnd(]
 		.single 	27
 
 UnaryRand: ;; [rand(]
 		.single 	28
+
+; ************************************************************************************************
+;
+;										Optimisable ABS
+;
+; ************************************************************************************************
+
+UnaryAbs: ;; [abs(]			
+		jsr 	EXPEvalNumber 				; one operand
+		jsr 	ERRCheckRParen 				; closing )
+		lda 	XSControl,x
+		and 	#XS_TYPEMASK
+		beq 	_UAAbsInteger
+		lda 	#25
+		jsr 	DoMathCommand
+		lda 	ControlError
+		bne 	DUFError
+_UAExit:
+		rts
+
+_UAAbsInteger: 								; integer optimised.
+		lda 	XSNumber3,x
+		bpl 	_UAExit
+		jmp 	UnaryNegateInteger
+
+; ************************************************************************************************
+;
+;										Optimisable SGN
+;
+; ************************************************************************************************
+
+UnarySgn: ;; [sgn(]
+		jsr 	EXPEvalNumber 				; one operand
+		jsr 	ERRCheckRParen 				; closing )
+		lda 	#26
+		jsr 	DoMathCommand
+		lda 	ControlError
+		bne 	DUFError
+		rts
 
 		.send 		code
 
