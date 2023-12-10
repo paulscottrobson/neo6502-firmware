@@ -26,13 +26,10 @@ ColdStart:
 		jmp 	Command_RUN
 
 		.send 	code
-
 		.include "_include.inc"
-
-
 		.section code
 ;
-;									Temp bodges of various kinds.
+;			Temp bodges of various kinds.
 ;
 
 CheckSpeed:
