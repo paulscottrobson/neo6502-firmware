@@ -44,8 +44,17 @@ DRCType:
 BinaryMinus: ;; [-]
 		jsr 	DereferenceCheckTypes
 		bmi 	DRCType
+		lda 	XSControl,x
+		ora 	XSControl+1,x
+		and 	#XS_TYPEMASK
+		beq 	_BASubInteger
 		lda 	#1
 		jsr 	DoMathCommand
+		jmp 	EXPRMainLoop
+
+_BASubInteger:
+		sec
+		.binop 	sbc
 		jmp 	EXPRMainLoop
 
 ; ************************************************************************************************
@@ -114,8 +123,17 @@ BinaryModulus: ;; [%]
 BinaryAdd: ;; [+]
 		jsr 	DereferenceCheckTypes
 		bmi 	_BAConcatenate
+		lda 	XSControl,x
+		ora 	XSControl+1,x
+		and 	#XS_TYPEMASK
+		beq 	_BAAddInteger
 		lda 	#0
 		jsr 	DoMathCommand
+		jmp 	EXPRMainLoop
+
+_BAADDInteger:
+		clc
+		.binop 	adc
 		jmp 	EXPRMainLoop
 
 _BAConcatenate:
