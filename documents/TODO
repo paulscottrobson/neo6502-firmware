@@ -1,22 +1,19 @@
 TODO List
 ---------
 
-- Try Veselin's flash fix.
-
-- Integer Optimisations.
-	- Cmp in binary calculators.
-	- Sgn unary functions.
+- Integer Optimisations : Compare.
+- Change timer to be updated automatically, remove the dispatcher call (?)
+- TIME function
+- PCW Benchmarks.
 
 - PROC / ENDPROC / CALL get working w/o params.
-
-- PCW Benchmarks.
 
 - Locals / Parameters code.
 
 - Break test in loops.
-- Change timer to be updated automatically, remove the dispatcher call.
 - DIM and Arrays.
-- Inkey$() and Key() and Time and Event
+- Inkey$() and Key() and Event
+- Max and Min ?
 - INPUT simple Number/String
 - NEW Creates AXY
 - A,X,Y in Sys.
@@ -35,10 +32,6 @@ TODO List
 - Function key handling
 - File I/O stuff.
 
-Notes
-----
-
-		
 Add to doc
 ----------
 PROC/ENDPROC/CALL 
