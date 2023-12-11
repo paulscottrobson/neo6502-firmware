@@ -1,3 +1,9 @@
 for i = 1 to 10
-print alloc(i*1024)
+print i,
+call print.star()
 next
+end
+
+proc print.star()
+print "*"
+endproc

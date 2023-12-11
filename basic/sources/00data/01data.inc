@@ -27,6 +27,7 @@ XS_TYPEMASK = $C0
 XS_TYPEBIT = $80
 XS_STRING = $80
 XS_ISVARIABLE = $20
+XS_ISARRAY = $10
 XS_ISPROC = $C0
 
 		.section zeropage
