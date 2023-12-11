@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-add_compile_options(-Wall -O2)
+add_compile_options(-Wall -Werror -O2)
 
 # To change the default serial config for all apps, pass e.g.
 #   cmake -DDVI_DEFAULT_SERIAL_CONFIG=pimoroni_demo_hdmi_cfg ..

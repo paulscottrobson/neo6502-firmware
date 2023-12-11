@@ -10,8 +10,6 @@ target_sources(firmware PRIVATE main.c
     interface/dispatch.c interface/maths.c
 )
 
-target_compile_options(firmware PRIVATE -Wall)
-
 target_compile_definitions(firmware
     PRIVATE PICO
 )
