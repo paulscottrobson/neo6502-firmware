@@ -48,9 +48,17 @@ _DCSyntax:
 _DCRange:
 		.error_range
 
+; ************************************************************************************************
+;
+;							Create an array according to slots 0,1,2
+;
+; ************************************************************************************************
+
 DimCreateArray:
 		.byte 	3
 		;		Work out total size
+		; 		multiply x+1.y+1 if 2 dims
+		; 		multiply by 5
 		; 		allocate memory
 		; 		store memory pointers and dimensions
 		rts
