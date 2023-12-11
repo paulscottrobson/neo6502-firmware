@@ -85,10 +85,10 @@ void KBDCheckTimer(void) {
 		}
 	}
 
-	int ascii = getchar_timeout_us(0);
-	if (ascii != PICO_ERROR_TIMEOUT) {
-		KBDInsertQueue(ascii);
-	}
+//	int ascii = getchar_timeout_us(0);
+//	if (ascii != PICO_ERROR_TIMEOUT) {
+//		KBDInsertQueue(ascii);
+//	}
 }
 
 // ***************************************************************************************

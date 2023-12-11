@@ -84,6 +84,11 @@ void KBDCheckTimer(void) {
 			nextRepeat = TMRRead()+KBD_REPEAT_AFTER; 							// Quicker repeat after first time.
 		}
 	}
+
+//	int ascii = getchar_timeout_us(0);
+//	if (ascii != PICO_ERROR_TIMEOUT) {
+//		KBDInsertQueue(ascii);
+//	}
 }
 
 // ***************************************************************************************

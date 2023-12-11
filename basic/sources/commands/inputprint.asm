@@ -85,6 +85,7 @@ _CPNotInput:
 		lda 	XSNumber0,x
 		jsr 	CPPrintYA 					; print YA
 		ply
+		clc
 		bra 	Command_IP_Main 			; loop round clearing carry so NL if end		
 		;
 		;		Print number

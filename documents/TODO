@@ -1,11 +1,8 @@
 TODO List
 ---------
 
-- Integer Optimisations : Compare.
-- Change timer to be updated automatically, remove the dispatcher call (?)
-- TIME function
-- PCW Benchmarks.
-
+- Incomplete last line bug ?
+- PCW Benchmarks
 - PROC / ENDPROC / CALL get working w/o params.
 
 - Locals / Parameters code.

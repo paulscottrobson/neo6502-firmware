@@ -10,7 +10,7 @@ StandardVectorTable:
 	.word	UnaryRnd                 ; $84 rnd(
 	.word	EXPUnaryIsVal            ; $85 isval(
 	.word	UnaryInt                 ; $86 int(
-	.word	Unimplemented            ; $87 time
+	.word	EXPUnaryTime             ; $87 time(
 	.word	Unimplemented            ; $88 event(
 	.word	Unimplemented            ; $89 inkey$(
 	.word	EXPUnaryAsc              ; $8a asc(

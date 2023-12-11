@@ -65,7 +65,7 @@ void CONInitialise(struct GraphicsMode *gMode) {
 	graphMode->foreCol = 7;graphMode->backCol = 0; 	 							// Reset colours
 	CONWrite(12);  																// Clear screen / home cursor.
 
-	stdio_uart_init_full(uart0, 115200, 28, 29);
+//	stdio_uart_init_full(uart0, 115200, 28, 29);
 }
 
 // ***************************************************************************************
@@ -138,7 +138,7 @@ void CONWrite(int c) {
 				CONScrollUp();
 			}
 
-			putchar('\n');
+			//putchar('\n');
 
 			break;
 
@@ -160,7 +160,7 @@ void CONWrite(int c) {
 				graphMode->xCursor++;
 				if (graphMode->xCursor == graphMode->xCSize) CONWrite(CC_ENTER);
 
-				putchar(c);
+				//putchar(c);
 				
 			} else {
 

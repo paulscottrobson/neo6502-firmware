@@ -24,6 +24,7 @@
 	.include "sources/arithmetic/unary/str.asm"
 	.include "sources/arithmetic/unary/string.asm"
 	.include "sources/arithmetic/unary/substring.asm"
+	.include "sources/arithmetic/unary/time.asm"
 	.include "sources/arithmetic/unary/val.asm"
 	.include "sources/commands/assert.asm"
 	.include "sources/commands/clear.asm"
