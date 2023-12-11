@@ -1,9 +1,9 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		syntax.asm
-;		Purpose:	Syntax checking
-;		Created:	7th December 2023
+;		Name:		errorhandler.asm
+;		Purpose:	Handle Errors
+;		Created:	11th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -12,41 +12,59 @@
 
 ; ************************************************************************************************
 ;
-;									Check next character (General)
+;											Handle Errors
 ;
 ; ************************************************************************************************
 
 		.section code	
 
-checknext .macro
-		lda 	(CodePtr),y
-		cmp 	#\1
-		bne 	ERRSyntaxError
-		iny
-		rts
-		.endm
+Unimplemented:
+		.error_unimp
 
-; ************************************************************************************************
-;
-;											Specific checks
-;
-; ************************************************************************************************
+ErrorHandler:		
+		tay 								; error number in Y
+		ldx 	#0
+_EHFindMessage: 							; find the message
+		dey
+		beq 	_EHFoundMessage		
+_EHSkip:
+		lda 	ErrorMessageText,x
+		inx
+		cmp 	#0
+		bne 	_EHSkip
+		bra 	_EHFindMessage
+_EHFoundMessage: 							; print the message
+		lda 	ErrorMessageText,x
+		jsr 	CPPrintA
+		inx
+		lda 	ErrorMessageText,x 			
+		bne 	_EHFoundMessage				
+		;
+		lda 	ERRLine 					; check for line #
+		ora 	ERRLine+1		
+		beq 	_EHWarmStart
+		ldy 	#_EHAtMsg >> 8
+		lda 	#_EHAtMsg & $FF
+		jsr 	CPPrintYA 
 
-ERRCheckLParen:
-		.checknext 	KWD_LPAREN
-ERRCheckRParen:
-		.checknext 	KWD_RPAREN
-ERRCheckComma:
-		.checknext 	KWD_COMMA
+		ldx 	#0 							; print line number.
+		lda 	ERRLine
+		sta 	XSNumber0,x
+		lda 	ERRLine+1
+		sta 	XSNumber1,x
+		stz 	XSNumber2,x
+		stz 	XSNumber3,x
+		stz 	XSControl,x
+		jsr 	CPNumberToString		
+		jsr 	CPPrintYA 
 
-ERRCheckA:
-		cmp 	(codePtr),y
-		bne 	ERRSyntaxError
-		iny
-		rts		
+_EHWarmStart:
+		lda 	#13 						; CR
+		jsr 	WriteCharacter
+		jmp 	WarmStart
 
-ERRSyntaxError:
-		.error_syntax
+_EHAtMsg:
+		.text 	9," at line "
 
 		.send code
 		

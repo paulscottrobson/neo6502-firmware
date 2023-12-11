@@ -80,19 +80,20 @@ switch (*DCOMMAND) {
 				}
 				break;
 			case 6:
-				*DSTATUS = 0;
+				r = 0;
 				if (MATHIsFloatBinary()) {
 				f1 = MATHReadFloat(MATH_REG1);
 				f2 = MATHReadFloat(MATH_REG2);
 				float diff = (float_abs(f1)+float_abs(f2)) * 0.0000001f;
 				if (float_abs(f1-f2) >= diff) {
-				*DSTATUS = (f1 < f2 ? 0xFF:0x01);
+				r = (f1 < f2 ? 0xFF:0x01);
 				}
 				} else {
 				i1 = MATHReadInt(MATH_REG1);
 				i2 = MATHReadInt(MATH_REG2);
-				if (i1 != i2) *DSTATUS = (i1 < i2 ? 0xFF:0x01);
+				if (i1 != i2) r = (i1 < i2 ? 0xFF:0x01);
 				}
+				*DPARAMS = r;
 				#define FROMRADIANS(n) 	((n) * 180.0 / M_PI)
 				#define TORADIANS(n) ((n) * M_PI / 180.0)
 				break;

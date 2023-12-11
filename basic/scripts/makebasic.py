@@ -26,6 +26,8 @@ class Program(object):
 		self.code = []
 		self.store = IdentifierStore()
 		self.store.add("A")
+		self.store.add("O")
+		self.store.add("P")
 		self.store.add("X")
 		self.store.add("Y")
 		self.ts = TokenSet()

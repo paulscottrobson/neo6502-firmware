@@ -57,14 +57,7 @@ WarmStart:
 		.byte   3
 		bra     WarmStart
 
-Unimplemented:
-		lda     #$FF
-ErrorHandler:
-		ldx     #$EE
-		ldy     #$EE
-		.byte   3
-_EHLoop:
-		bra     _EHLoop     
+ 
 
 		.align  256
 Program:

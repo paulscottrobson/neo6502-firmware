@@ -71,6 +71,8 @@ RUNNewLine:
 
 RUNNewCommand:		
 		stz 	stringInitialised 			; reset string system flag.
+		bit 	ControlStatus
+		bmi 	_RUNBreak
 
 _RNCNoCheck:		
 		lda 	(codePtr),y 				; get next token

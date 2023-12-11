@@ -52,6 +52,7 @@
 	.include "sources/structures/scanforward.asm"
 	.include "sources/structures/scanproc.asm"
 	.include "sources/structures/while.asm"
+	.include "sources/support/errors/errorhandler.asm"
 	.include "sources/support/errors/syntax.asm"
 	.include "sources/support/stack/bytes.asm"
 	.include "sources/support/stack/frames.asm"
