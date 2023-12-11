@@ -21,13 +21,20 @@
 
 #define float_abs(n) (((n) < 0.0) ? -(n):(n))
 
+#ifdef PICO
+#define TIMECRITICAL(x) __time_critical_func(x)
+#else
+#define TIMECRITICAL(x) x
+#endif
+
 // ***************************************************************************************
 //
 //							Handle commands sent by message
 //
 // ***************************************************************************************
 
-void DSPHandler(uint8_t *cBlock,uint8_t *memory) {
+void TIMECRITICAL(DSPHandler)(uint8_t *cBlock, uint8_t *memory) 
+{
     float f1,f2;
     int i1,i2;
     uint32_t u1;
@@ -42,7 +49,8 @@ void DSPHandler(uint8_t *cBlock,uint8_t *memory) {
 //
 // ***************************************************************************************
 
-void DSPSync(void) {
+void TIMECRITICAL(DSPSync)(void) 
+{
     KBDSync();
 }
 

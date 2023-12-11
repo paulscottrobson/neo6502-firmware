@@ -84,9 +84,39 @@ CMPCompareGreaterEqual: 	;; [>=]
 CMPCompareBaseCode:
 		jsr 	DereferenceCheckTypes 		; dereference, check types match.
 		bmi 	_CMPString 					; string ?
+		;
+		lda 	XSControl,x 				; comparing integers
+		ora 	XSControl+1,x
+		and 	#XS_TYPEMASK
+		beq 	_CMPInteger
+
 		lda 	#6 							; use coprocessor to compare
 		jsr 	DOMathCommand
 		lda 	ControlStatus 				; get result.
+		rts
+		;
+		;		Integer comparison
+		;
+_CMPInteger:
+		phy 								; save Y
+		sec 								; subtract
+		.binop 	sbc
+		bvc 	_CMPINoOverflow 			; signed comparison
+		eor 	#$80
+_CMPINoOverflow:
+		lda 	XSNumber0,x 				; check if result zero
+		ora 	XSNumber1,x
+		ora 	XSNumber2,x
+		ora 	XSNumber3,x
+		tay 								; store in Y
+		beq 	_CMPIExit 					; if so, return zero.
+		ldy 	#$FF 						; return -1
+		lda 	XSNumber3,x 				; if bit 31 set
+		bmi 	_CMPIExit 					
+		ldy 	#$01 						; else +ve
+_CMPIExit:
+		tya 								; result in A
+		ply 								; restore Y
 		rts
 		;
 		;		String comparison
