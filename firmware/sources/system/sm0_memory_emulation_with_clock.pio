@@ -2,20 +2,20 @@
 .side_set 1 opt
 .wrap_target
 start:
-    set pins, 0b110 side 1  [5] ; activate A0-A7, side 1 is clock high
+    set pins, 0b110 side 1  [7] ; activate A0-A7, side 1 is clock high
     in  pins, 8                 ; read 8 bits
     set pins, 0b101         [5] ; activate A8-A15
     in  pins, 24                ; read 8 bits, OEs, r/w bit and some random bits
     set pins, 0b011         [4] ; activate D0-D7
     jmp pin read
     in  pins, 32                ; read data and some random bits
-    jmp start       side 0  [3] ; side 0 is clock low
+    jmp start       side 0  [7] ; side 0 is clock low
 read:
     mov osr, ~null              ; set pins 0-7 to OUT
     out pindirs, 8
     out pins, 8                 ; Write out data
     mov osr, null               ; set pins 0-7 to IN
-    out pindirs, 8  side 0  [3] ; side 0 is clock low
+    out pindirs, 8  side 0  [7] ; side 0 is clock low
 .wrap
 
 % c-sdk {
