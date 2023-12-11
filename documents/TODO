@@ -1,21 +1,16 @@
 TODO List
 ---------
 
-- Incomplete last line bug ?
-- PCW Benchmarks
 - PROC / ENDPROC / CALL get working w/o params.
-
 - Locals / Parameters code.
-
-- Break test in loops.
 - DIM and Arrays.
 - Inkey$() and Key() and Event
 - Max and Min ?
 - INPUT simple Number/String
-- NEW Creates AXY
 - A,X,Y in Sys.
 - Tokenising 
 	- Tokeniser does comments.
+- NEW Creates AOPXY
 - Listing
 - READ/DATA/RESTORE
 - Screen editor.

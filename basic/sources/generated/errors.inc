@@ -71,3 +71,8 @@ error_line .macro
 	jmp	ErrorHandler
 	.endm
 
+error_unimp .macro
+	lda	#15
+	jmp	ErrorHandler
+	.endm
+
