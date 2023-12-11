@@ -30,6 +30,7 @@
 	.include "sources/commands/assert.asm"
 	.include "sources/commands/clear.asm"
 	.include "sources/commands/comment.asm"
+	.include "sources/commands/dim.asm"
 	.include "sources/commands/goto.asm"
 	.include "sources/commands/inputprint.asm"
 	.include "sources/commands/let.asm"

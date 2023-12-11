@@ -16,5 +16,5 @@ ExtendedVectorTable:
 	.word	Command_GOTO             ; $18a goto
 	.word	Command_RETURN           ; $18b return
 	.word	Unimplemented            ; $18c restore
-	.word	Unimplemented            ; $18d dim
+	.word	DimCommand               ; $18d dim
 	.send code
