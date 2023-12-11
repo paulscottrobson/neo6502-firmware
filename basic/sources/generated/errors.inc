@@ -76,3 +76,13 @@ error_unimp .macro
 	jmp	ErrorHandler
 	.endm
 
+error_unknown .macro
+	lda	#16
+	jmp	ErrorHandler
+	.endm
+
+error_memory .macro
+	lda	#17
+	jmp	ErrorHandler
+	.endm
+

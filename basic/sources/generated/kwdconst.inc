@@ -48,6 +48,7 @@ KWD_EXPLPAREN                      = $9a ; exp(
 KWD_KEYLPAREN                      = $9b ; key(
 KWD_PEEKLPAREN                     = $9c ; peek(
 KWD_DEEKLPAREN                     = $9d ; deek(
+KWD_ALLOCLPAREN                    = $9e ; alloc(
 KWD_WHILE                          = $b0 ; while
 KWD_WEND                           = $b1 ; wend
 KWD_IF                             = $b2 ; if

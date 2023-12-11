@@ -85,6 +85,49 @@ _CCFoundEnd:
 
 ; ************************************************************************************************
 ;
+;									      Allocate Memory
+;
+; ************************************************************************************************
+
+MemoryAllocateYA:
+		sta 	zTemp0 						; save LSB of count in zTemp0
+
+		lda 	freeMemory+1 				; push start address on stack
+		pha
+		lda 	freeMemory
+		pha
+
+		clc 								; add Y:ZTemp0 to free memory
+		adc 	zTemp0
+		sta 	freeMemory
+		tya
+		adc 	freeMemory+1
+		sta 	freeMemory+1
+		bcs 	_MYAError 					; overflow
+		jsr 	MemoryCheck 				; past string pos
+		bcs 	_MYAError
+
+		pla 								; return value in YA
+		ply 									
+		rts
+_MYAError:
+		.error_memory
+
+; ************************************************************************************************
+;
+;								Check out of memory, CS if so.
+;
+; ************************************************************************************************
+
+MemoryCheck:
+		lda 	freeMemory+1
+		clc
+		adc 	#6
+		cmp 	stringMemory+1
+		rts
+
+; ************************************************************************************************
+;
 ;										Clear all variables
 ;
 ; ************************************************************************************************

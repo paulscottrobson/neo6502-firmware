@@ -27,7 +27,8 @@ errors = """
 	reference: 	cannot assign
 	line : 		unknown line number
 	unimp :		not implemented
-
+	unknown : 	unknown procedure
+	memory : 	out of memory
 """
 
 err = []

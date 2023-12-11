@@ -18,4 +18,6 @@ ErrorMessageText:
 	.text	"Cannot Assign",0
 	.text	"Unknown Line Number",0
 	.text	"Not Implemented",0
+	.text	"Unknown Procedure",0
+	.text	"Out Of Memory",0
 	.send code
