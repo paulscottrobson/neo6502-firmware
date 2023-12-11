@@ -1,6 +1,0 @@
-[submodule "firmware/libraries/PicoDVI"]
-	path = firmware/libraries/PicoDVI
-	url = https://github.com/Wren6991/PicoDVI
-[submodule "firmware/libraries/tinyusb"]
-	path = firmware/libraries/tinyusb
-	url = https://github.com/vsladkov/tinyusb.git
