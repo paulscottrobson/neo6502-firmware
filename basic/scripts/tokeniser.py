@@ -47,7 +47,9 @@ class IdentifierStore(object):
 			self.store[0] += 1 																# Another page. 
 		self.store.append(len(name)+6)														# Offset byte
 		self.store += [0,0,0,0] 															# default value
-		self.store.append(0x00 if isInteger else 0x80) 										# control byte.
+		ctrl = 0x00 if isInteger else 0x80
+		ctrl = ctrl + 0x10 if name.endswith("(") else ctrl
+		self.store.append(ctrl) 															# control byte.
 		b = [ord(x) for x in name] 															# work out name
 		b[-1] |= 0x80
 		self.store += b																		#  name

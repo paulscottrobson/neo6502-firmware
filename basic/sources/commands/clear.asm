@@ -151,9 +151,9 @@ _CVLoop:
 		iny
 		sta 	(zTemp0),y
 
-		iny 								; set the type to integer or string.
+		iny 								; set the type to integer or string, preserving array
 		lda 	(zTemp0),y
-		and 	#$80
+		and 	#$80+$10
 		sta 	(zTemp0),y
 
 		clc

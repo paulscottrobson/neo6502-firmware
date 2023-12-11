@@ -2,9 +2,11 @@ TODO List
 ---------
 
 - DIM and Arrays.
-- Locals / Parameters code.
+	- Complete DIM
+	- Access arrays via terms.
 - Inkey$() and Key() and Event
 - Max and Min ?
+- Locals / Parameters code.
 - INPUT simple Number/String
 - A,X,Y in Sys.
 - Tokenising 
