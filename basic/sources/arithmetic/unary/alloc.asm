@@ -1,8 +1,8 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		errorhandler.asm
-;		Purpose:	Handle Errors
+;		Name:		alloc.asm
+;		Purpose:	Allocate memory
 ;		Created:	11th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
@@ -12,70 +12,31 @@
 
 ; ************************************************************************************************
 ;
-;											Handle Errors
+;											Allocate memory
 ;
 ; ************************************************************************************************
 
 		.section code	
 
-Unimplemented:
-		.error_unimp
+EXPUnaryAlloc: ;; [alloc(]
+		jsr 	EXPEvalInteger16 				; amount to allocate
+		jsr 	ERRCheckRParen
+		phy
+		ldy 	XSNumber1,x 					; allocate it.
+		lda	 	XSNumber0,x
+		jsr 	MemoryAllocateYA
 
-ErrorHandler:		
-		tax 								; error number in X
-		lda 	#ErrorMessageText & $FF
-		sta 	zTemp0
-		lda 	#ErrorMessageText >> 8
-		sta 	zTemp0+1
-_EHFindMessage: 							; find the message
-		dex
-		beq 	_EHFoundMessage		
-_EHSkip:
-		lda 	(zTemp0)
-		inc 	zTemp0
-		bne 	_EHNoCarry
-		inc 	zTemp0+1
-_EHNoCarry:		
-		cmp 	#0
-		bne 	_EHSkip
-		bra 	_EHFindMessage
-_EHFoundMessage: 							; print the message
-		ldy 	#0
-_EHMPrint:		
-		lda 	(zTemp0),y
-		jsr 	CPPrintA
-		iny
-		lda 	(zTemp0),y
-		bne 	_EHMPrint
-		;
-		lda 	ERRLine 					; check for line #
-		ora 	ERRLine+1		
-		beq 	_EHWarmStart
-		ldy 	#_EHAtMsg >> 8
-		lda 	#_EHAtMsg & $FF
-		jsr 	CPPrintYA 
-
-		ldx 	#0 							; print line number.
-		lda 	ERRLine
-		sta 	XSNumber0,x
-		lda 	ERRLine+1
-		sta 	XSNumber1,x
+		sta 	XSNumber0,x 					; return adddres
+		sty 	XSNumber1,x
 		stz 	XSNumber2,x
 		stz 	XSNumber3,x
 		stz 	XSControl,x
-		jsr 	CPNumberToString		
-		jsr 	CPPrintYA 
-
-_EHWarmStart:
-		lda 	#13 						; CR
-		jsr 	WriteCharacter
-		jmp 	WarmStart
-
-_EHAtMsg:
-		.text 	9," at line "
+		ply
+		rts
 
 		.send code
-		
+
+
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

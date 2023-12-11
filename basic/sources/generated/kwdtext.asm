@@ -53,7 +53,7 @@ BaseTokenText:
 	.byte	$04,$4b,$45,$59,$a8           	; $ 9b KEY(
 	.byte	$05,$50,$45,$45,$4b,$a8       	; $ 9c PEEK(
 	.byte	$05,$44,$45,$45,$4b,$a8       	; $ 9d DEEK(
-	.byte	$00                           	; $ 9e 
+	.byte	$06,$41,$4c,$4c,$4f,$43,$a8   	; $ 9e ALLOC(
 	.byte	$00                           	; $ 9f 
 	.byte	$00                           	; $ a0 
 	.byte	$00                           	; $ a1 

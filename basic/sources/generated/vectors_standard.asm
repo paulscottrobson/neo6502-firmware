@@ -33,7 +33,7 @@ StandardVectorTable:
 	.word	Unimplemented            ; $9b key(
 	.word	PeekUnary                ; $9c peek(
 	.word	DeekUnary                ; $9d deek(
-	.word	Unimplemented            ; $9e 
+	.word	EXPUnaryAlloc            ; $9e alloc(
 	.word	Unimplemented            ; $9f 
 	.word	Unimplemented            ; $a0 
 	.word	Unimplemented            ; $a1 
@@ -60,7 +60,7 @@ StandardVectorTable:
 	.word	Command_REPEAT           ; $b6 repeat
 	.word	Command_UNTIL            ; $b7 until
 	.word	Command_SN1              ; $b8 proc
-	.word	Unimplemented            ; $b9 endproc
+	.word	Command_ENDPROC          ; $b9 endproc
 	.word	Command_FOR              ; $ba for
 	.word	Command_NEXT             ; $bb next
 	.word	Unimplemented            ; $bc case
@@ -90,5 +90,5 @@ StandardVectorTable:
 	.word	PokeCommand              ; $d4 poke
 	.word	DokeCommand              ; $d5 doke
 	.word	Unimplemented            ; $d6 local
-	.word	Unimplemented            ; $d7 call
+	.word	Command_CALL             ; $d7 call
 	.send code

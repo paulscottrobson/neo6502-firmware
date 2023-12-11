@@ -1,9 +1,8 @@
 TODO List
 ---------
 
-- PROC / ENDPROC / CALL get working w/o params.
-- Locals / Parameters code.
 - DIM and Arrays.
+- Locals / Parameters code.
 - Inkey$() and Key() and Event
 - Max and Min ?
 - INPUT simple Number/String
