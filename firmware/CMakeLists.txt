@@ -14,18 +14,18 @@ add_compile_options(-Wall -O2)
 # then rebuild. This is applied via target_compile_definitions on each app
 # individually.
 set(DVI_DEFAULT_SERIAL_CONFIG "pico_sock_cfg" CACHE STRING
-	"Select a default pin configuration from common_dvi_pin_configs.h")
+    "Select a default pin configuration from common_dvi_pin_configs.h")
 
 include_directories(
-	include
+    include
 )
 
 include(FetchContent)
 
 FetchContent_Declare(
-	PicoDVI
-	GIT_REPOSITORY https://github.com/Wren6991/PicoDVI
-	GIT_TAG        a248d72b8cc95a08b43ef4307cd954eb801272b2 # just the latest on 11/12/2023
+    PicoDVI
+    GIT_REPOSITORY https://github.com/Wren6991/PicoDVI
+    GIT_TAG        a248d72b8cc95a08b43ef4307cd954eb801272b2 # just the latest on 11/12/2023
 )
 FetchContent_MakeAvailable(PicoDVI)
 
