@@ -4,21 +4,21 @@ TODO List
 - DIM and Arrays.
 	- Complete DIM
 	- Access arrays via terms.
-- Inkey$() and Key() and Event
+- IF THEN<number> and IF GOTO<number> do not work.
+- A,X,Y in Sys.
+- Inkey$() and Key() and Event()
 - Max and Min ?
 - Locals / Parameters code.
 - INPUT simple Number/String
-- A,X,Y in Sys.
 - Tokenising 
 	- Tokeniser does comments.
+	- Tokeniser test routine.
+- LOAD and SAVE
 - NEW Creates AOPXY
 - Listing
 - READ/DATA/RESTORE
 - Screen editor.
 - Assembler
-
-- Arrays
-
 - Locale handling
 - Console colour and cursor control / positioning.
 - Audio system driver on emulator, and audio interface
@@ -27,4 +27,4 @@ TODO List
 
 Add to doc
 ----------
-PROC/ENDPROC/CALL 
+
