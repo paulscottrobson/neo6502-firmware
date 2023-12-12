@@ -1,9 +1,6 @@
 TODO List
 ---------
-
-- DIM and Arrays.
-	- Complete DIM
-	- Access arrays via terms.
+- Access arrays via terms.
 - Inkey$() and Key() and Event()
 - Max and Min ?
 - Locals / Parameters code.
