@@ -12,7 +12,7 @@ StandardVectorTable:
 	.word	UnaryInt                 ; $86 int(
 	.word	EXPUnaryTime             ; $87 time(
 	.word	Unimplemented            ; $88 event(
-	.word	Unimplemented            ; $89 inkey$(
+	.word	UnaryInkey               ; $89 inkey$(
 	.word	EXPUnaryAsc              ; $8a asc(
 	.word	ChrUnary                 ; $8b chr$(
 	.word	UnarySqr                 ; $8c sqr(
@@ -30,12 +30,12 @@ StandardVectorTable:
 	.word	UnaryATan                ; $98 atan(
 	.word	UnaryLog                 ; $99 log(
 	.word	UnaryExp                 ; $9a exp(
-	.word	Unimplemented            ; $9b key(
+	.word	UnaryKey                 ; $9b key(
 	.word	PeekUnary                ; $9c peek(
 	.word	DeekUnary                ; $9d deek(
 	.word	EXPUnaryAlloc            ; $9e alloc(
-	.word	Unimplemented            ; $9f 
-	.word	Unimplemented            ; $a0 
+	.word	Unimplemented            ; $9f max(
+	.word	Unimplemented            ; $a0 min(
 	.word	Unimplemented            ; $a1 
 	.word	Unimplemented            ; $a2 
 	.word	Unimplemented            ; $a3 

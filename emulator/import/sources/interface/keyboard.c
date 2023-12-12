@@ -20,7 +20,7 @@
 //		at 8 states per byte, so keycode 0 is byte 0 bit 0, keycode 7 is byte 0 bit 7
 //		keycode 8 is byte 1 bit 0 etc.
 //
-static uint8_t keyboardState[(KBD_MAX_KEYCODE >> 3)+1];
+static uint8_t keyboardState[KBD_MAX_KEYCODE+1];
 //
 //		Queue of ASCII keycode presses.
 //
@@ -54,9 +54,8 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 	}
 
 	if (keyCode != 0 && keyCode < KBD_MAX_KEYCODE) { 							// Legitimate keycode.
-		uint8_t bit = 0x01 << (keyCode & 7);									// Bit to set or clear.
 		if (isDown) {
-			keyboardState[keyCode >> 3] |= bit; 								// Set down bit.
+			keyboardState[keyCode] = 0xFF; 										// Set down flag.
 			uint8_t ascii = KBDMapToASCII(keyCode,modifiers);  					// What key ?
 			if (ascii != 0) {
 				currentASCII = ascii;  											// Remember code and time.
@@ -65,7 +64,7 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 				nextRepeat = TMRRead()+KBD_REPEAT_START;
 			}
 		} else {
-			keyboardState[keyCode >> 3] &= (bit ^ 0xFF); 						// Clear down bit.
+			keyboardState[keyCode] = 0x00; 										// Clear flag
 			if (keyCode == currentKeyCode) currentASCII = 0; 					// Autorepeat off, key released.
 		}
 	}
