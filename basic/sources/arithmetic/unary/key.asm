@@ -1,44 +1,38 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		time.asm
-;		Purpose:	Return time in cs
-;		Created:	11th December 2023
-;		Reviewed:   No
+;		Name:		key.asm
+;		Purpose:	Return key status
+;		Created:	12th December 2003
+;		Reviewed: 	No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
+		.section code
+
 ; ************************************************************************************************
 ;
-;										Return time in cs
+; 										INKEY$() function
 ;
 ; ************************************************************************************************
 
-		.section code	
-
-EXPUnaryTime: ;; [time(]
-		jsr 	ERRCheckRParen 					; )
-
-		.DoSendMessage 							; get time.
-		.byte 	1,1
+UnaryKey: ;; [key(]	
+		jsr 	EXPEvalInteger8				; get value to check
+		pha
+		jsr 	ERRCheckRParen 				
+		pla
+		sta 	ControlParameters
+		.DoSendMessage
+		.byte 	1,2
 		.DoWaitMessage
-		
-		lda 	ControlPort+4 					; return as integer
-		sta 	XSNumber0,x
-		lda 	ControlPort+5
-		sta 	XSNumber1,x
-		lda 	ControlPort+6
-		sta 	XSNumber2,x
-		lda 	ControlPort+7
-		sta 	XSNumber3,x
-		stz 	XSControl,x
+		lda 	ControlParameters
+		sta 	XSNumber0,x		
 		rts
 
 		.send code
 
-				
 ; ************************************************************************************************
 ;
 ;									Changes and Updates
@@ -49,4 +43,3 @@ EXPUnaryTime: ;; [time(]
 ;		==== 			=====
 ;
 ; ************************************************************************************************
-

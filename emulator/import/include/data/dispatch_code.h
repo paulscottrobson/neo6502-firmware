@@ -10,6 +10,10 @@ switch (*DCOMMAND) {
 			case 1:
 				*((uint32_t *)DPARAMS) = TMRRead();
 				break;
+			case 2:
+				i1 = *DPARAMS;
+				*DPARAMS = (i1 < KBD_MAX_KEYCODE) ? KBDGetStateArray()[i1] : 0;
+				break;
 		}
 		break;
 	case 2:

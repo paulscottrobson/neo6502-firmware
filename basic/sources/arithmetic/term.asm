@@ -216,14 +216,15 @@ DoMathCommand:
 		DoWaitMessage 						; wait till hardware free
 		sta 	ControlFunction
 
-		txa
+		txa 								; work out basic position of Stack,X
 		clc 
 		adc 	#XSStack & $FF
 		sta 	ControlPort+4
 		lda 	#XSStack >> 8
 		adc 	#0
 		sta 	ControlPort+5
-		lda 	#8
+
+		lda 	#StackSize 					; gap between stack entries.
 		sta 	ControlPort+6
 		lda 	#4
 		sta 	ControlCommand 				; do command

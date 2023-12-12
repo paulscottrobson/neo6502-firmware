@@ -1,44 +1,39 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		time.asm
-;		Purpose:	Return time in cs
-;		Created:	11th December 2023
-;		Reviewed:   No
+;		Name:		inkey.asm
+;		Purpose:	Get keystroke if any.
+;		Created:	12th December 2003
+;		Reviewed: 	No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
+		.section code
+
 ; ************************************************************************************************
 ;
-;										Return time in cs
+; 										INKEY$() function
 ;
 ; ************************************************************************************************
 
-		.section code	
+UnaryInkey: ;; [inkey$(]	
+		jsr 	ERRCheckRParen 				; no parameter
+		lda 	#1 							; allocate space for one char
+		jsr 	StringTempAllocate
 
-EXPUnaryTime: ;; [time(]
-		jsr 	ERRCheckRParen 					; )
-
-		.DoSendMessage 							; get time.
-		.byte 	1,1
+		.DoSendMessage 						; send command 2,1 read keyboard
+		.byte 	2,1
 		.DoWaitMessage
-		
-		lda 	ControlPort+4 					; return as integer
-		sta 	XSNumber0,x
-		lda 	ControlPort+5
-		sta 	XSNumber1,x
-		lda 	ControlPort+6
-		sta 	XSNumber2,x
-		lda 	ControlPort+7
-		sta 	XSNumber3,x
-		stz 	XSControl,x
+		lda 	ControlPort+4
+		beq 	_UIExit 					; "" if empty
+		jsr 	StringTempWrite
+_UIExit:		
 		rts
 
 		.send code
 
-				
 ; ************************************************************************************************
 ;
 ;									Changes and Updates
@@ -49,4 +44,3 @@ EXPUnaryTime: ;; [time(]
 ;		==== 			=====
 ;
 ; ************************************************************************************************
-

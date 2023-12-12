@@ -14,6 +14,7 @@ ControlCommand = ControlPort+0
 ControlFunction = ControlPort+1
 ControlError = ControlPort+2
 ControlStatus = ControlPort+3
+ControlParameters = ControlPort+4
 
 VariableA = Program+2
 VariableO = Program+9
