@@ -56,11 +56,57 @@ _DCRange:
 
 DimCreateArray:
 		.byte 	3
-		;		Work out total size
-		; 		multiply x+1.y+1 if 2 dims
-		; 		multiply by 5
-		; 		allocate memory
-		; 		store memory pointers and dimensions
+		phx
+		phy
+		lda 	XSNumber0+1 				; first dimension
+		inc 	a 							; need one more entry than the maximum dimension
+		ldy 	XSNumber0+2 				; second dimension, zero if only one.
+		beq 	_DCASingle 					
+		iny 								; one more than maximum dimension
+		jsr 	MultiplyYA 					; YA = Y x A
+_DCASingle:
+		jsr 	MultiplyYABy5 				; Multiply YA (the number of elements) by 5. 		
+		jsr 	MemoryAllocateYA 			; allocate memory for it.
+		;
+		ldx 	XSNumber0 					; copy target address in variable table to zTemp0
+		stx 	zTemp0
+		ldx 	XSNumber1
+		stx 	zTemp0+1
+		;
+		sta 	(zTemp0) 					; copy out the address of the array memory block.
+		tya
+		ldy 	#1
+		sta 	(zTemp0),y
+		;
+		iny 								; copy out the two dimensions, if one dimension 
+		lda 	XSNumber0+1 				; the second value is zero.
+		sta 	(zTemp0),y
+		iny
+		lda 	XSNumber0+2
+		sta 	(zTemp0),y
+		;
+		ply
+		plx
+		rts
+
+; ************************************************************************************************
+;
+;									Multiply Y by A => YA
+;
+; ************************************************************************************************
+
+MultiplyYA:
+		.byte 	3
+		rts
+		
+; ************************************************************************************************
+;
+;									    Multiply YA by 5
+;
+; ************************************************************************************************
+
+MultiplyYABy5:
+		.byte 	3
 		rts
 
 		.send code
