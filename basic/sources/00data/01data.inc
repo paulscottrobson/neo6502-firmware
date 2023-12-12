@@ -15,6 +15,12 @@ ControlFunction = ControlPort+1
 ControlError = ControlPort+2
 ControlStatus = ControlPort+3
 
+VariableA = Program+2
+VariableO = Program+9
+VariableP = Program+16
+VariableX = Program+23
+VariableY = Program+30
+
 ; ************************************************************************************************
 ;	
 ;											Stack

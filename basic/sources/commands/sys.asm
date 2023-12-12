@@ -28,6 +28,10 @@ Command_Sys:	;; [sys]
 		lda 	XSNumber1,x
 		sta 	_SysCall+2
 
+		lda  	VariableA 					; load in AXY
+		ldx 	VariableX
+		ldy 	VariableY
+		
 _SysCall:
 		jsr 	$FFFF 						; call the code
 		ply
