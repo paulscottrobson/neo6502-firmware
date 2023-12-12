@@ -55,7 +55,6 @@ _DCRange:
 ; ************************************************************************************************
 
 DimCreateArray:
-		.byte 	3
 		phx
 		phy
 		lda 	XSNumber0+1 				; first dimension
@@ -66,6 +65,8 @@ DimCreateArray:
 		jsr 	MultiplyYA 					; YA = Y x A
 _DCASingle:
 		jsr 	MultiplyYABy5 				; Multiply YA (the number of elements) by 5. 		
+		cpy 	#51 						; always going to be too big (256/5)
+		bcs 	_DCAError
 		jsr 	MemoryAllocateYA 			; allocate memory for it.
 		;
 		ldx 	XSNumber0 					; copy target address in variable table to zTemp0
@@ -88,6 +89,8 @@ _DCASingle:
 		ply
 		plx
 		rts
+_DCAError:
+		.error_range
 
 ; ************************************************************************************************
 ;
@@ -96,7 +99,31 @@ _DCASingle:
 ; ************************************************************************************************
 
 MultiplyYA:
-		.byte 	3
+		sta 	zTemp0 						; zTemp0 : adder
+		stz 	zTemp0+1
+		stz 	zTemp1						; zTemp1 : result
+		stz 	zTemp1+1
+_MYALoop:
+		tya 								; complete ?
+		beq 	_MYAExit
+		lsr 	a 							; right shift into carry
+		tay
+		bcc 	_MYANoAdd
+		;
+		clc 								; add if LSB set
+		lda 	zTemp0
+		adc 	zTemp1
+		sta 	zTemp1
+		lda 	zTemp0+1
+		adc 	zTemp1+1
+		sta 	zTemp1+1
+_MYANoAdd:
+		asl 	zTemp0
+		rol 	zTemp0+1
+		bra 	_MYALoop		
+_MYAExit:
+		lda 	zTemp1 						; return result.
+		ldy 	zTemp1+1				
 		rts
 		
 ; ************************************************************************************************
@@ -106,7 +133,20 @@ MultiplyYA:
 ; ************************************************************************************************
 
 MultiplyYABy5:
-		.byte 	3
+		sta 	zTemp0 						; save it.
+		sty 	zTemp0+1
+		asl 	zTemp0 						; x 4
+		rol 	zTemp0+1
+		asl 	zTemp0
+		rol 	zTemp0+1
+		;
+		clc 								; add to original.
+		adc 	zTemp0
+		pha
+		tya
+		adc 	zTemp0+1
+		tay
+		pla
 		rts
 
 		.send code

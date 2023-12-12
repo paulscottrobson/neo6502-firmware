@@ -85,16 +85,18 @@ _CCFoundEnd:
 
 ; ************************************************************************************************
 ;
-;									      Allocate Memory
+;									Allocate Memory & Clear it.
 ;
 ; ************************************************************************************************
 
 MemoryAllocateYA:
 		sta 	zTemp0 						; save LSB of count in zTemp0
 
-		lda 	freeMemory+1 				; push start address on stack
+		lda 	freeMemory+1 				; save start address on stack
+		sta 	zTemp1+1 					; & copy to zTemp1.
 		pha
 		lda 	freeMemory
+		sta 	zTemp1
 		pha
 
 		clc 								; add Y:ZTemp0 to free memory
@@ -107,6 +109,22 @@ MemoryAllocateYA:
 		jsr 	MemoryCheck 				; past string pos
 		bcs 	_MYAError
 
+_MAYAClear: 								; erase the memory.
+		lda 	zTemp1
+		cmp 	freeMemory
+		bne 	_MAYAZero
+		lda 	zTemp1+1
+		cmp 	freeMemory+1
+		beq 	_MAYAExit
+_MAYAZero:		
+		lda 	#$00
+		sta 	(zTemp1)
+		inc 	zTemp1
+		bne 	_MAYAClear
+		inc 	zTemp1+1
+		bra 	_MAYAClear
+
+_MAYAExit:
 		pla 								; return value in YA
 		ply 									
 		rts
