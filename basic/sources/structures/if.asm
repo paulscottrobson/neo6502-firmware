@@ -34,9 +34,15 @@ IfCommand: ;; [if]
 		iny 								; consume THEN
 		jsr 	CheckIfZero
 		beq 	_IfFail 					; if fail, go to next line
+		lda 	(codePtr),y 				; line # follows e.g. IF .. THEN 100
+		and 	#$C0
+		cmp 	#$40
+		beq 	_IfThenConst
 		rts 								; if THEN just continue
 _IfFail:
 		jmp 	RUNEndOfLine
+_IfThenConst:
+		jmp 	Command_GOTO		
 
 		; ------------------------------------------------------------------------
 		;

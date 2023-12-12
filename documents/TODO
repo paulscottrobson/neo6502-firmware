@@ -4,8 +4,6 @@ TODO List
 - DIM and Arrays.
 	- Complete DIM
 	- Access arrays via terms.
-- IF THEN<number> and IF GOTO<number> do not work.
-- A,X,Y in Sys.
 - Inkey$() and Key() and Event()
 - Max and Min ?
 - Locals / Parameters code.
