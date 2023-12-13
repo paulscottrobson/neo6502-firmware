@@ -67,7 +67,8 @@ test:
 	make unary
 	make string
 	make assign
-
+	make array
+	
 binary:
 	$(PYTHON) tests$(S)binary.py >build$(S)test.bas
 	make run
@@ -82,4 +83,7 @@ string:
 	make run
 assign:
 	$(PYTHON) tests$(S)assign.py >build$(S)test.bas
+	make run
+array:
+	$(PYTHON) tests$(S)array.py >build$(S)test.bas
 	make run

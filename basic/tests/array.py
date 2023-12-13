@@ -3,7 +3,7 @@
 #
 #		Name : 		testarray.py
 #		Purpose :	Array testing script
-#		Date :		1st July 2023
+#		Date :		4th December 2023
 #		Author : 	Paul Robson (paul@robsons.org.uk)
 #
 # *******************************************************************************************

@@ -3,7 +3,7 @@
 #
 #		Name : 		teststring.py
 #		Purpose :	Test string operations
-#		Date :		26th May 2023
+#		Date :		4th December 2023
 #		Author : 	Paul Robson (paul@robsons.org.uk)
 #
 # *******************************************************************************************
