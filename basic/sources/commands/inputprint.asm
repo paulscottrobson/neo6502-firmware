@@ -64,7 +64,7 @@ _CPLoop:
 		bpl	 	_CPNotInput
 		and 	#$C0 						; check 40-7F e.g. an identifier.
 		cmp 	#$40
-		bne 	_CPNotInput 				
+		bcs 	_CPNotInput 				
 		jsr 	_CPInputCode 				; input code
 		bra 	Command_IP_Main 			; and go round again.
 		;
@@ -119,50 +119,68 @@ _CPExit2:
 		;		Input code
 		;
 _CPInputCode:
-;		jsr 	EXPTermR0 					; get the term, the thing being input to
-;											; (type being identifier is checked above)
-;		phy 								; save position
-;		jsr 	CPInputA					; input a line to YX
-;
-;		lda 	IFR0+IFExponent 			; string ?
-;		bmi 	_CPInputString
-;		;
-;		;		Number Input Code
-;		;
-;		lda 	IFR0+IFMantissa0 			; push target address on stack
-;		pha
-;		lda 	IFR0+IFMantissa1
-;		pha
-;		;
-;		stx 	zTemp0 						; use VAL Code to convert.
-;		sty 	zTemp0+1
-;		jsr 	VALConversionZTemp0
-;
-;		pla 								; do the assign.
-;		sta 	zTemp0+1
-;		pla
-;		sta 	zTemp0
-;		jsr 	AssignNumber
-;
-;		ply
-;		rts
-;
+		ldx 	#0 							; slot 0
+		jsr 	EvaluateTerm 				; term, which is the variable to assign to in slot 0.
+_CPReInput:		
+		jsr 	InputLine 					; input line
 		;
-		;										String Input Code
+		lda 	#inputBuffer & $FF 			; store in level 1, also param buffer for conversion.
+		sta 	XSNumber0+1
+		sta 	ControlCommand+8
+		lda 	#inputBuffer >> 8
+		sta 	XSNumber1+1
+		sta 	ControlCommand+9
+		lda 	#XS_ISSTRING
+		sta 	XSControl+1
 		;
+		lda 	XSControl 					; are we expecting a string e.g. input name$
+		bmi 	_CPDoAssign
+		ldx 	#1
+		lda 	#33
+		jsr 	DoMathCommand
+		lda 	ControlError 				; error occurred, reget
+		beq 	_CPDoAssign
+		lda 	#'?'
+		jsr 	CPPrintA
+		jsr 	CPPrintA
+		bra 	_CPReInput
+		
+_CPDoAssign:
+		ldx 	#0 							; do the assignment
+		jsr 	AssignValueToReference
+		rts
 
-;_CPInputString:
-;		lda 	IFR0+IFMantissa0 			; copy target address to zTemp0
-;		sta 	zTemp0
-;		lda 	IFR0+IFMantissa1
-;		sta 	zTemp0+1
-;		;
-;		stx 	IFR0+IFMantissa0 			; string YX in result register
-;		sty 	IFR0+IFMantissa1
-;		jsr 	AssignString 				; assign the string
-;		ply 								; exit
-;		rts
+; ************************************************************************************************
+;
+;									Input a string to buffer
+;
+; ************************************************************************************************
 
+InputLine:	
+		stz 	inputBuffer 				; empty input buffer
+_InputLoop:
+		jsr 	CPInputA 					; get character
+		cmp 	#13
+		beq 	_InputExit
+		cmp 	#8
+		beq 	_InputDelete
+		cmp 	#32
+		bcc 	_InputLoop
+		ldx 	inputBuffer					; new character
+		cpx 	#MAXLINESIZE 				; too many ?
+		beq 	_InputLoop
+		sta 	inputBuffer+1,x 			; add and echo
+		inc 	inputBuffer		
+		jsr 	CPPrintA
+		bra 	_InputLoop
+_InputDelete: 								; backspace
+		ldx 	inputBuffer 				; start of input ?
+		beq 	_InputLoop		
+		dec 	inputBuffer 				; backspace and echo out.
+		jsr 	CPPrintA
+		bra 	_InputLoop
+_InputExit: 
+		jmp 	CPPrintA					; return and exit
 
 ; ************************************************************************************************
 ;
@@ -212,7 +230,7 @@ _CPPrintExit:
 ; ************************************************************************************************
 
 CPInputA:
-		.byte 	3
+		jmp 	ReadCharacter
 CPPrintA:
 		jmp 	WriteCharacter
 		.send code

@@ -28,7 +28,7 @@ EXPUnaryInlineString: ;; [!!str]
 		sta 	XSNumber1,x
 		stz 	XSNumber2,x 				; fill in the rest & type
 		stz 	XSNumber3,x
-		lda 	#XS_STRING 					; make it a string.
+		lda 	#XS_ISSTRING 				; make it a string.
 		sta 	XSControl,x
 		;
 		tya	 								; skip over it.
