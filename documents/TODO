@@ -3,6 +3,7 @@ TODO List
 - Tokenising 
 	- Tokeniser does comments.
 	- Tokeniser test routine.
+- Patch Oliver Schmidt's debug code back in.
 - NEW Creates AOPXY
 - Listing
 - Simple command line usage.
