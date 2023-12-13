@@ -90,6 +90,20 @@ _ETIsIdentifier:
 		stz 	XSNumber2,x 				; neatness
 		stz 	XSNumber3,x
 		;
+		phy 								; is this an array
+		ldy 	#4
+		lda 	(zTemp0),y
+		ply
+		and 	#XS_ISARRAY
+		beq 	_ETNotArray
+		;
+		jsr 	ArrayAccess 				; access the correct element.
+		lda 	XSNumber0,x 				; set zTemp0 because we are now pointing at the element.
+		sta 	zTemp0
+		lda 	XSNumber1,x
+		sta 	zTemp0+1
+_ETNotArray:		
+		;
 		phy 								; read and update the type/control
 		ldy 	#4
 		lda 	(zTemp0),y

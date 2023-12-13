@@ -1,15 +1,16 @@
 TODO List
 ---------
-- Access arrays via terms.
 - Event() Max() and Min()
 - Locals / Parameters code.
 - INPUT simple Number/String
 - Tokenising 
 	- Tokeniser does comments.
 	- Tokeniser test routine.
-- LOAD and SAVE
 - NEW Creates AOPXY
 - Listing
+- LOAD and SAVE
+
+- Simple command line usage.
 - READ/DATA/RESTORE
 - Screen editor.
 - Assembler

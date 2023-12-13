@@ -8,6 +8,7 @@
 	.include "sources/generated/kwdconst.inc"
 	.include "sources/generated/neo6502.inc"
 	.include "sources/support/stack/stack.inc"
+	.include "sources/arithmetic/array.asm"
 	.include "sources/arithmetic/binary/compare.asm"
 	.include "sources/arithmetic/binary/mathint.asm"
 	.include "sources/arithmetic/binary/mathstd.asm"

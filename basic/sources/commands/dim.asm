@@ -14,10 +14,27 @@
 
 DimCommand: ;; [dim]
 		ldx 	#0 							; get the term, e.g. the variable to dimension
-		jsr 	EvaluateTerm
-		lda 	XSControl+0 				; check it is a reference.
-		and 	#XS_ISVARIABLE
+		lda 	(CodePtr),y 				; check we have a reference here.
+		cmp 	#$40
+		bcs 	_DCSyntax
+		;
+		clc 								; make a real address.
+		adc 	#Program >> 8
+		sta 	XSNumber1,x 				; copy reference into slot 0 and zTemp0
+		sta 	zTemp0+1
+		iny
+		lda 	(codePtr),y
+		sta 	XSNumber0,x
+		sta 	zTemp0
+		iny
+
+		phy 								; check it's an array
+		ldy 	#4
+		lda 	(zTemp0),y
+		ply
+		and 	#XS_ISARRAY
 		beq 	_DCSyntax
+
 		inx
 		jsr 	EXPEvalInteger8 			; get the first dimension 0-255
 		lda 	XSNumber0+1 				; max 254 dimensions

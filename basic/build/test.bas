@@ -1,8 +1,5 @@
-print chr$(12)
-repeat
-print chr$(20)
-for i = 0 to 127
-	print key(i),
-next
-print time()
-until 0
+dim c(12)
+c(4) = 4
+c(5) = 5
+c(2) = 2.2
+print c(2)+c(5)*c(4)
