@@ -95,7 +95,7 @@ _AAHaveIndex:
 		bpl 	_AANotString 				; if string, set the type bit in the element.
 		ldy 	#4
 		lda 	(zTemp0),y
-		ora 	#XS_STRING
+		ora 	#XS_ISSTRING
 		sta 	(zTemp0),y
 _AANotString:		
 		ply

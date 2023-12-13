@@ -22,6 +22,8 @@ VariableP = Program+16
 VariableX = Program+23
 VariableY = Program+30
 
+MAXLINESIZE = 128
+
 ; ************************************************************************************************
 ;	
 ;											Stack
@@ -32,7 +34,7 @@ StackSize = 8
 
 XS_TYPEMASK = $C0
 XS_TYPEBIT = $80
-XS_STRING = $80
+XS_ISSTRING = $80
 XS_ISVARIABLE = $20
 XS_ISARRAY = $10
 XS_ISPROC = $C0
@@ -98,6 +100,9 @@ basicStackEnd: 								; bottom limit of stack.
 		.fill 	1
 tempBuffer: 								; generic buffer.
 		.fill 	32
+inputBuffer: 								; input buffer
+		.fill 	MAXLINESIZE+1	
+		
 		.send storage
 
 ; ************************************************************************************************

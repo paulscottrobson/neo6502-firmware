@@ -80,7 +80,7 @@ _STAAllocate:
 		sta 	XSNumber1,x
 		stz 	XSNumber2,x 				; set the typing data and the upper address bytes.
 		stz 	XSNumber3,x
-		lda 	#XS_STRING					; it's a string.
+		lda 	#XS_ISSTRING				; it's a string.
 		sta 	XSControl,x
 		;
 		lda 	#0 							; clear the target string
