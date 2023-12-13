@@ -4,5 +4,5 @@
 30 k=k+1
 50 IF k<10000 THEN GOTO 30
 60 print "End"
-70 print (time()-t1)/100:end
+70 print (time()-t1)/100/10:end
 

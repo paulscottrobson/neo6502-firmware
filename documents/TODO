@@ -1,24 +1,28 @@
 TODO List
 ---------
-- Event() Max() and Min()
-- Locals / Parameters code.
-- INPUT simple Number/String
+- INPUT simple Number/String addition to PRINT/INPUT
 - Tokenising 
 	- Tokeniser does comments.
 	- Tokeniser test routine.
 - NEW Creates AOPXY
 - Listing
-- LOAD and SAVE
-
 - Simple command line usage.
+- First play version
+
+- LOAD and SAVE and some sort of directory listing.
+- Second play version
+
+- Event() Max() and Min()
+- Locals / Parameters code.
 - READ/DATA/RESTORE
 - Screen editor.
 - Assembler
 - Locale handling
 - Console colour and cursor control / positioning.
-- Audio system driver on emulator, and audio interface
 - Function key handling
-- File I/O stuff.
+
+- Graphics system.
+- Audio system driver on emulator, and audio interface
 
 Add to doc
 ----------
