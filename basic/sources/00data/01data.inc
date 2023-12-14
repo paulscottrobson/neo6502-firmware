@@ -85,6 +85,7 @@ zTemp1:
 ; ************************************************************************************************
 
 		.section storage
+		
 freeMemory: 								; free memory address
 		.fill 	2
 ERRLine: 									; line number for errors.
@@ -101,8 +102,22 @@ basicStackEnd: 								; bottom limit of stack.
 		.fill 	1
 tempBuffer: 								; generic buffer.
 		.fill 	32
-inputBuffer: 								; input buffer
+
+inputPos: 									; tokenising position in input buffer
+		.fill 	1
+inputBuffer: 								; input buffer / token input buffer.
 		.fill 	MAXLINESIZE+1	
+
+tokLineSize: 								; offset to end of line
+		.fill 	1
+tokLineNumber: 								; line number of current life
+		.fill 	2		
+tokBuffer: 									; tokenised line buffer
+		.fill 	256 	
+tokIsFirstElement: 							; first tokenised element flag.
+		.fill 	1		
+tokElement: 								; length prefixed string indicating an identifier or punctuation.
+		.fill 	64
 		
 		.send storage
 

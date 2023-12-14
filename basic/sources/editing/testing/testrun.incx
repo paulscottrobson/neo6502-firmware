@@ -1,0 +1,40 @@
+	ldx #Line0 & $FF
+	ldy #Line0 >> 8
+	jsr TOKOneLine
+
+	ldx #Line1 & $FF
+	ldy #Line1 >> 8
+	jsr TOKOneLine
+
+	ldx #Line2 & $FF
+	ldy #Line2 >> 8
+	jsr TOKOneLine
+
+	ldx #Line3 & $FF
+	ldy #Line3 >> 8
+	jsr TOKOneLine
+
+	ldx #Line4 & $FF
+	ldy #Line4 >> 8
+	jsr TOKOneLine
+
+	ldx #Line5 & $FF
+	ldy #Line5 >> 8
+	jsr TOKOneLine
+
+	ldx #Line6 & $FF
+	ldy #Line6 >> 8
+	jsr TOKOneLine
+
+	ldx #Line7 & $FF
+	ldy #Line7 >> 8
+	jsr TOKOneLine
+
+	ldx #Line8 & $FF
+	ldy #Line8 >> 8
+	jsr TOKOneLine
+
+	ldx #Line9 & $FF
+	ldy #Line9 >> 8
+	jsr TOKOneLine
+
