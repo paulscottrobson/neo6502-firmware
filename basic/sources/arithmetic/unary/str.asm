@@ -27,9 +27,9 @@ StrUnary: ;; [str$(]
 		jsr 	ERRCheckRParen
 
 		lda 	XSNumber0-1,x
-		sta 	ControlCommand+8		
+		sta 	ControlParameters+4		
 		lda 	XSNumber1-1,x
-		sta 	ControlCommand+9
+		sta 	ControlParameters+5
 
 		lda 	#34 						; convert number to string
 		jsr 	DoMathCommand

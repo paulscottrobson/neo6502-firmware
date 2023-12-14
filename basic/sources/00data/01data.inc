@@ -10,7 +10,8 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-ControlCommand = ControlPort+0
+ControlCommand_Check = ControlPort+0 
+
 ControlFunction = ControlPort+1
 ControlError = ControlPort+2
 ControlStatus = ControlPort+3

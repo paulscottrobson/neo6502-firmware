@@ -26,7 +26,7 @@ UnaryInkey: ;; [inkey$(]
 		.DoSendMessage 						; send command 2,1 read keyboard
 		.byte 	2,1
 		.DoWaitMessage
-		lda 	ControlPort+4
+		lda 	ControlParameters+0
 		beq 	_UIExit 					; "" if empty
 		jsr 	StringTempWrite
 _UIExit:		

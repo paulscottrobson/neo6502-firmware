@@ -53,9 +53,9 @@ EXPValBody:
 		jsr 	ERRCheckRParen 					; )
 
 		lda 	zTemp0 							; copy address to offset 8/9
-		sta 	ControlCommand+8
+		sta 	ControlParameters+4
 		lda 	zTemp0+1
-		sta 	ControlCommand+9
+		sta 	ControlParameters+5
 
 		lda 	#33
 		jsr 	DoMathCommand
