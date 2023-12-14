@@ -21,7 +21,7 @@
 TOKWriteA:
 		phx
 		ldx 	tokLineSize
-		sta 	tokBuffer,x
+		sta 	tokLineSize,x
 		inc 	tokLineSize
 		plx
 		rts
