@@ -22,15 +22,41 @@
 boot:   jmp     ColdStart
 		jmp     CheckSpeed
 		
-ColdStart:  
+ColdStart:
+		jmp 	TestTokenising  
 		jmp     Command_RUN
 
 		.send   code
 		.include "_include.inc"
 		.section code
+
+TestTokenising:
+		lda 	#_Test1 & $FF
+		ldy 	#_Test1 >> 8
+		jsr 	LoadTokenCodeYA
+		jsr 	TOKTokenise
+_h1:		bra 	_h1
+
+_Test1:	.byte 	_Test1End-_Test1-1
+		.text 	"  123409"
+_Test1End:						
 ;
 ;           Temp bodges of various kinds.
 ;
+LoadTokenCodeYA:
+		sta 	zTemp0
+		sty 	zTemp0+1
+		lda 	(zTemp0)
+		tax
+		inx
+		ldy 	#0
+_LTCCopy:		
+		lda 	(zTemp0),y
+		sta 	inputBuffer,y
+		iny
+		dex
+		bne 	_LTCCopy
+		rts
 
 CheckSpeed:
 		pha
@@ -57,7 +83,6 @@ WarmStart:
 		.byte   3
 		bra     WarmStart
 
- 
 
 		.align  256
 Program:

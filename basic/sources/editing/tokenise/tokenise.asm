@@ -14,7 +14,7 @@
 
 ; ************************************************************************************************
 ;
-;								Tokenise line. Data source function in YX. 
+;								Tokenise line in input buffer
 ;
 ; ************************************************************************************************
 
@@ -29,23 +29,33 @@ TOKTokenise:
 		;
 		stz 	inputPos 					; input position.
 		
-		; ----------------------------------------------------------------------------------
-		;
-		;							Main tokenising loop
-		;
-		; ----------------------------------------------------------------------------------
-
 _TOKMainLoop:
+		.byte 	3
+		jsr 	TOKTokeniseOne
+		bcs 	_TOKMainLoop
+		lda 	#KWD_SYS_END
+		jsr 	TOKWriteA
+		rts
+
+; ************************************************************************************************
+;
+;						Tokenise one element. Return CS to continue
+;
+; ************************************************************************************************
+
+TOKTokeniseOne:		
 		; 	Skip spaces
-		; 	If End, write line end and exit
+		; 	If End, exit with CC.
 		; 	If '$', extract identifier convert from hex and write as constant
 		; 	If '"', do the string constant code.
 		; 	If '.', do the packed BCD Decimal code.
-		;	If Decimal extract identifier, convert from decimal and write as constant.
+		;	If Decimal extract identifier, convert from decimal and write as constant / line number.
 		; 	If Identifier extract identifier, check trailing $( and write as token or identifier.
 		; 	Check first 2 characters
 		; 	Check 1 character
-		
+		clc
+		rts
+
 		.send code
 
 ; ************************************************************************************************
