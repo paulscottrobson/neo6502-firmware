@@ -204,10 +204,10 @@ CheckFollowingDecimal:
 		inc 	a
 		sec
 		adc 	CodePtr
-		sta 	ControlPort+8 				; param slot 2 = address of decimal data.
+		sta 	ControlParameters+4 		; param slot 2 = address of decimal data.
 		lda 	CodePtr+1
 		adc 	#0
-		sta 	ControlPort+9
+		sta 	ControlParameters+5
 		lda 	#32 						; decimal expand code.
 		jsr 	DoMathCommand
 		;
@@ -233,15 +233,15 @@ DoMathCommand:
 		txa 								; work out basic position of Stack,X
 		clc 
 		adc 	#XSStack & $FF
-		sta 	ControlPort+4
+		sta 	ControlParameters+0
 		lda 	#XSStack >> 8
 		adc 	#0
-		sta 	ControlPort+5
+		sta 	ControlParameters+1
 
 		lda 	#StackSize 					; gap between stack entries.
-		sta 	ControlPort+6
+		sta 	ControlParameters+2
 		lda 	#4
-		sta 	ControlCommand 				; do command
+		sta 	ControlCommand_Check		; do command
 		DoWaitMessage 		
 		pla				; wait for result.
 		rts

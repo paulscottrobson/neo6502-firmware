@@ -126,10 +126,10 @@ _CPReInput:
 		;
 		lda 	#inputBuffer & $FF 			; store in level 1, also param buffer for conversion.
 		sta 	XSNumber0+1
-		sta 	ControlCommand+8
+		sta 	ControlParameters+4
 		lda 	#inputBuffer >> 8
 		sta 	XSNumber1+1
-		sta 	ControlCommand+9
+		sta 	ControlParameters+5
 		lda 	#XS_ISSTRING
 		sta 	XSControl+1
 		;
@@ -190,10 +190,10 @@ _InputExit:
 
 CPNumberToString:
 		lda 	#tempBuffer & $FF  			; set up pointer.
-		sta 	ControlCommand+8		
+		sta 	ControlParameters+4		
 		pha
 		lda 	#tempBuffer >> 8
-		sta 	ControlCommand+9
+		sta 	ControlParameters+5
 		pha
 		lda 	#34 						; convert number to string
 		jsr 	DoMathCommand		

@@ -25,13 +25,13 @@ EXPUnaryTime: ;; [time(]
 		.byte 	1,1
 		.DoWaitMessage
 		
-		lda 	ControlPort+4 					; return as integer
+		lda 	ControlParameters+0				; return as integer
 		sta 	XSNumber0,x
-		lda 	ControlPort+5
+		lda 	ControlParameters+1
 		sta 	XSNumber1,x
-		lda 	ControlPort+6
+		lda 	ControlParameters+2
 		sta 	XSNumber2,x
-		lda 	ControlPort+7
+		lda 	ControlParameters+3
 		sta 	XSNumber3,x
 		stz 	XSControl,x
 		rts
