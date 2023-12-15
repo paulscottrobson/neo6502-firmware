@@ -22,7 +22,7 @@ _h1:	.byte 	3
 		bra 	_h1
 
 _Test1:	.byte 	_Test1End-_Test1-1
-		.text 	' "Hello world"'
+		.text 	'100 42.527'
 _Test1End:						
 ;
 ;           Temp bodges of various kinds.
