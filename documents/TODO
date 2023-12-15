@@ -1,10 +1,15 @@
 TODO List
 ---------
 - Tokenising 
-	- Tokeniser does comments.
-	- Tokeniser test routine.
+	- Packed BCD for Decimals
+	- Identifiers
+			- Keywords
+	- Punctuation keywords
+		- Tokeniser does comments.
+	- Variable creation
+		- NEW Creates AOPXY
+
 - Patch Oliver Schmidt's debug code back in.
-- NEW Creates AOPXY
 - Listing
 - Simple command line usage.
 - First play version

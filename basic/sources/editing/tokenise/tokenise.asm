@@ -30,10 +30,10 @@ TOKTokenise:
 		stz 	inputPos 					; input position.
 		
 _TOKMainLoop:
-		.byte 	3
-		jsr 	TOKTokeniseOne
+		jsr 	TOKTokeniseOne 				; tokenise one element in the line
+		stz 	tokIsFirstElement 			; reset first element flag
 		bcs 	_TOKMainLoop
-		lda 	#KWD_SYS_END
+		lda 	#KWD_SYS_END 				; write end of line marker.
 		jsr 	TOKWriteA
 		rts
 
@@ -43,16 +43,51 @@ _TOKMainLoop:
 ;
 ; ************************************************************************************************
 
-TOKTokeniseOne:		
-		; 	Skip spaces
-		; 	If End, exit with CC.
-		; 	If '$', extract identifier convert from hex and write as constant
-		; 	If '"', do the string constant code.
-		; 	If '.', do the packed BCD Decimal code.
-		;	If Decimal extract identifier, convert from decimal and write as constant / line number.
+TOKTokeniseOne:	
+		jsr 	TOKGet 						; get first character skipping spaces.
+		beq 	_TOKExitFail	
+		cmp 	#' '+1 	 					; > ' ', decide what to do with it.	
+		bcs 	_TOKDecideWhat
+		jsr 	TOKGetNext
+		bra 	TOKTokeniseOne
+		;
+		;		Dispatcher.
+		;
+_TOKDecideWhat:
+		;
+		;		first character $, e.g. a hexadecimal constant
+		;
+		cmp 	#'$'
+		bne 	_TOKNotHexadecimal
+		jsr 	TokeniseHexConst
+		sec
+		rts
+_TOKNotHexadecimal:
+		;
+		;		first character '"' e.g. a string constant.
+		;
+		cmp 	#'"'
+		bne 	_TOKNotString
+		jsr 	TokeniseString
+		sec
+		rts
+_TOKNotString:
+		;
+		;		first character 0-9, e.g. an integer constant
+		;
+		jsr 	TOKIsDigit 					
+		bcc 	_TOKNotIntConst
+		jsr 	TokeniseIntConst
+		sec
+		rts
+_TOKNotIntConst:
+
+		; 	TODO:If '.', do the packed BCD Decimal code.
 		; 	If Identifier extract identifier, check trailing $( and write as token or identifier.
 		; 	Check first 2 characters
 		; 	Check 1 character
+
+_TOKExitFail:		 						; tokenisation complete
 		clc
 		rts
 
