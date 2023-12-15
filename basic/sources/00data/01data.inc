@@ -119,7 +119,9 @@ tokIsFirstElement: 							; first tokenised element flag.
 tokElement: 								; length prefixed string indicating an identifier or punctuation.
 		.fill 	64
 tokLengthPos: 								; position of length.
-		.fill 	1		
+		.fill 	1	
+tokDecCount: 								; decimal count.
+		.fill 	1			
 		.send storage
 
 ; ************************************************************************************************

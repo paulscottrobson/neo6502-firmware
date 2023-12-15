@@ -1,7 +1,6 @@
 TODO List
 ---------
 - Tokenising 
-	- Packed BCD for Decimals
 	- Identifiers
 			- Keywords
 	- Punctuation keywords

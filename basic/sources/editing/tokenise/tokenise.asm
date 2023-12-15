@@ -73,11 +73,16 @@ _TOKNotHexadecimal:
 		rts
 _TOKNotString:
 		;
-		;		first character 0-9, e.g. an integer constant
+		;		first character 0-9, e.g. an integer constant, possibly followed by a decimal set.
 		;
 		jsr 	TOKIsDigit 					
 		bcc 	_TOKNotIntConst
 		jsr 	TokeniseIntConst
+		jsr 	TOKGet 
+		cmp 	#"." 						; does it have a decimal
+		bne 	_TOKNotDecimal
+		jsr 	TokeniseDecimal
+_TOKNotDecimal:		
 		sec
 		rts
 _TOKNotIntConst:
