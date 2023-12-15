@@ -18,10 +18,11 @@ TestTokenising:
 		ldy 	#_Test1 >> 8
 		jsr 	LoadTokenCodeYA
 		jsr 	TOKTokenise
-_h1:		bra 	_h1
+_h1:	.byte 	3	
+		bra 	_h1
 
 _Test1:	.byte 	_Test1End-_Test1-1
-		.text 	"  123409"
+		.text 	' "Hello world"'
 _Test1End:						
 ;
 ;           Temp bodges of various kinds.

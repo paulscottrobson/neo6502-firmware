@@ -1,81 +1,57 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		tokio.asm
-;		Purpose:	Read/Write functions
-;		Created:	14th December 2023
+;		Name:		tok_string.asm
+;		Purpose:	Tokenise a string constant
+;		Created:	15th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
-		
+
 		.section code
 
 ; ************************************************************************************************
 ;
-;									Output token A
+;								Tokenise a string constant.
 ;
 ; ************************************************************************************************
 
-TOKWriteA:
-		phx
-		ldx 	tokLineSize
-		sta 	tokLineSize,x
-		inc 	tokLineSize
-		plx
+TokeniseString:
+		jsr 	TOKGetNext 					; consume the '"'
+		jsr 	TOKCreateString 
 		rts
 
 ; ************************************************************************************************
 ;
-;		  Get current character in token buffer. Z flag set at End, with/without advance
-;
-; ************************************************************************************************				
-
-TOKGet:
-		phx
-		lda 	#0
-		ldx 	inputPos 					; end of buffer, return zero.
-		cpx 	inputBuffer
-		beq		_TGExit
-		lda 	inputBuffer+1,x 			; read next character skipping length prefix.
-_TGExit:	
-		plx
-		cmp 	#0
-		rts		
-
-TOKGetNext:
-		jsr 	TOKGet
-		beq 	_TGNExit
-		inc 	inputPos
-_TGNExit:
-		cmp 	#0
-		rts		
-
-; ************************************************************************************************
-;
-;				Extract sequence of identifier charactes into the tokElement buffer
+;		Create a string structure, from the rest of the line to EOL or " (also used by comment)
 ;
 ; ************************************************************************************************
 
-TOKExtractIdentifier:
-		stz 	tokElement
-_TEILoop:
-		jsr 	TOKGet 						; get next, check end of token text
-		beq 	_TEIExit		
-		jsr 	TOKIsIdentifierElement 		; if identifier element
-		bcc 	_TEIExit
-		jsr 	TOKGetNext 					; get and consume
-		jsr 	TOKToUpper 					; capitalise it.
-		inc 	tokElement 					; add it.
-		ldx 	tokElement
-		sta 	tokElement,x
-		bra 	_TEILoop
-_TEIExit:
+TOKCreateString:
+		lda 	#KWD_SYS_STR 				; write out the string unary function.
+		jsr 	TOKWriteA
+
+		lda 	tokLineSize 				; save the position of the length so we can update it.
+		sta 	tokLengthPos
+		lda 	#0 							; write initial length zero.
+		jsr 	TOKWriteA
+_TCSLoop:
+		jsr 	TOKGetNext 					; get and consume next.
+		beq 	_TCSEndString 				; end of line
+		cmp 	#'"' 						; closing quote mark
+		beq 	_TCSEndString
+		;
+		jsr 	TOKWriteA 					; output it
+		ldx 	tokLengthPos 				; increment the length
+		inc 	tokLineSize,x
+		bra 	_TCSLoop
+_TCSEndString:
 		rts
 
 		.send code
-		
+
 ; ************************************************************************************************
 ;
 ;									Changes and Updates
