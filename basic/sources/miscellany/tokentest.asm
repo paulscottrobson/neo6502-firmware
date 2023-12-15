@@ -1,58 +1,47 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;       Name:       basic.asm
-;       Purpose:    BASIC main program
-;       Created:    25th November 2023
+;       Name:       tokentest.asm
+;       Purpose:    Tokeniser testing code
+;       Created:    15th December 2023
 ;       Reviewed:   No
 ;       Author:     Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-		.weak
-BASICBUILD = 0 								; 0: Installable 1: Testmode 2: Tokenise test.
-		.endweak
-
-; ************************************************************************************************
-;
-;                                          Main Program
-;
-; ************************************************************************************************
-
 		.section code
+		.if BASICBUILD==2
 
-boot:   jmp     ColdStart
-		jmp     CheckSpeed
-		
-ColdStart:
-		.if 	BASICBUILD==2
-		jmp 	TestTokenising  
-		.endif
-		.if 	BASICBUILD==1
-		jmp     Command_RUN
-		.endif
+TestTokenising:
+		lda 	#_Test1 & $FF
+		ldy 	#_Test1 >> 8
+		jsr 	LoadTokenCodeYA
+		jsr 	TOKTokenise
+_h1:		bra 	_h1
 
-		jsr 	Command_NEW
-		jmp 	WarmStart
-
-		.send   code
-		.include "_include.inc"
-		.section code
-
-WarmStart:
-		lda     #$00
+_Test1:	.byte 	_Test1End-_Test1-1
+		.text 	"  123409"
+_Test1End:						
+;
+;           Temp bodges of various kinds.
+;
+LoadTokenCodeYA:
+		sta 	zTemp0
+		sty 	zTemp0+1
+		lda 	(zTemp0)
 		tax
-		tay
-		.byte   3
-		bra     WarmStart
+		inx
+		ldy 	#0
+_LTCCopy:		
+		lda 	(zTemp0),y
+		sta 	inputBuffer,y
+		iny
+		dex
+		bne 	_LTCCopy
+		rts
 
-		.align  256
-Program:
-		.if 	BASICBUILD==1
-		.binary "build/tokenised.dat"
 		.endif
-		
 		.send code
 
 
