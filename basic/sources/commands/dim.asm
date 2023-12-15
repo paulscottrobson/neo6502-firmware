@@ -15,7 +15,7 @@
 DimCommand: ;; [dim]
 		ldx 	#0 							; get the term, e.g. the variable to dimension
 		lda 	(CodePtr),y 				; check we have a reference here.
-		cmp 	#$40
+		cmp 	#$20
 		bcs 	_DCSyntax
 		;
 		clc 								; make a real address.

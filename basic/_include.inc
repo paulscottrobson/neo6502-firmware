@@ -54,6 +54,8 @@
 	.include "sources/generated/vectors_binary.asm"
 	.include "sources/generated/vectors_extended.asm"
 	.include "sources/generated/vectors_standard.asm"
+	.include "sources/miscellany/speed.asm"
+	.include "sources/miscellany/tokentest.asm"
 	.include "sources/structures/call.asm"
 	.include "sources/structures/do.asm"
 	.include "sources/structures/for.asm"
