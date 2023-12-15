@@ -1,54 +1,57 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		new.asm
-;		Purpose:	New program
-;		Created:	3rd December 2023
+;		Name:		tok_punctuation.asm
+;		Purpose:	Tokenise punctuation
+;		Created:	15th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-; ************************************************************************************************
-;
-;										NEW Command
-;
-; ************************************************************************************************
-
 		.section code
 
-Command_NEW:	;; [new]
-		lda 	#1 							; 1 page of identifiers
-		sta 	Program
-		stz 	Program+1 					; empty it.
-		stz 	Program+256 				; Erase current program
 
-		lda 	#"A" 						; create required variables A O P X Y
-		jsr 	_CNVariable
-		lda 	#"O"
-		jsr 	_CNVariable
-		lda 	#"P"
-		jsr 	_CNVariable
-		lda 	#"X"
-		jsr 	_CNVariable
-		lda 	#"Y"
-		jsr 	_CNVariable
+; ************************************************************************************************
+;
+;										Tokenise punctuation
+;
+; ************************************************************************************************
 
-		jsr 	ClearCode 					; Run CLR
-		jmp 	Command_END 				; Run END
-;
-;		Create new variable called 'A' (single character name)
-;
-_CNVariable:
-		sta 	tokElement+1
-		lda 	#1
-		sta 	tokElement
-		jsr 	TOKCreateIdentifier
+TokenisePunctuation:
+		jsr 	TOKGetNext 					; get the first punctuation character
+		sta 	tokElement+1 				; set it up
+		jsr 	TOKGet 						; look at following character
+		beq 	_TPOne 						; skip if end or space
+		cmp 	#' '+1
+		bcc 	_TPOne
+
+		sta 	tokElement+2 				; make it a 2 character entry
+		lda 	#2
+		sta 	tokElement 
+		jsr 	_TPTryPunctuation 			; try it.
+		bcc 	_TPOne 						; failed, do one.
+		jsr 	TOKGetNext 					; consume second character
+_TPExit:		
 		rts
 
+_TPOne:
+		lda 	#1 							; 1 character entry
+		sta 	tokElement		
+		jsr 	_TPTryPunctuation 			; try it.
+		bcs 	_TPExit 					; matched, generated, exit
+		.error_syntax 						; otherwise error
+
+_TPTryPunctuation:		
+		jsr 	TOKFindToken 				; try to find token.
+		bcc 	_TPTPExit 					; not found.
+		jsr 	TOKWriteXA 					; output the tokens.
+		sec 								; was done.
+_TPTPExit:
+		rts		
 		.send code
-						
+
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

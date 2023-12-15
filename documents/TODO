@@ -1,12 +1,10 @@
 TODO List
 ---------
 - Tokenising 
-	- Identifiers
-			- Keywords
-	- Punctuation keywords
-		- Tokeniser does comments.
-	- Variable creation
-		- NEW Creates AOPXY
+	- Variable/Identifier reference creation.
+	- Variable check already exists.
+	- Tokeniser does comments.
+
 
 - Patch Oliver Schmidt's debug code back in.
 - Listing

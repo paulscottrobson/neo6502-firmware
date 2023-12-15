@@ -91,4 +91,5 @@ StandardVectorTable:
 	.word	DokeCommand              ; $d5 doke
 	.word	Unimplemented            ; $d6 local
 	.word	Command_CALL             ; $d7 call
+	.word	Unimplemented            ; $d8 #
 	.send code

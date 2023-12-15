@@ -86,11 +86,16 @@ _TOKNotDecimal:
 		sec
 		rts
 _TOKNotIntConst:
+		jsr 	TOKIsAlpha 					; is it A-Z ?
+		bcs 	_TOKIdentifier 				; yes, do identifier
+		jsr 	TokenisePunctuation 
+		sec
+		rts
 
-		; 	TODO:If '.', do the packed BCD Decimal code.
-		; 	If Identifier extract identifier, check trailing $( and write as token or identifier.
-		; 	Check first 2 characters
-		; 	Check 1 character
+_TOKIdentifier:
+		jsr 	TokeniseIdentifier 			; identifier
+		sec
+		rts
 
 _TOKExitFail:		 						; tokenisation complete
 		clc
