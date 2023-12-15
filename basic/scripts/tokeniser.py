@@ -40,7 +40,6 @@ class IdentifierStore(object):
 		self.identifiers[name] = len(self.store)+1 											# Points to data, offset 1 in record.
 		isString = name.endswith("$") or name.endswith("$(") 
 		isArray = name.endswith("(")
-		name = name.replace("$","").replace("(","")
 		if (len(self.store) & 0xFF) + len(name) + 6 >= 0xFC:								# Close to overflow. $FC in text
 			self.store[0] += 1 																# Another page. 
 		self.store.append(len(name)+6)														# Offset byte

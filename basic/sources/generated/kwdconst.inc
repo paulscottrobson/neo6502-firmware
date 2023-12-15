@@ -91,6 +91,7 @@ KWD_POKE                           = $d4 ; poke
 KWD_DOKE                           = $d5 ; doke
 KWD_LOCAL                          = $d6 ; local
 KWD_CALL                           = $d7 ; call
+KWD_HASH                           = $d8 ; #
 KWD_CLEAR                          = $180 ; clear
 KWD_NEW                            = $181 ; new
 KWD_RUN                            = $182 ; run

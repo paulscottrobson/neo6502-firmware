@@ -16,11 +16,10 @@ Identifier
 
 +5 			Control byte.
 				bit 7,6 	00 float 	01 integer 	10 string 	11 procedure
-				bit 5 		Variable or Indirection Reference
-				bit 4 		Byte Reference
-				bit 3 		Word Reference
-
-+6+ 		ASCII name of variable, bit 7 set of last. Stored in lower case.
+				bit 5 		Variable (Reference)
+				bit 4 		Array
+				
++6+ 		ASCII name of variable, bit 7 set of last. Stored in upper case.
 
 Total size = 6 + len(name). Expands when this value is >= $FC, so it will
 allocate extra space, but only once.

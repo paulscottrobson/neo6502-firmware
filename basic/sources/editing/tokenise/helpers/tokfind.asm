@@ -79,7 +79,8 @@ _TOKFindLoop:
 		ldy 	#1 							; offset to actual text.
 _TOKCompare:
 		lda 	(zTemp0),y 					; compare the characters 
-		cmp 	TOKElement,y
+		eor 	TOKElement,y
+		and 	#$7F 						; ignoring bit 7
 		bne 	_TOKNext 					; different ? try next
 		iny 								; compare next two
 		dex

@@ -1,70 +1,56 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;       Name:       basic.asm
-;       Purpose:    BASIC main program
-;       Created:    25th November 2023
-;       Reviewed:   No
-;       Author:     Paul Robson (paul@robsons.org.uk)
+;		Name:		tok_identifier.asm
+;		Purpose:	Tokenise identifier
+;		Created:	15th December 2023
+;		Reviewed:   No
+;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
-; ************************************************************************************************
-
-		.weak
-BASICBUILD = 0 								; 0: Installable 1: Testmode 2: Tokenise test.
-		.endweak
-
-; ************************************************************************************************
-;
-;                                          Main Program
-;
 ; ************************************************************************************************
 
 		.section code
 
-boot:   jmp     ColdStart
-		jmp     CheckSpeed
-		
-ColdStart:
-		.if 	BASICBUILD==2
-		jsr 	Command_NEW
-		jmp 	TestTokenising  
-		.endif
-		.if 	BASICBUILD==1
-		jmp     Command_RUN
-		.endif
 
-		jsr 	Command_NEW
-		jmp 	WarmStart
+; ************************************************************************************************
+;
+;										Tokenise identifier
+;
+; ************************************************************************************************
 
-		.send   code
-		.include "_include.inc"
-		.section code
+TokeniseIdentifier:
+		jsr 	TOKExtractIdentifier 		; get the identifier.
+		jsr 	TOKFindToken 				; try to find token.
+		bcc 	_TINoToken  				; not found, it's an identifier.
+		jsr 	TOKWriteXA 					; output it.
+		rts
+		;
+		;		Not a token, so it must be an identifier.
+		;
+_TINoToken:		
+		jsr 	TOKFindIdentifier 			; identifier exists ?
+		bcs 	_TIHaveToken 				; yes, output it
+		jsr 	TOKCreateIdentifier 		; else create it.
+_TIHaveToken:
+		pha 								; output the token.
+		txa
+		jsr 	TOKWriteA
+		pla		
+		jsr 	TOKWriteA
+		rts
 
-WarmStart:
-		lda     #$00
-		tax
-		tay
-		.byte   3
-		bra     WarmStart
 
-		.align  256
-Program:
-		.if 	BASICBUILD==1
-		.binary "build/tokenised.dat"
-		.endif
-		
 		.send code
 
-
 ; ************************************************************************************************
 ;
-;                                   Changes and Updates
+;									Changes and Updates
 ;
 ; ************************************************************************************************
 ;
-;       Date            Notes
-;       ====            =====
+;		Date			Notes
+;		==== 			=====
 ;
 ; ************************************************************************************************
 
