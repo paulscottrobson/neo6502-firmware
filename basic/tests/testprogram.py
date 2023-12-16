@@ -15,7 +15,7 @@ def compare(start,size):
 	global errors
 	for i in range(0,size):
 		if ram[i+base+start] != reqd[i+start]:
-			print("\tProgram ${0:02x} {0:3} should be ${1:02x} {1:3}".format(ram[i+base],reqd[i]))
+			print("\tAt ${2:04x} Program ${0:02x} {0:3} should be ${1:02x} {1:3}".format(ram[i+base+start],reqd[i+start],i+start))
 			errors = errors + 1
 
 errors = 0

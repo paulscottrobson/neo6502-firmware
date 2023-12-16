@@ -15,18 +15,56 @@ from tokeniser import *
 
 class TestProgram(object):
 	def __init__(self):
+		self.variables = {}
 		self.identStore = IdentifierStore()
 		for c in ["A","O","P","X","Y"]:
 			self.identStore.add(c)
+			self.variables[c] = True
 		self.tokenSet = TokenSet()
+		self.tokenNames = self.tokenSet.getAllTokenNames()
 		self.tokenWorker = Tokeniser(self.identStore)
 		self.tokeniser = []
 		self.sourceLines = []
 		self.program = {}
+		lineCount = 200
 
-		for i in range(0,22):
+		for i in range(0,max(10,lineCount >> 3)):
+			vName = ""
+			for c in range(0,random.randint(1,11)):
+				vName = vName + (chr(random.randint(97,120)) if c % 2 == 0 else chr(random.randint(48,57)))
+			if random.randint(0,2) == 0:
+				vName += "$"
+			if random.randint(0,2) == 0:
+				vName += "("
+			self.variables[vName] = True
+		self.variables = [x for x in self.variables.keys()]
+		for i in range(0,lineCount):
 			ln = i * 10 + 1000
-			self.addLine(ln,"print {0} ${0} > >= adc clear \"Hi\":4.73 a_{1}".format(ln,(i+1)*11))
+			line = ""
+			for e in range(0,random.randint(1,10)):
+				line += " " + self.createElement()
+			self.addLine(ln,line.strip())
+	#
+	def createElement(self):
+		n = random.randint(0,5)
+		if n == 0:
+			return str(random.randint(-320000,320000))
+		elif n == 1:
+			return str(random.randint(-999999,999999)/10)
+		elif n == 2:
+			return "${0:X}".format(random.randint(0,123456))
+		elif n == 3:
+			return '"'+"".join([chr(random.randint(65,90)) for i in range(0,random.randint(0,7))])+'"'
+		elif n == 4:
+			return self.variables[random.randint(0,len(self.variables)-1)]
+		elif n == 5:
+			s = self.tokenNames[random.randint(0,len(self.tokenNames)-1)]
+			if s.startswith("!!") or s == "'" or s == '$':
+				s = self.createElement()
+			return s
+		else:
+			assert False
+		return str(n)	
 	#
 	def addLine(self,lineNumber,code):
 		self.sourceLines.append("{0} {1}".format(lineNumber,code))

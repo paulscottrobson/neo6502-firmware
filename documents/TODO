@@ -1,11 +1,11 @@
 TODO List
 ---------
 - Tokenising 
-	- Allow for duplication / Variable check already exists.
-	- Add random things with a seed check.
 	- Randomly chosen lines with deletion.
-	- Tokeniser does comments and add these in (makebasic.py needs to do it as well)
+	- Remove spaces sometimes.
+	- Tokeniser does comments and add these in to testing (makebasic.py needs to do it as well)
 
+- Tokenising very long decimals.
 - Patch Oliver Schmidt's debug code back in.
 - Listing code port/change.
 - Simple command line usage.
