@@ -128,7 +128,28 @@ _TICWExit:
 ; ************************************************************************************************
 
 TOKInsertNewVariablePage:
-		.byte 	3
+		jsr 	ClearResetFreeMemory 		; points zTemp0 to program end.
+		;
+		clc 	 							; X contains the terminal copy point, copying backwards
+		lda 	Program 	
+		adc 	#Program>>8
+		tax
+_TINVLoop:
+		lda 	(zTemp0)					; copy it up.
+		inc 	zTemp0+1
+		sta 	(zTemp0)
+		dec 	zTemp0+1		
+		;
+		lda 	zTemp0 						; back one.
+		bne 	_TINVNoBorrow
+		cpx 	zTemp0+1 					; done the last page
+		beq 	_TINVExit
+		dec 	zTemp0+1
+_TINVNoBorrow:
+		dec 	zTemp0
+		bra 	_TINVLoop
+_TINVExit:		
+		inc 	Program 					; one more page of variables now.
 		rts
 
 		.send code

@@ -24,9 +24,9 @@ class TestProgram(object):
 		self.sourceLines = []
 		self.program = {}
 
-		for i in range(0,7):
+		for i in range(0,22):
 			ln = i * 10 + 1000
-			self.addLine(ln,"print {0} ${0} > >= adc clear \"Hi\":4.73 a_{1}$(".format(ln,(i+1)*11))
+			self.addLine(ln,"print {0} ${0} > >= adc clear \"Hi\":4.73 a_{1}".format(ln,(i+1)*11))
 	#
 	def addLine(self,lineNumber,code):
 		self.sourceLines.append("{0} {1}".format(lineNumber,code))
