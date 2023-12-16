@@ -78,16 +78,31 @@ TOKExtractIdentifier:
 		stz 	tokElement
 _TEILoop:
 		jsr 	TOKGet 						; get next, check end of token text
-		beq 	_TEIExit		
+		beq 	_TEIEndMainID		
 		jsr 	TOKIsIdentifierElement 		; if identifier element
-		bcc 	_TEIExit
+		bcc 	_TEIEndMainID
 		jsr 	TOKGetNext 					; get and consume
-		jsr 	TOKToUpper 					; capitalise it.
+		jsr 	TOKToUpper 					; capitalise it and add it
+		jsr 	_TEIAddChar
+		bra 	_TEILoop
+_TEIEndMainID:
+		cmp 	#"$" 						; do we have a string ?
+		bne 	_TEINotString
+		jsr 	_TEIAddChar 				; add it
+		jsr 	TOKGetNext 					; consume $
+		jsr 	TOKGet 						; get next
+_TEINotString:
+		cmp 	#"("						; do we have an array ?
+		bne 	_TEINotArray
+		jsr 	_TEIAddChar 				; add (
+		jsr 	TOKGetNext 					; consume (
+_TEINotArray:		
+		rts
+
+_TEIAddChar:
 		inc 	tokElement 					; add it.
 		ldx 	tokElement
 		sta 	tokElement,x
-		bra 	_TEILoop
-_TEIExit:
 		rts
 
 		.send code

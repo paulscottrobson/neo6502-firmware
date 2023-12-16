@@ -1,9 +1,7 @@
 TODO List
 ---------
 - Tokenising 
-	- Identifier can grab $ then ( at then end !
-	- check $ ( $( tokenise with the correct types.
-	- Add the expansion
+	- Add the expansion to variables.
 	- Allow for duplication / Variable check already exists.
 	- Add random things with a seed check.
 	- Randomly chosen lines with deletion.
