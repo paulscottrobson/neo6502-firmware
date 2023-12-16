@@ -135,6 +135,17 @@ array:
 #
 # ***************************************************************************************
 
+manytokens:
+	make tokens 
+	make tokens 
+	make tokens 
+	make tokens 
+	make tokens 
+	make tokens 
+	make tokens 
+	make tokens 
+	make tokens 
+
 tokens: prelim	
 	$(PYTHON) tests$(S)makeprogram.py
 	$(ASSEMBLER) -DBASICBUILD=2 basic.asm -L build/basic.lst -o build/basic.bin
