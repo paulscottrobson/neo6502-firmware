@@ -1,7 +1,6 @@
 TODO List
 ---------
 - Tokenising 
-	- Reenable insert and delete code.
 	- Create the editor/tester with just simple keywords 
 	- Add other non identifier things.
 	- Add specific non duplicated identifiers, limited so no expansion
