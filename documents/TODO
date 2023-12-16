@@ -1,7 +1,6 @@
 TODO List
 ---------
 - Tokenising 
-	- Add the expansion to variables.
 	- Allow for duplication / Variable check already exists.
 	- Add random things with a seed check.
 	- Randomly chosen lines with deletion.
