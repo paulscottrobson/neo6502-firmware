@@ -27,14 +27,14 @@ boot:   jmp     ColdStart
 		
 ColdStart:
 		.if 	BASICBUILD==2
-		jsr 	Command_NEW
+		jsr 	NewProgram
 		jmp 	TestTokenising  
 		.endif
 		.if 	BASICBUILD==1
 		jmp     Command_RUN
 		.endif
 
-		jsr 	Command_NEW
+		jsr 	NewProgram
 		jmp 	WarmStart
 
 		.send   code

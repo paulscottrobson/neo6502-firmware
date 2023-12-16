@@ -135,6 +135,8 @@ array:
 #
 # ***************************************************************************************
 
-tokenrun: prelim	
+tokens: prelim	
+	$(PYTHON) tests$(S)makeprogram.py
 	$(ASSEMBLER) -DBASICBUILD=2 basic.asm -L build/basic.lst -o build/basic.bin
 	$(RUNCMD)
+	$(PYTHON) tests$(S)testprogram.py

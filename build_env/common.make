@@ -53,6 +53,7 @@ endif
 ROOTDIR =  $(dir $(realpath $(lastword $(MAKEFILE_LIST))))..$(S)
 BINDIR = $(ROOTDIR)bin$(S)
 SRCDIR = $(ROOTDIR)kernel$(S)
+CSCRIPTS = $(ROOTDIR)basic$(S)scripts
 #
 #		Current applications.
 # 

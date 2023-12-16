@@ -13,34 +13,43 @@
 		.section code
 		.if BASICBUILD==2
 
-TestTokenising:
-		lda 	#_Test1 & $FF
-		ldy 	#_Test1 >> 8
-		jsr 	LoadTokenCodeYA
-		jsr 	TOKTokenise
-_h1:	.byte 	3	
-		bra 	_h1
+TIPtr = $FE
 
-_Test1:	.byte 	_Test1End-_Test1-1
-		.text 	"while assert adc"
-_Test1End:						
-;
-;           Temp bodges of various kinds.
-;
-LoadTokenCodeYA:
-		sta 	zTemp0
-		sty 	zTemp0+1
-		lda 	(zTemp0)
+TestTokenising:	
+		lda 	#TestInput & $FF
+		sta 	TIPtr
+		lda 	#TestInput >> 8
+		sta 	TIPtr+1
+_TTLoop:
+		jsr 	TTGet
 		tax
-		inx
-		ldy 	#0
-_LTCCopy:		
-		lda 	(zTemp0),y
+		beq 	_TTExit
+		stz 	inputBuffer
+_TTGetLine:
+		jsr 	TTGet
+		inc 	inputBuffer
+		ldy 	inputBuffer
 		sta 	inputBuffer,y
-		iny
 		dex
-		bne 	_LTCCopy
+		bne 	_TTGetLine		
+		jsr 	TOKTokenise
+		jsr 	PGMDeleteLine
+		jsr 	PGMInsertLine
+		bra 	_TTLoop		
+_TTExit:
+		lda 	#Program >> 8
+		sta 	$00
+		jmp 	$FFFF		
+
+TTGet:	lda 	(TIPtr)
+		inc 	TIPtr
+		bne 	_TTGExit
+		inc 	TIPtr+1
+_TTGExit:
 		rts
+
+TestInput:
+		.include "../generated/inputtoken.dat"				
 
 		.endif
 		.send code
