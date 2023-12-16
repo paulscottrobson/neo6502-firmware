@@ -1,11 +1,11 @@
 TODO List
 ---------
 - Tokenising 
-	- Randomly chosen lines with deletion.
+	- Out of memory
 	- Remove spaces sometimes.
-	- Tokeniser does comments and add these in to testing (makebasic.py needs to do it as well)
-
-- Tokenising very long decimals.
+	- Tokeniser does comments
+	- Tokenising very long decimals (bug ?)
+	
 - Patch Oliver Schmidt's debug code back in.
 - Listing code port/change.
 - Simple command line usage.
