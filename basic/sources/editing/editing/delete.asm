@@ -3,7 +3,7 @@
 ;
 ;		Name:		delete.asm
 ;		Purpose:	Delete line in token space, if it exists
-;		Created:	28th May 2023
+;		Created:	16th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -19,12 +19,13 @@
 ; ************************************************************************************************
 
 PGMDeleteLine:
-		jsr 	PGMEndProgram 				; end of program into zTemp0
+		jsr 	ClearResetFreeMemory 		; end of program into zTemp0
 		;
 		;		Point to start of program code
 		;
 		stz 	zTemp1						; copy base address of code to zTemp1
-		lda 	PGMBaseHigh		
+		lda 	Program
+		adc 	#Program >> 8		
 		sta 	zTemp1+1
 		;
 		;		Try to find the line, scanning forward

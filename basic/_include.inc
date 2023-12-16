@@ -43,6 +43,8 @@
 	.include "sources/commands/stop.asm"
 	.include "sources/commands/sys.asm"
 	.include "sources/commands/undefined.asm"
+	.include "sources/editing/editing/delete.asm"
+	.include "sources/editing/editing/insert.asm"
 	.include "sources/editing/tokenise/helpers/tokconstant.asm"
 	.include "sources/editing/tokenise/helpers/tokfind.asm"
 	.include "sources/editing/tokenise/helpers/tokidcreate.asm"

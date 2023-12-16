@@ -3,7 +3,7 @@
 ;
 ;		Name:		insert.asm
 ;		Purpose:	Insert line in token space into program.
-;		Created:	28th May 2023
+;		Created:	16th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -19,12 +19,18 @@
 ; ************************************************************************************************
 
 PGMInsertLine:
-		jsr 	PGMEndProgram 				; end of program into zTemp0
+		lda 	tokLineSize 				; if the line is empty, don't insert it
+		cmp 	#4
+		beq 	_PGMIExit
+
+		jsr 	ClearResetFreeMemory 		; end of program into zTemp0
 		;
 		;		Point to start of program code
 		;
 		stz 	zTemp1						; copy base address of code to zTemp1
-		lda 	PGMBaseHigh		
+		lda 	Program
+		clc
+		adc 	#Program >> 8	
 		sta 	zTemp1+1
 		;
 		;		Try to find the line whose line number is greater than the one in the token 
@@ -85,6 +91,7 @@ _PGMICopyLoop:
 		cpy 	TOKLineSize
 		bne 	_PGMICopyLoop
 
+_PGMIExit:
 		clc
 		rts								
 		.send code
