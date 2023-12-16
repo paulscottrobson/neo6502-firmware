@@ -19,9 +19,13 @@
 		.section code
 
 Command_NEW:	;; [new]
+		jsr 	NewProgram
+		jmp 	Command_END 				; Run END
+		
+NewProgram:		
 		lda 	#1 							; 1 page of identifiers
 		sta 	Program
-		stz 	Program+1 					; empty it.
+		stz 	Program+1 					; End of current identifier list.
 		stz 	Program+256 				; Erase current program
 
 		lda 	#"A" 						; create required variables A O P X Y
@@ -36,7 +40,7 @@ Command_NEW:	;; [new]
 		jsr 	_CNVariable
 
 		jsr 	ClearCode 					; Run CLR
-		jmp 	Command_END 				; Run END
+		rts		
 ;
 ;		Create new variable called 'A' (single character name)
 ;

@@ -1,15 +1,16 @@
 TODO List
 ---------
 - Tokenising 
-	- Create the editor/tester with just simple keywords 
-	- Add other non identifier things.
-	- Add specific non duplicated identifiers, limited so no expansion
+	- Identifier can grab $ then ( at then end !
+	- check $ ( $( tokenise with the correct types.
 	- Add the expansion
 	- Allow for duplication / Variable check already exists.
-	- Tokeniser does comments.
+	- Add random things with a seed check.
+	- Randomly chosen lines with deletion.
+	- Tokeniser does comments and add these in (makebasic.py needs to do it as well)
 
 - Patch Oliver Schmidt's debug code back in.
-- Listing
+- Listing code port/change.
 - Simple command line usage.
 - First play version
 
@@ -26,8 +27,11 @@ TODO List
 - Function key handling
 
 - Graphics system.
+	- Drawing operators
+	- Sprites and Tiles.
 - Audio system driver on emulator, and audio interface
 
 Add to doc
 ----------
+
 

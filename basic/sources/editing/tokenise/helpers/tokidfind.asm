@@ -20,7 +20,14 @@
 ; ************************************************************************************************
 
 TOKFindIdentifier:
-		.byte 	3
+		ldx 	tokElement 					; set the MSB of the last character of the identifier.
+		lda 	tokElement,x
+		ora 	#$80
+		sta 	tokElement,x
+
+
+		clc
+		rts
 
 		.send code
 
