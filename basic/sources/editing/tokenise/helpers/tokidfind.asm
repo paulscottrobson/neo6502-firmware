@@ -1,8 +1,8 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		tokidmanager.asm
-;		Purpose:	Manage identifiers
+;		Name:		tokidfind.asm
+;		Purpose:	Find existing identifier.
 ;		Created:	15th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
@@ -21,16 +21,6 @@
 
 TOKFindIdentifier:
 		.byte 	3
-
-; ************************************************************************************************
-;
-;									   Create identifier
-;
-; ************************************************************************************************
-
-TOKCreateIdentifier:
-		.byte 	3
-		
 
 		.send code
 

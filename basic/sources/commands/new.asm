@@ -41,6 +41,7 @@ Command_NEW:	;; [new]
 ;		Create new variable called 'A' (single character name)
 ;
 _CNVariable:
+		ora 	#$80 						; in the correct format, bit 7 of last character set :)
 		sta 	tokElement+1
 		lda 	#1
 		sta 	tokElement
