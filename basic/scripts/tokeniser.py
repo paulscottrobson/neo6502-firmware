@@ -36,12 +36,11 @@ class IdentifierStore(object):
 	#
 	def add(self,name):
 		name = name.upper()
+		bAddress = len(self.store)
 		assert name not in self.identifiers
 		self.identifiers[name] = len(self.store)+1 											# Points to data, offset 1 in record.
-		isString = name.endswith("$") or name.endswith("$(") 
+		isString = name.endswith("$") or name.endswith("$(") 								# Work out type byte
 		isArray = name.endswith("(")
-		if (len(self.store) & 0xFF) + len(name) + 6 >= 0xFC:								# Close to overflow. $FC in text
-			self.store[0] += 1 																# Another page. 
 		self.store.append(len(name)+6)														# Offset byte
 		self.store += [0,0,0,0] 															# default value
 		ctrl = 0x80 if isString else 0x00
@@ -49,7 +48,11 @@ class IdentifierStore(object):
 		self.store.append(ctrl) 															# control byte.
 		b = [ord(x) for x in name] 															# work out name
 		b[-1] |= 0x80
-		self.store += b																		#  name
+		self.store += b																		# name
+		aAddress = len(self.store)
+		if (bAddress & 0x80) == 0 and (aAddress & 0x80) != 0:  								# creating crossed the middle of the page
+			self.store[0] += 1 																# Another page. 
+
 		return self
 	#
 	def dump(self):
