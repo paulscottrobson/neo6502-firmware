@@ -1,6 +1,12 @@
 TODO List
 ---------
-- Listing code port/change.
+- Detokenisation code 
+	- keywords
+	- identifiers
+	- constants
+	- strings
+	- decimals.
+
 - Tokeniser does comments
 - Patch Oliver Schmidt's debug code back in.
 - Try LOAD and SAVE and some sort of directory listing
@@ -9,6 +15,7 @@ TODO List
 
 - Out of memory on program editing.
 - Tokenising very long decimals (bug ?)
+- List procedures()
 - Event() Max() and Min()
 - Locals / Parameters code.
 - READ/DATA/RESTORE
@@ -25,5 +32,3 @@ TODO List
 
 Add to doc
 ----------
-
-

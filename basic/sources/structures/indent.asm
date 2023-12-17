@@ -25,12 +25,12 @@ _GILoop:
 		lda 	(codePtr),y 				; end of line ?
 		cmp 	#KWD_SYS_END		
 		beq 	_GIExit
-		jsr 	SkipOneInstruction
+		jsr 	SkipOneInstruction 			; skip instruction, which adjusts the structure count
 		bra 	_GILoop
 
 _GIExit:
-		lda 	zTemp1
-		asl 	a
+		lda 	zTemp1 						; this is now the offset
+		asl 	a 							; x 2 to accentuate the indentation.
 		rts
 
 		.send code
