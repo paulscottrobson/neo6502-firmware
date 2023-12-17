@@ -73,6 +73,15 @@ _TOKNotHexadecimal:
 		rts
 _TOKNotString:
 		;
+		;		first character "'" e.g. a comment.
+		;
+		cmp 	#"'"
+		bne 	_TOKNotComment
+		jsr 	TokeniseComment
+		sec
+		rts
+_TOKNotComment:		
+		;
 		;		first character 0-9, e.g. an integer constant, possibly followed by a decimal set.
 		;
 		jsr 	TOKIsDigit 					
@@ -84,7 +93,7 @@ _TOKNotString:
 		jsr 	TokeniseDecimal
 _TOKNotDecimal:		
 		sec
-		rts
+		rts		
 _TOKNotIntConst:
 		jsr 	TOKIsAlpha 					; is it A-Z ?
 		bcs 	_TOKIdentifier 				; yes, do identifier

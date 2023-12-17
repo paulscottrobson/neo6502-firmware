@@ -1,11 +1,11 @@
 TODO List
 ---------
-- Tokeniser does comments
 - Patch Oliver Schmidt's debug code back in.
-- Try LOAD and SAVE and some sort of directory listing
+- Try LOAD and SAVE and some sort of directory listing functionality.
+- Do the save/load tester code running on the emulator & firmware.
 - If works, write sample code.
-- First play version
 
+- First play version
 - Out of memory on program editing.
 - Tokenising very long decimals (bug ?)
 - List procedures()

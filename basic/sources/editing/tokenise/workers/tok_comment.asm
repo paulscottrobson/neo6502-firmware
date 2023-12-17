@@ -1,35 +1,42 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		00data_config.inc
-;		Purpose:	BASIC memory usage configuration
-;		Created:	25th November 2023
-;		Reviewed:	No
+;		Name:		tok_comment.asm
+;		Purpose:	Tokenise a comment
+;		Created:	17th December 2023
+;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
+		.section code
+
 ; ************************************************************************************************
-;	
-;	These can be overridden on the command line. tass64 doesn't support ifdef, god knows why not.
+;
+;								Tokenise a comment
 ;
 ; ************************************************************************************************
 
-		.weak
-		.endweak
+TokeniseComment:
+		lda 	#KWD_SQUOTE 				; write out the ', which is a comment marker
+		jsr 	TOKWriteA
+		jsr 	TOKGetNext 					; consume it.
+_TOKSkipSpaces:		
+		jsr 	TOKGet 						; what follows ?
+		beq 	_TCExit
+		cmp 	#' '+1 						; non space ?
+		bcs 	_TCCheck
+		jsr 	TOKGetNext
+		bra 	_TOKSkipSpaces
+_TCCheck:
+		cmp 	#'"'						; quote follows, exit.
+		beq 	_TCExit
+		jsr 	TOKCreateString 			; create a comment from the rest of the line.
+_TCExit:
+		rts
 
-		* = $10
-		.dsection zeropage
-
-		* = $200
-		.dsection storage
-
-		* = $800 							; BASIC ROM goes here.
-		.dsection code
-
-		HIGHMEMORY = $A000
-		STACKPAGES = 8 
+		.send code
 
 ; ************************************************************************************************
 ;
