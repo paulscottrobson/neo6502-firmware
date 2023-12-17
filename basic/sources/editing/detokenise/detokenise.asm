@@ -3,7 +3,7 @@
 ;
 ;		Name:		detokenise.asm
 ;		Purpose:	Detokenise line
-;		Created:	28th May 2023
+;		Created:	17th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -12,67 +12,83 @@
 		
 		.section code
 
+decode 	.macro 								; decode a keyword macro.
+		ldy 	#(\1) >> 8
+		ldx 	#(\1) & $FF
+		jsr 	TOKDToken
+		.endm
+
 ; ************************************************************************************************
 ;
-;						Detokenise code at YX (not including line numbers)
+;							Detokenise code at codePtr (not line numbers)
 ;
 ; ************************************************************************************************
 
 TOKDetokenise:
-		stx 	zTemp2 						; save tokenised code in zTemp2
-		sty 	zTemp2+1
+		lda 	#3 							; start position.
+		sta 	TOKOffset
 		stz		TOKLastCharacter 			; clear last character
 		;
 		;		Main detokenising loop
 		;
 _TOKDLoop:
 		jsr 	TOKDGet 					; get next
-		cmp 	#PR_LSQLSQENDRSQRSQ			; end of line, exit.
+		cmp 	#KWD_SYS_END				; end of line, exit.
 		beq 	_TOKDExit
-		;
-		cmp 	#PR_LSQLSQSTRINGRSQRSQ		; is it a string or decimal places modifier
-		beq 	_TOKDDataItem
-		cmp 	#PR_LSQLSQDECIMALRSQRSQ
-		beq 	_TOKDDataItem
-		;
-		cmp 	#PR_AMPERSAND 				; & is a special case.
-		beq 	_TOKAmpersand
-		;
-		cmp 	#0 							; is it a token 80-FF
-		bpl 	_TOKDNotToken
-		jsr 	TOKDToken 					; token to text.		
-		bra 	_TOKDLoop
-		;
-		;		00-7F which are integers and identifiers.
-		;
-_TOKDNotToken:
-		cmp 	#$40  						; 40-7F Identifier
-		bcc 	_TOKDNotIdentifier
-		jsr 	TOKDIdentifier
-		bra 	_TOKDLoop
-		;
-_TOKDNotIdentifier: 						; 00-3F Base 10 Integer
-		ldy 	#10 						
-		jsr 	TOKDInteger
-		bra 	_TOKDLoop
-		;
-		;		&<hex> code, outputs following integer in hex format.
-		;
-_TOKAmpersand:
-		jsr 	TOKDSpaceLastAlpha  		; space if last alpha
-		lda 	#"&" 						; output hex marker
-		jsr 	TOKDOutput
-		jsr 	TOKDGet 					; get first char of integer
-		ldy 	#16 						; expand in base 16
-		jsr 	TOKDInteger
-		bra 	_TOKDLoop
-		;
-		;		Handle data
-		;
-_TOKDDataItem:								; [[STRING]] [[DECIMAL]]
-		jsr 	TOKDDataItem
+		cmp 	#$20 						; 00-1F identifier
+		bcc 	_TOKDIdentifier
+		cmp 	#$40	 					; 20-3F binary operator.
+		bcc 	_TOKDBinaryOp
+		cmp 	#$00 						; 80-FF token (also shift, hex, string, decimals)
+		bmi 	_TOKDToken
+		jsr 	TOKDInteger 				; 40-7F integer
 		bra 	_TOKDLoop
 
+_TOKDIdentifier:
+		jsr 	TOKDIdentifier 				; call the identifier decode code.
+		bra 	_TOKDLoop
+_TOKDBinaryOp:
+		clc 								; make $80 based.
+		adc 	#$60
+		.decode BinaryTokenText
+		bra 	_TOKDLoop
+
+_TOKDToken:
+		cmp 	#KWD_SYS_SH1 				; handle shifts.
+		beq 	_TOKDShift1
+		cmp 	#KWD_SYS_SH2
+		beq 	_TOKDShift2
+		cmp 	#KWD_SYS_STR 				; strings
+		beq 	_TOKDString
+		cmp 	#KWD_SYS_DEC 				; decimals
+		beq 	_TOKDDecimal
+		cmp 	#KWD_DOLLAR 				; hex
+		beq 	_TOKDHex
+		
+		.decode BaseTokenText
+		bra 	_TOKDLoop
+
+_TOKDShift1:								; shift-1
+		jsr 	TOKDGet
+		.decode Shift1TokenText
+		bra 	_TOKDLoop
+
+_TOKDShift2:		 						; shift-2
+		jsr 	TOKDGet
+		.decode Shift2TokenText
+		bra 	_TOKDLoop
+
+_TOKDString: 								; string
+		jsr 	TOKDString
+		bra 	_TOKDLoop
+
+_TOKDDecimal: 								; decimal
+		jsr 	TOKDDecimal
+		bra 	_TOKDLoop
+
+_TOKDHex:									; hexadecimal
+		jsr 	TOKDHexadecimal
+		bra 	_TOKDLoop
 _TOKDExit:
 		clc
 		rts
@@ -83,11 +99,11 @@ _TOKDExit:
 ;
 ; ************************************************************************************************
 
-TOKDGet:lda 	(zTemp2)
-		inc 	zTemp2
-		bne 	_TKDGExit
-		inc 	zTemp2+1
-_TKDGExit:
+TOKDGet:phy
+		ldy 	tokOffset
+		inc 	tokOffset
+		lda 	(codePtr),y
+		ply
 		rts
 
 ; ************************************************************************************************
@@ -98,28 +114,29 @@ _TKDGExit:
 
 TOKDOutput:
 		sta 	TOKLastCharacter 			; save last character
-		jmp 	(TOKOutputMethod) 			; call output handler
-
-; ************************************************************************************************
-;
-;									Set the handler.
-;
-; ************************************************************************************************
-
-TOKSetDetokeniseOutput:	
-		stx 	TOKOutputMethod
-		sty 	TOKOutputMethod+1
+		jsr 	WriteCharacter
 		rts
+
+; ************************************************************************************************
+;
+;										Spacing required
+;
+; ************************************************************************************************
+
+TOKDSpacing:
+		jsr 	TOKIsIdentifierElement		; next character alphanumeric
+		bcc 	TOKDSExit
+TOKDSpaceLastAlpha:		
+		lda 	TOKLastCharacter			; and last character also alphanumeric
+		jsr 	TOKIsIdentifierElement
+		bcc 	TOKDSExit
+		lda 	#" " 						; we need a space.
+		jsr 	TOKDOutput
+TOKDSExit:
+		rts		
 
 		.send code
 		
-		.section storage
-TOKOutputMethod:							; routine to handle output characters
-		.fill 	2
-TOKLastCharacter: 							; last character output.
-		.fill 	1		
-		.send storage
-
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

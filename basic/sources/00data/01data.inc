@@ -128,6 +128,10 @@ clFrom: 									; LIST range.
 		.fill 	2		
 clTo:
 		.fill 	2		
+tokLastCharacter: 							; last character output.
+		.fill 	1		
+tokOffset: 									; position in line.
+		.fill 	1		
 		.send storage
 
 ; ************************************************************************************************

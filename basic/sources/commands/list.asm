@@ -19,8 +19,7 @@
 		.section code
 
 Command_LIST:	;; [list]
-		lda 	#6 							; set default spacing.
-		sta 	CLIndent
+		stz 	CLIndent 					; reset indent
 		stz 	CLFrom 						; default from 
 		stz 	CLFrom+1
 
@@ -111,10 +110,7 @@ _CLSaveIndent:
 _CLSpacing:		
 		lda 	CLIndent
 		jsr 	_CLASpaces 					; do the indent
-
-		lda 	#42
-		jsr 	WriteCharacter
-
+		jsr 	TOKDetokenise 				; output the line text.
 		lda 	#13	 						; next line
 		jsr 	WriteCharacter
 

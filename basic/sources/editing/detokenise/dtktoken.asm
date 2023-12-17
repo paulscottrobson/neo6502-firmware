@@ -3,7 +3,7 @@
 ;
 ;		Name:		dtktoken.asm
 ;		Purpose:	Detokenise token
-;		Created:	28th May 2023
+;		Created:	17th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -19,20 +19,9 @@
 ; ************************************************************************************************
 
 TOKDToken:
-		ldx 	#StandardTokens & $FF 		; standard table
-		ldy 	#StandardTokens >> 8
-		cmp 	#PR_LSQLSQSHIFTRSQRSQ 		; is it the shift token ?
-		bne 	_TOKDSearch
+		sty 	zTemp0+1 					; save table address/
+		stx 	zTemp0
 		;
-		jsr 	TOKDGet 					; get next
-		ldx 	#AlternateTokens & $FF 		; alt table address
-		ldy 	#AlternateTokens >> 8
-		;
-		;		Seach for token A in table YX.
-		;
-_TOKDSearch:		
-		stx 	zTemp0 						; save table in zTemp0
-		sty 	zTemp0+1
 		tax 								; token ID in X.				
 _TOKDFind:
 		dex 								; reached the token position
@@ -52,10 +41,12 @@ _TOKDFound:
 		beq 	_TOKDExit 					; not a token with text.
 		tax 	 				
 		ldy 	#1 							; output the token.
-		lda 	(zTemp0),y 					; check spacing first character,
+		lda 	(zTemp0),y 					; check spacing first character
+		and 	#$7F
 		jsr 	TOKDSpacing 				; do we need space before this.
 _TOKDOutput:
 		lda 	(zTemp0),y 					; output them in lower case
+		and 	#$7F
 		jsr 	TOKToLower
 		jsr 	TOKDOutput
 		iny
@@ -70,17 +61,6 @@ _TOKDExit:
 ;
 ; ************************************************************************************************
 
-TOKDSpacing:
-		jsr 	TOKIsIdentifierElement		; next character alphanumeric
-		bcc 	TOKDSExit
-TOKDSpaceLastAlpha:		
-		lda 	TOKLastCharacter			; and last character also alphanumeric
-		jsr 	TOKIsIdentifierElement
-		bcc 	TOKDSExit
-		lda 	#" " 						; we need a space.
-		jsr 	TOKDOutput
-TOKDSExit:
-		rts		
 		.send code
 		
 ; ************************************************************************************************

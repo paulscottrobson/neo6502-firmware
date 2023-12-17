@@ -1,12 +1,5 @@
 TODO List
 ---------
-- Detokenisation code 
-	- keywords
-	- identifiers
-	- constants
-	- strings
-	- decimals.
-
 - Tokeniser does comments
 - Patch Oliver Schmidt's debug code back in.
 - Try LOAD and SAVE and some sort of directory listing

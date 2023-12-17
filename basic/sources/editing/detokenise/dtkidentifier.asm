@@ -19,63 +19,30 @@
 ; ************************************************************************************************
 
 TOKDIdentifier:
-		ldy 	#$FF 						; flag set on first character only.
-		sty 	TOKDIFirstChar
-_TOKDLoop:
-		tay 								; token in Y, now coner it to ASCII
-		lda 	#'_' 						; handle _
-		cpy 	#$64
-		beq 	_TOKDIOutput
-		tya 								; handle a-z
-		clc
-		adc	 	#$21
-		cpy 	#$5A
-		bcc 	_TOKDIOutput
-		sec 								; handle 0-9
-		sbc 	#$4B
-		;
-		;		ASCII equivalent in A
-		;	
-_TOKDIOutput:		
-		bit 	TOKDIFirstChar 				; check spacing if first character
-		bpl 	_TOKDINoSpacing
-		pha
-		jsr 	TOKDSpacing
-		stz 	TOKDIFirstChar
+		clc 								; MSB of record	
+		adc 	#Program >> 8
+		sta 	zTemp0+1
+		jsr 	TOKDGet 					; LSB
+		sta 	zTemp0
+		ldy 	#5 							; start of name
+		lda 	(zTemp0),y 					; check we need spacing.
+		and 	#$7F
+		jsr 	TOKDSpacing 				; do we need space before this.
+
+_TOKDIOut:
+		lda 	(zTemp0),y 					; get character
+		iny
+		pha 								; save it
+		and 	#$7F 						; strip MSB
+		jsr 	TOKToLower 					; make lower case.
+		jsr 	TOKDOutput 					; output it.
 		pla
-_TOKDINoSpacing:		
-		;
-		;		Output
-		;
-		jsr 	TOKDOutput		
-		jsr 	TOKDGet 					; get next token
-		cmp 	#$7C 						; 7C..7F are end markers
-		bcc 	_TOKDLoop
-		;
-		;		Output the end $ ( or $(
-		;
-		beq 	_TOKDIExit 					; it's a number, no tail.
-		lsr 	a 							; string ?
-		bcc 	_TOKDICheckArray
-		pha
-		lda 	#"$"
-		jsr 	TOKDOutput
-		pla
-_TOKDICheckArray:
-		lsr 	a 							; array ?
-		bcc 	_TOKDIExit		
-		lda 	#"("
-		jsr 	TOKDOutput
-_TOKDIExit:
-		rts		
+		bpl 	_TOKDIOut 					; output the whole character.
+		rts
+
 
 		.send code
 		
-		.section storage
-TOKDIFirstChar:
-		.fill 	1
-		.send storage
-
 ; ************************************************************************************************
 ;
 ;									Changes and Updates
@@ -84,7 +51,6 @@ TOKDIFirstChar:
 ;
 ;		Date			Notes
 ;		==== 			=====
-; 		01/07/23 		. is no longer part of an identifier, it's a token.
 ;
 ; ************************************************************************************************
 
