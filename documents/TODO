@@ -1,14 +1,11 @@
 TODO List
 ---------
-- Tokenising 
-	- Out of memory
-	- Remove spaces sometimes.
-	- Tokeniser does comments
-	- Tokenising very long decimals (bug ?)
-	
-- Patch Oliver Schmidt's debug code back in.
+- Simple command line usage (don't forget CLEAR after editing line)
 - Listing code port/change.
-- Simple command line usage.
+- Tokeniser does comments
+- Tokenising very long decimals (bug ?)
+- Out of memory on program loading.
+- Patch Oliver Schmidt's debug code back in.
 - First play version
 
 - LOAD and SAVE and some sort of directory listing.
