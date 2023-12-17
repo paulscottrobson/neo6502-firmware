@@ -42,7 +42,7 @@ ColdStart:
 		jmp 	WarmStart
 
 _CSMsg:	.byte 	_CSMSgEnd-_CSMSg-1
-		.text 	"NeoBasic",13,13
+		.text 	13,"NeoBasic",13,13
 _CSMSgEnd:
 		.send   code
 		.include "_include.inc"
