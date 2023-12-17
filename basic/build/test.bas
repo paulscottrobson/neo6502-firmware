@@ -1,1 +1,3 @@
-14982 case A Y$189E4-42204.1 d9j0m4
+for i = 1 to 10
+print "Hello, world"
+next	

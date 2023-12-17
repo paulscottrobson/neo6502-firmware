@@ -21,7 +21,6 @@
 
 Command_RUN:	;; [run]
 		jsr 	ClearCode					; clear everything out.
-
 		lda 	Program 					; back to the program start, get the count of var pages.
 		clc 								; make an actual address.
 		adc 	#(Program >> 8)
