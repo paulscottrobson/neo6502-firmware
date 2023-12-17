@@ -45,6 +45,7 @@
 	.include "sources/commands/undefined.asm"
 	.include "sources/editing/editing/delete.asm"
 	.include "sources/editing/editing/insert.asm"
+	.include "sources/editing/editing/warmstart.asm"
 	.include "sources/editing/tokenise/helpers/tokconstant.asm"
 	.include "sources/editing/tokenise/helpers/tokfind.asm"
 	.include "sources/editing/tokenise/helpers/tokidcreate.asm"

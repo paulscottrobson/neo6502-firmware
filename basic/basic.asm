@@ -26,6 +26,10 @@ boot:   jmp     ColdStart
 		jmp     CheckSpeed
 		
 ColdStart:
+		ldy 	#_CSMsg >> 8
+		lda 	#_CSMsg & $FF
+		jsr 	CPPrintYA 
+
 		.if 	BASICBUILD==2
 		jsr 	NewProgram
 		jmp 	TestTokenising  
@@ -37,16 +41,12 @@ ColdStart:
 		jsr 	NewProgram
 		jmp 	WarmStart
 
+_CSMsg:	.byte 	_CSMSgEnd-_CSMSg-1
+		.text 	"NeoBasic",13,13
+_CSMSgEnd:
 		.send   code
 		.include "_include.inc"
 		.section code
-
-WarmStart:
-		lda     #$00
-		tax
-		tay
-		.byte   3
-		bra     WarmStart
 
 		.align  256
 Program:

@@ -63,18 +63,32 @@ wedge:
 
 # ***************************************************************************************
 #
-#				Build the normal BASIC (e.g. boots into empty program)
+#						Build the test BASIC (e.g. runs test.bas)
+#
+# ***************************************************************************************
+
+tbuild: prelim
+	$(ASSEMBLER) -DBASICBUILD=1 basic.asm -L build/basic.lst -o build/basic.bin
+	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 1000
+	$(CCOPY) build$(S)basic_binary.h $(BINDIR)
+
+trun:tbuild	
+	$(RUNCMD)
+
+# ***************************************************************************************
+#
+#							Build the command line basic
 #
 # ***************************************************************************************
 
 build: prelim
-	$(ASSEMBLER) basic.asm -L build/basic.lst -o build/basic.bin
+	$(ASSEMBLER) -DBASICBUILD=0 basic.asm -L build/basic.lst -o build/basic.bin
 	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 1000
 	$(CCOPY) build$(S)basic_binary.h $(BINDIR)
 
 run:build	
 	$(RUNCMD)
-
+	
 # ***************************************************************************************
 #
 #				Rebuild firmware / emulator after importing common code

@@ -1,16 +1,14 @@
 TODO List
 ---------
-- Simple command line usage (don't forget CLEAR after editing line)
 - Listing code port/change.
 - Tokeniser does comments
-- Tokenising very long decimals (bug ?)
-- Out of memory on program loading.
 - Patch Oliver Schmidt's debug code back in.
+- Try LOAD and SAVE and some sort of directory listing
+- If works, write sample code.
 - First play version
 
-- LOAD and SAVE and some sort of directory listing.
-- Second play version
-
+- Out of memory on program editing.
+- Tokenising very long decimals (bug ?)
 - Event() Max() and Min()
 - Locals / Parameters code.
 - READ/DATA/RESTORE
