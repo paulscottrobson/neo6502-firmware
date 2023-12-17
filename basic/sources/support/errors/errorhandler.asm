@@ -54,17 +54,9 @@ _EHMPrint:
 		ldy 	#_EHAtMsg >> 8
 		lda 	#_EHAtMsg & $FF
 		jsr 	CPPrintYA 
-
-		ldx 	#0 							; print line number.
-		lda 	ERRLine
-		sta 	XSNumber0,x
-		lda 	ERRLine+1
-		sta 	XSNumber1,x
-		stz 	XSNumber2,x
-		stz 	XSNumber3,x
-		stz 	XSControl,x
-		jsr 	CPNumberToString		
-		jsr 	CPPrintYA 
+		lda 	ERRLine 					; print line #
+		ldx 	ERRLine+1
+		jsr 	PrintNumberXA
 
 _EHWarmStart:
 		lda 	#13 						; CR
@@ -73,6 +65,19 @@ _EHWarmStart:
 
 _EHAtMsg:
 		.text 	9," at line "
+
+PrintNumberXA:
+		phy
+		stx 	XSNumber1
+		sta 	XSNumber0
+		ldx 	#0 							; print line number.
+		stz 	XSNumber2
+		stz 	XSNumber3
+		stz 	XSControl
+		jsr 	CPNumberToString		
+		jsr 	CPPrintYA 
+		ply
+		rts
 
 		.send code
 		

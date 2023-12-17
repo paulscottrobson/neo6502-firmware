@@ -9,7 +9,7 @@ ExtendedVectorTable:
 	.word	Command_STOP             ; $183 stop
 	.word	Command_END              ; $184 end
 	.word	Command_ASSERT           ; $185 assert
-	.word	Unimplemented            ; $186 list
+	.word	Command_LIST             ; $186 list
 	.word	Unimplemented            ; $187 save
 	.word	Unimplemented            ; $188 load
 	.word	Command_GOSUB            ; $189 gosub

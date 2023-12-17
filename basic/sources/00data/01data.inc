@@ -121,7 +121,13 @@ tokElement: 								; length prefixed string indicating an identifier or punctua
 tokLengthPos: 								; position of length.
 		.fill 	1	
 tokDecCount: 								; decimal count.
-		.fill 	1			
+		.fill 	1	
+clIndent:	 								; current listing indent
+		.fill 	1				
+clFrom: 									; LIST range.
+		.fill 	2		
+clTo:
+		.fill 	2		
 		.send storage
 
 ; ************************************************************************************************

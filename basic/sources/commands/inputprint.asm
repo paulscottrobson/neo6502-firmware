@@ -203,7 +203,7 @@ CPNumberToString:
 
 ; ************************************************************************************************
 ;
-;							Print string at YA on output device
+;					Print string at YA on output device, return chars printed
 ;
 ; ************************************************************************************************
 
@@ -221,6 +221,7 @@ _CPPrintAYXLoop:
 		dex
 		bne 	_CPPrintAYXLoop
 _CPPrintExit:	
+		lda 	(zTemp0)
 		rts		
 
 ; ************************************************************************************************

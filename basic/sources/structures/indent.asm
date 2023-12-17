@@ -3,7 +3,7 @@
 ;
 ;		Name:		indent.asm
 ;		Purpose:	Get current line indentation
-;		Created:	7th July 2023
+;		Created:	17th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -23,7 +23,7 @@ GetIndent:
 		ldy 	#3
 _GILoop:
 		lda 	(codePtr),y 				; end of line ?
-		cmp 	#PR_LSQLSQENDRSQRSQ 		
+		cmp 	#KWD_SYS_END		
 		beq 	_GIExit
 		jsr 	SkipOneInstruction
 		bra 	_GILoop
@@ -32,7 +32,6 @@ _GIExit:
 		lda 	zTemp1
 		asl 	a
 		rts
-
 
 		.send code
 
