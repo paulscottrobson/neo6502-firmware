@@ -124,15 +124,80 @@ Shift1TokenText:
 	.byte	$04,$4c,$49,$53,$d4           	; $186 LIST
 	.byte	$04,$53,$41,$56,$c5           	; $187 SAVE
 	.byte	$04,$4c,$4f,$41,$c4           	; $188 LOAD
-	.byte	$05,$47,$4f,$53,$55,$c2       	; $189 GOSUB
-	.byte	$04,$47,$4f,$54,$cf           	; $18a GOTO
-	.byte	$06,$52,$45,$54,$55,$52,$ce   	; $18b RETURN
-	.byte	$07,$52,$45,$53,$54,$4f,$52,$c5	; $18c RESTORE
-	.byte	$03,$44,$49,$cd               	; $18d DIM
+	.byte	$03,$43,$41,$d4               	; $189 CAT
+	.byte	$05,$47,$4f,$53,$55,$c2       	; $18a GOSUB
+	.byte	$04,$47,$4f,$54,$cf           	; $18b GOTO
+	.byte	$06,$52,$45,$54,$55,$52,$ce   	; $18c RETURN
+	.byte	$07,$52,$45,$53,$54,$4f,$52,$c5	; $18d RESTORE
+	.byte	$03,$44,$49,$cd               	; $18e DIM
 	.byte	$FF
 
 Shift2TokenText:
 	.byte	$03,$41,$44,$c3               	; $280 ADC
+	.byte	$03,$41,$4e,$c4               	; $281 AND
+	.byte	$03,$41,$53,$cc               	; $282 ASL
+	.byte	$03,$42,$43,$c3               	; $283 BCC
+	.byte	$03,$42,$43,$d3               	; $284 BCS
+	.byte	$03,$42,$45,$d1               	; $285 BEQ
+	.byte	$03,$42,$49,$d4               	; $286 BIT
+	.byte	$03,$42,$4d,$c9               	; $287 BMI
+	.byte	$03,$42,$4e,$c5               	; $288 BNE
+	.byte	$03,$42,$50,$cc               	; $289 BPL
+	.byte	$03,$42,$52,$c1               	; $28a BRA
+	.byte	$03,$42,$52,$cb               	; $28b BRK
+	.byte	$03,$42,$56,$c3               	; $28c BVC
+	.byte	$03,$42,$56,$d3               	; $28d BVS
+	.byte	$03,$43,$4c,$c3               	; $28e CLC
+	.byte	$03,$43,$4c,$c4               	; $28f CLD
+	.byte	$03,$43,$4c,$c9               	; $290 CLI
+	.byte	$03,$43,$4c,$d6               	; $291 CLV
+	.byte	$03,$43,$4d,$d0               	; $292 CMP
+	.byte	$03,$43,$50,$d8               	; $293 CPX
+	.byte	$03,$43,$50,$d9               	; $294 CPY
+	.byte	$03,$44,$45,$c3               	; $295 DEC
+	.byte	$03,$44,$45,$d8               	; $296 DEX
+	.byte	$03,$44,$45,$d9               	; $297 DEY
+	.byte	$03,$45,$4f,$d2               	; $298 EOR
+	.byte	$03,$49,$4e,$c3               	; $299 INC
+	.byte	$03,$49,$4e,$d8               	; $29a INX
+	.byte	$03,$49,$4e,$d9               	; $29b INY
+	.byte	$03,$4a,$4d,$d0               	; $29c JMP
+	.byte	$03,$4a,$53,$d2               	; $29d JSR
+	.byte	$03,$4c,$44,$c1               	; $29e LDA
+	.byte	$03,$4c,$44,$d8               	; $29f LDX
+	.byte	$03,$4c,$44,$d9               	; $2a0 LDY
+	.byte	$03,$4c,$53,$d2               	; $2a1 LSR
+	.byte	$03,$4e,$4f,$d0               	; $2a2 NOP
+	.byte	$03,$4f,$52,$c1               	; $2a3 ORA
+	.byte	$03,$50,$48,$c1               	; $2a4 PHA
+	.byte	$03,$50,$48,$d0               	; $2a5 PHP
+	.byte	$03,$50,$48,$d8               	; $2a6 PHX
+	.byte	$03,$50,$48,$d9               	; $2a7 PHY
+	.byte	$03,$50,$4c,$c1               	; $2a8 PLA
+	.byte	$03,$50,$4c,$d0               	; $2a9 PLP
+	.byte	$03,$50,$4c,$d8               	; $2aa PLX
+	.byte	$03,$50,$4c,$d9               	; $2ab PLY
+	.byte	$03,$52,$4f,$cc               	; $2ac ROL
+	.byte	$03,$52,$4f,$d2               	; $2ad ROR
+	.byte	$03,$52,$54,$c9               	; $2ae RTI
+	.byte	$03,$52,$54,$d3               	; $2af RTS
+	.byte	$03,$53,$42,$c3               	; $2b0 SBC
+	.byte	$03,$53,$45,$c3               	; $2b1 SEC
+	.byte	$03,$53,$45,$c4               	; $2b2 SED
+	.byte	$03,$53,$45,$c9               	; $2b3 SEI
+	.byte	$03,$53,$54,$c1               	; $2b4 STA
+	.byte	$03,$53,$54,$d8               	; $2b5 STX
+	.byte	$03,$53,$54,$d9               	; $2b6 STY
+	.byte	$03,$53,$54,$da               	; $2b7 STZ
+	.byte	$03,$54,$41,$d8               	; $2b8 TAX
+	.byte	$03,$54,$41,$d9               	; $2b9 TAY
+	.byte	$03,$54,$52,$c2               	; $2ba TRB
+	.byte	$03,$54,$53,$c2               	; $2bb TSB
+	.byte	$03,$54,$53,$d8               	; $2bc TSX
+	.byte	$03,$54,$58,$c1               	; $2bd TXA
+	.byte	$03,$54,$58,$d3               	; $2be TXS
+	.byte	$03,$54,$59,$c1               	; $2bf TYA
+	.byte	$03,$53,$54,$d0               	; $2c0 STP
 	.byte	$FF
 
 BinaryPrecedence:

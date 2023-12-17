@@ -61,6 +61,7 @@
 	.include "sources/editing/tokenise/helpers/tokio.asm"
 	.include "sources/editing/tokenise/helpers/toktypes.asm"
 	.include "sources/editing/tokenise/tokenise.asm"
+	.include "sources/editing/tokenise/workers/tok_comment.asm"
 	.include "sources/editing/tokenise/workers/tok_decimal.asm"
 	.include "sources/editing/tokenise/workers/tok_hexconstant.asm"
 	.include "sources/editing/tokenise/workers/tok_identifier.asm"

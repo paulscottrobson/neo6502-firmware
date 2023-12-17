@@ -17,7 +17,7 @@ include ../build_env/common.make
 endif
 
 BASPROG = test.bas 
-RUNCMD =  $(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@1000 build$(S)wedge.bin@FFFA
+RUNCMD =  $(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@800 build$(S)wedge.bin@FFFA
 
 all: build
 
@@ -69,7 +69,7 @@ wedge:
 
 tbuild: prelim
 	$(ASSEMBLER) -DBASICBUILD=1 basic.asm -L build/basic.lst -o build/basic.bin
-	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 1000
+	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 800
 	$(CCOPY) build$(S)basic_binary.h $(BINDIR)
 
 trun:tbuild	
@@ -83,7 +83,7 @@ trun:tbuild
 
 build: prelim
 	$(ASSEMBLER) -DBASICBUILD=0 basic.asm -L build/basic.lst -o build/basic.bin
-	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 1000
+	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 800
 	$(CCOPY) build$(S)basic_binary.h $(BINDIR)
 
 run:build	

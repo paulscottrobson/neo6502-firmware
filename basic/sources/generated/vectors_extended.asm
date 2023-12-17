@@ -12,9 +12,10 @@ ExtendedVectorTable:
 	.word	Command_LIST             ; $186 list
 	.word	Unimplemented            ; $187 save
 	.word	Unimplemented            ; $188 load
-	.word	Command_GOSUB            ; $189 gosub
-	.word	Command_GOTO             ; $18a goto
-	.word	Command_RETURN           ; $18b return
-	.word	Unimplemented            ; $18c restore
-	.word	DimCommand               ; $18d dim
+	.word	Unimplemented            ; $189 cat
+	.word	Command_GOSUB            ; $18a gosub
+	.word	Command_GOTO             ; $18b goto
+	.word	Command_RETURN           ; $18c return
+	.word	Unimplemented            ; $18d restore
+	.word	DimCommand               ; $18e dim
 	.send code
