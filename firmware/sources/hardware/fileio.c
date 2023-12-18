@@ -69,11 +69,7 @@ uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
 	UINT bytesWritten;
 	result = f_open(&file, fileName, FA_WRITE|FA_CREATE_ALWAYS);
 	if (result == FR_OK) {
-		CONWriteString("Writing ");
-		CONWriteHex(size);
-		CONWriteString("\r");
 		f_write(&file,cpuMemory+startAddress,size,&bytesWritten);
-		CONWriteString("Closing\r");
 		f_close(&file);
 	}
 	return (result == FR_OK) ? 0 : 1;
