@@ -94,7 +94,6 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
 // ***************************************************************************************
 
 void KBDInitialise(void) {
-//	board_init();                                                               // USB Initialise.
 	tusb_init();
 	for (int i = 0;i < KBD_MAX_KEYCODE;i++) lastReport[i] = 0;                  // No keys currently known
 }
