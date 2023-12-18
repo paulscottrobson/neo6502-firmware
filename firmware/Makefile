@@ -49,3 +49,5 @@ clean: always
 run: build
 	$(UPLOADER) $(UPCONFIG) $(UPCOMMANDS)
 
+reset:
+	$(UPLOADER) $(UPCONFIG) -c "adapter speed 5000" -c "init" -c "reset init" -c "reset run" -c "exit"

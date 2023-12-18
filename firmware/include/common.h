@@ -42,6 +42,8 @@
 #include "interface/memory.h"
 #include "interface/dispatch.h"
 #include "interface/maths.h"
+#include "interface/fdebug.h"
+#include "interface/fileio.h"
 //
 //		Other Includes
 //

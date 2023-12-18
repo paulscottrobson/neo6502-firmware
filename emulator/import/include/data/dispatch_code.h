@@ -31,6 +31,9 @@ switch (*DCOMMAND) {
 		break;
 	case 3:
 		switch (*DFUNCTION) {
+			case 1:
+				FIODirectory();
+				break;
 		}
 		break;
 	case 4:
