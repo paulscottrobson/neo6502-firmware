@@ -10,8 +10,8 @@ ExtendedVectorTable:
 	.word	Command_END              ; $184 end
 	.word	Command_ASSERT           ; $185 assert
 	.word	Command_LIST             ; $186 list
-	.word	Unimplemented            ; $187 save
-	.word	Unimplemented            ; $188 load
+	.word	Command_Save             ; $187 save
+	.word	Command_Load             ; $188 load
 	.word	Command_CAT              ; $189 cat
 	.word	Command_GOSUB            ; $18a gosub
 	.word	Command_GOTO             ; $18b goto

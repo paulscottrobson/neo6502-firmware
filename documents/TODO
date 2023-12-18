@@ -1,15 +1,16 @@
 TODO List
 ---------
 
-- Try LOAD and SAVE and some sort of directory listing functionality.
-	- BASIC/Emulator save/load
-	- FatFS save/load
+- FatFS load
+- FatFS save
+- BASIC Load to/Save from arbitrary memory location.
 - Do the save/load tester code running on the emulator & firmware.
 - Rewrite the speed code.
-- If works, write sample code and devise some sort of build contraption.
+- If works, write sample code for commands.
 - Put BASIC into a command in its own write (N)
 - First play version
 
+- Print(0) bug (space after all text only tokens)
 - Out of memory on program editing.
 - Tokenising very long decimals (bug ?)
 - List procedures()

@@ -29,6 +29,7 @@ errors = """
 	unimp :		not implemented
 	unknown : 	unknown procedure
 	memory : 	out of memory
+	file :		file i/o error
 """
 
 err = []

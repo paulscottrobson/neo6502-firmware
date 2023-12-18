@@ -165,3 +165,18 @@ tokens: prelim
 	$(ASSEMBLER) -DBASICBUILD=2 basic.asm -L build/basic.lst -o build/basic.bin
 	$(RUNCMD)
 	$(PYTHON) tests$(S)testprogram.py
+
+# ***************************************************************************************
+#
+#										BASIC demos
+#
+# ***************************************************************************************
+
+DEMOSRC = $(shell find . -name '*.bsc')
+DEMOBAS = $(subst bsc,bas,$(DEMOSRC))
+
+demos: $(DEMOBAS)
+
+%.bas : %.bsc
+	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
+	$(CCOPY) $@ storage

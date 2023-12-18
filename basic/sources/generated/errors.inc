@@ -86,3 +86,8 @@ error_memory .macro
 	jmp	ErrorHandler
 	.endm
 
+error_file .macro
+	lda	#18
+	jmp	ErrorHandler
+	.endm
+
