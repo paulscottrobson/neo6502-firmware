@@ -110,6 +110,7 @@ void FIODirectory(void) {
 // ***************************************************************************************
 
 uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
+	printf("Reading %s to $%x\n",fileName,loadAddress);
 	return 0;
 }
 
@@ -120,6 +121,7 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 // ***************************************************************************************
 
 uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
+	printf("Writing %s from $%x size $%x\n",fileName,startAddress,size);
 	return 0;
 }
 

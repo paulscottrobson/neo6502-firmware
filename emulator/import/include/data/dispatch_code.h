@@ -34,6 +34,12 @@ switch (*DCOMMAND) {
 			case 1:
 				FIODirectory();
 				break;
+			case 2:
+				*DERROR = FIOReadFile(DSPGetString(DCOMMAND,4),DSPGetInt16(DCOMMAND,6));
+				break;
+			case 3:
+				*DERROR = FIOWriteFile(DSPGetString(DCOMMAND,4),DSPGetInt16(DCOMMAND,6),DSPGetInt16(DCOMMAND,8));
+				break;
 		}
 		break;
 	case 4:
