@@ -14,6 +14,7 @@
 #include <inttypes.h>
 #include "ff.h"
 
+
 // ***************************************************************************************
 //
 //									Display directory
@@ -45,7 +46,15 @@ void FIODirectory(void) {
 // ***************************************************************************************
 
 uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
-	return 0;
+	FIL file;
+	FRESULT result;
+	UINT bytesRead;
+	result = f_open(&file, fileName, FA_READ);
+	if (result == FR_OK) {
+		f_read(&file,cpuMemory+loadAddress,0xFFFF,&bytesRead);
+		f_close(&file);
+	}
+	return (result == FR_OK) ? 0 : 1;
 }
 
 // ***************************************************************************************
@@ -55,7 +64,19 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 // ***************************************************************************************
 
 uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
-	return 0;
+	FIL file;
+	FRESULT result;
+	UINT bytesWritten;
+	result = f_open(&file, fileName, FA_WRITE|FA_CREATE_ALWAYS);
+	if (result == FR_OK) {
+		CONWriteString("Writing ");
+		CONWriteHex(size);
+		CONWriteString("\r");
+		f_write(&file,cpuMemory+startAddress,size,&bytesWritten);
+		CONWriteString("Closing\r");
+		f_close(&file);
+	}
+	return (result == FR_OK) ? 0 : 1;
 }
 
 // ***************************************************************************************
