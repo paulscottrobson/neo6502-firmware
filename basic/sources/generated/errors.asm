@@ -20,4 +20,5 @@ ErrorMessageText:
 	.text	"Not Implemented",0
 	.text	"Unknown Procedure",0
 	.text	"Out Of Memory",0
+	.text	"File I/O Error",0
 	.send code

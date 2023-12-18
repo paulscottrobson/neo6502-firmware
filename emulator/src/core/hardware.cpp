@@ -111,7 +111,14 @@ void FIODirectory(void) {
 
 uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 	printf("Reading %s to $%x\n",fileName,loadAddress);
-	return 0;
+	char szFileName[64];
+	sprintf(szFileName,"storage/%s",fileName);
+	FILE *f = fopen(szFileName,"rb");
+	if (f != NULL) {
+		fread(CPUAccessMemory()+loadAddress,1,0xFFFF,f);
+		fclose(f);
+	}
+	return (f == NULL) ? 1 : 0;
 }
 
 // ***************************************************************************************
@@ -122,6 +129,13 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 
 uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
 	printf("Writing %s from $%x size $%x\n",fileName,startAddress,size);
-	return 0;
+	char szFileName[64];
+	sprintf(szFileName,"storage/%s",fileName);
+	FILE *f = fopen(szFileName,"wb");
+	if (f != NULL) {
+		fwrite(CPUAccessMemory()+startAddress,1,size,f);
+		fclose(f);
+	}
+	return (f == NULL) ? 1 : 0;
 }
 
