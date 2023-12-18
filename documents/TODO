@@ -2,7 +2,6 @@ TODO List
 ---------
 
 - Try LOAD and SAVE and some sort of directory listing functionality.
-	- Parameter access for save/load
 	- BASIC/Emulator save/load
 	- FatFS save/load
 - Do the save/load tester code running on the emulator & firmware.

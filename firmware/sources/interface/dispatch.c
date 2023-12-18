@@ -74,6 +74,25 @@ void DSPReset(void) {
 
 // ***************************************************************************************
 //
+//                              Access helper functions
+//
+// ***************************************************************************************
+
+static char szBuffer[32];  
+
+char *DSPGetString(uint8_t *command,uint8_t paramOffset) {
+    uint8_t *mem = cpuMemory+command[paramOffset]+(command[paramOffset+1]<<8);  // From here.
+    memcpy(szBuffer,mem+1,*mem);                                                // Make ASCIIZ string
+    szBuffer[*mem] = '\0';
+    return szBuffer;
+}
+
+uint16_t DSPGetInt16(uint8_t *command,uint8_t paramOffset) {
+    return command[paramOffset] + (command[paramOffset+1] << 8);
+}
+
+// ***************************************************************************************
+//
 //      Date        Revision
 //      ====        ========
 //
