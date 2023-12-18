@@ -51,21 +51,7 @@ bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_dat
         f_chdir("/");
     }
 
-    DIR d;
-    CONWriteString("Opening\r");
-    FRESULT r = f_opendir(&d,"/");
-    if (r == FR_OK) {
-        FILINFO fi;
-        while (f_readdir(&d,&fi) == FR_OK && fi.fname[0] != '\0') {
-            CONWriteString(fi.fname);
-            CONWriteString("\r");
-        }
-        CONWriteString("Closing\r");
-        f_closedir(&d);
-    }
     msc_inquiry_complete = true;
-
-
     return true;
 }
 

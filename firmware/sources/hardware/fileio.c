@@ -1,63 +1,66 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      dispatch.config
+//      Name :      fileio.c
 //      Authors :   Paul Robson (paul@robsons.org.uk)
-//      Date :      22nd November 2023
+//      Date :      18th December 2023
 //      Reviewed :  No
-//      Purpose :   Dispatched for commands
+//      Purpose :   File I/O code.
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-// ***************************************************************************************
-//
-//									Group 1 (System)
-//
-// ***************************************************************************************
-
-group 1
-	function 0 										// Function 0 resets the interface
-		DSPReset();
-
-	function 1 										// Function 1 copies the 32 bit system timer
-		*((uint32_t *)DPARAMS) = TMRRead(); 		// (assumes littleendian)
-
-	function 2 										// Function status reads the keyboard state.
-		i1 = *DPARAMS;
-		*DPARAMS = (i1 < KBD_MAX_KEYCODE) ? KBDGetStateArray()[i1] : 0;
-			
-// ***************************************************************************************
-//
-//									Group 0 (Console)
-//
-// ***************************************************************************************
-
-group 2
-	function 0 										// Function 0 is console out
-		CONWrite(*DPARAMS);
-	function 1 										// Function 1 is console in
-		*(DPARAMS) = KBDGetKey();
-	function 2 										// Function 2 is key available in queue
-		*(DPARAMS) = KBDIsKeyAvailable() ? 0xFF: 0;
+#include "common.h"
+#include <inttypes.h>
+#include "ff.h"
 
 // ***************************************************************************************
 //
-//									Group 2 (File I/O)
+//									Display directory
 //
 // ***************************************************************************************
 
-group 3
-	function 1 										// Function 1 is directory listing
-		FIODirectory();
-		
+void FIODirectory(void) {
+	DIR d;
+	FRESULT r = f_opendir(&d,"/");
+	if (r == FR_OK) {
+		FILINFO fi;
+		while (f_readdir(&d,&fi) == FR_OK && fi.fname[0] != '\0') {
+				if (fi.fattrib & AM_DIR) {
+					CONWriteString("DIR: ");
+				} else {
+					CONWriteString("     ");
+				}
+				CONWriteString(fi.fname);
+				CONWriteString("\r");
+		}
+		f_closedir(&d);
+	}
+}   
+
 // ***************************************************************************************
 //
-//									Group 3 (Mathematics)
+//									Read File
 //
 // ***************************************************************************************
 
-group 4
-	include 	maths_binary.config
-	include 	maths_unary.config
-	include 	maths_other.config
+uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//									Write File
+//
+// ***************************************************************************************
+
+uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//		Date 		Revision
+//		==== 		========
+//
+// ***************************************************************************************

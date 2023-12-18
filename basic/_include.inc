@@ -31,6 +31,7 @@
 	.include "sources/arithmetic/unary/time.asm"
 	.include "sources/arithmetic/unary/val.asm"
 	.include "sources/commands/assert.asm"
+	.include "sources/commands/cat.asm"
 	.include "sources/commands/clear.asm"
 	.include "sources/commands/comment.asm"
 	.include "sources/commands/dim.asm"

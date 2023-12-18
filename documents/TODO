@@ -1,11 +1,16 @@
 TODO List
 ---------
-- Patch Oliver Schmidt's debug code back in.
-- Try LOAD and SAVE and some sort of directory listing functionality.
-- Do the save/load tester code running on the emulator & firmware.
-- If works, write sample code.
 
+- Try LOAD and SAVE and some sort of directory listing functionality.
+	- Parameter access for save/load
+	- BASIC/Emulator save/load
+	- FatFS save/load
+- Do the save/load tester code running on the emulator & firmware.
+- Rewrite the speed code.
+- If works, write sample code and devise some sort of build contraption.
+- Put BASIC into a command in its own write (N)
 - First play version
+
 - Out of memory on program editing.
 - Tokenising very long decimals (bug ?)
 - List procedures()
@@ -13,10 +18,14 @@ TODO List
 - Locals / Parameters code.
 - READ/DATA/RESTORE
 - Screen editor.
+- Second play version
+
 - Assembler
 - Locale handling
 - Console colour and cursor control / positioning.
+- Coloured listing etc.
 - Function key handling
+- Third play version
 
 - Graphics system.
 	- Drawing operators
