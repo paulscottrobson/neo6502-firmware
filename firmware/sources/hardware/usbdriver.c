@@ -12,7 +12,6 @@
 // ***************************************************************************************
 
 #include "common.h"
-//#include "bsp/board.h"
 #include "tusb.h"
 #include "interface/kbdcodes.h"
 

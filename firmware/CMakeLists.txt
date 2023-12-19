@@ -32,3 +32,6 @@ FetchContent_MakeAvailable(PicoDVI)
 add_subdirectory(${picodvi_SOURCE_DIR}/software/libdvi ${picodvi_BINARY_DIR})
 add_subdirectory(libraries/fatfs/source)
 add_subdirectory(sources)
+
+pico_enable_stdio_usb(firmware 0)
+pico_enable_stdio_uart(firmware 1)
