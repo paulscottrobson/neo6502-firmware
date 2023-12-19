@@ -21,7 +21,15 @@ target_sources(firmware PRIVATE main.c
 
 target_compile_definitions(firmware
     PRIVATE PICO
+    PRIVATE PICO_FLASH_SPI_CLKDIV=4
 )
+
+pico_define_boot_stage2(firmware_boot2 ${PICO_SDK_PATH}/src/rp2_common/boot_stage2/boot2_generic_03h.S)
+target_compile_definitions(firmware_boot2 PRIVATE
+	PICO_FLASH_SPI_CLKDIV=4
+	PICO_FLASH_SIZE_BYTES=2097152
+)
+pico_set_boot_stage2(firmware firmware_boot2)
 
 target_link_libraries(firmware
     hardware_pio
