@@ -76,6 +76,7 @@ static void wait_for_disk_io(BYTE pdrv) {
 
 static bool disk_io_complete(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_data) {
     (void)cb_data;
+    CONWriteString("Complete msg ");CONWriteHex(get_core_num());CONWriteString("\r");
     msc_volume_busy[dev_addr] = false;
     return true;
 }
@@ -102,9 +103,12 @@ DRESULT disk_read(BYTE pdrv, BYTE *buff, LBA_t sector, UINT count) {
 DRESULT disk_write(BYTE pdrv, const BYTE *buff, LBA_t sector, UINT count) {
     uint8_t const dev_addr = pdrv;
     uint8_t const lun = 0;
+    CONWriteString("Writing ");CONWriteHex(get_core_num());CONWriteString("\r");
     msc_volume_busy[pdrv] = true;
     tuh_msc_write10(dev_addr, lun, buff, sector, (uint16_t)count, disk_io_complete, 0);
+    CONWriteString("Waiting\r");
     wait_for_disk_io(pdrv);
+    CONWriteString("Write Completed.\r");
     return RES_OK;
 }
 

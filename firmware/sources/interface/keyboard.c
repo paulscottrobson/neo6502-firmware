@@ -51,6 +51,7 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 	if (keyCode == 0xFF) { 														// Reset request
 		queueSize = 0; 															// Empty keyboard queue
 		for (int i = 0;i < sizeof(keyboardState);i++) keyboardState[i] = 0; 	// No keys down.
+		return;
 	}
 
 	if (keyCode != 0 && keyCode < KBD_MAX_KEYCODE) { 							// Legitimate keycode.

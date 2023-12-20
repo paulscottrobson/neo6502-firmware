@@ -14,6 +14,7 @@
 #include "system/processor.h"
 
 int main() {
+    KBDInitialise();                                                            // Initialise keyboard & USB system.
     DSPReset();                                                                 // Initialises everything.
     while (1) CPUExecute();                                                     // Doesn't have to loop but can.
 }
