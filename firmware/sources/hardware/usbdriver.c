@@ -55,6 +55,8 @@ static void usbProcessReport(uint8_t const *report) {
 
 void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* desc_report, uint16_t desc_len) {
  
+  CONWriteString("Hello keyboard\r");
+  
 	switch(tuh_hid_interface_protocol(dev_addr, instance)) {
 
 		case HID_ITF_PROTOCOL_KEYBOARD:
@@ -92,9 +94,10 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
 //
 // ***************************************************************************************
 
+
 void KBDInitialise(void) {
-	tusb_init();
 	for (int i = 0;i < KBD_MAX_KEYCODE;i++) lastReport[i] = 0;                  // No keys currently known
+	tusb_init();
 }
 
 // ***************************************************************************************
