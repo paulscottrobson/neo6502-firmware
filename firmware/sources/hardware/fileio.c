@@ -24,15 +24,17 @@
 void FIODirectory(void) {
 	DIR d;
 	FRESULT r = f_opendir(&d,"/");
+	char szBuffer[320];
 	if (r == FR_OK) {
 		FILINFO fi;
 		while (f_readdir(&d,&fi) == FR_OK && fi.fname[0] != '\0') {
+				sprintf(szBuffer,"%-32s ",fi.fname);
 				if (fi.fattrib & AM_DIR) {
-					CONWriteString("DIR: ");
+					strcat(szBuffer,"<DIR>");
 				} else {
-					CONWriteString("     ");
+					sprintf(szBuffer+strlen(szBuffer),"%d bytes.",(int)fi.fsize);
 				}
-				CONWriteString(fi.fname);
+				CONWriteString(szBuffer);
 				CONWriteString("\r");
 		}
 		f_closedir(&d);

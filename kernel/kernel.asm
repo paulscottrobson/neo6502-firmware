@@ -34,7 +34,36 @@ start
 	sei
 	ldx 	#$ff
 	txs
+
+
+	jsr 	KSendMessage
+	.byte 	3,1
+	jsr 	KWaitMessage
+
+set16 	.macro
+	lda 	#\2 & $FF
+	sta 	\1
+	lda 	#\2 >> 8
+	sta 	1+\1
+	.endm
+
+	.set16 	$FF04,name
+	.set16 	$FF06,$800
+	.set16 	$FF08,$8000
+
+	jsr 	KSendMessage
+	.byte 	3,3
+	jsr 	KWaitMessage
+
+	jsr 	KSendMessage
+	.byte 	3,1
+	jsr 	KWaitMessage
+
 	jmp 	WozMonStart
+
+name:	
+	.byte 	8
+	.text 	"demo.010"
 
 	.include 	"support.asm"
 	.include 	"wozmon.asm"
