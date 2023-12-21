@@ -1,6 +1,5 @@
 TODO List
 ---------
-- Reinitialise sound/Kbd events.
 - BASIC Load to/Save from arbitrary memory location.
 - Do the save/load tester code running on the emulator & firmware.
 - Rewrite the speed code.

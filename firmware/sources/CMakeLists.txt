@@ -6,10 +6,9 @@ target_sources(firmware PRIVATE main.c
     hardware/dvi_320x240x256.c hardware/usbdriver.c hardware/timer.c hardware/sound.c 
     hardware/fdebug.c hardware/fileio.c
     #
-    #       Select USB storage interface
+    #       Select Storage interface
     #
-    hardware/usb_storage_vs.c
-    #hardware/usb_storage_example.c
+    hardware/usb_storage.c
     #
     #       Select CPU driver
     #
