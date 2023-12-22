@@ -55,8 +55,6 @@ static void usbProcessReport(uint8_t const *report) {
 
 void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* desc_report, uint16_t desc_len) {
  
-  CONWriteString("Hello keyboard\r");
-  CONWriteHex(get_core_num());
 	switch(tuh_hid_interface_protocol(dev_addr, instance)) {
 
 		case HID_ITF_PROTOCOL_KEYBOARD:
