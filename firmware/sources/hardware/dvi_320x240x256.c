@@ -42,7 +42,7 @@ struct dvi_inst dvi0;                                   	                // DVI 
 
 uint16_t palette[256];                                                          // Current DVI palette (RGB565)
 uint8_t  *screenMemory;								// Graphics RAM (max 320x240)
-uint16_t buffer1[FRAME_WIDTH],buffer2[FRAME_WIDTH];                             // 2 buffers for scanline used alternatively
+uint16_t buffer1[FRAME_WIDTH+32],buffer2[FRAME_WIDTH+32];                       // 2 buffers for scanline used alternatively
 uint16_t frameCounter = 0,lineCounter = 0;                                      // Tracking line/frame counts.
 bool  isInitialised = false;							// Only start core once.
 

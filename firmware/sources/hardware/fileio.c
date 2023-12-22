@@ -35,7 +35,7 @@ void FIODirectory(void) {
 	// CONWriteString(pSD->pcName);
     // FRESULT fr = f_mount(&pSD->fatfs, pSD->pcName, 1);
 	// CONWriteString("Open\r");
-
+	
 	FRESULT r = f_opendir(&d,"/");
 	char szBuffer[320];
 	if (r == FR_OK) {
