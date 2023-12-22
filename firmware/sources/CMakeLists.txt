@@ -2,18 +2,28 @@ add_executable(firmware)
 
 pico_generate_pio_header(firmware ${CMAKE_CURRENT_LIST_DIR}/system/sm0_memory_emulation_with_clock.pio)
 
+add_definitions(-w)
+
 target_sources(firmware PRIVATE main.c 
+    #
+    #       Hardware sources
+    #
     hardware/dvi_320x240x256.c hardware/usbdriver.c hardware/timer.c hardware/sound.c 
     hardware/fdebug.c hardware/fileio.c
     #
     #       Select Storage interface
     #
-    hardware/usb_storage.c
+    #hardware/storage/usb_storage.c
+    #hardware/storage/null_storage.c
+    hardware/storage/sdcard_storage.c
     #
     #       Select CPU driver
     #
-    system/processor_pio.c
-    #system/processor_bitbang.c
+    #system/processor_pio.c
+    system/processor_bitbang.c
+    #
+    #       Common interface routines
+    #
     interface/graphics.c interface/console.c interface/keyboard.c interface/memory.c 
     interface/dispatch.c interface/maths.c
 )
@@ -41,11 +51,14 @@ target_link_libraries(firmware
     tinyusb_host
     tinyusb_device
     tinyusb_board
-    fatfs
+    #fatfs
+    FatFs_SPI
 )
 
 target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 pico_add_extra_outputs(firmware)
+
+add_subdirectory(../libraries/no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI build)
 
 add_custom_target(upload
     COMMAND openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program firmware.elf verify reset exit"

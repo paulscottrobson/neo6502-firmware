@@ -35,6 +35,7 @@ start
 	ldx 	#$ff
 	txs
 
+	jmp 	WozMonStart
 
 	jsr 	KSendMessage
 	.byte 	3,1
@@ -59,11 +60,10 @@ set16 	.macro
 	.byte 	3,1
 	jsr 	KWaitMessage
 
-	jmp 	WozMonStart
 
 name:	
 	.byte 	8
-	.text 	"demo.014"
+	.text 	"demo.015"
 
 	.include 	"support.asm"
 	.include 	"wozmon.asm"
