@@ -1,43 +1,45 @@
-/* hw_config.c
-Copyright 2021 Carl John Kugler III
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      sdcard_storage.c
+//      Author :    Carl John Kugler III
+//                  Paul Robson
+//      Date :      20th December 2023
+//      Reviewed :  No
+//      Purpose :   SDCard configuration
+//
+// ***************************************************************************************
+// ***************************************************************************************
 
-Licensed under the Apache License, Version 2.0 (the License); you may not use 
-this file except in compliance with the License. You may obtain a copy of the 
-License at
-
-   http://www.apache.org/licenses/LICENSE-2.0 
-Unless required by applicable law or agreed to in writing, software distributed 
-under the License is distributed on an AS IS BASIS, WITHOUT WARRANTIES OR 
-CONDITIONS OF ANY KIND, either express or implied. See the License for the 
-specific language governing permissions and limitations under the License.
-*/
-/*
-
-This file should be tailored to match the hardware design.
-
-There should be one element of the spi[] array for each hardware SPI used.
-
-There should be one element of the sd_cards[] array for each SD card slot.
-The name is should correspond to the FatFs "logical drive" identifier.
-(See http://elm-chan.org/fsw/ff/doc/filename.html#vol)
-The rest of the constants will depend on the type of
-socket, which SPI it is driven by, and how it is wired.
-
-*/
-
+#include "common.h"
 #include <string.h>
-//
 #include "my_debug.h"
-//
 #include "hw_config.h"
-//
-#include "ff.h" /* Obtains integer types */
-//
-#include "diskio.h" /* Declarations of disk functions */
+#include "ff.h" 
+#include "diskio.h" 
+#include "f_util.h"
+
+// SDCard requires fatfs_spi instead of fatfs in libraries.
+// and sdcard_storage enabled rather than usb_storage
+
+static bool isInitialised = false;
+
+void STOInitialise(void) {
+    if (!isInitialised) {
+        isInitialised = true;
+        sd_card_t *pSD = sd_get_by_num(0);
+        FRESULT fr = f_mount(&pSD->fatfs, pSD->pcName, 1);
+    }
+}
+
+void STOSynchronise(void) {    
+    CONWriteString("SDCard Storage\r");
+}
 
 // Hardware Configuration of SPI "objects"
 // Note: multiple SD cards can be driven by one SPI if they use different slave
 // selects.
+
 static spi_t spis[] = {  // One for each SPI.
     {
         .hw_inst = spi1,  // SPI component
@@ -50,6 +52,7 @@ static spi_t spis[] = {  // One for each SPI.
 };
 
 // Hardware Configuration of the SD Card "objects"
+
 static sd_card_t sd_cards[] = {  // One for each SD card
     {
         .pcName = "0:",   // Name used to mount device
@@ -64,9 +67,8 @@ static sd_card_t sd_cards[] = {  // One for each SD card
     }
 };
 
-
-/* ********************************************************************** */
 size_t sd_get_num() { return count_of(sd_cards); }
+
 sd_card_t *sd_get_by_num(size_t num) {
     if (num <= sd_get_num()) {
         return &sd_cards[num];
@@ -74,6 +76,7 @@ sd_card_t *sd_get_by_num(size_t num) {
         return NULL;
     }
 }
+
 size_t spi_get_num() { return count_of(spis); }
 spi_t *spi_get_by_num(size_t num) {
     if (num <= sd_get_num()) {
@@ -83,4 +86,10 @@ spi_t *spi_get_by_num(size_t num) {
     }
 }
 
-/* [] END OF FILE */
+// ***************************************************************************************
+//
+//      Date        Revision
+//      ====        ========
+//
+// ***************************************************************************************
+
