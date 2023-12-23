@@ -13,9 +13,9 @@ target_sources(firmware PRIVATE main.c
     #
     #       Select Storage interface
     #
-    hardware/storage/usb_storage.c
+    #hardware/storage/usb_storage.c
     #hardware/storage/null_storage.c
-    #hardware/storage/sdcard_storage.c
+    hardware/storage/sdcard_storage.c
     #
     #       Select CPU driver
     #
@@ -51,8 +51,8 @@ target_link_libraries(firmware
     tinyusb_host
     tinyusb_device
     tinyusb_board
-    fatfs
-    #FatFs_SPI
+    #fatfs
+    FatFs_SPI
 )
 
 target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})

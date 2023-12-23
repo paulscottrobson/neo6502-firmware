@@ -79,7 +79,7 @@ static void __not_in_flash_func(_scanline_callback)(void) {
 // ***************************************************************************************
 
 static void __not_in_flash_func(core1_main)() {
-   dvi_register_irqs_this_core(&dvi0, DMA_IRQ_0);           			// Enable IRQs
+   dvi_register_irqs_this_core(&dvi0, DMA_IRQ_1);           			// Enable IRQs
    dvi_start(&dvi0);                         					// Start DVI library
    dvi_scanbuf_main_16bpp(&dvi0);                  				// State we are using 16 bit (e.g. 565) render
 }
