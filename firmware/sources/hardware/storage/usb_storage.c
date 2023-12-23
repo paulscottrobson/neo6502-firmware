@@ -20,6 +20,18 @@ static FATFS msc_fatfs_volumes[CFG_TUH_DEVICE_MAX];
 static volatile bool msc_volume_busy[CFG_TUH_DEVICE_MAX];
 static scsi_inquiry_resp_t msc_inquiry_resp;
 
+
+void STOInitialise(void) {
+}
+
+void STOSynchronise(void) {
+    CONWriteString("USB Storage\r");
+    while (!msc_inquiry_complete) {
+        KBDSync();
+        sleep_us(1000);
+    }
+}
+
 bool msc_inquiry_complete = false;
 
 bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_data) {

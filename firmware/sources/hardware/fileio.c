@@ -14,13 +14,6 @@
 #include <inttypes.h>
 #include "ff.h"
 
-
-#include "f_util.h"
-#include "hw_config.h"
-// SDCard requires these uncommented, and fatfs_spi instead of fatfs in libraries.
-// and sdcard_storage enabled rather than usb_storage
-//
-
 // ***************************************************************************************
 //
 //									Display directory
@@ -29,8 +22,7 @@
 
 void FIODirectory(void) {
 	DIR d;
-    sd_card_t *pSD = sd_get_by_num(0);
-    FRESULT fr = f_mount(&pSD->fatfs, pSD->pcName, 1);
+	STOInitialise();
 	FRESULT r = f_opendir(&d,"/");
 	char szBuffer[320];
 	if (r == FR_OK) {
@@ -59,6 +51,7 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 	FIL file;
 	FRESULT result;
 	UINT bytesRead;
+	STOInitialise();
 	result = f_open(&file, fileName, FA_READ);
 	if (result == FR_OK) {
 		f_read(&file,cpuMemory+loadAddress,0xFFFF,&bytesRead);
@@ -77,6 +70,7 @@ uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
 	FIL file;
 	FRESULT result;
 	UINT bytesWritten;
+	STOInitialise();
 	result = f_open(&file, fileName, FA_WRITE|FA_CREATE_ALWAYS);
 	if (result == FR_OK) {
 		f_write(&file,cpuMemory+startAddress,size,&bytesWritten);

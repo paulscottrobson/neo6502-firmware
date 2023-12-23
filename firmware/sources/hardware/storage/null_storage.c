@@ -15,6 +15,12 @@
 #include "ff.h"
 #include "diskio.h"
 
+void STOInitialise(void) {
+}
+
+void STOSynchronise(void) {    
+}
+
 DSTATUS disk_status(BYTE pdrv) {
     return 0;
 }
