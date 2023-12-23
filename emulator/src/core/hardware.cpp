@@ -139,3 +139,15 @@ uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
 	return (f == NULL) ? 1 : 0;
 }
 
+// ***************************************************************************************
+//
+//								Dummy initialise & synchronise
+//
+// ***************************************************************************************
+
+void STOInitialise() {
+}
+
+void STOSynchronise() {
+	CONWriteString("Stored in 'storage' directory\r");
+}
