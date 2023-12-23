@@ -15,8 +15,8 @@
 #include "ff.h"
 
 
-// #include "f_util.h"
-// #include "hw_config.h"
+#include "f_util.h"
+#include "hw_config.h"
 // SDCard requires these uncommented, and fatfs_spi instead of fatfs in libraries.
 // and sdcard_storage enabled rather than usb_storage
 //
@@ -29,13 +29,8 @@
 
 void FIODirectory(void) {
 	DIR d;
-	// CONWriteString("Get\r");
-    // sd_card_t *pSD = sd_get_by_num(0);
-	// CONWriteString("Mount\r");
-	// CONWriteString(pSD->pcName);
-    // FRESULT fr = f_mount(&pSD->fatfs, pSD->pcName, 1);
-	// CONWriteString("Open\r");
-	
+    sd_card_t *pSD = sd_get_by_num(0);
+    FRESULT fr = f_mount(&pSD->fatfs, pSD->pcName, 1);
 	FRESULT r = f_opendir(&d,"/");
 	char szBuffer[320];
 	if (r == FR_OK) {
