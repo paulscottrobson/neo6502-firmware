@@ -11,7 +11,10 @@ target_sources(firmware PRIVATE main.c
     hardware/dvi_320x240x256.c hardware/usbdriver.c hardware/timer.c hardware/sound.c 
     hardware/fdebug.c hardware/fileio.c
     #
-    #       Select Storage interface
+    #       Select Storage interface.
+    #
+    #       For USB Flash, select usb_storage and fatfs in libraries
+    #       For SD Card, select sdcard_storage and fatfs_spi in libraries
     #
     #hardware/storage/usb_storage.c
     #hardware/storage/null_storage.c

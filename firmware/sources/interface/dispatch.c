@@ -61,8 +61,6 @@ void TIMECRITICAL(DSPSync)(void)
 //
 // ***************************************************************************************
 
-    extern bool msc_inquiry_complete;
-
 void DSPReset(void) {
     const char bootString[] = PROMPT;
     MEMInitialiseMemory();                                                      // Set up memory, load kernel ROM

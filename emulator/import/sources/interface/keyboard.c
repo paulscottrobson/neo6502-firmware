@@ -27,8 +27,8 @@ static uint8_t keyboardState[KBD_MAX_KEYCODE+1];
 static uint8_t queue[MAX_QUEUE_SIZE+1];
 static uint8_t queueSize = 0;
 
-static uint8_t currentASCII,currentKeyCode; 									// Current key pressed.
-static uint32_t nextRepeat;  													// Time of next repeat.
+static uint8_t currentASCII = 0,currentKeyCode = 0; 							// Current key pressed.
+static uint32_t nextRepeat = 9999;  											// Time of next repeat.
 
 static uint8_t KBDMapToASCII(uint8_t keyCode,uint8_t modifiers);
 static uint8_t KBDDefaultASCIIKeys(uint8_t keyCode,uint8_t isShift);
@@ -51,6 +51,7 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 	if (keyCode == 0xFF) { 														// Reset request
 		queueSize = 0; 															// Empty keyboard queue
 		for (int i = 0;i < sizeof(keyboardState);i++) keyboardState[i] = 0; 	// No keys down.
+		return;
 	}
 
 	if (keyCode != 0 && keyCode < KBD_MAX_KEYCODE) { 							// Legitimate keycode.
