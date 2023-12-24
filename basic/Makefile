@@ -16,7 +16,7 @@ else
 include ../build_env/common.make
 endif
 
-BASPROG = test.bas 
+BASPROG = test.bsc 
 RUNCMD =  $(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@800 build$(S)wedge.bin@FFFA
 
 all: build
@@ -50,7 +50,7 @@ prelim: always
 	$(PYTHON) scripts$(S)token_code.py
 	$(PYTHON) scripts$(S)errors.py
 	$(PYTHON) scripts$(S)makebuild.py >_include.inc
-	$(PYTHON) $(BINDIR)makebasic.zip build$(S)test.bas -obuild$(S)tokenised.dat
+	$(PYTHON) $(BINDIR)makebasic.zip build$(S)$(BASPROG) -obuild$(S)tokenised.dat
 
 # ***************************************************************************************
 #
