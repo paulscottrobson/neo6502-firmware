@@ -29,7 +29,9 @@ EXTRAFILES = libwinpthread-1.dll  SDL2.dll
 PYTHON = python
 TOUCH =
 PICO_SDK_PATH=<somewhere, god alone knows>
+PYTHON = c:\Python312\python.exe
 else
+PYTHON = python3
 CCOPY = cp
 CCOPYREC = cp -r
 CDEL = rm -f
@@ -57,7 +59,6 @@ CSCRIPTS = $(ROOTDIR)basic$(S)scripts
 #
 #		Current applications.
 # 
-PYTHON = python3
 ASSEMBLER = 64tass -q -b --mr65c02 -Wall
 ASMEND = 
 UPLOADER = openocd 
@@ -68,7 +69,7 @@ EMULATOR = $(BINDIR)neo$(APPSTEM)
 #		Export path to the common scripts.
 #
 ifeq ($(OS),Windows_NT)
-SET PYTHONPATH=$(CSCRIPTS)
+PYTHONPATH=%CSCRIPTS%
 else
 export PYTHONPATH=$(CSCRIPTS)
 endif

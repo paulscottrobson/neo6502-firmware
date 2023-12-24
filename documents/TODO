@@ -1,12 +1,15 @@
 TODO List
 ---------
+- Working release is dependent on USB Flash progress.
+- The peculiar LoadROM bug.
+
+Fixes/Changes/Enhancements
+--------------------------
 - BASIC Load to/Save from arbitrary memory location.
 - Do the save/load tester code running on the emulator & firmware.
 - Rewrite the speed code.
-- If works, write sample code for commands.
-- Put BASIC into a command in its own write (N)
+- Write sample code for commands.
 - First play version
-
 - Print(0) bug (space after all text only tokens)
 - Out of memory on program editing.
 - Tokenising very long decimals (bug ?)
@@ -15,14 +18,11 @@ TODO List
 - Locals / Parameters code.
 - READ/DATA/RESTORE
 - Screen editor.
-- Second play version
-
 - Assembler
 - Locale handling
 - Console colour and cursor control / positioning.
 - Coloured listing etc.
 - Function key handling
-- Third play version
 
 - Graphics system.
 	- Drawing operators
@@ -31,5 +31,3 @@ TODO List
 
 Add to doc
 ----------
-
-

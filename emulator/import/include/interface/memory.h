@@ -26,6 +26,7 @@ extern uint16_t controlPort;
 
 
 void MEMInitialiseMemory(void);
+void MEMLoadBasic(void);
 
 #endif
 
