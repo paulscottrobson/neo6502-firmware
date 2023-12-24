@@ -126,6 +126,17 @@ class Tokeniser(object):
 				digits = digits[2:]
 			return m.group(2)
 		#
+		#		Comment
+		#
+		if s[0] == "'":
+			s = s[1:].strip()
+			self.code.append(self.getTokenID("'"))
+			if s != "":
+				self.code.append(self.getTokenID("!!str"))
+				self.code.append(len(s))
+				self.code += [ord(c) for c in s]
+			return ""
+		#
 		#		Identifier or Token
 		#
 		if s[0].upper() >= "A" and s[0].upper() <= "Z":

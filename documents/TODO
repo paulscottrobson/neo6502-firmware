@@ -6,11 +6,23 @@ TODO List
 
 Fixes/Changes/Enhancements
 --------------------------
-- Tokeniser can do auto-comments, add to demos.
 - BASIC Load to/Save from arbitrary memory location.
 - Do the save/load tester code running on the emulator & firmware.
 - Write sample code for commands.
-
+	 	
+	Functions : keyboard
+					key() inkeys$() 
+	Commands :  
+			   	procedures
+			   		call/proc/endproc
+			   	conditionals
+			   		if/then and if/else/endif
+			   	loops
+				   do/exit/loop
+				   for to/downto
+				   repeat/until
+				   while/wend
+	
 - Print(0) bug (space after all text only tokens)
 - Out of memory on program editing.
 - Tokenising very long decimals (bug ?)
