@@ -2,14 +2,15 @@ TODO List
 ---------
 - Working release is dependent on USB Flash progress.
 - The peculiar LoadROM bug.
+- Current clock 5.61 Mhz
 
 Fixes/Changes/Enhancements
 --------------------------
+- Tokeniser can do auto-comments, add to demos.
 - BASIC Load to/Save from arbitrary memory location.
 - Do the save/load tester code running on the emulator & firmware.
-- Rewrite the speed code.
 - Write sample code for commands.
-- First play version
+
 - Print(0) bug (space after all text only tokens)
 - Out of memory on program editing.
 - Tokenising very long decimals (bug ?)
@@ -27,6 +28,7 @@ Fixes/Changes/Enhancements
 - Graphics system.
 	- Drawing operators
 	- Sprites and Tiles.
+
 - Audio system driver on emulator, and audio interface
 
 Add to doc
