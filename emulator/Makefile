@@ -37,11 +37,20 @@ run: always emulator
 	$(EMULATOR) 
 	
 krun: always kernel emulator
-	$(EMULATOR) $(BINDIR)kernel.bin@FC00 $(BINDIR)a1basic.bin@E000
+	$(EMULATOR) $(BINDIR)kernel.bin@FC00 
 
 emulator: prebuild $(APPNAME)
 	$(CCOPY) $(APPNAME) ..$(S)bin
-	
+
+clearobj:
+	$(CDEL) src$(S)core$(S)*.o
+	$(CDEL) framework$(S)*.o 
+	$(CDEL) import$(S)sources$(S)interface$(S)*.o
+
+windows: clearobj $(APPNAME)	
+	$(CCOPY) $(APPNAME)	 ..$(S)bin
+	$(CCOPY) SDL2.dll ..$(S)bin
+
 %.o:%.cpp
 	$(CC) $(CADDRESSES) $(CXXFLAGS) -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I framework -I include -I import$(S)include -c -o $@ $<
 

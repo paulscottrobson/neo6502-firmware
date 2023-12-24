@@ -1,0 +1,5 @@
+Additional notes
+
+1) 	to run BASIC from WozMon use the 'N' command.
+2) 	to use the SDCard make sure the NMI, RST and IRQ switches on the board are OFF on version B
+

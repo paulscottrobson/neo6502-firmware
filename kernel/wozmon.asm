@@ -79,8 +79,7 @@ WMNextProcessNoInc:
 	bcc 	WMNextProcess 					; < '.' we ignore
 	cmp 	#':' 							
 	beq 	WMSetMode
-	cmp 	#'R'
-	beq 	WMRunCode
+	jsr 	WMCommandHandler
 
 ; ***************************************************************************************
 ;
@@ -140,15 +139,6 @@ WMCurrentWriteAddress:
 WMNextProcessNoInc2:	
 	bra 	WMNextProcessNoInc
 
-; ***************************************************************************************
-;
-;								Come here to Run from current
-;
-; ***************************************************************************************
-
-WMRunCode:
- 	jmp 	(WMCurrent)
-
 ;
 ;		So either in single byte mode ($FF) or List mode ($74)
 ;
@@ -202,6 +192,28 @@ WMCheckAddressReqd:
 
 WMNewHex:
 	.word 	0
+
+; ***************************************************************************************
+;
+;										Special commands
+;
+; ***************************************************************************************
+
+WMCommandHandler:
+	cmp 	#'R' 							; R command from WozMon
+	beq 	WMRunCode
+	cmp 	#'N' 							; N runs NeoBASIC
+	beq 	WMRunBasic
+	rts
+	
+WMRunCode:
+ 	jmp 	(WMCurrent)
+
+WMRunBasic:
+	jsr 	KSendMessage  					; call "Load BASIC"
+	.byte 	1,3
+	jsr 	KWaitMessage
+	jmp 	(0)								; and start it.
 
 ; ***************************************************************************************
 ;

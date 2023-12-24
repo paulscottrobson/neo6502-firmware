@@ -180,3 +180,4 @@ demos: $(DEMOBAS)
 %.bas : %.bsc
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
 	$(CCOPY) $@ storage
+	$(CCOPY) $@ ..$(S)emulator$(S)storage

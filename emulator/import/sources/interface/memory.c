@@ -13,8 +13,6 @@
 
 #include "common.h"
 #include "data/kernel_binary.h"                                            		// Contains kernel image.
-#include "data/a1basic_binary.h"												// Contains Apple Integer BASIC
-#include "data/figforth_binary.h"  												// Contains Fig-Forth (79)
 #include "data/basic_binary.h" 													// NeoBasic
 
 #ifdef PICO
@@ -45,10 +43,19 @@ static void loadROM(const uint8_t *vROM, uint16_t startAddress, uint16_t romSize
 
 void MEMInitialiseMemory(void) {
 	loadROM(kernel_bin,KERNEL_LOAD,KERNEL_SIZE);    							// Load in the kernel
-	loadROM(a1basic_bin,A1BASIC_LOAD,A1BASIC_SIZE);
-	loadROM(figforth_bin,FIGFORTH_LOAD,FIGFORTH_SIZE);
-	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);
 	cpuMemory[DEFAULT_PORT] = 0x00;               								// Clear the default command port
+}
+
+// ***************************************************************************************
+//
+//                     			Load BASIC from Flash
+//
+// ***************************************************************************************
+
+void MEMLoadBasic(void) {
+	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  									// Copy ROM image into memory.
+	cpuMemory[0] = BASIC_LOAD & 0xFF;  											// Start with jmp (0)
+	cpuMemory[1] = BASIC_LOAD >> 8;
 }
 
 // ***************************************************************************************

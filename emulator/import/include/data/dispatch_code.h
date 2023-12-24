@@ -14,6 +14,9 @@ switch (*DCOMMAND) {
 				i1 = *DPARAMS;
 				*DPARAMS = (i1 < KBD_MAX_KEYCODE) ? KBDGetStateArray()[i1] : 0;
 				break;
+			case 3:
+				MEMLoadBasic();
+				break;
 		}
 		break;
 	case 2:

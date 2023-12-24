@@ -87,7 +87,7 @@ for l in src:
 	#
 	#		Decompose into Mnemonic cycles opcodes c-code
 	#
-	m = re.match("^\"([\w\s\#\%@]+)\"\s+(\d+)\s+([\(\)\w\:\,]+)\s+(.+)",l)
+	m = re.match('^\"([\\w\\s\\#\\%@]+)\"\\s+(\\d+)\\s+([\\(\\)\\w\\:\\,]+)\\s+(.+)',l)
 	assert m is not None,"Line "+l
 	#
 	#		Simple opcode, so 2 digits long.
@@ -98,12 +98,12 @@ for l in src:
 	#		Multiple opcodes for instruction.
 	#
 	else:
-		opcodes = re.match("^\((.*)\)$",m.group(3))
+		opcodes = re.match("^\\((.*)\\)$",m.group(3))
 		#
 		#		For each opcode, 
 		#
 		for mode in opcodes.group(1).split(","):
-			m2 = re.match("^(\w+)\:([0-9A-F]+)$",mode)							# the opcode.
+			m2 = re.match("^(\\w+)\\:([0-9A-F]+)$",mode)							# the opcode.
 			assert(m2 is not None)
 			mode = m2.group(1).lower()											# addressing mode.
 			body = m.group(4)													# code.
