@@ -10,16 +10,8 @@ General
 
 BASIC Interpreter
 -----------------
-	- BASIC Load to/Save from arbitrary memory location.
+	- BASIC Save from arbitrary memory location / length.
 	- Do the save/load tester code running on the emulator & firmware.
-	- Write sample code for commands. 	
-		Commands :  
-				   	loops
-					   do/exit/loop
-					   for to/downto
-					   repeat/until
-					   while/wend
-		
 	- Out of memory on program editing.
 	- Tokenising very long decimals (bug ?) limit to 6 digits
 	- List procedures() list proc()

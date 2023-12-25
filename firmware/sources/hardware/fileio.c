@@ -54,7 +54,7 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 	STOInitialise();
 	result = f_open(&file, fileName, FA_READ);
 	if (result == FR_OK) {
-		f_read(&file,cpuMemory+loadAddress,0xFFFF,&bytesRead);
+		f_read(&file,cpuMemory+loadAddress,0x10000-loadAddress,&bytesRead);
 		f_close(&file);
 	}
 	return (result == FR_OK) ? 0 : 1;
@@ -70,6 +70,7 @@ uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
 	FIL file;
 	FRESULT result;
 	UINT bytesWritten;
+	if (size > 0x10000-startAddress) return 2;
 	STOInitialise();
 	result = f_open(&file, fileName, FA_WRITE|FA_CREATE_ALWAYS);
 	if (result == FR_OK) {
