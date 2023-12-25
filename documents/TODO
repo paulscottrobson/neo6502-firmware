@@ -12,15 +12,8 @@ BASIC Interpreter
 -----------------
 	- BASIC Load to/Save from arbitrary memory location.
 	- Do the save/load tester code running on the emulator & firmware.
-	- Write sample code for commands.
-		 	
-		Functions : keyboard
-						key() inkeys$() 
+	- Write sample code for commands. 	
 		Commands :  
-				   	procedures
-				   		call/proc/endproc
-				   	conditionals
-				   		if/then and if/else/endif
 				   	loops
 					   do/exit/loop
 					   for to/downto
@@ -32,6 +25,7 @@ BASIC Interpreter
 	- List procedures() list proc()
 	- Event() Max() and Min() functions (demo code for event)
 	- Locals / Parameters code.
+	- Amend procedures demo code
 	- READ/DATA/RESTORE
 	- Assembler
 

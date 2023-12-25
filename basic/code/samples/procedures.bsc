@@ -1,0 +1,20 @@
+'
+'	Procedures
+'
+call do1()
+call do1()
+end
+'
+'	Procedure do1
+'
+proc do1()
+	print "In do1()"
+	call do2()
+	print "Leaving do1()"
+endproc
+'
+'	Procedure do2()
+'
+proc do2()
+	print "in do2()"
+endproc
