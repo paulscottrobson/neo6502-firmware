@@ -4,14 +4,13 @@ TODO List
 General
 -------
 - Working release is dependent on USB Flash progress.
+		SDCard should be a backup if at all possible as blocks UEXT stuff.
 - The peculiar LoadROM bug, currently worked round.
 - Current clock 5.61 Mhz, can optimise this slightly.
   (would be nice to get to F256 speed)
 
 BASIC Interpreter
 -----------------
-	- BASIC Save from arbitrary memory location / length.
-	- Do the save/load tester code running on the emulator & firmware.
 	- Out of memory on program editing.
 	- Tokenising very long decimals (bug ?) limit to 6 digits
 	- List procedures() list proc()
