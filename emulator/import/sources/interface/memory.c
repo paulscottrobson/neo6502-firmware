@@ -43,6 +43,7 @@ static void loadROM(const uint8_t *vROM, uint16_t startAddress, uint16_t romSize
 
 void MEMInitialiseMemory(void) {
 	loadROM(kernel_bin,KERNEL_LOAD,KERNEL_SIZE);    							// Load in the kernel
+	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  									// **** Temp fix ****
 	cpuMemory[DEFAULT_PORT] = 0x00;               								// Clear the default command port
 }
 
@@ -54,8 +55,8 @@ void MEMInitialiseMemory(void) {
 
 void MEMLoadBasic(void) {
 	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  									// Copy ROM image into memory.
-	cpuMemory[0] = BASIC_LOAD & 0xFF;  											// Start with jmp (0)
-	cpuMemory[1] = BASIC_LOAD >> 8;
+	cpuMemory[0x0] = BASIC_LOAD & 0xFF;  										// Start with jmp (0)
+	cpuMemory[0x1] = BASIC_LOAD >> 8;
 }
 
 // ***************************************************************************************
