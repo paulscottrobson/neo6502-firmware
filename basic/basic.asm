@@ -22,8 +22,9 @@ BASICBUILD = 0 								; 0: Installable 1: Testmode 2: Tokenise test.
 
 		.section code
 
-boot:   jmp     ColdStart
-		jmp     CheckSpeed
+boot:   jmp     ColdStart 					; $800 cold start
+		jmp     WarmStart 					; $803 warm start
+		.byte 	Program>>8,Program&$FF,0 	; $806 address of Program base (var table)
 		
 ColdStart:
 		ldy 	#_CSMsg >> 8
@@ -42,7 +43,7 @@ ColdStart:
 		jmp 	WarmStart
 
 _CSMsg:	.byte 	_CSMSgEnd-_CSMSg-1
-		.text 	13,"NeoBasic",13,13
+		.text 	13,"Welcome to NeoBasic",13,13
 _CSMSgEnd:
 		.send   code
 		.include "_include.inc"

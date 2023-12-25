@@ -53,6 +53,8 @@ _TOKDOutput:
 		dex
 		bne 	_TOKDOutput		
 _TOKDExit:
+		lda 	#'A' 						; add space if last character identifier.
+		jsr 	TOKDSpacing 				; (fixing print 0 bug)
 		rts		
 
 ; ************************************************************************************************
