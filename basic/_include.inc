@@ -23,6 +23,7 @@
 	.include "sources/arithmetic/unary/inkey.asm"
 	.include "sources/arithmetic/unary/key.asm"
 	.include "sources/arithmetic/unary/len.asm"
+	.include "sources/arithmetic/unary/minmax.asm"
 	.include "sources/arithmetic/unary/peekdeek.asm"
 	.include "sources/arithmetic/unary/simple.asm"
 	.include "sources/arithmetic/unary/str.asm"
