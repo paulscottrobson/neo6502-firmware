@@ -11,7 +11,6 @@ General
 
 BASIC Interpreter
 -----------------
-	- Event() (demo code for event)
 	- READ/DATA/RESTORE
 	- Locals / Parameters code , think about it !
 	- Amend procedures demo code

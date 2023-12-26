@@ -11,7 +11,7 @@ StandardVectorTable:
 	.word	EXPUnaryIsVal            ; $85 isval(
 	.word	UnaryInt                 ; $86 int(
 	.word	EXPUnaryTime             ; $87 time(
-	.word	Unimplemented            ; $88 event(
+	.word	EXPUnaryEvent            ; $88 event(
 	.word	UnaryInkey               ; $89 inkey$(
 	.word	EXPUnaryAsc              ; $8a asc(
 	.word	ChrUnary                 ; $8b chr$(

@@ -20,6 +20,7 @@
 	.include "sources/arithmetic/unary/asc.asm"
 	.include "sources/arithmetic/unary/chr.asm"
 	.include "sources/arithmetic/unary/dollar.asm"
+	.include "sources/arithmetic/unary/event.asm"
 	.include "sources/arithmetic/unary/inkey.asm"
 	.include "sources/arithmetic/unary/key.asm"
 	.include "sources/arithmetic/unary/len.asm"
