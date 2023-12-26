@@ -175,7 +175,11 @@ tokens: prelim
 DEMOSRC = $(shell find . -name '*.bsc')
 DEMOBAS = $(subst bsc,bas,$(DEMOSRC))
 
-demos: $(DEMOBAS)
+demos: clearstorage $(DEMOBAS)
+
+clearstorage:
+	$(CDEL) storage$(S)*.*
+	$(CDEL) ..$(S)emulator$(S)storage$(S)*.*
 
 %.bas : %.bsc
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
