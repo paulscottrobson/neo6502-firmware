@@ -24,6 +24,13 @@ Command_LIST:	;; [list]
 		stz 	CLFrom+1
 
 		lda 	(codePtr),y 				; is there a to line (e.g. LIST ,xxx)
+		cmp 	#$20 						; is it an identifier
+		bcs 	_CLListToFrom
+		jmp 	_CLListProcedure
+;
+;		List to/from
+;		
+_CLListToFrom:
 		cmp 	#KWD_COMMA
 		beq 	_CLToLine
 		cmp 	#KWD_SYS_END 				; EOL, default TO
@@ -95,6 +102,42 @@ _CLExit:
 		jmp 	WarmStart		
 _CLBreak:
 		.error_break
+;
+;		List procedure
+;		
+_CLListProcedure:
+		clc 								; identifier address in zTemp0
+		adc 	#Program >> 8
+		sta 	zTemp0+1
+		iny
+		lda 	(codePtr),y
+		sta 	zTemp0  					
+		;
+		ldy 	#4 							; check procedure
+		lda 	(zTemp0),y
+		and 	#XS_TYPEMASK
+		cmp 	#XS_ISPROC
+		beq 	_CLListOk 					; found procedure
+		.error_syntax
+_CLListOk:		
+		ldy 	#1 							; start at that line, get address
+		lda 	(zTemp0)
+		sta 	codePtr
+		lda 	(zTemp0),y
+		sta 	codePtr+1
+_CLListLoop2:
+		lda 	(codePtr) 					; end of program
+		beq 	_CLExit
+		jsr  	ListCurrentLine 			; list current line				
+		lda 	CLIndent 					; indent = 0, end of procedure
+		beq 	_CLExit
+		clc 								; advance to next line.
+		lda 	(codePtr)
+		adc 	codePtr
+		sta 	codePtr
+		bcc 	_CLListLoop2
+		inc 	codePtr+1
+		bra 	_CLListLoop2
 ;
 ;		Compare current line number to range.
 ;
