@@ -4,38 +4,38 @@ TODO List
 General
 -------
 - Working release is dependent on USB Flash progress.
-		SDCard should be a backup if at all possible as blocks UEXT stuff.
+		SDCard should be a backup if at all possible as blocks UEXT SPI usage.
 - The peculiar LoadROM bug, currently worked round.
 - Current clock 5.61 Mhz, can optimise this slightly.
-  (would be nice to get to F256 speed)
+  (would be nice to get to F256 speed of 6.29 Mhz probably out of reach)
 
 BASIC Interpreter
 -----------------
-	- Event() Max() and Min() functions (demo code for event)
+	- Event() (demo code for event)
 	- READ/DATA/RESTORE
-	- Locals / Parameters code.
+	- Locals / Parameters code , think about it !
 	- Amend procedures demo code
 	- Import Assembler
 
 Firmware
 --------
+	- Console colour and cursor control / positioning, design.
+	- Coloured listing etc.
 	- Line end tracker
 	- Screen editor.
 	- Locale handling for keyboard
-	- Console colour and cursor control / positioning.
-	- Coloured listing etc.
 	- Function key handling
-
 
 Both
 ----
 	- Graphics system.
-		- Drawing operators
+		- Palette modification.
+		- Drawing operators.
 		- Sprites and Tiles.
 
 	- Audio system driver on emulator, and audio interface
 
 Other
 -----
-	- Emulator useability
+	- Emulator useability improvements
 	- Cross development instructions

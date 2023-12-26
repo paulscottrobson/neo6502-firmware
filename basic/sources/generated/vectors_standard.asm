@@ -34,8 +34,8 @@ StandardVectorTable:
 	.word	PeekUnary                ; $9c peek(
 	.word	DeekUnary                ; $9d deek(
 	.word	EXPUnaryAlloc            ; $9e alloc(
-	.word	Unimplemented            ; $9f max(
-	.word	Unimplemented            ; $a0 min(
+	.word	EXPUnaryMax              ; $9f max(
+	.word	EXPUnaryMin              ; $a0 min(
 	.word	Unimplemented            ; $a1 
 	.word	Unimplemented            ; $a2 
 	.word	Unimplemented            ; $a3 

@@ -115,6 +115,8 @@ _CMPINoOverflow:
 		bmi 	_CMPIExit 					
 		ldy 	#$01 						; else +ve
 _CMPIExit:
+		clc 								; fix up result, non destructive.
+		.binop 	adc 				
 		tya 								; result in A
 		ply 								; restore Y
 		rts
