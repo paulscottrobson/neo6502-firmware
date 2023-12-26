@@ -11,8 +11,6 @@ General
 
 BASIC Interpreter
 -----------------
-	- Out of memory on program editing.
-	- Tokenising very long decimals (bug ?) limit to 6 digits
 	- List procedures() list proc()
 	- Event() Max() and Min() functions (demo code for event)
 	- Locals / Parameters code.
@@ -22,8 +20,9 @@ BASIC Interpreter
 
 Firmware
 --------
+	- Line end tracker
 	- Screen editor.
-	- Locale handling
+	- Locale handling for keyboard
 	- Console colour and cursor control / positioning.
 	- Coloured listing etc.
 	- Function key handling

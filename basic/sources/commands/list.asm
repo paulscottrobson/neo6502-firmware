@@ -81,9 +81,47 @@ _CLLoop:
 		jsr 	_CLCompareLine
 		cmp 	#1 							; > to then skip
 		beq 	_CLNext
-		;
-		;		Actually list the line.
-		;
+		jsr 	ListCurrentLine
+_CLNext:		
+		clc 								; advance to next line.
+		lda 	(codePtr)
+		adc 	codePtr
+		sta 	codePtr
+		bcc 	_CLNoCarry
+		inc 	codePtr+1
+_CLNoCarry:		
+		bra 	_CLLoop		
+_CLExit:
+		jmp 	WarmStart		
+_CLBreak:
+		.error_break
+;
+;		Compare current line number to range.
+;
+_CLCompareLine:
+		ldy 	#1
+		sec
+		lda 	(codePtr),y
+		sbc 	CLFrom,x
+		sta 	zTemp0
+		iny
+		lda 	(codePtr),y
+		sbc 	CLFrom+1,x
+		bcc 	_CLIsNegative
+		bne 	_CLIsPositive
+		lda 	zTemp0
+		bne 	_CLIsPositive
+		rts
+_CLIsPositive:		
+		lda 	#1
+		rts
+_CLIsNegative:
+		lda 	#255		
+		rts
+;
+;		List the current line.
+;
+ListCurrentLine:
 		ldy 	#2 							; print line #
 		lda 	(codePtr),y
 		tax
@@ -115,24 +153,15 @@ _CLSpacing:
 		jsr 	WriteCharacter
 
 		pla 								; get indent up
-		bmi 	_CLNext 				 	; if +ve add to indent
+		bmi 	_CLLExit 				 	; if +ve add to indent
 		clc
 		adc 	CLIndent
 		sta 	CLIndent
-_CLNext:
-		clc 								; advance to next line.
-		lda 	(codePtr)
-		adc 	codePtr
-		sta 	codePtr
-		bcc 	_CLNoCarry
-		inc 	codePtr+1
-_CLNoCarry:		
-		bra 	_CLLoop		
-_CLExit:
-		jmp 	WarmStart		
-_CLBreak:
-		.error_break
-
+_CLLExit:
+		rts
+;
+;		Write out A spaces
+;
 _CLASpaces:
 		cmp 	#0
 		beq 	_CLASExit
@@ -143,27 +172,6 @@ _CLASpaces:
 		dec 	a
 		bra 	_CLASpaces
 _CLASExit:
-		rts
-
-_CLCompareLine:
-		ldy 	#1
-		sec
-		lda 	(codePtr),y
-		sbc 	CLFrom,x
-		sta 	zTemp0
-		iny
-		lda 	(codePtr),y
-		sbc 	CLFrom+1,x
-		bcc 	_CLIsNegative
-		bne 	_CLIsPositive
-		lda 	zTemp0
-		bne 	_CLIsPositive
-		rts
-_CLIsPositive:		
-		lda 	#1
-		rts
-_CLIsNegative:
-		lda 	#255		
 		rts
 
 		.send code
