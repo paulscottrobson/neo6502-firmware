@@ -1,5 +1,6 @@
 '
 ' 	For loop - note it is closer to Pascal now
+'	To/DownTo replaces step. No index on next.
 '
 for i = 1 to 8:print i;" ";:next:print
 for i = 12 downto 8:print i;" ";:next:print

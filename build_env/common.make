@@ -77,6 +77,6 @@ endif
 #		Uncommenting .SILENT will shut the whole build up.
 #
 ifndef VERBOSE
-#.SILENT:
+.SILENT:
 endif
 

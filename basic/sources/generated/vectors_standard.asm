@@ -82,8 +82,8 @@ StandardVectorTable:
 	.word	Command_SN8              ; $cc :
 	.word	Command_Comment          ; $cd '
 	.word	Command_SN9              ; $ce )
-	.word	Unimplemented            ; $cf read
-	.word	Unimplemented            ; $d0 data
+	.word	Command_READ             ; $cf read
+	.word	Command_DATA             ; $d0 data
 	.word	ElseCode                 ; $d1 else
 	.word	Unimplemented            ; $d2 when
 	.word	Command_SN5              ; $d3 downto

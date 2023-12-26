@@ -30,6 +30,7 @@ errors = """
 	unknown : 	unknown procedure
 	memory : 	out of memory
 	file :		file i/o error
+	data : 		out of data
 """
 
 err = []

@@ -21,4 +21,5 @@ ErrorMessageText:
 	.text	"Unknown Procedure",0
 	.text	"Out Of Memory",0
 	.text	"File I/O Error",0
+	.text	"Out Of Data",0
 	.send code

@@ -11,10 +11,9 @@ General
 
 BASIC Interpreter
 -----------------
-	- READ/DATA/RESTORE
 	- Locals / Parameters code , think about it !
-	- Amend procedures demo code
-	- Import Assembler
+	- Amend procedures demo code accordingly.
+	- Import Assembler (from SuperBasic I think)
 
 Firmware
 --------
@@ -38,3 +37,7 @@ Other
 -----
 	- Emulator useability improvements
 	- Cross development instructions
+
+Add to Documentation
+--------------------
+	

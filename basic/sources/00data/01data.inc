@@ -132,6 +132,13 @@ tokLastCharacter: 							; last character output.
 		.fill 	1		
 tokOffset: 									; position in line.
 		.fill 	1		
+dataPtr: 									; Data equivalent of CodePtr
+		.fill 	2		
+dataPos: 									; Data position of Y
+		.fill 	1		
+dataInStatement: 							; Non zero if currently in data statement
+		.fill 	1		 					; (should be pointing at , : or EOL)
+		
 		.send storage
 
 ; ************************************************************************************************
