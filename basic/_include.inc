@@ -44,6 +44,8 @@
 	.include "sources/commands/load.asm"
 	.include "sources/commands/new.asm"
 	.include "sources/commands/pokedoke.asm"
+	.include "sources/commands/readdata.asm"
+	.include "sources/commands/restore.asm"
 	.include "sources/commands/run.asm"
 	.include "sources/commands/save.asm"
 	.include "sources/commands/stop.asm"

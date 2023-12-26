@@ -49,7 +49,7 @@ ClearCode:
 		;
 		;		Reset READ/DATA
 		;
-;		jsr 	Command_RESTORE
+		jsr 	Command_RESTORE
 		rts
 
 ; ************************************************************************************************
