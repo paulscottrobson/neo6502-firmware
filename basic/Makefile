@@ -125,22 +125,22 @@ testrun: prelim
 	$(RUNCMD)
 
 binary:
-	$(PYTHON) tests$(S)binary.py >build$(S)test.bas
+	$(PYTHON) tests$(S)binary.py >build$(S)test.bsc
 	make testrun
 brackets:	
-	$(PYTHON) tests$(S)brackets.py >build$(S)test.bas
+	$(PYTHON) tests$(S)brackets.py >build$(S)test.bsc
 	make testrun
 unary:
-	$(PYTHON) tests$(S)unary.py >build$(S)test.bas
+	$(PYTHON) tests$(S)unary.py >build$(S)test.bsc
 	make testrun
 string:
-	$(PYTHON) tests$(S)string.py >build$(S)test.bas
+	$(PYTHON) tests$(S)string.py >build$(S)test.bsc
 	make testrun
 assign:
-	$(PYTHON) tests$(S)assign.py >build$(S)test.bas
+	$(PYTHON) tests$(S)assign.py >build$(S)test.bsc
 	make testrun
 array:
-	$(PYTHON) tests$(S)array.py >build$(S)test.bas
+	$(PYTHON) tests$(S)array.py >build$(S)test.bsc
 	make testrun
 
 # ***************************************************************************************

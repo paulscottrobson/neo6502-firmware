@@ -25,6 +25,11 @@ PGMInsertLine:
 
 		jsr 	ClearResetFreeMemory 		; end of program into zTemp0
 		;
+		lda 	zTemp0+1 					; end of memory
+		adc 	#8 							; required free space
+		cmp 	#HIGHMEMORY >> 8 			; overflow
+		bcs 	_PGMIError
+		;
 		;		Point to start of program code
 		;
 		stz 	zTemp1						; copy base address of code to zTemp1
@@ -79,6 +84,8 @@ _PGMINext: 									; back one.
 _PGMINoBorrow:
 		dec 	zTemp0
 		bra 	_PGMIInsertLoop 			; do previous byte.
+_PGMIError:
+		.error_memory		
 		;
 		;		Copy new line into the created space.
 		;

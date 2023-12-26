@@ -45,6 +45,10 @@ _TDExit:
 ;		Append Nibble A.
 ;
 _TDWriteNibble:
+		ldx 	tokDecCount  				; limit to 6 digits
+		cpx 	#6
+		bcs 	_TDWNExit
+		;
 		and 	#$0f 						; mask off digit.
 		pha 								; shift bit 0 of count into carry
 		lda 	tokDecCount
@@ -61,6 +65,7 @@ _TDWriteNibble:
 		jsr 	TOKWriteA 					; output it
 		ldx 	tokLengthPos 				; increment the length
 		inc 	tokLineSize,x
+_TDWNExit:		
 		rts
 
 _TDSecondNibble:
