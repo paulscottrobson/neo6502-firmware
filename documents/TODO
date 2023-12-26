@@ -11,12 +11,11 @@ General
 
 BASIC Interpreter
 -----------------
-	- List procedures() list proc()
 	- Event() Max() and Min() functions (demo code for event)
+	- READ/DATA/RESTORE
 	- Locals / Parameters code.
 	- Amend procedures demo code
-	- READ/DATA/RESTORE
-	- Assembler
+	- Import Assembler
 
 Firmware
 --------
