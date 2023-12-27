@@ -26,7 +26,7 @@
 
 AssembleGroup1:
 		lda 	#$FF 						; flag for group 1 / mask.
-		sta 	ModeMask 					; initialise the mode mask - all for all
+		sta 	modeMask 					; initialise the mode mask - all for all
 		bra 	AsmGroup12 	
 
 		; ----------------------------------------------------------------------------------------
@@ -38,19 +38,19 @@ AssembleGroup1:
 AssembleGroup2:
 		lda 	#$00 						; flag for group 2
 AsmGroup12:
-		sta 	IsGroup1 					; save the 'group 1' flag
+		sta 	isGroup1 					; save the 'group 1' flag
 
 		pla 								; pop the return address to access the information following.
 		plx
 		jsr 	AccessParameters 			; get opcode and save as base
-		sta 	BaseOpcode
+		sta 	baseOpcode
 		;
-		lda 	IsGroup1 					; skip if group 1 as we don't have a complex mask.
+		lda 	isGroup1 					; skip if group 1 as we don't have a complex mask.
 		bne 	_AG12HaveMask
 		;
 		lda 	#2 							; if group 2 the second parameter is the mask
 		jsr 	GetParameter		 		; e.g. which modes are supported for this operand
-		sta 	ModeMask
+		sta 	modeMask
 _AG12HaveMask:		
 		jsr 	TypeAndCalculateOperand 	; get zero page type
 		;
@@ -66,7 +66,7 @@ _AG12HaveMask:
 		jsr 	PromoteToAbsolute  			; promote ZP to ABS and try that
 		jsr 	AssembleModeX
 		bcs 	_AG12Exit
-		jmp 	SyntaxError 				; can't do either, so must be wrong mode/operand.
+		.error_syntax 						; can't do either, so must be wrong mode/operand.
 _AG12Exit:	
 		rts		
 
@@ -111,12 +111,12 @@ AssembleGroup3:
 		jsr 	AssemblerWriteByte
 		jsr 	CalculateOperand 			; get a 16 bit operand
 		;
-		lda 	NSMantissa0 				; calculate the offset
+		lda 	XSNumber0 					; calculate the offset
 		sec
-		sbc 	AssemblerAddress
+		sbc 	VariableP
 		pha 								; LSB in A
-		lda 	NSMantissa1
-		sbc 	AssemblerAddress+1
+		lda 	XSNumber1
+		sbc 	VariableP+1
 		tax 								; MSB in X
 		pla
 		;
@@ -130,10 +130,10 @@ _AG3NoCarry:
 		jsr 	AssemblerWriteByte
 		cpx 	#0 							; was it in range
 		beq 	_AG3Exit
-		lda 	AssemblerControl 			; are we allowing bad values ?
+		lda 	VariableO 					; are we allowing bad values ?
 		and 	#1
 		beq 	_AG3Exit
-		jmp 	RangeError 					; no, branch is out of range
+		.error_range						; no, branch is out of range
 _AG3Exit:
 		rts		
 
@@ -157,8 +157,8 @@ AssembleGroup4:
 ; ************************************************************************************************
 
 AccessParameters:
-		sta 	ParamStart
-		stx 	ParamStart+1
+		sta 	paramStart
+		stx 	paramStart+1
 		lda 	#1
 
 ; ************************************************************************************************
@@ -170,9 +170,9 @@ AccessParameters:
 GetParameter:
 		phy
 		tay
-		lda 	ParamStart
+		lda 	paramStart
 		sta 	zTemp0		
-		lda 	ParamStart+1
+		lda 	paramStart+1
 		sta 	zTemp0+1
 		lda 	(zTemp0),y
 		ply

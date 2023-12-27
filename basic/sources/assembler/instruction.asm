@@ -23,7 +23,7 @@ AssembleModeX:
 		;
 		;		First check if the instruction is supported.
 		;
-		lda 	IsGroup1
+		lda 	isGroup1
 		beq 	_AMXGroup2
 
 		; ----------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ AssembleModeX:
 		cpx 	#AM_IMMEDIATE 			; if not immediate, we can continue.
 		bne 	_AMXHaveInfo
 		;
-		lda 	BaseOpcode 				; cannot store immediate.
+		lda 	baseOpcode 				; cannot store immediate.
 		cmp 	#$81 
 		beq 	_AMXFail
 		;
@@ -64,7 +64,7 @@ _AMXGroup2:
 		lsr 	a 						; make it 0-7.
 		lsr  	a
 		tay
-		lda 	ModeMask 				; shift the modemask left so you can check it against the requested offset
+		lda 	modeMask 				; shift the modemask left so you can check it against the requested offset
 _AMXCheckOkay:
 		asl 	a 						; shift modemask left enough times to check legitimate.
 		dey
@@ -83,23 +83,23 @@ _AMXHaveInfo:
 		cpx 	#$00 					; does it *require* an 8 bit operand
 		bpl 	_AMXAnySize 			; checking bit 7, the zero page opcode flag.
 
-		ldy 	NSMantissa1 			; fail if it is outside range, e.g. the MSB is set.
+		ldy 	XSNumber1 				; fail if it is outside range, e.g. the MSB is set.
 		bne 	_AMXFail
 		;
 _AMXAnySize:		
 		clc 							; add offset to the base opcode
-		adc 	BaseOpcode 				
+		adc 	baseOpcode 				
 _AMXOutputCode:		
 		jsr 	AssemblerWriteByte 		; write the opcode out.
 
 		cpx 	#AM_ACC 				; A mode (e.g. ASL)
 		beq 	_AMXExit
 
-		lda 	NSMantissa0 			; write LSB operand
+		lda 	XSNumber0 				; write LSB operand
 		jsr 	AssemblerWriteByte
 		cpx 	#$00 					; zeropage ?
 		bmi 	_AMXExit		
-		lda 	NSMantissa1 			; write MSB operand
+		lda 	XSNumber1 				; write MSB operand
 		jsr 	AssemblerWriteByte
 _AMXExit:		
 		ply
@@ -115,12 +115,12 @@ _AMXCheckOddities:
 		cmp 	ExtraOpcode+2,y 		; match address mode	
 		bne 	_AMXCONext
 		lda 	ExtraOpcode+0,y 		; do the base opcodes match
-		cmp 	BaseOpcode
+		cmp 	baseOpcode
 		bne 	_AMXCONext
 		;
 		cpx 	#$00 					; requires zero page ?
 		bpl 	_AMXCONotZero
-		lda 	NSMantissa1
+		lda 	XSNumber1
 		bne 	_AMXCONext
 _AMXCONotZero:		
 		lda 	ExtraOpcode+1,y 		; get new opcode

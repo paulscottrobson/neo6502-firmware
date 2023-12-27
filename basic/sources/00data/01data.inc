@@ -139,6 +139,14 @@ dataPos: 									; Data position of Y
 dataInStatement: 							; Non zero if currently in data statement
 		.fill 	1		 					; (should be pointing at , : or EOL)
 paramCount: 								; parameters in call.
+		.fill 	1	
+modeMask: 									; modes available here.
+		.fill 	1			
+isGroup1: 									; assembler group 1 flag (LDA,STA etc.)
+		.fill 	1		
+baseOpcode: 								; current base opcode.
+		.fill 	1		
+paramStart: 								; 1/2 byte parameters for each assembler opcode.
 		.fill 	1		
 		.send storage
 

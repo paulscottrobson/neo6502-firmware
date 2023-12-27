@@ -25,11 +25,6 @@ BASICBUILD = 0 								; 0: Installable 1: Testmode 2: Tokenise test.
 boot:   jmp     ColdStart 					; $800 cold start
 		jmp     WarmStart 					; $803 warm start
 		.byte 	Program>>8,Program&$FF,0 	; $806 address of Program base (var table)
-
-AssembleGroup1:
-AssembleGroup2:
-AssembleGroup3:
-AssembleGroup4:
 		
 ColdStart:
 		ldy 	#_CSMsg >> 8

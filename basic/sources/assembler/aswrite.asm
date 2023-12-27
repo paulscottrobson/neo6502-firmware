@@ -19,38 +19,38 @@
 ; ************************************************************************************************
 
 AssemblerWriteByte:		
-	pha
-	lda 	AssemblerControl 				; check printing bytes ?
-	and 	#2
-	beq 	_AWBNoPrint
-	;
-	lda		AssemblerAddress+1 				; print address
-	jsr 	PrintHex
-	lda		AssemblerAddress
-	jsr 	PrintHex
-	lda 	#' '
-	jsr 	EXTPrintCharacter
-	pla 									; print byte
-	pha
-	jsr 	PrintHex
-	lda 	#13
-	jsr 	EXTPrintCharacter
+		pha
+		lda 	VariableO 					; check printing bytes ?
+		and 	#2
+		beq 	_AWBNoPrint
+		;
+		lda		VariableP+1 				; print address
+		jsr 	PrintHex
+		lda		VariableP
+		jsr 	PrintHex
+		lda 	#' '
+		jsr 	WriteCharacter
+		pla 								; print byte
+		pha
+		jsr 	PrintHex
+		lda 	#13
+		jsr 	WriteCharacter
 _AWBNoPrint:	
-	lda		AssemblerAddress				; copy address to zTemp0
-	sta 	zTemp0
-	lda		AssemblerAddress+1
-	beq 	_AWBRange
-	sta 	zTemp0+1
-	pla 									; write byte out
-	sta 	(zTemp0)
-	inc 	AssemblerAddress 				; bump address
-	bne 	_AWBNoCarry
-	inc 	AssemblerAddress+1
+		lda		VariableP					; copy address to zTemp0
+		sta 	zTemp0
+		lda		VariableP+1
+		beq 	_AWBRange
+		sta 	zTemp0+1
+		pla 								; write byte out
+		sta 	(zTemp0)
+		inc 	VariableP 					; bump address
+		bne 	_AWBNoCarry
+		inc 	VariableP+1
 _AWBNoCarry:	
-	rts
+		rts
 	
 _AWBRange:
-	jmp 	RangeError
+		.error_range
 
 ; ************************************************************************************************
 ;
@@ -73,10 +73,9 @@ _PrintNibble:
 		adc 	#6
 _NoShift:
 		adc 	#48
-		jmp 	EXTPrintCharacter
+		jmp 	WriteCharacter
 
 	.send 		code
-
 
 ; ************************************************************************************************
 ;
