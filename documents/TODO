@@ -11,7 +11,8 @@ General
 
 BASIC Interpreter
 -----------------
-	- Convert BASIC assembler.
+	- Rewrite speed tester to use inline assembler.
+	- Update labels with different value error.
 
 Firmware
 --------

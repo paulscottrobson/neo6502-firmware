@@ -186,3 +186,7 @@ clearstorage:
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
 	$(CCOPY) $@ storage
 	$(CCOPY) $@ ..$(S)emulator$(S)storage
+
+checkasm:
+	$(ASSEMBLER) -Wno-error=implied-reg code$(S)checkasm.tass -L build/checkasm.lst -o build/asmtest.bin	
+	cmp -b storage/asmtest.inline build/asmtest.bin
