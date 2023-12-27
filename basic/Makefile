@@ -187,6 +187,21 @@ clearstorage:
 	$(CCOPY) $@ storage
 	$(CCOPY) $@ ..$(S)emulator$(S)storage
 
+# ***************************************************************************************
+#
+#				Does a common check of BASIC inline assembler vs 64 tass
+#
+# ***************************************************************************************
+
 checkasm:
 	$(ASSEMBLER) -Wno-error=implied-reg code$(S)checkasm.tass -L build/checkasm.lst -o build/asmtest.bin	
 	cmp -b storage/asmtest.inline build/asmtest.bin
+
+# ***************************************************************************************
+#
+#								Run the machine clean.
+#
+# ***************************************************************************************
+
+basemachine:
+	$(EMULATOR) #$(BINDIR)kernel.bin@FC00 build$(S)basic.bin@800 build$(S)wedge.bin@FFFA

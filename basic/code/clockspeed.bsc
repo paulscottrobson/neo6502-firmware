@@ -4,26 +4,26 @@
 '	Emulator is inaccurate because I don't add 1 for the taken branch, speed is approx
 '	on emulation.
 '
-code = alloc(32)
+p = alloc(32)
 '
 '	Basically DEY ; bne Loop ; DEX ; bne Loop ; DEC ; bne Loop
 '
-poke code,$EA
-poke code+1,$88:poke code+2,$D0:poke code+3,$FD
-poke code+4,$CA:poke code+5,$D0:poke code+6,$FA
-poke code+7,$3A:poke code+8,$D0:poke code+9,$F7
-poke code+10,$60
+.clockme
+	dey : bne clockme
+	dex : bne clockme
+	dec : bne clockme
+	rts
 '
 '	Do this many iterations with initial value of A
 '
-count = 2
+count = 5
 a = 50
 '
 '	Do code, measuring time.
 '
 x = 0:y = 0
 start = time()
-for i = 1 to count:print i:sys code:next
+for i = 1 to count:print i:sys clockme:next
 tExec = (time()-start) / 100
 '
 '	Time for each iteration of the dex/dey bit
