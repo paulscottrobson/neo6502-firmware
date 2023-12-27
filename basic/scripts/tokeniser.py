@@ -94,7 +94,19 @@ class Tokeniser(object):
 		if s[0] >= "0" and s[0] <= "9":
 			m = re.match("(\\d+)\\s*(.*)$",s)
 			self.renderConstant(int(m.group(1)))
-			return m.group(2)
+			s = m.group(2)
+			print(s)
+			if s.startswith("."):
+				m = re.match('\\.(\\d+)\\s*(.*)',s)
+				digits = ([int(x) for x in m.group(1)] + [0xF])
+				digits = digits if len(digits) % 2 == 0 else digits + [0xF]
+				self.code.append(self.getTokenID("!!dec"))
+				self.code.append(len(digits) >> 1)
+				while len(digits) > 0:
+					self.code.append(digits[0]*16+digits[1])
+					digits = digits[2:]
+				return m.group(2)
+			return s
 		#
 		#		Hexadecimal numbers also in base 64
 		#
@@ -115,16 +127,6 @@ class Tokeniser(object):
 		#
 		#		Decimals [!!dec] [length] [digits packed in BCD, ending in $F, max of 8 digits]
 		#
-		if s[0] == '.':
-			m = re.match('\\.(\\d+)\\s*(.*)',s)
-			digits = ([int(x) for x in m.group(1)] + [0xF])
-			digits = digits if len(digits) % 2 == 0 else digits + [0xF]
-			self.code.append(self.getTokenID("!!dec"))
-			self.code.append(len(digits) >> 1)
-			while len(digits) > 0:
-				self.code.append(digits[0]*16+digits[1])
-				digits = digits[2:]
-			return m.group(2)
 		#
 		#		Comment
 		#
@@ -186,10 +188,11 @@ if __name__ == "__main__":
 	tk = Tokeniser(iStore)
 	tk.test("12 300 $2A $43")
 	tk.test(' "" "Hello" ')
-	tk.test(".1 .4082 .251")
+	tk.test(".1 1.4082 4.251")
 	tk.test("gosub return rnd( left$( while")
 	tk.test("name$ a.number fre.d")
 	tk.test("case A Y$189E4-42204.1 d9j0m4")
+	tk.test(".hello ")
 #	tk.test("+")
 	iStore.dump()
 # 		identifiers

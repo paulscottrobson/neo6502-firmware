@@ -79,7 +79,7 @@ class TestProgram(object):
 			return self.variables[random.randint(0,len(self.variables)-1)]
 		elif n == 5:
 			s = self.tokenNames[random.randint(0,len(self.tokenNames)-1)]
-			if s.startswith("!!") or s == "'" or s == '$':
+			if s.startswith("!!") or s == "'" or s == '$' or s == ".":
 				s = self.createElement()
 			return s
 		else:
