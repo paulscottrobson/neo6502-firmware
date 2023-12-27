@@ -112,6 +112,7 @@ BaseTokenText:
 	.byte	$05,$4c,$4f,$43,$41,$cc       	; $ d6 LOCAL
 	.byte	$04,$43,$41,$4c,$cc           	; $ d7 CALL
 	.byte	$01,$a3                       	; $ d8 #
+	.byte	$01,$ae                       	; $ d9 .
 	.byte	$FF
 
 Shift1TokenText:
