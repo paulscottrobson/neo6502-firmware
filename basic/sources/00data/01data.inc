@@ -138,7 +138,8 @@ dataPos: 									; Data position of Y
 		.fill 	1		
 dataInStatement: 							; Non zero if currently in data statement
 		.fill 	1		 					; (should be pointing at , : or EOL)
-		
+paramCount: 								; parameters in call.
+		.fill 	1		
 		.send storage
 
 ; ************************************************************************************************
