@@ -55,8 +55,6 @@ LocaliseNextTerm:
 _LNTPushNumLoop:
 		lda		(zTemp0),y
 		jsr 	StackPushByte
-		lda 	#0
-		sta 	(zTemp0),y
 		iny
 		cpy 	#4			
 		bne 	_LNTPushNumLoop
@@ -93,10 +91,6 @@ _LNTPushStrLoop:
 _LNTStringOut:
 		plx
 		lda 	(zTemp1) 					; get the length
-		pha 								; zero the length
-		lda 	#0 
-		sta 	(zTemp1)
-		pla
 _LNTOutStringTail:		
 		jsr 	StackPushByte 				; write the length
 		lda 	#STK_LOCALS 				; output the string type

@@ -11,8 +11,6 @@ General
 
 BASIC Interpreter
 -----------------
-	- Parameters code , think about it !
-	- Amend procedures demo code accordingly for params/locals.
 	- Import Assembler (from SuperBasic I think)
 
 Firmware
@@ -40,4 +38,3 @@ Other
 
 Add to Documentation
 --------------------
-	LOCAL

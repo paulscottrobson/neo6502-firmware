@@ -90,7 +90,9 @@ _AVTRString:
 		phy
 		ldy 	XSNumber1,x 				; YA is the address of the current concreted string if any
 		lda 	XSNumber0,x
+		phx
 		jsr 	StringConcrete
+		plx
 		ply
 		rts
 

@@ -31,11 +31,29 @@ Command_CALL:	;; [call]
 		lda 	(codePtr),y
 		pha
 		iny
+;
+;		Evaluate parameters onto stack.
+;
+		stz 	paramCount
+		lda 	(codePtr),y 				; check if parameters
+		cmp 	#KWD_RPAREN
+		beq 	_CCEndCall
 
-		;
-		; 		TODO: Evaluate parameters on stack.
-		;
-		jsr 	ERRCheckRParen 				; closing )
+_CCParamLoop		
+		inc 	paramCount 					; one more parameter
+		ldx 	paramCount 					; put in that slot, e.g. param#1 => slot #1
+		jsr 	EXPEvaluateExpressionAtX 	; evaluate it
+		jsr 	DereferenceTOS 				; dereference it.
+		lda 	(codePtr),y 				; get next
+		cmp 	#KWD_RPAREN 				; ) ?
+		beq 	_CCEndCall
+		iny 								; consume
+		cmp 	#KWD_COMMA 					; get next if comma
+		beq 	_CCParamLoop
+		.error_syntax 						
+
+_CCEndCall:		
+		iny 								; consume closing parameters
 		jsr 	STKSaveCodePosition	 		; save return address onto stack
 
 		pla 								; get address of line.
@@ -55,9 +73,20 @@ Command_CALL:	;; [call]
 		lda 	(zTemp0),y
 		sta 	codePtr+1
 		ldy 	#6 							; after the identifier
-		;
-		;		TODO: Evaluate terms and save parameters there.
-		;
+		ldx 	#0  						; now start localising & copying parameters
+_CCUpdateParamLoop:		
+		cpx 	paramCount 					; done all the parameters ?
+		beq 	_CCDoneParameters
+		jsr 	LocaliseNextTerm 			; get a term into the slot.
+		jsr 	AssignValueToReference	 	; assign the parameter value to the parameter variable
+		inx 								; do the next one.
+		lda 	(codePtr),y 				; if , follows then consume it
+		cmp 	#KWD_COMMA
+		bne 	_CCUpdateParamLoop
+		iny
+		bra 	_CCUpdateParamLoop
+
+_CCDoneParameters:
 		jsr 	ERRCheckRParen 				; check right bracket and continue.
 		rts
 
