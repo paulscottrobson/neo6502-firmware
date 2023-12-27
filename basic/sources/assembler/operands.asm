@@ -26,7 +26,7 @@
 ; ************************************************************************************************
 
 TypeAndCalculateOperand:
-		.cget 								; get first character
+		lda 	(codePtr),y					; get first character
 
 		; ---------------------------------------------------------------------------------------
 		;
@@ -37,7 +37,7 @@ TypeAndCalculateOperand:
 		ldx 	#AM_ACC 					; ACC if : or EOL
 		cmp 	#KWD_COLON
 		beq 	_TACOExit
-		cmp 	#KWC_EOL
+		cmp 	#KWD_SYS_END
 		beq 	_TACOExit
 		;
 		; ---------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ TypeAndCalculateOperand:
 		;
 		dey 								; undo get of first character
 		jsr 	CalculateOperand 			; get operand
-		.cget 								; is it followed by , ?
+		lda 	(codePtr),y 				; is it followed by , ?
 		ldx 	#AM_ZEROPAGE 				; if not, try zero page (then absolute)
 		cmp 	#KWD_COMMA
 		bne 	_TACOExit
@@ -82,7 +82,7 @@ TypeAndCalculateOperand:
 		cmp 	#'Y'
 		beq 	_TACOExit
 _TACOSyntax:		
-		jmp 	SyntaxError					
+		.error_syntax
 		;
 		; ---------------------------------------------------------------------------------------
 		;
@@ -92,14 +92,14 @@ _TACOSyntax:
 
 _TACOIndirect:
 		jsr 	CalculateOperand 			; get the operand
-		.cget 								; what follows ?
+		lda 	(codePtr),y 				; what follows ?
 		cmp 	#KWD_COMMA 					; if , then it must be ,X)
 		beq 	_TACOIndX
 		;
 		; 		We have (xx) so it's either (xx) or (xx),Y
 		;
-		jsr 	CheckRightBracket  			; otherwise must be ) or ),Y
-		.cget 							
+		jsr 	ERRCheckRParen  			; otherwise must be ) or ),Y
+		lda 	(codePtr),y			
 		ldx 	#AM_IND 					
 		cmp 	#KWD_COMMA 					; if not comma then exit with (xx)
 		bne 	_TACOExit
@@ -118,7 +118,7 @@ _TACOIndX:
 		jsr 	TACOCheckXY 				; get the next one as X/Y/0
 		cmp 	#'X' 						; check X
 		bne 	_TACOSyntax
-		jsr 	CheckRightBracket			; check )
+		jsr 	ERRCheckRParen				; check )
 		ldx 	#AM_INDX
 _TACOExit:
 		rts		
@@ -133,11 +133,10 @@ CalculateOperand:
 		pha
 		phx
 		ldx 	#0 							; get 16 bit integer in Slot 0
-		jsr 	Evaluate16BitInteger
+		jsr 	EXPEvalInteger16
 		plx
 		pla
 		rts
-
 
 ; ************************************************************************************************
 ;
@@ -147,38 +146,24 @@ CalculateOperand:
 ; ************************************************************************************************
 
 TACOCheckXY:	
-		.cget  								; get next	
-		and 	#$C0 						; check it is an identifier reference.
-		cmp 	#$40
-		bne 	_TCXYFail
+		lda 	(codePtr),y  				; get next	
+		bne 	_TCXYFail 					; X and Y are $00<something>, first variable page
 		;
-		.cget 								; get variable address to zTemp
-		clc 								
-		adc 	#((VariableSpace >> 8) - $40) & $FF		
-		sta 	zTemp0+1
 		iny
-		.cget 	
+		lda 	(codePtr),y
 		iny
-		sta 	zTemp0
-		phy 								; save position
-		;
-		ldy 	#2 							; type is integer ?
-		lda 	(zTemp0),y
-		bne 	_TCXYPopFail
-		ldy 	#8 							; get first character, should have bit 7 set as also last.
-		lda 	(zTemp0),y
-		cmp 	#'X'+$80 					; should be X or Y
-		beq 	_TCXYFound		
-		cmp 	#'Y'+$80
-		beq 	_TCXYFound		
-_TCXYPopFail:
-		ply
-_TCXYFail:
+		cmp 	#VariableX & $FF
+		beq 	_TCXYFoundX
+		cmp 	#VariableY & $FF
+		beq 	_TCXYFoundY
+_TCXYFail:		
 		lda 	#0
 		rts		
-_TCXYFound:
-		ply 								; restore position
-		and 	#$7F 						; throw bit 7
+_TCXYFoundX:
+		lda 	#'X'
+		rts
+_TCXYFoundY:
+		lda 	#'Y'
 		rts
 
 		.send 	code

@@ -37,6 +37,7 @@
 	.include "sources/assembler/aswrite.asm"
 	.include "sources/assembler/instruction.asm"
 	.include "sources/assembler/label.asm"
+	.include "sources/assembler/operands.asm"
 	.include "sources/commands/assert.asm"
 	.include "sources/commands/cat.asm"
 	.include "sources/commands/clear.asm"
