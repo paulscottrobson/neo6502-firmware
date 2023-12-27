@@ -95,7 +95,6 @@ class Tokeniser(object):
 			m = re.match("(\\d+)\\s*(.*)$",s)
 			self.renderConstant(int(m.group(1)))
 			s = m.group(2)
-			print(s)
 			if s.startswith("."):
 				m = re.match('\\.(\\d+)\\s*(.*)',s)
 				digits = ([int(x) for x in m.group(1)] + [0xF])

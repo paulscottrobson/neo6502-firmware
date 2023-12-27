@@ -11,7 +11,6 @@ General
 
 BASIC Interpreter
 -----------------
-	- Rewrite speed tester to use inline assembler.
 	- Update labels with different value error.
 
 Firmware
@@ -25,6 +24,7 @@ Firmware
 
 Both
 ----
+	- Controller system.
 	- Graphics system.
 		- Palette modification.
 		- Drawing operators.
