@@ -92,5 +92,5 @@ StandardVectorTable:
 	.word	Command_LOCAL            ; $d6 local
 	.word	Command_CALL             ; $d7 call
 	.word	Unimplemented            ; $d8 #
-	.word	Command_SN6              ; $d9 .
+	.word	LabelCommand             ; $d9 .
 	.send code
