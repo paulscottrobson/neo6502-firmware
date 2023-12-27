@@ -73,9 +73,8 @@ _CCUnknown:
 ; ************************************************************************************************
 
 Command_ENDPROC:	;; [endproc]
-		; 		
-		;		TODO: Unwind locals and parameters
-		;
+		jsr		StackRemoveLocals
+_CEContinue:		
 		lda 	#STK_CALL
 		jsr 	StackCheckFrame
 		jsr 	STKLoadCodePosition 		

@@ -89,7 +89,7 @@ StandardVectorTable:
 	.word	Command_SN5              ; $d3 downto
 	.word	PokeCommand              ; $d4 poke
 	.word	DokeCommand              ; $d5 doke
-	.word	Unimplemented            ; $d6 local
+	.word	Command_LOCAL            ; $d6 local
 	.word	Command_CALL             ; $d7 call
 	.word	Unimplemented            ; $d8 #
 	.send code
