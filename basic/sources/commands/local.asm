@@ -34,43 +34,35 @@ Command_LOCAL: ;; [local]
 ;
 ; ************************************************************************************************
 
-LocaliseNextTerm:
+LocaliseNextTerm:		
 		jsr 	EvaluateTerm 				; evaluate the term
-		lda 	NSStatus,x
-		and 	#NSBIsReference 			; check it is a reference, must be a variable.
+		lda 	XSControl,x 				; check it is a reference
+		and 	#XS_ISVARIABLE
 		beq		_LNTError
 		;
-		lda 	NSMantissa0,x 				; copy address of variable to zTemp0
+		lda 	XSNumber0,x 				; copy address of variable to zTemp0
 		sta 	zTemp0
-		lda 	NSMantissa1,x
+		lda 	XSNumber1,x
 		sta  	zTemp0+1
 		;
-		lda 	NSStatus,x 					; figure out what it is.
-		and 	#NSBIsString
-		bne 	_LNTPushString
+		lda 	XSControl,x 				; figure out what it is.
+		bmi 	_LNTPushString
 		;
 		;		Push number onto BASIC stack.
 		;
 		phy
-		ldy 	#0 							; push 0 to 4 inclusive, the number values, on the stack, and zero them as you go.
+		ldy 	#0 							; push 0 to 3 inclusive, the number values, on the stack
 _LNTPushNumLoop:
 		lda		(zTemp0),y
 		jsr 	StackPushByte
-;		lda 	#0
-;		sta 	(zTemp0),y
+		lda 	#0
+		sta 	(zTemp0),y
 		iny
-		cpy 	#5			
+		cpy 	#4			
 		bne 	_LNTPushNumLoop
 		;
-		lda 	zTemp0 						; push the actual target address to write on the stack
-		jsr 	StackPushByte
-		lda 	zTemp0+1
-		jsr 	StackPushByte
-		;
 		lda 	#STK_LOCALN 				; push local-number marker.
-		jsr 	StackPushByte
-		ply
-		rts
+		bra 	_LNTPushTargetExit
 		;
 		;		Push string. Slightly different, as we push the string, then the length, but then we post the
 		;	 	address of the variable record, not the string, as this might be updated with a larger concreted
@@ -84,35 +76,46 @@ _LNTPushString:
 		ldy 	#1
 		lda 	(zTemp0),y
 		sta 	zTemp1+1				
-		ldy 	#0 							; output string
-		cmp 	#0 							; if not assigned string
-		beq 	_LNTStringOut
+		ora 	zTemp1 						; is that address zero, e.g. no value assigned
+		beq 	_LNTOutStringTail 			; output string length zero.
+
+		lda 	(zTemp1) 					; get the length
+		beq 	_LNTOutStringTail 			; if zerok, output string length zero
+
+		phx
+		tax 								; use X as a counter, Y = 1
 _LNTPushStrLoop:		
 		lda 	(zTemp1),y
-		beq 	_LNTStringOut
 		jsr 	StackPushByte
 		iny
-		bra 	_LNTPushStrLoop
+		dex
+		bne 	_LNTPushStrLoop
 _LNTStringOut:
-		tya									; output length (chars written).
-		jsr 	StackPushByte
+		plx
+		lda 	(zTemp1) 					; get the length
+		pha 								; zero the length
+		lda 	#0 
+		sta 	(zTemp1)
+		pla
+_LNTOutStringTail:		
+		jsr 	StackPushByte 				; write the length
+		lda 	#STK_LOCALS 				; output the string type
 		;
-;		lda 	#0 							; clear original string (currently disabled).
-;		sta 	(zTemp1)
-		;
-		lda 	NSMantissa0,x 				; output address of the string record *not* the string itself
+_LNTPushTargetExit:
+		pha 								; save the end marker		
+		lda 	XSNumber0,x 				; output address of the string record *not* the string itself
 		jsr 	StackPushByte
-		lda 	NSMantissa1,x
+		lda 	XSNumber1,x
 		jsr 	StackPushByte
 
-		lda 	#STK_LOCALS 				; push local-string marker.
+		pla 								; output end marker.
 		jsr 	StackPushByte
 
 		ply
 		rts
 
 _LNTError:
-		jmp 	SyntaxError
+		.error_syntax
 
 ; ************************************************************************************************
 ;
@@ -132,7 +135,7 @@ LocalPopValue:
 		jsr 	StackPopByte
 		sta 	zTemp0
 		phy
-		ldy 	#4 							; copy back
+		ldy 	#3 							; copy back
 _LPVNumberCopy:
 		jsr 	StackPopByte
 		sta 	(zTemp0),y
@@ -145,38 +148,42 @@ _LPVNumberCopy:
 		;
 _LPVString:
 		;
-		; 	CAN POP NULL STRING HERE.
-		;
 		jsr 	StackPopByte 				; address of record copied to zTemp0
 		sta 	zTemp0+1
 		jsr 	StackPopByte
-		sta 	zTemp0
+		sta 	zTemp0		
 		;
-		phy
+		phx 								; use X as a counter
+		phy 								; use Y as position
 		;
 		lda 	(zTemp0) 					; address to write string to copied to zTemp1
 		sta 	zTemp1
 		ldy 	#1
 		lda 	(zTemp0),y
 		sta 	zTemp1+1
-		;
-		jsr 	StackPopByte 				; # chars to get => y
-		tay		
 
-		lda 	zTemp1+1 					; if no target (e.g. was "" originally) exit
-		beq 	_LPVStringCopied
+		ora 	zTemp1 						; if uninitialised, leave it like that
+		beq 	_LPVUninitialised
 
-		lda 	#0 							; NULL on end
-		sta 	(zTemp1),y
+		jsr 	StackPopByte 				; # chars to get => y		
+		sta 	(zTemp1) 					; write in length byte.
+		cmp 	#0
+		beq 	_LPVStringCopied 			; we're done if zero.
+		tay 								; use as counter/pos
+
 _LPVStringCopy: 							; copy string out to target address (zTemp1)
-		dey
-		bmi 	_LPVStringCopied		
 		jsr 	StackPopByte
 		sta 	(zTemp1),y
-		bra 	_LPVStringCopy
+		dey
+		bne 	_LPVStringCopy
+		bra 	_LPVStringCopied
+
+_LPVUninitialised:
+		jsr 	StackPopByte 				; throw the length.		
+
 _LPVStringCopied:
-		;
-		plx
+		ply 								; restore X & Y
+		plx		
 		rts		
 
 		.send code

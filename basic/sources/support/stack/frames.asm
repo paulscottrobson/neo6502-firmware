@@ -41,7 +41,22 @@ _SONoBorrow:
 	
 _SOMemory:
 		.error_stack
+
+; ************************************************************************************************
+;
+;										Remove Locals
+;
+; ************************************************************************************************
 			
+StackRemoveLocals:
+		lda 	(basicStack) 				; locals to unstack ?
+		cmp 	#STK_LOCALINFO
+		bcs 	_SRLExit
+		jsr 	LocalPopValue
+		bra 	StackRemoveLocals
+_SRLExit:
+		rts		
+
 ; ************************************************************************************************
 ;
 ;										Close a frame

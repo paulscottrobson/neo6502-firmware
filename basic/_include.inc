@@ -42,6 +42,7 @@
 	.include "sources/commands/let.asm"
 	.include "sources/commands/list.asm"
 	.include "sources/commands/load.asm"
+	.include "sources/commands/local.asm"
 	.include "sources/commands/new.asm"
 	.include "sources/commands/pokedoke.asm"
 	.include "sources/commands/readdata.asm"
