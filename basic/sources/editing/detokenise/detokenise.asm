@@ -135,6 +135,21 @@ TOKDSpaceLastAlpha:
 TOKDSExit:
 		rts		
 
+; ************************************************************************************************
+;
+;											Colour Scheme
+;
+; ************************************************************************************************
+
+TOK_Colour_Scheme:
+		.byte 	COL_WHITE 					; +0 comment
+		.byte 	COL_YELLOW 					; +1 keyword
+		.byte 	COL_ORANGE 					; +2 identifier
+		.byte 	COL_CYAN 					; +3 constants
+		.byte 	COL_PINK 					; +4 string
+		.byte 	COL_GREEN 					; +5 punctuation
+		.byte 	COL_RED 					; +6 line number
+		
 		.send code
 		
 ; ************************************************************************************************

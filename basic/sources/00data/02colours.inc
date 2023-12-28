@@ -1,64 +1,38 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		label.asm
-;		Purpose:	Handle assembler labels
-;		Created:	27th December 2023
-;		Reviewed: 	No
+;		Name:		02colours.inc
+;		Purpose:	Default Colours
+;		Created:	28th Decmber 2023
+;		Reviewed:	No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
 ; ************************************************************************************************
 
-		.section 	code
-
 ; ************************************************************************************************
 ;
-;											Define a label
+;											Colours
 ;
 ; ************************************************************************************************
 
-LabelCommand: ;; [.]
-		ldx 	#0 							; get a term
-		jsr 	EvaluateTerm 				
-		lda 	XSControl 					; needs to be an integer reference.
-		cmp 	#XS_ISVARIABLE
-		bne 	_ALType 					; otherwise typing error
+COL_BLACK = 0
+COL_RED = 1
+COL_GREEN = 2
+COL_YELLOW = 3
+COL_BLUE = 4
+COL_MAGENTA = 5
+COL_CYAN = 6
+COL_WHITE = 7
+COL_ALT_BLACK = 8
+COL_DARK_GREY = 9
+COL_DARK_GREEN = 10
+COL_ORANGE = 11
+COL_DARK_ORANGE = 12
+COL_BROWN = 13
+COL_PINK = 14
+COL_LIGHT_GREY = 15
 
-		lda 	XSNumber0,x 				; copy reference address to zTemp0
-		sta 	zTemp0 						; (e.g. where we store the address)
-		lda 	XSNumber1,x
-		sta 	zTemp0+1
-
-		phy 								; copy address in (64k)
-
-		ldy 	#1 							; if the value is zero, we can write it.
-		lda 	(zTemp0)
-		ora 	(zTemp0),y
-		beq 	_ALSetValue
-
-		lda 	(zTemp0) 					; otherwise check it doesn't change
-		cmp 	VariableP+0
-		bne 	_ALError
-		lda 	(zTemp0),y
-		cmp 	VariableP+1
-		beq 	_ALExit
-_ALError:
-		.error_label		
-
-_ALSetValue
-		lda	 	VariableP+0
-		sta 	(zTemp0)
-		lda	 	VariableP+1
-		sta 	(zTemp0),y
-_ALExit:		
-		ply
-		rts
-
-_ALType:
-		.error_type
-
-		.send 	code
 
 ; ************************************************************************************************
 ;
@@ -70,3 +44,4 @@ _ALType:
 ;		==== 			=====
 ;
 ; ************************************************************************************************
+

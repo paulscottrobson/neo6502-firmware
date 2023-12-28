@@ -5,25 +5,22 @@ General
 -------
 - Working release is dependent on USB Flash progress.
 		SDCard should be a backup if at all possible as blocks UEXT SPI usage.
-- The peculiar LoadROM bug, currently worked round.
+- The peculiar LoadROM bug, currently worked round. Now resets on reload
+		so now only loaded at boot.
 - Current clock 5.61 Mhz, can optimise this slightly.
   (would be nice to get to F256 speed of 6.29 Mhz probably out of reach)
 
-BASIC Interpreter
------------------
-	- Update labels with different value error.
-
 Firmware
 --------
-	- Console colour and cursor control / positioning, design.
 	- Coloured listing etc.
-	- Line end tracker
+	- Line end tracker mark lines which are continuations.
 	- Screen editor.
 	- Locale handling for keyboard
 	- Function key handling
 
 Both
 ----
+	- Add VDU command.
 	- Controller system.
 	- Graphics system.
 		- Palette modification.

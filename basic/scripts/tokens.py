@@ -113,7 +113,7 @@ class TokenSet(object):
 			!!END 	!!SH1	!!SH2	!!DEC 	TO 		LET 	PRINT	INPUT	
 			SYS 	EXIT	, 		; 		: 		' 		)		READ 	
 			DATA 	ELSE	WHEN	DOWNTO 	POKE	DOKE 	LOCAL	CALL
-			# 		.
+			# 		. 		VDU
 			""")
 		#
 		#		Keyword tokens (minor)

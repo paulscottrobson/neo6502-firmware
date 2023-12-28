@@ -9,11 +9,6 @@ pushd firmware/libraries
 git submodule update --init -- fatfs PicoDVI tinyusb
 popd
 
-
-#6502 software
-make -C software/apple1-basic
-make -C software/fig-forth
-
 #kernel
 make -C kernel
 

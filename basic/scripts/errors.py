@@ -31,6 +31,7 @@ errors = """
 	memory : 	out of memory
 	file :		file i/o error
 	data : 		out of data
+	label : 	label has changed value
 """
 
 err = []

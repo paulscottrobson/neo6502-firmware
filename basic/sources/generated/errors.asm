@@ -22,4 +22,5 @@ ErrorMessageText:
 	.text	"Out Of Memory",0
 	.text	"File I/O Error",0
 	.text	"Out Of Data",0
+	.text	"Label Has Changed Value",0
 	.send code
