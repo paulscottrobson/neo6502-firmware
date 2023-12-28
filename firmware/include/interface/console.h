@@ -19,6 +19,7 @@ void CONInitialise(struct GraphicsMode *gMode);
 void CONWrite(int c);
 void CONWriteHex(uint16_t h);	
 void CONWriteString(char *s);
+void CONGetScreenLine(uint16_t addr);
 
 #define CONTROL(c) 	((c) & 0x1F)
 

@@ -116,7 +116,8 @@ KWaitMessage1:
 ; ***************************************************************************************
 
 KReadLine:
-
+		phx 								; save target address
+		phy
 _KRLLoop:
 		jsr 	KReadCharacter 				; read and echo character
 		cmp 	#13 						; exit if CR pressed
@@ -124,6 +125,11 @@ _KRLLoop:
 		jsr 	KWriteCharacter
 		bra 	_KRLLoop
 _KRLExit:
-		; TODO: Move Cursor to end of current command. 
-		; TODO: Extract text as far back as possible and space-strip it (?)
+		ply
+		plx
+		stx 	DParameters 				; where the string goes.
+		sty 	DParameters+1
+		jsr 	KSendMessage 				; send the 'get line' message.
+		.byte 	2,3
+		jsr 	KWaitMessage
 		rts				

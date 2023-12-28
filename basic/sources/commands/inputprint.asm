@@ -167,7 +167,7 @@ _InputLoop:
 		cmp 	#32
 		bcc 	_InputLoop
 		ldx 	inputBuffer					; new character
-		cpx 	#MAXLINESIZE 				; too many ?
+		cpx 	#80 						; too many ?
 		beq 	_InputLoop
 		sta 	inputBuffer+1,x 			; add and echo
 		inc 	inputBuffer		

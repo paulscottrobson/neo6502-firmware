@@ -197,6 +197,35 @@ void CONWrite(int c) {
 
 // ***************************************************************************************
 //
+//					Load screen line from current cursor position
+//
+// ***************************************************************************************
+
+void CONGetScreenLine(uint16_t addr) {
+	while (graphMode->isExtLine[graphMode->yCursor]) {  						// Find the bottom line.
+		graphMode->yCursor++;
+	}
+	int start = graphMode->yCursor;  											// Figure out where to start.
+	while (start > 0 && graphMode->isExtLine[start-1]) start--;
+
+	int bufferSize = 0;
+	for (int line = start;line <= graphMode->yCursor;line++) { 					// Input into buffer.
+		for (int x = 0;x < graphMode->xCSize;x++) {
+			if (bufferSize < 255) {
+				int ch = graphMode->consoleMemory[x+line*MAXCONSOLEWIDTH];
+				ch = (ch < ' ') ? ' ' : ch;
+				cpuMemory[addr + bufferSize + 1] = ch;
+				bufferSize++;
+			}
+		}
+	}
+	while (bufferSize > 0 && cpuMemory[addr+bufferSize] == ' ') bufferSize--;  	// Strip trailing spaces.
+	cpuMemory[addr] = bufferSize;
+	CONWrite(CC_ENTER); 														// Start of next line
+}
+
+// ***************************************************************************************
+//
 //								Rubbish debugging tools.
 //
 // ***************************************************************************************

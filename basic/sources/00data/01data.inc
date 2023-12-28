@@ -23,8 +23,6 @@ VariableP = Program+16
 VariableX = Program+23
 VariableY = Program+30
 
-MAXLINESIZE = 128
-
 ; ************************************************************************************************
 ;	
 ;											Stack
@@ -106,7 +104,7 @@ tempBuffer: 								; generic buffer.
 inputPos: 									; tokenising position in input buffer
 		.fill 	1
 inputBuffer: 								; input buffer / token input buffer.
-		.fill 	MAXLINESIZE+1	
+		.fill 	256
 
 tokLineSize: 								; offset to end of line
 		.fill 	1
