@@ -19,6 +19,8 @@
 ; ************************************************************************************************
 
 TOKDString:
+		lda 	#4 							; string.
+		jsr 	DTKColour	
 		lda 	#'"' 						; open quote
 		jsr 	TOKDOutput
 		jsr 	TOKDGet 					; string length

@@ -32,6 +32,8 @@ TOKDInteger:
 		ldy 	#1 							; check seperation
 		lda 	(zTemp0),y		
 		jsr 	TOKDSpacing
+		lda 	#3
+		jsr 	DTKColour	
 _TOKDPrint:									; print the number
 		lda 	(zTemp0),y
 		iny

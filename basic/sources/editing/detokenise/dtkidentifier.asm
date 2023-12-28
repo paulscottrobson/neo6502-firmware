@@ -28,13 +28,20 @@ TOKDIdentifier:
 		lda 	(zTemp0),y 					; check we need spacing.
 		and 	#$7F
 		jsr 	TOKDSpacing 				; do we need space before this.
-
+		lda 	#2
+		jsr 	DTKColour
 _TOKDIOut:
 		lda 	(zTemp0),y 					; get character
 		iny
 		pha 								; save it
 		and 	#$7F 						; strip MSB
 		jsr 	TOKToLower 					; make lower case.
+		cmp		#"(" 						; change colour on (
+		bne 	_TOKDINotBracket
+		lda 	#5
+		jsr 	DTKColour
+		lda 	#"("
+_TOKDINotBracket:		
 		jsr 	TOKDOutput 					; output it.
 		pla
 		bpl 	_TOKDIOut 					; output the whole character.

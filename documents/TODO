@@ -12,15 +12,12 @@ General
 
 Firmware
 --------
-	- Coloured listing etc.
-	- Line end tracker mark lines which are continuations.
 	- Screen editor.
 	- Locale handling for keyboard
 	- Function key handling
 
 Both
 ----
-	- Add VDU command.
 	- Controller system.
 	- Graphics system.
 		- Palette modification.

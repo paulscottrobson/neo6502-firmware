@@ -165,6 +165,8 @@ _CLIsNegative:
 ;		List the current line.
 ;
 ListCurrentLine:
+		lda 	#6 							; colour line #
+		jsr 	DTKColour
 		ldy 	#2 							; print line #
 		lda 	(codePtr),y
 		tax

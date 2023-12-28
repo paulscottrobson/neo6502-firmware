@@ -43,11 +43,32 @@ _TOKDFound:
 		ldy 	#1 							; output the token.
 		lda 	(zTemp0),y 					; check spacing first character
 		and 	#$7F
+		pha
 		jsr 	TOKDSpacing 				; do we need space before this.
+		pla
+		cmp 	#"'" 						; is it quote ?
+		beq 	_TOKDIsComment
+		jsr 	TOKIsAlpha 					; is it an alpha token ?
+		bcc 	_TOKDPunctuation
+		lda 	#1
+		bra 	_TOKDSetColour
+_TOKDIsComment:
+		lda 	#0		
+		bra 	_TOKDSetColour
+_TOKDPunctuation:
+		lda 	#5
+_TOKDSetColour:	
+		jsr 	DTKColour	
 _TOKDOutput:
 		lda 	(zTemp0),y 					; output them in lower case
 		and 	#$7F
 		jsr 	TOKToLower
+		cmp		#"(" 						; change colour on (
+		bne 	_TOKDNotBracket
+		lda 	#5
+		jsr 	DTKColour
+		lda 	#"("
+_TOKDNotBracket:		
 		jsr 	TOKDOutput
 		iny
 		dex
@@ -71,7 +92,6 @@ _TOKDExit:
 ;
 ;		Date			Notes
 ;		==== 			=====
-;		28/06/23 		Support shifted tokens.
 ;
 ; ************************************************************************************************
 

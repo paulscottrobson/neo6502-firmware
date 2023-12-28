@@ -52,6 +52,9 @@ static void CONClearScreen(void) {
 		memset(graphMode->graphicsMemory,graphMode->backCol,MAXGRAPHICSMEMORY); // Erase graphics screen to black
 	}
 	memset(graphMode->consoleMemory,' ',MAXCONSOLEMEMORY); 						// Erase character display to spaces.
+	for (int y = 0;y < graphMode->yCSize;y++) {  								// No extended lines.
+		graphMode->isExtLine[y] = 0;
+	}
 }
 
 // ***************************************************************************************
@@ -87,6 +90,10 @@ void CONScrollUp(void) {
 		memset(graphMode->graphicsMemory + (graphMode->yCSize-1) * graphMode->fontHeight * 320,
 			   graphMode->backCol, graphMode->fontHeight * 320);		
 	}		
+	for (int y = 0;y < graphMode->yCSize;y++) {  								// Scroll extended line.
+		graphMode->isExtLine[y] = graphMode->isExtLine[y+1];
+	}
+	graphMode->isExtLine[graphMode->yCSize-1] = 0;
 }
 
 // ***************************************************************************************
@@ -154,6 +161,7 @@ void CONWrite(int c) {
 			CONClearScreen();break;
 
 		case CC_ENTER: 	 														// M/13 carriage return.
+			graphMode->isExtLine[graphMode->yCursor] = 0;
 			graphMode->xCursor = 0;CONWrite(CC_LF);break;
 
 		case CC_HOME: 															// T/20 home cursor.		
@@ -170,7 +178,10 @@ void CONWrite(int c) {
 			if (c >= ' ' && c < 127) {  										// 32-126 output a character.
 				CONDrawCharacter(graphMode->xCursor,graphMode->yCursor,c,graphMode->foreCol,graphMode->backCol);
 				graphMode->xCursor++;
-				if (graphMode->xCursor == graphMode->xCSize) CONWrite(CC_ENTER);
+				if (graphMode->xCursor == graphMode->xCSize) {  				// Char at EOL mark extended.
+					graphMode->isExtLine[graphMode->yCursor] = 1;
+					graphMode->xCursor = 0;CONWrite(CC_LF);
+				}
 
 			} else {
 				if (c >= 0x80 && c < 0x90) graphMode->foreCol = c & 0x0F;
