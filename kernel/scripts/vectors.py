@@ -11,6 +11,7 @@
 # ***************************************************************************************
 
 vectors = [
+		"KReadLine",
 		"KReadCharacter",
 		"KWriteCharacter",
 		"KWaitMessage",

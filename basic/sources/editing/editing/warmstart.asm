@@ -21,7 +21,13 @@
 WarmStart:
 		lda 	#COL_GREEN+$80 				; set display colour.
 		jsr 	WriteCharacter
-		jsr 	InputLine 					; input string to buffer
+
+		ldy 	#inputBuffer >> 8 			; address of input buffer
+		ldx 	#inputBuffer & $FF
+
+		jsr 	ReadLine 					; read using screen editor
+;		jsr 	InputLine 					; input string to buffer direct typing (ignores YX)
+
 		stz 	ControlStatus 				; clear break flag.
 		jsr 	TOKTokenise 				; tokenise it.
 		lda 	tokLineNumber 				; any line number ? if not, execute it.

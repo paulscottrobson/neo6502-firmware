@@ -95,7 +95,10 @@ run:build
 #
 # ***************************************************************************************
 
-import:
+kernel:
+	make -C ..$(S)kernel
+
+import: kernel
 	make -C ..$(S)emulator import
 	make -C ..$(S)emulator
 
@@ -105,7 +108,7 @@ emulator:
 firmware:
 	make -C ..$(S)firmware
 	
-fi : firmware import
+fik : kernel firmware import
 	
 always:
 
