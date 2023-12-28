@@ -21,6 +21,8 @@
 TOKDHexadecimal:
 		lda 	#'A' 						; spacing if identifier because of $ double usage
 		jsr 	TOKDSpacing
+		lda 	#3 							; colour
+		jsr 	DTKColour	
 		lda 	#'$' 						; $
 		jsr 	TOKDOutput
 		ldy 	TOKOffset 					; get start of the number into Y 

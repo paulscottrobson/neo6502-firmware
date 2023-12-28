@@ -99,6 +99,9 @@ import:
 	make -C ..$(S)emulator import
 	make -C ..$(S)emulator
 
+emulator:
+	make -C ..$(S)emulator
+
 firmware:
 	make -C ..$(S)firmware
 	

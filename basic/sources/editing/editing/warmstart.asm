@@ -19,6 +19,8 @@
 ; ************************************************************************************************
 
 WarmStart:
+		lda 	#COL_GREEN+$80 				; set display colour.
+		jsr 	WriteCharacter
 		jsr 	InputLine 					; input string to buffer
 		stz 	ControlStatus 				; clear break flag.
 		jsr 	TOKTokenise 				; tokenise it.

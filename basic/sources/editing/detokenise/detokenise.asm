@@ -141,12 +141,21 @@ TOKDSExit:
 ;
 ; ************************************************************************************************
 
+DTKColour:
+		phx
+		tax
+		lda 	TOK_Colour_Scheme,x
+		ora 	#$80
+		jsr 	WriteCharacter
+		plx
+		rts
+
 TOK_Colour_Scheme:
 		.byte 	COL_WHITE 					; +0 comment
-		.byte 	COL_YELLOW 					; +1 keyword
-		.byte 	COL_ORANGE 					; +2 identifier
-		.byte 	COL_CYAN 					; +3 constants
-		.byte 	COL_PINK 					; +4 string
+		.byte 	COL_CYAN 					; +1 keyword
+		.byte 	COL_YELLOW 					; +2 identifier
+		.byte 	COL_ORANGE 					; +3 constants
+		.byte 	COL_WHITE 					; +4 string
 		.byte 	COL_GREEN 					; +5 punctuation
 		.byte 	COL_RED 					; +6 line number
 		
