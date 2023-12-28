@@ -119,6 +119,16 @@ void CONWrite(int c) {
 	
 	switch (c) {
 
+		case CC_LEFT:															// A/1 left
+			if (graphMode->xCursor-- == 0) 
+				graphMode->xCursor = graphMode->xCSize-1;
+			break;
+
+		case CC_RIGHT:															// D/4 right
+			if (++graphMode->xCursor == graphMode->xCSize) 
+				graphMode->xCursor = 0;
+			break;
+
 		case CC_BACKSPACE: 														// H/8 backspace
 			if (graphMode->xCursor > 0) {
 				graphMode->xCursor--;
@@ -149,6 +159,10 @@ void CONWrite(int c) {
 		case CC_HOME: 															// T/20 home cursor.		
 			graphMode->xCursor = graphMode->yCursor = 0;break;
 
+		case CC_UP:																// W/22 up cursor
+			if (graphMode->yCursor > 0) graphMode->yCursor--;
+			break;
+
 		case CC_REVERSE:  														// X/24 reverse character at cursor
 			CONReverseCursorBlock();break;
 
@@ -159,7 +173,8 @@ void CONWrite(int c) {
 				if (graphMode->xCursor == graphMode->xCSize) CONWrite(CC_ENTER);
 
 			} else {
-
+				if (c >= 0x80 && c < 0x90) graphMode->foreCol = c & 0x0F;
+				if (c >= 0x90 && c < 0xA0) graphMode->backCol = c & 0x0F;
 			}
 	}
 }

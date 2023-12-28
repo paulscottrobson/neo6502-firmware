@@ -54,7 +54,7 @@ void MEMInitialiseMemory(void) {
 // ***************************************************************************************
 
 void MEMLoadBasic(void) {
-	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  									// Copy ROM image into memory.
+	//loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  								// Copy ROM image into memory crashes
 	cpuMemory[0x0] = BASIC_LOAD & 0xFF;  										// Start with jmp (0)
 	cpuMemory[0x1] = BASIC_LOAD >> 8;
 }

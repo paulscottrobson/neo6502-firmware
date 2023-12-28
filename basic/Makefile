@@ -54,7 +54,6 @@ prelim: always
 	$(PYTHON) $(BINDIR)makebasic.zip build$(S)$(BASPROG) -obuild$(S)tokenised.dat
 
 # ***************************************************************************************
-#
 #			Build the 'wedge' that boots straight into BASIC by fixing RST vector
 #
 # ***************************************************************************************

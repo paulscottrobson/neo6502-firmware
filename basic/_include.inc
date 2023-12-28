@@ -3,6 +3,7 @@
 ;
 	.include "sources/00data/00data_config.inc"
 	.include "sources/00data/01data.inc"
+	.include "sources/00data/02colours.inc"
 	.include "sources/arithmetic/binary/binary.inc"
 	.include "sources/assembler/constants.inc"
 	.include "sources/generated/errors.inc"
