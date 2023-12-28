@@ -145,7 +145,7 @@ void CONWrite(int c) {
 
 		case CC_TAB:  															// I/9 Tab
 			do {
-				CONWrite(' ');
+				CONWrite(CC_RIGHT);
 			} while ((graphMode->xCursor % 8) != 0);
 			break;
 			
@@ -164,11 +164,16 @@ void CONWrite(int c) {
 			graphMode->isExtLine[graphMode->yCursor] = 0;
 			graphMode->xCursor = 0;CONWrite(CC_LF);break;
 
+		case CC_DOWN: 															// S/19 down
+			graphMode->yCursor = (graphMode->yCursor+1) % graphMode->yCSize;
+			break;
+
 		case CC_HOME: 															// T/20 home cursor.		
-			graphMode->xCursor = graphMode->yCursor = 0;break;
+			graphMode->xCursor = graphMode->yCursor = 0;
+			break;
 
 		case CC_UP:																// W/22 up cursor
-			if (graphMode->yCursor > 0) graphMode->yCursor--;
+			graphMode->yCursor = (graphMode->yCursor+graphMode->yCSize - 1) % graphMode->yCSize;
 			break;
 
 		case CC_REVERSE:  														// X/24 reverse character at cursor

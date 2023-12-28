@@ -12,7 +12,8 @@ General
 
 Firmware
 --------
-	- Screen editor.
+	- Screen editor
+			- complete position / extraction code.
 	- Locale handling for keyboard
 	- Function key handling
 

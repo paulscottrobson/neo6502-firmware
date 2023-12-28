@@ -108,3 +108,22 @@ KWaitMessage1:
 		bne 	KWaitMessage1
 		pla
 		rts
+
+; ***************************************************************************************
+;
+;									Screen Editor input
+;
+; ***************************************************************************************
+
+KReadLine:
+
+_KRLLoop:
+		jsr 	KReadCharacter 				; read and echo character
+		cmp 	#13 						; exit if CR pressed
+		beq 	_KRLExit
+		jsr 	KWriteCharacter
+		bra 	_KRLLoop
+_KRLExit:
+		; TODO: Move Cursor to end of current command. 
+		; TODO: Extract text as far back as possible and space-strip it (?)
+		rts				

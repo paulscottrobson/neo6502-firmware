@@ -1,4 +1,5 @@
 ControlPort = $ff00
+ReadLine = $ffeb
 ReadCharacter = $ffee
 WriteCharacter = $fff1
 WaitMessage = $fff4
