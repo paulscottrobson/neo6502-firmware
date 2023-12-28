@@ -4,7 +4,7 @@ TODO List
 General
 -------
 - Working release is dependent on USB Flash progress.
-		SDCard should be a backup if at all possible as blocks UEXT SPI usage.
+		SDCard should be a backup if at all possible as can block UEXT SPI usage.
 - The peculiar LoadROM bug, currently worked round. Now resets on reload
 		so now only loaded at boot.
 - Current clock 5.61 Mhz, can optimise this slightly.
@@ -12,8 +12,6 @@ General
 
 Firmware
 --------
-	- Screen editor
-			- complete position / extraction code.
 	- Locale handling for keyboard
 	- Function key handling
 
@@ -34,3 +32,4 @@ Other
 
 Add to Documentation
 --------------------
+	- the API documentation which is very out of date.

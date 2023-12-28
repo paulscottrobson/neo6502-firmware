@@ -30,6 +30,9 @@ switch (*DCOMMAND) {
 			case 2:
 				*(DPARAMS) = KBDIsKeyAvailable() ? 0xFF: 0;
 				break;
+			case 3:
+				CONGetScreenLine(DSPGetInt16(DCOMMAND,4));
+				break;
 		}
 		break;
 	case 3:

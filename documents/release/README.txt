@@ -13,3 +13,12 @@ Paul Robson.
 paul@robsons.org.uk
 28 Dec 2023
 
+*****************
+*** IMPORTANT ***
+*****************
+
+If you are using the SD Card storage board made by Olimex, it requires the switches 2-4 on the B boards to be OFF. The 
+board is shipped with all switches set to 'on' (Switch 1 is the on board beeper). 
+
+Without this change the SD Card will not work (see the board manual page 12).
+
