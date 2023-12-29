@@ -74,9 +74,9 @@
 #define KEY_DOWN 0x51 			// Keyboard Down Arrow				S / 19
 #define KEY_UP 0x52 			// Keyboard Up Arrow 				W / 23
 
-#define KEY_102ND 0x64 			// Keyboard Non-US \ | 	 mapped onto KEY_BACKSLASH.
+#define KEY_102ND 0x64 			// Keyboard Non-US \ | 	 
 
-#define KBD_MAX_KEYCODE (0x53)	// The biggest scancode we store, +1
+#define KBD_MAX_KEYCODE (0x65)	// The biggest scancode we store, +1
 
 #endif
 
