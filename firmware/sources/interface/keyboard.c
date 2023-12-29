@@ -187,7 +187,7 @@ static const uint8_t defaultShift[] = {
 	KEY(KEY_RIGHTBRACE,']','}'), 	KEY(KEY_BACKSLASH,'\\','|'), 	KEY(KEY_HASHTILDE,'#','~'),
 	KEY(KEY_SEMICOLON,';',':'), 	KEY(KEY_APOSTROPHE,'\'','"'), 	KEY(KEY_GRAVE,'`','~'),
 	KEY(KEY_COMMA,',','<'), 		KEY(KEY_DOT,'.','>'), 			KEY(KEY_SLASH,'/','?'),
-	KEY(KEY_SPACE,' ',' '),
+	KEY(KEY_SPACE,' ',' '),			KEY(KEY_102ND,'\\','|'),
 	0	
 };
 

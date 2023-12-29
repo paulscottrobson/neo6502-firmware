@@ -32,7 +32,7 @@ static void usbProcessReport(uint8_t const *report) {
 		if (key >= KEY_KP1 && key < KEY_KP1+10) {                               // Numeric keypad numbers will work.
 			key = key - KEY_KP1 + KEY_1;
 		}
-		if (key == KEY_102ND) key = KEY_BACKSLASH; 								// Non US /| mapped.
+		// if (key == KEY_102ND) key = KEY_BACKSLASH; 															// Non US /| mapped.
 
 		if (key != 0 && key < KBD_MAX_KEYCODE) {                                // If key is down, and not too high.
 			if (lastReport[key] == 0) KBDEvent(1,key,report[0]);                // It wasn't down before so key press.
