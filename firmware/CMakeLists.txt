@@ -1,5 +1,15 @@
 cmake_minimum_required(VERSION 3.14)
-set(PICO_TINYUSB_PATH $ENV{PICO_SDK_PATH}/lib/tinyusb)
+
+include(FetchContent)
+
+FetchContent_Declare(
+    tinyusb
+    GIT_REPOSITORY https://github.com/hathach/tinyusb.git
+    GIT_TAG        0.16.0
+)
+FetchContent_MakeAvailable(tinyusb)
+
+set(PICO_TINYUSB_PATH ${tinyusb_SOURCE_DIR})
 include($ENV{PICO_SDK_PATH}/pico_sdk_init.cmake)
 project(firmware C CXX ASM)
 set(CMAKE_C_STANDARD 11)
@@ -20,7 +30,7 @@ include_directories(
     include
 )
 
-include(FetchContent)
+
 
 FetchContent_Declare(
     PicoDVI
