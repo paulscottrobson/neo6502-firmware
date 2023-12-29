@@ -22,7 +22,6 @@ Both
 		- Palette modification.
 		- Drawing operators.
 		- Sprites and Tiles.
-
 	- Audio system driver on emulator, and audio interface
 
 Other
@@ -32,4 +31,3 @@ Other
 
 Add to Documentation
 --------------------
-	- the API documentation which is very out of date.
