@@ -22,10 +22,15 @@ RELEASEFILE = neo6502.zip
 DOCDIR = documents$(S)release$(S)
 
 DOCUMENTS = $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
-BINARIES = $(BINDIR)firmware.uf2 $(BINDIR)firmware.elf
+BINARIES = $(BINDIR)firmware.uf2 $(BINDIR)firmware.elf $(BINDIR)*.dll $(BINDIR)*.exe
 
-all: 
-	zip -r -j release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES)
+all: samples
+	zip -r -j release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) release$(S)samples.zip
+	$(CDEL) release$(S)samples.zip
+
+samples:
+	zip -r -j release$(S)samples.zip basic$(S)code
+	zip -d release$(S)samples.zip *.bsc *.tass
 
 always:
 
