@@ -13,6 +13,7 @@ General
 Firmware
 --------
 	- Locale handling for keyboard
+		.[name] configuration file
 	- Function key handling
 
 Both

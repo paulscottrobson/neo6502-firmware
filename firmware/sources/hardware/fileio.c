@@ -28,6 +28,7 @@ void FIODirectory(void) {
 	if (r == FR_OK) {
 		FILINFO fi;
 		while (f_readdir(&d,&fi) == FR_OK && fi.fname[0] != '\0') {
+			if (fi.fname[0] != '.') {
 				sprintf(szBuffer,"%-32s ",fi.fname);
 				if (fi.fattrib & AM_DIR) {
 					strcat(szBuffer,"<DIR>");
@@ -36,6 +37,7 @@ void FIODirectory(void) {
 				}
 				CONWriteString(szBuffer);
 				CONWriteString("\r");
+			}
 		}
 		f_closedir(&d);
 	}
