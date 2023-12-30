@@ -31,14 +31,17 @@ struct GraphicsMode {
 	void  (*startMode)(struct GraphicsMode *); 									// Start up the mode.
 };
 
+extern struct GraphicsMode gMode;
+
 void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b); 				// Implementation specific.
 void RNDStartMode0(struct GraphicsMode *gMode);
 
 void GFXSetMode(int Mode);
 void GFXResetDefaults(void);
 void GFXSetDefaults(uint8_t *cmd);
+void GFXGraphicsCommand(uint8_t cmd,uint8_t *data);
 void GFXFastLine(struct GraphicsMode *gMode,int x, int y, int x2, int y2);
-void inline GFXPlotPixel(struct GraphicsMode *gMode,int x,int y);
+void GFXPlotPixel(struct GraphicsMode *gMode,int x,int y);
 
 #endif
 

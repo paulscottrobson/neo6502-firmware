@@ -18,6 +18,9 @@ Both
 	- Graphics system.
 		- Palette modification.
 		- Drawing operators.
+				Rectangle, check SOLID FRAME
+				Ellipse
+				Text ? Add DIM
 		- Sprites and Tiles.
 	- Controller system.
 	- Audio system driver on emulator, and audio interface

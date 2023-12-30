@@ -32,10 +32,10 @@ void GFXResetDefaults(void) {
 // ***************************************************************************************
 
 void GFXSetDefaults(uint8_t *cmd) {
-	pixelAnd = cmd[0];
-	pixelXor = cmd[1];
-	useSolidFill = cmd[2];
-	drawSize = cmd[3];
+	pixelAnd = cmd[4];
+	pixelXor = cmd[5];
+	useSolidFill = cmd[6];
+	drawSize = cmd[7];
 }
 
 // ***************************************************************************************

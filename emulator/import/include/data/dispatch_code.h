@@ -215,10 +215,13 @@ switch (*DCOMMAND) {
 				GFXSetDefaults(DCOMMAND);
 				break;
 			case 2:
+				GFXGraphicsCommand(2,DCOMMAND);
 				break;
 			case 3:
+				GFXGraphicsCommand(3,DCOMMAND);
 				break;
 			case 4:
+				GFXGraphicsCommand(4,DCOMMAND);
 				break;
 		}
 		break;

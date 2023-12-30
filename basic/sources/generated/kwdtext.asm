@@ -117,8 +117,7 @@ BaseTokenText:
 	.byte	$04,$52,$45,$43,$d4           	; $ db RECT
 	.byte	$04,$4d,$4f,$56,$c5           	; $ dc MOVE
 	.byte	$07,$45,$4c,$4c,$49,$50,$53,$c5	; $ dd ELLIPSE
-	.byte	$02,$42,$d9                   	; $ de BY
-	.byte	$05,$49,$4d,$41,$47,$c5       	; $ df IMAGE
+	.byte	$05,$49,$4d,$41,$47,$c5       	; $ de IMAGE
 	.byte	$FF
 
 Shift1TokenText:
@@ -143,6 +142,7 @@ Shift1TokenText:
 	.byte	$03,$49,$4e,$cb               	; $192 INK
 	.byte	$05,$46,$52,$41,$4d,$c5       	; $193 FRAME
 	.byte	$05,$53,$4f,$4c,$49,$c4       	; $194 SOLID
+	.byte	$02,$42,$d9                   	; $195 BY
 	.byte	$FF
 
 Shift2TokenText:
