@@ -122,7 +122,11 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 	sprintf(szFileName,"storage/%s",fileName);
 	FILE *f = fopen(szFileName,"rb");
 	if (f != NULL) {
-		fread(CPUAccessMemory()+loadAddress,1,0xFFFF,f);
+		if (loadAddress == 0xFFFF) {
+			fread(gfxMemory,1,GFX_MEMORY_SIZE,f);
+		} else {
+			fread(CPUAccessMemory()+loadAddress,1,0xFFFF,f);
+		}
 		fclose(f);
 	}
 	return (f == NULL) ? 1 : 0;

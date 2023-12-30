@@ -17,8 +17,10 @@
 
 #ifdef PICO
 _Alignas(MEMORY_SIZE) uint8_t cpuMemory[MEMORY_SIZE];  							// Processor memory, aligned for Pico
+uint8_t gfxMemory[GFX_MEMORY_SIZE];
 #else
 uint8_t cpuMemory[MEMORY_SIZE];
+uint8_t gfxMemory[GFX_MEMORY_SIZE];
 #endif
 
 uint16_t controlPort = DEFAULT_PORT;       										// Control point.
