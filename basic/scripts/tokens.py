@@ -120,7 +120,7 @@ class TokenSet(object):
 		#
 		self.add(0x180,"""
 			CLEAR 	NEW 	RUN 	STOP 	END 	ASSERT 	LIST 	SAVE 	
-			LOAD	CAT 	GOSUB 	GOTO	RETURN 	RESTORE	DIM		
+			LOAD	CAT 	GOSUB 	GOTO	RETURN 	RESTORE	DIM		FKEY
 			""")
 		#
 		#		Keyword tokens (assembler)

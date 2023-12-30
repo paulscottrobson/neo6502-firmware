@@ -131,6 +131,7 @@ Shift1TokenText:
 	.byte	$06,$52,$45,$54,$55,$52,$ce   	; $18c RETURN
 	.byte	$07,$52,$45,$53,$54,$4f,$52,$c5	; $18d RESTORE
 	.byte	$03,$44,$49,$cd               	; $18e DIM
+	.byte	$04,$46,$4b,$45,$d9           	; $18f FKEY
 	.byte	$FF
 
 Shift2TokenText:

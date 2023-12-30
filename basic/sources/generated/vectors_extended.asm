@@ -18,4 +18,5 @@ ExtendedVectorTable:
 	.word	Command_RETURN           ; $18c return
 	.word	Command_RESTORE          ; $18d restore
 	.word	DimCommand               ; $18e dim
+	.word	Command_FKEY             ; $18f fkey
 	.send code
