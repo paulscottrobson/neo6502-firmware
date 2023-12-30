@@ -93,9 +93,10 @@ StandardVectorTable:
 	.word	Command_CALL             ; $d7 call
 	.word	Unimplemented            ; $d8 #
 	.word	LabelCommand             ; $d9 .
-	.word	Unimplemented            ; $da line
-	.word	Unimplemented            ; $db rect
-	.word	Unimplemented            ; $dc move
-	.word	Unimplemented            ; $dd by
-	.word	Unimplemented            ; $de image
+	.word	Command_Line             ; $da line
+	.word	Command_Rect             ; $db rect
+	.word	Command_Move             ; $dc move
+	.word	Command_Ellipse          ; $dd ellipse
+	.word	Unimplemented            ; $de by
+	.word	Unimplemented            ; $df image
 	.send code

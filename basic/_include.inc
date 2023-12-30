@@ -47,6 +47,7 @@
 	.include "sources/commands/dim.asm"
 	.include "sources/commands/fkey.asm"
 	.include "sources/commands/goto.asm"
+	.include "sources/commands/graphics.asm"
 	.include "sources/commands/ink.asm"
 	.include "sources/commands/inputprint.asm"
 	.include "sources/commands/let.asm"

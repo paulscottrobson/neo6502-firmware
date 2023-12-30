@@ -145,7 +145,22 @@ isGroup1: 									; assembler group 1 flag (LDA,STA etc.)
 baseOpcode: 								; current base opcode.
 		.fill 	1		
 paramStart: 								; 1/2 byte parameters for each assembler opcode.
+		.fill 	1	
+graphicsPosX: 								; current graphics position.
+		.fill 	2			
+graphicsPosY:
+		.fill 	2			
+graphicsCurrent: 							; current drawing mode (1 = move,2 = line,3 = rect,4 = ellipse)
 		.fill 	1		
+inkAndByte: 								; pixel drawing value
+		.fill 	1		
+inkXorByte:
+		.fill 	1	
+graphicsSolidMode: 							; graphics solid mode.
+		.fill 	1		
+graphicsSize: 								; graphics size.
+		.fill 	1			
+
 		.send storage
 
 ; ************************************************************************************************

@@ -1,8 +1,8 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		cls.asm
-;		Purpose:	Clear screen
+;		Name:		graphics.asm
+;		Purpose:	Chainable graphics commands.
 ;		Created:	30th December 2023
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
@@ -12,18 +12,39 @@
 
 ; ************************************************************************************************
 ;
-;										CLS Command
+;									Multiple entry points
 ;
 ; ************************************************************************************************
 
 		.section code
 
-Command_CLS:	;; [cls]
-		lda 	#12
-		jsr 	WriteCharacter
-		jsr 	GraphicsReset
-		rts
+Command_Move:	;; [move]
+Command_Line:	;; [line]
+Command_Rect: 	;; [rect]
+Command_Ellipse: ;; [ellipse]
+		dey 								; point at the original coordinates
 
+	
+
+; ************************************************************************************************
+;
+;									Reset graphics state
+;
+; ************************************************************************************************
+
+GraphicsReset:
+		stz 	graphicsPosX 				; position to 0,0
+		stz 	graphicsPosX+1
+		stz 	graphicsPosY
+		stz 	graphicsPosY+1
+		lda 	#1  						; move mode, size 1
+		sta 	graphicsCurrent
+		sta 	graphicsSize
+		stz 	inkAndByte 					; colour draw white
+		lda 	#7
+		sta 	inkXorByte
+		stz 	graphicsSolidMode 			; and frame mode.
+		rts
 
 		.send code
 

@@ -50,6 +50,10 @@ ClearCode:
 		;		Reset READ/DATA
 		;
 		jsr 	Command_RESTORE
+		;
+		;		Reset Graphics
+		;
+		jsr 	GraphicsReset
 		rts
 
 ; ************************************************************************************************
