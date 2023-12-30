@@ -35,6 +35,8 @@ void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b); 				// Impleme
 void RNDStartMode0(struct GraphicsMode *gMode);
 
 void GFXSetMode(int Mode);
+void GFXFastLine(struct GraphicsMode *gMode,int x, int y, int x2, int y2);
+void GFXPlotPixel(struct GraphicsMode *gMode,int x,int y);
 
 #endif
 
