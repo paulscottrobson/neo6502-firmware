@@ -116,8 +116,9 @@ BaseTokenText:
 	.byte	$04,$4c,$49,$4e,$c5           	; $ da LINE
 	.byte	$04,$52,$45,$43,$d4           	; $ db RECT
 	.byte	$04,$4d,$4f,$56,$c5           	; $ dc MOVE
-	.byte	$02,$42,$d9                   	; $ dd BY
-	.byte	$05,$49,$4d,$41,$47,$c5       	; $ de IMAGE
+	.byte	$07,$45,$4c,$4c,$49,$50,$53,$c5	; $ dd ELLIPSE
+	.byte	$02,$42,$d9                   	; $ de BY
+	.byte	$05,$49,$4d,$41,$47,$c5       	; $ df IMAGE
 	.byte	$FF
 
 Shift1TokenText:
@@ -137,12 +138,11 @@ Shift1TokenText:
 	.byte	$07,$52,$45,$53,$54,$4f,$52,$c5	; $18d RESTORE
 	.byte	$03,$44,$49,$cd               	; $18e DIM
 	.byte	$04,$46,$4b,$45,$d9           	; $18f FKEY
-	.byte	$07,$45,$4c,$4c,$49,$50,$53,$c5	; $190 ELLIPSE
-	.byte	$04,$54,$45,$58,$d4           	; $191 TEXT
-	.byte	$03,$43,$4c,$d3               	; $192 CLS
-	.byte	$03,$49,$4e,$cb               	; $193 INK
-	.byte	$05,$46,$52,$41,$4d,$c5       	; $194 FRAME
-	.byte	$05,$53,$4f,$4c,$49,$c4       	; $195 SOLID
+	.byte	$04,$54,$45,$58,$d4           	; $190 TEXT
+	.byte	$03,$43,$4c,$d3               	; $191 CLS
+	.byte	$03,$49,$4e,$cb               	; $192 INK
+	.byte	$05,$46,$52,$41,$4d,$c5       	; $193 FRAME
+	.byte	$05,$53,$4f,$4c,$49,$c4       	; $194 SOLID
 	.byte	$FF
 
 Shift2TokenText:
