@@ -209,4 +209,17 @@ switch (*DCOMMAND) {
 				break;
 		}
 		break;
+	case 5:
+		switch (*DFUNCTION) {
+			case 1:
+				GFXSetDefaults(DCOMMAND);
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+		}
+		break;
 }

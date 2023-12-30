@@ -55,6 +55,7 @@ static void CONClearScreen(void) {
 	for (int y = 0;y < graphMode->yCSize;y++) {  								// No extended lines.
 		graphMode->isExtLine[y] = 0;
 	}
+	GFXResetDefaults(); 														// Reset graphics defaults.
 }
 
 // ***************************************************************************************
