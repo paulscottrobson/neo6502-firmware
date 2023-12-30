@@ -12,8 +12,7 @@ General
 
 Firmware
 --------
-	- Locale handling for keyboard
-		.[name] configuration file
+	- Write proper config.bas code.
 	- Function key handling
 
 Both

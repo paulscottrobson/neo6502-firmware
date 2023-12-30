@@ -1,34 +1,28 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      keyboard.h
+//      Name :      config.c
 //      Authors :   Paul Robson (paul@robsons.org.uk)
-//      Date :      21st November 2023
+//      Date :      30th December 2023
 //      Reviewed :  No
-//      Purpose :   Keyboard prototypes
+//      Purpose :   Configuration handler
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-#ifndef _KEYBOARD_H
-#define _KEYBOARD_H
+#include "common.h"
 
-void KBDInitialise(void);
-void KBDSync(void);
-
-void KBDCheckTimer(void);
-void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers);
-uint8_t *KBDGetStateArray(void);
-bool KBDIsKeyAvailable(void);
-uint8_t KBDGetKey(void);
-void KBDSetLocale(char c1,char c2);
-
+// ***************************************************************************************
 //
-//		Keyboard repeat rates, in 1/100 sec
+//								Handle configuration
 //
-#define KBD_REPEAT_START 	(90)  												// Time for first repeat
-#define KBD_REPEAT_AFTER  	(12)  												// Time for subsequent repeats
-#endif
+// ***************************************************************************************
+
+void CFGProcess(void) {
+	if (FIOReadFile(".config",0x100) == 0) {  									// Try to read config file
+		KBDSetLocale(cpuMemory[0x100],cpuMemory[0x101]);  						// Set locale from config file.
+	}
+}
 
 // ***************************************************************************************
 //
