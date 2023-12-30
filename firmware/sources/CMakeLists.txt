@@ -28,7 +28,7 @@ target_sources(firmware PRIVATE main.c
     #       Common interface routines
     #
     interface/graphics.c interface/console.c interface/keyboard.c interface/memory.c 
-    interface/dispatch.c interface/maths.c interface/config.c
+    interface/dispatch.c interface/maths.c interface/config.c interface/efla.c
 )
 
 target_compile_definitions(firmware
