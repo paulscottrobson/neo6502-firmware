@@ -1,0 +1,12 @@
+'
+'		Create configuration file
+'
+config = alloc(16)
+call ConfigKeyboard()
+save ".config",config,2
+end
+'
+proc ConfigKeyboard()
+	poke config,asc("G")
+	poke config+1,asc("B")
+endproc

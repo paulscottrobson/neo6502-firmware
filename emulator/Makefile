@@ -21,7 +21,7 @@ IMPSRC = import$(S)sources$(S)interface$(S)
 SOURCES = 	src$(S)core$(S)sys_processor.o  framework$(S)main.o framework$(S)gfx.o framework$(S)debugger.o \
 			src$(S)core$(S)sys_debugger.o src$(S)core$(S)hardware.o \
   			$(IMPSRC)memory.o $(IMPSRC)graphics.o $(IMPSRC)console.o $(IMPSRC)keyboard.o $(IMPSRC)dispatch.o \
-  			$(IMPSRC)maths.o 
+  			$(IMPSRC)maths.o  $(IMPSRC)config.o
 
 FIRMWARE = ..$(S)firmware$(S)
 

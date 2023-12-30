@@ -21,6 +21,7 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers);
 uint8_t *KBDGetStateArray(void);
 bool KBDIsKeyAvailable(void);
 uint8_t KBDGetKey(void);
+void KBDSetLocale(char c1,char c2);
 
 //
 //		Keyboard repeat rates, in 1/100 sec

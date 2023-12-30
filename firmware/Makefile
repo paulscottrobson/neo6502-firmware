@@ -33,6 +33,7 @@ kernel: always
 rebuild: clean build
 
 build: kernel always
+	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.c
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
 	make -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .

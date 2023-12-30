@@ -17,7 +17,7 @@ keys = """
 #		GB (e.g. United Kingdom) keyboard variations.
 #
 	[GB]
-		49:#	^49:~	^52:@	^31:" ^32:£		
+		49:#	^49:~	^52:@	^31:" 	
 
 
 	[XX]
