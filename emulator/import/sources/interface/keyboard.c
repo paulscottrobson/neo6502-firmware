@@ -14,6 +14,7 @@
 #include "interface/kbdcodes.h"
 
 #define MAX_QUEUE_SIZE (64) 													// Max size of keyboard queue.
+#define MAX_FKEY_SIZE (48)   													// Max length of function key.
 
 //
 //		Bit patterns for the key states. These represent the key codes (see kbdcodes.h)
@@ -229,12 +230,33 @@ static uint8_t KBDDefaultControlKeys(uint8_t keyCode,uint8_t isShift) {
 
 // ***************************************************************************************
 //
+//								Define function keys
+//
+// ***************************************************************************************
+
+static char functionKeyText[10*(MAX_FKEY_SIZE+1)] = {0};
+
+#define FKEYTEXT(n) (functionKeyText + (n-1)*(MAX_FKEY_SIZE+1))
+
+uint8_t KBDSetFunctionKey(int fKey,const char *keyText) {
+	if (strlen(keyText) <= MAX_FKEY_SIZE && fKey >= 1 && fKey <= 10) {
+		strcpy(FKEYTEXT(fKey),keyText);
+		return 0;
+	}
+	return 1;
+}
+
+// ***************************************************************************************
+//
 //								Process function keys
 //
 // ***************************************************************************************
 
 static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers) {
-	//CONWrite('F');CONWrite(funcNum+'0');
+	const char *txt = FKEYTEXT(funcNum);
+	while (*txt != '\0') {
+		KBDInsertQueue(*txt++);		
+	}
 }
 
 // ***************************************************************************************

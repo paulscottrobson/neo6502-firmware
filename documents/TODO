@@ -12,17 +12,14 @@ General
 
 Firmware
 --------
-	- Write proper config.bas code.
-	- Function key handling
-			KEY n,<string> w/internal storage ?
 
 Both
 ----
-	- Controller system.
 	- Graphics system.
 		- Palette modification.
 		- Drawing operators.
 		- Sprites and Tiles.
+	- Controller system.
 	- Audio system driver on emulator, and audio interface
 
 Other

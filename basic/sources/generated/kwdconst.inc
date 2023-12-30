@@ -108,6 +108,7 @@ KWD_GOTO                           = $18b ; goto
 KWD_RETURN                         = $18c ; return
 KWD_RESTORE                        = $18d ; restore
 KWD_DIM                            = $18e ; dim
+KWD_FKEY                           = $18f ; fkey
 KWD_ADC                            = $280 ; adc
 KWD_AND                            = $281 ; and
 KWD_ASL                            = $282 ; asl

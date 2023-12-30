@@ -33,6 +33,9 @@ switch (*DCOMMAND) {
 			case 3:
 				CONGetScreenLine(DSPGetInt16(DCOMMAND,4));
 				break;
+			case 4:
+				*DERROR = KBDSetFunctionKey(*(DCOMMAND+4),DSPGetString(DCOMMAND,6));
+				break;
 		}
 		break;
 	case 3:
