@@ -56,7 +56,11 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 	STOInitialise();
 	result = f_open(&file, fileName, FA_READ);
 	if (result == FR_OK) {
-		f_read(&file,cpuMemory+loadAddress,0x10000-loadAddress,&bytesRead);
+		if (loadAddress == 0xFFFF) {
+			f_read(&file,gfxMemory+loadAddress,GFX_MEMORY_SIZE,&bytesRead);
+		} else {
+			f_read(&file,cpuMemory+loadAddress,0x10000-loadAddress,&bytesRead);
+		}
 		f_close(&file);
 	}
 	return (result == FR_OK) ? 0 : 1;

@@ -14,6 +14,7 @@ Firmware
 --------
 	- Write proper config.bas code.
 	- Function key handling
+			KEY n,<string> w/internal storage ?
 
 Both
 ----

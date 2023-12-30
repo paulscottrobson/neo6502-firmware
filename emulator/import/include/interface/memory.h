@@ -13,11 +13,14 @@
 #ifndef _MEMORY_h
 #define _MEMORY_h
 
-#define MEMORY_SIZE  0x10000 // 64k
+#define MEMORY_SIZE  0x10000 	// 64k
+#define GFX_MEMORY_SIZE 0x8000  // 32k for sprites/tiles/etc.
+
 #define DEFAULT_PORT 0xFF00
 
 extern uint8_t  cpuMemory[];
 extern uint16_t controlPort;
+extern uint8_t gfxMemory[];
 
 //
 //		Access the control port address via this Macro !
