@@ -97,6 +97,5 @@ StandardVectorTable:
 	.word	Command_Rect             ; $db rect
 	.word	Command_Move             ; $dc move
 	.word	Command_Ellipse          ; $dd ellipse
-	.word	Unimplemented            ; $de by
-	.word	Unimplemented            ; $df image
+	.word	Unimplemented            ; $de image
 	.send code

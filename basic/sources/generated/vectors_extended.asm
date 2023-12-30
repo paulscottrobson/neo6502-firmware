@@ -24,4 +24,5 @@ ExtendedVectorTable:
 	.word	Command_INK              ; $192 ink
 	.word	Unimplemented            ; $193 frame
 	.word	Unimplemented            ; $194 solid
+	.word	Unimplemented            ; $195 by
 	.send code
