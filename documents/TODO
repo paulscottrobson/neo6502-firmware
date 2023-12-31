@@ -10,18 +10,18 @@ General
 - Current clock 5.61 Mhz, can optimise this slightly.
   (would be nice to get to F256 speed of 6.29 Mhz probably out of reach)
 
-Firmware
---------
+BASIC only
+----------
+
+Firmware only
+-------------
 
 Both
 ----
 	- Graphics system.
+				Text ? Add DIM to generalised picking up the size.
 		- Palette modification.
-		- Drawing operators.
-				Rectangle, check SOLID FRAME
-				Ellipse
-				Text ? Add DIM
-		- Sprites and Tiles.
+		- Sprites, Images and Tiles, graphics source.
 	- Controller system.
 	- Audio system driver on emulator, and audio interface
 
@@ -32,3 +32,4 @@ Other
 
 Add to Documentation
 --------------------
+	PLOT MOVE LINE ELLIPSE RECT

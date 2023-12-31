@@ -28,6 +28,8 @@
 #define TIMECRITICAL(x) x
 #endif
 
+#include "_who.c"
+
 // ***************************************************************************************
 //
 //							Handle commands sent by message

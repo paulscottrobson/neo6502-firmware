@@ -42,6 +42,8 @@ void GFXSetDefaults(uint8_t *cmd);
 void GFXGraphicsCommand(uint8_t cmd,uint8_t *data);
 void GFXFastLine(struct GraphicsMode *gMode,int x, int y, int x2, int y2);
 void GFXPlotPixel(struct GraphicsMode *gMode,int x,int y);
+void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y);
+void GFXEllipse(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int useSolidFill);
 
 #endif
 

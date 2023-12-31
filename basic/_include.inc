@@ -63,6 +63,7 @@
 	.include "sources/commands/stop.asm"
 	.include "sources/commands/sys.asm"
 	.include "sources/commands/undefined.asm"
+	.include "sources/commands/who.asm"
 	.include "sources/editing/detokenise/detokenise.asm"
 	.include "sources/editing/detokenise/dtkdecimal.asm"
 	.include "sources/editing/detokenise/dtkhex.asm"

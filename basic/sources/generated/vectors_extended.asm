@@ -25,4 +25,5 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $193 frame
 	.word	Unimplemented            ; $194 solid
 	.word	Unimplemented            ; $195 by
+	.word	Command_WHO              ; $196 who
 	.send code
