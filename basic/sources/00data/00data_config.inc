@@ -28,7 +28,7 @@
 		* = $800 							; BASIC ROM goes here.
 		.dsection code
 
-		HIGHMEMORY = $A000
+		HIGHMEMORY = $F000
 		STACKPAGES = 8 
 
 ; ************************************************************************************************

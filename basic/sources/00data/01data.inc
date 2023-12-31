@@ -159,7 +159,9 @@ inkXorByte:
 graphicsSolidMode: 							; graphics solid mode.
 		.fill 	1		
 graphicsSize: 								; graphics size.
-		.fill 	1			
+		.fill 	1	
+graphicsText: 								; size of string
+		.fill 	2				
 
 		.send storage
 

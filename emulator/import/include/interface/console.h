@@ -15,6 +15,8 @@
 
 #include "interface/graphics.h"
 
+extern const unsigned char  font_5x7[];
+
 void CONInitialise(struct GraphicsMode *gMode);
 void CONWrite(int c);
 void CONWriteHex(uint16_t h);	

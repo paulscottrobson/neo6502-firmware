@@ -19,7 +19,6 @@ Firmware only
 Both
 ----
 	- Graphics system.
-				Text ? Add DIM to generalised picking up the size.
 		- Palette modification.
 		- Sprites, Images and Tiles, graphics source.
 	- Controller system.
@@ -32,4 +31,4 @@ Other
 
 Add to Documentation
 --------------------
-	PLOT MOVE LINE ELLIPSE RECT
+	PLOT MOVE LINE ELLIPSE RECT TEXT

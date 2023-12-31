@@ -229,6 +229,9 @@ switch (*DCOMMAND) {
 			case 5:
 				GFXGraphicsCommand(5,DCOMMAND);
 				break;
+			case 6:
+				GFXGraphicsCommand(6,DCOMMAND);
+				break;
 		}
 		break;
 }

@@ -18,14 +18,24 @@
 
 		.section code
 
+Command_Text: 	;; [text]
+		lda 	#6 							; set mode to text.
+		sta 	graphicsCurrent
+		ldx 	#0
+		jsr 	EXPEvalString 				; get string to print out
+		lda 	XSNumber0
+		sta 	graphicsText
+		lda 	XSNumber1
+		sta 	graphicsText+1
+		bra 	GCommandLoop
+
 Command_Move:	;; [move]
 Command_Line:	;; [line]
 Command_Rect: 	;; [rect]
 Command_Ellipse: ;; [ellipse]
 Command_Plot: 	;; [plot]
-
 		dey 								; point at the original coordinates
-_GCommandLoop:
+GCommandLoop:
 		lda 	(codePtr),y
 		cmp 	#KWD_SYS_END 				; end of line or colon, exit
 		beq 	_GCExit
@@ -46,12 +56,16 @@ _GCommandLoop:
 		beq 	_GChangeMode
 		inx
 		cmp 	#KWD_PLOT
-		bne 	_GNotMode
+		beq 	_GChangeMode
+		inx
+		cmp 	#KWD_TEXT
+		beq 	_GChangeMode
+		bra 	_GNotMode
 
 _GChangeMode:
 		stx		graphicsCurrent 			; switch mode to MOVE, LINE, RECT, ELLIPSE, PLOT
 		iny 								; consume token.
-		bra 	_GCommandLoop
+		bra 	GCommandLoop
 _GCExit:
 		rts		
 		;
@@ -59,7 +73,7 @@ _GNotMode:
 		jsr 	GraphicsCommon 				; check TO_x,y BY_x,y INK_c INK_a,x SOLID and FRAME
 		bcc 	_GMoveOnly 					; not recognised, check if coordinate move only
 		cmp 	#0 							; do we print (e.g. was it TO or BY)
-		beq 	_GCommandLoop 				; no
+		beq 	GCommandLoop 				; no
 		;
 		lda 	graphicsPosX 				; old coordinates 4-7
 		sta 	ControlParameters+4
@@ -72,21 +86,29 @@ _GNotMode:
 		;
 		jsr 	_GCopyCoordinates
 		;
+		lda 	graphicsCurrent 			; are we in text
+		cmp 	#6
+		bne 	_GNotText
+		lda 	graphicsText 				; copy address into slot 4.
+		sta 	ControlParameters+4
+		lda 	graphicsText+1
+		sta 	ControlParameters+5
+_GNotText:
 		DoWaitMessage 						; wait till hardware free
 		lda	 	graphicsCurrent 			; current action.
 		cmp 	#1 							; if move, do nothing
-		beq 	_GCommandLoop
+		beq 	GCommandLoop
 		sta 	ControlFunction 			
 		lda 	#5
 		sta 	ControlCommand_Check		; do command 5 (graphics)
 		DoWaitMessage 		
-		bra 	_GCommandLoop
+		jmp 	GCommandLoop
 
 _GMoveOnly:
 		dey
 		jsr 	GCGetCoordinates 			; get new coordinates
 		jsr 	_GCopyCoordinates 			; update them
-		bra 	_GCommandLoop 				; and go back.
+		jmp 	GCommandLoop 				; and go back.
 
 _GCopyCoordinates:
 		lda 	XSNumber0 					; copy new coordinates into 0-3
@@ -126,10 +148,23 @@ GraphicsCommon:
 		beq 	_GCInk
 		cmp 	#KWD_BY & $FF
 		beq 	_GCBy
+		cmp 	#KWD_DIM & $FF
+		beq 	_GCDim
 		dey 								; point back to shift and exit as unknown.
 _GCUnknown:
 		clc
 		rts		
+		;
+		;		Handle DIM
+		;		
+_GCDim:	
+		iny 								; consume DIM
+		jsr 	EXPEvalInteger8 			; get size
+		sta 	graphicsSize 				; update it.
+		jsr 	_GCSendDrawingInfo
+		lda 	#0 							; do not execute.
+		sec
+		rts
 		;
 		;		Handle SOLID and FRAME
 		;
@@ -232,6 +267,8 @@ GraphicsReset:
 		lda 	#7
 		sta 	inkXorByte
 		stz 	graphicsSolidMode 			; and frame mode.
+		stz 	graphicsText 				; and selected text.
+		stz 	graphicsText+1
 		rts
 
 		.send code
