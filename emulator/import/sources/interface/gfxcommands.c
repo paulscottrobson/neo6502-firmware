@@ -49,6 +49,33 @@ void GFXPlotPixel(struct GraphicsMode *gMode,int x,int y) {
 	*pixel = ((*pixel) & pixelAnd) ^ pixelXor;
 }
 
+void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y) {
+	if (x >= 0 && y >= 0 && x < gMode->xGSize && y < gMode->yGSize) {
+		uint8_t *pixel = gMode->graphicsMemory+x+y*gMode->xGSize;
+		*pixel = ((*pixel) & pixelAnd) ^ pixelXor;
+	}
+}
+
+// ***************************************************************************************
+//
+// 										Draw a rectangle
+//
+// ***************************************************************************************
+
+void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2) {
+	int ySize = abs(y1-y2);
+	int yDir = (y1 < y2) ? 1 : -1;
+	for (int l = 0;l < ySize;l++) {
+		if (useSolidFill != 0 || l == 0 || l == ySize-1) {
+			GFXFastLine(gMode,x1,y1,x2,y1);
+		} else {
+			GFXPlotPixelChecked(gMode,x1,y1);
+			GFXPlotPixelChecked(gMode,x2,y1);
+		}
+		y1 += yDir;
+	}
+}
+
 // ***************************************************************************************
 //
 //								Handle graphics commands
@@ -65,6 +92,15 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 	switch(cmd) {
 		case 2:
 			GFXFastLine(&gMode,x1,y1,x2,y2);
+			break;
+		case 3:
+			GFXRectangle(&gMode,x1,y1,x2,y2);
+			break;
+		case 4:
+			GFXEllipse(&gMode,x1,y1,x2,y2,useSolidFill);
+			break;
+		case 5:
+			GFXPlotPixelChecked(&gMode,x1,y1);
 			break;
 	}
 }

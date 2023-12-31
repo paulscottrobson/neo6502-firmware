@@ -22,6 +22,8 @@ Command_Move:	;; [move]
 Command_Line:	;; [line]
 Command_Rect: 	;; [rect]
 Command_Ellipse: ;; [ellipse]
+Command_Plot: 	;; [plot]
+
 		dey 								; point at the original coordinates
 _GCommandLoop:
 		lda 	(codePtr),y
@@ -41,9 +43,13 @@ _GCommandLoop:
 		beq 	_GChangeMode
 		inx
 		cmp 	#KWD_ELLIPSE
+		beq 	_GChangeMode
+		inx
+		cmp 	#KWD_PLOT
 		bne 	_GNotMode
+
 _GChangeMode:
-		stx		graphicsCurrent 			; switch mode to MOVE, LINE, RECT, ELLIPSE
+		stx		graphicsCurrent 			; switch mode to MOVE, LINE, RECT, ELLIPSE, PLOT
 		iny 								; consume token.
 		bra 	_GCommandLoop
 _GCExit:
@@ -55,14 +61,14 @@ _GNotMode:
 		cmp 	#0 							; do we print (e.g. was it TO or BY)
 		beq 	_GCommandLoop 				; no
 		;
-		lda 	graphicsPosX 				; old coordinates 0-3
-		sta 	ControlParameters+0
+		lda 	graphicsPosX 				; old coordinates 4-7
+		sta 	ControlParameters+4
 		lda 	graphicsPosX+1
-		sta 	ControlParameters+1
+		sta 	ControlParameters+5
 		lda 	graphicsPosY
-		sta 	ControlParameters+2
+		sta 	ControlParameters+6
 		lda 	graphicsPosY+1
-		sta 	ControlParameters+3
+		sta 	ControlParameters+7
 		;
 		jsr 	_GCopyCoordinates
 		;
@@ -83,17 +89,17 @@ _GMoveOnly:
 		bra 	_GCommandLoop 				; and go back.
 
 _GCopyCoordinates:
-		lda 	XSNumber0 					; copy new coordinates into 4-7
-		sta 	ControlParameters+4 		; also update last position.
+		lda 	XSNumber0 					; copy new coordinates into 0-3
+		sta 	ControlParameters+0 		; also update last position.
 		sta 	graphicsPosX
 		lda 	XSNumber1
-		sta 	ControlParameters+5
+		sta 	ControlParameters+1
 		sta 	graphicsPosX+1
 		lda 	XSNumber0+1
-		sta 	ControlParameters+6
+		sta 	ControlParameters+2
 		sta 	graphicsPosY
 		lda 	XSNumber1+1
-		sta 	ControlParameters+7
+		sta 	ControlParameters+3
 		sta 	graphicsPosY+1
 		rts
 

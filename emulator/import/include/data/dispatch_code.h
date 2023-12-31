@@ -17,6 +17,9 @@ switch (*DCOMMAND) {
 			case 3:
 				MEMLoadBasic();
 				break;
+			case 4:
+				CONWriteString((char *)whoList);
+				break;
 		}
 		break;
 	case 2:
@@ -222,6 +225,9 @@ switch (*DCOMMAND) {
 				break;
 			case 4:
 				GFXGraphicsCommand(4,DCOMMAND);
+				break;
+			case 5:
+				GFXGraphicsCommand(5,DCOMMAND);
 				break;
 		}
 		break;

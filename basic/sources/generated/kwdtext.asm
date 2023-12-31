@@ -116,8 +116,9 @@ BaseTokenText:
 	.byte	$04,$4c,$49,$4e,$c5           	; $ da LINE
 	.byte	$04,$52,$45,$43,$d4           	; $ db RECT
 	.byte	$04,$4d,$4f,$56,$c5           	; $ dc MOVE
-	.byte	$07,$45,$4c,$4c,$49,$50,$53,$c5	; $ dd ELLIPSE
-	.byte	$05,$49,$4d,$41,$47,$c5       	; $ de IMAGE
+	.byte	$04,$50,$4c,$4f,$d4           	; $ dd PLOT
+	.byte	$07,$45,$4c,$4c,$49,$50,$53,$c5	; $ de ELLIPSE
+	.byte	$05,$49,$4d,$41,$47,$c5       	; $ df IMAGE
 	.byte	$FF
 
 Shift1TokenText:
@@ -143,6 +144,7 @@ Shift1TokenText:
 	.byte	$05,$46,$52,$41,$4d,$c5       	; $193 FRAME
 	.byte	$05,$53,$4f,$4c,$49,$c4       	; $194 SOLID
 	.byte	$02,$42,$d9                   	; $195 BY
+	.byte	$03,$57,$48,$cf               	; $196 WHO
 	.byte	$FF
 
 Shift2TokenText:

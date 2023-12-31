@@ -1,0 +1,24 @@
+'
+'		Graphics very simple demo
+'
+repeat
+	call test(1,2000)
+	call test(2,2000)
+	call test(3,1000)
+	call test(4,1000)
+	call test(5,1000)
+	call test(6,1000)
+until 0
+end
+
+proc test(type,count)
+	cls
+	for n = 1 to count
+		if type = 1 then plot ink rand(16) to rand(320),rand(240)
+		if type = 2 then line ink rand(16) to rand(320),rand(240)
+		if type = 3 then rect ink rand(16) solid to rand(320),rand(240)
+		if type = 4 then rect ink rand(16) frame to rand(320),rand(240)
+		if type = 5 then ellipse ink rand(16) solid to rand(320),rand(240)
+		if type = 6 then ellipse ink rand(16) frame to rand(320),rand(240)
+	next
+endproc
