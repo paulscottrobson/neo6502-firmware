@@ -19,11 +19,11 @@ ExtendedVectorTable:
 	.word	Command_RESTORE          ; $18d restore
 	.word	DimCommand               ; $18e dim
 	.word	Command_FKEY             ; $18f fkey
-	.word	Unimplemented            ; $190 text
-	.word	Command_CLS              ; $191 cls
-	.word	Command_INK              ; $192 ink
-	.word	Unimplemented            ; $193 frame
-	.word	Unimplemented            ; $194 solid
-	.word	Unimplemented            ; $195 by
-	.word	Command_WHO              ; $196 who
+	.word	Command_CLS              ; $190 cls
+	.word	Command_INK              ; $191 ink
+	.word	Unimplemented            ; $192 frame
+	.word	Unimplemented            ; $193 solid
+	.word	Unimplemented            ; $194 by
+	.word	Command_WHO              ; $195 who
+	.word	Unimplemented            ; $196 palette
 	.send code

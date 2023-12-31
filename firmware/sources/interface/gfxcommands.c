@@ -62,17 +62,45 @@ void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y) {
 //
 // ***************************************************************************************
 
-void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2) {
+void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int solid) {
 	int ySize = abs(y1-y2);
 	int yDir = (y1 < y2) ? 1 : -1;
 	for (int l = 0;l < ySize;l++) {
-		if (useSolidFill != 0 || l == 0 || l == ySize-1) {
+		if (solid != 0 || l == 0 || l == ySize-1) {
 			GFXFastLine(gMode,x1,y1,x2,y1);
 		} else {
 			GFXPlotPixelChecked(gMode,x1,y1);
 			GFXPlotPixelChecked(gMode,x2,y1);
 		}
 		y1 += yDir;
+	}
+}
+
+// ***************************************************************************************
+//
+//									Draw scaled string
+//
+// ***************************************************************************************
+
+void GFXScaledText(struct GraphicsMode *gMode,char *s,int x,int y) {
+	while (*s != '\0') {
+		char c = *s++;
+		if (c >= ' ' && c < 0x80) {
+			int y1 = y;
+			for (int yc = 0;yc < 7;yc++) {				
+				int bits = font_5x7[(c-' ')*8+yc];
+				int x1 = x;
+				while (bits != 0) {
+					if (bits & 0x80) {
+						GFXRectangle(gMode,x1,y1,x1+drawSize,y1+drawSize,-1);
+					}
+					x1 += drawSize;
+					bits = (bits << 1) & 0xFF;
+				}
+			y1 += drawSize;
+			}
+		}
+		x = x + 6 * drawSize;
 	}
 }
 
@@ -94,13 +122,16 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 			GFXFastLine(&gMode,x1,y1,x2,y2);
 			break;
 		case 3:
-			GFXRectangle(&gMode,x1,y1,x2,y2);
+			GFXRectangle(&gMode,x1,y1,x2,y2,useSolidFill);
 			break;
 		case 4:
 			GFXEllipse(&gMode,x1,y1,x2,y2,useSolidFill);
 			break;
 		case 5:
 			GFXPlotPixelChecked(&gMode,x1,y1);
+			break;
+		case 6:
+			GFXScaledText(&gMode,DSPGetString(data,8),x1,y1);
 			break;
 	}
 }
