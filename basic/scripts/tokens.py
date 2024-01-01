@@ -113,7 +113,7 @@ class TokenSet(object):
 			!!END 	!!SH1	!!SH2	!!DEC 	TO 		LET 	PRINT	INPUT	
 			SYS 	EXIT	, 		; 		: 		' 		)		READ 	
 			DATA 	ELSE	WHEN	DOWNTO 	POKE	DOKE 	LOCAL	CALL
-			# 		. 		LINE 	RECT 	MOVE 	PLOT 	ELLIPSE	IMAGE	
+			# 		. 		LINE 	RECT 	MOVE 	PLOT 	ELLIPSE	
 			TEXT
 			""")
 		#
@@ -122,7 +122,8 @@ class TokenSet(object):
 		self.add(0x180,"""
 			CLEAR 	NEW 	RUN 	STOP 	END 	ASSERT 	LIST 	SAVE 	
 			LOAD	CAT 	GOSUB 	GOTO	RETURN 	RESTORE	DIM		FKEY
-			CLS 	INK		FRAME	SOLID	BY 		WHO 	PALETTE
+			CLS 	INK		FRAME	SOLID	BY 		WHO 	PALETTE 
+			DRAW	IMAGE
 			""")
 		#
 		#		Keyword tokens (assembler)

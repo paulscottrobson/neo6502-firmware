@@ -2,12 +2,7 @@
 '		Graphics very simple demo
 '
 repeat
-	call test(1,2000)
-	call test(2,2000)
-	call test(3,1000)
-	call test(4,1000)
-	call test(5,1000)
-	call test(6,1000)
+	for i = 1 to 7:call test(i,1000):next
 until 0
 end
 
@@ -20,5 +15,6 @@ proc test(type,count)
 		if type = 4 then rect ink rand(16) frame to rand(320),rand(240)
 		if type = 5 then ellipse ink rand(16) solid to rand(320),rand(240)
 		if type = 6 then ellipse ink rand(16) frame to rand(320),rand(240)
+		if type = 7 then text "Hello!" ink rand(16) dim rand(4)+1 to rand(320),rand(240)
 	next
 endproc

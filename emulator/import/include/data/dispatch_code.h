@@ -232,6 +232,9 @@ switch (*DCOMMAND) {
 			case 6:
 				GFXGraphicsCommand(6,DCOMMAND);
 				break;
+			case 32:
+				gMode.setPalette(DPARAMS[0],DPARAMS[1],DPARAMS[2],DPARAMS[3]);
+				break;
 		}
 		break;
 }
