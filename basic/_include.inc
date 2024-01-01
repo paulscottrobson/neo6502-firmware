@@ -55,6 +55,7 @@
 	.include "sources/commands/load.asm"
 	.include "sources/commands/local.asm"
 	.include "sources/commands/new.asm"
+	.include "sources/commands/palette.asm"
 	.include "sources/commands/pokedoke.asm"
 	.include "sources/commands/readdata.asm"
 	.include "sources/commands/restore.asm"

@@ -24,13 +24,13 @@ Identifier
 Total size = 6 + len(name). Expands when this value is >= $FC, so it will
 allocate extra space, but only once.
 
-LINE x,y (TO x,y) (BY x,y) (INK c) (INK a,x) (SOLID) (FRAME)
-MOVE
-RECT
-ELLIPSE
+Graphics structure
+==================
++0 		File type (1)
++1 		# of 16x16 tiles (numbered from $80)
++2 		# of 16x16 sprites (numbered from $80)
++3 		# of 32x32 sprites (numbered from $C0)
++4..15 	Not used
++16 	First tile (stored consecutively)
 
-IMAGE n (TO x,y) (BY x,y) (DIM n)
-SPRITE n (TO x,y) (BY x,y) (IMAGE n) (DIM n)
-TEXT "xxxx" (DIM n) (TO x,y) (BY x,y) (INK c) (INK a,x)
-
-TILE ?
+DRAW IMAGE grp,img DIM n TO/BY

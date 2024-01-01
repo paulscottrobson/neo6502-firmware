@@ -19,8 +19,8 @@ Firmware only
 Both
 ----
 	- Graphics system.
-		- Palette modification.
-		- Sprites, Images and Tiles, graphics source.
+		- Devise a method for storing sprites.
+		- Sprites, Images and Tiles
 	- Controller system.
 	- Audio system driver on emulator, and audio interface
 
@@ -31,4 +31,4 @@ Other
 
 Add to Documentation
 --------------------
-	PLOT MOVE LINE ELLIPSE RECT TEXT
+
