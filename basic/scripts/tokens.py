@@ -97,7 +97,7 @@ class TokenSet(object):
 			!!STR 	$ 		(		RAND(	RND(	ISVAL(	INT(	TIME(	EVENT(	
 			INKEY$(	ASC(	CHR$(	SQR( 	LEN(  	ABS(  	SGN( 	VAL( 	STR$( 	
 			MID$(	LEFT$( 	RIGHT$(	SIN( 	COS(	TAN(	ATAN(	LOG(	EXP( 	
-			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN(
+			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	HIT(
 			""",48)
 		#
 		#		Structure tokens
@@ -135,7 +135,12 @@ class TokenSet(object):
 			PLX	PLY	ROL	ROR	RTI	RTS	SBC	SEC	SED	SEI	STA	STX	STY	STZ	
 			TAX	TAY	TRB	TSB	TSX	TXA	TXS	TYA STP
 		""")
-
+		#
+		#		Additional Unary functions, less popular
+		#
+		self.add(0x2D0,"""
+		""")
+		
 if __name__ == "__main__":
 	ts = TokenSet()
 	print(ts.getRange(0x80))

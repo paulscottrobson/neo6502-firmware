@@ -12,6 +12,7 @@ General
 
 BASIC only
 ----------
+- Move tokens : SIN COS TAN ATAN LOG EXP ALLOC VAL STR$ ISVAL
 
 Firmware only
 -------------
@@ -26,7 +27,9 @@ Both
 
 Other
 -----
-	- Emulator useability improvements
+	- Convert BAS back to BSC.
+	- Autorun on emulator.
+	- Emulator useability improvements ?
 	- Cross development instructions
 
 Add to Documentation
