@@ -19,10 +19,13 @@ Firmware only
 Both
 ----
 	- Graphics system.
-		- Pack demo sprites
-		- Sprites, Images and Tiles
+		- Images
+		- Amend demo.
+		- Sprites
 	- Controller system.
 	- Audio system driver on emulator, and audio interface
+	- Graphics system
+		- Tiles
 
 Other
 -----
