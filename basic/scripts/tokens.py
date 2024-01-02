@@ -94,9 +94,9 @@ class TokenSet(object):
 		#		Unary tokens from $80-$B0
 		#
 		self.add(0x80,"""
-			!!STR 	$ 		(		RAND(	RND(	ISVAL(	INT(	TIME(	EVENT(	
-			INKEY$(	ASC(	CHR$(	SQR( 	LEN(  	ABS(  	SGN( 	VAL( 	STR$( 	
-			MID$(	LEFT$( 	RIGHT$(	SIN( 	COS(	TAN(	ATAN(	LOG(	EXP( 	
+			!!STR 	$ 		(		RAND(	RND(	!!UN10	INT(	TIME(	EVENT(	
+			INKEY$(	ASC(	CHR$(	!!UN11 	LEN(  	ABS(  	SGN( 	!!UN8	!!UN9
+			MID$(	LEFT$( 	RIGHT$(	!!UN2	!!UN3	!!UN4	!!UN5	!!UN6	!!UN7
 			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	HIT(
 			""",48)
 		#
@@ -134,11 +134,13 @@ class TokenSet(object):
 			JMP	JSR	LDA	LDX	LDY	LSR	NOP	ORA	PHA	PHP	PHX	PHY	PLA	PLP	
 			PLX	PLY	ROL	ROR	RTI	RTS	SBC	SEC	SED	SEI	STA	STX	STY	STZ	
 			TAX	TAY	TRB	TSB	TSX	TXA	TXS	TYA STP
-		""")
+		""",80)
 		#
 		#		Additional Unary functions, less popular
 		#
 		self.add(0x2D0,"""
+			SIN( 	COS(	TAN(	ATAN(	LOG(	EXP( 	VAL( 	STR$( 	
+			ISVAL( 	SQR(
 		""")
 		
 if __name__ == "__main__":
@@ -146,6 +148,7 @@ if __name__ == "__main__":
 	print(ts.getRange(0x80))
 	print(ts.getRange(0x180))
 	print(ts.getRange(0x20))
+	print(ts.getRange(0x280))
 	print(ts.nameToToken.keys())
 	print(ts.getByName("!!str"))
 

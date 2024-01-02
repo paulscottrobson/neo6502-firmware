@@ -12,7 +12,6 @@ General
 
 BASIC only
 ----------
-- Move tokens : SIN COS TAN ATAN LOG EXP ALLOC VAL STR$ ISVAL
 - Autorun on emulator.
 
 Firmware only

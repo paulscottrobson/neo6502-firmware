@@ -95,6 +95,7 @@ class TestProgram(object):
 	# 		Add a line of the program to the typed-in and the result
 	#
 	def addLine(self,lineNumber,code):
+		print(code)
 		self.sourceLines.append("{0} {1}".format(lineNumber,code))
 		if code != "":
 			self.program[lineNumber] = self.tokenWorker.tokenise(code)

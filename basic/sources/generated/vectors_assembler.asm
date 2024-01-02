@@ -68,4 +68,29 @@ AssemblerVectorTable:
 	.word	Assemble_txs             ; $2be txs
 	.word	Assemble_tya             ; $2bf tya
 	.word	Assemble_stp             ; $2c0 stp
+	.word	Unimplemented            ; $2c1 
+	.word	Unimplemented            ; $2c2 
+	.word	Unimplemented            ; $2c3 
+	.word	Unimplemented            ; $2c4 
+	.word	Unimplemented            ; $2c5 
+	.word	Unimplemented            ; $2c6 
+	.word	Unimplemented            ; $2c7 
+	.word	Unimplemented            ; $2c8 
+	.word	Unimplemented            ; $2c9 
+	.word	Unimplemented            ; $2ca 
+	.word	Unimplemented            ; $2cb 
+	.word	Unimplemented            ; $2cc 
+	.word	Unimplemented            ; $2cd 
+	.word	Unimplemented            ; $2ce 
+	.word	Unimplemented            ; $2cf 
+	.word	UnarySin                 ; $2d0 sin(
+	.word	UnaryCos                 ; $2d1 cos(
+	.word	UnaryTan                 ; $2d2 tan(
+	.word	UnaryATan                ; $2d3 atan(
+	.word	UnaryLog                 ; $2d4 log(
+	.word	UnaryExp                 ; $2d5 exp(
+	.word	EXPUnaryVal              ; $2d6 val(
+	.word	StrUnary                 ; $2d7 str$(
+	.word	EXPUnaryIsVal            ; $2d8 isval(
+	.word	UnarySqr                 ; $2d9 sqr(
 	.send code

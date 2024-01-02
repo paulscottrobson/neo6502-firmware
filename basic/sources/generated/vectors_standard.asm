@@ -8,28 +8,28 @@ StandardVectorTable:
 	.word	UnaryParenthesis         ; $82 (
 	.word	UnaryRand                ; $83 rand(
 	.word	UnaryRnd                 ; $84 rnd(
-	.word	EXPUnaryIsVal            ; $85 isval(
+	.word	Unimplemented            ; $85 !!un10
 	.word	UnaryInt                 ; $86 int(
 	.word	EXPUnaryTime             ; $87 time(
 	.word	EXPUnaryEvent            ; $88 event(
 	.word	UnaryInkey               ; $89 inkey$(
 	.word	EXPUnaryAsc              ; $8a asc(
 	.word	ChrUnary                 ; $8b chr$(
-	.word	UnarySqr                 ; $8c sqr(
+	.word	Unimplemented            ; $8c !!un11
 	.word	EXPUnaryLen              ; $8d len(
 	.word	UnaryAbs                 ; $8e abs(
 	.word	UnarySgn                 ; $8f sgn(
-	.word	EXPUnaryVal              ; $90 val(
-	.word	StrUnary                 ; $91 str$(
+	.word	Unimplemented            ; $90 !!un8
+	.word	Unimplemented            ; $91 !!un9
 	.word	Unary_Mid                ; $92 mid$(
 	.word	Unary_Left               ; $93 left$(
 	.word	Unary_Right              ; $94 right$(
-	.word	UnarySin                 ; $95 sin(
-	.word	UnaryCos                 ; $96 cos(
-	.word	UnaryTan                 ; $97 tan(
-	.word	UnaryATan                ; $98 atan(
-	.word	UnaryLog                 ; $99 log(
-	.word	UnaryExp                 ; $9a exp(
+	.word	Unimplemented            ; $95 !!un2
+	.word	Unimplemented            ; $96 !!un3
+	.word	Unimplemented            ; $97 !!un4
+	.word	Unimplemented            ; $98 !!un5
+	.word	Unimplemented            ; $99 !!un6
+	.word	Unimplemented            ; $9a !!un7
 	.word	UnaryKey                 ; $9b key(
 	.word	PeekUnary                ; $9c peek(
 	.word	DeekUnary                ; $9d deek(

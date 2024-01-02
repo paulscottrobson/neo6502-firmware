@@ -32,7 +32,9 @@ EvaluateTerm:
 		;
 		;		Unary function.
 		;
-_ETKeyword:		
+_ETKeyword:	
+		cmp 	#KWD_SYS_SH2 				; is it a shift unary function
+		beq 	_ETShiftUnary	
 		cmp 	#$B0 						; is it a unary function ?
 		bcs 	_ETSyntax
 		phx
@@ -41,6 +43,22 @@ _ETKeyword:
 		lda 	StandardVectorTable,x
 		sta 	_ETVector+1
 		lda 	StandardVectorTable+1,x
+		sta 	_ETVector+2
+		plx 								; restore stack pos and go there.
+		iny 								; consume
+		bra 	_ETVector
+		;
+_ETShiftUnary:
+		iny 								; get the shifted value
+		lda 	(codePtr),y		
+		cmp 	#$D0 						; not a unary function
+		bcc 	_ETSyntax
+		phx
+		asl 	a 							; access address to jump
+		tax
+		lda 	AssemblerVectorTable,x
+		sta 	_ETVector+1
+		lda 	AssemblerVectorTable+1,x
 		sta 	_ETVector+2
 		plx 								; restore stack pos and go there.
 		iny 								; consume
