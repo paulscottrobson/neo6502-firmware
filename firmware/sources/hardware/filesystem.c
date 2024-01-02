@@ -1,11 +1,11 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      fileio.c
+//      Name :      filesystem.c
 //      Authors :   Paul Robson (paul@robsons.org.uk)
-//      Date :      18th December 2023
+//      Date :      2nd January 2024
 //      Reviewed :  No
-//      Purpose :   File I/O code.
+//      Purpose :   File I/O interface code.
 //
 // ***************************************************************************************
 // ***************************************************************************************
@@ -13,6 +13,7 @@
 #include "common.h"
 #include <inttypes.h>
 #include "ff.h"
+#include "system/fileio.h"
 
 // ***************************************************************************************
 //
@@ -21,25 +22,21 @@
 // ***************************************************************************************
 
 void FIODirectory(void) {
-	DIR d;
-	STOInitialise();
-	FRESULT r = f_opendir(&d,"/");
-	char szBuffer[320];
-	if (r == FR_OK) {
-		FILINFO fi;
-		while (f_readdir(&d,&fi) == FR_OK && fi.fname[0] != '\0') {
-			if (fi.fname[0] != '.') {
-				sprintf(szBuffer,"%-32s ",fi.fname);
-				if (fi.fattrib & AM_DIR) {
-					strcat(szBuffer,"<DIR>");
+	if (FISDirectoryOpen() == 0) {
+		char szBuffer[320];
+		int isDirectory,fileSize;
+		while (FISDirectoryNext(szBuffer,&isDirectory,&fileSize) == 0) {
+			if (szBuffer[0] != '.') {
+				while (strlen(szBuffer) < 32) strcat(szBuffer," ");
+				if (isDirectory != 0) {
+					strcat(szBuffer,"<Dir>");
 				} else {
-					sprintf(szBuffer+strlen(szBuffer),"%d bytes.",(int)fi.fsize);
+					sprintf(szBuffer+strlen(szBuffer),"%d bytes.",fileSize);
 				}
-				CONWriteString(szBuffer);
-				CONWriteString("\r");
+				CONWriteString(szBuffer);CONWriteString("\r");
 			}
 		}
-		f_closedir(&d);
+		FISDirectoryClose();
 	}
 }   
 
@@ -50,20 +47,8 @@ void FIODirectory(void) {
 // ***************************************************************************************
 
 uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
-	FIL file;
-	FRESULT result;
-	UINT bytesRead;
-	STOInitialise();
-	result = f_open(&file, fileName, FA_READ);
-	if (result == FR_OK) {
-		if (loadAddress == 0xFFFF) {
-			f_read(&file,gfxMemory+loadAddress,GFX_MEMORY_SIZE,&bytesRead);
-		} else {
-			f_read(&file,cpuMemory+loadAddress,0x10000-loadAddress,&bytesRead);
-		}
-		f_close(&file);
-	}
-	return (result == FR_OK) ? 0 : 1;
+	uint16_t maxRead = (loadAddress == 0xFFFF) ? GFX_MEMORY_SIZE : 0x10000-loadAddress;
+	return FISReadFile(fileName,loadAddress,maxRead);
 }
 
 // ***************************************************************************************
@@ -73,17 +58,8 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 // ***************************************************************************************
 
 uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
-	FIL file;
-	FRESULT result;
-	UINT bytesWritten;
-	if (size > 0x10000-startAddress) return 2;
-	STOInitialise();
-	result = f_open(&file, fileName, FA_WRITE|FA_CREATE_ALWAYS);
-	if (result == FR_OK) {
-		f_write(&file,cpuMemory+startAddress,size,&bytesWritten);
-		f_close(&file);
-	}
-	return (result == FR_OK) ? 0 : 1;
+	if (startAddress == 0xFFFF) return 1;
+	return FISWriteFile(fileName,startAddress,size);
 }
 
 // ***************************************************************************************
