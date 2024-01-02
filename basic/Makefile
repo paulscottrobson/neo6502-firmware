@@ -23,15 +23,21 @@ all: build
 
 # ***************************************************************************************
 #
-#						Build the Python Text->BASIC tokeniser
+#						Build the Python Text->BASIC converters
 #
 # ***************************************************************************************
 
-makebasic:
+convert:
 	$(CCOPY) scripts$(S)*.py build
 	$(CCOPY) build$(S)makebasic.py build$(S)__main__.py
 	$(CDEL) $(BINDIR)makebasic.zip
 	zip -j $(BINDIR)makebasic.zip build$(S)__main__.py build$(S)tokens.py build$(S)tokeniser.py
+	$(CDEL) build$(S)*.py
+
+	$(CCOPY) scripts$(S)*.py build
+	$(CCOPY) build$(S)listbasic.py build$(S)__main__.py
+	$(CDEL) $(BINDIR)listbasic.zip
+	zip -j $(BINDIR)listbasic.zip build$(S)__main__.py build$(S)tokens.py
 	$(CDEL) build$(S)*.py
 
 # ***************************************************************************************
