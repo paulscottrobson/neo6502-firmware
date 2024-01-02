@@ -35,7 +35,7 @@ all: emulator
 always:
 	
 run: always emulator
-	$(EMULATOR) 
+	$(EMULATOR)
 	
 krun: always kernel emulator
 	$(EMULATOR) $(BINDIR)kernel.bin@FC00 

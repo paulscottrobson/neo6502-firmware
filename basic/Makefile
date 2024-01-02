@@ -17,7 +17,7 @@ include ../build_env/common.make
 endif
 
 BASPROG = test.bsc 
-RUNCMD =  $(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@800 build$(S)wedge.bin@FFFA
+RUNCMD =  $(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@800 build$(S)wedge.bin@FFFA  
 
 all: build
 
