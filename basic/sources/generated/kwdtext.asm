@@ -56,7 +56,7 @@ BaseTokenText:
 	.byte	$06,$41,$4c,$4c,$4f,$43,$a8   	; $ 9e ALLOC(
 	.byte	$04,$4d,$41,$58,$a8           	; $ 9f MAX(
 	.byte	$04,$4d,$49,$4e,$a8           	; $ a0 MIN(
-	.byte	$00                           	; $ a1 
+	.byte	$04,$48,$49,$54,$a8           	; $ a1 HIT(
 	.byte	$00                           	; $ a2 
 	.byte	$00                           	; $ a3 
 	.byte	$00                           	; $ a4 
@@ -118,8 +118,7 @@ BaseTokenText:
 	.byte	$04,$4d,$4f,$56,$c5           	; $ dc MOVE
 	.byte	$04,$50,$4c,$4f,$d4           	; $ dd PLOT
 	.byte	$07,$45,$4c,$4c,$49,$50,$53,$c5	; $ de ELLIPSE
-	.byte	$05,$49,$4d,$41,$47,$c5       	; $ df IMAGE
-	.byte	$04,$54,$45,$58,$d4           	; $ e0 TEXT
+	.byte	$04,$54,$45,$58,$d4           	; $ df TEXT
 	.byte	$FF
 
 Shift1TokenText:
@@ -146,6 +145,8 @@ Shift1TokenText:
 	.byte	$02,$42,$d9                   	; $194 BY
 	.byte	$03,$57,$48,$cf               	; $195 WHO
 	.byte	$07,$50,$41,$4c,$45,$54,$54,$c5	; $196 PALETTE
+	.byte	$04,$44,$52,$41,$d7           	; $197 DRAW
+	.byte	$05,$49,$4d,$41,$47,$c5       	; $198 IMAGE
 	.byte	$FF
 
 Shift2TokenText:

@@ -56,7 +56,13 @@ void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y) {
 	}
 }
 
-static inline void horLine(struct GraphicsMode *gMode,int x1,int x2,int y) {
+// ***************************************************************************************
+//
+// 								Draw a horizontal line.
+//
+// ***************************************************************************************
+
+static void GFXHorizontalLine(struct GraphicsMode *gMode,int x1,int x2,int y) {
     int x;
 	int xEnd;
 
@@ -69,7 +75,7 @@ static inline void horLine(struct GraphicsMode *gMode,int x1,int x2,int y) {
 	}
 
 	do {
-		GFXPlotPixel(gMode,x,y);
+		GFXPlotPixelChecked(gMode,x,y);
 		x++;
 	} while( x != xEnd);
 
@@ -95,7 +101,7 @@ void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int sol
 
     do {
 		if (solid != 0 || yRow == y1 || yRow == y2) {
-			horLine(gMode,x1,x2,yRow);
+			GFXHorizontalLine(gMode,x1,x2,yRow);
 		} else {
 			GFXPlotPixelChecked(gMode,x1,yRow);
 			GFXPlotPixelChecked(gMode,x2,yRow);

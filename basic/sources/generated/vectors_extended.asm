@@ -26,4 +26,6 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $194 by
 	.word	Command_WHO              ; $195 who
 	.word	Command_Palette          ; $196 palette
+	.word	Unimplemented            ; $197 draw
+	.word	Unimplemented            ; $198 image
 	.send code
