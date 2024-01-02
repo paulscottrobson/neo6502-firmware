@@ -62,7 +62,7 @@ void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y) {
 //
 // ***************************************************************************************
 
-static inline void GFXHorizontalLine(struct GraphicsMode *gMode,int x1,int x2,int y) {
+static void GFXHorizontalLine(struct GraphicsMode *gMode,int x1,int x2,int y) {
     int x;
 	int xEnd;
 
@@ -75,7 +75,7 @@ static inline void GFXHorizontalLine(struct GraphicsMode *gMode,int x1,int x2,in
 	}
 
 	do {
-		GFXPlotPixel(gMode,x,y);
+		GFXPlotPixelChecked(gMode,x,y);
 		x++;
 	} while( x != xEnd);
 

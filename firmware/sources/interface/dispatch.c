@@ -13,6 +13,7 @@
 #include "common.h"
 #include "data/prompt.h"
 #include "interface/kbdcodes.h"
+#include "interface/filesystem.h"
 
 #define DCOMMAND    (cBlock+0)
 #define DFUNCTION   (cBlock+1)

@@ -9,7 +9,7 @@ target_sources(firmware PRIVATE main.c
     #       Hardware sources
     #
     hardware/dvi_320x240x256.c hardware/usbdriver.c hardware/timer.c hardware/sound.c 
-    hardware/fdebug.c hardware/filesystem.c
+    hardware/fdebug.c hardware/fileimplementation.c
     #
     #       Select Storage interface.
     #
@@ -29,7 +29,7 @@ target_sources(firmware PRIVATE main.c
     #
     interface/graphics.c interface/console.c interface/keyboard.c interface/memory.c 
     interface/dispatch.c interface/maths.c interface/config.c interface/efla.c
-    interface/gfxcommands.c interface/ellipse.c interface/fileio.c
+    interface/gfxcommands.c interface/ellipse.c interface/fileinterface.c
 )
 
 target_compile_definitions(firmware

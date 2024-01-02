@@ -106,9 +106,18 @@ void FDBWrite(uint8_t c) {
 //
 // *******************************************************************************************************************************
 
-void FIODirectory(void) {
+int FISDirectoryOpen(void) {
 	CONWriteString((char *)"Directory listing not emulated.\r");
+	return 1;
 }
+
+int FISDirectoryClose(void) {
+	return 1;
+}
+
+int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize) {
+	return 1;
+}   
 
 // ***************************************************************************************
 //
@@ -116,16 +125,16 @@ void FIODirectory(void) {
 //
 // ***************************************************************************************
 
-uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
+uint8_t FISReadFile(char *fileName,uint16_t loadAddress,uint16_t maxSize) {
 	printf("Reading %s to $%x\n",fileName,loadAddress);
 	char szFileName[64];
 	sprintf(szFileName,"storage/%s",fileName);
 	FILE *f = fopen(szFileName,"rb");
 	if (f != NULL) {
 		if (loadAddress == 0xFFFF) {
-			fread(gfxMemory,1,GFX_MEMORY_SIZE,f);
+			fread(gfxMemory,1,maxSize,f);
 		} else {
-			fread(CPUAccessMemory()+loadAddress,1,0xFFFF,f);
+			fread(CPUAccessMemory()+loadAddress,1,maxSize,f);
 		}
 		fclose(f);
 	}
@@ -138,7 +147,7 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 //
 // ***************************************************************************************
 
-uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
+uint8_t FISWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
 	printf("Writing %s from $%x size $%x\n",fileName,startAddress,size);
 	char szFileName[64];
 	sprintf(szFileName,"storage/%s",fileName);

@@ -1,7 +1,7 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      fileio.h
+//      Name :      filesystem.h
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //      Date :      18th December 2023
 //      Reviewed :  No
@@ -10,16 +10,15 @@
 // ***************************************************************************************
 // ***************************************************************************************
 
-#ifndef _FILEIO_H
-#define _FILEIO_H
+#ifndef _FILESYS_H
+#define _FILESYS_H
 
-void FIODirectory(void);
-uint8_t FIOReadFile(char *fileName,uint16_t loadAddress);
+int FISDirectoryOpen(void);
+int FISDirectoryClose(void);
+int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize);
+
+uint8_t FISReadFile(char *fileName,uint16_t loadAddress,uint16_t maxSize);
 uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size);
-
-void _FIODirectory(void);
-uint8_t _FIOReadFile(char *fileName,uint16_t loadAddress);
-uint8_t _FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size);
 
 #endif
 
