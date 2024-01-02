@@ -12,7 +12,6 @@ General
 
 BASIC only
 ----------
-- Autorun on emulator.
 
 Firmware only
 -------------
@@ -20,13 +19,14 @@ Firmware only
 Both
 ----
 	- Graphics system.
-		- Devise a method for storing sprites.
+		- Pack demo sprites
 		- Sprites, Images and Tiles
 	- Controller system.
 	- Audio system driver on emulator, and audio interface
 
 Other
 -----
+	- Autorun on emulator.
 	- Emulator useability improvements ?
 	- Cross development instructions
 
