@@ -17,6 +17,10 @@ void FIODirectory(void);
 uint8_t FIOReadFile(char *fileName,uint16_t loadAddress);
 uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size);
 
+void _FIODirectory(void);
+uint8_t _FIOReadFile(char *fileName,uint16_t loadAddress);
+uint8_t _FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size);
+
 #endif
 
 // ***************************************************************************************
