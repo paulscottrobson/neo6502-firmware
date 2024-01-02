@@ -58,22 +58,58 @@ void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y) {
 
 // ***************************************************************************************
 //
+// 								Draw a horizontal line.
+//
+// ***************************************************************************************
+
+static inline void GFXHorizontalLine(struct GraphicsMode *gMode,int x1,int x2,int y) {
+    int x;
+	int xEnd;
+
+	if (x2>x1){
+		x = x1;
+		xEnd = x2+1;
+	} else {
+		x = x2;
+		xEnd = x1+1;
+	}
+
+	do {
+		GFXPlotPixel(gMode,x,y);
+		x++;
+	} while( x != xEnd);
+
+}
+
+// ***************************************************************************************
+//
 // 										Draw a rectangle
 //
 // ***************************************************************************************
 
 void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int solid) {
-	int ySize = abs(y1-y2);
-	int yDir = (y1 < y2) ? 1 : -1;
-	for (int l = 0;l < ySize;l++) {
-		if (solid != 0 || l == 0 || l == ySize-1) {
-			GFXFastLine(gMode,x1,y1,x2,y1);
-		} else {
-			GFXPlotPixelChecked(gMode,x1,y1);
-			GFXPlotPixelChecked(gMode,x2,y1);
-		}
-		y1 += yDir;
+    int yRow;
+	int yEnd;
+
+	if (y2>y1) {
+		yRow = y1;
+		yEnd = y2+1;
+	} else {
+		yRow = y2;
+		yEnd = y1+1;
 	}
+
+    do {
+		if (solid != 0 || yRow == y1 || yRow == y2) {
+			GFXHorizontalLine(gMode,x1,x2,yRow);
+		} else {
+			GFXPlotPixelChecked(gMode,x1,yRow);
+			GFXPlotPixelChecked(gMode,x2,yRow);
+		}
+
+        yRow++;
+
+	} while( yRow != yEnd);
 }
 
 // ***************************************************************************************

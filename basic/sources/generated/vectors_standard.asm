@@ -36,7 +36,7 @@ StandardVectorTable:
 	.word	EXPUnaryAlloc            ; $9e alloc(
 	.word	EXPUnaryMax              ; $9f max(
 	.word	EXPUnaryMin              ; $a0 min(
-	.word	Unimplemented            ; $a1 
+	.word	Unimplemented            ; $a1 hit(
 	.word	Unimplemented            ; $a2 
 	.word	Unimplemented            ; $a3 
 	.word	Unimplemented            ; $a4 
@@ -98,6 +98,5 @@ StandardVectorTable:
 	.word	Command_Move             ; $dc move
 	.word	Command_Plot             ; $dd plot
 	.word	Command_Ellipse          ; $de ellipse
-	.word	Unimplemented            ; $df image
-	.word	Command_Text             ; $e0 text
+	.word	Command_Text             ; $df text
 	.send code
