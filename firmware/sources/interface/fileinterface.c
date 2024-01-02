@@ -1,7 +1,7 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      filesystem.c
+//      Name :      fileinterface.c
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //      Date :      2nd January 2024
 //      Reviewed :  No
@@ -13,7 +13,6 @@
 #include "common.h"
 #include <inttypes.h>
 #include "ff.h"
-#include "system/fileio.h"
 
 // ***************************************************************************************
 //
