@@ -12,7 +12,6 @@ General
 
 BASIC only
 ----------
-- Convert BAS back to BSC Python & Commit with marker.
 - Move tokens : SIN COS TAN ATAN LOG EXP ALLOC VAL STR$ ISVAL
 - Autorun on emulator.
 
