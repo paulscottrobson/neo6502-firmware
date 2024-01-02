@@ -97,22 +97,24 @@ void CPUReset(void) {
 		strcpy(command,argumentList[i]);  											// Copy command
 		char *pos = strchr(command,'@'); 											// Look for splitting @
 		if (pos != NULL) {
-			int ch,address,a1;
+			int ch,address;
+			unsigned char *p;
 			*pos++ = '\0'; 															// Split it
 			if (sscanf(pos,"%x",&address) != 1)  									// Hex -> Decimal
 						exit(fprintf(stderr,"Bad format %s",pos));
-			a1 = address;					
+			p = cpuMemory+address;				 									// Load here.	
+			if (address == 0xFFFF) p = gfxMemory;  									// Load to graphics memory
+			printf("Load %s to %x\n",command,address);
 			FILE *f = fopen(command,"rb");  										// Read file in and copy to RAM.
 			if (f == NULL) exit(fprintf(stderr,"Bad file %s",command));
 			while (ch = fgetc(f),ch >= 0) {
-				cpuMemory[address] = ch;
+				*p++ = ch;
 				address = (address+1) & 0xFFFF;
 			}
 			fclose(f);
-			printf("Load %s to %x\n",command,a1);
 		}
 	}
-	resetProcessor();																// Reset CPU	
+	resetProcessor();																// Reset CPU		
 }
 
 // *******************************************************************************************************************************
