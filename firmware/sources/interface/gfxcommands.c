@@ -12,7 +12,7 @@
 
 #include "common.h"
 
-static uint8_t pixelAnd,pixelXor,useSolidFill,drawSize;
+static uint8_t pixelAnd,pixelXor,useSolidFill,drawSize,flipBits;
 
 // ***************************************************************************************
 //
@@ -23,6 +23,7 @@ static uint8_t pixelAnd,pixelXor,useSolidFill,drawSize;
 void GFXResetDefaults(void) {
 	pixelAnd = 0;pixelXor = 7;
 	useSolidFill = 0;drawSize = 1;
+	flipBits = 0;
 }
 
 // ***************************************************************************************
@@ -36,6 +37,7 @@ void GFXSetDefaults(uint8_t *cmd) {
 	pixelXor = cmd[5];
 	useSolidFill = cmd[6];
 	drawSize = cmd[7];
+	flipBits = cmd[8];
 }
 
 // ***************************************************************************************
@@ -168,6 +170,9 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 			break;
 		case 6:
 			GFXScaledText(&gMode,DSPGetString(data,8),x1,y1);
+			break;
+		case 7:
+			printf("%d,%d %d %d %d\n",x1,y1,data[8],drawSize,flipBits);
 			break;
 	}
 }

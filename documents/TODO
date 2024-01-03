@@ -14,8 +14,7 @@ To next release
 ---------------
 	- Graphics system.
 		- Images
-				- Flip to general & set state.
-				- Image ID
+				Image drawing code.
 		- Amend demo for images.
 	- Autorun on emulator ? Generalise the system.
 	- Emulator useability improvements ?

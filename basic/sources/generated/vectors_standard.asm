@@ -99,4 +99,5 @@ StandardVectorTable:
 	.word	Command_Plot             ; $dd plot
 	.word	Command_Ellipse          ; $de ellipse
 	.word	Command_Text             ; $df text
+	.word	Command_Image            ; $e0 image
 	.send code

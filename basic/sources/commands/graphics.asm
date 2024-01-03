@@ -24,6 +24,8 @@ Command_Line:	;; [line]
 Command_Rect: 	;; [rect]
 Command_Ellipse: ;; [ellipse]
 Command_Plot: 	;; [plot]
+Command_Image:  ;; [image]
+
 		dey 								; point at the original coordinates
 GCommandLoop:
 		lda 	(codePtr),y
@@ -51,9 +53,27 @@ GCommandLoop:
 		inx
 		cmp 	#KWD_TEXT
 		beq 	_GChangeModeText
+		inx
+		cmp 	#KWD_IMAGE
+		beq 	_GChangeModeImage
 		dey 								; unconsume
 		bra 	_GNotMode
 
+_GChangeModeImage:
+		phx
+		stz 	graphicsFlip 				; default flip
+		jsr 	EXPEvalInteger8 			; the image number
+		sta 	graphicsImageID 			; save ID
+		lda 	(codePtr),y 				; followed by comma ?
+		cmp 	#KWD_COMMA
+		bne 	_GCMINotComma
+		iny 								; consume comma
+		jsr 	EXPEvalInteger8 			; get flip
+		sta 	graphicsFlip 		
+_GCMINotComma:		
+		jsr 	GCSendDrawingInfo 			; update flip
+		plx 
+		bra 	_GChangeMode
 _GChangeModeText: 							; switch mode to text
 		phx
 		ldx 	#0
@@ -95,6 +115,12 @@ _GNotMode:
 		lda 	graphicsText+1
 		sta 	ControlParameters+5
 _GNotText:
+		lda 	graphicsCurrent 			; are we in image
+		cmp 	#7
+		bne 	_GNotImage
+		lda 	graphicsImageID 			; copy image ID into slot 4.
+		sta 	ControlParameters+4		
+_GNotImage:		
 		DoWaitMessage 						; wait till hardware free
 		lda	 	graphicsCurrent 			; current action.
 		cmp 	#1 							; if move, do nothing
@@ -163,7 +189,7 @@ _GCDim:
 		iny 								; consume DIM
 		jsr 	EXPEvalInteger8 			; get size
 		sta 	graphicsSize 				; update it.
-		jsr 	_GCSendDrawingInfo
+		jsr 	GCSendDrawingInfo
 		lda 	#0 							; do not execute.
 		sec
 		rts
@@ -173,7 +199,7 @@ _GCDim:
 _GCSolidFrame:
 		stx 	graphicsSolidMode 			; get mode to X for frame/solid
 		iny 								; consume 2nd half of token.
-		jsr 	_GCSendDrawingInfo
+		jsr 	GCSendDrawingInfo
 		lda 	#0 							; do not execute.
 		sec
 		rts
@@ -221,14 +247,14 @@ _GCInk:
 		jsr 	EXPEvalInteger8 			; get the xor value
 		sta 	inkXorByte
 _GCIExit:
-		jsr 	_GCSendDrawingInfo
+		jsr 	GCSendDrawingInfo
 		sec  								; found but don't draw.
 		lda 	#0
 		rts
 		;
 		;		If Ink, Size, solid mode changed notify the co processor
 		;
-_GCSendDrawingInfo:
+GCSendDrawingInfo:
 		lda 	inkAndByte
 		sta 	ControlParameters+0
 		lda 	inkXorByte
@@ -237,6 +263,8 @@ _GCSendDrawingInfo:
 		sta 	ControlParameters+2
 		lda 	graphicsSize
 		sta 	ControlParameters+3
+		lda 	graphicsFlip
+		sta 	ControlParameters+4
 		DoSendMessage
 		.byte 	5,1
 		DoWaitMessage
