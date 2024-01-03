@@ -240,4 +240,11 @@ switch (*DCOMMAND) {
 				break;
 		}
 		break;
+	case 7:
+		switch (*DFUNCTION) {
+			case 1:
+				*DPARAMS = KBDKeyboardController();
+				break;
+		}
+		break;
 }

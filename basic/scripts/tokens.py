@@ -94,7 +94,7 @@ class TokenSet(object):
 		#		Unary tokens from $80-$B0
 		#
 		self.add(0x80,"""
-			!!STR 	$ 		(		RAND(	RND(	!!UN10	INT(	TIME(	EVENT(	
+			!!STR 	$ 		(		RAND(	RND(	JOYPAD(	INT(	TIME(	EVENT(	
 			INKEY$(	ASC(	CHR$(	!!UN11 	LEN(  	ABS(  	SGN( 	!!UN8	!!UN9
 			MID$(	LEFT$( 	RIGHT$(	TRUE	FALSE	!!UN4	!!UN5	!!UN6	!!UN7
 			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	HIT(

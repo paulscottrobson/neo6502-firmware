@@ -18,10 +18,16 @@
 
 		.section code	
 
-EXPUnaryNull: ;; [$]
-		jsr 	EXPEvalInteger 				; get a value
+EXPUnaryDollar: ;; [$]
+		lda 	(codePtr),y 				; check constant follows.
+		and 	#$C0
+		cmp 	#$40
+		bne 	_EUDSyntax
+		jsr 	EvaluateTerm 				; get the hex value
 		rts
-
+_EUDSyntax:
+		.error_syntax
+		
 		.send code
 				
 ; ************************************************************************************************

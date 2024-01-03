@@ -174,9 +174,7 @@ int GFXFindImage(int type,int id) {
 // ***************************************************************************************
 
 void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int flip) {
-
 	if (gfxMemory[0] == 0) return;  											// No graphics installed.
-
 	int size = 16;  															// Figure out the size in pixels, type (0-2) and id in that type.
 	int type = 0;   															// Sprite records use a different mapping.
 	if (id >= 0x80) {   														// Drawing a sprite 16x16 ($80-$BF) 32x32 ($C0-$FF)
