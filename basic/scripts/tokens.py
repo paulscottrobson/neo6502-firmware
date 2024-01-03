@@ -95,9 +95,9 @@ class TokenSet(object):
 		#
 		self.add(0x80,"""
 			!!STR 	$ 		(		RAND(	RND(	JOYPAD(	INT(	TIME(	EVENT(	
-			INKEY$(	ASC(	CHR$(	!!UN11 	LEN(  	ABS(  	SGN( 	!!UN8	!!UN9
+			INKEY$(	ASC(	CHR$(	!!UN11 	LEN(  	ABS(  	SGN( 	HIT(	!!UN9
 			MID$(	LEFT$( 	RIGHT$(	TRUE	FALSE	!!UN4	!!UN5	!!UN6	!!UN7
-			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	HIT(
+			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	
 			""",48)
 		#
 		#		Structure tokens
@@ -113,8 +113,8 @@ class TokenSet(object):
 			!!END 	!!SH1	!!SH2	!!DEC 	TO 		LET 	PRINT	INPUT	
 			SYS 	EXIT	, 		; 		: 		' 		)		READ 	
 			DATA 	ELSE	WHEN	DOWNTO 	POKE	DOKE 	LOCAL	CALL
-			# 		. 		LINE 	RECT 	MOVE 	PLOT 	ELLIPSE	
-			TEXT 	IMAGE
+			# 		. 		LINE 	RECT 	MOVE 	PLOT 	ELLIPSE	TEXT 	
+			IMAGE 	SPRITE
 			""")
 		#
 		#		Keyword tokens (minor)
@@ -122,8 +122,8 @@ class TokenSet(object):
 		self.add(0x180,"""
 			CLEAR 	NEW 	RUN 	STOP 	END 	ASSERT 	LIST 	SAVE 	
 			LOAD	CAT 	GOSUB 	GOTO	RETURN 	RESTORE	DIM		FKEY
-			CLS 	INK		FRAME	SOLID	BY 		WHO 	PALETTE 
-			DRAW	!!UN2
+			CLS 	INK		FRAME	SOLID	BY 		WHO 	PALETTE DRAW	
+			HIDE
 			""")
 		#
 		#		Keyword tokens (assembler)

@@ -19,7 +19,7 @@ StandardVectorTable:
 	.word	EXPUnaryLen              ; $8d len(
 	.word	UnaryAbs                 ; $8e abs(
 	.word	UnarySgn                 ; $8f sgn(
-	.word	Unimplemented            ; $90 !!un8
+	.word	Unimplemented            ; $90 hit(
 	.word	Unimplemented            ; $91 !!un9
 	.word	Unary_Mid                ; $92 mid$(
 	.word	Unary_Left               ; $93 left$(
@@ -36,7 +36,7 @@ StandardVectorTable:
 	.word	EXPUnaryAlloc            ; $9e alloc(
 	.word	EXPUnaryMax              ; $9f max(
 	.word	EXPUnaryMin              ; $a0 min(
-	.word	Unimplemented            ; $a1 hit(
+	.word	Unimplemented            ; $a1 
 	.word	Unimplemented            ; $a2 
 	.word	Unimplemented            ; $a3 
 	.word	Unimplemented            ; $a4 
@@ -100,4 +100,5 @@ StandardVectorTable:
 	.word	Command_Ellipse          ; $de ellipse
 	.word	Command_Text             ; $df text
 	.word	Command_Image            ; $e0 image
+	.word	Unimplemented            ; $e1 sprite
 	.send code

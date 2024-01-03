@@ -39,7 +39,7 @@ BaseTokenText:
 	.byte	$04,$4c,$45,$4e,$a8           	; $ 8d LEN(
 	.byte	$04,$41,$42,$53,$a8           	; $ 8e ABS(
 	.byte	$04,$53,$47,$4e,$a8           	; $ 8f SGN(
-	.byte	$00                           	; $ 90 
+	.byte	$04,$48,$49,$54,$a8           	; $ 90 HIT(
 	.byte	$00                           	; $ 91 
 	.byte	$05,$4d,$49,$44,$24,$a8       	; $ 92 MID$(
 	.byte	$06,$4c,$45,$46,$54,$24,$a8   	; $ 93 LEFT$(
@@ -56,7 +56,7 @@ BaseTokenText:
 	.byte	$06,$41,$4c,$4c,$4f,$43,$a8   	; $ 9e ALLOC(
 	.byte	$04,$4d,$41,$58,$a8           	; $ 9f MAX(
 	.byte	$04,$4d,$49,$4e,$a8           	; $ a0 MIN(
-	.byte	$04,$48,$49,$54,$a8           	; $ a1 HIT(
+	.byte	$00                           	; $ a1 
 	.byte	$00                           	; $ a2 
 	.byte	$00                           	; $ a3 
 	.byte	$00                           	; $ a4 
@@ -120,6 +120,7 @@ BaseTokenText:
 	.byte	$07,$45,$4c,$4c,$49,$50,$53,$c5	; $ de ELLIPSE
 	.byte	$04,$54,$45,$58,$d4           	; $ df TEXT
 	.byte	$05,$49,$4d,$41,$47,$c5       	; $ e0 IMAGE
+	.byte	$06,$53,$50,$52,$49,$54,$c5   	; $ e1 SPRITE
 	.byte	$FF
 
 Shift1TokenText:
@@ -147,7 +148,7 @@ Shift1TokenText:
 	.byte	$03,$57,$48,$cf               	; $195 WHO
 	.byte	$07,$50,$41,$4c,$45,$54,$54,$c5	; $196 PALETTE
 	.byte	$04,$44,$52,$41,$d7           	; $197 DRAW
-	.byte	$00                           	; $198 
+	.byte	$04,$48,$49,$44,$c5           	; $198 HIDE
 	.byte	$FF
 
 Shift2TokenText:
