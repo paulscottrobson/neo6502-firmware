@@ -60,7 +60,7 @@ uint8_t FISReadFile(char *fileName,uint16_t loadAddress,uint16_t maxSize) {
 	result = f_open(&file, fileName, FA_READ);
 	if (result == FR_OK) {
 		if (loadAddress == 0xFFFF) {
-			f_read(&file,gfxMemory+loadAddress,maxSize,&bytesRead);
+			f_read(&file,gfxMemory,maxSize,&bytesRead);
 		} else {
 			f_read(&file,cpuMemory+loadAddress,0x10000-loadAddress,&bytesRead);
 		}

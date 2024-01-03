@@ -1,8 +1,10 @@
 '
 '		Graphics very simple demo
 '
+cls
+load "test.gfx",$FFFF
 repeat
-	for i = 1 to 7:call test(i,1000):next
+	for i = 1 to 8:call test(i,1000):next
 until 0
 end
 
@@ -16,5 +18,10 @@ proc test(type,count)
 		if type = 5 then ellipse ink rand(16) solid to rand(320),rand(240)
 		if type = 6 then ellipse ink rand(16) frame to rand(320),rand(240)
 		if type = 7 then text "Hello!" ink rand(16) dim rand(4)+1 to rand(320),rand(240)
+		if type = 8
+			id = rand(3):if id <> 0 then id=id*64+64
+			image id,rand(4) dim rand(3)+1 to rand(320),rand(240)
+		endif
 	next
 endproc
+
