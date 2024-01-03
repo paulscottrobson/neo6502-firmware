@@ -100,8 +100,12 @@ void CPUReset(void) {
 			int ch,address;
 			unsigned char *p;
 			*pos++ = '\0'; 															// Split it
-			if (sscanf(pos,"%x",&address) != 1)  									// Hex -> Decimal
-						exit(fprintf(stderr,"Bad format %s",pos));
+			if (strcmp(pos,"page") == 0) { 											// Load to page.
+				address = cpuMemory[0x809] + (cpuMemory[0x80A] << 8);
+			} else {
+				if (sscanf(pos,"%x",&address) != 1)  								// Hex -> Decimal
+							exit(fprintf(stderr,"Bad format %s",pos));
+			}
 			p = cpuMemory+address;				 									// Load here.	
 			if (address == 0xFFFF) p = gfxMemory;  									// Load to graphics memory
 			printf("Load %s to %x\n",command,address);
@@ -112,6 +116,19 @@ void CPUReset(void) {
 				address = (address+1) & 0xFFFF;
 			}
 			fclose(f);
+		} else {
+			if (strcmp(command,"cold") == 0) { 										// Cold boots from $800
+				printf("Cold boot $800\n");
+				cpuMemory[0xFFFC] = 0;cpuMemory[0xFFFD] = 8;
+			}
+			if (strcmp(command,"warm") == 0) { 										// Warm boots from $803
+				printf("Warm boot $803\n");
+				cpuMemory[0xFFFC] = 3;cpuMemory[0xFFFD] = 8;
+			}
+			if (strcmp(command,"exec") == 0) { 										// Warm boots from $806
+				printf("Warm boot $806\n");
+				cpuMemory[0xFFFC] = 6;cpuMemory[0xFFFD] = 8;
+			}
 		}
 	}
 	resetProcessor();																// Reset CPU		

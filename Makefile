@@ -22,7 +22,7 @@ RELEASEFILE = neo6502.zip
 DOCDIR = documents$(S)release$(S)
 
 DOCUMENTS = $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
-BINARIES = $(BINDIR)firmware.uf2 $(BINDIR)firmware.elf $(BINDIR)*.dll $(BINDIR)*.exe
+BINARIES = $(BINDIR)firmware.uf2 $(BINDIR)firmware.elf $(BINDIR)*.dll $(BINDIR)*.exe $(BINDIR)basic.bin
 
 all: samples always
 	make -B -C kernel
