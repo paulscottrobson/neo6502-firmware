@@ -29,7 +29,7 @@ all: samples
 	$(CDEL) release$(S)samples.zip
 
 samples:
-	zip -r -j release$(S)samples.zip basic$(S)code 
+	zip -r -j release$(S)samples.zip basic$(S)code documents$(S)images$(S)test.gfx
 	zip -d release$(S)samples.zip *.bsc *.tass
 
 always:

@@ -119,6 +119,7 @@ BaseTokenText:
 	.byte	$04,$50,$4c,$4f,$d4           	; $ dd PLOT
 	.byte	$07,$45,$4c,$4c,$49,$50,$53,$c5	; $ de ELLIPSE
 	.byte	$04,$54,$45,$58,$d4           	; $ df TEXT
+	.byte	$05,$49,$4d,$41,$47,$c5       	; $ e0 IMAGE
 	.byte	$FF
 
 Shift1TokenText:
@@ -146,7 +147,7 @@ Shift1TokenText:
 	.byte	$03,$57,$48,$cf               	; $195 WHO
 	.byte	$07,$50,$41,$4c,$45,$54,$54,$c5	; $196 PALETTE
 	.byte	$04,$44,$52,$41,$d7           	; $197 DRAW
-	.byte	$05,$49,$4d,$41,$47,$c5       	; $198 IMAGE
+	.byte	$00                           	; $198 
 	.byte	$FF
 
 Shift2TokenText:
