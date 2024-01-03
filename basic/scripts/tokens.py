@@ -140,7 +140,7 @@ class TokenSet(object):
 		#
 		self.add(0x2D0,"""
 			SIN( 	COS(	TAN(	ATAN(	LOG(	EXP( 	VAL( 	STR$( 	
-			ISVAL( 	SQR(
+			ISVAL( 	SQR( 	PAGE
 		""")
 		
 if __name__ == "__main__":

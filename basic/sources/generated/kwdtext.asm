@@ -241,6 +241,7 @@ Shift2TokenText:
 	.byte	$05,$53,$54,$52,$24,$a8       	; $2d7 STR$(
 	.byte	$06,$49,$53,$56,$41,$4c,$a8   	; $2d8 ISVAL(
 	.byte	$04,$53,$51,$52,$a8           	; $2d9 SQR(
+	.byte	$04,$50,$41,$47,$c5           	; $2da PAGE
 	.byte	$FF
 
 BinaryPrecedence:

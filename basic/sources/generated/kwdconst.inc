@@ -201,3 +201,4 @@ KWD_VALLPAREN                      = $2d6 ; val(
 KWD_STRDOLLARLPAREN                = $2d7 ; str$(
 KWD_ISVALLPAREN                    = $2d8 ; isval(
 KWD_SQRLPAREN                      = $2d9 ; sqr(
+KWD_PAGE                           = $2da ; page

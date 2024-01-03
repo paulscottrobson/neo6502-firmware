@@ -22,11 +22,12 @@ BASICBUILD = 0 								; 0: Installable 1: Testmode 2: Tokenise test.
 
 		.section code
 
-boot:   jmp     ColdStart 					; $800 cold start
-		jmp     WarmStart 					; $803 warm start
-		.byte 	Program>>8,Program&$FF,0 	; $806 address of Program base (var table)
+boot:   jmp     BColdStart 					; $800 cold start
+		jmp     BWarmStart 					; $803 warm start
+		jmp 	Command_RUN 				; $806 run program
+		.byte 	Program & $FF,Program>>8,0 	; $809 address of Program base (var table)
 		
-ColdStart:
+BColdStart:
 		ldy 	#_CSMsg >> 8
 		lda 	#_CSMsg & $FF
 		jsr 	CPPrintYA 
@@ -34,9 +35,6 @@ ColdStart:
 		.if 	BASICBUILD==2
 		jsr 	NewProgram
 		jmp 	TestTokenising  
-		.endif
-		.if 	BASICBUILD==1
-		jmp     Command_RUN
 		.endif
 
 		jsr 	NewProgram
@@ -49,11 +47,13 @@ _CSMSgEnd:
 		.include "_include.inc"
 		.section code
 
+BWarmStart:
+		jsr 	ClearCode
+		jmp 	WarmStart
+
 		.align  256
 Program:
-		.if 	BASICBUILD==1
-		.binary "build/tokenised.dat"
-		.endif
+
 		
 		.send code
 

@@ -17,7 +17,7 @@ include ../build_env/common.make
 endif
 
 BASPROG = test.bsc 
-RUNCMD =  $(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@800 build$(S)wedge.bin@FFFA
+RUNCMD =  $(EMULATOR) $(BINDIR)kernel.bin@FC00 build$(S)basic.bin@800 
 
 all: build
 
@@ -28,7 +28,6 @@ all: build
 # ***************************************************************************************
 
 release:
-		make -B wedge
 		make -B convert
 		make -B build
 
@@ -71,26 +70,16 @@ prelim: always
 	$(PYTHON) $(BINDIR)makebasic.zip build$(S)$(BASPROG) -obuild$(S)tokenised.dat
 
 # ***************************************************************************************
-#			Build the 'wedge' that boots straight into BASIC by fixing RST vector
-#
-# ***************************************************************************************
-
-wedge:
-	$(ASSEMBLER) wedge.asm -o build$(S)wedge.bin
-
-# ***************************************************************************************
 #
 #						Build the test BASIC (e.g. runs test.bas)
 #
 # ***************************************************************************************
 
 tbuild: prelim
-	$(ASSEMBLER) -DBASICBUILD=1 basic.asm -L build/basic.lst -o build/basic.bin
-	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 800
-	$(CCOPY) build$(S)basic_binary.h $(BINDIR)
+	$(ASSEMBLER) -DBASICBUILD=0 basic.asm -L build$(S)basic.lst -o build$(S)basic.bin
 
 trun:tbuild	
-	$(RUNCMD)
+	$(RUNCMD) build$(S)tokenised.dat@page exec
 
 # ***************************************************************************************
 #
@@ -102,9 +91,10 @@ build: prelim
 	$(ASSEMBLER) -DBASICBUILD=0 basic.asm -L build/basic.lst -o build/basic.bin
 	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 800
 	$(CCOPY) build$(S)basic_binary.h $(BINDIR)
+	$(CCOPY) build$(S)basic.bin $(BINDIR)
 
 run:build	
-	$(RUNCMD)
+	$(RUNCMD) cold
 	
 # ***************************************************************************************
 #
@@ -144,8 +134,8 @@ test:
 	make array
 
 testrun: prelim
-	$(ASSEMBLER) -DBASICBUILD=1 basic.asm -L build/basic.lst -o build/basic.bin
-	$(RUNCMD)
+	$(ASSEMBLER) basic.asm -L build/basic.lst -o build/basic.bin
+	$(RUNCMD) build$(S)tokenised.dat@page exec
 
 binary:
 	$(PYTHON) tests$(S)binary.py >build$(S)test.bsc
@@ -186,7 +176,7 @@ manytokens:
 tokens: prelim	
 	$(PYTHON) tests$(S)makeprogram.py
 	$(ASSEMBLER) -DBASICBUILD=2 basic.asm -L build/basic.lst -o build/basic.bin
-	$(RUNCMD)
+	$(RUNCMD) cold
 	$(PYTHON) tests$(S)testprogram.py
 
 # ***************************************************************************************
@@ -227,4 +217,4 @@ checkasm:
 # ***************************************************************************************
 
 basemachine:
-	$(EMULATOR) #$(BINDIR)kernel.bin@FC00 build$(S)basic.bin@800 build$(S)wedge.bin@FFFA
+	$(EMULATOR) 

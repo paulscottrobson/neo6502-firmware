@@ -93,4 +93,5 @@ AssemblerVectorTable:
 	.word	StrUnary                 ; $2d7 str$(
 	.word	EXPUnaryIsVal            ; $2d8 isval(
 	.word	UnarySqr                 ; $2d9 sqr(
+	.word	Unimplemented            ; $2da page
 	.send code

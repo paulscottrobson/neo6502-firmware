@@ -13,15 +13,13 @@ General
 To next release
 ---------------
 Changes:
-	- Autorun on emulator ? Generalise the system, replace wedge.
-
-	- Emulator useability improvements ? Cross development instructions
-
+	- PAGE
 	- Double build
 
 R2 can go, maybe.
-
-
+	- Rebuild
+	- Rebuild Windows Emulator
+	
 Todo
 ----
   - User defined font ?
