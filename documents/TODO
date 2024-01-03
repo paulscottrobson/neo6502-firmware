@@ -33,4 +33,17 @@ Other
 
 Add to Documentation
 --------------------
+	SPRITE
+	HIT
 
+
+Sprites
+-------
+		position x,y
+		flip flags v/h
+		pairs of graphic ID/address
+		visible/invisible
+		anchor offsets centre initially ?
+
+		SPRITE CLEAR (everything off, clear all sprites to hidden etc.)
+		SPRITE <id>	HIDE IMAGE n,n,n,n | TO x,y <shows> | BY x,y <shows> | FLIP n <reset at SPRITE>  can 'resprite' as usual.
