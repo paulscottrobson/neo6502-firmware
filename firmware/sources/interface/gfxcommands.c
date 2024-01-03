@@ -128,7 +128,7 @@ void GFXScaledText(struct GraphicsMode *gMode,char *s,int x,int y) {
 				int x1 = x;
 				while (bits != 0) {
 					if (bits & 0x80) {
-						GFXRectangle(gMode,x1,y1,x1+drawSize,y1+drawSize,-1);
+						GFXRectangle(gMode,x1,y1,x1+drawSize-1,y1+drawSize-1,-1);
 					}
 					x1 += drawSize;
 					bits = (bits << 1) & 0xFF;

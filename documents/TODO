@@ -10,28 +10,31 @@ General
 - Current clock 5.61 Mhz, can optimise this slightly.
   (would be nice to get to F256 speed of 6.29 Mhz probably out of reach)
 
-BASIC only
-----------
-
-Firmware only
--------------
-
-Both
-----
+To next release
+---------------
 	- Graphics system.
 		- Images
-		- Amend demo.
+				- Flip to general & set state.
+				- Image ID
+		- Amend demo for images.
+	- Autorun on emulator ? Generalise the system.
+	- Emulator useability improvements ?
+	- Cross development instructions
+	- Double build
+
+R2 can go.
+
+
+Todo
+----
+	- Graphics system
 		- Sprites
+		- Tiles
 	- Controller system.
 	- Audio system driver on emulator, and audio interface
-	- Graphics system
-		- Tiles
 
 Other
 -----
-	- Autorun on emulator.
-	- Emulator useability improvements ?
-	- Cross development instructions
 
 Add to Documentation
 --------------------
