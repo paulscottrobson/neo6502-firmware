@@ -13,12 +13,13 @@ General
 To next release
 ---------------
 Changes:
-	- Write a controller demo.
-	- Autorun on emulator ? Generalise the system.
+	- Autorun on emulator ? Generalise the system, replace wedge.
+
 	- Emulator useability improvements ? Cross development instructions
+
 	- Double build
 
-R2 can go.
+R2 can go, maybe.
 
 
 Todo
