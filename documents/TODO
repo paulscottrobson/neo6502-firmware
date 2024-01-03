@@ -12,13 +12,13 @@ General
 
 To next release
 ---------------
-	- Graphics system.
-		- Images
-				Image drawing code.
-		- Amend demo for images.
+Bugs:
+	- print 2*$40+$20 doesn't work.
+
+Changes:
+	- Controller system, write a controller demo.
 	- Autorun on emulator ? Generalise the system.
-	- Emulator useability improvements ?
-	- Cross development instructions
+	- Emulator useability improvements ? Cross development instructions
 	- Double build
 
 R2 can go.
@@ -29,7 +29,6 @@ Todo
 	- Graphics system
 		- Sprites
 		- Tiles
-	- Controller system.
 	- Audio system driver on emulator, and audio interface
 
 Other
@@ -37,4 +36,4 @@ Other
 
 Add to Documentation
 --------------------
-
+		IMAGE
