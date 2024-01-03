@@ -41,9 +41,8 @@ EXPUnaryJoypad: ;; [joypad(]
 
 EUJCopyToVariable:
 		pha 									; save status.
-		ldx 	#0 								; evaluate a term, must be a L-Expr		
 		jsr 	EvaluateTerm
-		lda 	XSControl 						; check integer variable
+		lda 	XSControl,x						; check integer variable
 		and 	#(XS_TYPEBIT|XS_ISVARIABLE)
 		cmp 	#XS_ISVARIABLE
 		bne 	_EUCTJError
@@ -64,10 +63,13 @@ EUJCopyToVariable:
 _EUCTVRetZero:
 		lda 	#0
 _EUCTVRetA:		
-		ldx 	XSNumber0 						; make zTemp0 point to the variable
-		stx 	zTemp0
-		ldx 	XSNumber1
-		stx 	zTemp0+1
+		pha
+		lda 	XSNumber0,x 					; make zTemp0 point to the variable
+		sta 	zTemp0
+		lda 	XSNumber1,x
+		sta 	zTemp0+1
+		pla
+		
 		phy
 		ldy 	#3 								; fill int with A
 _EUCTVRLoop:		

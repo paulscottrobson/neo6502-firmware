@@ -24,7 +24,11 @@ DOCDIR = documents$(S)release$(S)
 DOCUMENTS = $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
 BINARIES = $(BINDIR)firmware.uf2 $(BINDIR)firmware.elf $(BINDIR)*.dll $(BINDIR)*.exe
 
-all: samples
+all: samples always
+	make -B -C kernel
+	make -B -C basic
+	make -B -C firmware
+	make -B -C emulator
 	zip -r -j release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) release$(S)samples.zip
 	$(CDEL) release$(S)samples.zip
 

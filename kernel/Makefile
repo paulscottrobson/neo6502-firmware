@@ -20,7 +20,15 @@ endif
 BINARY = firmware
 KERNELSOURCES = kernel.asm
 
-all: always
+all: always kernel
+
+# ***************************************************************************************
+#
+#									Release kernel
+#
+# ***************************************************************************************
+
+kernel:
 	$(CDEL) $(BINDIR)binary.h
 	$(CDEL) build$(S)binary.h
 	$(CDEL) $(BINDIR)kernel.bin
@@ -31,5 +39,15 @@ all: always
 	$(CCOPY) build$(S)kernel_binary.h $(BINDIR)
 	$(CCOPY) neo6502.inc $(BINDIR)
 	$(CCOPY) neo6502.inc $(ROOTDIR)documents$(S)release
+
 always:
+
+# ***************************************************************************************
+#
+#									Release rebuild
+#
+# ***************************************************************************************
+
+release:
+		make -B kernel
 
