@@ -307,6 +307,23 @@ static uint8_t KBDLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifi
 
 // ***************************************************************************************
 //
+//							Read the keyboard controller
+//
+// ***************************************************************************************
+
+uint8_t KBDKeyboardController(void) {
+	uint8_t ck = 0;
+	if (keyboardState[29]) ck |= 0x01; 											// Z bit 0
+	if (keyboardState[27]) ck |= 0x02; 											// X bit 1
+	if (keyboardState[14]) ck |= 0x04; 											// K bit 2
+	if (keyboardState[16]) ck |= 0x08; 											// M bit 3
+	if (keyboardState[15]) ck |= 0x10; 											// L bit 4
+	if (keyboardState[51]) ck |= 0x20; 											// ; bit 5 (key imm right of L)
+	return ck;
+}
+
+// ***************************************************************************************
+//
 //		Date 		Revision
 //		==== 		========
 //

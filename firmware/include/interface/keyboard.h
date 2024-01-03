@@ -23,6 +23,7 @@ bool KBDIsKeyAvailable(void);
 uint8_t KBDGetKey(void);
 void KBDSetLocale(char c1,char c2);
 uint8_t KBDSetFunctionKey(int fKey,const char *keyText);
+uint8_t KBDKeyboardController(void);
 //
 //		Keyboard repeat rates, in 1/100 sec
 //

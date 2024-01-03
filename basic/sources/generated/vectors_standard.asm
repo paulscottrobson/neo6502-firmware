@@ -4,11 +4,11 @@
 	.section code
 StandardVectorTable:
 	.word	EXPUnaryInlineString     ; $80 !!str
-	.word	EXPUnaryNull             ; $81 $
+	.word	EXPUnaryDollar           ; $81 $
 	.word	UnaryParenthesis         ; $82 (
 	.word	UnaryRand                ; $83 rand(
 	.word	UnaryRnd                 ; $84 rnd(
-	.word	Unimplemented            ; $85 !!un10
+	.word	EXPUnaryJoypad           ; $85 joypad(
 	.word	UnaryInt                 ; $86 int(
 	.word	EXPUnaryTime             ; $87 time(
 	.word	EXPUnaryEvent            ; $88 event(
