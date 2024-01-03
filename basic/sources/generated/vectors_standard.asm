@@ -24,8 +24,8 @@ StandardVectorTable:
 	.word	Unary_Mid                ; $92 mid$(
 	.word	Unary_Left               ; $93 left$(
 	.word	Unary_Right              ; $94 right$(
-	.word	Unimplemented            ; $95 !!un2
-	.word	Unimplemented            ; $96 !!un3
+	.word	ConstTrue                ; $95 true
+	.word	ConstFalse               ; $96 false
 	.word	Unimplemented            ; $97 !!un4
 	.word	Unimplemented            ; $98 !!un5
 	.word	Unimplemented            ; $99 !!un6

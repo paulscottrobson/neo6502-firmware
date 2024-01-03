@@ -19,16 +19,6 @@
 		.section code
 
 Command_Text: 	;; [text]
-		lda 	#6 							; set mode to text.
-		sta 	graphicsCurrent
-		ldx 	#0
-		jsr 	EXPEvalString 				; get string to print out
-		lda 	XSNumber0
-		sta 	graphicsText
-		lda 	XSNumber1
-		sta 	graphicsText+1
-		bra 	GCommandLoop
-
 Command_Move:	;; [move]
 Command_Line:	;; [line]
 Command_Rect: 	;; [rect]
@@ -42,6 +32,7 @@ GCommandLoop:
 		cmp 	#KWD_COLON
 		beq 	_GCExit
 		;
+		iny 								; consume
 		ldx 	#1 							; can we change mode ?
 		cmp 	#KWD_MOVE
 		beq 	_GChangeMode
@@ -59,12 +50,22 @@ GCommandLoop:
 		beq 	_GChangeMode
 		inx
 		cmp 	#KWD_TEXT
-		beq 	_GChangeMode
+		beq 	_GChangeModeText
+		dey 								; unconsume
 		bra 	_GNotMode
+
+_GChangeModeText: 							; switch mode to text
+		phx
+		ldx 	#0
+		jsr 	EXPEvalString 				; get string to print out
+		lda 	XSNumber0
+		sta 	graphicsText
+		lda 	XSNumber1
+		sta 	graphicsText+1
+		plx
 
 _GChangeMode:
 		stx		graphicsCurrent 			; switch mode to MOVE, LINE, RECT, ELLIPSE, PLOT
-		iny 								; consume token.
 		bra 	GCommandLoop
 _GCExit:
 		rts		
@@ -97,11 +98,12 @@ _GNotText:
 		DoWaitMessage 						; wait till hardware free
 		lda	 	graphicsCurrent 			; current action.
 		cmp 	#1 							; if move, do nothing
-		beq 	GCommandLoop
+		beq 	_GCommandLoop2
 		sta 	ControlFunction 			
 		lda 	#5
 		sta 	ControlCommand_Check		; do command 5 (graphics)
 		DoWaitMessage 		
+_GCommandLoop2:		
 		jmp 	GCommandLoop
 
 _GMoveOnly:
@@ -269,6 +271,8 @@ GraphicsReset:
 		stz 	graphicsSolidMode 			; and frame mode.
 		stz 	graphicsText 				; and selected text.
 		stz 	graphicsText+1
+		stz 	graphicsImageID 			; image ID
+		stz 	graphicsFlip 				; flip
 		rts
 
 		.send code

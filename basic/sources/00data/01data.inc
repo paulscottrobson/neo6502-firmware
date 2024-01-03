@@ -162,7 +162,11 @@ graphicsSize: 								; graphics size.
 		.fill 	1	
 graphicsText: 								; size of string
 		.fill 	2				
-
+graphicsImageID: 							; ID of image
+		.fill 	1
+graphicsFlip:								; flip bits of image (0 = horiz,1 = vertical)
+		.fill 	1
+		s		
 		.send storage
 
 ; ************************************************************************************************
