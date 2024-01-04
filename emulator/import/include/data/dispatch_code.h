@@ -240,6 +240,19 @@ switch (*DCOMMAND) {
 				break;
 		}
 		break;
+	case 6:
+		switch (*DFUNCTION) {
+			case 1:
+				SPRReset();
+				break;
+			case 2:
+				SPRUpdate(DPARAMS);
+				break;
+			case 3:
+				SPRHide(DPARAMS);
+				break;
+		}
+		break;
 	case 7:
 		switch (*DFUNCTION) {
 			case 1:

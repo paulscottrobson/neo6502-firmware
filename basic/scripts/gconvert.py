@@ -166,3 +166,4 @@ if __name__ == "__main__":
 	ix = ImageExtractor(Image.open("16.png"),(255,0,0))
 	obj = ix.extract(95,0,16)
 	print(obj,obj.getData())
+
