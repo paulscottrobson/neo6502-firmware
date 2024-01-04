@@ -239,7 +239,7 @@ void CONWriteHex(uint16_t h) {
 	}
 }
 
-void CONWriteString(char *s) {
+void CONWriteString(const char *s) {
 	while (*s != '\0') CONWrite(*s++);
 }
 

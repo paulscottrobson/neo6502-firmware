@@ -28,7 +28,7 @@ void STOInitialise(void) {
     if (!isInitialised) {
         isInitialised = true;
         sd_card_t *pSD = sd_get_by_num(0);
-        FRESULT fr = f_mount(&pSD->fatfs, pSD->pcName, 1);
+        f_mount(&pSD->fatfs, pSD->pcName, 1);
     }
 }
 
