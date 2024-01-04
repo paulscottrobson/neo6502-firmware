@@ -11,16 +11,7 @@ target_sources(firmware PRIVATE main.c
     hardware/dvi_320x240x256.c hardware/usbdriver.c hardware/timer.c hardware/sound.c 
     hardware/fdebug.c hardware/fileimplementation.c
     #
-    #       Select Storage interface.
-    #
-    #       For USB Flash, select usb_storage and fatfs in libraries
-    #       For SD Card, select sdcard_storage and fatfs_spi in libraries
-    #
-    hardware/storage/usb_storage.c
-    #hardware/storage/null_storage.c
-    #hardware/storage/sdcard_storage.c
-    #
-    #       Select CPU driver
+    #       CPU type (pretty much permanently PIO now)
     #
     system/processor_pio.c
     #system/processor_bitbang.c
@@ -31,6 +22,13 @@ target_sources(firmware PRIVATE main.c
     interface/dispatch.c interface/maths.c interface/config.c interface/efla.c
     interface/gfxcommands.c interface/ellipse.c interface/fileinterface.c
 )
+
+if(USBKEY_STORAGE)
+    target_sources(firmware PRIVATE hardware/storage/usb_storage.c)
+endif()
+if(SDCARD_STORAGE)
+     target_sources(firmware PRIVATE hardware/storage/sdcard_storage.c)
+endif()
 
 target_compile_definitions(firmware
     PRIVATE PICO
@@ -55,14 +53,19 @@ target_link_libraries(firmware
     tinyusb_host
     tinyusb_device
     tinyusb_board
-    fatfs
-    #FatFs_SPI
 )
+
+if(USBKEY_STORAGE)
+    target_link_libraries(firmware fatfs)
+endif()
+if(SDCARD_STORAGE)
+    target_link_libraries(firmware FatFs_SPI)
+endif()
 
 target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 pico_add_extra_outputs(firmware)
 
-#add_subdirectory(../libraries/no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI build)
+add_subdirectory(../libraries/no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI build)
 
 add_custom_target(upload
     COMMAND openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program firmware.elf verify reset exit"

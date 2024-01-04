@@ -14,8 +14,8 @@ To next release
 ---------------
 Changes:
 
-	- Double build
 	- Simple sprites
+	- Image Constructor from 3 PNG files.
 	- Rebuild
 	- Rebuild Windows Emulator
 
@@ -23,7 +23,7 @@ R2 can go, maybe.
 	
   - User defined font ?
 	- Graphics system
-		- Sprites (upgrade, something like AMAL probably)
+		- Sprites (upgrade, something like AMAL probably and delayed update)
 		- Tiles
 	- Audio system driver on emulator, and audio interface
 
@@ -35,5 +35,4 @@ Add to Documentation
 	SPRITE
 	HIT
 
-
-S
+0330 123 1105

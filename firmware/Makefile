@@ -63,8 +63,6 @@ build: kernel always
 	make -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .
-	$(CCOPY) $(BINARY).uf2 $(BINDIR)
-	$(CCOPY) $(BINARY).elf $(BINDIR)
 
 # ***************************************************************************************
 #
@@ -74,7 +72,7 @@ build: kernel always
 
 clean: always
 	rm -Rf build
-	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S .
+	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DUSBKEY_STORAGE=1
 
 # ***************************************************************************************
 #
@@ -96,9 +94,32 @@ reset:
 
 # ***************************************************************************************
 #
+#								Build both firmware
+#
+# ***************************************************************************************
+
+dual:
+	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.c
+	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.c
+	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
+
+	rm -Rf build
+	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DUSBKEY_STORAGE=1
+	make -C build
+	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_usb.elf
+	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 $(BINDIR)$(BINARY)_usb.uf2
+
+	rm -Rf build
+	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DSDCARD_STORAGE=1
+	make -C build
+	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_sd.elf
+	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 $(BINDIR)$(BINARY)_sd.uf2
+
+# ***************************************************************************************
+#
 #									Release rebuild
 #
 # ***************************************************************************************
 
 release:
-	make -B rebuild
+	make -B dual

@@ -30,8 +30,6 @@ include_directories(
     include
 )
 
-
-
 FetchContent_Declare(
     PicoDVI
     GIT_REPOSITORY https://github.com/Wren6991/PicoDVI
