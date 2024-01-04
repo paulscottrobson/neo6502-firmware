@@ -22,6 +22,8 @@ static const char *_author = "Po-Han Lin (http://www.edepot.com)";
 
 void GFXFastLine(struct GraphicsMode *gMode,int x, int y, int x2, int y2) {
 
+	_author++;
+	
 	if (x < 0 || y < 0 || x >= gMode->xGSize || y >= gMode->yGSize) return;
 	if (x2 < 0 || y2 < 0 || x2 >= gMode->xGSize || y2 >= gMode->yGSize) return;
 

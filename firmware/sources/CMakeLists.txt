@@ -2,7 +2,7 @@ add_executable(firmware)
 
 pico_generate_pio_header(firmware ${CMAKE_CURRENT_LIST_DIR}/system/sm0_memory_emulation_with_clock.pio)
 
-add_definitions(-w)
+add_definitions(-Wno-error=unused-variable)
 
 target_sources(firmware PRIVATE main.c 
     #

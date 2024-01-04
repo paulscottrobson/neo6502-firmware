@@ -44,7 +44,7 @@ void FIODirectory(void) {
 //
 // ***************************************************************************************
 
-uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
+uint8_t FIOReadFile(const char *fileName,uint16_t loadAddress) {
 	uint16_t maxRead = (loadAddress == 0xFFFF) ? GFX_MEMORY_SIZE : 0x10000-loadAddress;
 	return FISReadFile(fileName,loadAddress,maxRead);
 }
@@ -55,7 +55,7 @@ uint8_t FIOReadFile(char *fileName,uint16_t loadAddress) {
 //
 // ***************************************************************************************
 
-uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size) {
+uint8_t FIOWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 	if (startAddress == 0xFFFF) return 1;
 	return FISWriteFile(fileName,startAddress,size);
 }

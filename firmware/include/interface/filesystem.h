@@ -17,12 +17,12 @@ int FISDirectoryOpen(void);
 int FISDirectoryClose(void);
 int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize);
 
-uint8_t FISReadFile(char *fileName,uint16_t loadAddress,uint16_t maxSize);
-uint8_t FISWriteFile(char *fileName,uint16_t startAddress,uint16_t size);
+uint8_t FISReadFile(const char *fileName,uint16_t loadAddress,uint16_t maxSize);
+uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size);
 
 void FIODirectory(void);
-uint8_t FIOReadFile(char *fileName,uint16_t loadAddress);
-uint8_t FIOWriteFile(char *fileName,uint16_t startAddress,uint16_t size);
+uint8_t FIOReadFile(const char *fileName,uint16_t loadAddress);
+uint8_t FIOWriteFile(const char *fileName,uint16_t startAddress,uint16_t size);
 #endif
 
 // ***************************************************************************************
