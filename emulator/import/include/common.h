@@ -46,6 +46,7 @@
 #include "interface/filesystem.h"
 #include "interface/config.h"
 #include "interface/miscellany.h"
+#include "interface/sprites.h"
 //
 //		Other Includes
 //

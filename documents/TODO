@@ -15,7 +15,12 @@ To next release
 Changes:
 
 	- Simple sprites
-	- Image Constructor from 3 PNG files.
+			- Write BASIC side handler and check with printf()
+			- Write Sprite code
+	- Hit
+			- Write Sprite demo
+
+	- Image Constructor app from 3 PNG files.
 	- Rebuild
 	- Rebuild Windows Emulator
 
