@@ -22,19 +22,19 @@ RELEASEFILE = neo6502.zip
 DOCDIR = documents$(S)release$(S)
 
 DOCUMENTS = $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
-BINARIES = $(BINDIR)firmware.uf2 $(BINDIR)firmware.elf $(BINDIR)*.dll $(BINDIR)*.exe $(BINDIR)basic.bin
+BINARIES = $(BINDIR)*.uf2 $(BINDIR)*.elf $(BINDIR)*.dll $(BINDIR)*.exe $(BINDIR)basic.bin
 
 all: samples always
-	make -B -C kernel
-	make -B -C basic
-	make -B -C firmware
-	make -B -C emulator
+	make -B -C kernel release
+	make -B -C basic release
+	make -B -C firmware release
+	make -B -C emulator release
 	zip -r -j release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) release$(S)samples.zip
 	$(CDEL) release$(S)samples.zip
 
 samples:
 	zip -r -j release$(S)samples.zip basic$(S)code documents$(S)images$(S)test.gfx
-	zip -d release$(S)samples.zip *.bsc *.tass
+	zip -d release$(S)samples.zip *.tass
 
 always:
 

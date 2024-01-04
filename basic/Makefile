@@ -30,7 +30,8 @@ all: build
 release:
 		make -B convert
 		make -B build
-
+		make -B demos
+		
 # ***************************************************************************************
 #
 #						Build the Python Text->BASIC converters

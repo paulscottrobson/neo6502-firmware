@@ -33,4 +33,26 @@ Graphics structure
 +4..15 	Not used
 +16 	First tile (stored consecutively)
 
-DRAW IMAGE grp,img DIM n TO/BY
+
+Sprites
+-------
+		state :
+			visible  	0
+			position	$FFFF both   
+			image # <composite of image and size in bit 6> $FF not drawable.
+			(actually drawn)
+			(offset to top left, both size/2)
+			(size, for checking bounds & drawing)
+			(image address)
+
+SPRITE CLEAR
+
+SPRITE <n> TO|BY <x,y> IMAGE <n> FLIP <n> DIM <s> 		Draws the current sprite, showing it.
+	   HIDE 											Makes it invisible
+
+HIT(n,n,d)
+
+6,1 	reset sprites, clear screen
+6,2 	update <n> x[2] y[2] image & size[1] flip[1] and show -ve values fail. 
+6,3 	hide <n>
+
