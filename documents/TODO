@@ -13,17 +13,17 @@ General
 To next release
 ---------------
 Changes:
-	- Double build
 
-R2 can go, maybe.
+	- Double build
+	- Simple sprites
 	- Rebuild
 	- Rebuild Windows Emulator
+
+R2 can go, maybe.
 	
-Todo
-----
   - User defined font ?
 	- Graphics system
-		- Sprites (initial)
+		- Sprites (upgrade, something like AMAL probably)
 		- Tiles
 	- Audio system driver on emulator, and audio interface
 
@@ -36,18 +36,4 @@ Add to Documentation
 	HIT
 
 
-Sprites
--------
-		position x,y of upper left.
-		flip flags v/h
-		pairs of graphic ID/address
-		visible/invisible
-
-		SPRITE CLEAR (everything off, clear all sprites to hidden etc.)
-		SPRITE <id>	HIDE IMAGE n,n,n,n | TO x,y <shows> | BY x,y <shows> | FLIP n <reset at SPRITE>  can 'resprite' as usual. | FRAME n
-
-7,1 clear all (hide)
-7,2 [id] [images] (hide)
-7,3 [id] [x,y] [flip] (show) centre ($FF don't change)
-7,4 [id] [image to select]
-7,5 [id] (hide)
+S
