@@ -18,6 +18,7 @@ include ../build_env/common.make
 endif
 
 BINARY = firmware
+STORAGE = SDCARD
 
 all: build
 
@@ -72,7 +73,7 @@ build: kernel always
 
 clean: always
 	rm -Rf build
-	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DUSBKEY_STORAGE=1
+	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -D$(STORAGE)_STORAGE=1
 
 # ***************************************************************************************
 #
@@ -80,7 +81,9 @@ clean: always
 #
 # ***************************************************************************************
 
-run: build
+run: build upload
+
+upload:	
 	$(UPLOADER) $(UPCONFIG) $(UPCOMMANDS)
 
 # ***************************************************************************************

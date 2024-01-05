@@ -19,9 +19,9 @@
 // ***************************************************************************************
 
 void CFGProcess(void) {
-	if (FIOReadFile(".config",0x100) == 0) {  									// Try to read config file
-		KBDSetLocale(cpuMemory[0x100],cpuMemory[0x101]);  						// Set locale from config file.
-	}
+//	if (FIOReadFile(".config",0x100) == 0) {  									// Try to read config file
+//		KBDSetLocale(cpuMemory[0x100],cpuMemory[0x101]);  						// Set locale from config file.
+//	}
 }
 
 // ***************************************************************************************
