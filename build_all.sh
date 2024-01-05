@@ -9,20 +9,5 @@ pushd firmware/libraries
 git submodule update --init -- fatfs PicoDVI tinyusb
 popd
 
-#kernel
-make -C kernel
+make all
 
-#basic
-make -C basic
-
-
-#prepare firmware
-rm -Rf firmware/build
-mkdir -p firmware/build
-cmake -B firmware/build firmware
-make -C firmware
-
-
-make -C emulator
-
-make
