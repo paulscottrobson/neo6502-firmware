@@ -34,7 +34,8 @@ R2 can go, maybe.
 		- Sprites (upgrade, something like AMAL probably and delayed update)
 		- Tiles
 	- Audio system driver on emulator, and audio interface
-
+	- Add USB Joystick interface if stable.
+	
 Other
 -----
 
