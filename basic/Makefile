@@ -222,9 +222,9 @@ basemachine:
 
 # ***************************************************************************************
 #
-#								Start VLC showing HDMI in
+#								Start VLC showing HDMI in (me only)
 #
 # ***************************************************************************************
 
 vlc:
-	vlc v4l2:///dev/video2:fps=30:chroma=mjpg:width=640:height=480
+	vlc v4l2:///dev/video2:fps=30:chroma=mjpg:width=640:height=480 &

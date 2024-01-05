@@ -83,6 +83,12 @@ zTemp1:
 ; ************************************************************************************************
 
 		.section storage
+
+; ************************************************************************************************
+;	
+;										Main Interpreter
+;
+; ************************************************************************************************
 		
 freeMemory: 								; free memory address
 		.fill 	2
@@ -100,6 +106,26 @@ basicStackEnd: 								; bottom limit of stack.
 		.fill 	1
 tempBuffer: 								; generic buffer.
 		.fill 	32
+dataPtr: 									; Data equivalent of CodePtr
+		.fill 	2		
+dataPos: 									; Data position of Y
+		.fill 	1		
+dataInStatement: 							; Non zero if currently in data statement
+		.fill 	1		 					; (should be pointing at , : or EOL)
+paramCount: 								; parameters in call.
+		.fill 	1	
+clIndent:	 								; current listing indent
+		.fill 	1				
+clFrom: 									; LIST range.
+		.fill 	2		
+clTo:
+		.fill 	2		
+
+; ************************************************************************************************
+;	
+;										Tokenisation / Input
+;
+; ************************************************************************************************
 
 inputPos: 									; tokenising position in input buffer
 		.fill 	1
@@ -120,24 +146,17 @@ tokLengthPos: 								; position of length.
 		.fill 	1	
 tokDecCount: 								; decimal count.
 		.fill 	1	
-clIndent:	 								; current listing indent
-		.fill 	1				
-clFrom: 									; LIST range.
-		.fill 	2		
-clTo:
-		.fill 	2		
 tokLastCharacter: 							; last character output.
 		.fill 	1		
 tokOffset: 									; position in line.
 		.fill 	1		
-dataPtr: 									; Data equivalent of CodePtr
-		.fill 	2		
-dataPos: 									; Data position of Y
-		.fill 	1		
-dataInStatement: 							; Non zero if currently in data statement
-		.fill 	1		 					; (should be pointing at , : or EOL)
-paramCount: 								; parameters in call.
-		.fill 	1	
+
+; ************************************************************************************************
+;	
+;											Assembler
+;
+; ************************************************************************************************
+
 modeMask: 									; modes available here.
 		.fill 	1			
 isGroup1: 									; assembler group 1 flag (LDA,STA etc.)
@@ -146,6 +165,13 @@ baseOpcode: 								; current base opcode.
 		.fill 	1		
 paramStart: 								; 1/2 byte parameters for each assembler opcode.
 		.fill 	1	
+
+; ************************************************************************************************
+;	
+;											Graphics
+;
+; ************************************************************************************************
+
 graphicsPosX: 								; current graphics position.
 		.fill 	2			
 graphicsPosY:
@@ -166,7 +192,24 @@ graphicsImageID: 							; ID of image
 		.fill 	1
 graphicsFlip:								; flip bits of image (0 = horiz,1 = vertical)
 		.fill 	1
-		s		
+
+; ************************************************************************************************
+;	
+;					Sprites. Order here must match the order in the firmware
+;
+; ************************************************************************************************
+
+spriteID: 									; ID of sprite
+		.fill 	1
+spriteX: 									; sprite X position
+		.fill 	2
+spriteY: 									; sprite Y position
+		.fill 	2
+spriteImageSize: 							; image# (0..5) size (6)
+		.fill 	1
+spriteFlip: 								; x flip (7) y flip (6)
+		.fill 	1
+
 		.send storage
 
 ; ************************************************************************************************
