@@ -18,6 +18,9 @@ include ../build_env/common.make
 endif
 
 BINARY = firmware
+#
+#		Can be SDCARD or USBKEY currently.
+#
 STORAGE = SDCARD
 
 all: build
