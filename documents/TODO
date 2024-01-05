@@ -14,6 +14,8 @@ To next release
 ---------------
 Changes:
 
+	- Config load not working ???? Not present ?
+
 	- Simple sprites
 			- Write BASIC side handler and check with printf()
 			- Write Sprite code
@@ -21,6 +23,7 @@ Changes:
 			- Write Sprite demo
 
 	- Image Constructor app from 3 PNG files.
+
 	- Rebuild
 	- Rebuild Windows Emulator
 
@@ -40,4 +43,3 @@ Add to Documentation
 	SPRITE
 	HIT
 
-0330 123 1105
