@@ -1,0 +1,47 @@
+  1 '
+  2 '		Line Demo
+  3 '		based on Agon Light version (https://github.com/rothnarge/LineDemo)
+  4 '		originaly seen on commander X16 (https://www.facebook.com/adric22/videos/537764615172105/?idorvanity=396408204443613)
+  5 '
+ 20 maxx=320:maxy=240
+ 30 dim b1(254) :dim b2(254)
+ 40 dim b3(254) :dim b4(254)
+ 70 cls
+ 80 print"LINE SPACING?" ; :input s
+ 90 print"TAIL LENGTH?" ; :input l
+100 print"MULTIPLIER?" ; :input mult
+110 if mult<1 then mult=1
+130 d1=0:d2=1:d3=0:d4=1:' directions
+140 a1=0:a2=0
+150 a3=50*mult:a4=100*mult
+160 c=0:' black
+170 cc=0: ' color counter
+180 p=0: ' pointer to current line
+190 e=1: ' pointer to line to erase
+210 cls
+220 gosub 350
+230 line ink c a1,a2 to a3,a4
+260 b1(p) =a1:b2(p) =a2:b3(p) =a3:b4(p) =a4
+270 p=p+1:if p=l then p=0
+280 line ink 0 b1(e) ,b2(e)to b3(e) ,b4(e)
+310 e=e+1:if e=l then e=0
+320 cc=cc+1:if cc<>5 then goto 220
+330 cc=0:c=c+1:if c=16 then c=1
+340 goto 220
+350 if d1=0 then if a1<=s then d1=1:a1=1:goto 390
+360 if d1=0 then a1=a1-s:goto 390
+370 if a1+s>=maxx then d1=0:a1=maxx-1:goto 390
+380 a1=a1+s
+390 if d2=0 then if a2<=s then d2=1:a2=1:goto 430
+400 if d2=0 then a2=a2-s:goto 430
+410 if a2+s>=maxy then d2=0:a2=maxy-1:goto 430
+420 a2=a2+s
+430 if d3=0 then if a3<=s then d3=1:a3=1:goto 470
+440 if d3=0 then a3=a3-s:goto 470
+450 if a3+s>=maxx then d3=0:a3=maxx-1:goto 470
+460 a3=a3+s
+470 if d4=0 then if a4<=s then d4=1:a4=1:return
+480 if d4=0 then a4=a4-s:return
+490 if a4+s>=maxy then d4=0:a4=maxy-1:return
+500 a4=a4+s
+510 return
