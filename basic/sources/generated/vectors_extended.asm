@@ -28,4 +28,5 @@ ExtendedVectorTable:
 	.word	Command_Palette          ; $196 palette
 	.word	Unimplemented            ; $197 draw
 	.word	Unimplemented            ; $198 hide
+	.word	Unimplemented            ; $199 flip
 	.send code

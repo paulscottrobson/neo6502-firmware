@@ -149,6 +149,7 @@ Shift1TokenText:
 	.byte	$07,$50,$41,$4c,$45,$54,$54,$c5	; $196 PALETTE
 	.byte	$04,$44,$52,$41,$d7           	; $197 DRAW
 	.byte	$04,$48,$49,$44,$c5           	; $198 HIDE
+	.byte	$04,$46,$4c,$49,$d0           	; $199 FLIP
 	.byte	$FF
 
 Shift2TokenText:

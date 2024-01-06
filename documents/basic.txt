@@ -53,6 +53,6 @@ SPRITE <n> TO|BY <x,y> IMAGE <n> FLIP <n> DIM <s> 		Draws the current sprite, sh
 HIT(n,n,d)
 
 6,1 	reset sprites, clear screen
-6,2 	update <n> x[2] y[2] image & size[1] flip[1] and show -ve values fail. 
+6,2 	update <n> x[2] y[2] image & size[1] 0-5:image,6:size flip[1] 0:x 1:y and show -ve values fail. 
 6,3 	hide <n>
 

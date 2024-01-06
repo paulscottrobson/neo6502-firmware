@@ -126,6 +126,7 @@ KWD_WHO                            = $195 ; who
 KWD_PALETTE                        = $196 ; palette
 KWD_DRAW                           = $197 ; draw
 KWD_HIDE                           = $198 ; hide
+KWD_FLIP                           = $199 ; flip
 KWD_ADC                            = $280 ; adc
 KWD_AND                            = $281 ; and
 KWD_ASL                            = $282 ; asl

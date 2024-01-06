@@ -123,7 +123,7 @@ class TokenSet(object):
 			CLEAR 	NEW 	RUN 	STOP 	END 	ASSERT 	LIST 	SAVE 	
 			LOAD	CAT 	GOSUB 	GOTO	RETURN 	RESTORE	DIM		FKEY
 			CLS 	INK		FRAME	SOLID	BY 		WHO 	PALETTE DRAW	
-			HIDE
+			HIDE 	FLIP
 			""")
 		#
 		#		Keyword tokens (assembler)
