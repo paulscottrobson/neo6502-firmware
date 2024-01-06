@@ -78,9 +78,9 @@ float MATHReadFloat(uint8_t regOffset) {
 	return (type & 0x40) ? sc.f : (float)(int)sc.i;
 }
 
-uint32_t MATHReadInt(uint8_t regOffset) {
+int MATHReadInt(uint8_t regOffset) {
 	uint8_t type = MATHRead(regOffset);
-	return (type & 0x40) ? (uint32_t)sc.f : sc.i ;
+	return (type & 0x40) ? (int)sc.f : sc.i ;
 }
 
 void MATHWriteFloat(float f,uint8_t regOffset) {
