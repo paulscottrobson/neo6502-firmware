@@ -2,7 +2,8 @@
   2 '		Line Demo
   3 '		based on Agon Light version (https://github.com/rothnarge/LineDemo)
   4 '		originaly seen on commander X16 (https://www.facebook.com/adric22/videos/537764615172105/?idorvanity=396408204443613)
-  5 '
+  5 '       Written by Sascha Schneider
+  6 '
  20 maxx=320:maxy=240
  30 dim b1(254) :dim b2(254)
  40 dim b3(254) :dim b4(254)
