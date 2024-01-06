@@ -26,6 +26,9 @@ void SPRUpdate(uint8_t *paramData) {
 	printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x\n",*paramData,x,y,paramData[5],paramData[6]);
 }
 
+// update coords checks for $80 not -ve.
+
+
 // ***************************************************************************************
 //
 //		Date 		Revision

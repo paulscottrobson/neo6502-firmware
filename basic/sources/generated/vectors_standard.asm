@@ -100,5 +100,5 @@ StandardVectorTable:
 	.word	Command_Ellipse          ; $de ellipse
 	.word	Command_Text             ; $df text
 	.word	Command_Image            ; $e0 image
-	.word	Unimplemented            ; $e1 sprite
+	.word	Command_Sprite           ; $e1 sprite
 	.send code

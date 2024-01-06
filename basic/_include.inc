@@ -64,6 +64,7 @@
 	.include "sources/commands/restore.asm"
 	.include "sources/commands/run.asm"
 	.include "sources/commands/save.asm"
+	.include "sources/commands/sprite.asm"
 	.include "sources/commands/stop.asm"
 	.include "sources/commands/sys.asm"
 	.include "sources/commands/undefined.asm"
