@@ -14,10 +14,12 @@ To next release
 ---------------
 Changes:
  
+ 	- $Cx 8x check image works like that make sprites the same.
+
 	- Config load not working ???? Not present ?
 
 	- Simple sprites
-			- Write Sprite code
+			- Optimise Sprite code
 			- Write Sprite demo
 	- Hit
 			- Write Hit demo
