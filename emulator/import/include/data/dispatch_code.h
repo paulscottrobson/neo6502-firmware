@@ -246,7 +246,7 @@ switch (*DCOMMAND) {
 				SPRReset();
 				break;
 			case 2:
-				SPRUpdate(DPARAMS);
+				*DERROR = SPRUpdate(DPARAMS);
 				break;
 			case 3:
 				SPRHide(DPARAMS);
