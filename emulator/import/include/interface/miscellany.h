@@ -16,6 +16,8 @@
 void STOInitialise(void);
 void STOSynchronise(void);
 
+void LOGDrawLogo(void);
+
 #endif
 
 // ***************************************************************************************

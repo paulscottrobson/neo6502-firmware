@@ -20,7 +20,7 @@ bool MATHIsFloatUnary(void);
 bool MATHIsFloatBinary(void);
 void MATHCommon(uint8_t *params);
 float MATHReadFloat(uint8_t stackOffset);
-int MATHReadInt(uint8_t stackOffset);
+int32_t MATHReadInt(uint8_t stackOffset);
 void MATHWriteFloat(float f,uint8_t stackOffset);
 void MATHWriteInt(uint32_t i,uint8_t stackOffset);
 
