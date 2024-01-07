@@ -26,7 +26,7 @@ def convert(sourceFile,scale):
 	xByteOffset = (xByteSize * 8 - xSize)//2
 
 	data = [xByteSize,ySize] + [ 0 ] * (xByteSize * ySize)
-	print(sourceFile,len(data))
+	print(sourceFile,len(data),xSize,ySize)
 	limit = 128
 	for x in range(0,xSize):
 		for y in range(0,ySize):
@@ -50,6 +50,6 @@ def convert(sourceFile,scale):
 	h.write(",".join([str(x) for x in data]))
 	h.write("\n};\n")
 
-convert("olimex.png",8)
-convert("logo.png",6)
-convert("neotext.png",5)
+convert("olimex.png",1)
+convert("logo.png",1)
+convert("neotext.png",1)

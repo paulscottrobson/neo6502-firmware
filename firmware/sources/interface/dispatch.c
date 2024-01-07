@@ -71,7 +71,7 @@ void DSPReset(void) {
     SPRReset();                                                                 // Reset sprites.
     LOGDrawLogo();                                                              // Draw logo
     CONWrite(0x80+3);                                                           // Yellow text
-    for (int i = 0;i < 21;i++) CONWrite(19); 
+    for (int i = 0;i < 22;i++) CONWrite(19); 
     const char *c = bootString;
     while (*c != '\0') CONWrite(*c++);	
     
