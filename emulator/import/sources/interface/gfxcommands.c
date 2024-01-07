@@ -154,13 +154,13 @@ int GFXFindImage(int type,int id) {
 
 	switch(type) {
 		case 0:  																// 16x16 tiles
-			addr = 16 + id * (16*16/2);
+			addr = 256 + id * (16*16/2);
 			break;
 		case 1:  																// 16x16 sprites
-			addr = 16 + gfxMemory[1]*(16*16/2) + id*(16*16/2);
+			addr = 256 + gfxMemory[1]*(16*16/2) + id*(16*16/2);
 			break;
 		case 2:  																// 32x32 sprites
-			addr = 16 + gfxMemory[1]*(16*16/2) + gfxMemory[2]*(16*16/2) + id*(32*32/2);
+			addr = 256 + gfxMemory[1]*(16*16/2) + gfxMemory[2]*(16*16/2) + id*(32*32/2);
 			break;
 	}
 	return addr;

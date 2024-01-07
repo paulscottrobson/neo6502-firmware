@@ -73,7 +73,7 @@ class TokenSet(object):
 		tokenText = tokenText.strip().lower()
 		assert tokenID not in self.idToToken
 		if tokenText != "":
-			assert tokenText not in self.nameToToken
+			assert tokenText not in self.nameToToken,"Duplicate "+tokenText
 		token = Token(tokenID,tokenText)
 		self.idToToken[tokenID] = token 
 		self.nameToToken[token.getName()] = token
@@ -133,12 +133,15 @@ class TokenSet(object):
 			CLC	CLD	CLI	CLV	CMP	CPX	CPY	DEC	DEX	DEY	EOR	INC	INX	INY	
 			JMP	JSR	LDA	LDX	LDY	LSR	NOP	ORA	PHA	PHP	PHX	PHY	PLA	PLP	
 			PLX	PLY	ROL	ROR	RTI	RTS	SBC	SEC	SED	SEI	STA	STX	STY	STZ	
-			TAX	TAY	TRB	TSB	TSX	TXA	TXS	TYA STP
-		""",80)
+			TAX	TAY	TRB	TSB	TSX	TXA	TXS	TYA 
+
+			SET LD  ST  LDD STD POP STP ADD SUB POPD CPR INR DCR RTN
+			BR  BNC BC  BP  BM  BZ  BNZ BLZ BNLZ BK RS BS XEQ
+		""",0x60)
 		#
 		#		Additional Unary functions, less popular
 		#
-		self.add(0x2D0,"""
+		self.add(0x2E0,"""
 			SIN( 	COS(	TAN(	ATAN(	LOG(	EXP( 	VAL( 	STR$( 	
 			ISVAL( 	SQR( 	PAGE
 		""")

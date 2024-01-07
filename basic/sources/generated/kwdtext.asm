@@ -217,33 +217,49 @@ Shift2TokenText:
 	.byte	$03,$54,$58,$c1               	; $2bd TXA
 	.byte	$03,$54,$58,$d3               	; $2be TXS
 	.byte	$03,$54,$59,$c1               	; $2bf TYA
-	.byte	$03,$53,$54,$d0               	; $2c0 STP
-	.byte	$00                           	; $2c1 
-	.byte	$00                           	; $2c2 
-	.byte	$00                           	; $2c3 
-	.byte	$00                           	; $2c4 
-	.byte	$00                           	; $2c5 
-	.byte	$00                           	; $2c6 
-	.byte	$00                           	; $2c7 
-	.byte	$00                           	; $2c8 
-	.byte	$00                           	; $2c9 
-	.byte	$00                           	; $2ca 
-	.byte	$00                           	; $2cb 
-	.byte	$00                           	; $2cc 
-	.byte	$00                           	; $2cd 
-	.byte	$00                           	; $2ce 
-	.byte	$00                           	; $2cf 
-	.byte	$04,$53,$49,$4e,$a8           	; $2d0 SIN(
-	.byte	$04,$43,$4f,$53,$a8           	; $2d1 COS(
-	.byte	$04,$54,$41,$4e,$a8           	; $2d2 TAN(
-	.byte	$05,$41,$54,$41,$4e,$a8       	; $2d3 ATAN(
-	.byte	$04,$4c,$4f,$47,$a8           	; $2d4 LOG(
-	.byte	$04,$45,$58,$50,$a8           	; $2d5 EXP(
-	.byte	$04,$56,$41,$4c,$a8           	; $2d6 VAL(
-	.byte	$05,$53,$54,$52,$24,$a8       	; $2d7 STR$(
-	.byte	$06,$49,$53,$56,$41,$4c,$a8   	; $2d8 ISVAL(
-	.byte	$04,$53,$51,$52,$a8           	; $2d9 SQR(
-	.byte	$04,$50,$41,$47,$c5           	; $2da PAGE
+	.byte	$03,$53,$45,$d4               	; $2c0 SET
+	.byte	$02,$4c,$c4                   	; $2c1 LD
+	.byte	$02,$53,$d4                   	; $2c2 ST
+	.byte	$03,$4c,$44,$c4               	; $2c3 LDD
+	.byte	$03,$53,$54,$c4               	; $2c4 STD
+	.byte	$03,$50,$4f,$d0               	; $2c5 POP
+	.byte	$03,$53,$54,$d0               	; $2c6 STP
+	.byte	$03,$41,$44,$c4               	; $2c7 ADD
+	.byte	$03,$53,$55,$c2               	; $2c8 SUB
+	.byte	$04,$50,$4f,$50,$c4           	; $2c9 POPD
+	.byte	$03,$43,$50,$d2               	; $2ca CPR
+	.byte	$03,$49,$4e,$d2               	; $2cb INR
+	.byte	$03,$44,$43,$d2               	; $2cc DCR
+	.byte	$03,$52,$54,$ce               	; $2cd RTN
+	.byte	$02,$42,$d2                   	; $2ce BR
+	.byte	$03,$42,$4e,$c3               	; $2cf BNC
+	.byte	$02,$42,$c3                   	; $2d0 BC
+	.byte	$02,$42,$d0                   	; $2d1 BP
+	.byte	$02,$42,$cd                   	; $2d2 BM
+	.byte	$02,$42,$da                   	; $2d3 BZ
+	.byte	$03,$42,$4e,$da               	; $2d4 BNZ
+	.byte	$03,$42,$4c,$da               	; $2d5 BLZ
+	.byte	$04,$42,$4e,$4c,$da           	; $2d6 BNLZ
+	.byte	$02,$42,$cb                   	; $2d7 BK
+	.byte	$02,$52,$d3                   	; $2d8 RS
+	.byte	$02,$42,$d3                   	; $2d9 BS
+	.byte	$03,$58,$45,$d1               	; $2da XEQ
+	.byte	$00                           	; $2db 
+	.byte	$00                           	; $2dc 
+	.byte	$00                           	; $2dd 
+	.byte	$00                           	; $2de 
+	.byte	$00                           	; $2df 
+	.byte	$04,$53,$49,$4e,$a8           	; $2e0 SIN(
+	.byte	$04,$43,$4f,$53,$a8           	; $2e1 COS(
+	.byte	$04,$54,$41,$4e,$a8           	; $2e2 TAN(
+	.byte	$05,$41,$54,$41,$4e,$a8       	; $2e3 ATAN(
+	.byte	$04,$4c,$4f,$47,$a8           	; $2e4 LOG(
+	.byte	$04,$45,$58,$50,$a8           	; $2e5 EXP(
+	.byte	$04,$56,$41,$4c,$a8           	; $2e6 VAL(
+	.byte	$05,$53,$54,$52,$24,$a8       	; $2e7 STR$(
+	.byte	$06,$49,$53,$56,$41,$4c,$a8   	; $2e8 ISVAL(
+	.byte	$04,$53,$51,$52,$a8           	; $2e9 SQR(
+	.byte	$04,$50,$41,$47,$c5           	; $2ea PAGE
 	.byte	$FF
 
 BinaryPrecedence:
