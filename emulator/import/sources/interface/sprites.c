@@ -49,11 +49,18 @@ void SPRReset(void) {
 //
 // ***************************************************************************************
 
+static SPRITE_ACTION saHide;
+
 void SPRHide(uint8_t *paramData) {
 	int spriteID = *paramData;  												// Sprite ID
 	if (spriteID < MAX_SPRITES) {  												// Legit ?
-		if (sprites[spriteID].isDrawn) {  										// If drawn, erase it and mark not drawn.
-			SPRPHYErase(&sprites[spriteID]);
+		SPRITE_INTERNAL *s = &sprites[spriteID];
+		if (s->isDrawn) {  														// If drawn, erase it and mark not drawn.
+			saHide.display = s->x + s->y * gMode.xGSize;  						// Work out the draw address top left of sprite.
+			saHide.image = s->imageAddress; 									// Where from.
+			saHide.xSize = s->xSize;saHide.ySize = s->ySize;  					// Size and flip.
+			saHide.flip = s->flip;
+			SPRPHYErase(&saHide);
 			sprites[spriteID].isDrawn = false;
 		}
 		sprites[spriteID].isVisible = false;  									// Mark not visible.
@@ -66,6 +73,8 @@ void SPRHide(uint8_t *paramData) {
 //
 // ***************************************************************************************
 
+static SPRITE_ACTION saRemove,saDraw;
+
 int SPRUpdate(uint8_t *paramData) {
 
 	uint8_t spriteID = paramData[0];  											// Sprite ID
@@ -76,7 +85,7 @@ int SPRUpdate(uint8_t *paramData) {
 	uint8_t  imageSize = paramData[5];
 	uint8_t flip = paramData[6];
 
-	printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x\n",*paramData,x,y,paramData[5],paramData[6]);
+	//printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x\n",*paramData,x,y,paramData[5],paramData[6]);
 
 	bool xyChanged = (x & 0xFF00) != 0x8000;  									// Check to see if elements changed.
 	bool isChanged = (imageSize != 0x80);
@@ -85,7 +94,11 @@ int SPRUpdate(uint8_t *paramData) {
 	if (xyChanged | isChanged | flipChanged) {   								// Some change made.
 		SPRITE_INTERNAL *p = &sprites[spriteID];  								// Pointer to sprite structures
 		if (p->isDrawn) {  														// Erase if currently drawn
-			SPRPHYErase(p);
+			saRemove.display = p->x + p->y * gMode.xGSize;  					// Work out the draw address top left of sprite.
+			saRemove.image = p->imageAddress; 									// Where from.
+			saRemove.xSize = p->xSize;saRemove.ySize = p->ySize;  				// Size and flip.
+			saRemove.flip = p->flip;
+			SPRPHYErase(&saRemove);
 			p->isDrawn = false;
 		}
 		p->isVisible = true;  													// Mark as visible
@@ -98,27 +111,27 @@ int SPRUpdate(uint8_t *paramData) {
 			p->imageAddress = GFXFindImage((p->xSize == 16) ? 1 : 2,  			// Address of image
 															imageSize & 0x3F);
 			if (p->imageAddress < 0) return 2;   								// Bad image number
-			printf("%d %d %d %d\n",p->imageSize,p->xSize,p->ySize,p->flip);
 		}
 
 		if (xyChanged) {  														// Positions changed.
 			p->x = x - p->xSize / 2;   											// Initially anchor point is centre.
 			p->y = y - p->ySize / 2;
-			printf("%d %d\n",p->x,p->y);
 			p->isVisible = (p->x >= 0 && p->y >= 0 &&  							// Initially clip very simply all must be on screen.
 									p->x < gMode.xGSize-p->xSize && p->y < gMode.yGSize-p->ySize);
 		}
 
 		if (p->isVisible) {  													// Redraw if possible.
-			SPRPHYDraw(p); 
+			saDraw.display = p->x + p->y * gMode.xGSize;  						// Work out the draw address top left of sprite.
+			saDraw.image = p->imageAddress; 									// Where from.
+			saDraw.xSize = p->xSize;saDraw.ySize = p->ySize;  					// Size and flip.
+			saDraw.flip = p->flip;
+			SPRPHYDraw(&saDraw);
 			p->isDrawn = true;  												// And mark as drawn.
 		}
 	}
 
 	return 0; 
 }
-
-
 
 // ***************************************************************************************
 //

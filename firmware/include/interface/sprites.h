@@ -26,12 +26,19 @@ typedef struct _sprite_internal {
 	uint8_t flip;  																// flip 0:x 1:y
 } SPRITE_INTERNAL;
 
+typedef struct _sprite_action {
+	uint16_t display;
+	uint16_t image;
+	uint8_t flip;
+	uint8_t xSize,ySize;
+} SPRITE_ACTION;
+
 void SPRReset(void);  															// Sprite reset.
 void SPRHide(uint8_t *paramData);
 int SPRUpdate(uint8_t *paramData);
 
-void SPRPHYErase(SPRITE_INTERNAL *s); 											// Sprite draw/erase routines
-void SPRPHYDraw(SPRITE_INTERNAL *s);
+void SPRPHYErase(SPRITE_ACTION *s); 											// Sprite draw/erase routines
+void SPRPHYDraw(SPRITE_ACTION *s);
 
 #endif
 

@@ -15,6 +15,8 @@ To next release
 Changes:
  
  	- $Cx 8x check image works like that make sprites the same.
+  - Option to transfer program with upload again, useful for testing.
+ 	- Null optimisation
 
 	- Config load not working ???? Not present ?
 

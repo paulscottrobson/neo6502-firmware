@@ -12,7 +12,10 @@
 
 #include "common.h"
 
-static void _SPXORDrawForwardLine(uint8_t bytes,uint8_t *display,uint8_t *image) {
+static void _SPXORDrawForwardLine(SPRITE_ACTION *sa) {
+	uint8_t bytes = sa->xSize/2;
+	uint8_t *image = gfxMemory + sa->image;
+	uint8_t *display = gMode.graphicsMemory + sa->display;
 	while (bytes--) {
 		uint8_t b = *image++;
 		if (b & 0xF0) {
@@ -26,7 +29,10 @@ static void _SPXORDrawForwardLine(uint8_t bytes,uint8_t *display,uint8_t *image)
 	}
 }
 
-static void _SPXORDrawBackwardLine(uint8_t bytes,uint8_t *display,uint8_t *image) {
+static void _SPXORDrawBackwardLine(SPRITE_ACTION *sa) {
+	uint8_t bytes = sa->xSize/2;
+	uint8_t *image = gfxMemory + sa->image;
+	uint8_t *display = gMode.graphicsMemory + sa->display + sa->xSize;
 	while (bytes--) {
 		uint8_t b = *image++;
 		--display;
@@ -46,7 +52,7 @@ static void _SPXORDrawBackwardLine(uint8_t bytes,uint8_t *display,uint8_t *image
 //
 // ***************************************************************************************
 
-void SPRPHYErase(SPRITE_INTERNAL *s) {
+void SPRPHYErase(SPRITE_ACTION *s) {
 	SPRPHYDraw(s); 
 }
 
@@ -56,18 +62,21 @@ void SPRPHYErase(SPRITE_INTERNAL *s) {
 //
 // ***************************************************************************************
 
-void SPRPHYDraw(SPRITE_INTERNAL *s) {
-	s->drawAddress = s->x + s->y * gMode.xGSize;  	 							// Work out the draw address top left of sprite.
-	uint8_t *imgData = gfxMemory + s->imageAddress;  							// Where to get it from.
-	uint8_t yXor = (s->flip & 2) ? (s->ySize-1) : 0;  							// Used to y-flip
+void SPRPHYDraw(SPRITE_ACTION *s) {
+
+	uint16_t yAdjust = gMode.xGSize;  											// Handle vertical flipping.
+	if (s->flip & 2) {
+		s->display += (s->ySize-1) * gMode.xGSize;
+		yAdjust = -yAdjust;
+	}
 	for (int yPos = 0;yPos < s->ySize;yPos++) {   								// Work top to bottom
-		uint8_t *screenLine = gMode.graphicsMemory + s->drawAddress + (yPos ^ yXor) * gMode.xGSize;
-		if (s->flip & 1) {
-			_SPXORDrawBackwardLine(s->xSize/2,screenLine+s->xSize-1,imgData); 	// Draw a backward line.
+		if (s->flip & 1) {  													// Draw according to x flip
+			_SPXORDrawBackwardLine(s); 					
 		} else {
-			_SPXORDrawForwardLine(s->xSize/2,screenLine,imgData); 				// Draw a forward line.
+			_SPXORDrawForwardLine(s); 					
 		}
-		imgData += (s->xSize / 2);  											// Next row.
+		s->image += s->xSize/2;
+		s->display += yAdjust;
 	}
 	//printf("%d %d\n",s->isVisible,s->drawAddress);
 }
