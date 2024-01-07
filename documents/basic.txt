@@ -30,8 +30,8 @@ Graphics structure
 +1 		# of 16x16 tiles (numbered from $80)
 +2 		# of 16x16 sprites (numbered from $80)
 +3 		# of 32x32 sprites (numbered from $C0)
-+4..15 	Not used
-+16 	First tile (stored consecutively)
++4..255 Not used
++256 	First tile (stored consecutively)
 
 
 Sprites

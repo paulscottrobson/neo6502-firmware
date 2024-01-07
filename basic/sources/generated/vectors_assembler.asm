@@ -67,31 +67,47 @@ AssemblerVectorTable:
 	.word	Assemble_txa             ; $2bd txa
 	.word	Assemble_txs             ; $2be txs
 	.word	Assemble_tya             ; $2bf tya
-	.word	Assemble_stp             ; $2c0 stp
-	.word	Unimplemented            ; $2c1 
-	.word	Unimplemented            ; $2c2 
-	.word	Unimplemented            ; $2c3 
-	.word	Unimplemented            ; $2c4 
-	.word	Unimplemented            ; $2c5 
-	.word	Unimplemented            ; $2c6 
-	.word	Unimplemented            ; $2c7 
-	.word	Unimplemented            ; $2c8 
-	.word	Unimplemented            ; $2c9 
-	.word	Unimplemented            ; $2ca 
-	.word	Unimplemented            ; $2cb 
-	.word	Unimplemented            ; $2cc 
-	.word	Unimplemented            ; $2cd 
-	.word	Unimplemented            ; $2ce 
-	.word	Unimplemented            ; $2cf 
-	.word	UnarySin                 ; $2d0 sin(
-	.word	UnaryCos                 ; $2d1 cos(
-	.word	UnaryTan                 ; $2d2 tan(
-	.word	UnaryATan                ; $2d3 atan(
-	.word	UnaryLog                 ; $2d4 log(
-	.word	UnaryExp                 ; $2d5 exp(
-	.word	EXPUnaryVal              ; $2d6 val(
-	.word	StrUnary                 ; $2d7 str$(
-	.word	EXPUnaryIsVal            ; $2d8 isval(
-	.word	UnarySqr                 ; $2d9 sqr(
-	.word	EXPUnaryPage             ; $2da page
+	.word	Unimplemented            ; $2c0 set
+	.word	Unimplemented            ; $2c1 ld
+	.word	Unimplemented            ; $2c2 st
+	.word	Unimplemented            ; $2c3 ldd
+	.word	Unimplemented            ; $2c4 std
+	.word	Unimplemented            ; $2c5 pop
+	.word	Assemble_stp             ; $2c6 stp
+	.word	Unimplemented            ; $2c7 add
+	.word	Unimplemented            ; $2c8 sub
+	.word	Unimplemented            ; $2c9 popd
+	.word	Unimplemented            ; $2ca cpr
+	.word	Unimplemented            ; $2cb inr
+	.word	Unimplemented            ; $2cc dcr
+	.word	Unimplemented            ; $2cd rtn
+	.word	Unimplemented            ; $2ce br
+	.word	Unimplemented            ; $2cf bnc
+	.word	Unimplemented            ; $2d0 bc
+	.word	Unimplemented            ; $2d1 bp
+	.word	Unimplemented            ; $2d2 bm
+	.word	Unimplemented            ; $2d3 bz
+	.word	Unimplemented            ; $2d4 bnz
+	.word	Unimplemented            ; $2d5 blz
+	.word	Unimplemented            ; $2d6 bnlz
+	.word	Unimplemented            ; $2d7 bk
+	.word	Unimplemented            ; $2d8 rs
+	.word	Unimplemented            ; $2d9 bs
+	.word	Unimplemented            ; $2da xeq
+	.word	Unimplemented            ; $2db 
+	.word	Unimplemented            ; $2dc 
+	.word	Unimplemented            ; $2dd 
+	.word	Unimplemented            ; $2de 
+	.word	Unimplemented            ; $2df 
+	.word	UnarySin                 ; $2e0 sin(
+	.word	UnaryCos                 ; $2e1 cos(
+	.word	UnaryTan                 ; $2e2 tan(
+	.word	UnaryATan                ; $2e3 atan(
+	.word	UnaryLog                 ; $2e4 log(
+	.word	UnaryExp                 ; $2e5 exp(
+	.word	EXPUnaryVal              ; $2e6 val(
+	.word	StrUnary                 ; $2e7 str$(
+	.word	EXPUnaryIsVal            ; $2e8 isval(
+	.word	UnarySqr                 ; $2e9 sqr(
+	.word	EXPUnaryPage             ; $2ea page
 	.send code

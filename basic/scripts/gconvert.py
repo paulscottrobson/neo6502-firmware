@@ -128,7 +128,8 @@ class ImageExtractor(object):
 class ImageCollection(object):
 	def __init__(self):
 		self.objects = []
-		self.total = 16
+		self.headerSize = 256
+		self.total = self.headerSize
 	#
 	def add(self,image):
 		self.objects.append(image)
@@ -136,7 +137,7 @@ class ImageCollection(object):
 		assert self.total < 20480-16,"Too many images"
 	#
 	def render(self,fileName):
-		data = [ 0 ] * 16
+		data = [ 0 ] * self.headerSize
 		data[0] = 1
 		for i in self.objects:
 			if not i.isSprite() and i.getSize() == 16:
