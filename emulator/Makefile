@@ -22,7 +22,7 @@ SOURCES = 	src$(S)core$(S)sys_processor.o  framework$(S)main.o framework$(S)gfx.
 			src$(S)core$(S)sys_debugger.o src$(S)core$(S)hardware.o \
   			$(IMPSRC)memory.o $(IMPSRC)graphics.o $(IMPSRC)console.o $(IMPSRC)keyboard.o $(IMPSRC)dispatch.o \
   			$(IMPSRC)maths.o  $(IMPSRC)config.o $(IMPSRC)gfxcommands.o $(IMPSRC)efla.o $(IMPSRC)ellipse.o \
-  			$(IMPSRC)fileinterface.o $(IMPSRC)sprites.o
+  			$(IMPSRC)fileinterface.o $(IMPSRC)sprites.o $(IMPSRC)logo.o
 
 FIRMWARE = ..$(S)firmware$(S)
 
