@@ -1,0 +1,13 @@
+cls:sprite clear
+for i = 1 to 31:line i*10,0 ink 1 to i*10,239:next
+for i = 1 to 23:line 0,i*10 ink 5 to 319,i*10:next
+load "test.gfx",$FFFF
+repeat
+	for x = 32 to 280
+		t1 = time()+2:repeat:until time() > t1
+		sprite 1 to x,60 image $C0 flip 0
+		sprite 2 to x,100 image $C0 flip 2
+		sprite 3 to x,140 image $C0 flip 1
+		sprite 4 to x,180 image $C0 flip 3
+	next
+until 0
