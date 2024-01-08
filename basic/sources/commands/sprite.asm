@@ -140,7 +140,7 @@ _CSToPosition:
 		pla 								; is it TO
 		cmp 	#KWD_TO
 		beq 	_CSCopyPosition
-
+		;
 		lda 	spriteX+1 					; it's BY, check we've done a TO otherwise it makes no sense.
 		cmp 	#$80
 		beq 	_CSValue

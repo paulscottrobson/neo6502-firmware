@@ -13,9 +13,9 @@ General
 To next release
 ---------------
 Changes:
-	- Sprite n by 10,10 doesn't work.
 
 	- Write Sprite demo
+
 	- Hit
 			- Write Hit demo
 
@@ -39,6 +39,6 @@ Other
 
 Add to Documentation
 --------------------
-	SPRITE
+	SPRITE (BY)
 	HIT
 
