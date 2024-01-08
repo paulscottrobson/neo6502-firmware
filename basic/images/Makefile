@@ -12,5 +12,8 @@ creator:
 	zip -j $(BINDIR)createblanks.zip build$(S)__main__.py build$(S)gconvert.py
 	$(CDEL) build$(S)*.py
 
+do:
+	$(PYTHON) makeimg.py
+	$(CCOPY) graphics.gfx ..$(S)storage
+
 all: creator
-	$(PYTHON) $(BINDIR)createblanks.zip

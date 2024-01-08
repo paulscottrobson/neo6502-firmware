@@ -28,10 +28,14 @@ class Tile16x16(object):
 		return self.data
 	def isSprite(self):
 		return False
+	def isBlank(self):
+		return len([x for x in self.data if x != 0x88]) == 0
 
 class Sprite16x16(Tile16x16):
 	def isSprite(self):
 		return True
+	def isBlank(self):
+		return len([x for x in self.data if x != 0x00]) == 0
 
 class Sprite32x32(Sprite16x16):
 	def getSize(self):
