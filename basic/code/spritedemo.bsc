@@ -1,13 +1,26 @@
+'
+'		Simple sprite demo.
+'
 cls:sprite clear
-for i = 1 to 31:line i*10,0 ink 1 to i*10,239:next
-for i = 1 to 23:line 0,i*10 ink 5 to 319,i*10:next
-load "test.gfx",$FFFF
+input "How many ";count
+dim x(count),y(count),xi(count),yi(count)
+load "graphics.gfx",$FFFF
+for i = 0 to 23:line 0,i*10 ink 1 to 319,i*10:next
+for i = 0 to 31:line i*10,0 ink 1 to i*10,239:next
+for i = 1 to count
+	x(i) = rand(250)+35:y(i) = rand(200)+16
+	repeat
+		xi(i) = rand(8)-4:yi(i) = rand(8)-4
+	until xi(i) <> 0 & yi(i) <> 0
+	sprite i image $C1 to 32,32
+next
 repeat
-	for x = 32 to 280
-		t1 = time()+2:repeat:until time() > t1
-		sprite 1 to x,60 image $C0 flip 0
-		sprite 2 to x,100 image $C0 flip 2
-		sprite 3 to x,140 image $C0 flip 1
-		sprite 4 to x,180 image $C0 flip 3
+	for i = 1 to count
+		x(i) = x(i) + xi(i)
+		y(i) = y(i) + yi(i)
+		if x(i) > 304 then xi(i) = -xi(i):sprite i image $C1 flip 1
+		if x(i) < 16 then  xi(i) = -xi(i):sprite i image $C1 flip 0
+		if y(i) < 16 | y(i) > 224 then yi(i) = -yi(i)
+		sprite i to x(i),y(i)
 	next
-until 0
+until false
