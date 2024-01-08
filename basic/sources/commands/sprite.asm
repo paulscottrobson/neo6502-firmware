@@ -112,10 +112,7 @@ _CSWriteImage:
 		stz 	spriteFlip 					; IMAGE resets FLIP to 0
 		ldx 	#0 							; get the value 
 		jsr 	EXPEvalInteger8
-		and 	#$BF 						; clear bit 6
-		bpl 	_CSNotNeg 					; 0x stays as that.
-		eor 	#$C0 						; 10xxxxxx => 01xxxxxx
-_CSNotNeg:		
+		and 	#$7F   						; clear bit 7
 		sta 	spriteImageSize 			; save image
 		bra 	CSSpriteLoopInner
 		;

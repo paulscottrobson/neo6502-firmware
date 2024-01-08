@@ -20,15 +20,14 @@ typedef struct _sprite_internal {
 	bool isVisible;  															// TRUE if currently visible
 	uint16_t x,y;  																// Current drawn position (e.g. passed in)
 	uint16_t xSize,ySize;  														// Sprite horizontal/vertical size.
-	int drawAddress;   															// Physical draw address in screen memory.
 	uint8_t imageSize;  														// image (0:5) size (6) value
-	int imageAddress; 	 														// Physical graphic address in gfxMemory
+	uint8_t *imageAddress; 	 													// Physical graphic address in gfxMemory
 	uint8_t flip;  																// flip 0:x 1:y
 } SPRITE_INTERNAL;
 
 typedef struct _sprite_action {
-	uint16_t display;
-	uint16_t image;
+	uint8_t *display;
+	uint8_t *image;
 	uint8_t flip;
 	uint8_t xSize,ySize;
 } SPRITE_ACTION;
