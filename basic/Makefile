@@ -196,7 +196,7 @@ DEMOSRC = $(shell find . -name '*.bsc')
 DEMOBAS = $(subst bsc,bas,$(DEMOSRC))
 
 demos: clearstorage $(DEMOBAS)
-	$(CCOPY) ..$(S)documents$(S)images$(S)test.gfx storage
+	$(CCOPY) images$(S)test$(S)test.gfx storage
 
 clearstorage:
 	$(CDEL) storage$(S)*.*

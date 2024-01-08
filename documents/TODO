@@ -13,6 +13,8 @@ General
 To next release
 ---------------
 Changes:
+
+	- Image Constructor app from 3 PNG files
  
 	- Simple sprites
 			- Optimise Sprite code
@@ -20,7 +22,8 @@ Changes:
 	- Hit
 			- Write Hit demo
 
-	- Image Constructor app from 3 PNG files.
+	- Sprite n by 10,10 doesn't work.
+
 	- Rebuild
 	- Rebuild Windows Emulator
 
