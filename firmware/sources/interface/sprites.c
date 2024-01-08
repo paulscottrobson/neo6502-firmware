@@ -85,13 +85,14 @@ int SPRUpdate(uint8_t *paramData) {
 	uint8_t flip = paramData[6];
 
 //	printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x\n",*paramData,x,y,paramData[5],paramData[6]);
+	
+	SPRITE_INTERNAL *p = &sprites[spriteID];  									// Pointer to sprite structures
 
-	bool xyChanged = (x & 0xFF00) != 0x8000;  									// Check to see if elements changed.
-	bool isChanged = (imageSize != 0x80);
-	bool flipChanged = (flip != 0x80);
+	bool xyChanged = ((x & 0xFF00) != 0x8000) && (p->x != x || p->y != y); 		// Check to see if elements changed.
+	bool isChanged = (imageSize != 0x80) && (imageSize != p->imageSize);
+	bool flipChanged = (flip != 0x80) && (flip != p->flip);
 
 	if (xyChanged | isChanged | flipChanged) {   								// Some change made.
-		SPRITE_INTERNAL *p = &sprites[spriteID];  								// Pointer to sprite structures
 		if (p->isDrawn) {  														// Erase if currently drawn
 			saRemove.display = gMode.graphicsMemory + p->x + p->y*gMode.xGSize; // Work out the draw address top left of sprite.
 			saRemove.image = p->imageAddress; 									// Where from.

@@ -22,16 +22,20 @@ static void _SPXORDrawForwardLine(SPRITE_ACTION *sa) {
 	uint8_t bytes = sa->xSize/2;
 	uint8_t *image = sa->image;
 	uint8_t *display = sa->display;
+	uint8_t b;
 	while (bytes--) {
-		uint8_t b = *image++;
-		if (b & 0xF0) {
-			*display ^= (b & 0xF0);
+		if ((b = *image++)) {
+			if (b & 0xF0) {
+				*display ^= (b & 0xF0);
+			}
+			display++;
+			if (b & 0x0F) {
+				*display ^= b << 4;
+			}		
+			display++;
+		} else {
+			display += 2;
 		}
-		display++;
-		if (b & 0x0F) {
-			*display ^= b << 4;
-		}		
-		display++;
 	}
 }
 
@@ -45,16 +49,20 @@ static void _SPXORDrawBackwardLine(SPRITE_ACTION *sa) {
 	uint8_t bytes = sa->xSize/2;
 	uint8_t *image = sa->image;
 	uint8_t *display = sa->display + sa->xSize;
+	uint8_t b;
 	while (bytes--) {
-		uint8_t b = *image++;
-		--display;
-		if (b & 0xF0) {
-			*display ^= (b & 0xF0);
+		if ((b = *image++)) {
+			--display;
+			if (b & 0xF0) {
+				*display ^= (b & 0xF0);
+			}
+			--display;
+			if (b & 0x0F) {
+				*display ^= b << 4;
+			}					
+		} else {
+			display -= 2;
 		}
-		--display;
-		if (b & 0x0F) {
-			*display ^= b << 4;
-		}		
 	}
 }
 
