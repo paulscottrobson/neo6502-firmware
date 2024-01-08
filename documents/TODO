@@ -14,7 +14,6 @@ To next release
 ---------------
 Changes:
 	- Sprite n by 10,10 doesn't work.
-	- Image 1+128 to 10,10 doesn't work.
 
 	- Write Sprite demo
 	- Hit
