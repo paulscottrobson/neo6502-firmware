@@ -22,7 +22,7 @@ DOCDIR = documents$(S)release$(S)
 
 DOCUMENTS =  $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
 BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(BINDIR)*.dll $(BINDIR)*.exe $(BINDIR)basic.bin 
-PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip
+PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip
 
 all: 
 	make -B -C kernel release
@@ -36,7 +36,7 @@ zipfile: samples
 	$(CDEL) release$(S)samples.zip
 
 samples:
-	zip -r -j -q release$(S)samples.zip basic$(S)code documents$(S)images$(S)test.gfx
+	zip -r -j -q release$(S)samples.zip basic$(S)code image$(S)test$(S)test.gfx
 	zip -d -q release$(S)samples.zip *.tass *.bsc
 
 
