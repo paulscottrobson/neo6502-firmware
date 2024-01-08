@@ -84,13 +84,14 @@ int SPRUpdate(uint8_t *paramData) {
 	uint8_t  imageSize = paramData[5];
 	uint8_t flip = paramData[6];
 
-//	printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x\n",*paramData,x,y,paramData[5],paramData[6]);
 	
 	SPRITE_INTERNAL *p = &sprites[spriteID];  									// Pointer to sprite structures
 
 	bool xyChanged = ((x & 0xFF00) != 0x8000) && (p->x != x || p->y != y); 		// Check to see if elements changed.
 	bool isChanged = (imageSize != 0x80) && (imageSize != p->imageSize);
 	bool flipChanged = (flip != 0x80) && (flip != p->flip);
+
+	//printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x %d %d %d @ %d,%d %d:%d\n",*paramData,x,y,paramData[5],paramData[6],xyChanged,isChanged,flipChanged,p->x,p->y,p->isVisible,p->isDrawn);
 
 	if (xyChanged | isChanged | flipChanged) {   								// Some change made.
 		if (p->isDrawn) {  														// Erase if currently drawn
@@ -101,9 +102,11 @@ int SPRUpdate(uint8_t *paramData) {
 			SPRPHYErase(&saRemove);
 			p->isDrawn = false;
 		}
-		p->isVisible = true;  													// Mark as visible
+		//p->isVisible = true;  												// Mark as visible
 
-		if (flipChanged) p->flip = flip;  										// Flip has changed.
+		if (flipChanged) { 														// Flip has changed
+			p->flip = flip; 
+		}									
 
 		if (isChanged) {  														// Image or size changed
 			p->imageSize = imageSize;  											// Update image size.
@@ -118,6 +121,7 @@ int SPRUpdate(uint8_t *paramData) {
 			p->y = y - p->ySize / 2;
 			p->isVisible = (p->x >= 0 && p->y >= 0 &&  							// Initially clip very simply all must be on screen.
 									p->x < gMode.xGSize-p->xSize && p->y < gMode.yGSize-p->ySize);
+			//printf("changed %d %d %d\n",p->x,p->y,p->isVisible);
 		}
 
 		if (p->isVisible) {  													// Redraw if possible.
