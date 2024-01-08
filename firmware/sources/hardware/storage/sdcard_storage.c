@@ -29,7 +29,7 @@ void STOInitialise(void) {
         isInitialised = true;
         sd_card_t *pSD = sd_get_by_num(0);
         f_mount(&pSD->fatfs, pSD->pcName, 1);
-        //CONWriteString("Initialised.\n");
+        CONWriteString("Doesn't work ? Check DIP switches.\r");
     }
 }
 
