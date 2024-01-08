@@ -7,7 +7,8 @@ endif
 
 all: always creator builder 
 	$(PYTHON) $(BINDIR)makeimg.zip
-
+	$(CCOPY) graphics.gfx ..$(S)storage
+	
 creator: always
 	$(CCOPY) ..$(S)scripts$(S)gconvert.py build
 	$(CCOPY) create_blanks.py build$(S)__main__.py
