@@ -32,13 +32,20 @@ BColdStart:
 		lda 	#_CSMsg & $FF
 		jsr 	CPPrintYA 
 
+		.if 	BASICBUILD==0
+		jsr 	NewProgram
+		jmp 	WarmStart
+		.endif
+		
+		.if 	BASICBUILD==1
+		jsr 	Command_RUN
+		.endif		
+
 		.if 	BASICBUILD==2
 		jsr 	NewProgram
 		jmp 	TestTokenising  
 		.endif
 
-		jsr 	NewProgram
-		jmp 	WarmStart
 
 _CSMsg:	.byte 	_CSMSgEnd-_CSMSg-1
 		.text 	13,"Welcome to NeoBasic",13,13
@@ -53,7 +60,9 @@ BWarmStart:
 
 		.align  256
 Program:
-
+		.if 	BASICBUILD==1
+		.binary "build/tokenised.dat"
+		.endif
 		
 		.send code
 

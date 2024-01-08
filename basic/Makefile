@@ -77,10 +77,13 @@ prelim: always
 # ***************************************************************************************
 
 tbuild: prelim
-	$(ASSEMBLER) -DBASICBUILD=0 basic.asm -L build$(S)basic.lst -o build$(S)basic.bin
+	$(ASSEMBLER) -DBASICBUILD=1 basic.asm -L build$(S)basic.lst -o build$(S)basic.bin
+	$(PYTHON) $(BINDIR)hconvert.py build$(S)basic.bin build$(S)basic_binary.h basic 800
+	$(CCOPY) build$(S)basic_binary.h $(BINDIR)
+	$(CCOPY) build$(S)basic.bin $(BINDIR)
 
 trun:tbuild	
-	$(RUNCMD) build$(S)tokenised.dat@page exec
+	$(RUNCMD) exec
 
 # ***************************************************************************************
 #
