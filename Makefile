@@ -36,7 +36,7 @@ zipfile: samples
 	$(CDEL) release$(S)samples.zip
 
 samples:
-	zip -r -j -q release$(S)samples.zip basic$(S)code image$(S)test$(S)test.gfx
+	zip -r -j -q release$(S)samples.zip basic$(S)code basic$(S)images$(S)test$(S)test.gfx basic$(S)images$(S)graphics.gfx
 	zip -d -q release$(S)samples.zip *.tass *.bsc
 
 
