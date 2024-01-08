@@ -197,6 +197,7 @@ DEMOBAS = $(subst bsc,bas,$(DEMOSRC))
 
 demos: clearstorage $(DEMOBAS)
 	$(CCOPY) images$(S)test$(S)test.gfx storage
+	$(CCOPY) images$(S)graphics.gfx storage
 
 clearstorage:
 	$(CDEL) storage$(S)*.*
