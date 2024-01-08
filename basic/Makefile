@@ -85,6 +85,9 @@ tbuild: prelim
 trun:tbuild	
 	$(RUNCMD) exec
 
+tneo: tbuild
+	make -C ..$(S)firmware run 
+	
 # ***************************************************************************************
 #
 #							Build the command line basic
