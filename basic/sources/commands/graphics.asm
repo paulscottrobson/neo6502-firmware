@@ -62,6 +62,7 @@ GCommandLoop:
 _GChangeModeImage:
 		phx
 		stz 	graphicsFlip 				; default flip
+		ldx 	#0
 		jsr 	EXPEvalInteger8 			; the image number
 		sta 	graphicsImageID 			; save ID
 		lda 	(codePtr),y 				; followed by comma ?
