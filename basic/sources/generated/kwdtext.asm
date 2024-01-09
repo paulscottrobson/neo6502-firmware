@@ -150,6 +150,9 @@ Shift1TokenText:
 	.byte	$04,$44,$52,$41,$d7           	; $197 DRAW
 	.byte	$04,$48,$49,$44,$c5           	; $198 HIDE
 	.byte	$04,$46,$4c,$49,$d0           	; $199 FLIP
+	.byte	$05,$53,$4f,$55,$4e,$c4       	; $19a SOUND
+	.byte	$03,$53,$46,$d8               	; $19b SFX
+	.byte	$05,$53,$4c,$49,$44,$c5       	; $19c SLIDE
 	.byte	$FF
 
 Shift2TokenText:
