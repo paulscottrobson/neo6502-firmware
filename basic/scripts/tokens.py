@@ -139,8 +139,8 @@ class TokenSet(object):
 		#		Additional Unary functions, less popular
 		#
 		self.add(0x2E0,"""
-			SIN( 	COS(	TAN(	ATAN(	LOG(	EXP( 	VAL( 	STR$( 	
-			ISVAL( 	SQR( 	PAGE
+			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
+			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY(
 		""")
 		
 if __name__ == "__main__":
