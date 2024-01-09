@@ -260,6 +260,8 @@ Shift2TokenText:
 	.byte	$06,$49,$53,$56,$41,$4c,$a8   	; $2e8 ISVAL(
 	.byte	$04,$53,$51,$52,$a8           	; $2e9 SQR(
 	.byte	$04,$50,$41,$47,$c5           	; $2ea PAGE
+	.byte	$08,$53,$50,$52,$49,$54,$45,$58,$a8	; $2eb SPRITEX(
+	.byte	$08,$53,$50,$52,$49,$54,$45,$59,$a8	; $2ec SPRITEY(
 	.byte	$FF
 
 BinaryPrecedence:

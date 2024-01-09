@@ -119,6 +119,7 @@ int SPRUpdate(uint8_t *paramData) {
 		if (xyChanged) {  														// Positions changed.
 			p->x = x - p->xSize / 2;   											// Initially anchor point is centre.
 			p->y = y - p->ySize / 2;
+			p->xc = x;p->yc = y;  												// Remember centre position
 			p->isVisible = (p->x >= 0 && p->y >= 0 &&  							// Initially clip very simply all must be on screen.
 									p->x < gMode.xGSize-p->xSize && p->y < gMode.yGSize-p->ySize);
 			//printf("changed %d %d %d\n",p->x,p->y,p->isVisible);
@@ -135,6 +136,22 @@ int SPRUpdate(uint8_t *paramData) {
 	}
 
 	return 0; 
+}
+
+// ***************************************************************************************
+//
+//								Collision check
+//
+// ***************************************************************************************
+
+uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance) {
+	if (s1 >= MAX_SPRITES || s2 >= MAX_SPRITES) { 								// Validate parameters
+		*error = 1;
+		return 0;
+	}
+	SPRITE_INTERNAL *p1 = &sprites[s1],*p2 = &sprites[s2]; 						// Structure pointers.
+	int sdist = (p1->xc-p2->xc)*(p1->xc-p2->xc)+(p1->yc-p2->yc)*(p1->yc-p2->yc);// Square of distance
+	return sdist <= distance*distance;
 }
 
 // ***************************************************************************************

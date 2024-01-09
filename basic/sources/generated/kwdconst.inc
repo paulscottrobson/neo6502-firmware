@@ -202,3 +202,5 @@ KWD_STRDOLLARLPAREN                = $2e7 ; str$(
 KWD_ISVALLPAREN                    = $2e8 ; isval(
 KWD_SQRLPAREN                      = $2e9 ; sqr(
 KWD_PAGE                           = $2ea ; page
+KWD_SPRITEXLPAREN                  = $2eb ; spritex(
+KWD_SPRITEYLPAREN                  = $2ec ; spritey(

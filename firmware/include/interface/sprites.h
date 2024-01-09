@@ -19,6 +19,7 @@ typedef struct _sprite_internal {
 	bool isDrawn;  																// TRUE if currently drawn
 	bool isVisible;  															// TRUE if currently visible
 	uint16_t x,y;  																// Current drawn position (e.g. passed in)
+	uint16_t xc,yc;  															// Centre position
 	uint16_t xSize,ySize;  														// Sprite horizontal/vertical size.
 	uint8_t imageSize;  														// image (0:5) size (6) value
 	uint8_t *imageAddress; 	 													// Physical graphic address in gfxMemory
@@ -32,9 +33,10 @@ typedef struct _sprite_action {
 	uint8_t xSize,ySize;
 } SPRITE_ACTION;
 
-void SPRReset(void);  															// Sprite reset.
+void SPRReset(void);  															// Sprite methods
 void SPRHide(uint8_t *paramData);
 int SPRUpdate(uint8_t *paramData);
+uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance);
 
 void SPRPHYErase(SPRITE_ACTION *s); 											// Sprite draw/erase routines
 void SPRPHYDraw(SPRITE_ACTION *s);

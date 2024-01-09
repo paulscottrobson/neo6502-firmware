@@ -1,9 +1,9 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		boolean.asm
-;		Purpose:	True/False unaries
-;		Created:	3rd January 2024
+;		Name:		hit.asm
+;		Purpose:	Sprite collision
+;		Created:	9th January 2024
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -12,32 +12,47 @@
 
 ; ************************************************************************************************
 ;
-;									True/False constants
+;									Check sprite collision
 ;
 ; ************************************************************************************************
 
 		.section code	
 
-ReturnBoolean:
-		cmp 	#0
-		bne 	ConstTrue
-		
-ConstFalse: ;; [false]
-		lda 	#0
-		bra 	ConstCommon
-ConstTrue: ;; [true]
-		lda 	#$FF
-ConstCommon:		
-		sta 	XSNumber3,x
-		sta 	XSNumber2,x
-		sta 	XSNumber1,x
-		sta 	XSNumber0,x
-		stz 	XSControl,x
-		rts
-		
+EXPUnaryHit: ;; [hit(]
+		jsr 	EXPEvalInteger8 			; sprite 1
+		pha
+		jsr 	ERRCheckComma
+
+		jsr 	EXPEvalInteger8 			; sprite 2
+		pha
+		jsr 	ERRCheckComma
+
+		jsr 	EXPEvalInteger8 			; closing distance
+		pha
+		jsr 	ERRCheckRParen
+
+		pla
+		sta 	ControlParameters+2
+		pla
+		sta 	ControlParameters+1
+		pla
+		sta 	ControlParameters+0
+
+		.DoSendMessage
+		.byte 	6,4
+		.DoWaitMessage
+		lda 	ControlError 				; failed ?
+		bne 	_EUHError
+
+		lda 	ControlParameters+0 		; true/false option.
+		jmp 	ReturnBoolean
+
+_EUHError:
+		.error_range
+
 		.send code
 
-				
+
 ; ************************************************************************************************
 ;
 ;									Changes and Updates

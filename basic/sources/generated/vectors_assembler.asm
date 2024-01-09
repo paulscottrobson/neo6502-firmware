@@ -110,4 +110,6 @@ AssemblerVectorTable:
 	.word	EXPUnaryIsVal            ; $2e8 isval(
 	.word	UnarySqr                 ; $2e9 sqr(
 	.word	EXPUnaryPage             ; $2ea page
+	.word	Unimplemented            ; $2eb spritex(
+	.word	Unimplemented            ; $2ec spritey(
 	.send code

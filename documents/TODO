@@ -13,8 +13,6 @@ To next release
 ---------------
 Changes:
 
-	- Hit
-			- Write Hit demo
 	- SpriteX,SpriteY
 	- Rebuild
 	- Rebuild Windows Emulator
@@ -38,5 +36,5 @@ Other
 
 Add to Documentation
 --------------------
-	HIT SPRITEX SPRITEY
+	SPRITEX SPRITEY
 

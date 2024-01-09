@@ -121,7 +121,8 @@ dual:
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_usb.elf
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 $(BINDIR)$(BINARY)_usb.uf2
 
-
+	make -B clean
+	
 # ***************************************************************************************
 #
 #									Release rebuild
