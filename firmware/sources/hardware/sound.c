@@ -58,13 +58,12 @@ static bool SNDTimerCallback(struct repeating_timer *t) {
 
 struct repeating_timer timer;
 
-int SNDInitialise(void) {
+void SNDInitialise(void) {
 	gpio_set_function(SOUND_PIN, GPIO_FUNC_PWM);
 	sliceNumber = pwm_gpio_to_slice_num(SOUND_PIN);
 	channel = pwm_gpio_to_channel(SOUND_PIN);
 	SNDSetFrequency(0,0,false);
     add_repeating_timer_ms(20, SNDTimerCallback, NULL, &timer);
-	return 1;
 }
 
 // ***************************************************************************************
@@ -74,8 +73,10 @@ int SNDInitialise(void) {
 // ***************************************************************************************
 
 void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise) {
-	SNDSetPWMFrequencyDuty(sliceNumber,channel, frequency, 50);
-	pwm_set_enabled(sliceNumber,(frequency != 0));
+	if (channel < SOUND_CHANNELS) {
+		SNDSetPWMFrequencyDuty(sliceNumber,channel, frequency, 50);
+		pwm_set_enabled(sliceNumber,(frequency != 0));
+	}
 }
 
 // ***************************************************************************************

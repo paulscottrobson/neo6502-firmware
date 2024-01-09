@@ -13,12 +13,18 @@ To next release
 ---------------
 
 	- Audio system interface
+			SOUND CLEAR (silence, clear queue all)
+			SOUND <ch> CLEAR (silence, clear queue)
+			SOUND <ch>,<pitch>,<duration in ms> (add to queue, play new if not playing)
+			SFX <ch>,<id> (play sound effects)
+
 	- Rebuild Windows Emulator
 	- Rebuild, upload via UF2 etc. and check it all is working.
 
 Next Coding
 -----------	
 	- Neaten the logo which is a bit frayed.
+	- Start the Log.
 	- Config load not working ???? Not present ?
   	- User defined font 
 	- Graphics system
@@ -27,6 +33,7 @@ Next Coding
 				- something like AMAL 
 				- Changeable anchor points.
 		- Tiles
+		- Turtle Graphics System		
 	- Add USB Joystick interface if stable.
 	- Sweet16 code run on the RP2040 and baby assembler for it :)
 	
