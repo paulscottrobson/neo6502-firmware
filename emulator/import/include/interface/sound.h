@@ -15,8 +15,7 @@
 
 int SNDInitialise(void);
 void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise);
-void SNDQuiet(uint8_t channel);
-void SNDSync(void);
+void SNDManager(void);
 
 #endif
 

@@ -20,8 +20,6 @@
 #define SOUND_PIN 	(20) 					// Beeper pin.
 
 static uint sliceNumber,channel;
-static uint16_t channelFrequency;  			
-static bool isChannelNoise;
 
 // ***************************************************************************************
 //
@@ -29,7 +27,7 @@ static bool isChannelNoise;
 //
 // ***************************************************************************************
 
-static int32_t pwm_set_freq_duty(uint slice_num,uint chan,uint32_t f, int d)
+static int32_t SNDSetPWMFrequencyDuty(uint slice_num,uint chan,uint32_t f, int d)
 {
 	uint32_t clock = DVI_TIMING.bit_clk_khz * 1024;
 	uint32_t divider16 = clock / f / 4096 + (clock % (f * 4096) != 0);
@@ -47,12 +45,11 @@ static int32_t pwm_set_freq_duty(uint slice_num,uint chan,uint32_t f, int d)
 //
 // ***************************************************************************************
 
-bool repeating_timer_callback(struct repeating_timer *t) {
- 	if (isChannelNoise) {
- 		pwm_set_freq_duty(sliceNumber,channel, channelFrequency-50+random() % 100, random() % 80+10	);
- 	}
+static bool SNDTimerCallback(struct repeating_timer *t) {
+	SNDManager();
     return true;
 }
+
 // ***************************************************************************************
 //
 //				Initialise sound channel, return # of supported channels
@@ -65,8 +62,8 @@ int SNDInitialise(void) {
 	gpio_set_function(SOUND_PIN, GPIO_FUNC_PWM);
 	sliceNumber = pwm_gpio_to_slice_num(SOUND_PIN);
 	channel = pwm_gpio_to_channel(SOUND_PIN);
-	SNDQuiet(0);
-    add_repeating_timer_ms(10, repeating_timer_callback, NULL, &timer);
+	SNDSetFrequency(0,0,false);
+    add_repeating_timer_ms(20, SNDTimerCallback, NULL, &timer);
 	return 1;
 }
 
@@ -77,20 +74,8 @@ int SNDInitialise(void) {
 // ***************************************************************************************
 
 void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise) {
-	channelFrequency = frequency;isChannelNoise = isNoise;
-	pwm_set_freq_duty(sliceNumber,channel, frequency, 50);
-	pwm_set_enabled(sliceNumber,true);
-}
-
-// ***************************************************************************************
-//
-//									Silence channel
-//
-// ***************************************************************************************
-
-void SNDQuiet(uint8_t channel) {
-	pwm_set_enabled(sliceNumber,false);	
-	isChannelNoise = false;
+	SNDSetPWMFrequencyDuty(sliceNumber,channel, frequency, 50);
+	pwm_set_enabled(sliceNumber,(frequency != 0));
 }
 
 // ***************************************************************************************

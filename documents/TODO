@@ -12,6 +12,7 @@ General
 To next release
 ---------------
 
+	- Audio system interface
 	- Rebuild Windows Emulator
 	- Rebuild, upload via UF2 etc. and check it all is working.
 
@@ -20,7 +21,6 @@ Next Coding
 	- Neaten the logo which is a bit frayed.
 	- Config load not working ???? Not present ?
   	- User defined font 
-	- Audio system driver on emulator, and audio interface
 	- Graphics system
 		- Sprites 
 				- Optimise Sprite code (maybe ?)
