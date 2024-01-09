@@ -188,6 +188,7 @@ _GCUnknown:
 		;		
 _GCDim:	
 		iny 								; consume DIM
+		ldx 	#0
 		jsr 	EXPEvalInteger8 			; get size
 		sta 	graphicsSize 				; update it.
 		jsr 	GCSendDrawingInfo

@@ -254,6 +254,9 @@ switch (*DCOMMAND) {
 			case 4:
 				DPARAMS[0] = SPRCollisionCheck(DERROR,DPARAMS[0],DPARAMS[1],DPARAMS[2]);
 				break;
+			case 5:
+				*DERROR = SPRGetSpriteData(DPARAMS);
+				break;
 		}
 		break;
 	case 7:

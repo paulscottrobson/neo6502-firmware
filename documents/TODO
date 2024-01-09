@@ -11,23 +11,22 @@ General
   
 To next release
 ---------------
-Changes:
 
-	- SpriteX,SpriteY
-	- Rebuild
 	- Rebuild Windows Emulator
-	- Document remaining functions.
-	
-Next Release
-------------	
+	- Rebuild, upload via UF2 etc. and check it all is working.
+
+Next Coding
+-----------	
+	- Neaten the logo which is a bit frayed.
 	- Config load not working ???? Not present ?
-  - User defined font ?
+  	- User defined font 
+	- Audio system driver on emulator, and audio interface
 	- Graphics system
 		- Sprites 
-				- Optimise Sprite code 
-				-	something like AMAL 
+				- Optimise Sprite code (maybe ?)
+				- something like AMAL 
+				- Changeable anchor points.
 		- Tiles
-	- Audio system driver on emulator, and audio interface
 	- Add USB Joystick interface if stable.
 	- Sweet16 code run on the RP2040 and baby assembler for it :)
 	
@@ -36,5 +35,4 @@ Other
 
 Add to Documentation
 --------------------
-	SPRITEX SPRITEY
 
