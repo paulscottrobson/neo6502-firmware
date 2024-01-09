@@ -19,7 +19,7 @@ StandardVectorTable:
 	.word	EXPUnaryLen              ; $8d len(
 	.word	UnaryAbs                 ; $8e abs(
 	.word	UnarySgn                 ; $8f sgn(
-	.word	Unimplemented            ; $90 hit(
+	.word	EXPUnaryHit              ; $90 hit(
 	.word	Unimplemented            ; $91 !!un9
 	.word	Unary_Mid                ; $92 mid$(
 	.word	Unary_Left               ; $93 left$(

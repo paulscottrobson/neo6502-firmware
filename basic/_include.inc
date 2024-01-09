@@ -24,6 +24,7 @@
 	.include "sources/arithmetic/unary/chr.asm"
 	.include "sources/arithmetic/unary/dollar.asm"
 	.include "sources/arithmetic/unary/event.asm"
+	.include "sources/arithmetic/unary/hit.asm"
 	.include "sources/arithmetic/unary/inkey.asm"
 	.include "sources/arithmetic/unary/joypad.asm"
 	.include "sources/arithmetic/unary/key.asm"
