@@ -7,36 +7,36 @@ General
 		SDCard should be a backup if at all possible as can block UEXT SPI usage.
 - The peculiar LoadROM bug, currently worked round. Now resets on reload
 		so now only loaded at boot.
-- Current clock 5.61 Mhz, can optimise this slightly.
-  (would be nice to get to F256 speed of 6.29 Mhz probably out of reach)
-
+- Current clock 6.25 Mhz, this may be reduced if some board can't cope.
+  
 To next release
 ---------------
 Changes:
 
 	- Hit
 			- Write Hit demo
-
+	- SpriteX,SpriteY
 	- Rebuild
 	- Rebuild Windows Emulator
-
-R2 can go, maybe.
+	- Document remaining functions.
 	
+Next Release
+------------	
 	- Config load not working ???? Not present ?
   - User defined font ?
 	- Graphics system
 		- Sprites 
-				- Optimise Sprite code s
+				- Optimise Sprite code 
 				-	something like AMAL 
 		- Tiles
 	- Audio system driver on emulator, and audio interface
 	- Add USB Joystick interface if stable.
+	- Sweet16 code run on the RP2040 and baby assembler for it :)
 	
 Other
 -----
 
 Add to Documentation
 --------------------
-	SPRITE (BY)
-	HIT
+	HIT SPRITEX SPRITEY
 
