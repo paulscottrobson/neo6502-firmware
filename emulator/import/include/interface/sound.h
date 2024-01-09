@@ -13,7 +13,9 @@
 #ifndef _SOUND_H
 #define _SOUND_H
 
-int SNDInitialise(void);
+#define SOUND_CHANNELS 	(1)
+
+void SNDInitialise(void);
 void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise);
 void SNDManager(void);
 
