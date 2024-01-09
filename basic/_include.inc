@@ -33,6 +33,7 @@
 	.include "sources/arithmetic/unary/page.asm"
 	.include "sources/arithmetic/unary/peekdeek.asm"
 	.include "sources/arithmetic/unary/simple.asm"
+	.include "sources/arithmetic/unary/spritexy.asm"
 	.include "sources/arithmetic/unary/str.asm"
 	.include "sources/arithmetic/unary/string.asm"
 	.include "sources/arithmetic/unary/substring.asm"

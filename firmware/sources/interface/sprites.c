@@ -23,7 +23,7 @@ static SPRITE_INTERNAL sprites[MAX_SPRITES];
 static void _SPRResetSprite(int n) {
 	SPRITE_INTERNAL *p = &sprites[n];  											// Set everything to default values.
 	p->isDrawn = p->isVisible = false;
-	p->x = p->y = -1;
+	p->xc = p->yc = p->x = p->y = -1;
 	p->imageSize = p->flip = p->xSize = p->ySize = 0;
 }
 
@@ -64,6 +64,20 @@ void SPRHide(uint8_t *paramData) {
 		}
 		sprites[spriteID].isVisible = false;  									// Mark not visible.
 	}
+}
+
+// ***************************************************************************************
+//
+//								Get sprite position.
+//
+// ***************************************************************************************
+
+uint8_t SPRGetSpriteData(uint8_t *param) {
+	if (*param >= MAX_SPRITES) return 1; 										// Bad sprite #
+	SPRITE_INTERNAL *p = &sprites[*param];										// Sprite structure
+	param[1] = p->xc & 0xFF;param[2] = p->xc >> 8;
+	param[3] = p->yc & 0xFF;param[4] = p->yc >> 8;
+	return 0;
 }
 
 // ***************************************************************************************

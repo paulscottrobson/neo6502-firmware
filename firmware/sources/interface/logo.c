@@ -36,7 +36,6 @@ static const uint8_t graphic_olimex[] =
 static void _LOGDraw(const uint8_t *data,uint8_t colour,int yPos) {
 	int xByteSize = *data++;
 	int ySize = *data++;
-	printf("%d\n",xByteSize);
 	for (int y = 0;y < ySize;y++) {
 		int x = 160 - (xByteSize * 4);
 		for (int x1 = 0;x1 < xByteSize;x1++) {
