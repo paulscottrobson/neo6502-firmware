@@ -19,17 +19,44 @@
 		.section code
 
 Command_SFX:	;; [sfx]
+		lda 	(codePtr),y 				; push first on stack
+		pha
+		cmp 	#KWD_SYS_SH1
+		bne 	_CSNotClear
+		iny  								; check CLEAR
+		lda 	(codePtr),y
+		iny
+		cmp 	#KWD_CLEAR & $FF
+		bne 	_CSSyntax
+		pla 								; replace with $FF
+		lda 	#$FF
+		pha
+_CSNotClear:		
 		ldx 	#0
 		jsr 	EXPEvalInteger8 			; channel #
-		pha
 		jsr 	ERRCheckComma
+		inx
 		jsr 	EXPEvalInteger8 			; f/x number
-		sta 	ControlParameters+1
-		pla
+
+		pla 	 							; check CLEAR prefix.
+		cmp 	#$FF
+		bne 	_CSNotClear2
+		lda 	XSNumber0
 		sta 	ControlParameters+0
-		.DoSendMessage 						; reset all sound
+		.DoSendMessage 						; clear channel
+		.byte 	8,2
+
+_CSNotClear2:
+		lda 	XSNumber0+1
+		sta 	ControlParameters+1
+		lda 	XSNumber0
+		sta 	ControlParameters+0
+		.DoSendMessage 						; play sound
 		.byte 	8,5
 		rts		
+
+_CSSyntax:
+		.error_syntax		
 		.send code
 
 ; ************************************************************************************************
