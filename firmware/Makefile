@@ -21,7 +21,7 @@ BINARY = firmware
 #
 #		Can be SDCARD or USBKEY currently.
 #
-STORAGE = SDCARD
+STORAGE = USBKEY
 
 all: build
 
@@ -106,9 +106,12 @@ reset:
 # ***************************************************************************************
 
 dual:
+	$(CDEL)   firmware.elf firmware.uf2
+
 	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.c
 	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.c
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
+	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)_sfxdata.h
 
 	rm -Rf build
 	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DSDCARD_STORAGE=1
