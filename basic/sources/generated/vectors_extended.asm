@@ -29,7 +29,7 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $197 draw
 	.word	Unimplemented            ; $198 hide
 	.word	Unimplemented            ; $199 flip
-	.word	Unimplemented            ; $19a sound
+	.word	Command_SOUND            ; $19a sound
 	.word	Unimplemented            ; $19b sfx
 	.word	Unimplemented            ; $19c slide
 	.send code

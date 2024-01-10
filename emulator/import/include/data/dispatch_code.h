@@ -277,6 +277,9 @@ switch (*DCOMMAND) {
 			case 3:
 				SNDStartup();
 				break;
+			case 4:
+				*DERROR = SNDPlay(DPARAMS[0],DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7),DPARAMS[9]);
+				break;
 		}
 		break;
 }
