@@ -68,7 +68,7 @@ prelim: always
 	$(PYTHON) scripts$(S)token_code.py
 	$(PYTHON) scripts$(S)errors.py
 	$(PYTHON) scripts$(S)makebuild.py >_include.inc
-	$(PYTHON) $(BINDIR)makebasic.zip build$(S)$(BASPROG) -obuild$(S)tokenised.dat
+	$(PYTHON) $(BINDIR)makebasic.zip $(BASPROG) -obuild$(S)tokenised.dat
 
 # ***************************************************************************************
 #
@@ -145,22 +145,22 @@ testrun: prelim
 	$(RUNCMD) build$(S)tokenised.dat@page exec
 
 binary:
-	$(PYTHON) tests$(S)binary.py >build$(S)test.bsc
+	$(PYTHON) tests$(S)binary.py >test.bsc
 	make testrun
 brackets:	
-	$(PYTHON) tests$(S)brackets.py >build$(S)test.bsc
+	$(PYTHON) tests$(S)brackets.py >test.bsc
 	make testrun
 unary:
-	$(PYTHON) tests$(S)unary.py >build$(S)test.bsc
+	$(PYTHON) tests$(S)unary.py >test.bsc
 	make testrun
 string:
-	$(PYTHON) tests$(S)string.py >build$(S)test.bsc
+	$(PYTHON) tests$(S)string.py >test.bsc
 	make testrun
 assign:
-	$(PYTHON) tests$(S)assign.py >build$(S)test.bsc
+	$(PYTHON) tests$(S)assign.py >test.bsc
 	make testrun
 array:
-	$(PYTHON) tests$(S)array.py >build$(S)test.bsc
+	$(PYTHON) tests$(S)array.py >test.bsc
 	make testrun
 
 # ***************************************************************************************

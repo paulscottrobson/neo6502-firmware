@@ -3,6 +3,7 @@
 '
 cls
 for i = 1 to 15
+	a = sin(i)
 	ink i:print "Hello, world"
 next
 
