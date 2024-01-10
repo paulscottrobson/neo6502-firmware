@@ -16,6 +16,8 @@ To next release
 			SOUND CLEAR (silence, clear queue all)
 			SOUND <ch> CLEAR (silence, clear queue)
 			SOUND <ch>,<pitch>,<duration in ms> (add to queue, play new if not playing)
+
+	- Audio system sfx
 			SFX <ch>,<id> (play sound effects)
 
 	- Rebuild Windows Emulator
@@ -23,7 +25,9 @@ To next release
 
 Next Coding
 -----------	
-	- Start the Log.
+
+	- Start the Changes Log, document fixes made from now on.
+	- Start the code review.
 	- Config load not working ???? Not present ?
   	- User defined font 
 	- Graphics system
