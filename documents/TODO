@@ -9,22 +9,16 @@ General
 		so now only loaded at boot.
 - Current clock 6.25 Mhz, this may be reduced if some board can't cope.
   
-To next release
----------------
-
-	- Rebuild, upload via UF2 etc. and check it all is working.
-
 Next Coding
 -----------	
-	- Start the Changes Log, document fixes made from now on.
 
 	Bugs
 		- Start the code review.
-		- Config load not working ???? Not present ?
 
 	Enhancements	
 	  	- User defined font 
 	  	- SLIDE
+
 		- Graphics system
 
 			- Sprites 
