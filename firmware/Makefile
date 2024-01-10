@@ -106,7 +106,7 @@ reset:
 #
 # ***************************************************************************************
 
-dual:
+dual: kernel always
 	$(CDEL)   firmware.elf firmware.uf2
 
 	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.c
