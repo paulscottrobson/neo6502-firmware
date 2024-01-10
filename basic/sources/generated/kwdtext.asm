@@ -153,6 +153,7 @@ Shift1TokenText:
 	.byte	$05,$53,$4f,$55,$4e,$c4       	; $19a SOUND
 	.byte	$03,$53,$46,$d8               	; $19b SFX
 	.byte	$05,$53,$4c,$49,$44,$c5       	; $19c SLIDE
+	.byte	$05,$47,$4c,$4f,$41,$c4       	; $19d GLOAD
 	.byte	$FF
 
 Shift2TokenText:

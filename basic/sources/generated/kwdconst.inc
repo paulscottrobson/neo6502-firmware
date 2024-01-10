@@ -130,6 +130,7 @@ KWD_FLIP                           = $199 ; flip
 KWD_SOUND                          = $19a ; sound
 KWD_SFX                            = $19b ; sfx
 KWD_SLIDE                          = $19c ; slide
+KWD_GLOAD                          = $19d ; gload
 KWD_ADC                            = $280 ; adc
 KWD_AND                            = $281 ; and
 KWD_ASL                            = $282 ; asl
