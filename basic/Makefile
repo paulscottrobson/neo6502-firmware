@@ -198,6 +198,7 @@ DEMOBAS = $(subst bsc,bas,$(DEMOSRC))
 demos: clearstorage $(DEMOBAS)
 	$(CCOPY) images$(S)test$(S)test.gfx storage
 	$(CCOPY) images$(S)graphics.gfx storage
+	$(CCOPY) storage$(S)*.* ..$(S)emulator$(S)storage
 
 clearstorage:
 	$(CDEL) storage$(S)*.*
@@ -206,7 +207,6 @@ clearstorage:
 %.bas : %.bsc
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
 	$(CCOPY) $@ storage
-	$(CCOPY) $@ ..$(S)emulator$(S)storage
 
 # ***************************************************************************************
 #

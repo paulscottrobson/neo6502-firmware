@@ -11,27 +11,38 @@ General
   
 To next release
 ---------------
-
+	- Cross Dev demo in BASIC Windows/Linux.
+	- GFXLOAD
+	- SFX CLEAR ?
 	- Rebuild Windows Emulator
 	- Rebuild, upload via UF2 etc. and check it all is working.
 
 Next Coding
 -----------	
-
 	- Start the Changes Log, document fixes made from now on.
-	- Start the code review.
-	- Config load not working ???? Not present ?
-  	- User defined font 
-  	- SLIDE
-	- Graphics system
-		- Sprites 
-				- Optimise Sprite code (maybe ?)
-				- something like AMAL 
-				- Changeable anchor points.
-		- Tiles
-		- Turtle Graphics System		
-	- Add USB Joystick interface if stable.
-	- Sweet16 code run on the RP2040 and baby assembler for it :)
+
+	Bugs
+		- Start the code review.
+		- Config load not working ???? Not present ?
+
+	Enhancements	
+	  	- User defined font 
+	  	- SLIDE
+		- Graphics system
+
+			- Sprites 
+					- Optimise Sprite code (maybe ?)
+					- something like AMAL 
+					- Changeable anchor points.
+			- Tiles
+					- Eris style tilemap command ?
+
+			- Turtle Graphics System		
+					- Use sprite 0
+
+		- Add USB Joystick interface if stable.
+
+		- Sweet16 code run on the RP2040 and baby assembler for it :)
 	
 Other
 -----
