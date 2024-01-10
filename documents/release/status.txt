@@ -1,0 +1,29 @@
+Status
+------
+	Standard BASIC stuff
+	Named procedures with parameters and locals
+	Inline assembler works
+	Timer/Event works
+	For/While/Repeat/Do loops
+	Multiline and nested If/Then/Else
+	Keyboard can be accessed via queue, key states or as a faux controller
+	Line/Point/Ellipse/Rectangle/Image text graphic operations
+	Sprites & Collision
+	Sound playing in queue, sound effects built in.
+	Function key definitions to produce any text you like.
+	Creating graphics files from PNG files
+	Wozmon works (it's weird, it's supposed to work that way)
+	Save/Load/Edit seems reliable on SD Card/USB key
+
+Todo
+----
+	Bug fixes !
+	Code Review
+	Make the configuration file work (keyboard locale, boot into BASIC etc.)
+	Slide sound effects (adds a constant to the frequency to create simple FX)
+	Sprite Anchor Points
+	A small animation language as in STOS and AMOS to handle some of the load
+	Tile maps
+	Turtle graphics
+	USB Joystick support
+	Sweet16 running on the RP2040 but controlled by BASIC.

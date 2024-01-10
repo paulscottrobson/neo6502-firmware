@@ -31,9 +31,13 @@ all:
 	make -B -C emulator release
 	make -B zipfile 
 
-zipfile: samples
-	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) release$(S)samples.zip
+zipfile: samples crossdev
+	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) release$(S)samples.zip release$(S)crossdev.zip
 	$(CDEL) release$(S)samples.zip
+	$(CDEL) release$(S)crossdev.zip
+
+crossdev:
+	zip -r -j -q release$(S)crossdev.zip documents$(S)release$(S)crossdev
 
 samples:
 	zip -r -j -q release$(S)samples.zip basic$(S)code basic$(S)images$(S)test$(S)test.gfx basic$(S)images$(S)graphics.gfx
