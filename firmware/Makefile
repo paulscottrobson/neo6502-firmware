@@ -64,6 +64,7 @@ build: kernel always
 	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.c
 	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.c
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
+	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)_sfxdata.h
 	make -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .

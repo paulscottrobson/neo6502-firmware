@@ -12,9 +12,6 @@ General
 To next release
 ---------------
 
-	- Audio system sfx
-			SFX <ch>,<id> (play sound effects)
-
 	- Rebuild Windows Emulator
 	- Rebuild, upload via UF2 etc. and check it all is working.
 
@@ -25,6 +22,7 @@ Next Coding
 	- Start the code review.
 	- Config load not working ???? Not present ?
   	- User defined font 
+  	- SLIDE
 	- Graphics system
 		- Sprites 
 				- Optimise Sprite code (maybe ?)
