@@ -32,4 +32,5 @@ ExtendedVectorTable:
 	.word	Command_SOUND            ; $19a sound
 	.word	Command_SFX              ; $19b sfx
 	.word	Unimplemented            ; $19c slide
+	.word	Command_GLoad            ; $19d gload
 	.send code

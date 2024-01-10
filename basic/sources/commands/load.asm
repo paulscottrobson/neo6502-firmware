@@ -12,7 +12,7 @@
 
 ; ************************************************************************************************
 ;
-;										SAVE Command
+;									   GLOAD/LOAD Commands
 ;
 ; ************************************************************************************************
 
@@ -24,16 +24,25 @@ Command_Load:	;; [load]
 		;
 		lda 	(codePtr),y 				; does a , follow
 		cmp 	#KWD_COMMA
-		beq		_CLLoadMemory 				; if so, load into memory.
+		beq		CLLoadMemory 				; if so, load into memory.
 		;
 		stz 	ControlParameters+2 		; load into program space
 		lda 	#Program >> 8
 		sta 	ControlParameters+3
-		jsr 	_CLLoad 					; Load BASIC program
+		jsr 	CLLoad 						; Load BASIC program
 		jsr 	ClearCode
 		jmp 	WarmStart
 
-_CLLoadMemory:
+Command_GLoad: ;; [gload]
+		ldx 	#0  						; file name
+		jsr 	EXPEvalString
+		lda 	#$FF
+		sta 	ControlParameters+2
+		sta 	ControlParameters+3
+		jsr 	CLLoad
+		rts
+
+CLLoadMemory:
 		iny 								; skip comma
 		ldx 	#1 							; load here
 		jsr 	EXPEvalInteger16
@@ -41,13 +50,13 @@ _CLLoadMemory:
 		sta 	ControlParameters+2
 		lda 	XSNumber1+1 
 		sta 	ControlParameters+3
-		jsr 	_CLLoad
+		jsr 	CLLoad
 		rts
 
 ;
 ;		Load named file (at stack 0) into address set at param2/3
 ;		
-_CLLoad:
+CLLoad:
 		lda 	XSNumber0  					; set file name in parameters
 		sta 	ControlParameters+0
 		lda 	XSNumber1
