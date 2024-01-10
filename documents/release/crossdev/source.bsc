@@ -1,0 +1,8 @@
+'
+'	A demo program
+'
+cls
+for i = 1 to 15
+	ink i:print "Hello, world"
+next
+
