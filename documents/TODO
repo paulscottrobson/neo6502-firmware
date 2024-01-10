@@ -12,11 +12,6 @@ General
 To next release
 ---------------
 
-	- Audio system interface
-			SOUND CLEAR (silence, clear queue all)
-			SOUND <ch> CLEAR (silence, clear queue)
-			SOUND <ch>,<pitch>,<duration in ms> (add to queue, play new if not playing)
-
 	- Audio system sfx
 			SFX <ch>,<id> (play sound effects)
 
@@ -45,4 +40,3 @@ Other
 
 Add to Documentation
 --------------------
-

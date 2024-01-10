@@ -80,6 +80,7 @@ void SNDPlayNextNote(int channelID) {
 // ***************************************************************************************
 
 uint8_t SNDPlay(int channelID,uint16_t frequency,uint16_t timems,bool isNoise) {
+	//printf("%d %d %d %d\n",channelID,frequency,timems,isNoise);
 	if (channelID >= SOUND_CHANNELS) return 1;
 	SOUND_CHANNEL *c = &channel[channelID];
 	if (c->queueCount != SOUND_QUEUE_SIZE) {  									// If queue not full
