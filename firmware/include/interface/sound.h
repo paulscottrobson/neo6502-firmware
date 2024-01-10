@@ -37,6 +37,8 @@ void SNDResetAll(void);
 uint8_t SNDResetChannel(int channel);
 uint8_t SNDPlay(int channelID,uint16_t frequency,uint16_t timems,bool isNoise);
 void SNDStartup(void);
+
+uint8_t SFXPlay(int channelID,int effect);
 #endif
 
 // ***************************************************************************************

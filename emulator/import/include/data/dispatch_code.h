@@ -280,6 +280,9 @@ switch (*DCOMMAND) {
 			case 4:
 				*DERROR = SNDPlay(DPARAMS[0],DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7),DPARAMS[9]);
 				break;
+			case 5:
+				*DERROR = SFXPlay(DPARAMS[0],DPARAMS[1]);
+				break;
 		}
 		break;
 }

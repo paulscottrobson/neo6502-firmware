@@ -21,7 +21,8 @@ target_sources(firmware PRIVATE main.c
     interface/graphics.c interface/console.c interface/keyboard.c interface/memory.c 
     interface/dispatch.c interface/maths.c interface/config.c interface/efla.c
     interface/gfxcommands.c interface/ellipse.c interface/fileinterface.c 
-    interface/sprites.c interface/logo.c interface/sprites_xor.c interface/sndmanager.c
+    interface/sprites.c interface/logo.c interface/sprites_xor.c 
+    interface/sndmanager.c interface/sfxmanager.c
 )
 
 if(USBKEY_STORAGE)
