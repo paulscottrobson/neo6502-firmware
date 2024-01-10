@@ -77,7 +77,8 @@ void DSPReset(void) {
     
     KBDInitialise();                                                            // Initialise keyboard & USB system.
     KBDEvent(0,0xFF,0);                                                         // Reset the keyboard manager
-    SNDInitialise();                                                            // Initialise sound
+    SNDInitialise();                                                            // Initialise sound hardware
+    SNDManager();                                                               // Initialise sound manager
     CONWrite(0x80+6);
     STOSynchronise();                                                           // Synchronise storage
     CONWrite(0x80+2);

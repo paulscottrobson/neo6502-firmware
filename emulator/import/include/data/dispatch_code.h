@@ -266,4 +266,17 @@ switch (*DCOMMAND) {
 				break;
 		}
 		break;
+	case 8:
+		switch (*DFUNCTION) {
+			case 1:
+				SNDResetAll();
+				break;
+			case 2:
+				*DERROR = SNDResetChannel(*DPARAMS);
+				break;
+			case 3:
+				SNDStartup();
+				break;
+		}
+		break;
 }

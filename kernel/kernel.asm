@@ -35,6 +35,10 @@ start
 	ldx 	#$ff
 	txs
 
+	jsr 	KSendMessage  				; beep
+	.byte 	8,3
+	jsr 	KWaitMessage
+
 	jmp 	WozMonStart
 
 	.include 	"support.asm"
