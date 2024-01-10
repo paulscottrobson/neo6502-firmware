@@ -33,6 +33,7 @@ all: build
 
 always:
 	$(PYTHON) scripts$(S)makedispatch.py dispatch.config >include$(S)data$(S)dispatch_code.h
+	$(CCOPY) $(BINDIR)basic_binary.h include$(S)data
 
 # ***************************************************************************************
 #
