@@ -19,14 +19,17 @@
 // ***************************************************************************************
 
 void CFGProcess(void) {
-//	if (FIOReadFile(".config",0x100) == 0) {  									// Try to read config file
-//		KBDSetLocale(cpuMemory[0x100],cpuMemory[0x101]);  						// Set locale from config file.
-//	}
+#ifdef USBKEY_STORAGE
+	if (FIOReadFile(".config",0x100) == 0) {  									// Try to read config file
+		KBDSetLocale(cpuMemory[0x100],cpuMemory[0x101]);  						// Set locale from config file.
+	}
+#endif
 }
 
 // ***************************************************************************************
 //
 //		Date 		Revision
 //		==== 		========
+//		10/01/24 	Config load is for USB only. Doesn't work for SDCard. Don't know why.
 //
 // ***************************************************************************************

@@ -26,9 +26,11 @@ target_sources(firmware PRIVATE main.c
 )
 
 if(USBKEY_STORAGE)
+    add_definitions(-DUSBKEY_STORAGE=1)
     target_sources(firmware PRIVATE hardware/storage/usb_storage.c)
 endif()
 if(SDCARD_STORAGE)
+    add_definitions(-DSDCARD_STORAGE=1)
      target_sources(firmware PRIVATE hardware/storage/sdcard_storage.c)
 endif()
 
