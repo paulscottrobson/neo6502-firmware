@@ -52,3 +52,6 @@ always:
 release:
 		make -B kernel
 
+clean:
+	$(CDEL) neo6502.inc  
+	$(CDEL) build$(S)*

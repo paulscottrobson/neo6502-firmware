@@ -241,3 +241,16 @@ basemachine:
 
 vlc:
 	vlc v4l2:///dev/video2:fps=30:chroma=mjpg:width=640:height=480 &
+
+# ***************************************************************************************
+#
+#											Clean
+#
+# ***************************************************************************************
+
+clean:
+	$(CDEL) build$(S)*.*
+	$(CDEL) sources$(S)generate$(S)*.*
+	$(CDEL) _include.inc
+	$(CDEL) test.bas
+	$(CDEL) memory.dump

@@ -5,3 +5,5 @@ Changes
 			Enabled configuration file for USB Hub only. SDCard still won't load on startup, even though it works fine otherwise.
 
 11/1/24		Cleaned up github. Now buildable straight from github.		
+			Tidied up make clean
+			Moved the boot display graphics from documents to firmware

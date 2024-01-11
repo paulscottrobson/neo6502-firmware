@@ -9,6 +9,13 @@ samples.
 
 All suggestions are welcome.
 
+Build Requirements
+------------------
+Gnu C for the platform(s)
+Pico SDK
+Python 3 & PIL/Pillow installed
+SDL2
+
 Running the emulator / real hardware - keyboard development
 -----------------------------------------------------------
 
