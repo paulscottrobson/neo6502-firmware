@@ -29,6 +29,7 @@ all: always kernel
 # ***************************************************************************************
 
 kernel:
+	$(CMAKEDIR) build
 	$(CDEL) $(BINDIR)binary.h
 	$(CDEL) build$(S)binary.h
 	$(CDEL) $(BINDIR)kernel.bin
