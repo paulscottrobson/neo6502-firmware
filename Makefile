@@ -34,6 +34,8 @@ all:
 	make -B zipfile 
 
 zipfile: samples crossdev
+	$(CCOPY) emulator$(S)SDL2.dll bin
+	$(CCOPY) emulator$(S)libwinpthread-1.dll bin
 	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) release$(S)samples.zip release$(S)crossdev.zip
 	$(CDEL) release$(S)samples.zip
 	$(CDEL) release$(S)crossdev.zip
