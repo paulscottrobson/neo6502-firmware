@@ -26,6 +26,7 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks
 
 all: 
 	$(CMAKEDIR) bin
+	make -B -C documents/bootdisplay
 	make -B -C kernel release
 	make -B -C basic release
 	make -B -C firmware release
