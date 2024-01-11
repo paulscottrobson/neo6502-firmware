@@ -25,6 +25,7 @@ BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(BINDIR)*.dll $(BINDIR)*.exe $(BINDI
 PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip
 
 all: 
+	$(CMAKEDIR) bin
 	make -B -C kernel release
 	make -B -C basic release
 	make -B -C firmware release
