@@ -106,7 +106,9 @@ $(APPNAME): $(SOURCES)
 # ***************************************************************************************
 
 import: always
-	$(CMAKEDIR) $(FIRMWARE)include
+	$(CMAKEDIR) import
+	$(CMAKEDIR) import$(S)include
+	$(CMAKEDIR) include
 	$(CCOPY) $(FIRMWARE)include$(S)common.h import$(S)include
 	$(CCOPYREC) $(FIRMWARE)include$(S)interface import$(S)include
 	$(CCOPYREC) $(FIRMWARE)include$(S)data import$(S)include
@@ -146,6 +148,8 @@ clean: import
 
 prebuild:
 	$(CMAKEDIR) 6502
+	$(CMAKEDIR) import
+	$(CMAKEDIR) import$(S)include
 	make -C processor
 	$(PYTHON) scripts$(S)mapper.py >include$(S)hid2sdl.h
 	$(CCOPY) $(BINDIR)*_binary.h include

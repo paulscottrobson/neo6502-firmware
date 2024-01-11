@@ -3,4 +3,5 @@ Changes
 
 10/1/24 	R2 released.
 			Enabled configuration file for USB Hub only. SDCard still won't load on startup, even though it works fine otherwise.
-			
+
+11/1/24		Cleaned up github. 		
