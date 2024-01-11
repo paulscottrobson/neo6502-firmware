@@ -121,11 +121,12 @@ void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int sol
 
 void GFXScaledText(struct GraphicsMode *gMode,char *s,int x,int y) {
 	while (*s != '\0') {
-		char c = *s++;
-		if (c >= ' ' && c < 0x80) {
+		uint8_t c = *s++;
+		if ((c >= ' ' && c < 0x80) || (c >= 0xC0)) {
 			int y1 = y;
 			for (int yc = 0;yc < 7;yc++) {				
 				int bits = font_5x7[(c-' ')*8+yc];
+				if (c >= 0xC0) bits = userDefinedFont[(c & 0x3F) * 8 + yc];
 				int x1 = x;
 				while (bits != 0) {
 					if (bits & 0x80) {
@@ -241,5 +242,6 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 //
 //		Date 		Revision
 //		==== 		========
+//		11-01-24	Modified to support UDGs
 //
 // ***************************************************************************************
