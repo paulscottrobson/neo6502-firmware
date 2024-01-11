@@ -3,6 +3,7 @@
 //
 //      Name :      sfxmanager.c
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//				   	Turi Scandurra
 //      Date :      9th January 2024
 //      Reviewed :  No
 //      Purpose :   Sound Effects Manager

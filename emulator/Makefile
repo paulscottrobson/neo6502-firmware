@@ -81,7 +81,6 @@ clearobj:
 
 windows: clearobj $(APPNAME)	
 	$(CCOPY) $(APPNAME)	 ..$(S)bin
-	$(CCOPY) SDL2.dll ..$(S)bin
 	make -B clearobj
 
 # ***************************************************************************************
