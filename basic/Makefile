@@ -39,6 +39,7 @@ release:
 # ***************************************************************************************
 
 convert:
+	$(CMAKEDIR) build
 	$(CCOPY) scripts$(S)*.py build
 	$(CCOPY) build$(S)makebasic.py build$(S)__main__.py
 	$(CDEL) $(BINDIR)makebasic.zip
@@ -203,6 +204,7 @@ demos: clearstorage $(DEMOBAS)
 	$(CCOPY) storage$(S)*.* ..$(S)emulator$(S)storage
 
 clearstorage:
+	$(CMAKEDIR) build
 	$(CMAKEDIR) storage
 	$(CMAKEDIR) ..$(S)emulator$(S)storage
 	$(CDEL) storage$(S)*.*
