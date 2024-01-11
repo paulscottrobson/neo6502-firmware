@@ -7,3 +7,4 @@ Changes
 11/1/24		Cleaned up github. Now buildable straight from github.		
 			Tidied up make clean
 			Moved the boot display graphics from documents to firmware
+			Added user defined character support to firmware.

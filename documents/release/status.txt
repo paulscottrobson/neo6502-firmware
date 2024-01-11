@@ -14,12 +14,12 @@ Status
 	Creating graphics files from PNG files
 	Wozmon works (it's weird, it's supposed to work that way)
 	Save/Load/Edit seems reliable on SD Card/USB key
-
+	User defined font characters.
+	
 Todo
 ----
 	Bug fixes !
 	Code Review
-	Make the configuration file work (keyboard locale, boot into BASIC etc.)
 	Slide sound effects (adds a constant to the frequency to create simple FX)
 	Sprite Anchor Points
 	A small animation language as in STOS and AMOS to handle some of the load

@@ -17,6 +17,22 @@ struct GraphicsMode *graphMode;
 
 // ***************************************************************************************
 //
+//						User defined font memory (64 characters)
+//
+// ***************************************************************************************
+
+uint8_t userDefinedFont[64*8];
+
+uint8_t CONUpdateUserFont(uint8_t *data) {
+	if (data[0] < 0xC0) return 1;
+	for (int i = 0;i < 7;i++) {
+		userDefinedFont[(data[0] & 0x3F)*8 + i] = data[i+1];
+	}
+	return 0;
+}	
+
+// ***************************************************************************************
+//
 //									Raw character output
 //
 // ***************************************************************************************
@@ -27,7 +43,10 @@ static void CONDrawCharacter(uint16_t x,uint16_t y,uint16_t ch,uint16_t fcol,uin
 		uint16_t cWidth = graphMode->fontWidth,cHeight = graphMode->fontHeight; 
 		if (graphMode->xGSize != 0) {  											// Only if graphics mode.
 			for (uint16_t y1 = 0;y1 < cHeight;y1++) {  							// Each line of font data
+
 				uint16_t b = font_5x7[(ch-32)*cHeight + y1]; 					// Bit pattern for that line.
+				if (ch >= 192) b = userDefinedFont[(ch & 0x3F) * 8 + y1]; 		// $C0-$FF UDG Memory.												
+
 				uint8_t *screen = graphMode->graphicsMemory+					// Where in memory it starts.
 												x*cWidth+(y*cHeight+y1) * 320;	
 				screen += ((320-graphMode->xCSize*cWidth)/2);  					// Horizontal centering.
@@ -181,7 +200,7 @@ void CONWrite(int c) {
 			CONReverseCursorBlock();break;
 
 		default:
-			if (c >= ' ' && c < 127) {  										// 32-126 output a character.
+			if ((c >= ' ' && c < 127) || c >= 192) {  							// 32-126,192+ output a character.
 				CONDrawCharacter(graphMode->xCursor,graphMode->yCursor,c,graphMode->foreCol,graphMode->backCol);
 				graphMode->xCursor++;
 				if (graphMode->xCursor == graphMode->xCSize) {  				// Char at EOL mark extended.
@@ -247,5 +266,6 @@ void CONWriteString(const char *s) {
 //
 //		Date 		Revision
 //		==== 		========
+//		11-01-24	Added user defined font option.
 //
 // ***************************************************************************************

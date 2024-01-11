@@ -22,6 +22,9 @@ void CONWrite(int c);
 void CONWriteHex(uint16_t h);	
 void CONWriteString(const char *s);
 void CONGetScreenLine(uint16_t addr);
+uint8_t CONUpdateUserFont(uint8_t *data);
+
+extern uint8_t userDefinedFont[64*8];
 
 #define CONTROL(c) 	((c) & 0x1F)
 
@@ -52,5 +55,6 @@ void CONGetScreenLine(uint16_t addr);
 //
 //		Date 		Revision
 //		==== 		========
+//		11-01-24 	Added CONUpdateUserFont declaration.
 //
 // ***************************************************************************************
