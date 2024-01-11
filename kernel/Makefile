@@ -34,7 +34,7 @@ kernel:
 	$(CDEL) $(BINDIR)kernel.bin
 	$(PYTHON) scripts$(S)vectors.py
 	$(ASSEMBLER) $(KERNELSOURCES) -o build$(S)kernel.bin -L build$(S)kernel.lst $(ASMEND)
-	$(PYTHON) $(BINDIR)hconvert.py build$(S)kernel.bin build$(S)kernel_binary.h kernel
+	$(PYTHON) $(ROOTDIR)basic$(S)scripts$(S)hconvert.py build$(S)kernel.bin build$(S)kernel_binary.h kernel
 	$(CCOPY) build$(S)kernel.bin $(BINDIR)
 	$(CCOPY) build$(S)kernel_binary.h $(BINDIR)
 	$(CCOPY) neo6502.inc $(BINDIR)
