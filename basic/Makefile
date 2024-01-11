@@ -58,8 +58,8 @@ convert:
 # ***************************************************************************************
 
 prelim: always
-	$(MAKEDIR) build
-	$(MAKEDIR) sources$(S)generated
+	$(CMAKEDIR) build
+	$(CMAKEDIR) sources$(S)generated
 	$(CDEL) sources$(S)generated$(S)*.*
 	$(CCOPY) $(BINDIR)neo6502.inc sources$(S)generated
 	$(PYTHON) scripts$(S)opcodes.py > sources$(S)generated$(S)opcodes.asm
@@ -203,6 +203,8 @@ demos: clearstorage $(DEMOBAS)
 	$(CCOPY) storage$(S)*.* ..$(S)emulator$(S)storage
 
 clearstorage:
+	$(CMAKEDIR) storage
+	$(CMAKEDIR) ..$(S)emulator$(S)storage
 	$(CDEL) storage$(S)*.*
 	$(CDEL) ..$(S)emulator$(S)storage$(S)*.*
 
