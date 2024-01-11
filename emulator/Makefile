@@ -106,6 +106,7 @@ $(APPNAME): $(SOURCES)
 # ***************************************************************************************
 
 import: always
+	$(MAKEDIR) $(FIRMWARE)include
 	$(CCOPY) $(FIRMWARE)include$(S)common.h import$(S)include
 	$(CCOPYREC) $(FIRMWARE)include$(S)interface import$(S)include
 	$(CCOPYREC) $(FIRMWARE)include$(S)data import$(S)include
@@ -144,6 +145,7 @@ clean: import
 # ***************************************************************************************
 
 prebuild:
+	$(MAKEDIR) 6502
 	make -C processor
 	$(PYTHON) scripts$(S)mapper.py >include$(S)hid2sdl.h
 	$(CCOPY) $(BINDIR)*_binary.h include

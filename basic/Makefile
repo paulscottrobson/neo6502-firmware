@@ -58,6 +58,8 @@ convert:
 # ***************************************************************************************
 
 prelim: always
+	$(MAKEDIR) build
+	$(MAKEDIR) sources$(S)generated
 	$(CDEL) sources$(S)generated$(S)*.*
 	$(CCOPY) $(BINDIR)neo6502.inc sources$(S)generated
 	$(PYTHON) scripts$(S)opcodes.py > sources$(S)generated$(S)opcodes.asm
