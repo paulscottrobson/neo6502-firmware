@@ -62,6 +62,7 @@ rebuild: clean build
 # ***************************************************************************************
 
 build: kernel always
+	make -B -C bootdisplay
 	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.c
 	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.c
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
@@ -109,6 +110,7 @@ reset:
 dual: kernel always
 	$(CDEL)   firmware.elf firmware.uf2
 
+	make -B -C bootdisplay
 	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.c
 	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.c
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h

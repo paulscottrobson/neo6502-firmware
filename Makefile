@@ -26,7 +26,6 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks
 
 all: 
 	$(CMAKEDIR) bin
-	make -B -C documents/bootdisplay
 	make -B -C kernel release
 	make -B -C basic release
 	make -B -C firmware release
@@ -45,4 +44,8 @@ samples:
 	zip -r -j -q release$(S)samples.zip basic$(S)code basic$(S)images$(S)test$(S)test.gfx basic$(S)images$(S)graphics.gfx
 	zip -d -q release$(S)samples.zip *.tass *.bsc
 
-
+clean:
+	make -B -C kernel clean
+	make -B -C basic clean
+	make -B -C emulator clean
+	make -B -C firmware clean

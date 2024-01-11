@@ -137,7 +137,9 @@ clean: import
 	$(CDEL) $(APPNAME) 
 	$(CDEL) src$(S)*.o 
 	$(CDEL) src$(S)core$(S)*.o 
+	$(CDEL) import$(S)sources$(S)interface$(S)*.o 
 	$(CDEL) framework$(S)*.o
+	$(CDEL) 6502$(S)*.*
 
 
 # ***************************************************************************************
