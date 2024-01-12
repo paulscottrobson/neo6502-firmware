@@ -24,7 +24,7 @@ static void _SPRResetSprite(int n) {
 	SPRITE_INTERNAL *p = &sprites[n];  											// Set everything to default values.
 	p->isDrawn = p->isVisible = false;
 	p->xc = p->yc = p->x = p->y = -1;
-	p->imageSize = p->flip = p->xSize = p->ySize = 0;
+	p->imageSize = 0xFF;p->flip = p->xSize = p->ySize = 0;
 }
 
 // ***************************************************************************************
@@ -172,5 +172,6 @@ uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance)
 //
 //		Date 		Revision
 //		==== 		========
+//		12-01-24	Changed initial image size to $FF as not picked up if sprite initialise to $80
 //
 // ***************************************************************************************

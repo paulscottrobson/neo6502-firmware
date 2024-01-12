@@ -8,3 +8,8 @@ Changes
 			Tidied up make clean
 			Moved the boot display graphics from documents to firmware
 			Added user defined character support to firmware.
+			Fixed problem with Windows libpthread.dll
+			Fixed missing image generation scripts from release.
+			
+12/1/24 	Discovered sprite using $80 image first time wasn't displaying, fixed.
+			

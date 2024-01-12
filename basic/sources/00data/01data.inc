@@ -207,7 +207,7 @@ spriteY: 									; sprite Y position
 		.fill 	2
 spriteImageSize: 							; image# (0..5) size (6)
 		.fill 	1
-spriteFlip: 								; x flip (7) y flip (6)
+spriteFlip: 								; x flip (0) y flip (1)
 		.fill 	1
 spriteBlockSize = * - spriteID
 		.send storage
