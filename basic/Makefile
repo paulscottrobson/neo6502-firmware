@@ -28,6 +28,7 @@ all: build
 # ***************************************************************************************
 
 release:
+		make -B -C images
 		make -B convert
 		make -B build
 		make -B demos

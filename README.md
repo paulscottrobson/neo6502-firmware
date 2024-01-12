@@ -9,7 +9,7 @@ Firmware for a Neo6502 Retrocomputer
 - cmake
 - build-essential
 - python3
-
+- Python Imaging Library / Pillow
 
 run:
 

@@ -183,7 +183,6 @@ _CSUS:	lda 	spriteID,x
 		sta 	ControlParameters,x 		
 		dex
 		bpl 	_CSUS		
-
 		.DoSendMessage 						; call code to Update current sprite
 		.byte 	6,2
 		.DoWaitMessage

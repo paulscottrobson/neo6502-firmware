@@ -1,4 +1,4 @@
-defchr 192,63,33,33,33,33,33,63
-print "[";chr$(192);chr$(192);"]"
-text "Hello"+chr$(192) ink 15,3 dim 2 to 100,100
-text "Hello"+chr$(192) ink 15,3 dim 2 to 100,100
+cls
+gload "test.gfx"
+image $80 to 100,100
+sprite 1 image $80 to 50,50
