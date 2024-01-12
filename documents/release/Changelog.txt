@@ -12,4 +12,7 @@ Changes
 			Fixed missing image generation scripts from release.
 			
 12/1/24 	Discovered sprite using $80 image first time wasn't displaying, fixed.
+			Got the github based build working, except for the Windows emulator
+			Got the Windows emulator cross compiling on Linux
+
 			
