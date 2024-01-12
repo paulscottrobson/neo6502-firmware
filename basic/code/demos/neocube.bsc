@@ -8,7 +8,7 @@ dim x(8):dim y(8):dim z(8):dim vx(8):dim vy(8)
 
 let rx_step = 3        'rotation step
 let rx = -rx_step :    'rem rotation angle x
-let l = 80 : l = l /2  'length of the vector
+let l = 80 : l = l \2  'length of the vector
 let fs = 200           'scale
 
 cls

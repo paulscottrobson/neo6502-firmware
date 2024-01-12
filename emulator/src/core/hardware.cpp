@@ -179,9 +179,9 @@ uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 //
 // ***************************************************************************************
 
-void STOInitialise() {
+void STOInitialise(void) {
 }
 
-void STOSynchronise() {
+void STOSynchronise(void) {
 	CONWriteString("Stored in 'storage' directory\r");
 }

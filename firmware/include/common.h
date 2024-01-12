@@ -29,7 +29,9 @@
 //		PC specific includes
 //
 #ifdef IBMPC
-#include <cstdint>
+#include <stdint.h>
+#include <stdbool.h>
+#include <hardware.h>
 #endif
 //
 //		Neo6502 Includes
