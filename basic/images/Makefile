@@ -10,6 +10,7 @@ all: always creator builder
 	$(CCOPY) graphics.gfx ..$(S)storage
 	
 creator: always
+	$(CMAKEDIR) build
 	$(CCOPY) ..$(S)scripts$(S)gconvert.py build
 	$(CCOPY) create_blanks.py build$(S)__main__.py
 	$(CDEL) $(BINDIR)createblanks.zip
@@ -17,6 +18,7 @@ creator: always
 	$(CDEL) build$(S)*.py
 
 builder: always
+	$(CMAKEDIR) build
 	$(CCOPY) ..$(S)scripts$(S)gconvert.py build
 	$(CCOPY) makeimg.py build$(S)__main__.py
 	$(CDEL) $(BINDIR)makeimg.zip
