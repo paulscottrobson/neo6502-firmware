@@ -1,7 +1,7 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      keyboard.c
+//      Name :      keyboard.cpp
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //      Date :      21st November 2023
 //      Reviewed :  No
@@ -49,9 +49,12 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 	if (isDown && keyCode == KEY_ESC) {   										// Pressed ESC
 		cpuMemory[controlPort+3] |= 0x80;  										// Set that flag.
 	}
+
 	if (keyCode == 0xFF) { 														// Reset request
 		queueSize = 0; 															// Empty keyboard queue
-		for (int i = 0;i < sizeof(keyboardState);i++) keyboardState[i] = 0; 	// No keys down.
+		for (unsigned int i = 0;i < sizeof(keyboardState);i++) {   				// No keys down.
+			keyboardState[i] = 0; 
+		}
 		return;
 	}
 
@@ -266,7 +269,7 @@ static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers) {
 // ***************************************************************************************
 
 static const uint8_t _KBDLocaleData[] = {
-	#include "_locale.c"
+	#include "_locale.cpp"
 };
 
 static const uint8_t *_KBDLocaleCurrent = NULL;
