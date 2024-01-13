@@ -11,8 +11,8 @@ SRC6="$IMPSRC/sndmanager.c $IMPSRC/sfxmanager.c"
 SOURCES="$SRC1 $SRC2 $SRC3 $SRC4 $SRC5 $SRC6"
 INCLUDES="-I../include -I../import/include -I../framework -I.."
 
-x86_64-w64-mingw32-g++ -Wall -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -o neo.exe $SOURCES $INCLUDES -lmingw32 -mwindows -lSDL2main -lSDL2 `x86_64-w64-mingw32/bin/sdl2-config --cflags --libs`
+x86_64-w64-mingw32-g++ -Wall -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -o neo.exe $SOURCES $INCLUDES `x86_64-w64-mingw32/bin/sdl2-config --cflags --static-libs` -static-libgcc -static-libstdc++ 
 
-cp ../*.dll .
-zip neowin.zip *.dll neo.exe
+rm neowin.zip
+zip neowin.zip neo.exe *.dll
 
