@@ -4,34 +4,34 @@ pico_generate_pio_header(firmware ${CMAKE_CURRENT_LIST_DIR}/system/sm0_memory_em
 
 add_definitions(-Wno-error=unused-variable)
 
-target_sources(firmware PRIVATE main.c 
+target_sources(firmware PRIVATE main.cpp  
     #
     #       Hardware sources
     #
-    hardware/dvi_320x240x256.c hardware/usbdriver.c hardware/timer.c hardware/sound.c 
-    hardware/fdebug.c hardware/fileimplementation.c
+    hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp  
+    hardware/fdebug.cpp  hardware/fileimplementation.cpp 
     #
     #       CPU type (pretty much permanently PIO now)
     #
-    system/processor_pio.c
-    #system/processor_bitbang.c
+    system/processor_pio.cpp 
+    #system/processor_bitbang.cpp 
     #
     #       Common interface routines
     #
-    interface/graphics.c interface/console.c interface/keyboard.c interface/memory.c 
-    interface/dispatch.c interface/maths.c interface/config.c interface/efla.c
-    interface/gfxcommands.c interface/ellipse.c interface/fileinterface.c 
-    interface/sprites.c interface/logo.c interface/sprites_xor.c 
-    interface/sndmanager.c interface/sfxmanager.c
+    interface/graphics.cpp  interface/console.cpp  interface/keyboard.cpp  interface/memory.cpp  
+    interface/dispatch.cpp  interface/maths.cpp  interface/config.cpp  interface/efla.cpp 
+    interface/gfxcommands.cpp  interface/ellipse.cpp  interface/fileinterface.cpp  
+    interface/sprites.cpp  interface/logo.cpp  interface/sprites_xor.cpp  
+    interface/sndmanager.cpp  interface/sfxmanager.cpp 
 )
 
 if(USBKEY_STORAGE)
     add_definitions(-DUSBKEY_STORAGE=1)
-    target_sources(firmware PRIVATE hardware/storage/usb_storage.c)
+    target_sources(firmware PRIVATE hardware/storage/usb_storage.cpp )
 endif()
 if(SDCARD_STORAGE)
     add_definitions(-DSDCARD_STORAGE=1)
-     target_sources(firmware PRIVATE hardware/storage/sdcard_storage.c)
+     target_sources(firmware PRIVATE hardware/storage/sdcard_storage.cpp )
 endif()
 
 target_compile_definitions(firmware
@@ -72,13 +72,13 @@ pico_add_extra_outputs(firmware)
 add_subdirectory(../libraries/no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI build)
 
 add_custom_target(upload
-    COMMAND openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program firmware.elf verify reset exit"
+    COMMAND openocd -f interface/cmsis-dap.cpp fg -f target/rp2040.cpp fg -c "adapter speed 5000" -c "program firmware.elf verify reset exit"
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     COMMENT "Upload via picoprobe..."
 )
 
 add_custom_target(reset
-    COMMAND openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "init" -c "reset run" -c "exit"
+    COMMAND openocd -f interface/cmsis-dap.cpp fg -f target/rp2040.cpp fg -c "adapter speed 5000" -c "init" -c "reset run" -c "exit"
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     COMMENT "Reset via picoprobe..."
 )

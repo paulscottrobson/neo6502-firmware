@@ -63,8 +63,8 @@ rebuild: clean build
 
 build: kernel always
 	make -B -C bootdisplay
-	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.c
-	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.c
+	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.cpp
+	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.cpp
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
 	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)_sfxdata.h
 	make -C build

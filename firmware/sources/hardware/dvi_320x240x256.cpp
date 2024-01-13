@@ -1,7 +1,7 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      usbdriver.c
+//      Name :      usbdriver.cpp
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //                  Luke Wren (PicoDVI Library)
 //                  Phillip Burgess (adafruit extensions used to understand it)

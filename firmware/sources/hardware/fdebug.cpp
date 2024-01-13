@@ -1,35 +1,36 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      config.c
+//      Name :      fdebug.cpp
 //      Authors :   Paul Robson (paul@robsons.org.uk)
-//      Date :      30th December 2023
+//      Date :      18th December 2023
 //      Reviewed :  No
-//      Purpose :   Configuration handler
+//      Purpose :   Firmware debugger code
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
 #include "common.h"
 
+static int fIsInitialised = 0;
+
 // ***************************************************************************************
 //
-//								Handle configuration
+//							Send character to firmware debugger
 //
 // ***************************************************************************************
 
-void CFGProcess(void) {
-#ifdef USBKEY_STORAGE
-	if (FIOReadFile(".config",0x100) == 0) {  									// Try to read config file
-		KBDSetLocale(cpuMemory[0x100],cpuMemory[0x101]);  						// Set locale from config file.
+void FDBWrite(uint8_t c) {
+	if (fIsInitialised == 0) { 				// Is the port open ?
+		stdio_uart_init_full(uart0, 115200, 28, 29);
+		fIsInitialised = -1;
 	}
-#endif
+	putchar(c); 							// Send character to it.
 }
 
 // ***************************************************************************************
 //
 //		Date 		Revision
 //		==== 		========
-//		10/01/24 	Config load is for USB only. Doesn't work for SDCard. Don't know why.
 //
 // ***************************************************************************************

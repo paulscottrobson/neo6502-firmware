@@ -1,7 +1,7 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      processor_bitbang.c
+//      Name :      processor_bitbang.cpp
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //                  Andre Weissflog
 //                  Rien Matthijsse
