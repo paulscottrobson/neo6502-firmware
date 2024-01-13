@@ -28,8 +28,6 @@ extern uint8_t userDefinedFont[64*8];
 
 #define CONTROL(c) 	((c) & 0x1F)
 
-#define CC_  		CONTROL('')
-
 #define CC_LEFT 	CONTROL('A')
 #define CC_RIGHT 	CONTROL('D')
 #define CC_INSERT 	CONTROL('E')
