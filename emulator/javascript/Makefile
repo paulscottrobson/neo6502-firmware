@@ -32,10 +32,12 @@ FLAGS = -DINCLUDE_OS_SUPPORT -DIBMPC -I. -I framework -I./cpu -I./bin -I include
 all: app
 
 app:
-#	rm -Rf build
-#	mkdir -p build
-#	cp -R ../src ../include ../framework ../6502 ../storage ../import build -R
+	rm -Rf build
+	mkdir -p build
+	cp -R ../src ../include ../framework ../6502 ../storage ../import build -R
 	cd build ; emcc  -D EMSCRIPTEN -D LINUX -D INCLUDE_DEBUGGING_SUPPORT $(FLAGS) $(SOURCES) -o neo.html
+	cp build/neo.* .
+	rm -Rf build
 
-server: app
-	cd build ; python -m http.server
+server: 
+	python -m http.server
