@@ -28,16 +28,10 @@ SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp \
   			$(IMPSRC)fileinterface.cpp $(IMPSRC)sprites.cpp $(IMPSRC)logo.cpp $(IMPSRC)sprites_xor.cpp \
   			$(IMPSRC)sndmanager.cpp $(IMPSRC)sfxmanager.cpp
 
-FLAGS = -DINCLUDE_OS_SUPPORT -DIBMPC -I.. -I ../framework -I ../cpu -I ../bin -I ../include -I $(FIRMDIR)/include -I 6502 -O1 \
-		-s USE_SDL=2 -s WASM=1 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file storage \
-		 -D INCLUDE_DEBUGGING_SUPPORT -s LINKABLE=1 -s EXPORT_ALL=1 
+INCLUDES= -I ../include -I ../framework -I .. -I $(FIRMDIR)include
 
-all: app
+all: 
+	x86_64-w64-mingw32-g++ -Wall -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -o neo.exe $(SOURCES) $(INCLUDES) `x86_64-w64-mingw32/bin/sdl2-config --cflags --static-libs` -static-libgcc -static-libstdc++ 
+	$(CDEL) neowin.zip
+	zip neowin.zip neo.exe
 
-app:
-	$(CMAKEDIR) storage
-	$(CCOPY) $(ROOTDIR)basic$(S)code$(S)*.bas storage
-	emcc  -D EMSCRIPTEN -D LINUX -D INCLUDE_DEBUGGING_SUPPORT $(FLAGS) $(SOURCES) -o neo.html
-
-server: 
-	python -m http.server
