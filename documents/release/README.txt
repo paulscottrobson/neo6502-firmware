@@ -68,7 +68,7 @@ These examples work. Obviously you may want to change file names and directories
 
 My Development Environment
 --------------------------
-Arch Linux. Sublime Text is the editor,  ARM GCC v13.2, Python 3.11.6 with PIL/Pillow installed (does the graphics conversion stuff). 
+Ubuntu 23.10. Sublime Text is the editor,  ARM GCC v13.2, Python 3.11.6 with PIL/Pillow installed (does the graphics conversion stuff). 
 64tass does the 6502 assembly. CMake 3.28.1 Gnu Make 4.4.1 (though it doesn't do anything clever !). 
 Documentation is mostly libreoffice. Hardware is a i5-4690 with 16Gb of RAM, most of the uploading uses a Pico based debugger from 
 "The Pi Hut" which I think is a standard design. A Raspi Keyboard with USB hub, a SanDisk USB3.1 key and 
@@ -85,4 +85,4 @@ Without this change the SD Card will not work (see the board manual page 12).
 
 Paul Robson.
 paul@robsons.org.uk
-10th January 2024
+14th January 2024

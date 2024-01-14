@@ -145,10 +145,11 @@ uint8_t FISReadFile(const char *fileName,uint16_t loadAddress,uint16_t maxSize) 
 	sprintf(szFileName,"storage/%s",fileName);
 	FILE *f = fopen(szFileName,"rb");
 	if (f != NULL) {
+		int b;
 		if (loadAddress == 0xFFFF) {
-			fread(gfxMemory,1,maxSize,f);
+			b = fread(gfxMemory,1,maxSize,f);
 		} else {
-			fread(CPUAccessMemory()+loadAddress,1,maxSize,f);
+			b = fread(CPUAccessMemory()+loadAddress,1,maxSize,f);
 		}
 		fclose(f);
 	}
