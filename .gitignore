@@ -9,13 +9,8 @@ bin/neo
 emulator/framework/debugger.o
 emulator/framework/gfx.o
 emulator/framework/main.o
-emulator/import/sources/interface/console.o
-emulator/import/sources/interface/dispatch.o
-emulator/import/sources/interface/graphics.o
-emulator/import/sources/interface/keyboard.o
-emulator/import/sources/interface/maths.o
-emulator/import/sources/interface/memory.o
 emulator/include/basic_binary.h
+emulator/javascript/build
 emulator/neo
 emulator/src/core/hardware.o
 emulator/src/core/sys_debugger.o
@@ -37,9 +32,9 @@ kernel/build/kernel.lst
 kernel/build/_vectors.inc
 release/*
 scripts/build.count
-software/apple1-basic/build/a1basic.lst
-software/fig-forth/build/fig-forth.lst
 build
 .vscode
 *.nix
+firmware/sources/interface/*.o
 .envrc
+*.exe
