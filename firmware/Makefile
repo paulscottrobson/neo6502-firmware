@@ -21,7 +21,7 @@ BINARY = firmware
 #
 #		Can be SDCARD or USBKEY currently.
 #
-STORAGE = SDCARD
+STORAGE = USBKEY
 
 all: build
 
@@ -63,10 +63,10 @@ rebuild: clean build
 
 build: kernel always
 	make -B -C bootdisplay
-	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.cpp
-	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.cpp
+	$(PYTHON) scripts$(S)who.py >include$(S)data$(S)neowho.h
+	$(PYTHON) scripts$(S)keymaps.py >include$(S)data$(S)neolocale.h
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
-	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)_sfxdata.h
+	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)sfxdata.h
 	make -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .

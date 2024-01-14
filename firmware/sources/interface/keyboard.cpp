@@ -269,7 +269,7 @@ static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers) {
 // ***************************************************************************************
 
 static const uint8_t _KBDLocaleData[] = {
-	#include "_locale.cpp"
+	#include "data/neolocale.h"
 };
 
 static const uint8_t *_KBDLocaleCurrent = NULL;

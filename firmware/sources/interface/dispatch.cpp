@@ -29,7 +29,7 @@
 #define TIMECRITICAL(x) x
 #endif
 
-#include "_who.cpp"
+#include "data/neowho.h"
 
 // ***************************************************************************************
 //
