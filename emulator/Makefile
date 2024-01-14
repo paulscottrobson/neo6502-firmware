@@ -144,4 +144,4 @@ fwbuild:
 release:
 		make -B clean
 		make -B emulator
-
+		make -B -C cross-compile
