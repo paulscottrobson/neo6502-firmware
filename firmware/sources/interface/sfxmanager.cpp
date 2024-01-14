@@ -13,7 +13,7 @@
 
 #include "common.h"
 
-#include "data/_sfxdata.h"
+#include "data/sfxdata.h"
 
 // ***************************************************************************************
 //
@@ -30,8 +30,8 @@ uint8_t SFXPlay(int channelID,int effect) {
 		notes += 2;
 	}
 	return 0;
-
 }
+
 // ***************************************************************************************
 //
 //		Date 		Revision
