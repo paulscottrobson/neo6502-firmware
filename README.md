@@ -1,6 +1,15 @@
 # neo6502-firmware
 Firmware for a Neo6502 Retrocomputer
 
+## Getting Started:
+
+The release files on the right contain eveything you need to get started:
+- documentation
+- samples and example code and explainers.
+- firmware for the RP 2040 with WozMon and BASIC for SDCard or USB Host.
+- tools for cross development
+- Windows and Ubuntu emulators
+
 ## Building:
 ### required software:
 - Pico SDK (Remember to set PICO_SDK_PATH to point where it's installed)

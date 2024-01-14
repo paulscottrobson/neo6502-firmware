@@ -21,3 +21,4 @@ Changes
 			Note : Ubuntu default emscripten doesn't build javascript version
 			Shrunk the emulator display size so it takes up less screen real estate (short term solution)
 			More build improvements to the main github.
+			Building the Windows Emulator remotely :)
