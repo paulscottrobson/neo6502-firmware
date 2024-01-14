@@ -116,12 +116,12 @@ void DBGXRender(int *address,int showDisplay) {
 		}
 		GFXString(GRID(5,row),buffer,GRIDSIZE,isPC ? DBGC_HIGHLIGHT:DBGC_DATA,-1);	// Print the mnemonic
 	}
-
+	
 	#endif 
 	renderCount++;
 	if (showDisplay != 0) {
 		int xc = 320;int yc = 240;
-		int xs = 4;int ys = 4;
+		int xs = 3;int ys = 3;
 		SDL_Rect r;
 		r.w = xs*xc;r.h = ys*yc;
 		r.x = WIN_WIDTH/2-r.w/2;r.y = WIN_HEIGHT/2-r.h/2;

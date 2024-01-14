@@ -16,3 +16,6 @@ Changes
 			Got the Windows emulator cross compiling on Linux
 
 13/1/24 	Hopefully cross compiling is fixed and neo.exe is completely static. But you never know with Windows.			
+
+14/1/24		Switched to Ubuntu 23.10 from Arch. Got everything building again (Ubuntu default emscripten doesn't build javascript version)
+			Shrunk the emulator display size so it takes up less screen real estate (short term solution)
