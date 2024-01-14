@@ -14,5 +14,5 @@ INCLUDES="-I../include -I../import/include -I../framework -I.."
 x86_64-w64-mingw32-g++ -Wall -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -o neo.exe $SOURCES $INCLUDES `x86_64-w64-mingw32/bin/sdl2-config --cflags --static-libs` -static-libgcc -static-libstdc++ 
 
 rm neowin.zip
-zip neowin.zip neo.exe *.dll
+zip neowin.zip neo.exe
 
