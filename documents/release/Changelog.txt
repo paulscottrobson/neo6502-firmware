@@ -25,4 +25,7 @@ Changes
 			Ported the bouncy ball demo from SuperBasic
 
 15/1/24 	Added FROM to reset the origin.
+			Sprites do not error with bad numbers
+			Sprites are clipped to the screen boundary properly.
+
 			

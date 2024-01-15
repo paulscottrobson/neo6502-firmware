@@ -12,10 +12,10 @@
 
 #include "common.h"
 
-static const uint16_t clipTop = 50;
-static const uint16_t clipBottom = 200;
-static const uint16_t clipLeft = 80;
-static const uint16_t clipRight = 250;
+static const int16_t clipTop = 0;
+static const int16_t clipBottom = 239;
+static const int16_t clipLeft = 0;
+static const int16_t clipRight = 319;
 
 // ***************************************************************************************
 //
@@ -52,7 +52,7 @@ static void _SPXORDrawForwardLine(SPRITE_ACTION *sa) {
 
 static void _SPXORDrawBackwardLine(SPRITE_ACTION *sa) {
 	uint8_t bytes = sa->xBytes;
-	uint8_t *image = sa->image+sa->xSize/2-1;
+	uint8_t *image = sa->image+sa->xBytes-1;
 	uint8_t *display = sa->display;
 	uint8_t b;
 	while (bytes--) {
@@ -91,8 +91,10 @@ void SPRPHYDraw(SPRITE_ACTION *s) {
 	if (s->x < clipLeft - s->xSize || s->x > clipRight) return; 				// Clip completely.
 
 	s->xBytes = s->xSize/2; 							 						// Bytes to copy
+
 	if (s->x + s->xSize > clipRight) {  										// Clip on the right.
 		s->xBytes -= (s->x+s->xSize-clipRight)/2;  								// By putting out less data.
+		if ((s->flip & 1) != 0) s->image += s->xSize/2-s->xBytes;
 	}
 
 	int yAdjust = s->xSize/2; 	 												// Handle vertical flipping.
@@ -100,6 +102,14 @@ void SPRPHYDraw(SPRITE_ACTION *s) {
 		s->image += (s->ySize-1) * s->xSize/2;  								// Shift image data to last line
 	 	yAdjust = -yAdjust;  													// And work backwards.
 	}
+
+	if (s->x < clipLeft) {  													// Are we off to the left.
+		int adjust = (clipLeft-s->x+1)/2; 	 									// Bytes to clip
+		s->display += adjust * 2;
+		if ((s->flip & 1) == 0) s->image += adjust;
+		s->xBytes -= adjust;
+	}
+
 	for (int yPos = 0;yPos < s->ySize;yPos++) {   								// Work top to bottom
 		if (s->y+yPos >= clipTop && s->y+yPos <= clipBottom) {  				// In clip area.
 			if (s->flip & 1) {  												// Draw according to x flip

@@ -15,10 +15,6 @@ General
 Next Coding
 -----------	
 
-	- Stop off screen sprites causing an error
-
-	- Trim sprites properly.
-	
 	- Start the code review.
 
   	- SLIDE
@@ -26,9 +22,8 @@ Next Coding
 	- Graphics system
 
 		- Sprites 
-				- Optimise Sprite code (maybe ?)
-				- something like AMAL 
 				- Changeable anchor points.
+				- something like AMAL 
 		- Tiles
 				- Eris style tilemap command ?
 
