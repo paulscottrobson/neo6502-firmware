@@ -16,14 +16,11 @@ Status
 	Save/Load/Edit seems reliable on SD Card/USB key
 	User defined font characters.
 	Sprite clipping works
+	Slide sound effects (adds a constant to the frequency to create simple FX)
+	Sprite Anchor Points
 
 Todo
 ----
-	Bug fixes !
-	Code Review
-	
-	Slide sound effects (adds a constant to the frequency to create simple FX)
-	Sprite Anchor Points
 	A small animation language as in STOS and AMOS to handle some of the load
 	Tile maps
 	Turtle graphics

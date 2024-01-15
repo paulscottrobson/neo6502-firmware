@@ -27,5 +27,7 @@ Changes
 15/1/24 	Added FROM to reset the origin.
 			Sprites do not error with bad numbers
 			Sprites are clipped to the screen boundary properly.
+			Added the slide option to SOUND.
+			Added anchor positions to sprites.
 
 			

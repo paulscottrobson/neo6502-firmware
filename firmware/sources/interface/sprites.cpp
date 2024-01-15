@@ -14,6 +14,17 @@
 
 static SPRITE_INTERNAL sprites[MAX_SPRITES];
 
+static const int16_t anchorX[] = { 	1,
+	0,1,2,
+	0,1,2,
+	0,1,2,
+};
+
+static const int16_t anchorY[] = { 	1,
+	2,2,2,
+	1,1,1,
+	0,0,0
+};
 // ***************************************************************************************
 //
 //										Reset a sprites
@@ -24,7 +35,9 @@ static void _SPRResetSprite(int n) {
 	SPRITE_INTERNAL *p = &sprites[n];  											// Set everything to default values.
 	p->isDrawn = p->isVisible = false;
 	p->xc = p->yc = p->x = p->y = -1;
-	p->imageSize = 0xFF;p->flip = p->xSize = p->ySize = 0;
+	p->imageSize = 0xFF;
+	p->anchor = p->flip = 0;
+	p->xSize = p->ySize = 0;
 }
 
 // ***************************************************************************************
@@ -97,17 +110,19 @@ int SPRUpdate(uint8_t *paramData) {
 	uint16_t y = paramData[3] + (paramData[4] << 8);
 	uint8_t  imageSize = paramData[5];
 	uint8_t flip = paramData[6];
-
+	uint8_t anchor = paramData[7];
 	
 	SPRITE_INTERNAL *p = &sprites[spriteID];  									// Pointer to sprite structures
 
 	bool xyChanged = ((x & 0xFF00) != 0x8000) && (p->x != x || p->y != y); 		// Check to see if elements changed.
 	bool isChanged = (imageSize != 0x80) && (imageSize != p->imageSize);
 	bool flipChanged = (flip != 0x80) && (flip != p->flip);
+	bool anchorChanged = (anchor != 0x80) && (anchor != p->anchor);
 
-	//printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x %d %d %d @ %d,%d %d:%d\n",*paramData,x,y,paramData[5],paramData[6],xyChanged,isChanged,flipChanged,p->x,p->y,p->isVisible,p->isDrawn);
+	// printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x Anchor:%d %d %d %d %d @ %d,%d %d:%d\n",
+	// 	*paramData,x,y,paramData[5],paramData[6],paramData[7],xyChanged,isChanged,flipChanged,anchorChanged,p->x,p->y,p->isVisible,p->isDrawn);
 
-	if (xyChanged | isChanged | flipChanged) {   								// Some change made.
+	if (xyChanged | isChanged | flipChanged | anchorChanged) {   				// Some change made.
 		if (p->isDrawn) {  														// Erase if currently drawn
 			saRemove.display = gMode.graphicsMemory + p->x + p->y*gMode.xGSize; // Work out the draw address top left of sprite.
 			saRemove.image = p->imageAddress; 									// Where from.
@@ -122,6 +137,11 @@ int SPRUpdate(uint8_t *paramData) {
 			p->flip = flip; 
 		}									
 
+		if (anchorChanged) {  													// Anchor has changed.
+			if (anchor > 9) return 1;  											// Bad anchor.
+			p->anchor = anchor;
+		}
+
 		if (isChanged) {  														// Image or size changed
 			p->imageSize = imageSize;  											// Update image size.
 			p->xSize = p->ySize = (imageSize & 0x40) ? 32:16;   				// Size of image.
@@ -131,8 +151,9 @@ int SPRUpdate(uint8_t *paramData) {
 		}
 
 		if (xyChanged) {  														// Positions changed.
-			p->x = x - p->xSize / 2;   											// Initially anchor point is centre.
-			p->y = y - p->ySize / 2;
+			printf("%d %d %d\n",p->anchor,anchorX[p->anchor],anchorY[p->anchor]);
+			p->x = x - anchorX[p->anchor] * p->xSize / 2;   					// Initially anchor point is centre.
+			p->y = y - anchorY[p->anchor] * p->ySize / 2;
 			p->xc = x;p->yc = y;  												// Remember centre position
 			p->isVisible = true;
 			//printf("changed %d %d %d\n",p->x,p->y,p->isVisible);

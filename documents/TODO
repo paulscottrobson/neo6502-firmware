@@ -15,15 +15,11 @@ General
 Next Coding
 -----------	
 
-	- Start the code review.
-
-  	- SLIDE
-
 	- Graphics system
 
 		- Sprites 
-				- Changeable anchor points.
 				- something like AMAL 
+
 		- Tiles
 				- Eris style tilemap command ?
 
@@ -32,10 +28,14 @@ Next Coding
 
 	- Add USB Joystick interface if stable.
 
+	- [] operators
+	
 	- Sweet16 code run on the RP2040 and baby assembler for it :)
 	
 Other
 -----
+	- Start the code review.
+	- Ongoing bug fixes
 
 Add to Documentation
 --------------------

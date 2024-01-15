@@ -24,6 +24,7 @@ typedef struct _sprite_internal {
 	uint8_t imageSize;  														// image (0:5) size (6) value
 	uint8_t *imageAddress; 	 													// Physical graphic address in gfxMemory
 	uint8_t flip;  																// flip 0:x 1:y
+	uint8_t anchor;  															// anchor 0-9
 } SPRITE_INTERNAL;
 
 typedef struct _sprite_action {

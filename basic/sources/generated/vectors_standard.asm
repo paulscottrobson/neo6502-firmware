@@ -102,4 +102,6 @@ StandardVectorTable:
 	.word	Command_Image            ; $e0 image
 	.word	Command_Sprite           ; $e1 sprite
 	.word	Unimplemented            ; $e2 from
+	.word	Unimplemented            ; $e3 [
+	.word	Unimplemented            ; $e4 ]
 	.send code

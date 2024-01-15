@@ -1,10 +1,11 @@
 '
-'		Bouncy Balls Demo by Paul Robson
+'		Showing how anchors work
 '
 cls:sprite clear:gload "graphics.gfx"
-rect ink 2 from 80,50 to 250,200
-for i = 1 to 6
-	sprite i image $C4 to i*4,i*35+15 flip i & 3
-	sprite i+10 image $C4 to 310+i*4,i*35+15 flip i & 3
-	sprite i+20 image $C4 to 140+i*4,i*35+15 flip i & 3
+for i = 0 to 8
+x = 36+(i % 3)*64
+y = 36+(i \ 3)*48
+sprite i image $C4 to x,y anchor i+1
+text str$(i+1) ink 3 to x,y
+line 0,239 ink 7 to x,y
 next

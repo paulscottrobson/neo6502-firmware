@@ -31,7 +31,7 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $199 flip
 	.word	Command_SOUND            ; $19a sound
 	.word	Command_SFX              ; $19b sfx
-	.word	Unimplemented            ; $19c slide
+	.word	Unimplemented            ; $19c anchor
 	.word	Command_GLoad            ; $19d gload
 	.word	Command_DEFCHR           ; $19e defchr
 	.send code
