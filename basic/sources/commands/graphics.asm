@@ -35,6 +35,8 @@ GCommandLoop:
 		beq 	_GCExit
 		;
 		iny 								; consume
+		cmp 	#KWD_FROM 					; FROM is syntactic sugar
+		beq 	GCommandLoop
 		ldx 	#1 							; can we change mode ?
 		cmp 	#KWD_MOVE
 		beq 	_GChangeMode
@@ -315,6 +317,7 @@ GraphicsReset:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		15/01/24 		Added FROM syntactic sugar really.
 ;
 ; ************************************************************************************************
 

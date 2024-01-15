@@ -101,4 +101,5 @@ StandardVectorTable:
 	.word	Command_Text             ; $df text
 	.word	Command_Image            ; $e0 image
 	.word	Command_Sprite           ; $e1 sprite
+	.word	Unimplemented            ; $e2 from
 	.send code

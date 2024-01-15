@@ -101,6 +101,7 @@ KWD_ELLIPSE                        = $de ; ellipse
 KWD_TEXT                           = $df ; text
 KWD_IMAGE                          = $e0 ; image
 KWD_SPRITE                         = $e1 ; sprite
+KWD_FROM                           = $e2 ; from
 KWD_CLEAR                          = $180 ; clear
 KWD_NEW                            = $181 ; new
 KWD_RUN                            = $182 ; run

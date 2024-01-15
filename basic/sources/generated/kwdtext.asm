@@ -121,6 +121,7 @@ BaseTokenText:
 	.byte	$04,$54,$45,$58,$d4           	; $ df TEXT
 	.byte	$05,$49,$4d,$41,$47,$c5       	; $ e0 IMAGE
 	.byte	$06,$53,$50,$52,$49,$54,$c5   	; $ e1 SPRITE
+	.byte	$04,$46,$52,$4f,$cd           	; $ e2 FROM
 	.byte	$FF
 
 Shift1TokenText:

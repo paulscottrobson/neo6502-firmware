@@ -23,3 +23,6 @@ Changes
 			More build improvements to the main github.
 			Building the Windows Emulator remotely :)
 			Ported the bouncy ball demo from SuperBasic
+
+15/1/24 	Added FROM to reset the origin.
+			
