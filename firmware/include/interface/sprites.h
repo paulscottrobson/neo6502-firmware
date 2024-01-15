@@ -32,6 +32,7 @@ typedef struct _sprite_action {
 	uint8_t flip; 																// flip position
 	uint16_t x,y;  																// top left.
 	uint8_t xSize,ySize;  														// Sprite size
+	uint8_t xBytes; 															// Bytes to copy.
 } SPRITE_ACTION;
 
 void SPRReset(void);  															// Sprite methods

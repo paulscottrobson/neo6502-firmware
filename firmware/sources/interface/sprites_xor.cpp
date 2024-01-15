@@ -24,7 +24,7 @@ static const uint16_t clipRight = 250;
 // ***************************************************************************************
 
 static void _SPXORDrawForwardLine(SPRITE_ACTION *sa) {
-	uint8_t bytes = sa->xSize/2;
+	uint8_t bytes = sa->xBytes;
 	uint8_t *image = sa->image;
 	uint8_t *display = sa->display;
 	uint8_t b;
@@ -51,22 +51,22 @@ static void _SPXORDrawForwardLine(SPRITE_ACTION *sa) {
 // ***************************************************************************************
 
 static void _SPXORDrawBackwardLine(SPRITE_ACTION *sa) {
-	uint8_t bytes = sa->xSize/2;
-	uint8_t *image = sa->image;
-	uint8_t *display = sa->display + sa->xSize;
+	uint8_t bytes = sa->xBytes;
+	uint8_t *image = sa->image+sa->xSize/2-1;
+	uint8_t *display = sa->display;
 	uint8_t b;
 	while (bytes--) {
-		if ((b = *image++)) {
-			--display;
-			if (b & 0xF0) {
-				*display ^= (b & 0xF0);
-			}
-			--display;
+		if ((b = *image--)) {
 			if (b & 0x0F) {
 				*display ^= b << 4;
 			}					
+			display++;
+			if (b & 0xF0) {
+				*display ^= (b & 0xF0);
+			}
+			display++;
 		} else {
-			display -= 2;
+			display += 2;
 		}
 	}
 }
@@ -89,6 +89,11 @@ void SPRPHYErase(SPRITE_ACTION *s) {
 
 void SPRPHYDraw(SPRITE_ACTION *s) {
 	if (s->x < clipLeft - s->xSize || s->x > clipRight) return; 				// Clip completely.
+
+	s->xBytes = s->xSize/2; 							 						// Bytes to copy
+	if (s->x + s->xSize > clipRight) {  										// Clip on the right.
+		s->xBytes -= (s->x+s->xSize-clipRight)/2;  								// By putting out less data.
+	}
 
 	int yAdjust = s->xSize/2; 	 												// Handle vertical flipping.
 	if (s->flip & 2) {
