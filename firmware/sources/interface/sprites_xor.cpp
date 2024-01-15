@@ -14,6 +14,8 @@
 
 static const uint16_t clipTop = 50;
 static const uint16_t clipBottom = 200;
+static const uint16_t clipLeft = 80;
+static const uint16_t clipRight = 250;
 
 // ***************************************************************************************
 //
@@ -86,6 +88,7 @@ void SPRPHYErase(SPRITE_ACTION *s) {
 // ***************************************************************************************
 
 void SPRPHYDraw(SPRITE_ACTION *s) {
+	if (s->x < clipLeft - s->xSize || s->x > clipRight) return; 				// Clip completely.
 
 	int yAdjust = s->xSize/2; 	 												// Handle vertical flipping.
 	if (s->flip & 2) {
@@ -110,5 +113,6 @@ void SPRPHYDraw(SPRITE_ACTION *s) {
 //
 //		Date 		Revision
 //		==== 		========
+//		15/01/24 	Fixes for better sprite clipping
 //
 // ***************************************************************************************
