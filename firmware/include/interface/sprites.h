@@ -27,10 +27,11 @@ typedef struct _sprite_internal {
 } SPRITE_INTERNAL;
 
 typedef struct _sprite_action {
-	uint8_t *display;
-	uint8_t *image;
-	uint8_t flip;
-	uint8_t xSize,ySize;
+	uint8_t *display;  															// display position
+	uint8_t *image;  															// image data 
+	uint8_t flip; 																// flip position
+	uint16_t x,y;  																// top left.
+	uint8_t xSize,ySize;  														// Sprite size
 } SPRITE_ACTION;
 
 void SPRReset(void);  															// Sprite methods

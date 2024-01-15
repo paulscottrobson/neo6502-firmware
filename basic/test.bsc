@@ -1,1 +1,8 @@
-line 10,100 to 100,100 from 10,200 to 100,200
+'
+'		Bouncy Balls Demo by Paul Robson
+'
+cls:sprite clear:gload "graphics.gfx"
+rect ink 2 from 80,50 to 250,200
+for i = 0 to 10
+	sprite i image $C4 to 150+i,i*32+32 flip i & 3
+next

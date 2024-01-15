@@ -134,14 +134,14 @@ int SPRUpdate(uint8_t *paramData) {
 			p->x = x - p->xSize / 2;   											// Initially anchor point is centre.
 			p->y = y - p->ySize / 2;
 			p->xc = x;p->yc = y;  												// Remember centre position
-			p->isVisible = (p->x >= 0 && p->y >= 0 &&  							// Initially clip very simply all must be on screen.
-									p->x < gMode.xGSize-p->xSize && p->y < gMode.yGSize-p->ySize);
+			p->isVisible = true;
 			//printf("changed %d %d %d\n",p->x,p->y,p->isVisible);
 		}
 
 		if (p->isVisible) {  													// Redraw if possible.
 			saDraw.display = gMode.graphicsMemory + p->x + p->y * gMode.xGSize; // Work out the draw address top left of sprite.
 			saDraw.image = p->imageAddress; 									// Where from.
+			saDraw.x = p->x;saDraw.y = p->y;  									// Position on screen
 			saDraw.xSize = p->xSize;saDraw.ySize = p->ySize;  					// Size and flip.
 			saDraw.flip = p->flip;
 			SPRPHYDraw(&saDraw);
