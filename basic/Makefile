@@ -126,7 +126,8 @@ emulator:
 firmware:
 	make -C ..$(S)firmware
 	
-fik : kernel firmware import
+fik : emulator
+
 	
 always:
 

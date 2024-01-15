@@ -12,6 +12,9 @@
 
 #include "common.h"
 
+static const uint16_t clipTop = 50;
+static const uint16_t clipBottom = 200;
+
 // ***************************************************************************************
 //
 //								XOR in image L->R
@@ -84,19 +87,21 @@ void SPRPHYErase(SPRITE_ACTION *s) {
 
 void SPRPHYDraw(SPRITE_ACTION *s) {
 
-	int yAdjust = gMode.xGSize;  												// Handle vertical flipping.
+	int yAdjust = s->xSize/2; 	 												// Handle vertical flipping.
 	if (s->flip & 2) {
-		s->display += (s->ySize-1) * gMode.xGSize;
-	 	yAdjust = -yAdjust;
+		s->image += (s->ySize-1) * s->xSize/2;  								// Shift image data to last line
+	 	yAdjust = -yAdjust;  													// And work backwards.
 	}
 	for (int yPos = 0;yPos < s->ySize;yPos++) {   								// Work top to bottom
-		if (s->flip & 1) {  													// Draw according to x flip
-			_SPXORDrawBackwardLine(s); 					
-		} else {
-			_SPXORDrawForwardLine(s); 					
+		if (s->y+yPos >= clipTop && s->y+yPos <= clipBottom) {  				// In clip area.
+			if (s->flip & 1) {  												// Draw according to x flip
+				_SPXORDrawBackwardLine(s); 					
+			} else {
+				_SPXORDrawForwardLine(s); 					
+			}
 		}
-		s->image += s->xSize/2;
-		s->display += yAdjust;
+		s->display += gMode.xGSize;
+		s->image += yAdjust;
 	}
 	//printf("%d %d\n",s->isVisible,s->drawAddress);
 }
