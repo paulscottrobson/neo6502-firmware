@@ -19,10 +19,13 @@
 typedef struct _sound_queue_item {
 	uint16_t frequency;
 	uint16_t timeMS;
+	uint16_t slide;
 	uint8_t  soundType;
 } SOUND_QUEUE_ELEMENT;
 
 typedef struct _sound_channel {
+	int  currentFrequency;
+	int  currentSlide;
 	bool isPlayingNote;
 	int  tick50Remaining;
 	int  queueCount;
@@ -35,7 +38,7 @@ void SNDManager(void);
 
 void SNDResetAll(void);
 uint8_t SNDResetChannel(int channel);
-uint8_t SNDPlay(int channelID,uint16_t frequency,uint16_t timems,bool isNoise);
+uint8_t SNDPlay(int channelID,uint16_t frequency,uint16_t timems,uint16_t slide,bool isNoise);
 void SNDStartup(void);
 
 uint8_t SFXPlay(int channelID,int effect);

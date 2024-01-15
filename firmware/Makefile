@@ -111,10 +111,10 @@ dual: kernel always
 	$(CDEL)   firmware.elf firmware.uf2
 
 	make -B -C bootdisplay
-	$(PYTHON) scripts$(S)who.py >sources$(S)interface$(S)_who.c
-	$(PYTHON) scripts$(S)keymaps.py >sources$(S)interface$(S)_locale.c
+	$(PYTHON) scripts$(S)who.py >include$(S)data$(S)neowho.h
+	$(PYTHON) scripts$(S)keymaps.py >include$(S)data$(S)neolocale.h
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
-	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)_sfxdata.h
+	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)sfxdata.h
 
 	rm -Rf build
 	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DSDCARD_STORAGE=1

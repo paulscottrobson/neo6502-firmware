@@ -51,8 +51,8 @@ uint8_t SNDResetChannel(int channelID) {
 
 void SNDStartup(void) {
 	#ifdef PICO
-	SNDPlay(0,220,500,false);
-	SNDPlay(0,440,250,false);
+	SNDPlay(0,220,500,0,false);
+	SNDPlay(0,440,250,0,false);
 	#endif
 }
 
@@ -66,6 +66,8 @@ void SNDPlayNextNote(int channelID) {
 	SOUND_CHANNEL *c = &channel[channelID];
 	if (c->queueCount == 0 || c->isPlayingNote) return;  						// Queue empty / note being played.
 	SOUND_QUEUE_ELEMENT *qe = &(c->queue[0]); 									// Head of the queue.
+	c->currentFrequency = qe->frequency;
+	c->currentSlide = qe->slide;
 	c->isPlayingNote = true;  													// Set up the channel data
 	c->tick50Remaining = qe->timeMS / 20;  
 	SNDSetFrequency(channelID,qe->frequency,false);								// Play the note.
@@ -81,13 +83,14 @@ void SNDPlayNextNote(int channelID) {
 //
 // ***************************************************************************************
 
-uint8_t SNDPlay(int channelID,uint16_t frequency,uint16_t timems,bool isNoise) {
-	//printf("%d %d %d %d\n",channelID,frequency,timems,isNoise);
+uint8_t SNDPlay(int channelID,uint16_t frequency,uint16_t timems,uint16_t slide,bool isNoise) {
+	printf("%d %d %d %d %d\n",channelID,frequency,timems,slide,isNoise);
 	if (channelID >= SOUND_CHANNELS) return 1;
 	SOUND_CHANNEL *c = &channel[channelID];
 	if (c->queueCount != SOUND_QUEUE_SIZE) {  									// If queue not full
 		SOUND_QUEUE_ELEMENT *qe = &(c->queue[c->queueCount]);  					// Add to queue.
 		qe->frequency = frequency;
+		qe->slide = slide;
 		qe->timeMS = timems;
 		qe->soundType = 0;
 		c->queueCount++;
@@ -121,6 +124,12 @@ void SNDManager(void) {
 				}
 			} else {  															// Decrement the timer.
 				c->tick50Remaining--;
+				if (c->currentSlide != 0) {
+					c->currentFrequency += c->currentSlide;
+					if (c->currentFrequency < 200) c->currentFrequency += 1000;
+					if (c->currentFrequency > 1200) c->currentFrequency -= 1000;
+					SNDSetFrequency(channelID,c->currentFrequency,false);
+				}
 			}
 		}
 	}
