@@ -3,38 +3,43 @@ TODO List
 
 General
 -------
-- Working release is dependent on USB Flash progress.
-		SDCard should be a backup if at all possible as can block UEXT SPI usage.
-- The peculiar LoadROM bug, currently worked round. Now resets on reload
-		so now only loaded at boot.
-- Current clock 6.25 Mhz, this may be reduced if some board can't cope.
+
+	- Working release is dependent on USB Flash progress.
+			SDCard should be a backup if at all possible as can block UEXT SPI usage.
+
+	- The peculiar LoadROM bug, currently worked round. Now resets on reload
+			so now only loaded at boot.
+
+	- Current clock 6.25 Mhz, this may be reduced if some board can't cope.
   
 Next Coding
 -----------	
 
-	Introduce FROM
+	- SPRITE CLEAR issue.
+
+	- Stop off screen sprites causing an error
+
+	- Trim sprites properly.
 	
-	Bugs
-		- Start the code review.
+	- Start the code review.
 
-	Enhancements	
+  	- SLIDE
 
-	  	- SLIDE
-		- Graphics system
+	- Graphics system
 
-			- Sprites 
-					- Optimise Sprite code (maybe ?)
-					- something like AMAL 
-					- Changeable anchor points.
-			- Tiles
-					- Eris style tilemap command ?
+		- Sprites 
+				- Optimise Sprite code (maybe ?)
+				- something like AMAL 
+				- Changeable anchor points.
+		- Tiles
+				- Eris style tilemap command ?
 
-			- Turtle Graphics System		
-					- Use sprite 0
+		- Turtle Graphics System		
+				- Use sprite 0
 
-		- Add USB Joystick interface if stable.
+	- Add USB Joystick interface if stable.
 
-		- Sweet16 code run on the RP2040 and baby assembler for it :)
+	- Sweet16 code run on the RP2040 and baby assembler for it :)
 	
 Other
 -----
