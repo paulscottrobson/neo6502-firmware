@@ -114,7 +114,7 @@ class TokenSet(object):
 			SYS 	EXIT	, 		; 		: 		' 		)		READ 	
 			DATA 	ELSE	WHEN	DOWNTO 	POKE	DOKE 	LOCAL	CALL
 			# 		. 		LINE 	RECT 	MOVE 	PLOT 	ELLIPSE	TEXT 	
-			IMAGE 	SPRITE 	FROM
+			IMAGE 	SPRITE 	FROM 	[		]
 			""")
 		#
 		#		Keyword tokens (minor)
@@ -123,7 +123,7 @@ class TokenSet(object):
 			CLEAR 	NEW 	RUN 	STOP 	END 	ASSERT 	LIST 	SAVE 	
 			LOAD	CAT 	GOSUB 	GOTO	RETURN 	RESTORE	DIM		FKEY
 			CLS 	INK		FRAME	SOLID	BY 		WHO 	PALETTE DRAW	
-			HIDE 	FLIP 	SOUND 	SFX 	SLIDE 	GLOAD	DEFCHR
+			HIDE 	FLIP 	SOUND 	SFX 	ANCHOR	GLOAD	DEFCHR
 			""")
 		#
 		#		Keyword tokens (assembler)

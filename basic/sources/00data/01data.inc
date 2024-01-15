@@ -199,16 +199,19 @@ graphicsFlip:								; flip bits of image (0 = horiz,1 = vertical)
 ;
 ; ************************************************************************************************
 
-spriteID: 									; ID of sprite
+spriteID: 									; ID of sprite +0
 		.fill 	1
-spriteX: 									; sprite X position
+spriteX: 									; sprite X position +1
 		.fill 	2
-spriteY: 									; sprite Y position
+spriteY: 									; sprite Y position +3
 		.fill 	2
-spriteImageSize: 							; image# (0..5) size (6)
+spriteImageSize: 							; image# (0..5) size (6) +5
 		.fill 	1
-spriteFlip: 								; x flip (0) y flip (1)
+spriteFlip: 								; x flip (0) y flip (1) +6
 		.fill 	1
+spriteAnchor: 								; anchor point +7
+		.fill 	1		
+		
 spriteBlockSize = * - spriteID
 		.send storage
 

@@ -73,7 +73,7 @@ CSSpriteLoopInner:
 		cmp 	#KWD_SPRITE 				; new SPRITE command
 		beq 	CSNewSprite
 
-		cmp 	#KWD_SYS_SH1 				; check for shift 1 (BY and FLIP)
+		cmp 	#KWD_SYS_SH1 				; check for shift 1 (BY ANCHOR and FLIP)
 		beq 	_CSIsShift1
 _CSSyntax:
 		.error_syntax		
@@ -91,6 +91,9 @@ _CSIsShift1:
 		beq 	_CSToPosition
 		ldx 	#spriteFlip-spriteID 		; single value 
 		cmp 	#KWD_FLIP-$100
+		beq 	_CSWriteValue
+		ldx 	#spriteAnchor-spriteID
+		cmp 	#KWD_ANCHOR-$100
 		beq 	_CSWriteValue
 		;
 		cmp 	#KWD_HIDE-$100 				; hide is a seperate thing.
@@ -202,6 +205,7 @@ _CSUSError:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		15-01-24 		Added support to pass ANCHOR.
 ;
 ; ************************************************************************************************
 

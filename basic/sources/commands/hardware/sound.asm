@@ -26,6 +26,8 @@ Command_SOUND:	;; [sound]
 		beq 	_CSCheckClear
 		;
 		ldx 	#0
+		stx 	XSNumber0+3  				; default slide.
+		stx 	XSNumber1+3
 		jsr 	EXPEvalInteger8 			; channel #
 
 		lda 	(codePtr),y 				; check for SOUND n CLEAR
@@ -39,6 +41,15 @@ Command_SOUND:	;; [sound]
 		jsr 	ERRCheckComma  				; duration in ms.
 		jsr 	EXPEvalInteger16
 		;
+		lda 	(codePtr),y 				; check for slide.
+		cmp 	#KWD_COMMA
+		bne 	_CSNoSlide
+		;
+		iny
+		inx
+		jsr 	EXPEvalInteger
+
+_CSNoSlide:		
 		lda 	XSNumber0  					; set up to queue.
 		sta 	ControlParameters
 		lda 	XSNumber0+1
@@ -49,7 +60,11 @@ Command_SOUND:	;; [sound]
 		sta 	ControlParameters+3
 		lda 	XSNumber1+2
 		sta 	ControlParameters+4
-		stz 	ControlParameters+5
+		lda 	XSNumber0+3
+		sta 	ControlParameters+5
+		lda 	XSNumber1+3
+		sta 	ControlParameters+6
+		stz 	ControlParameters+7
 		.DoSendMessage 						; play that sound
 		.byte 	8,4		
 		.DoWaitMessage
@@ -92,6 +107,7 @@ _CSResetAll:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		15/01/24 		Added optional fourth parameter for sliding.
 ;
 ; ************************************************************************************************
 

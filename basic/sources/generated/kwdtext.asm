@@ -122,6 +122,8 @@ BaseTokenText:
 	.byte	$05,$49,$4d,$41,$47,$c5       	; $ e0 IMAGE
 	.byte	$06,$53,$50,$52,$49,$54,$c5   	; $ e1 SPRITE
 	.byte	$04,$46,$52,$4f,$cd           	; $ e2 FROM
+	.byte	$01,$db                       	; $ e3 [
+	.byte	$01,$dd                       	; $ e4 ]
 	.byte	$FF
 
 Shift1TokenText:
@@ -153,7 +155,7 @@ Shift1TokenText:
 	.byte	$04,$46,$4c,$49,$d0           	; $199 FLIP
 	.byte	$05,$53,$4f,$55,$4e,$c4       	; $19a SOUND
 	.byte	$03,$53,$46,$d8               	; $19b SFX
-	.byte	$05,$53,$4c,$49,$44,$c5       	; $19c SLIDE
+	.byte	$06,$41,$4e,$43,$48,$4f,$d2   	; $19c ANCHOR
 	.byte	$05,$47,$4c,$4f,$41,$c4       	; $19d GLOAD
 	.byte	$06,$44,$45,$46,$43,$48,$d2   	; $19e DEFCHR
 	.byte	$FF
