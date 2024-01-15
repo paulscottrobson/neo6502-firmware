@@ -3,6 +3,6 @@
 '
 cls:sprite clear:gload "graphics.gfx"
 rect ink 2 from 80,50 to 250,200
-for i = 0 to 10
-	sprite i image $C4 to 150+i,i*32+32 flip i & 3
+for i = 0 to 20
+	sprite i image $C4 to 70+i*22,i*16+50 flip i & 3
 next

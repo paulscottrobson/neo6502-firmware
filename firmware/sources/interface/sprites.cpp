@@ -173,5 +173,6 @@ uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance)
 //		Date 		Revision
 //		==== 		========
 //		12-01-24	Changed initial image size to $FF as not picked up if sprite initialise to $80
+//		15/01/24 	Fixes for better sprite clipping
 //
 // ***************************************************************************************
