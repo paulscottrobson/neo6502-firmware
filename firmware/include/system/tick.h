@@ -1,24 +1,19 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//		Name : 		miscellany.h
+//		Name : 		tick.h
 //		Author :	Paul Robson (paul@robsons.org.uk)
-//		Date : 		23rd December 2023
+//		Date : 		16th January 2024
 //		Reviewed :	No
-//		Purpose :	Miscellaneous
+//		Purpose :	Initialise tick
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-#ifndef _MISCELLANY_H
-#define _MISCELLANY_H
+#ifndef _TICKHARDWARE_H
+#define _TICKHARDWARE_H
 
-void STOInitialise(void);
-void STOSynchronise(void);
-
-void LOGDrawLogo(void);
-
-void TICKProcess(void);
+void THWStart(void);
 
 #endif
 

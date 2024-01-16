@@ -26,7 +26,7 @@ SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp \
   			$(IMPSRC)memory.cpp $(IMPSRC)graphics.cpp $(IMPSRC)console.cpp $(IMPSRC)keyboard.cpp $(IMPSRC)dispatch.cpp \
   			$(IMPSRC)maths.cpp  $(IMPSRC)config.cpp $(IMPSRC)gfxcommands.cpp $(IMPSRC)efla.cpp $(IMPSRC)ellipse.cpp \
   			$(IMPSRC)fileinterface.cpp $(IMPSRC)sprites.cpp $(IMPSRC)logo.cpp $(IMPSRC)sprites_xor.cpp \
-  			$(IMPSRC)sndmanager.cpp $(IMPSRC)sfxmanager.cpp
+  			$(IMPSRC)sndmanager.cpp $(IMPSRC)sfxmanager.cpp $(IMPSRC)tick.cpp
 
 FLAGS = -DINCLUDE_OS_SUPPORT -DIBMPC -I.. -I ../framework -I ../cpu -I ../bin -I ../include -I $(FIRMDIR)/include -I 6502 -O1 \
 		-s USE_SDL=2 -s WASM=1 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file storage \
@@ -36,6 +36,8 @@ all: app
 
 app:
 	$(CMAKEDIR) storage
+	make -B -C $(ROOTDIR)basic demos
+	$(CCOPY) $(ROOTDIR)basic$(S)storage$(S)* storage
 	$(CCOPY) $(ROOTDIR)basic$(S)code$(S)*.bas storage
 	emcc  -D EMSCRIPTEN -D LINUX -D INCLUDE_DEBUGGING_SUPPORT $(FLAGS) $(SOURCES) -o neo.html
 

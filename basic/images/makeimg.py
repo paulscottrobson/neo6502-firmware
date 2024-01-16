@@ -29,22 +29,14 @@ def importSheet(coll,isTile,size,rows):
 	fName = "{0}_{1}.png".format("tile" if isTile else "sprite",size)  			# access the file
 	im = Image.open(fName)  	
 	xt = ImageExtractor(im,None if isTile else (255,0,255))   					# create an extractor.
-	col = 0    																	# scan the file
-	row = 0
-	completed = False
 	count = 0
 
-	while row < rows and not completed:
-		obj = xt.extract(col * (size+8) + 8,row * (size+8) + 8 + yPaletteSpace,size)
-		if not obj.isBlank():
-			count += 1
-			coll.add(obj)
-		else:
-			completed = (col+row) != 0 or not isTile
-		col = col + 1
-		if col == tileCount:
-			col = 0
-			row += 1
+	for row in range(0,rows):
+		for col in range(0,tileCount):
+			obj = xt.extract(col * (size+8) + 8,row * (size+8) + 8 + yPaletteSpace,size)
+			if not obj.isBlank():
+				count += 1
+				coll.add(obj)
 
 	print("\t{0:<7} {1}x{1} found {2}".format("Tiles" if isTile else "Sprites",size,count))
 
