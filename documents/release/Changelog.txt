@@ -38,4 +38,5 @@ Changes
 			BUG: Data statements no longer lost inside structures, replaced ScanForward.
 			BUG: Uninitialised graphics memory could cause a crash when drawing sprites/images.
 			Added VTAB (Ctrl+V,code 21) a vertical tab.
-			
+			BUG: Fixed badly initialised sprite removal.
+			*** Release 4 ***

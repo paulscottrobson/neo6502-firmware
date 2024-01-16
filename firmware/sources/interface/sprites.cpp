@@ -119,13 +119,14 @@ int SPRUpdate(uint8_t *paramData) {
 	bool flipChanged = (flip != 0x80) && (flip != p->flip);
 	bool anchorChanged = (anchor != 0x80) && (anchor != p->anchor);
 
-	// printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x Anchor:%d %d %d %d %d @ %d,%d %d:%d\n",
+	//printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x Anchor:%d %d %d %d %d @ %d,%d %d:%d\n",
 	// 	*paramData,x,y,paramData[5],paramData[6],paramData[7],xyChanged,isChanged,flipChanged,anchorChanged,p->x,p->y,p->isVisible,p->isDrawn);
 
 	if (xyChanged | isChanged | flipChanged | anchorChanged) {   				// Some change made.
 		if (p->isDrawn) {  														// Erase if currently drawn
 			saRemove.display = gMode.graphicsMemory + p->x + p->y*gMode.xGSize; // Work out the draw address top left of sprite.
 			saRemove.image = p->imageAddress; 									// Where from.
+			saRemove.x = p->x;saRemove.y = p->y;
 			saRemove.xSize = p->xSize;saRemove.ySize = p->ySize;  				// Size and flip.
 			saRemove.flip = p->flip;
 			SPRPHYErase(&saRemove);
@@ -194,5 +195,6 @@ uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance)
 //		==== 		========
 //		12-01-24	Changed initial image size to $FF as not picked up if sprite initialise to $80
 //		15/01/24 	Fixes for better sprite clipping
+//					Not setting x,y on saRemove caused issues.
 //
 // ***************************************************************************************
