@@ -192,6 +192,12 @@ void CONWrite(int c) {
 			graphMode->xCursor = graphMode->yCursor = 0;
 			break;
 
+		case CC_VTAB:  															// V/21 Vertical Tab
+			do {
+				CONWrite(CC_DOWN);
+			} while ((graphMode->yCursor % 8) != 0);
+			break;
+
 		case CC_UP:																// W/22 up cursor
 			graphMode->yCursor = (graphMode->yCursor+graphMode->yCSize - 1) % graphMode->yCSize;
 			break;

@@ -29,11 +29,13 @@ Changes
 			Sprites are clipped to the screen boundary properly.
 			Added the slide option to SOUND.
 			Added anchor positions to sprites.
+			*** Release 3 ***
 
 16/1/24 	Reorganised the tick code.
 			Slide is ms not ticks for consistency. (Technically breaking change but I doubt anyone's used it yet :))
 			Directory now works on emulators.
 			BUG: Clear in a program no longer causes an infinite loop 
 			BUG: Data statements no longer lost inside structures, replaced ScanForward.
-
+			BUG: Uninitialised graphics memory could cause a crash when drawing sprites/images.
+			Added VTAB (Ctrl+V,code 21) a vertical tab.
 			

@@ -41,6 +41,7 @@ extern uint8_t userDefinedFont[64*8];
 #define CC_PAGEUP	CONTROL('R')
 #define CC_DOWN 	CONTROL('S')
 #define CC_HOME 	CONTROL('T')
+#define CC_VTAB 	CONTROL('V')
 #define CC_UP  		CONTROL('W')
 #define CC_REVERSE  CONTROL('X')
 #define CC_DELETE 	CONTROL('Z')
