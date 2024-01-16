@@ -1,9 +1,4 @@
-call test()
+sprite clear:gload "graphics.gfx"
+sprite 2 image $80 to 100,254
+sprite 2 image $80 to 100,254
 end
-
-proc test()
-	read a,b$,c
-	data 4,"xx"
-	data 6
-	print a,b$,c
-endproc
