@@ -67,32 +67,32 @@ AssemblerVectorTable:
 	.word	Assemble_txa             ; $2bd txa
 	.word	Assemble_txs             ; $2be txs
 	.word	Assemble_tya             ; $2bf tya
-	.word	Unimplemented            ; $2c0 
-	.word	Unimplemented            ; $2c1 
-	.word	Unimplemented            ; $2c2 
-	.word	Unimplemented            ; $2c3 
-	.word	Unimplemented            ; $2c4 
-	.word	Unimplemented            ; $2c5 
-	.word	Unimplemented            ; $2c6 
-	.word	Unimplemented            ; $2c7 
-	.word	Unimplemented            ; $2c8 
-	.word	Unimplemented            ; $2c9 
-	.word	Unimplemented            ; $2ca 
-	.word	Unimplemented            ; $2cb 
-	.word	Unimplemented            ; $2cc 
-	.word	Unimplemented            ; $2cd 
-	.word	Unimplemented            ; $2ce 
-	.word	Unimplemented            ; $2cf 
-	.word	Unimplemented            ; $2d0 
-	.word	Unimplemented            ; $2d1 
-	.word	Unimplemented            ; $2d2 
-	.word	Unimplemented            ; $2d3 
-	.word	Unimplemented            ; $2d4 
-	.word	Unimplemented            ; $2d5 
-	.word	Unimplemented            ; $2d6 
-	.word	Unimplemented            ; $2d7 
-	.word	Unimplemented            ; $2d8 
-	.word	Unimplemented            ; $2d9 
+	.word	Unimplemented            ; $2c0 set
+	.word	Unimplemented            ; $2c1 ld
+	.word	Unimplemented            ; $2c2 st
+	.word	Unimplemented            ; $2c3 ldd
+	.word	Unimplemented            ; $2c4 std
+	.word	Unimplemented            ; $2c5 pop
+	.word	Assemble_stp             ; $2c6 stp
+	.word	Unimplemented            ; $2c7 add
+	.word	Unimplemented            ; $2c8 sub
+	.word	Unimplemented            ; $2c9 popd
+	.word	Unimplemented            ; $2ca cpr
+	.word	Unimplemented            ; $2cb inr
+	.word	Unimplemented            ; $2cc dcr
+	.word	Unimplemented            ; $2cd rtn
+	.word	Unimplemented            ; $2ce br
+	.word	Unimplemented            ; $2cf bnc
+	.word	Unimplemented            ; $2d0 bc
+	.word	Unimplemented            ; $2d1 bp
+	.word	Unimplemented            ; $2d2 bm
+	.word	Unimplemented            ; $2d3 bz
+	.word	Unimplemented            ; $2d4 bnz
+	.word	Unimplemented            ; $2d5 bm1
+	.word	Unimplemented            ; $2d6 bnm1
+	.word	Unimplemented            ; $2d7 bk
+	.word	Unimplemented            ; $2d8 rs
+	.word	Unimplemented            ; $2d9 bs
 	.word	Unimplemented            ; $2da 
 	.word	Unimplemented            ; $2db 
 	.word	Unimplemented            ; $2dc 

@@ -25,13 +25,15 @@ void FIODirectory(void) {
 		int isDirectory,fileSize;
 		while (FISDirectoryNext(szBuffer,&isDirectory,&fileSize) == 0) {
 			if (szBuffer[0] != '.') {
-				while (strlen(szBuffer) < 32) strcat(szBuffer," ");
-				if (isDirectory != 0) {
-					strcat(szBuffer,"<Dir>");
-				} else {
-					sprintf(szBuffer+strlen(szBuffer),"%d bytes.",fileSize);
+				if (fileSize >= 0) {
+					while (strlen(szBuffer) < 32) strcat(szBuffer," ");
+					if (isDirectory != 0) {
+						strcat(szBuffer,"<Dir>");
+					} else {
+						sprintf(szBuffer+strlen(szBuffer),"%d bytes.",fileSize);
+					}
 				}
-				CONWriteString(szBuffer);CONWriteString("\r");
+				CONWriteString(szBuffer);CONWriteString("\r");				
 			}
 		}
 		FISDirectoryClose();
@@ -64,5 +66,6 @@ uint8_t FIOWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 //
 //		Date 		Revision
 //		==== 		========
+//		16-01-24 	Modified so fileSize < 0 doesn't display information.
 //
 // ***************************************************************************************

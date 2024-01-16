@@ -124,6 +124,7 @@ BaseTokenText:
 	.byte	$04,$46,$52,$4f,$cd           	; $ e2 FROM
 	.byte	$01,$db                       	; $ e3 [
 	.byte	$01,$dd                       	; $ e4 ]
+	.byte	$01,$c0                       	; $ e5 @
 	.byte	$FF
 
 Shift1TokenText:
@@ -225,32 +226,32 @@ Shift2TokenText:
 	.byte	$03,$54,$58,$c1               	; $2bd TXA
 	.byte	$03,$54,$58,$d3               	; $2be TXS
 	.byte	$03,$54,$59,$c1               	; $2bf TYA
-	.byte	$00                           	; $2c0 
-	.byte	$00                           	; $2c1 
-	.byte	$00                           	; $2c2 
-	.byte	$00                           	; $2c3 
-	.byte	$00                           	; $2c4 
-	.byte	$00                           	; $2c5 
-	.byte	$00                           	; $2c6 
-	.byte	$00                           	; $2c7 
-	.byte	$00                           	; $2c8 
-	.byte	$00                           	; $2c9 
-	.byte	$00                           	; $2ca 
-	.byte	$00                           	; $2cb 
-	.byte	$00                           	; $2cc 
-	.byte	$00                           	; $2cd 
-	.byte	$00                           	; $2ce 
-	.byte	$00                           	; $2cf 
-	.byte	$00                           	; $2d0 
-	.byte	$00                           	; $2d1 
-	.byte	$00                           	; $2d2 
-	.byte	$00                           	; $2d3 
-	.byte	$00                           	; $2d4 
-	.byte	$00                           	; $2d5 
-	.byte	$00                           	; $2d6 
-	.byte	$00                           	; $2d7 
-	.byte	$00                           	; $2d8 
-	.byte	$00                           	; $2d9 
+	.byte	$03,$53,$45,$d4               	; $2c0 SET
+	.byte	$02,$4c,$c4                   	; $2c1 LD
+	.byte	$02,$53,$d4                   	; $2c2 ST
+	.byte	$03,$4c,$44,$c4               	; $2c3 LDD
+	.byte	$03,$53,$54,$c4               	; $2c4 STD
+	.byte	$03,$50,$4f,$d0               	; $2c5 POP
+	.byte	$03,$53,$54,$d0               	; $2c6 STP
+	.byte	$03,$41,$44,$c4               	; $2c7 ADD
+	.byte	$03,$53,$55,$c2               	; $2c8 SUB
+	.byte	$04,$50,$4f,$50,$c4           	; $2c9 POPD
+	.byte	$03,$43,$50,$d2               	; $2ca CPR
+	.byte	$03,$49,$4e,$d2               	; $2cb INR
+	.byte	$03,$44,$43,$d2               	; $2cc DCR
+	.byte	$03,$52,$54,$ce               	; $2cd RTN
+	.byte	$02,$42,$d2                   	; $2ce BR
+	.byte	$03,$42,$4e,$c3               	; $2cf BNC
+	.byte	$02,$42,$c3                   	; $2d0 BC
+	.byte	$02,$42,$d0                   	; $2d1 BP
+	.byte	$02,$42,$cd                   	; $2d2 BM
+	.byte	$02,$42,$da                   	; $2d3 BZ
+	.byte	$03,$42,$4e,$da               	; $2d4 BNZ
+	.byte	$03,$42,$4d,$b1               	; $2d5 BM1
+	.byte	$04,$42,$4e,$4d,$b1           	; $2d6 BNM1
+	.byte	$02,$42,$cb                   	; $2d7 BK
+	.byte	$02,$52,$d3                   	; $2d8 RS
+	.byte	$02,$42,$d3                   	; $2d9 BS
 	.byte	$00                           	; $2da 
 	.byte	$00                           	; $2db 
 	.byte	$00                           	; $2dc 

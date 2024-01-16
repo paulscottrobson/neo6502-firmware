@@ -90,7 +90,8 @@ uint8_t SNDPlay(int channelID,uint16_t frequency,uint16_t timems,uint16_t slide,
 	if (c->queueCount != SOUND_QUEUE_SIZE) {  									// If queue not full
 		SOUND_QUEUE_ELEMENT *qe = &(c->queue[c->queueCount]);  					// Add to queue.
 		qe->frequency = frequency;
-		qe->slide = slide;
+		qe->slide = slide/20;  													// Adjust to 50Hz tick rate
+		if (slide != 0 && qe->slide == 0) qe->slide = (slide & 0x8000) ? -1:1;  // Rounded to zero.
 		qe->timeMS = timems;
 		qe->soundType = 0;
 		c->queueCount++;
