@@ -1,3 +1,9 @@
-print "Started"
-clear
-print "Done"
+call test()
+end
+
+proc test()
+	read a,b$,c
+	data 4,"xx"
+	data 6
+	print a,b$,c
+endproc

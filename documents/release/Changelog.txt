@@ -34,3 +34,6 @@ Changes
 			Slide is ms not ticks for consistency. (Technically breaking change but I doubt anyone's used it yet :))
 			Directory now works on emulators.
 			BUG: Clear in a program no longer causes an infinite loop 
+			BUG: Data statements no longer lost inside structures, replaced ScanForward.
+
+			
