@@ -16,11 +16,11 @@
 #include "data/basic_binary.h" 													// NeoBasic
 
 #ifdef PICO
-_Alignas(MEMORY_SIZE) uint8_t cpuMemory[MEMORY_SIZE];  							// Processor memory, aligned for Pico
-uint8_t gfxMemory[GFX_MEMORY_SIZE];
+_Alignas(MEMORY_SIZE) uint8_t cpuMemory[MEMORY_SIZE] = {0};  					// Processor memory, aligned for Pico
+uint8_t gfxMemory[GFX_MEMORY_SIZE] = {0}; 										// Graphics memory.
 #else
-uint8_t cpuMemory[MEMORY_SIZE];
-uint8_t gfxMemory[GFX_MEMORY_SIZE];
+uint8_t cpuMemory[MEMORY_SIZE] = {0};
+uint8_t gfxMemory[GFX_MEMORY_SIZE] = {0};
 #endif
 
 uint16_t controlPort = DEFAULT_PORT;       										// Control point.
@@ -65,5 +65,6 @@ void MEMLoadBasic(void) {
 //
 //		Date 		Revision
 //		==== 		========
+//		16-01-24 	Cleared memory on restart (not loading graphics library could crash)
 //
 // ***************************************************************************************
