@@ -180,6 +180,12 @@ _CSCopyPosition:
 _CSValue:
 		.error_range		
 
+; ************************************************************************************************
+;
+;							Update sprite from parameter block
+;
+; ************************************************************************************************
+
 CSUpdateSprite:
 		ldx 	#spriteBlockSize-1 			; copy values to parameter buffer
 _CSUS:	lda 	spriteID,x

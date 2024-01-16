@@ -1,4 +1,7 @@
 sprite clear:gload "graphics.gfx"
-sprite 2 image $80 to 100,254
-sprite 2 image $80 to 100,254
+print "Starting"
+for y = 0 to 99
+sprite 2 image $80 to 100,y
+next
+print "End"
 end
