@@ -15,8 +15,8 @@ General
 Next Coding
 -----------	
 
-	- Add VTAB
-
+	- BUG: Sprite Y crash.
+	
 	- CLEAR <memory> option.
 
 	- Graphics system

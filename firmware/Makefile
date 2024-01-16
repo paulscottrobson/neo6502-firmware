@@ -21,7 +21,7 @@ BINARY = firmware
 #
 #		Can be SDCARD or USBKEY currently.
 #
-STORAGE = USBKEY
+STORAGE = SDCARD
 
 all: build
 
