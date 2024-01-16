@@ -18,6 +18,8 @@ void STOSynchronise(void);
 
 void LOGDrawLogo(void);
 
+void TICKProcess(void);
+
 #endif
 
 // ***************************************************************************************

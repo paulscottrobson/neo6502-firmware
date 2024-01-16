@@ -9,7 +9,7 @@ target_sources(firmware PRIVATE main.cpp
     #       Hardware sources
     #
     hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp  
-    hardware/fdebug.cpp  hardware/fileimplementation.cpp 
+    hardware/fdebug.cpp  hardware/fileimplementation.cpp hardware/tick.cpp
     #
     #       CPU type (pretty much permanently PIO now)
     #
@@ -22,7 +22,7 @@ target_sources(firmware PRIVATE main.cpp
     interface/dispatch.cpp  interface/maths.cpp  interface/config.cpp  interface/efla.cpp 
     interface/gfxcommands.cpp  interface/ellipse.cpp  interface/fileinterface.cpp  
     interface/sprites.cpp  interface/logo.cpp  interface/sprites_xor.cpp  
-    interface/sndmanager.cpp  interface/sfxmanager.cpp 
+    interface/sndmanager.cpp  interface/sfxmanager.cpp interface/tick.cpp
 )
 
 if(USBKEY_STORAGE)

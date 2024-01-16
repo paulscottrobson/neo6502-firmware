@@ -24,7 +24,7 @@ SOURCES = 	src$(S)core$(S)sys_processor.o  framework$(S)main.o framework$(S)gfx.
   			$(IMPSRC)memory.o $(IMPSRC)graphics.o $(IMPSRC)console.o $(IMPSRC)keyboard.o $(IMPSRC)dispatch.o \
   			$(IMPSRC)maths.o  $(IMPSRC)config.o $(IMPSRC)gfxcommands.o $(IMPSRC)efla.o $(IMPSRC)ellipse.o \
   			$(IMPSRC)fileinterface.o $(IMPSRC)sprites.o $(IMPSRC)logo.o $(IMPSRC)sprites_xor.o \
-  			$(IMPSRC)sndmanager.o $(IMPSRC)sfxmanager.o
+  			$(IMPSRC)sndmanager.o $(IMPSRC)sfxmanager.o $(IMPSRC)tick.o
 
 CC = g++
 

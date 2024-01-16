@@ -12,9 +12,11 @@
 
 #include "common.h"
 #include "system/processor.h"
+#include "system/tick.h"
 
 int main() {
     DSPReset();                                                                 // Initialises everything.
+    THWStart();
     while (1) CPUExecute();                                                     // Doesn't have to loop but can.
 }
 

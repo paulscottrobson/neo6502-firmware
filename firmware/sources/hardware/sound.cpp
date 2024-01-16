@@ -39,16 +39,7 @@ static int32_t SNDSetPWMFrequencyDuty(uint slice_num,uint chan,uint32_t f, int d
 	return wrap;
 }
 
-// ***************************************************************************************
-//
-// 					Makes a white noise by randomising the PWM values
-//
-// ***************************************************************************************
 
-static bool SNDTimerCallback(struct repeating_timer *t) {
-	SNDManager();
-    return true;
-}
 
 // ***************************************************************************************
 //
@@ -56,14 +47,11 @@ static bool SNDTimerCallback(struct repeating_timer *t) {
 //
 // ***************************************************************************************
 
-struct repeating_timer timer;
-
 void SNDInitialise(void) {
 	gpio_set_function(SOUND_PIN, GPIO_FUNC_PWM);
 	sliceNumber = pwm_gpio_to_slice_num(SOUND_PIN);
 	channel = pwm_gpio_to_channel(SOUND_PIN);
 	SNDSetFrequency(0,0,false);
-    add_repeating_timer_ms(20, SNDTimerCallback, NULL, &timer);
 }
 
 // ***************************************************************************************
@@ -83,5 +71,6 @@ void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise) {
 //
 //		Date 		Revision
 //		==== 		========
+//		16-01-24	Moved tick callback stuff to tick source for generalised usage
 //
 // ***************************************************************************************
