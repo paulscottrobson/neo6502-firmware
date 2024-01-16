@@ -39,12 +39,17 @@ _CRNextLine:
 		;		Look for Data.
 		;
 _CRKeepSearching:		
-		lda 	#KWD_DATA 					; scan for instruction DATA or EOL.
-		ldx 	#KWD_SYS_END
-		jsr 	ScanForward
-		cmp 	#KWD_DATA 					; found data ?
+		lda 	(codePtr),y 				; reached either target token.
+		iny 								; consume it in case.
+		cmp 	#KWD_DATA 					; found DATA ?
 		beq 	_CRHaveData 				; found it
+		dey
+		cmp 	#KWD_SYS_END 				; end of line.
+		beq 	_CREndOfLine 
+		jsr 	SkipOneInstruction
+		bra 	_CRKeepSearching
 
+_CREndOfLine:
 		ldy 	#3 							; position in next line.
 		clc 								; try the next line, keep going.
 		lda 	(codePtr)
@@ -117,6 +122,7 @@ _CDNotEOL:
 ;
 ;		Date			Notes
 ;		==== 			=====
+; 		16-01-24 		Has own scanner for DATA because didn't work in nested structures.
 ;
 ; ************************************************************************************************
 
