@@ -19,7 +19,8 @@
 		.section code
 
 Command_CLEAR:	;; [clear]
-		jmp 	ClearCode
+		jsr 	ClearCode
+		rts
 
 ; ************************************************************************************************
 ;
@@ -28,6 +29,7 @@ Command_CLEAR:	;; [clear]
 ; ************************************************************************************************
 
 ClearCode:
+		phy
 		;
 		;		Reset memory and variables
 		;
@@ -54,6 +56,7 @@ ClearCode:
 		;		Reset Graphics
 		;
 		jsr 	GraphicsReset
+		ply
 		rts
 
 ; ************************************************************************************************
@@ -198,6 +201,7 @@ _CVExit:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		16-01-24		CLEAR was looping (Y was reset to 3 causing it to loop infinitely)
 ;
 ; ************************************************************************************************
 
