@@ -17,6 +17,8 @@
 #include "interface/kbdcodes.h"
 #include "sys/stat.h"
 #include "sys/types.h"
+#include <limits.h>
+#include <dirent.h>
 
 // *******************************************************************************************************************************
 //
@@ -120,17 +122,27 @@ void FDBWrite(uint8_t c) {
 //
 // *******************************************************************************************************************************
 
+static struct dirent * dirEntry;
+static DIR *directory;
+
 int FISDirectoryOpen(void) {
-	CONWriteString((char *)"Directory listing not emulated.\r");
-	return 1;
+    directory = opendir("storage");
+	return (directory == NULL) ? 1 : 0;
 }
 
 int FISDirectoryClose(void) {
-	return 1;
+    if (directory != NULL) closedir(directory);
+	return 0;
 }
 
 int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize) {
-	return 1;
+	dirEntry = readdir(directory);
+	if (dirEntry != NULL) {
+		strcpy(buffer,dirEntry->d_name);
+		*isDirectory = 0;
+		*fileSize = -1;
+	}
+	return (dirEntry == NULL) ? 1 : 0;
 }   
 
 // ***************************************************************************************

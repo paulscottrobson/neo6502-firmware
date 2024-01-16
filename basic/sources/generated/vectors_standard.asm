@@ -104,4 +104,5 @@ StandardVectorTable:
 	.word	Unimplemented            ; $e2 from
 	.word	Unimplemented            ; $e3 [
 	.word	Unimplemented            ; $e4 ]
+	.word	Unimplemented            ; $e5 @
 	.send code

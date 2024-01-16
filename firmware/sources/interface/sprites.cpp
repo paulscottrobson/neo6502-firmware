@@ -151,7 +151,6 @@ int SPRUpdate(uint8_t *paramData) {
 		}
 
 		if (xyChanged) {  														// Positions changed.
-			printf("%d %d %d\n",p->anchor,anchorX[p->anchor],anchorY[p->anchor]);
 			p->x = x - anchorX[p->anchor] * p->xSize / 2;   					// Initially anchor point is centre.
 			p->y = y - anchorY[p->anchor] * p->ySize / 2;
 			p->xc = x;p->yc = y;  												// Remember centre position

@@ -21,7 +21,7 @@ def textProcess(k):
 	k = k.replace("[","LSQ").replace("]","RSQ").replace(",","COMMA").replace(":","COLON").replace(";","SEMICOLON")
 	k = k.replace("'","SQUOTE").replace("#","HASH").replace("&","AMPERSAND").replace(".","PERIOD").replace("%","PERCENT")
 	k = k.replace("\\","BACKSLASH").replace("|","VBAR").replace("^","HAT").replace("!","PLING").replace("?","QMARK")
-#	k = k.replace("","").replace("","").replace("","").replace("","").replace("","")
+	k = k.replace("@","AT").replace("","").replace("","").replace("","").replace("","")
 	return k		
 #
 #		Make file name in generated directory.

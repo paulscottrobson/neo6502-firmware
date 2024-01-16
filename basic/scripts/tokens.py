@@ -114,7 +114,7 @@ class TokenSet(object):
 			SYS 	EXIT	, 		; 		: 		' 		)		READ 	
 			DATA 	ELSE	WHEN	DOWNTO 	POKE	DOKE 	LOCAL	CALL
 			# 		. 		LINE 	RECT 	MOVE 	PLOT 	ELLIPSE	TEXT 	
-			IMAGE 	SPRITE 	FROM 	[		]
+			IMAGE 	SPRITE 	FROM 	[		] 		@
 			""")
 		#
 		#		Keyword tokens (minor)
@@ -134,6 +134,9 @@ class TokenSet(object):
 			JMP	JSR	LDA	LDX	LDY	LSR	NOP	ORA	PHA	PHP	PHX	PHY	PLA	PLP	
 			PLX	PLY	ROL	ROR	RTI	RTS	SBC	SEC	SED	SEI	STA	STX	STY	STZ	
 			TAX	TAY	TRB	TSB	TSX	TXA	TXS	TYA 
+
+			SET LD 	ST 	LDD STD POP STP ADD SUB POPD CPR INR DCR 
+			RTN BR BNC BC BP BM BZ BNZ BM1 BNM1 BK RS BS
 		""",0x60)
 		#
 		#		Additional Unary functions, less popular

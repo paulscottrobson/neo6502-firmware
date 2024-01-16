@@ -30,4 +30,6 @@ Changes
 			Added the slide option to SOUND.
 			Added anchor positions to sprites.
 
-			
+16/1/24 	Reorganised the tick code.
+			Slide is ms not ticks for consistency. (Technically breaking change but I doubt anyone's used it yet :))
+			Directory now works on emulators.
