@@ -14,13 +14,15 @@ General
 
 	- Shift-3 issue on the emulator.
 	  
+	- Possible listing corruption bug ? Cannot reproduce.
+
 Next Coding
 -----------	
 
-	- Fix imbalance DATA bug ?
-
 	- CLEAR <memory> option.
 
+	- [] operators
+	
 	- Graphics system
 
 		- Sprites 
@@ -34,8 +36,6 @@ Next Coding
 
 	- Add USB Joystick interface if stable.
 
-	- [] operators
-	
 	- Sweet16 code run on the RP2040 and baby assembler for it :)
 	
 Other

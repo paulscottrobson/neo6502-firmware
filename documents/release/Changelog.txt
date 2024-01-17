@@ -42,3 +42,6 @@ Changes
 			*** Release 4 ***
 
 17/01/24 	BUG: Graphics and Sprites coexist properly
+			BUG: Read data occasionally not working.
+			IMP: Reengineered event()
+			

@@ -41,33 +41,57 @@ EXPUnaryEvent: ;; [event(]
 		lda 	XSNumber1,x
 		sta 	zTemp0+1
 
+		ldy 	#3 								; if $FFxxxxxx then always return zero, halted.
+		lda 	(zTemp0),y
+		cmp 	#$FF
+		bmi 	_EUEFrozen
+
+		ldy 	#1 								; reset timer if lower 16 bits are zero
+		lda 	(zTemp0),y 						; one time in 64k this will fire wrongly.
+		ora 	(zTemp0)	 				
+		beq 	_EUEInitialise
+
 		ldy 	#1  							; calc timer() - value in variable
 		lda 	ControlParameters+0
 		cmp 	(zTemp0)
 		lda 	ControlParameters+1
 		sbc 	(zTemp0),y
+		sta 	zTemp1
 		iny
 		lda 	ControlParameters+2
 		sbc 	(zTemp0),y
+		sta 	zTemp1+1
 		iny
 		lda 	ControlParameters+3
 		sbc 	(zTemp0),y
 		bcs 	_EUETrigger 					; if timer() >= value then fire the event.
 		ply 									; restore Y
+_EUEFrozen:		
 		lda 	#0 								; and return 0.
 		jsr 	EXPUnaryReturnA
 		rts
 
+_EUEType:
+		.error_type
+
+_EUEInitialise:	 								; initialise if zero.
+		lda 	ControlParameters+0
+		sta 	(zTemp0)
+		lda 	ControlParameters+1
+		ldy 	#1
+		sta 	(zTemp0),y
+
 _EUETrigger:
 		clc 									; add timer rate to time() to give next fire time.
-		lda 	ControlParameters+0
+		lda 	(zTemp0)
 		adc 	XSNumber0+1,x
 		sta 	(zTemp0)
 		ldy 	#1
-		lda 	ControlParameters+1
+		lda 	(zTemp0),y
 		adc 	XSNumber1+1,x
 		sta 	(zTemp0),y
-		iny
+
+		ldy 	#2
 		lda 	(zTemp0),y
 		adc 	#0
 		sta 	(zTemp0),y
@@ -80,8 +104,6 @@ _EUETrigger:
 		lda 	#$FF
 		jsr 	EXPUnaryReturnA
 		rts
-_EUEType:
-		.error_type
 
 		.send code
 
@@ -94,6 +116,7 @@ _EUEType:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		17-01-24 		Made event additive and reset on zero.
 ;
 ; ************************************************************************************************
 
