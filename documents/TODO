@@ -12,9 +12,7 @@ General
 
 	- Current clock 6.25 Mhz, this may be reduced if some board can't cope.
 
-	- Shift-3 issue on the emulator.
-	  
-	- Possible listing corruption bug ? Cannot reproduce.
+	- Possible listing corruption bug (emulator) ? Cannot reproduce.
 
 Next Coding
 -----------	
@@ -45,3 +43,4 @@ Other
 
 Add to Documentation
 --------------------
+https://bbcmic.ro/?t=9ctpk
