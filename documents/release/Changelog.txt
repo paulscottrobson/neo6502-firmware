@@ -1,37 +1,37 @@
 Changes
 -------
 
-10/1/24 	R2 released.
+10/01/24 	R2 released.
 			Enabled configuration file for USB Hub only. SDCard still won't load on startup, even though it works fine otherwise.
 
-11/1/24		Cleaned up github. Now buildable straight from github.		
+11/01/24	Cleaned up github. Now buildable straight from github.		
 			Tidied up make clean
 			Moved the boot display graphics from documents to firmware
 			Added user defined character support to firmware.
 			Fixed problem with Windows libpthread.dll
 			Fixed missing image generation scripts from release.
 			
-12/1/24 	BUG:Discovered sprite using $80 image first time wasn't displaying, fixed.
+12/01/24 	BUG:Discovered sprite using $80 image first time wasn't displaying, fixed.
 			Got the github based build working, except for the Windows emulator
 			Got the Windows emulator cross compiling on Linux
 
-13/1/24 	Hopefully cross compiling is fixed and neo.exe is completely static. But you never know with Windows.			
+13/01/24 	Hopefully cross compiling is fixed and neo.exe is completely static. But you never know with Windows.			
 
-14/1/24		Switched to Ubuntu 23.10 from Arch. Got everything building again 
+14/01/24	Switched to Ubuntu 23.10 from Arch. Got everything building again 
 			Note : Ubuntu default emscripten doesn't build javascript version
 			Shrunk the emulator display size so it takes up less screen real estate (short term solution)
 			More build improvements to the main github.
 			Building the Windows Emulator remotely :)
 			Ported the bouncy ball demo from SuperBasic
 
-15/1/24 	Added FROM to reset the origin.
+15/01/24 	Added FROM to reset the origin.
 			Sprites do not error with bad numbers
 			Sprites are clipped to the screen boundary properly.
 			Added the slide option to SOUND.
 			Added anchor positions to sprites.
 			*** Release 3 ***
 
-16/1/24 	Reorganised the tick code.
+16/01/24 	Reorganised the tick code.
 			Slide is ms not ticks for consistency. (Technically breaking change but I doubt anyone's used it yet :))
 			Directory now works on emulators.
 			BUG: Clear in a program no longer causes an infinite loop 
@@ -40,3 +40,5 @@ Changes
 			Added VTAB (Ctrl+V,code 21) a vertical tab.
 			BUG: Fixed badly initialised sprite removal.
 			*** Release 4 ***
+
+17/01/24 	BUG: Graphics and Sprites coexist properly

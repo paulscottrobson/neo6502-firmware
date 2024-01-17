@@ -47,14 +47,16 @@ void GFXSetDefaults(uint8_t *cmd) {
 // ***************************************************************************************
 
 void GFXPlotPixel(struct GraphicsMode *gMode,int x,int y) {
+	uint8_t sprAnd = (SPRSpritesInUse() ? pixelAnd | 0xF0 : pixelAnd);
 	uint8_t *pixel = gMode->graphicsMemory+x+y*gMode->xGSize;
-	*pixel = ((*pixel) & pixelAnd) ^ pixelXor;
+	*pixel = ((*pixel) & sprAnd) ^ pixelXor;
 }
 
 void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y) {
+	uint8_t sprAnd = (SPRSpritesInUse() ? pixelAnd | 0xF0 : pixelAnd);
 	if (x >= 0 && y >= 0 && x < gMode->xGSize && y < gMode->yGSize) {
 		uint8_t *pixel = gMode->graphicsMemory+x+y*gMode->xGSize;
-		*pixel = ((*pixel) & pixelAnd) ^ pixelXor;
+		*pixel = ((*pixel) & sprAnd) ^ pixelXor;
 	}
 }
 
@@ -243,5 +245,6 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 //		Date 		Revision
 //		==== 		========
 //		11-01-24	Modified to support UDGs
+//		17-01-24 	Modified so graphics work ok with sprites.
 //
 // ***************************************************************************************

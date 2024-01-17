@@ -25,6 +25,9 @@ static const int16_t anchorY[] = { 	1,
 	1,1,1,
 	0,0,0
 };
+
+static int16_t spriteVisibleCount; 												// How many currently visible ?
+
 // ***************************************************************************************
 //
 //										Reset a sprites
@@ -37,7 +40,17 @@ static void _SPRResetSprite(int n) {
 	p->xc = p->yc = p->x = p->y = -1;
 	p->imageSize = 0xFF;
 	p->anchor = p->flip = 0;
-	p->xSize = p->ySize = 0;
+	p->xSize = p->ySize = 0;	
+}
+
+// ***************************************************************************************
+//
+//									Reset all sprites
+//
+// ***************************************************************************************
+
+bool SPRSpritesInUse(void) {
+	return spriteVisibleCount > 0;
 }
 
 // ***************************************************************************************
@@ -50,6 +63,7 @@ void SPRReset(void) {
 	for (int i = 0;i < MAX_SPRITES;i++) {  										// Reset all sprites.
 		_SPRResetSprite(i);
 	}
+	spriteVisibleCount = 0;
 	for (int i = 0;i < gMode.xGSize * gMode.yGSize;i++) {  						// Clear the sprite layer
 		gMode.graphicsMemory[i] &= 0x0F;  										// top 4 bits og graphics memory.
 	}
@@ -70,10 +84,12 @@ void SPRHide(uint8_t *paramData) {
 		if (s->isDrawn) {  														// If drawn, erase it and mark not drawn.
 			saHide.display = gMode.graphicsMemory + s->x + s->y * gMode.xGSize; // Work out the draw address top left of sprite.
 			saHide.image = s->imageAddress; 									// Where from.
+			saHide.x = s->x;saHide.y = s->y;
 			saHide.xSize = s->xSize;saHide.ySize = s->ySize;  					// Size and flip.
 			saHide.flip = s->flip;
 			SPRPHYErase(&saHide);
 			sprites[spriteID].isDrawn = false;
+			spriteVisibleCount--;
 		}
 		sprites[spriteID].isVisible = false;  									// Mark not visible.
 	}
@@ -130,6 +146,7 @@ int SPRUpdate(uint8_t *paramData) {
 			saRemove.xSize = p->xSize;saRemove.ySize = p->ySize;  				// Size and flip.
 			saRemove.flip = p->flip;
 			SPRPHYErase(&saRemove);
+			spriteVisibleCount--;
 			p->isDrawn = false;
 		}
 		//p->isVisible = true;  												// Mark as visible
@@ -166,6 +183,7 @@ int SPRUpdate(uint8_t *paramData) {
 			saDraw.xSize = p->xSize;saDraw.ySize = p->ySize;  					// Size and flip.
 			saDraw.flip = p->flip;
 			SPRPHYDraw(&saDraw);
+			spriteVisibleCount++;
 			p->isDrawn = true;  												// And mark as drawn.
 		}
 	}
@@ -196,5 +214,6 @@ uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance)
 //		12-01-24	Changed initial image size to $FF as not picked up if sprite initialise to $80
 //		15/01/24 	Fixes for better sprite clipping
 //					Not setting x,y on saRemove caused issues.
+//		16/01/24 	Added SpriteVisibleCount functionality.
 //
 // ***************************************************************************************

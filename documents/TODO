@@ -11,9 +11,13 @@ General
 			so now only loaded at boot.
 
 	- Current clock 6.25 Mhz, this may be reduced if some board can't cope.
-  
+
+	- Shift-3 issue on the emulator.
+	  
 Next Coding
 -----------	
+
+	- Fix imbalance DATA bug ?
 
 	- CLEAR <memory> option.
 
