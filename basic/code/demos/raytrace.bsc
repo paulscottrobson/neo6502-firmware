@@ -1,3 +1,5 @@
+1 ' Raytrace by @coprolite9000
+2 ' converted by Paul Robson
 10 CLS
 11 DIM map(15)
 12 for i = 0 to 15:read map(i):next

@@ -167,6 +167,7 @@ void CONWrite(int c) {
 			do {
 				CONWrite(CC_RIGHT);
 			} while ((graphMode->xCursor % 8) != 0);
+			if (graphMode->xCursor == 0) CONWrite(CC_DOWN);
 			break;
 			
 		case CC_LF:
@@ -273,5 +274,6 @@ void CONWriteString(const char *s) {
 //		Date 		Revision
 //		==== 		========
 //		11-01-24	Added user defined font option.
+//		17-01-24 	TAB goes down at end of line.
 //
 // ***************************************************************************************

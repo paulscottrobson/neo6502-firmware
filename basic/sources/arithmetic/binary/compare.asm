@@ -92,7 +92,7 @@ CMPCompareBaseCode:
 
 		lda 	#6 							; use coprocessor to compare
 		jsr 	DOMathCommand
-		lda 	ControlStatus 				; get result.
+		lda 	ControlParameters 			; get result.
 		rts
 		;
 		;		Integer comparison
@@ -188,6 +188,7 @@ _EXCBCFF:
 ;
 ;		Date			Notes
 ;		==== 			=====
+; 		17-01-24 		Float compare was reading CommandStatus not CommandParameters[0]
 ;
 ; ************************************************************************************************
 

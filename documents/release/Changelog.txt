@@ -44,4 +44,9 @@ Changes
 17/01/24 	BUG: Graphics and Sprites coexist properly
 			BUG: Read data occasionally not working.
 			IMP: Reengineered event()
-			
+			BUG: Int -ve numbers not working correctly (rounding towards zero)
+			BUG: FP Compare broken 
+			BUG: TAB does not drop a line going off the RHS.
+			Added the image rendering program for the BBC Micro suggested by Dirk Berger
+			Switched back to Arch as some keyboard functionality and sound in emulator broken.
+
