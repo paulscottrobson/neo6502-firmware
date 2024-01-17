@@ -79,6 +79,7 @@ void SNDInitialise(void) {
 // *******************************************************************************************************************************
 
 void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise) {
+	//printf("%d %d %d\n",channel,frequency,isNoise);
 	if (frequency != 0) {
 		GFXSetFrequency(frequency,1);
 	} else {

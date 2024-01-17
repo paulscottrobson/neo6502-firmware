@@ -411,7 +411,7 @@ void Beeper::setup(void) {
     if (desiredSpec.format != obtainedSpec.format) 
     	printf("Wrong format. %x %x\n",desiredSpec.format,obtainedSpec.format);
     SDL_PauseAudioDevice(dev,0);
- 	noise = freq1 = freq2 = freq3 = 0;
+ 	freq1 = 0;
 }
 
 Beeper::~Beeper()
@@ -428,26 +428,12 @@ void Beeper::generateSamples(Sint16 *stream, int length)
     		stream[i] += AMPLITUDE * ((((int)(v1*2/FREQUENCY)) % 2) ? -1 : 1);
     	    v1 += freq1;
         }
-    	if (freq2 != 0) {
-    		stream[i] += AMPLITUDE * ((((int)(v2*2/FREQUENCY)) % 2) ? -1 : 1);
-    	    v2 += freq2;
-        }
-    	if (freq3 != 0) {
-    		stream[i] += AMPLITUDE * ((((int)(v3*2/FREQUENCY)) % 2) ? -1 : 1);
-    	    v3 += freq3;
-        }
-        if (noise != 0) {
-        	stream[i] += AMPLITUDE * ((rand() & 1) ? -1 : 1);	
-        }
         i++;
     }
 }
 
 void Beeper::setFrequency(double f,int channel) {
-	if (channel == 0) noise = f;
 	if (channel == 1) freq1 = f;
-	if (channel == 2) freq2 = f;
-	if (channel == 3) freq3 = f;
 }
 
 void audio_callback(void *_beeper, Uint8 *_stream, int _length)
@@ -463,8 +449,5 @@ void GFXSetFrequency(int freq,int channel) {
 }
 
 void GFXSilence(void) {
-	beeper.setFrequency(0,0);
 	beeper.setFrequency(0,1);
-	beeper.setFrequency(0,2);
-	beeper.setFrequency(0,3);
 }
