@@ -50,6 +50,7 @@ _CRKeepSearching:
 		bra 	_CRKeepSearching
 
 _CREndOfLine:
+		.byte 	3
 		ldy 	#3 							; position in next line.
 		clc 								; try the next line, keep going.
 		lda 	(codePtr)

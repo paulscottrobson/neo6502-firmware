@@ -92,7 +92,7 @@ int GFXXRender(SDL_Surface *surface) {
 					int digit = isdigit(currentKey)?currentKey:(currentKey-'A'+10);	// Convert to a number.
 					int setting = 0;												// Which value is being changed ?
 					if (GFXIsKeyPressed(GFXKEY_SHIFT)) setting = 1;
-					if (GFXIsKeyPressed(GFXKEY_CONTROL)) setting = 2;
+					if (GFXIsKeyPressed(GFXKEY_CONTROL)) setting = 1;
 					addressSettings[setting] = 										// Shift it using this macro (so we could use Octal, say)
 									DEBUG_SHIFT(addressSettings[setting],(digit & 0x0F));
 				}
