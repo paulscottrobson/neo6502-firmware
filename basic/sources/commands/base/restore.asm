@@ -20,6 +20,7 @@
 
 Command_RESTORE:	;; [restore]
 		lda 	#Program >> 8				; back to the program start
+		clc
 		adc 	Program
 		sta 	dataPtr+1
 		stz 	dataPtr
@@ -60,6 +61,7 @@ SwapCodeDataPointers:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		17-01-24 		Missing CLC when calculating initial data search address.
 ;
 ; ************************************************************************************************
 
