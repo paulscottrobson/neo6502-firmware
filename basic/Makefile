@@ -197,12 +197,12 @@ tokens: prelim
 #
 # ***************************************************************************************
 
-DEMOSRC = $(shell find . -name '*.bsc')
+DEMOSRC = $(shell find code -name '*.bsc')
 DEMOBAS = $(subst bsc,bas,$(DEMOSRC))
+DEMOGFX = $(shell find code -name '*.gfx')
 
 demos: clearstorage $(DEMOBAS)
-	$(CCOPY) images$(S)test$(S)test.gfx storage
-	$(CCOPY) images$(S)graphics.gfx storage
+	$(CCOPY) $(DEMOGFX) storage
 	$(CCOPY) storage$(S)*.* ..$(S)emulator$(S)storage
 
 clearstorage:
@@ -215,6 +215,7 @@ clearstorage:
 %.bas : %.bsc
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
 	$(CCOPY) $@ storage
+	
 
 # ***************************************************************************************
 #
