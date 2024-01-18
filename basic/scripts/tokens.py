@@ -95,7 +95,7 @@ class TokenSet(object):
 		#
 		self.add(0x80,"""
 			!!STR 	$ 		(		RAND(	RND(	JOYPAD(	INT(	TIME(	EVENT(	
-			INKEY$(	ASC(	CHR$(	!!UN11 	LEN(  	ABS(  	SGN( 	HIT(	!!UN9
+			INKEY$(	ASC(	CHR$(	POINT( 	LEN(  	ABS(  	SGN( 	HIT(	!!UN9
 			MID$(	LEFT$( 	RIGHT$(	TRUE	FALSE	!!UN4	!!UN5	!!UN6	!!UN7
 			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	
 			""",48)
@@ -123,7 +123,8 @@ class TokenSet(object):
 			CLEAR 	NEW 	RUN 	STOP 	END 	ASSERT 	LIST 	SAVE 	
 			LOAD	CAT 	GOSUB 	GOTO	RETURN 	RESTORE	DIM		FKEY
 			CLS 	INK		FRAME	SOLID	BY 		WHO 	PALETTE DRAW	
-			HIDE 	FLIP 	SOUND 	SFX 	ANCHOR	GLOAD	DEFCHR
+			HIDE 	FLIP 	SOUND 	SFX 	ANCHOR	GLOAD	DEFCHR  LEFT
+			RIGHT 	FORWARD	TURTLE 	SWEET
 			""")
 		#
 		#		Keyword tokens (assembler)
@@ -143,7 +144,7 @@ class TokenSet(object):
 		#
 		self.add(0x2E0,"""
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
-			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY(
+			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( QUIET(
 		""")
 		
 if __name__ == "__main__":

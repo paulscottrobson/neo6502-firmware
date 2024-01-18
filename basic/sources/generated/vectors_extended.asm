@@ -34,4 +34,9 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $19c anchor
 	.word	Command_GLoad            ; $19d gload
 	.word	Command_DEFCHR           ; $19e defchr
+	.word	Unimplemented            ; $19f left
+	.word	Unimplemented            ; $1a0 right
+	.word	Unimplemented            ; $1a1 forward
+	.word	Unimplemented            ; $1a2 turtle
+	.word	Unimplemented            ; $1a3 sweet
 	.send code
