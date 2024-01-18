@@ -112,5 +112,6 @@ AssemblerVectorTable:
 	.word	EXPUnaryPage             ; $2ea page
 	.word	EXPUnarySpriteX          ; $2eb spritex(
 	.word	EXPUnarySpriteY          ; $2ec spritey(
-	.word	Unimplemented            ; $2ed quiet(
+	.word	Unimplemented            ; $2ed notes(
+	.word	EXPUnaryHimem            ; $2ee himem
 	.send code

@@ -276,7 +276,8 @@ Shift2TokenText:
 	.byte	$04,$50,$41,$47,$c5           	; $2ea PAGE
 	.byte	$08,$53,$50,$52,$49,$54,$45,$58,$a8	; $2eb SPRITEX(
 	.byte	$08,$53,$50,$52,$49,$54,$45,$59,$a8	; $2ec SPRITEY(
-	.byte	$06,$51,$55,$49,$45,$54,$a8   	; $2ed QUIET(
+	.byte	$06,$4e,$4f,$54,$45,$53,$a8   	; $2ed NOTES(
+	.byte	$05,$48,$49,$4d,$45,$cd       	; $2ee HIMEM
 	.byte	$FF
 
 BinaryPrecedence:

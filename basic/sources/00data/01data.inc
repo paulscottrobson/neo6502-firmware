@@ -120,6 +120,8 @@ clFrom: 									; LIST range.
 		.fill 	2		
 clTo:
 		.fill 	2		
+highMemoryUpper: 							; High byte of high memory
+		.fill 	1		
 
 ; ************************************************************************************************
 ;	
