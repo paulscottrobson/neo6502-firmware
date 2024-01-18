@@ -1,0 +1,11 @@
+'
+'		Showing how anchors work
+'
+cls:sprite clear:gload "graphics.gfx"
+for i = 0 to 8
+x = 36+(i % 3)*64
+y = 36+(i \ 3)*48
+sprite i image $C4 to x,y anchor i+1
+text str$(i+1) ink 3 to x,y
+line 0,239 ink 7 to x,y
+next

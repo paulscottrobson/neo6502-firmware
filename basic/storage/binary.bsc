@@ -1,0 +1,29 @@
+'
+'	Unusual binary operators
+'	
+print "/ returns a floating point value"
+print ,"22 / 7",,22/7
+print
+
+print "\ always returns an integer"
+print ,"22 \ 7",,22\7
+print
+
+print "% returns the modulus of the absolute values"
+print ,"113 mod 50",113%50
+print
+
+print ">> and << are logical shift right and left"
+print ,"312 << 2",312 << 2
+print ,"312 >> 2",312 >> 2
+print
+
+print "^ & and | are binary xor, and and or"
+print ,"$F07 & $1AC",$F07 & $1AC
+print ,"$F07 | $1AC",$F07 | $1AC
+print ,"$F07 ^ $1AC",$F07 ^ $1AC
+print
+
+print "Tests return -1 or 0 so you can use them ...."
+print ,"(1>2) | (4>3)",(1 > 2) | (4 > 3)
+print ,"(1>2) & (4>3)",(1 > 2) & (4 > 3)

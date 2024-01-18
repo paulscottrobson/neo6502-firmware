@@ -1,0 +1,76 @@
+' Neobasic spinning Cube for Olimex Neo6502
+'
+' Written by J. Viskari
+' 
+' Adapted from https://retro64.altervista.org/ProgrammingExamples/Freebasic/3dcube_04.bas
+
+dim x(8):dim y(8):dim z(8):dim vx(8):dim vy(8)
+
+let rx_step = 3        'rotation step
+let rx = -rx_step :    'rem rotation angle x
+let l = 80 : l = l \2  'length of the vector
+let fs = 200           'scale
+
+cls
+
+repeat
+call do_text()
+call render()
+until 0
+end
+
+proc render()
+    x(1) = -l : y(1) = -l : z(1) = -l
+    x(2) = -l: y(2) = l: z(2) = -l
+    x(3) = l: y(3) = l: z(3) = -l
+    x(4) = l : y(4) = -l : z(4) = -l
+    x(5) = -l : y(5) = -l: z(5) = l
+    x(6) = -l : y(6) = l: z(6) = l
+    x(7) = l: y(7) = l: z(7) = l
+    x(8) = l: y(8) = -l: z(8) = l
+
+    rx = rx + rx_step : c = cos(rx): s = sin(rx)
+
+    for np = 1 to 8
+        'rotation on x axes
+        yt = y(np): y(np) = c*yt-s*z(np): z(np) = s*yt + c*z(np)
+        'rotation on y axes
+        xt = x(np): x(np) = c*xt+s*z(np): z(np)=-s*xt+c*z(np)
+        'rotation on z axes
+        xt = x(np) :x(np)=c*xt-s*y(np) : y(np) = s*xt+c*y(np)
+        'points projections and translations to screen coordinates
+        vx(np) = 160 + (x(np)*fs)/(z(np)+fs)
+        vy(np) = 120 + (y(np)*fs)/(z(np)+fs)
+    next 
+
+    'clear old frame
+    rect ink 0 solid 60,40 to 260,220
+
+    line ink 1 vx(1),vy(1) to vx(2),vy(2)
+    line ink 1 vx(2),vy(2) to vx(3),vy(3)
+    line ink 1 vx(3),vy(3) to vx(4),vy(4)
+    line ink 1 vx(4),vy(4) to vx(1),vy(1)
+    line ink 1 vx(5),vy(5) to vx(6),vy(6) 
+    line ink 1 vx(6),vy(6) to vx(7),vy(7)
+    line ink 1 vx(7),vy(7) to vx(8),vy(8)
+    line ink 1 vx(8),vy(8) to vx(5),vy(5)
+    line ink 1 vx(8),vy(8) to vx(5),vy(5)
+    line ink 1 vx(1),vy(1) to vx(5),vy(5)
+    line ink 1 vx(4),vy(4) to vx(8),vy(8) 
+    line ink 1 vx(2),vy(2) to vx(6),vy(6)
+    line ink 1 vx(3),vy(3) to vx(7),vy(7) 
+
+endproc
+
+proc do_text()
+    tx = 80
+    ty = 20
+
+    rect ink 0 solid 20,10 to 300,40
+    tx = tx+int(40*cos(rx))
+    text "Neo6502 Cube" ink rand(16) dim 2 to tx,ty
+
+    'modify palette
+    palette 1,64,100+tx,0
+
+endproc

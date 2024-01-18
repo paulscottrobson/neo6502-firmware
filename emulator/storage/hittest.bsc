@@ -1,0 +1,11 @@
+'
+'		Simple hit demo
+'
+cls:sprite clear
+load "graphics.gfx",$FFFF
+
+sprite 2 image $C0 to 240,100
+x = 20
+repeat
+	x = x + 1:sprite 1 image $C0 to x,100
+until x >= 300 | hit(1,2,32)

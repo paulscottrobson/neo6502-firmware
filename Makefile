@@ -43,7 +43,7 @@ crossdev:
 
 samples:
 	zip -r -j -q release$(S)samples.zip basic$(S)code basic$(S)images$(S)test$(S)test.gfx basic$(S)images$(S)graphics.gfx
-	zip -d -q release$(S)samples.zip *.tass *.bsc
+	zip -d -q release$(S)samples.zip *.tass 
 
 clean:
 	make -B -C kernel clean

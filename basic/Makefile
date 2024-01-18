@@ -214,7 +214,7 @@ clearstorage:
 
 %.bas : %.bsc
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
-	$(CCOPY) $@ storage
+	$(CCOPY) $@ $< storage
 	
 
 # ***************************************************************************************

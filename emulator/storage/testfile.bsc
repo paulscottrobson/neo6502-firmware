@@ -1,0 +1,25 @@
+'
+'	Test save load
+'
+print "File I/O simple test":print
+tdSize = 8192
+testdata = alloc(tdSize)
+readdata = alloc(tdSize)
+for i = 0 to tdSize-1:poke testdata+i,rand(256):next
+'
+'
+repeat
+	fName$ = ".test.s"+str$(rand(100))
+	start = rand(tdSize-16)
+	size = rand(tdSize-start-16)
+
+	print ,chr$(34)+fName$+chr$(34),start,size
+	save fName$,testdata+start,size
+
+	poke readdata+size,255
+	load fName$,readdata
+	assert peek(readdata+size) = 255
+	for i = 0 to size-1
+		assert peek(readdata+i) = peek(testdata+start+i)
+	next
+until 0
