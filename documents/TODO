@@ -22,6 +22,9 @@ Larger Additions
 
 	- Tiles
 		- Eris style tilemap command ?
+			TILEMAP xScreen,yScreen,tileWidth,tileHeight,xOffset,yOffset,mapData
+			mapData : [width] [height] [tiles]
+		- Checking for monocolour and blank tile images which can be drawn much faster.
 
 	- Turtle Graphics System		
 		- Use sprite $7F

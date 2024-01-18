@@ -57,4 +57,5 @@ Changes
 			*** Release 5a ***
 			IMP: Added HIMEM unary
 			IMP: Added CLEAR <address> option
+			IMP: Added NOTES()
 			
