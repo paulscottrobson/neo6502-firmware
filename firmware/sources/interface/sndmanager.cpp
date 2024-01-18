@@ -58,6 +58,18 @@ void SNDStartup(void) {
 
 // ***************************************************************************************
 //
+//								Return number of pending notes
+//
+// ***************************************************************************************
+
+int SNDGetNoteCount(int channelID) {
+	if (channelID < 0 || channelID > SOUND_CHANNELS) return -1;
+	SOUND_CHANNEL *c = &channel[channelID];
+	return c->queueCount + (c->isPlayingNote ? 1 : 0);  						// # in queue + 1 if playing
+}
+
+// ***************************************************************************************
+//
 //								Play the next note, dequeuing
 //
 // ***************************************************************************************

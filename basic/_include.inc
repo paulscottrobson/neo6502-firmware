@@ -38,6 +38,7 @@
 	.include "sources/arithmetic/unary/hardware/inkey.asm"
 	.include "sources/arithmetic/unary/hardware/joypad.asm"
 	.include "sources/arithmetic/unary/hardware/key.asm"
+	.include "sources/arithmetic/unary/hardware/notes.asm"
 	.include "sources/arithmetic/unary/hardware/point.asm"
 	.include "sources/arithmetic/unary/hardware/spritexy.asm"
 	.include "sources/arithmetic/unary/hardware/time.asm"

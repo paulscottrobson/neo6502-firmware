@@ -1,2 +1,10 @@
-clear $8044
-print himem
+cls 
+gload "graphics.gfx"
+t1 = time()
+for n = 1 to 500
+	for x = 0 to 7
+	for y = 0 to 6
+		image $C0+(n & 1) to x*32,y*32
+	next:next
+next
+cls:print (time()-t1)/500/100
