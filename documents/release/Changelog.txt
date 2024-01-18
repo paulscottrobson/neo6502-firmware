@@ -58,4 +58,6 @@ Changes
 			IMP: Added HIMEM unary
 			IMP: Added CLEAR <address> option
 			IMP: Added NOTES()
-			
+			BUG: Didn't remove the speed up to draw the rendered image quicker, so emulators running at 10x actual.
+			*** Release 5b ***
+			BUG: <alphatoken> (  [e.g. print (2+3) would list as print(2+3) and on retokenising was assumed to be an array]

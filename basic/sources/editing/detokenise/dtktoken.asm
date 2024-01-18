@@ -43,6 +43,18 @@ _TOKDFound:
 		ldy 	#1 							; output the token.
 		lda 	(zTemp0),y 					; check spacing first character
 		and 	#$7F
+
+		cmp 	#"(" 						; special case of (
+		bne 	_TOKDNotLParen
+		lda 	TOKLastCharacter  			; if last character A-Z
+		jsr 	TOKIsAlpha
+		bcc 	_TOKDNoSpace
+		lda 	#' ' 						; output a space, so the listing doesn't confuse it with an array.
+		jsr 	TOKDOutput
+_TOKDNoSpace:		
+		lda 	#"("
+_TOKDNotLParen:		
+
 		pha
 		jsr 	TOKDSpacing 				; do we need space before this.
 		pla
@@ -65,6 +77,7 @@ _TOKDOutput:
 		jsr 	TOKToLower
 		cmp		#"(" 						; change colour on (
 		bne 	_TOKDNotBracket
+
 		lda 	#5
 		jsr 	DTKColour
 		lda 	#"("
@@ -92,6 +105,7 @@ _TOKDExit:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		18-01-24		Special check for ( as <alphatoken> ( was listed as an array element.
 ;
 ; ************************************************************************************************
 
