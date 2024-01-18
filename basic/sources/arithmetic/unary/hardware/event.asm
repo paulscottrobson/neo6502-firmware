@@ -75,12 +75,12 @@ _EUEType:
 		.error_type
 
 _EUEInitialise:	 								; initialise if zero.
-		lda 	ControlParameters+0
-		sta 	(zTemp0)
-		lda 	ControlParameters+1
-		ldy 	#1
+		ldy 	#3
+_EUECopy1:		
+		lda 	ControlParameters,y
 		sta 	(zTemp0),y
-
+		dey 	
+		bpl 	_EUECopy1
 _EUETrigger:
 		clc 									; add timer rate to time() to give next fire time.
 		lda 	(zTemp0)
@@ -117,6 +117,7 @@ _EUETrigger:
 ;		Date			Notes
 ;		==== 			=====
 ;		17-01-24 		Made event additive and reset on zero.
+;		18-01-24 		Fixed stupid event() bug ; not initialising properly when zero.
 ;
 ; ************************************************************************************************
 

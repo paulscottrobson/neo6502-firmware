@@ -1,8 +1,4 @@
-cls:print chr$(22);"XXXXXXXXXXXXXXXXXXXXX"
-sprite clear:gload "graphics.gfx"
-for i = 0 to 15
-	line ink i*3+7 from i,0 to i,20
-next:sprite 1 image $C0 to 100,100
-for i = 0 to 15
-	print i,point(i,544)
-next
+t1 = 0
+repeat
+	if event(t1,100) then print "*";
+until false
