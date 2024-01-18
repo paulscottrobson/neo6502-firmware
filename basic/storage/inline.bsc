@@ -1,0 +1,14 @@
+100 mem = alloc(32)
+110 for i = 0 to 1
+120 p = mem
+130 o = i * 3
+140 .start
+150 ldx #10
+160 .loop1
+170 lda #42
+180 jsr $FFF1
+190 dex
+200 bne loop1
+210 rts
+220 next
+230 sys mem

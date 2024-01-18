@@ -1,0 +1,27 @@
+'
+'	Showing IF tests. We support normal
+' 	and multiline with ELSE option.
+'
+for i = 1 to 8
+print i
+'
+'	Simple test
+'
+if i = 3 then print ,"it is 3"
+'
+'	Same test, done slightly differently
+'
+if i = 4: print , "it is 4":endif
+'
+if i = 4
+	print , "it is still 4"
+endif
+'
+'	If then else, can be one or multiline
+'
+if i = 6
+	print , "it is 6"
+else
+	print , "it isn't 6"
+endif
+next

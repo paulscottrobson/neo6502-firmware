@@ -1,0 +1,38 @@
+'
+'	Neo6502 speed test, written by Paul Robson 24/12/2023
+'	
+'	Emulator is inaccurate because I don't add 1 for the taken branch, speed is approx
+'	on emulation.
+'
+p = alloc(32)
+'
+'	Basically DEY ; bne Loop ; DEX ; bne Loop ; DEC ; bne Loop
+'
+.clockme
+	dey : bne clockme
+	dex : bne clockme
+	dec : bne clockme
+	rts
+'
+'	Do this many iterations with initial value of A
+'
+count = 5
+a = 50
+'
+'	Do code, measuring time.
+'
+x = 0:y = 0
+start = time()
+for i = 1 to count:print i:sys clockme:next
+tExec = (time()-start) / 100
+'
+'	Time for each iteration of the dex/dey bit
+'
+tExec = tExec / count / a
+print tExec;" secs per inner 2 loops"
+'
+'	Work out speed.
+'
+innerCycles = 1280 * 256
+cps = innerCycles / tExec
+print cps/1000/1000;" Mhz clock"

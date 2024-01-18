@@ -1,0 +1,13 @@
+'
+'	Shows how event works, there are two events
+' 	* at 100cs (e.g. 1Hz)
+' 	. at 7cs (e.g. 14Hz)
+'
+tStar = 0:tDot = 0
+repeat
+	if event(tStar,100) then print "*";
+	if event(tDot,7) then print ".";
+until 0
+'
+' 	You can stop an event timer by negating it
+'

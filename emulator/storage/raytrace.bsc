@@ -1,0 +1,13 @@
+1 ' Raytrace by @coprolite9000
+2 ' converted by Paul Robson
+10 CLS
+11 DIM map(15)
+12 for i = 0 to 15:read map(i):next
+15 DATA 0,24,6,30,36,12,42,18,9,33,3,27,45,21,39,15
+20 FOR N=8 TO 247:FOR M=0 TO 319
+30 X=0:Y=-0.1:Z=3:U=(M-159.5)/160:V=(N-127.5)/160:W=1/SQR(U*U+V*V+1):U=U*W:V=V*W:I=SGN(U):G=1
+50 E=X-I:F=Y-I:P=U*E+V*F-W*Z:D=P*P-E*E-F*F-Z*Z+1:IF D>0 THEN T=-P-SQR(D):IF T>0 THEN X=X+T*U:Y=Y+T*V:Z=Z-T*W:E=X-I:F=Y-I:G=Z:P=2*(U*E+V*F-W*G):U=U-P*E:V=V-P*F:W=W+P*G:I=-I:GOTO 50
+60 IF V<0 THEN P=(Y+2)/V:V=-V*((INT(X-U*P)+INT(Z-W*P) & 1)/2+0.3)+0.2
+70 C = 3-(48*SQR(V)+map(M % 4+N % 4*4)/3)\16
+75 PLOT INK C TO M,239-(N-8)
+80 next:next
