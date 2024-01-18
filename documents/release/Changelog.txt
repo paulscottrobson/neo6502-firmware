@@ -47,8 +47,11 @@ Changes
 			BUG: Int -ve numbers not working correctly (rounding towards zero)
 			BUG: FP Compare broken 
 			BUG: TAB does not drop a line going off the RHS.
-			Added the image rendering program for the BBC Micro suggested by Dirk Berger
-			Switched back to Arch as some keyboard functionality and sound in emulator broken.
+			IMP: Added the image rendering program for the BBC Micro suggested by Dirk Berger
+			NOT: Switched back to Arch as some keyboard functionality and sound in emulator broken.
 
-18/01/24 	Added POINT() to read screen pixel.
-			Added Squash & Breakout to sample code, included the text source.
+18/01/24 	IMP: Added POINT() to read screen pixel.
+			IMP: Added Squash & Breakout to sample code, included the text source.	
+			*** Release 5 ***
+			BUG: Fixed event initialisation bug
+			*** Release 5a ***
