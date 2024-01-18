@@ -217,6 +217,7 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 	uint16_t y1 = data[6]+(data[7] << 8);
 	uint16_t x2 = data[8]+(data[9] << 8);
 	uint16_t y2 = data[10]+(data[11] << 8);
+	bool isOk;
 
 	switch(cmd) {
 		case 2:
@@ -237,6 +238,14 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 		case 7:
 			GFXDrawImage(&gMode,x1,y1,data[8],drawSize,flipBits);
 			break;
+		case 33:
+			isOk = (x1 >= 0 && y1 >= 0 && x1 < gMode.xGSize && y1 < gMode.yGSize);
+			data[2] = isOk ? 0 : 1;
+			if (isOk) {
+				data[4] = gMode.graphicsMemory[x1 + y1 * gMode.xGSize];
+				if (SPRSpritesInUse()) data[4] &= 0x0F;
+			}
+			break;
 	}
 }
 
@@ -246,5 +255,6 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 //		==== 		========
 //		11-01-24	Modified to support UDGs
 //		17-01-24 	Modified so graphics work ok with sprites.
+//		18-01-24 	Added function 33 (read pixel)
 //
 // ***************************************************************************************

@@ -50,3 +50,4 @@ Changes
 			Added the image rendering program for the BBC Micro suggested by Dirk Berger
 			Switched back to Arch as some keyboard functionality and sound in emulator broken.
 
+18/01/24 	Added POINT() to read screen pixel.
