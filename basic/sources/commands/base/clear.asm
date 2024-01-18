@@ -19,6 +19,25 @@
 		.section code
 
 Command_CLEAR:	;; [clear]
+		lda 	(codePtr),y 				; followed by : or EOL
+		cmp 	#KWD_COLON
+		beq 	_CCSetFullMemory
+		cmp 	#KWD_SYS_END
+		beq 	_CCSetFullMemory
+		;
+		ldx 	#0 							; where does himem go.
+		jsr 	EXPEvalInteger16
+		lda 	XSNumber1 					; check range
+		cmp 	#HIGHMEMORY >> 8  			; past end of memory
+		bcs 	_CCRange
+											; Program space, stack space, and 2k required.
+		cmp 	#((Program >> 8)+StackPages+(2048 >> 8))
+		bcc 	_CCRange
+		jsr 	ClearCodeSetMemoryA
+		rts
+_CCRange:
+		.error_range		
+_CCSetFullMemory:		
 		jsr 	ClearCode
 		rts
 
@@ -28,7 +47,11 @@ Command_CLEAR:	;; [clear]
 ;
 ; ************************************************************************************************
 
+
 ClearCode:
+		lda 	#HIGHMEMORY >> 8 			; reset to full memory.
+ClearCodeSetMemoryA:
+		sta 	highMemoryUpper				; remember the high page
 		phy
 		;
 		;		Reset memory and variables
@@ -37,8 +60,8 @@ ClearCode:
 		jsr 	ClearVariables
 		;
 		;		Reset stack
-		;
-		lda 	#HIGHMEMORY >> 8 			; reset the stack.
+		;	
+		lda 	highMemoryUpper
 		jsr 	StackReset 			
 		;
 		;		Initialise string usage.

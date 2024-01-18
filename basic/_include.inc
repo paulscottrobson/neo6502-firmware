@@ -30,6 +30,7 @@
 	.include "sources/arithmetic/unary/extras/alloc.asm"
 	.include "sources/arithmetic/unary/extras/boolean.asm"
 	.include "sources/arithmetic/unary/extras/dollar.asm"
+	.include "sources/arithmetic/unary/extras/himem.asm"
 	.include "sources/arithmetic/unary/extras/minmax.asm"
 	.include "sources/arithmetic/unary/extras/page.asm"
 	.include "sources/arithmetic/unary/hardware/event.asm"

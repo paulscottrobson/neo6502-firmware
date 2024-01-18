@@ -55,3 +55,6 @@ Changes
 			*** Release 5 ***
 			BUG: Fixed event initialisation bug
 			*** Release 5a ***
+			IMP: Added HIMEM unary
+			IMP: Added CLEAR <address> option
+			

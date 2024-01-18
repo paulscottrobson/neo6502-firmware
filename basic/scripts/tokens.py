@@ -144,7 +144,7 @@ class TokenSet(object):
 		#
 		self.add(0x2E0,"""
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
-			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( QUIET(
+			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM
 		""")
 		
 if __name__ == "__main__":

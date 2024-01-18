@@ -1,4 +1,2 @@
-t1 = 0
-repeat
-	if event(t1,100) then print "*";
-until false
+clear $8044
+print himem

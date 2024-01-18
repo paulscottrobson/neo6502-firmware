@@ -244,4 +244,5 @@ KWD_SQRLPAREN                      = $2e9 ; sqr(
 KWD_PAGE                           = $2ea ; page
 KWD_SPRITEXLPAREN                  = $2eb ; spritex(
 KWD_SPRITEYLPAREN                  = $2ec ; spritey(
-KWD_QUIETLPAREN                    = $2ed ; quiet(
+KWD_NOTESLPAREN                    = $2ed ; notes(
+KWD_HIMEM                          = $2ee ; himem

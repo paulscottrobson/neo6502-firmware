@@ -38,7 +38,6 @@ app:
 	$(CMAKEDIR) storage
 	make -B -C $(ROOTDIR)basic demos
 	$(CCOPY) $(ROOTDIR)basic$(S)storage$(S)* storage
-	$(CCOPY) $(ROOTDIR)basic$(S)code$(S)*.bas storage
 	emcc  -D EMSCRIPTEN -D LINUX -D INCLUDE_DEBUGGING_SUPPORT $(FLAGS) $(SOURCES) -o neo.html
 
 server: 
