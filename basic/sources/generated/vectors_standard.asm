@@ -15,7 +15,7 @@ StandardVectorTable:
 	.word	UnaryInkey               ; $89 inkey$(
 	.word	EXPUnaryAsc              ; $8a asc(
 	.word	ChrUnary                 ; $8b chr$(
-	.word	Unimplemented            ; $8c !!un11
+	.word	Unimplemented            ; $8c point(
 	.word	EXPUnaryLen              ; $8d len(
 	.word	UnaryAbs                 ; $8e abs(
 	.word	UnarySgn                 ; $8f sgn(

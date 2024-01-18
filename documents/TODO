@@ -14,23 +14,17 @@ General
 
 	- Possible listing corruption bug (emulator) ? Cannot reproduce.
 
-Next Coding
------------	
+Larger Additions
+----------------
 
-	- CLEAR <memory> option.
+	- Sprites 
+		- something like AMAL 
 
-	- [] operators
-	
-	- Graphics system
+	- Tiles
+		- Eris style tilemap command ?
 
-		- Sprites 
-				- something like AMAL 
-
-		- Tiles
-				- Eris style tilemap command ?
-
-		- Turtle Graphics System		
-				- Use sprite 0
+	- Turtle Graphics System		
+		- Use sprite $7F
 
 	- Add USB Joystick interface if stable.
 
@@ -43,4 +37,3 @@ Other
 
 Add to Documentation
 --------------------
-https://bbcmic.ro/?t=9ctpk

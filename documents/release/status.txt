@@ -25,4 +25,4 @@ Todo
 	Tile maps
 	Turtle graphics
 	USB Joystick support
-	Sweet16 running on the RP2040 but controlled by BASIC.
+	Sweet16 running on the RP2040 but controlled by BASIC or Another.

@@ -35,7 +35,7 @@ BaseTokenText:
 	.byte	$07,$49,$4e,$4b,$45,$59,$24,$a8	; $ 89 INKEY$(
 	.byte	$04,$41,$53,$43,$a8           	; $ 8a ASC(
 	.byte	$05,$43,$48,$52,$24,$a8       	; $ 8b CHR$(
-	.byte	$00                           	; $ 8c 
+	.byte	$06,$50,$4f,$49,$4e,$54,$a8   	; $ 8c POINT(
 	.byte	$04,$4c,$45,$4e,$a8           	; $ 8d LEN(
 	.byte	$04,$41,$42,$53,$a8           	; $ 8e ABS(
 	.byte	$04,$53,$47,$4e,$a8           	; $ 8f SGN(
@@ -159,6 +159,11 @@ Shift1TokenText:
 	.byte	$06,$41,$4e,$43,$48,$4f,$d2   	; $19c ANCHOR
 	.byte	$05,$47,$4c,$4f,$41,$c4       	; $19d GLOAD
 	.byte	$06,$44,$45,$46,$43,$48,$d2   	; $19e DEFCHR
+	.byte	$04,$4c,$45,$46,$d4           	; $19f LEFT
+	.byte	$05,$52,$49,$47,$48,$d4       	; $1a0 RIGHT
+	.byte	$07,$46,$4f,$52,$57,$41,$52,$c4	; $1a1 FORWARD
+	.byte	$06,$54,$55,$52,$54,$4c,$c5   	; $1a2 TURTLE
+	.byte	$05,$53,$57,$45,$45,$d4       	; $1a3 SWEET
 	.byte	$FF
 
 Shift2TokenText:
@@ -271,6 +276,7 @@ Shift2TokenText:
 	.byte	$04,$50,$41,$47,$c5           	; $2ea PAGE
 	.byte	$08,$53,$50,$52,$49,$54,$45,$58,$a8	; $2eb SPRITEX(
 	.byte	$08,$53,$50,$52,$49,$54,$45,$59,$a8	; $2ec SPRITEY(
+	.byte	$06,$51,$55,$49,$45,$54,$a8   	; $2ed QUIET(
 	.byte	$FF
 
 BinaryPrecedence:
