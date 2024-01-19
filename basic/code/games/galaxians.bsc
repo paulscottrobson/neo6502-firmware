@@ -1,0 +1,53 @@
+cls:sprite clear:gload "galaxians.gfx"
+call Initialise()
+call ResetAttackers()
+line 160,0 to 160,239
+t1 = time()
+for i = 1 to 100
+call MoveFormation()	
+next
+t = (time()-t1)/100/100
+print 1/t
+end
+
+
+'
+'		Initialisation
+'
+proc Initialise()
+	dim status(59): ' 8 x 6 array of ships. 0 = not present, 1 = in formation, 2 = attacking. top down
+	dim attackers(8): ' Maximum active attackers
+	dim graphics(5):for i = 0 to 5:read graphics(i):next:data $8C,$80,$88,$84,$84,$84
+endproc
+'
+'		Reset attackers.
+'
+proc ResetAttackers()
+	local i
+	for i = 0 to 7:status(i) = 0:next
+	for i = 8 to 47:status(i) = 1:next
+	status(2) = 1:status(5) = 1
+	status(8) = 0:status(9) = 0:status(14) = 0:status(15) = 0
+	status(16) = 0:status(23) = 0
+	xCentre = 160:xCentreStep = 10:attCount = 0
+endproc
+'
+'		Reposition formation, also tracks those in attack mode.
+'
+proc MoveFormation()
+	local r,p,x,y,c
+	xCentre = xCentre + xCentreStep
+	if xCentre = 100 | xCentre = 220 then xCentreStep = -xCentreStep
+	attackers = 0
+	for r = 0 to 5
+		p = r * 8:
+		img = graphics(r)
+		x = xCentre - 16 * 7 \ 2
+		y = 24 + r * 12
+		for c = 0 to 7
+			if status(p) = 1 then sprite p image img to x,y
+			if status(p) = 2 then if attCount < 8 then attackers(attCount) = p:attCount = attCount + 1
+			p = p + 1:x = x + 16
+		next
+	next
+endproc

@@ -12,13 +12,17 @@
 
 ; ************************************************************************************************
 ;
-;										CLS Command
+;										PALETTE Command
 ;
 ; ************************************************************************************************
 
 		.section code
 
 Command_Palette:	;; [palette]
+		lda 	(codePtr),y 				; is it PALETTE CLEAR
+		cmp 	#KWD_SYS_SH1
+		beq 	_CPCheckClear
+
 		ldx 	#0
 		jsr 	EXPEvalInteger8			
 		pha
@@ -42,6 +46,19 @@ Command_Palette:	;; [palette]
 		.DoWaitMessage
 		rts
 
+_CPCheckClear:
+		iny
+		lda 	(codePtr),y
+		iny
+		cmp 	#KWD_CLEAR-$100
+		beq 	_CPResetPalette
+		.error_syntax
+		
+_CPResetPalette:		
+		.DoSendMessage
+		.byte 	5,34
+		.DoWaitMessage
+		rts
 
 		.send code
 
