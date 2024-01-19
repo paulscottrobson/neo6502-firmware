@@ -37,6 +37,7 @@ void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b); 				// Impleme
 void RNDStartMode0(struct GraphicsMode *gMode);
 
 void GFXSetMode(int Mode);
+void GFXDefaultPalette(void);
 void GFXResetDefaults(void);
 void GFXSetDefaults(uint8_t *cmd);
 void GFXGraphicsCommand(uint8_t cmd,uint8_t *data);
