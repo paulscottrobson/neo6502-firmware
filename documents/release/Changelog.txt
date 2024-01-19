@@ -64,3 +64,4 @@ Changes
 
 19/01/24 	IMP: Added PALETTE CLEAR (to reset it)			
 			BRK: * BREAKING CHANGE * Sound lengths are now in cs not ms, for consistency with the rest of BASIC.
+			*** Release 6 ***
