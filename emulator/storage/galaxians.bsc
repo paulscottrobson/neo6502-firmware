@@ -1,23 +1,44 @@
 cls:sprite clear:gload "galaxians.gfx"
 call Initialise()
+call DrawStars()
 call ResetAttackers()
-line 160,0 to 160,239
-t1 = time()
-for i = 1 to 100
-call MoveFormation()	
-next
-t = (time()-t1)/100/100
-print 1/t
+call Launch(41)
+tMoveForm = 0:tMoveDive = 0
+repeat
+	if event(tMoveForm,24) then call MoveFormation():call AnimateStars()
+	if event(tMoveDive,3) then if attCount<>0 then call MoveAttackers()
+until false
 end
-
-
 '
 '		Initialisation
 '
 proc Initialise()
-	dim status(59): ' 8 x 6 array of ships. 0 = not present, 1 = in formation, 2 = attacking. top down
-	dim attackers(8): ' Maximum active attackers
+	local i
+	dim status(47): ' 8 x 6 array of ships. 0 = not present, 1 = in formation, 2 = attacking. top down
+	dim xShip(47),yShip(47),xiShip(47): ' position of ship if attacking
+	dim attackers(8): ' active attackers, updated by MoveFormation()
 	dim graphics(5):for i = 0 to 5:read graphics(i):next:data $8C,$80,$88,$84,$84,$84
+endproc
+'
+'		Draw Stars
+'
+proc DrawStars()
+	local i
+	for i = 1 to 200
+		plot ink rand(8)+8 to rand(320),rand(240)
+	next
+	for i = 8 to 15:palette i,0,0,0:next
+endproc
+'
+'		Animate Stars
+'
+proc AnimateStars()
+	palette animStar+8,0,0,0
+	animStar = (animStar + 1) & 7
+	palette animStar+8,255,255,255
+	palette ((animStar+1) & 7)+8,192,192,192
+	palette ((animStar+2) & 7)+8,128,128,128
+	palette ((animStar+3) & 7)+8,64,64,64
 endproc
 '
 '		Reset attackers.
@@ -29,25 +50,61 @@ proc ResetAttackers()
 	status(2) = 1:status(5) = 1
 	status(8) = 0:status(9) = 0:status(14) = 0:status(15) = 0
 	status(16) = 0:status(23) = 0
-	xCentre = 160:xCentreStep = 10:attCount = 0
+	xCentre = 160:xCentreStep = 2:attCount = 0:formCount = 0
+	call MoveFormation()
 endproc
 '
 '		Reposition formation, also tracks those in attack mode.
 '
 proc MoveFormation()
 	local r,p,x,y,c
+	formCount = formCount + 1
 	xCentre = xCentre + xCentreStep
-	if xCentre = 100 | xCentre = 220 then xCentreStep = -xCentreStep
-	attackers = 0
+	if xCentre <= 100 | xCentre >= 220 then xCentreStep = -xCentreStep
+	attcount = 0
 	for r = 0 to 5
 		p = r * 8:
-		img = graphics(r)
+		img = graphics(r) + (formCount & 1)
 		x = xCentre - 16 * 7 \ 2
 		y = 24 + r * 12
 		for c = 0 to 7
 			if status(p) = 1 then sprite p image img to x,y
-			if status(p) = 2 then if attCount < 8 then attackers(attCount) = p:attCount = attCount + 1
+			if status(p) = 2 then if attCount < 8 then attCount = attCount + 1:attackers(attCount) = p
 			p = p + 1:x = x + 16
 		next
 	next
+endproc
+'
+'		Launch a ship
+'
+proc Launch(n)
+	assert status(n) = 1
+	status(n) = 2
+	xShip(n) = spritex(n)
+	yShip(n) = spritey(n)
+	sprite n image graphics(n\8)+2
+	xiShip(n) = -4
+	if xShip(n) >= 160 then xiShip = abs(xiShip):sprite n flip 1
+endproc
+'
+'		Move attackers.
+'
+proc MoveAttackers()
+	for i = 1 to attCount
+		n = attackers(i)
+		if status(n) = 2 
+			xShip(n) = xShip(n) + xiShip(n)
+			yShip(n) = yShip(n) + 2
+			if xShip(n) < 8 | xShip(n) > 312 then call FlipAttacker(n)
+			sprite n to xShip(n),yShip(n)
+			if yShip(n) > 230 then status(n) = 1
+		endif
+	next
+endproc
+'
+'		Flip attacker horizontally.
+'
+proc FlipAttacker(n)
+	xiShip(n) = -xiShip(n)
+	if xiShip(n) > 0:sprite n flip 1:else:sprite n flip 0:endif
 endproc
