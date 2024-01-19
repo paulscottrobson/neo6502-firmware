@@ -51,8 +51,8 @@ uint8_t SNDResetChannel(int channelID) {
 
 void SNDStartup(void) {
 	#ifdef PICO
-	SNDPlay(0,220,500,0,false);
-	SNDPlay(0,440,250,0,false);
+	SNDPlay(0,220,50,0,false);
+	SNDPlay(0,440,25,0,false);
 	#endif
 }
 
@@ -81,7 +81,7 @@ void SNDPlayNextNote(int channelID) {
 	c->currentFrequency = qe->frequency;
 	c->currentSlide = qe->slide;
 	c->isPlayingNote = true;  													// Set up the channel data
-	c->tick50Remaining = qe->timeMS / 20;  
+	c->tick50Remaining = qe->timeMS / 2;  
 	SNDSetFrequency(channelID,qe->frequency,false);								// Play the note.
 	c->queueCount--; 															// Dequeue
 	for (int i = 0;i < c->queueCount;i++) {
@@ -102,7 +102,7 @@ uint8_t SNDPlay(int channelID,uint16_t frequency,uint16_t timems,uint16_t slide,
 	if (c->queueCount != SOUND_QUEUE_SIZE) {  									// If queue not full
 		SOUND_QUEUE_ELEMENT *qe = &(c->queue[c->queueCount]);  					// Add to queue.
 		qe->frequency = frequency;
-		qe->slide = slide/20;  													// Adjust to 50Hz tick rate
+		qe->slide = slide/2;  													// Adjust to 50Hz tick rate
 		if (slide != 0 && qe->slide == 0) qe->slide = (slide & 0x8000) ? -1:1;  // Rounded to zero.
 		qe->timeMS = timems;
 		qe->soundType = 0;

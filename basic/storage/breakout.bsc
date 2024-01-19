@@ -142,7 +142,7 @@ proc CheckBrick()
 		score = (score + 1) % 10000
 		call RedrawScore()
 		if breakThrough=0 then yiBall = -yiBall
-		if soundOn then sound 0 clear:sound 0,200+y*32,80
+		if soundOn then sound 0 clear:sound 0,200+y*32,8
 	endif
 endproc
 '
@@ -162,13 +162,13 @@ proc CheckBat()
 		yiBall = -yiBall
 		xiBall = sgn(xo) * 2:if xiBall = 0 then xiBall = rand(2)*2-1
 		if abs(xo) >= batWidth \ 4 then xiBall = xiBall * 2
-		if soundOn then sound 0,330,100
+		if soundOn then sound 0,330,10
 	endif
 endproc
 '
 '		Wall Sound
 '
 proc WallSound()
-	if soundOn then sound 0 clear:sound 0,1700,40
+	if soundOn then sound 0 clear:sound 0,1700,4
 endproc
 
