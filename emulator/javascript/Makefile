@@ -40,8 +40,8 @@ app:
 	$(CCOPY) $(ROOTDIR)basic$(S)storage$(S)* storage
 	emcc  -D EMSCRIPTEN -D LINUX -D INCLUDE_DEBUGGING_SUPPORT $(FLAGS) $(SOURCES) -o neo.html
 
-upload: app
-	lftp -c "open ftp://paul@neo6502.com:autismuk000@ftp.studio2.org.uk; ; set ssl:check-hostname off ; put neo.html ; put neo.data ; put neo.js ; put neo.wasm ; ls"
+upload:app
+	lftp -c "open ftp://neo6502@studio2.org.uk:justfuckingdoit99@ftp.studio2.org.uk; ; set ssl:check-hostname off ; put neo.html ; put neo.data ; put neo.js ; put neo.wasm ; ls"
 
 server: 
 	python -m http.server
