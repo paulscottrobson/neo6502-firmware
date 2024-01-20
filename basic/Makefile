@@ -204,6 +204,7 @@ DEMOGFX = $(shell find code -name '*.gfx')
 demos: clearstorage $(DEMOBAS)
 	$(CCOPY) $(DEMOGFX) storage
 	$(CCOPY) images$(S)graphics.gfx storage
+	$(CCOPY) images$(S)test$(S)test.gfx storage
 	$(CCOPY) storage$(S)*.* ..$(S)emulator$(S)storage
 
 clearstorage:
