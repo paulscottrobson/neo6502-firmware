@@ -91,9 +91,11 @@ static void GFXHorizontalLine(struct GraphicsMode *gMode,int x1,int x2,int y) {
 //
 // ***************************************************************************************
 
-void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int solid) {
+void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int solid,bool setZero) {
     int yRow;
 	int yEnd;
+	int orgPixelAnd = pixelAnd;
+	int orgPixelXor = pixelXor;
 
 	if (y2>y1) {
 		yRow = y1;
@@ -101,6 +103,10 @@ void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int sol
 	} else {
 		yRow = y2;
 		yEnd = y1+1;
+	}
+
+	if (setZero) {
+		pixelAnd = 0;pixelXor = 0;
 	}
 
     do {
@@ -113,6 +119,9 @@ void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int sol
         yRow++;
 
 	} while( yRow != yEnd);
+
+	pixelAnd = orgPixelAnd;
+	pixelXor = orgPixelXor;
 }
 
 // ***************************************************************************************
@@ -121,7 +130,7 @@ void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int sol
 //
 // ***************************************************************************************
 
-void GFXScaledText(struct GraphicsMode *gMode,char *s,int x,int y) {
+void GFXScaledText(struct GraphicsMode *gMode,char *s,int x,int y,int useSolidFill) {
 	while (*s != '\0') {
 		uint8_t c = *s++;
 		if ((c >= ' ' && c < 0x80) || (c >= 0xC0)) {
@@ -130,9 +139,13 @@ void GFXScaledText(struct GraphicsMode *gMode,char *s,int x,int y) {
 				int bits = font_5x7[(c-' ')*8+yc];
 				if (c >= 0xC0) bits = userDefinedFont[(c & 0x3F) * 8 + yc];
 				int x1 = x;
-				while (bits != 0) {
+				for (int pixel = 0;pixel < 6;pixel++) {
 					if (bits & 0x80) {
-						GFXRectangle(gMode,x1,y1,x1+drawSize-1,y1+drawSize-1,-1);
+						GFXRectangle(gMode,x1,y1,x1+drawSize-1,y1+drawSize-1,-1,false);
+					} else {
+						if (useSolidFill) {
+							GFXRectangle(gMode,x1,y1,x1+drawSize-1,y1+drawSize-1,-1,true);						
+						}
 					}
 					x1 += drawSize;
 					bits = (bits << 1) & 0xFF;
@@ -176,7 +189,7 @@ int GFXFindImage(int type,int id) {
 //
 // ***************************************************************************************
 
-void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int flip) {
+void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int flip,int solidFill) {
 	if (gfxMemory[0] == 0) return;  											// No graphics installed.
 	int size = 16;  															// Figure out the size in pixels, type (0-2) and id in that type.
 	int type = 0;   															// Sprite records use a different mapping.
@@ -193,13 +206,13 @@ void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int fl
 	for (int xc = 0;xc < size;xc++) {  											// For each pixel
 		for (int yc = 0;yc < size;yc++) {
 			int pixel = gfxMemory[address+xc/2+(yc * size / 2)];   				// Access the pixel pair.
-			if (pixel != 0 || type == 0) {
+			if (pixel != 0 || type == 0 || solidFill) {
 				pixel = (xc & 1) ? pixel & 0x0F : pixel >> 4;					// Extract the half pixel to draw.
 				pixelXor = pixel;
 				pixelAnd = 0;
 				int x1 = x + (xc ^ xFlip) * scale;
 				int y1 = y + (yc ^ yFlip) * scale;
-				GFXRectangle(gMode,x1,y1,x1+scale-1,y1+scale-1,true);
+				GFXRectangle(gMode,x1,y1,x1+scale-1,y1+scale-1,true,false);
 			}
 		}
 	}
@@ -224,7 +237,7 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 			GFXFastLine(&gMode,x1,y1,x2,y2);
 			break;
 		case 3:
-			GFXRectangle(&gMode,x1,y1,x2,y2,useSolidFill);
+			GFXRectangle(&gMode,x1,y1,x2,y2,useSolidFill,false);
 			break;
 		case 4:
 			GFXEllipse(&gMode,x1,y1,x2,y2,useSolidFill);
@@ -233,10 +246,10 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 			GFXPlotPixelChecked(&gMode,x1,y1);
 			break;
 		case 6:
-			GFXScaledText(&gMode,DSPGetString(data,8),x1,y1);
+			GFXScaledText(&gMode,DSPGetString(data,8),x1,y1,useSolidFill);
 			break;
 		case 7:
-			GFXDrawImage(&gMode,x1,y1,data[8],drawSize,flipBits);
+			GFXDrawImage(&gMode,x1,y1,data[8],drawSize,flipBits,useSolidFill);
 			break;
 		case 33:
 			isOk = (x1 >= 0 && y1 >= 0 && x1 < gMode.xGSize && y1 < gMode.yGSize);
@@ -256,5 +269,6 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 //		11-01-24	Modified to support UDGs
 //		17-01-24 	Modified so graphics work ok with sprites.
 //		18-01-24 	Added function 33 (read pixel)
+//		19/01/24 	Added SOLID option to TEXT and IMAGE
 //
 // ***************************************************************************************

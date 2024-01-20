@@ -67,8 +67,8 @@ BinaryShift:
 		lda 	XSNumber0+1,x 				; if shift >=32 will be zero
 		and 	#$E0
 		ora 	XSNumber1+1,x
-		ora 	XSNumber1+2,x
-		ora 	XSNumber1+3,x
+		ora 	XSNumber2+1,x
+		ora 	XSNumber3+1,x
 		bne 	_BSIsZero
 		lda 	XSNumber0+1,x 				; check zero at start
 		beq 	_BSExit
@@ -129,6 +129,7 @@ _MICBIType:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		20-01-24 		>> and << were sometimes incorrectly detecting shifts more than 32
 ;
 ; ************************************************************************************************
 

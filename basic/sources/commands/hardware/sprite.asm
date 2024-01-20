@@ -135,10 +135,10 @@ _CSWriteValue:
 _CSToPosition:		
 		pha 								; save what we do with it.
 		ldx 	#0 							; get new coordinates.
-		jsr 	EXPEvalInteger16
+		jsr 	EXPEvalInteger
 		jsr 	ERRCheckComma
 		inx
-		jsr 	EXPEvalInteger16
+		jsr 	EXPEvalInteger
 		;
 		pla 								; is it TO
 		cmp 	#KWD_TO
@@ -212,6 +212,7 @@ _CSUSError:
 ;		Date			Notes
 ;		==== 			=====
 ;		15-01-24 		Added support to pass ANCHOR.
+; 		20-01-24 		Changed sprite coord evaluations to allow -ve coordinates
 ;
 ; ************************************************************************************************
 
