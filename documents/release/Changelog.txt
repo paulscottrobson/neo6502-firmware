@@ -72,4 +72,5 @@ Changes
 
 21/01/24	BUG: Forgot to change sound lengths in generated SFX
 			IMP: Improved some of the sound effects.
-						
+			IMP: Can now SOUND 0 CLEAR 440,200 syntax
+			BUG: SFX waits for queue to empty which makes no sense.

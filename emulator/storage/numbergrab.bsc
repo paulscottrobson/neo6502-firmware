@@ -1,0 +1,43 @@
+'
+'	Number grab. A sort of walk through.
+'
+cls:sprite clear:palette 0,0,0,255
+gload "numbergrab.gfx"
+seconds = 0:score = 0:call UpdateScore()
+tClock = 0:tPlayer = 0
+xPlayer = 160:yPlayer = 120:sprite 0 image $80 to xPlayer,yPlayer
+for i = 1 to 9:call SetUpDigit(i):next
+repeat
+	if event(tClock,100) then call UpdateTimer()
+	if event(tPlayer,3) then call MovePlayer()	
+until seconds = 60
+repeat:until inkey$() = ""
+end
+'
+proc UpdateTimer()
+	seconds = seconds + 1
+	rect solid ink 7 from 190,6 to 312,14 ink 1 from 191,7 to 191+seconds*2,13
+endproc
+'
+proc UpdateScore()
+	text right$("0000"+str$(score),4) solid dim 2 ink 3 to 160-24,2
+endproc
+'
+proc MovePlayer()
+	local fire,dx,dy,i
+	fire = joypad(dx,dy)
+	xPlayer = xPlayer + dx * 4:yPlayer = yPlayer + dy * 4
+	sprite 0 to xPlayer,yPlayer
+	for i = 1 to 9
+		if hit(0,i,12) 
+			score = score + i
+			call UpdateScore()
+			call SetUpDigit(i)
+			sound 0 clear:sfx 0,8
+		endif
+	next
+endproc
+'
+proc SetUpDigit(n)
+	sprite n image $80+n+1 to rand(300)+10,rand(220)+10
+endproc

@@ -19,28 +19,12 @@
 		.section code
 
 Command_SFX:	;; [sfx]
-		lda 	(codePtr),y 				; push first on stack
-		pha
-		cmp 	#KWD_SYS_SH1
-		bne 	_CSNotClear
-		iny  								; check CLEAR
-		lda 	(codePtr),y
-		iny
-		cmp 	#KWD_CLEAR & $FF
-		bne 	_CSSyntax
-		pla 								; replace with $FF
-		lda 	#$FF
-		pha
-_CSNotClear:		
 		ldx 	#0
 		jsr 	EXPEvalInteger8 			; channel #
 		jsr 	ERRCheckComma
 		inx
 		jsr 	EXPEvalInteger8 			; f/x number
 
-		pla 	 							; check CLEAR prefix.
-		cmp 	#$FF
-		bne 	_CSNotClear2
 		lda 	XSNumber0
 		sta 	ControlParameters+0
 		.DoSendMessage 						; clear channel
@@ -67,6 +51,7 @@ _CSSyntax:
 ;
 ;		Date			Notes
 ;		==== 			=====
+; 		21-01-24 		SFX always plays immediately.
 ;
 ; ************************************************************************************************
 

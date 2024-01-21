@@ -39,4 +39,5 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $1a1 forward
 	.word	Unimplemented            ; $1a2 turtle
 	.word	Unimplemented            ; $1a3 sweet
+	.word	Unimplemented            ; $1a4 tilemap
 	.send code
