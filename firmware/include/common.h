@@ -49,6 +49,7 @@
 #include "interface/config.h"
 #include "interface/miscellany.h"
 #include "interface/sprites.h"
+#include "interface/tilemap.h"
 //
 //		Other Includes
 //

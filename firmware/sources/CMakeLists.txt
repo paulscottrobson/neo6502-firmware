@@ -21,7 +21,7 @@ target_sources(firmware PRIVATE main.cpp
     interface/graphics.cpp  interface/console.cpp  interface/keyboard.cpp  interface/memory.cpp  
     interface/dispatch.cpp  interface/maths.cpp  interface/config.cpp  interface/efla.cpp 
     interface/gfxcommands.cpp  interface/ellipse.cpp  interface/fileinterface.cpp  
-    interface/sprites.cpp  interface/logo.cpp  interface/sprites_xor.cpp  
+    interface/sprites.cpp  interface/logo.cpp  interface/sprites_xor.cpp  interface/tilemap.cpp
     interface/sndmanager.cpp  interface/sfxmanager.cpp interface/tick.cpp
 )
 
