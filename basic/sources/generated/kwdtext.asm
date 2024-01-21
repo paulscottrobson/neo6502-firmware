@@ -164,6 +164,7 @@ Shift1TokenText:
 	.byte	$07,$46,$4f,$52,$57,$41,$52,$c4	; $1a1 FORWARD
 	.byte	$06,$54,$55,$52,$54,$4c,$c5   	; $1a2 TURTLE
 	.byte	$05,$53,$57,$45,$45,$d4       	; $1a3 SWEET
+	.byte	$07,$54,$49,$4c,$45,$4d,$41,$d0	; $1a4 TILEMAP
 	.byte	$FF
 
 Shift2TokenText:

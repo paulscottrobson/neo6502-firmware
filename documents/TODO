@@ -22,8 +22,6 @@ Larger Additions
 
 	- Tiles
 		- Eris style tilemap command ?
-			TILEMAP xScreen,yScreen,tileWidth,tileHeight,xOffset,yOffset,mapData
-			mapData : [width] [height] [tiles]
 		- Checking for monocolour and blank tile images which can be drawn much faster.
 
 	- Turtle Graphics System		
@@ -40,3 +38,7 @@ Other
 
 Add to Documentation
 --------------------
+			
+			TILEMAP  address,xOffset,yOffset (offset in pixels in map)
+			TILEDRAW xScreen,yScreen TO xScreen2,yScreen2 (window to draw in)
+			mapData : [1] [width] [height] [tiles]

@@ -141,6 +141,7 @@ KWD_RIGHT                          = $1a0 ; right
 KWD_FORWARD                        = $1a1 ; forward
 KWD_TURTLE                         = $1a2 ; turtle
 KWD_SWEET                          = $1a3 ; sweet
+KWD_TILEMAP                        = $1a4 ; tilemap
 KWD_ADC                            = $280 ; adc
 KWD_AND                            = $281 ; and
 KWD_ASL                            = $282 ; asl

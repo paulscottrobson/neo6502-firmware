@@ -33,9 +33,10 @@ Command_SOUND:	;; [sound]
 		lda 	(codePtr),y 				; check for SOUND n CLEAR
 		cmp 	#KWD_SYS_SH1
 		beq 	_CSCheckClear
+		jsr 	ERRCheckComma 				
 
-		inx
-		jsr 	ERRCheckComma 				; frequency
+_CSMakeSound:		
+		inx 								; frequency
 		jsr 	EXPEvalInteger16
 		inx
 		jsr 	ERRCheckComma  				; duration in ms.
@@ -77,7 +78,7 @@ _CSRange:
 _CSSyntax:
 		.error_syntax				
 		;		
-		;		Check for CLEAR. 0 is $FF if just SPRITE CLEAR or n for SPRITE n CLEAR
+		;		Check for CLEAR. 0 is $FF if just SOUND CLEAR or n for SOUND n CLEAR
 		;
 _CSCheckClear:
 		iny 								; check CLEAR follows
@@ -92,11 +93,22 @@ _CSCheckClear:
 		.DoSendMessage 						; stop that sound
 		.byte 	8,2
 		.DoWaitMessage
-		bra 	_CSCheckError
+		;
+		;		Now check if a sound follows.
+		;
+		lda 	(codePtr),y 				; EOL or :
+		cmp 	#KWD_SYS_END
+		beq 	_CSExit
+		cmp 	#KWD_COLON
+		bne 	_CSMakeSound		
+_CSExit:		
+		rts
+
 _CSResetAll:
 		.DoSendMessage 						; reset all sound
 		.byte 	8,1
-		rts		
+		rts
+
 		.send code
 
 ; ************************************************************************************************
@@ -108,6 +120,8 @@ _CSResetAll:
 ;		Date			Notes
 ;		==== 			=====
 ;		15/01/24 		Added optional fourth parameter for sliding.
+; 		21/01/24 		Allowed SOUND 0 CLEAR 1,440,1 type syntax.
 ;
 ; ************************************************************************************************
 
+	
