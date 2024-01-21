@@ -69,3 +69,7 @@ Changes
 			
 20/01/24 	BUG: Sprites cannot have negative coordinates.			
 			BUG: >> and << incorrectly detecting range check.
+
+21/01/24	BUG: Forgot to change sound lengths in generated SFX
+			IMP: Improved some of the sound effects.
+						
