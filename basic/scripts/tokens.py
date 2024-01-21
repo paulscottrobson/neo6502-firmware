@@ -114,7 +114,7 @@ class TokenSet(object):
 			SYS 	EXIT	, 		; 		: 		' 		)		READ 	
 			DATA 	ELSE	WHEN	DOWNTO 	POKE	DOKE 	LOCAL	CALL
 			# 		. 		LINE 	RECT 	MOVE 	PLOT 	ELLIPSE	TEXT 	
-			IMAGE 	SPRITE 	FROM 	[		] 		@
+			IMAGE 	SPRITE 	FROM 	[		] 		@ 		TILEDRAW
 			""")
 		#
 		#		Keyword tokens (minor)
