@@ -25,7 +25,7 @@ Command_Rect: 	;; [rect]
 Command_Ellipse: ;; [ellipse]
 Command_Plot: 	;; [plot]
 Command_Image:  ;; [image]
-
+Command_TileDraw: ;;  [tiledraw]
 		dey 								; point at the original coordinates
 GCommandLoop:
 		lda 	(codePtr),y
@@ -58,6 +58,9 @@ GCommandLoop:
 		inx
 		cmp 	#KWD_IMAGE
 		beq 	_GChangeModeImage
+		inx
+		cmp 	#KWD_TILEDRAW
+		beq 	_GChangeMode
 		dey 								; unconsume
 		bra 	_GNotMode
 
@@ -318,6 +321,7 @@ GraphicsReset:
 ;		Date			Notes
 ;		==== 			=====
 ;		15/01/24 		Added FROM syntactic sugar really.
+; 		21/01/24 		Added support for TILEDRAW
 ;
 ; ************************************************************************************************
 

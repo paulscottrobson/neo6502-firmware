@@ -1,4 +1,2 @@
-sound 0,440,50
-sound 0 clear 220,50
-sfx 0,8
-sfx 0,9	
+tilemap $ABCD,442,294
+tiledraw from 10,20 to 30,40

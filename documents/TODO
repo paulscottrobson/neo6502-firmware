@@ -38,7 +38,11 @@ Other
 
 Add to Documentation
 --------------------
-			
-			TILEMAP  address,xOffset,yOffset (offset in pixels in map)
-			TILEDRAW xScreen,yScreen TO xScreen2,yScreen2 (window to draw in)
-			mapData : [1] [width] [height] [tiles]
+Tilemap API functions
+TILEMAP and TILEDRAW commands
+
+Notes
+=====			
+TILEMAP  address,xOffset,yOffset (offset in pixels in map)
+TILEDRAW xScreen,yScreen TO xScreen2,yScreen2 (window to draw in)
+mapData : [1] [width] [height] [tiles]

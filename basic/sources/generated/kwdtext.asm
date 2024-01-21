@@ -125,6 +125,7 @@ BaseTokenText:
 	.byte	$01,$db                       	; $ e3 [
 	.byte	$01,$dd                       	; $ e4 ]
 	.byte	$01,$c0                       	; $ e5 @
+	.byte	$08,$54,$49,$4c,$45,$44,$52,$41,$d7	; $ e6 TILEDRAW
 	.byte	$FF
 
 Shift1TokenText:

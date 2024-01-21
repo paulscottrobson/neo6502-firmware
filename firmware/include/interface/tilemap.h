@@ -13,6 +13,7 @@
 #ifndef _TILEMAP_H
 #define _TILEMAP_H
 
+void TMPSelectTileMap(uint8_t *data,uint16_t xOffset,uint16_t yOffset);
 void TMPDrawTileMap(uint8_t *data);
 
 #endif

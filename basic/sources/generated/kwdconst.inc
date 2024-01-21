@@ -105,6 +105,7 @@ KWD_FROM                           = $e2 ; from
 KWD_LSQ                            = $e3 ; [
 KWD_RSQ                            = $e4 ; ]
 KWD_AT                             = $e5 ; @
+KWD_TILEDRAW                       = $e6 ; tiledraw
 KWD_CLEAR                          = $180 ; clear
 KWD_NEW                            = $181 ; new
 KWD_RUN                            = $182 ; run

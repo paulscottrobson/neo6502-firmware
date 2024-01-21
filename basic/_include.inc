@@ -77,6 +77,7 @@
 	.include "sources/commands/hardware/sfx.asm"
 	.include "sources/commands/hardware/sound.asm"
 	.include "sources/commands/hardware/sprite.asm"
+	.include "sources/commands/hardware/tilemap.asm"
 	.include "sources/editing/detokenise/detokenise.asm"
 	.include "sources/editing/detokenise/dtkdecimal.asm"
 	.include "sources/editing/detokenise/dtkhex.asm"
