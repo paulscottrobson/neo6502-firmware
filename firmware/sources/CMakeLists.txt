@@ -25,6 +25,8 @@ target_sources(firmware PRIVATE main.cpp
     interface/sndmanager.cpp  interface/sfxmanager.cpp interface/tick.cpp
 )
 
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+
 if(USBKEY_STORAGE)
     add_definitions(-DUSBKEY_STORAGE=1)
     target_sources(firmware PRIVATE hardware/storage/usb_storage.cpp )

@@ -25,7 +25,7 @@ proc BuildTileMap()
 	poke map,1
 	poke map+1, width
 	poke map+2, height
-	for i = 0 to width*height-1:poke map+3+i,$F2:next
+	for i = 0 to width*height-1:poke map+3+i,7:next
 	for i = 0 to width-1:call set(i,0,0):call set(i,height-1,0):next
 	for i = 0 to height-1:call set(0,i,1):call set(width-1,i,1):next
 	for i = 2 to 6:call set(i,i,i):call set(i+4,i+1,i):next
