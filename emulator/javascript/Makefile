@@ -30,13 +30,13 @@ SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp \
 
 FLAGS = -DINCLUDE_OS_SUPPORT -DIBMPC -I.. -I ../framework -I ../cpu -I ../bin -I ../include -I $(FIRMDIR)/include -I 6502 -O1 \
 		-s USE_SDL=2 -s WASM=1 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file storage \
-		 -D INCLUDE_DEBUGGING_SUPPORT -s LINKABLE=1 -s EXPORT_ALL=1 
+		 -D INCLUDE_DEBUGGING_SUPPORT -s LINKABLE=1 -s EXPORT_ALL=1 -fpermissive
 
 all: app
 
 app:
 	$(CMAKEDIR) storage
-	make -B -C $(ROOTDIR)basic demos
+	make -B -C $(ROOTDIR)basic release
 	$(CCOPY) $(ROOTDIR)basic$(S)storage$(S)* storage
 	emcc  -D EMSCRIPTEN -D LINUX -D INCLUDE_DEBUGGING_SUPPORT $(FLAGS) $(SOURCES) -o neo.html
 

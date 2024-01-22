@@ -91,11 +91,7 @@ $(APPNAME): $(SOURCES)
 	$(CC) $(SOURCES) $(LDFLAGS) $(SDL_LDFLAGS) -o $@
 
 %.o:%.cpp
-	$(CC) $(CADDRESSES) $(CXXFLAGS) -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I framework -I include -I $(FIRMDIR)include -c -o $@ $<
-
-%.o:%.c
-	$(CC) $(CADDRESSES) $(CXXFLAGS) -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I framework -I include -I $(FIRMDIR)include -c -o $@ $<
-
+	$(CC) $(CADDRESSES) $(CXXFLAGS) -fpermissive -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I framework -I include -I $(FIRMDIR)include -c -o $@ $<
 
 always:
 

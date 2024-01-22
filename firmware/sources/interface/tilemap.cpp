@@ -129,11 +129,29 @@ static void TMRRenderTileLine(uint8_t count) {
 	tilePixels = TMPGetTileRowAddress(*tilePtr,yTile & 15);  			// Tile Pixel data comes from here.
 
 	if (tilePixels == NULL) {   										// Transparent/Solid tile.
-		if (*tilePtr > 0xF0) {  										// Handle solid tile
-			uint8_t b = *tilePtr & 0x0F;
-			while (count--) {
-				*gDraw = (*gDraw & 0xF0) | b;gDraw++;
+		if (*tilePtr > 0xF0) {  										// Handle solid tile			
+			uint8_t b = *tilePtr & 0x0F;  								// Colour
+			uint32_t b2 = b | (b << 8) | (b << 16) | (b << 24);  		// Colour in 32 bits
+			//
+			//		Do while tiles to render and not on a 32 bit boundary
+			//
+			while (count > 0 && ((uint32_t(gDraw)) & 3)) {  			
+				*gDraw = (*gDraw & 0xF0) | b;gDraw++;count--;
 			}
+			//
+			//		While on a 32 bit boundary do it 4 bytes at a time.
+			//
+			while (count > 3) {
+				*((uint32_t *)gDraw) = (*((uint32_t *)gDraw) & 0xF0F0F0F0) | b2;
+				gDraw += 4;count -= 4;
+			}
+			//
+			//		Do anything remaining.
+			//
+			while (count > 0) {  			
+				*gDraw = (*gDraw & 0xF0) | b;gDraw++;count--;
+			}
+
 		} else {
 			gDraw += count;
 		}
