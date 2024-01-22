@@ -21,7 +21,6 @@ Larger Additions
 		- something like AMAL 
 
 	- Tiles
-		- Eris style tilemap command ?
 		- Checking for monocolour and blank tile images which can be drawn much faster.
 
 	- Turtle Graphics System		
