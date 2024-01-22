@@ -17,11 +17,10 @@ General
 Larger Additions
 ----------------
 
+	- Extend cross development to show graphics.
+	
 	- Sprites 
 		- something like AMAL 
-
-	- Tiles
-		- Checking for monocolour and blank tile images which can be drawn much faster.
 
 	- Turtle Graphics System		
 		- Use sprite $7F
@@ -37,11 +36,8 @@ Other
 
 Add to Documentation
 --------------------
-Tilemap API functions
-TILEMAP and TILEDRAW commands
 
 Notes
 =====			
-TILEMAP  address,xOffset,yOffset (offset in pixels in map)
-TILEDRAW xScreen,yScreen TO xScreen2,yScreen2 (window to draw in)
+
 mapData : [1] [width] [height] [tiles]

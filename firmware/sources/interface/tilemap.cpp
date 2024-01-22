@@ -129,7 +129,15 @@ static void TMRRenderTileLine(uint8_t count) {
 	tilePixels = TMPGetTileRowAddress(*tilePtr,yTile & 15);  			// Tile Pixel data comes from here.
 
 	if (tilePixels == NULL) {   										// Transparent/Solid tile.
-		gDraw += count;tilePtr++;
+		if (*tilePtr > 0xF0) {  										// Handle solid tile
+			uint8_t b = *tilePtr & 0x0F;
+			while (count--) {
+				*gDraw = (*gDraw & 0xF0) | b;gDraw++;
+			}
+		} else {
+			gDraw += count;
+		}
+		tilePtr++;
 		return;
 	}
 
@@ -158,7 +166,14 @@ static void TMRRenderTileLine(uint8_t count) {
 static void TMRenderTileLineStart(uint8_t count) {
 	tilePixels = TMPGetTileRowAddress(*tilePtr,yTile & 15);  			// Tile Pixel data comes from here.
 	if (tilePixels == NULL) {  											// Transparent/solid tile.
-		gDraw += count;
+		if (*tilePtr > 0xF0) {  										// F1..FF are solid tiles in that colour.
+			while (count--) {
+				*gDraw = (*gDraw & 0xF0) | (*tilePtr & 0x0F);
+				gDraw++;
+			}
+		} else {
+			gDraw += count;
+		}
 		tilePtr++;
 		return;
 	}
