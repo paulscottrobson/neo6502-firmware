@@ -80,3 +80,5 @@ Changes
 			IMP: Enhanced crossdev example to include sprite and tile creation and to show some functionality.
 			*** Release 8 ***
 			IMP: Enhanced solid drawing using 32 byte operations where possible.
+			IMP: Linux (Ubuntu) build in the release.
+			

@@ -21,11 +21,11 @@ RELEASEFILE = neo6502.zip
 DOCDIR = documents$(S)release$(S)
 
 DOCUMENTS =  $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
-BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(ROOTDIR)emulator$(S)cross-compile$(S)neowin.zip $(BINDIR)basic.bin 
+BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(ROOTDIR)emulator$(S)cross-compile$(S)neowin.zip $(BINDIR)basic.bin \
+			 $(ROOTDIR)emulator$(S)neolinux.zip
 PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip
 
 all: 
-	$(CMAKEDIR) binna
 	$(CMAKEDIR) release
 	make -B -C kernel release
 	make -B -C basic release
@@ -34,7 +34,8 @@ all:
 	make -B zipfile 
 
 zipfile: samples crossdev
-	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) release$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
+	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) \
+						release$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
 	$(CDEL) release$(S)samples.zip
 	$(CDEL) documents$(S)release$(S)crossdev$(S)crossdev.zip
 

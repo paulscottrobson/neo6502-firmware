@@ -18,6 +18,7 @@ SDL2
 
 Running the emulator / real hardware - keyboard development
 -----------------------------------------------------------
+There are pre-built emulators for Linux (Ubuntu) and Windows in the zip files. The Linux build requires SDL2.
 
 This has been tested pretty visciously and has held up so far. However, there may well be bugs. 
 
