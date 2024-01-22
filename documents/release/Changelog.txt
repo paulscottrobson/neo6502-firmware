@@ -81,4 +81,4 @@ Changes
 			*** Release 8 ***
 			IMP: Enhanced solid drawing using 32 byte operations where possible.
 			IMP: Linux (Ubuntu) build in the release.
-			
+			IMP: Can build emulators for windows & linux w/o Pico SDK

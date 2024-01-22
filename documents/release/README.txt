@@ -11,16 +11,21 @@ All suggestions are welcome.
 
 Build Requirements
 ------------------
-Gnu C for the platform(s)
-Pico SDK
+Gnu C for the platforms (Linux and x86_64-w64-mingw32-g++ cross compiler)
 Python 3 & PIL/Pillow installed
-SDL2
+SDL2 development library
+Pico SDK (to build the firmware)
+
+Building the Emulators *only*
+-----------------------------
+It is possible to build the emulators only. This requires Python & PIL, and SDL2, but only the build option for the
+platform in question. This can be started by "make linux" or "make windows" from the root.
 
 Running the emulator / real hardware - keyboard development
 -----------------------------------------------------------
 There are pre-built emulators for Linux (Ubuntu) and Windows in the zip files. The Linux build requires SDL2.
 
-This has been tested pretty visciously and has held up so far. However, there may well be bugs. 
+This has been tested and has held up so far. However, there may well be bugs. 
 
 So if you want to type code into the emulator, or the real machine, it's advisable that you save regularly and save to
 different file names (e.g.  myprog.001 myprog.002 etc.) just in case something goes awry. If it does, let me know.
@@ -86,4 +91,4 @@ Without this change the SD Card will not work (see the board manual page 12).
 
 Paul Robson.
 paul@robsons.org.uk
-14th January 2024
+22nd January 2024
