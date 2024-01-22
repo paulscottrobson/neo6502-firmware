@@ -18,11 +18,11 @@ Status
 	Sprite clipping works
 	Slide sound effects (adds a constant to the frequency to create simple FX)
 	Sprite Anchor Points
+	Tile maps
 
 Todo
 ----
 	A small animation language as in STOS and AMOS to handle some of the load
-	Tile maps
 	Turtle graphics
 	USB Joystick support
 	Sweet16 running on the RP2040 but controlled by BASIC or Another.
