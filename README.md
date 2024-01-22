@@ -26,6 +26,14 @@ run:
 build_all.sh
 ```	
 
+## Building emulators only
+### required software
+- gcc-arm-none-eabi *OR* build-essential
+- python3
+- Python Imaging Library / Pillow
+
+make linux or make windows
+
 #Release Contents
 
 see: release/neo6502.zip after running build_all.sh
@@ -37,8 +45,17 @@ see: release/neo6502.zip after running build_all.sh
 ### Documents
 * api.pdf - Neo6502 API description
 * basic.pdf - Basic Reference
+* memorymap.pdf - The memory map
+* wozmon.pdf - documentation about the monitor
+* various text files
 
 ### PC Software
-* neo - emulator
+* neolinux.zip neowin.zip - emulators
 * listbasic.zip - Python zipapp for converting tokenized basic to ASCII basic source code
 * makebasic.zip - Python zipapp for converting ASCII text source code to tokenized basic.
+* createblanks.zip - create skeletons for graphics
+* makeimg.zip - convert graphics to the internal format
+
+### Neo6502 software
+* samples - assorted examples, games, demos, test programs
+* crossdev - a working example of cross platform development

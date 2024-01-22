@@ -138,8 +138,26 @@ fwbuild:
 # ***************************************************************************************
 
 release:
+		make -C $(ROOTDIR)firmware prelim
 		make -B clean
 		make -B emulator
 		$(CDEL) neolinux.zip
 		zip neolinux.zip neo
+		make -B -C cross-compile
+
+# ***************************************************************************************
+#
+#						Make windows/linux emulator only
+#
+# ***************************************************************************************
+
+elinux:
+		make -C $(ROOTDIR)firmware prelim
+		make -B clean
+		make -B emulator
+
+ewindows: 
+		make -C $(ROOTDIR)firmware prelim
+		make -B clean
+		make -B prebuild
 		make -B -C cross-compile

@@ -25,6 +25,12 @@ BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(ROOTDIR)emulator$(S)cross-compile$(
 			 $(ROOTDIR)emulator$(S)neolinux.zip
 PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip
 
+# ***************************************************************************************
+#
+#						Remake everything to release state
+#
+# ***************************************************************************************
+
 all: 
 	$(CMAKEDIR) release
 	make -B -C kernel release
@@ -32,6 +38,12 @@ all:
 	make -B -C firmware release
 	make -B -C emulator release
 	make -B zipfile 
+
+# ***************************************************************************************
+#
+#								Make the release zip
+#
+# ***************************************************************************************
 
 zipfile: samples crossdev
 	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) \
@@ -46,8 +58,33 @@ samples:
 	zip -r -j -q release$(S)samples.zip basic$(S)code basic$(S)images$(S)test$(S)test.gfx basic$(S)images$(S)graphics.gfx
 	zip -d -q release$(S)samples.zip *.tass 
 
+# ***************************************************************************************
+#
+#							Make windows & linux versions
+#
+# ***************************************************************************************
+
+windows:
+		make -B -C kernel clean
+		make -B -C basic clean
+		make -B -C emulator clean
+		make -B -C emulator ewindows
+
+linux:
+		make -B -C kernel clean
+		make -B -C basic clean
+		make -B -C emulator clean
+		make -B -C emulator elinux
+
+# ***************************************************************************************
+#
+#								Clean everything
+#
+# ***************************************************************************************
+
 clean:
 	make -B -C kernel clean
 	make -B -C basic clean
 	make -B -C emulator clean
 	make -B -C firmware clean
+

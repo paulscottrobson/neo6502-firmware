@@ -58,16 +58,24 @@ rebuild: clean build
 
 # ***************************************************************************************
 #
-#									Build the firmware
+#							  Remake the preliminary files
 #
 # ***************************************************************************************
 
-build: kernel always
+prelim: kernel
 	make -B -C bootdisplay
 	$(PYTHON) scripts$(S)who.py >include$(S)data$(S)neowho.h
 	$(PYTHON) scripts$(S)keymaps.py >include$(S)data$(S)neolocale.h
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
 	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)sfxdata.h
+
+# ***************************************************************************************
+#
+#									Build the firmware
+#
+# ***************************************************************************************
+
+build: prelim always
 	make -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .
