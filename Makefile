@@ -25,7 +25,7 @@ BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(ROOTDIR)emulator$(S)cross-compile$(
 PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip
 
 all: 
-	$(CMAKEDIR) bin
+	$(CMAKEDIR) binna
 	$(CMAKEDIR) release
 	make -B -C kernel release
 	make -B -C basic release
@@ -34,12 +34,12 @@ all:
 	make -B zipfile 
 
 zipfile: samples crossdev
-	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) release$(S)samples.zip release$(S)crossdev.zip
+	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) release$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
 	$(CDEL) release$(S)samples.zip
-	$(CDEL) release$(S)crossdev.zip
+	$(CDEL) documents$(S)release$(S)crossdev$(S)crossdev.zip
 
 crossdev:
-	zip -r -j -q release$(S)crossdev.zip documents$(S)release$(S)crossdev
+	cd documents$(S)release$(S)crossdev ; $(CDEL) crossdev.zip ; zip -r -q crossdev.zip *
 
 samples:
 	zip -r -j -q release$(S)samples.zip basic$(S)code basic$(S)images$(S)test$(S)test.gfx basic$(S)images$(S)graphics.gfx

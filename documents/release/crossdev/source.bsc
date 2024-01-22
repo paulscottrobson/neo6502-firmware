@@ -1,9 +1,35 @@
 '
 '	A demo program
 '
-cls
-for i = 1 to 15
-	a = sin(i)
-	ink i:print "Hello, world"
+cls:sprite clear:' clear screen & load sprites
+gload "graphics.gfx":' load the graphics file built in
+'
+'	Draw some random lines
+'
+for i = 1 to 50
+	line 160,120 ink rand(16) to rand(320),rand(240)
 next
-
+'
+'	Use Image to draw things. These are graphics not sprites.
+'
+image 0 to 10,10
+image 0 dim 3 to 30,10: ' dim makes it bigger.
+image $80 dim 1 to 160,10
+image $80,2 dim 2 to 190,10
+image $C0 dim 1 to 240,10
+'
+'	Draw some text
+'
+text "Sprite Demo" solid dim 2 ink 3 to 10,100: ' solid here means black background rather than transparent
+'
+'	Animate some sprites
+'
+n = 0
+repeat
+	if event(t1,3): ' this returns true once every 3/100 of a second using t1 to track it. 
+		n = n + 1:x = int(sin(n) * 160 + 160)
+		sprite 0 image $80 to x,100
+		sprite 1 image $C0 to x,140	
+		sprite 2 image $80 flip 2 to x,180
+	endif
+until false
