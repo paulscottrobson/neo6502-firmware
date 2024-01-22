@@ -1,13 +1,13 @@
 Changes
 -------
 
-10/01/24 	R2 released.
+10/01/24 	*** Release 2 ***
 			Enabled configuration file for USB Hub only. SDCard still won't load on startup, even though it works fine otherwise.
 
 11/01/24	Cleaned up github. Now buildable straight from github.		
 			Tidied up make clean
 			Moved the boot display graphics from documents to firmware
-			Added user defined character support to firmware.
+			IMP: Added user defined character support to firmware.
 			Fixed problem with Windows libpthread.dll
 			Fixed missing image generation scripts from release.
 			
@@ -24,20 +24,20 @@ Changes
 			Building the Windows Emulator remotely :)
 			Ported the bouncy ball demo from SuperBasic
 
-15/01/24 	Added FROM to reset the origin.
-			Sprites do not error with bad numbers
-			Sprites are clipped to the screen boundary properly.
-			Added the slide option to SOUND.
-			Added anchor positions to sprites.
+15/01/24 	IMP: Added FROM to reset the origin.
+			BUG: Sprites do not error with bad numbers
+			BUG: Sprites are clipped to the screen boundary properly.
+			IMP: Added the slide option to SOUND.
+			IMP: Added anchor positions to sprites.
 			*** Release 3 ***
 
-16/01/24 	Reorganised the tick code.
-			Slide is ms not ticks for consistency. (Technically breaking change but I doubt anyone's used it yet :))
-			Directory now works on emulators.
+16/01/24 	IMP: Reorganised the tick code.
+			IMP: Slide is ms not ticks for consistency. (Technically breaking change but I doubt anyone's used it yet :))
+			IMP: Directory now works on emulators.
 			BUG: Clear in a program no longer causes an infinite loop 
 			BUG: Data statements no longer lost inside structures, replaced ScanForward.
 			BUG: Uninitialised graphics memory could cause a crash when drawing sprites/images.
-			Added VTAB (Ctrl+V,code 21) a vertical tab.
+			IMP: Added VTAB (Ctrl+V,code 21) a vertical tab.
 			BUG: Fixed badly initialised sprite removal.
 			*** Release 4 ***
 
@@ -73,5 +73,7 @@ Changes
 21/01/24	BUG: Forgot to change sound lengths in generated SFX
 			IMP: Improved some of the sound effects.
 			IMP: Can now SOUND 0 CLEAR 440,200 syntax
-			BUG: SFX waits for queue to empty which makes no sense.
+			BUG: SFX waits for queue to empty which makes no sense, so now it empties the queue first.
 			*** Release 7a ***
+
+22/01/04 	IMP: Added Tilemaps via TILEMAP and TILEDRAW commands.
