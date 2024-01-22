@@ -5,12 +5,12 @@ cls:sprite clear:gload "graphics.gfx":cls
 for i = 0 to 64:line i*5,0 ink 1 to i*5,239:next
 call BuildTileMap()
 '	call PrintTileMap()
-rect ink 3 frame 9,9 to 317,233
+rect ink 3 frame 9,9 to 307,233
 rCount = 0:t1 = time()
-for j = 1 to 40
-	for i = 0 to 15
-		tilemap map,5,5
-		tiledraw 10,10 to 318,232
+for j = 1 to 20
+	for i = 0 to 31
+		tilemap map,i,i
+		tiledraw 10,10 to 306,232
 		rCount = rCount + 1
 	next
 next
@@ -24,12 +24,12 @@ proc BuildTileMap()
 	poke map,1
 	poke map+1, width
 	poke map+2, height
-	for i = 0 to width*height-1:poke map+3+i,7:next
+	for i = 0 to width*height-1:poke map+3+i,$F0:next
 	for i = 0 to width-1:call set(i,0,0):call set(i,height-1,0):next
 	for i = 0 to height-1:call set(0,i,1):call set(width-1,i,1):next
 	for i = 2 to 6:call set(i,i,i):call set(i+4,i+1,i):next
 	for i = 0 to 9:call set(2+i,height-3,i+$F0):next
-	call set(0,1,$F5):call set(0,2,$F0)
+	call set(0,1,$F3):call set(0,2,$F0)
 endproc
 
 proc PrintTileMap()
