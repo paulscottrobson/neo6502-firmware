@@ -43,6 +43,7 @@ int SPRUpdate(uint8_t *paramData);
 uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance);
 uint8_t SPRGetSpriteData(uint8_t *param);
 bool SPRSpritesInUse(void);
+void SPRSetTurtleSprite(int16_t spriteID,int16_t rotation,int16_t colour);
 
 void SPRPHYErase(SPRITE_ACTION *s); 											// Sprite draw/erase routines
 void SPRPHYDraw(SPRITE_ACTION *s);

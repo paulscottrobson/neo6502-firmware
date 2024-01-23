@@ -6,6 +6,14 @@ add_definitions(-Wno-error=unused-variable)
 
 target_sources(firmware PRIVATE main.cpp  
     #
+    #       Common interface routines
+    #
+    interface/graphics.cpp  interface/console.cpp  interface/keyboard.cpp  interface/memory.cpp  
+    interface/dispatch.cpp  interface/maths.cpp  interface/config.cpp  interface/efla.cpp 
+    interface/gfxcommands.cpp  interface/ellipse.cpp  interface/fileinterface.cpp  
+    interface/sprites.cpp  interface/logo.cpp  interface/sprites_xor.cpp  interface/tilemap.cpp
+    interface/sndmanager.cpp  interface/sfxmanager.cpp interface/tick.cpp
+    #
     #       Hardware sources
     #
     hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp  
@@ -15,14 +23,6 @@ target_sources(firmware PRIVATE main.cpp
     #
     system/processor_pio.cpp 
     #system/processor_bitbang.cpp 
-    #
-    #       Common interface routines
-    #
-    interface/graphics.cpp  interface/console.cpp  interface/keyboard.cpp  interface/memory.cpp  
-    interface/dispatch.cpp  interface/maths.cpp  interface/config.cpp  interface/efla.cpp 
-    interface/gfxcommands.cpp  interface/ellipse.cpp  interface/fileinterface.cpp  
-    interface/sprites.cpp  interface/logo.cpp  interface/sprites_xor.cpp  interface/tilemap.cpp
-    interface/sndmanager.cpp  interface/sfxmanager.cpp interface/tick.cpp
 )
 
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")

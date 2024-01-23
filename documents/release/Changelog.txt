@@ -84,3 +84,4 @@ Changes
 			IMP: Can build emulators for windows & linux w/o Pico SDK
 
 23/01/04 	BUG: Sprite data is cleared during CLEAR/RUN			
+			IMP: Sprites can now render as rotated triangle.
