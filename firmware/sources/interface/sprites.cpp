@@ -59,11 +59,21 @@ bool SPRSpritesInUse(void) {
 //
 // ***************************************************************************************
 
-void SPRReset(void) {
+void SPRResetAll(void) {
 	for (int i = 0;i < MAX_SPRITES;i++) {  										// Reset all sprites.
 		_SPRResetSprite(i);
 	}
+}
+
+// ***************************************************************************************
+//
+//							Reset all sprites and clear display
+//
+// ***************************************************************************************
+
+void SPRReset(void) {
 	spriteVisibleCount = 0;
+	SPRResetAll();  	
 	for (int i = 0;i < gMode.xGSize * gMode.yGSize;i++) {  						// Clear the sprite layer
 		gMode.graphicsMemory[i] &= 0x0F;  										// top 4 bits og graphics memory.
 	}

@@ -79,6 +79,12 @@ ClearCodeSetMemoryA:
 		;		Reset Graphics
 		;
 		jsr 	GraphicsReset
+		;
+		;		Reset sprite data
+		;
+		.DoSendMessage 					
+		.byte 	6,6
+		.DoWaitMessage
 		ply
 		rts
 
@@ -225,6 +231,7 @@ _CVExit:
 ;		Date			Notes
 ;		==== 			=====
 ;		16-01-24		CLEAR was looping (Y was reset to 3 causing it to loop infinitely)
+;		23-01-24 		CLEAR resets all sprite settings as well.
 ;
 ; ************************************************************************************************
 

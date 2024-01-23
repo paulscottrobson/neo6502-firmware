@@ -82,3 +82,5 @@ Changes
 			IMP: Enhanced solid drawing using 32 byte operations where possible.
 			IMP: Linux (Ubuntu) build in the release.
 			IMP: Can build emulators for windows & linux w/o Pico SDK
+
+23/01/04 	BUG: Sprite data is cleared during CLEAR/RUN			
