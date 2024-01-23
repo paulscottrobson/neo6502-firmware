@@ -121,6 +121,20 @@ uint8_t SPRGetSpriteData(uint8_t *param) {
 
 // ***************************************************************************************
 //
+//		Set up structure for sprite action
+//
+// ***************************************************************************************
+
+static void SPRSetupAction(SPRITE_ACTION *sa,SPRITE_INTERNAL *p) {
+	sa->display = gMode.graphicsMemory + p->x + p->y*gMode.xGSize; 				// Work out the draw address top left of sprite.
+	sa->image = p->imageAddress; 												// Where graphic data comes from.
+	sa->x = p->x;sa->y = p->y;  												// Coordinates
+	sa->xSize = p->xSize;sa->ySize = p->ySize;  								// Size and flip.
+	sa->flip = p->flip;
+}
+
+// ***************************************************************************************
+//
 //								Update a sprite
 //
 // ***************************************************************************************
@@ -150,16 +164,11 @@ int SPRUpdate(uint8_t *paramData) {
 
 	if (xyChanged | isChanged | flipChanged | anchorChanged) {   				// Some change made.
 		if (p->isDrawn) {  														// Erase if currently drawn
-			saRemove.display = gMode.graphicsMemory + p->x + p->y*gMode.xGSize; // Work out the draw address top left of sprite.
-			saRemove.image = p->imageAddress; 									// Where from.
-			saRemove.x = p->x;saRemove.y = p->y;
-			saRemove.xSize = p->xSize;saRemove.ySize = p->ySize;  				// Size and flip.
-			saRemove.flip = p->flip;
+			SPRSetupAction(&saRemove,p);
 			SPRPHYErase(&saRemove);
 			spriteVisibleCount--;
 			p->isDrawn = false;
 		}
-		//p->isVisible = true;  												// Mark as visible
 
 		if (flipChanged) { 														// Flip has changed
 			p->flip = flip; 
@@ -187,11 +196,7 @@ int SPRUpdate(uint8_t *paramData) {
 		}
 
 		if (p->isVisible) {  													// Redraw if possible.
-			saDraw.display = gMode.graphicsMemory + p->x + p->y * gMode.xGSize; // Work out the draw address top left of sprite.
-			saDraw.image = p->imageAddress; 									// Where from.
-			saDraw.x = p->x;saDraw.y = p->y;  									// Position on screen
-			saDraw.xSize = p->xSize;saDraw.ySize = p->ySize;  					// Size and flip.
-			saDraw.flip = p->flip;
+			SPRSetupAction(&saDraw,p);
 			SPRPHYDraw(&saDraw);
 			spriteVisibleCount++;
 			p->isDrawn = true;  												// And mark as drawn.
@@ -225,5 +230,6 @@ uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance)
 //		15/01/24 	Fixes for better sprite clipping
 //					Not setting x,y on saRemove caused issues.
 //		16/01/24 	Added SpriteVisibleCount functionality.
+//		23/01/24 	Rationalised SPRITE_ACTION initialisation code.
 //
 // ***************************************************************************************
