@@ -21,7 +21,6 @@ proc PlayLevel(level)
 	text "Level "+str$(level) dim 2 ink 3 to 124,130
 	t1 = time()+100:repeat:until time() > t1
 	text "Level "+str$(level) dim 2 ink 0 to 124,130
-	remaining = 2
 	repeat
 		call DrawLives()
 		tBulletMove = 0:tMoveForm = 0:tMoveShip = 0:tMoveDive = 0:tLaunch = time()+100:tPBulletMove = 0
