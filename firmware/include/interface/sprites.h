@@ -37,6 +37,7 @@ typedef struct _sprite_action {
 } SPRITE_ACTION;
 
 void SPRReset(void);  															// Sprite methods
+void SPRResetAll(void);
 void SPRHide(uint8_t *paramData);
 int SPRUpdate(uint8_t *paramData);
 uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance);
