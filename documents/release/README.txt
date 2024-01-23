@@ -34,6 +34,22 @@ The SDCard seems more robust than the USB Key but my experience is if it works i
 
 If using the emulator be careful of the ESC key (which exits it) and the Function keys, which do debuggery things.
 
+Running the emulator - keys
+---------------------------
+The emulator has a simple 65C02 debugger built in. This can be triggered from code using opcode $03, which causes 
+a break to debugger. The keys are :
+
+	ESC 	Exit emulator
+	TAB 	Shows current display when in debug mode
+	F1 		Reset CPU
+	F5 		Run
+	F6 		Break into debugger manually
+	F7 		Step
+	F8 		Step over
+	F9 		Set Breakpoint
+	0-9A-F 	Sets the current code address
+			(with shift pressed sets the current data address)
+
 Running the emulator - Cross Development
 ----------------------------------------
 
@@ -74,7 +90,7 @@ These examples work. Obviously you may want to change file names and directories
 
 My Development Environment
 --------------------------
-Ubuntu 23.10. Sublime Text is the editor,  ARM GCC v13.2, Python 3.11.6 with PIL/Pillow installed (does the graphics conversion stuff). 
+Arch Linux. Sublime Text is the editor,  ARM GCC v13.2, Python 3.11.6 with PIL/Pillow installed (does the graphics conversion stuff). 
 64tass does the 6502 assembly. CMake 3.28.1 Gnu Make 4.4.1 (though it doesn't do anything clever !). 
 Documentation is mostly libreoffice. Hardware is a i5-4690 with 16Gb of RAM, most of the uploading uses a Pico based debugger from 
 "The Pi Hut" which I think is a standard design. A Raspi Keyboard with USB hub, a SanDisk USB3.1 key and 
@@ -91,4 +107,4 @@ Without this change the SD Card will not work (see the board manual page 12).
 
 Paul Robson.
 paul@robsons.org.uk
-22nd January 2024
+23rd January 2024
