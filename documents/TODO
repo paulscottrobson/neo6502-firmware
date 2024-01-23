@@ -17,11 +17,13 @@ General
 Larger Additions
 ----------------
 
-	- Sprites 
-		- something like AMAL 
+	- Finish Galaxians
 
 	- Turtle Graphics System		
 		- Use sprite $7F
+
+	- Sprites 
+		- something like AMAL 
 
 	- Add USB Joystick interface if stable.
 

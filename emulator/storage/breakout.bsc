@@ -2,7 +2,7 @@
 '		Breakout. Paul Robson.
 '
 breakThrough = false
-soundOn = false
+soundOn = true
 
 cls:sprite clear
 call Initialise()
