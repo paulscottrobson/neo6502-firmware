@@ -12,7 +12,25 @@
 
 #include "common.h"
 
+static int16_t spriteVisibleCount; 												// How many currently visible ?
+static int16_t turtleSpriteID = -1; 											// Sprite allocated to rotation
+static int16_t turtleRotation = 0; 												// Rotation of turtle.
+static int16_t turtleColour = 7; 												// Turtle drawing colour.
+
+// ***************************************************************************************
+//
+//									Sprite data
+//
+// ***************************************************************************************
+
 static SPRITE_INTERNAL sprites[MAX_SPRITES];
+static uint8_t turtleImage[16*16/2];
+
+// ***************************************************************************************
+//
+//								 Anchor positions
+//
+// ***************************************************************************************
 
 static const int16_t anchorX[] = { 	1,
 	0,1,2,
@@ -26,7 +44,13 @@ static const int16_t anchorY[] = { 	1,
 	0,0,0
 };
 
-static int16_t spriteVisibleCount; 												// How many currently visible ?
+// ***************************************************************************************
+//
+//								 Triangle bitmap data
+//
+// ***************************************************************************************
+
+#include "data/triangle.h"
 
 // ***************************************************************************************
 //
@@ -63,6 +87,7 @@ void SPRResetAll(void) {
 	for (int i = 0;i < MAX_SPRITES;i++) {  										// Reset all sprites.
 		_SPRResetSprite(i);
 	}
+	turtleSpriteID = -1;turtleRotation = 0;turtleColour = 7; 					// Reset turtle setup
 }
 
 // ***************************************************************************************
@@ -81,7 +106,34 @@ void SPRReset(void) {
 
 // ***************************************************************************************
 //
-//									Reset all sprites
+//				Set the current sprite, rotation and colour for the turtle
+//
+// ***************************************************************************************
+
+void SPRSetTurtleSprite(int16_t spriteID,int16_t rotation,int16_t colour) {
+	turtleSpriteID = spriteID;
+	while (rotation < 0) rotation += 360;
+	turtleRotation = rotation % 360;
+	turtleColour = colour & 0xF;
+}
+
+// ***************************************************************************************
+//
+//						Set up structure for sprite action
+//
+// ***************************************************************************************
+
+static void SPRSetupAction(SPRITE_ACTION *sa,SPRITE_INTERNAL *p) {
+	sa->display = gMode.graphicsMemory + p->x + p->y*gMode.xGSize; 				// Work out the draw address top left of sprite.
+	sa->image = p->imageAddress; 												// Where graphic data comes from.
+	sa->x = p->x;sa->y = p->y;  												// Coordinates
+	sa->xSize = p->xSize;sa->ySize = p->ySize;  								// Size and flip.
+	sa->flip = p->flip;
+}
+
+// ***************************************************************************************
+//
+//									Hide a sprite
 //
 // ***************************************************************************************
 
@@ -92,11 +144,7 @@ void SPRHide(uint8_t *paramData) {
 	if (spriteID < MAX_SPRITES) {  												// Legit ?
 		SPRITE_INTERNAL *s = &sprites[spriteID];
 		if (s->isDrawn) {  														// If drawn, erase it and mark not drawn.
-			saHide.display = gMode.graphicsMemory + s->x + s->y * gMode.xGSize; // Work out the draw address top left of sprite.
-			saHide.image = s->imageAddress; 									// Where from.
-			saHide.x = s->x;saHide.y = s->y;
-			saHide.xSize = s->xSize;saHide.ySize = s->ySize;  					// Size and flip.
-			saHide.flip = s->flip;
+			SPRSetupAction(&saHide,s);
 			SPRPHYErase(&saHide);
 			sprites[spriteID].isDrawn = false;
 			spriteVisibleCount--;
@@ -121,18 +169,24 @@ uint8_t SPRGetSpriteData(uint8_t *param) {
 
 // ***************************************************************************************
 //
-//		Set up structure for sprite action
+//					 Unpack turtle graphic for given angle
 //
 // ***************************************************************************************
 
-static void SPRSetupAction(SPRITE_ACTION *sa,SPRITE_INTERNAL *p) {
-	sa->display = gMode.graphicsMemory + p->x + p->y*gMode.xGSize; 				// Work out the draw address top left of sprite.
-	sa->image = p->imageAddress; 												// Where graphic data comes from.
-	sa->x = p->x;sa->y = p->y;  												// Coordinates
-	sa->xSize = p->xSize;sa->ySize = p->ySize;  								// Size and flip.
-	sa->flip = p->flip;
+static uint8_t *SPRUnpackTurtleGraphic(uint16_t angle) {
+	static uint8_t *gfx = turtleImage;
+	for (int i = 0;i < 16;i++) {  												// One 16 bit bitmap at a time.
+		uint16_t bits = triangleBitData[angle * 16 + i];  						// Get bit pattern
+		for (int j = 0;j < 8;j++) {  											// 2 colours per pixel
+			uint8_t b = 0;
+			if (bits & 0x8000) b |= (turtleColour << 4);
+			if (bits & 0x4000) b |= (turtleColour & 0x0F);
+			*gfx++ = b;
+			bits = bits << 2;
+		}
+	}
+	return turtleImage;
 }
-
 // ***************************************************************************************
 //
 //								Update a sprite
@@ -158,11 +212,12 @@ int SPRUpdate(uint8_t *paramData) {
 	bool isChanged = (imageSize != 0x80) && (imageSize != p->imageSize);
 	bool flipChanged = (flip != 0x80) && (flip != p->flip);
 	bool anchorChanged = (anchor != 0x80) && (anchor != p->anchor);
+	bool isTurtle = (spriteID == turtleSpriteID);
 
 	//printf("Sprite #%d to (%d,%d) ImSize:%x Flip:%x Anchor:%d %d %d %d %d @ %d,%d %d:%d\n",
 	// 	*paramData,x,y,paramData[5],paramData[6],paramData[7],xyChanged,isChanged,flipChanged,anchorChanged,p->x,p->y,p->isVisible,p->isDrawn);
 
-	if (xyChanged | isChanged | flipChanged | anchorChanged) {   				// Some change made.
+	if (xyChanged || isChanged || flipChanged || anchorChanged || isTurtle) {  	// Some change made.
 		if (p->isDrawn) {  														// Erase if currently drawn
 			SPRSetupAction(&saRemove,p);
 			SPRPHYErase(&saRemove);
@@ -185,6 +240,11 @@ int SPRUpdate(uint8_t *paramData) {
 			int img = GFXFindImage((p->xSize == 16) ? 1 : 2,imageSize & 0x3F);	// Address of image (offset in gfx memory)													
 			if (img < 0) return 2;   											// Bad image number
 			p->imageAddress = gfxMemory + img;  								// Physical address
+		}
+
+		if (isTurtle) {  														// If the turtle sprite
+			p->imageSize = p->xSize = p->ySize = 16;   							// Set up as the correct size.
+			p->imageAddress = SPRUnpackTurtleGraphic(turtleRotation);
 		}
 
 		if (xyChanged) {  														// Positions changed.
@@ -231,5 +291,6 @@ uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance)
 //					Not setting x,y on saRemove caused issues.
 //		16/01/24 	Added SpriteVisibleCount functionality.
 //		23/01/24 	Rationalised SPRITE_ACTION initialisation code.
+//					Added turtle rendering on demand code.
 //
 // ***************************************************************************************

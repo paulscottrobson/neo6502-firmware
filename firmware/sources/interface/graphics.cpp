@@ -16,9 +16,6 @@
 
 struct GraphicsMode gMode;														// Info about current mode.
 
-static uint8_t graphicsMemory[MAXGRAPHICSMEMORY],								// RAM used for graphics and console text.
-				consoleMemory[MAXCONSOLEMEMORY]; 
-
 // ***************************************************************************************
 //
 //							Initialise the graphics mode 0

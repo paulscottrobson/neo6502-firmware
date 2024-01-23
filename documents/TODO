@@ -17,11 +17,10 @@ General
 Larger Additions
 ----------------
 
-	- Finish Galaxians
-
 	- Turtle Graphics System		
-		- Use sprite $7F
-
+		- write turtle library code and interface
+		- write BASIC interface.
+		
 	- Sprites 
 		- something like AMAL 
 
@@ -40,4 +39,3 @@ Add to Documentation
 Notes
 =====			
 
-mapData : [1] [width] [height] [tiles]

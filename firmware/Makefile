@@ -68,6 +68,7 @@ prelim: kernel
 	$(PYTHON) scripts$(S)keymaps.py >include$(S)data$(S)neolocale.h
 	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
 	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)sfxdata.h
+	$(PYTHON) scripts$(S)triangle.py >include$(S)data$(S)triangle.h
 
 # ***************************************************************************************
 #
