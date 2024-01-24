@@ -76,12 +76,14 @@ Changes
 			BUG: SFX waits for queue to empty which makes no sense, so now it empties the queue first.
 			*** Release 7a ***
 
-22/01/04 	IMP: Added Tilemaps via TILEMAP and TILEDRAW commands.
+22/01/24 	IMP: Added Tilemaps via TILEMAP and TILEDRAW commands.
 			IMP: Enhanced crossdev example to include sprite and tile creation and to show some functionality.
 			*** Release 8 ***
 			IMP: Enhanced solid drawing using 32 byte operations where possible.
 			IMP: Linux (Ubuntu) build in the release.
 			IMP: Can build emulators for windows & linux w/o Pico SDK
 
-23/01/04 	BUG: Sprite data is cleared during CLEAR/RUN			
+23/01/24 	BUG: Sprite data is cleared during CLEAR/RUN			
 			IMP: Sprites can now render as rotated triangle.
+
+24/01/24	IMP: Serial link to hardware alive at 460800 baud.

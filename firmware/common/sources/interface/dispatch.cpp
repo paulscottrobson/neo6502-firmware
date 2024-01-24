@@ -82,6 +82,7 @@ void DSPReset(void) {
     CONWrite(0x80+6);
     STOSynchronise();                                                           // Synchronise storage
     CONWrite(0x80+2);
+    SERInitialise();                                                            // Initialise serial port.
     CFGProcess();                                                               // Process configuration file.
 }
 
