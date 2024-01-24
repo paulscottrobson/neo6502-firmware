@@ -1,4 +1,4 @@
-// ***************************************************************************************
+	// ***************************************************************************************
 // ***************************************************************************************
 //
 //      Name :      serial.cpp
@@ -57,9 +57,26 @@ uint8_t SERReadByte(void) {
 	return uart_getc(UART_ID);
 }
 
+// ***************************************************************************************
+//
+//									Input and process buffer.
+//
+// ***************************************************************************************
+
+static uint8_t sBuffer[256];
+
 void SERCheckDataAvailable(void) {
 	if (SERIsByteAvailable()) {
-		CONWriteHex(SERReadByte());
+		sBuffer[0] = SERReadByte();
+		sBuffer[1] = SERReadByte();
+		uint8_t checksum = 0;
+		for (int16_t i = 0;i < sBuffer[0];i++) {
+			sBuffer[i+2] = SERReadByte();
+			checksum += sBuffer[i+2];			
+		}
+		if (sBuffer[1] != checksum) {
+			CONWrite("?");
+		}
 	}
 }
 
