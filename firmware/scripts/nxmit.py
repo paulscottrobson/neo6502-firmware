@@ -43,7 +43,8 @@ c = 0
 c1 = 0
 while c < 65536:
 	data = []
-	for n in range(0,random.randint(0,252)):		
+	sz = random.randint(0,252)
+	for n in range(0,sz):		
 		data.append(random.randint(0,255))
 	si.transmit(data)
 

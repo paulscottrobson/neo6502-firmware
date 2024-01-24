@@ -75,7 +75,7 @@ void SERCheckDataAvailable(void) {
 			checksum += sBuffer[i+2];			
 		}
 		if (sBuffer[1] != checksum) {
-			CONWrite("?");
+			CONWrite('?');
 		}
 	}
 }
