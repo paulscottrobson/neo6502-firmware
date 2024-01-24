@@ -199,3 +199,23 @@ void STOInitialise(void) {
 void STOSynchronise(void) {
 	CONWriteString("Stored in 'storage' directory\r");
 }
+
+// ***************************************************************************************
+//
+//								Dummy serial functions
+//
+// ***************************************************************************************
+
+void SERInitialise(void) {
+}
+
+bool SERIsByteAvailable(void) {
+	return false;
+}
+
+uint8_t SERReadByte(void) {
+	return 0;
+}
+
+void SERCheckDataAvailable(void) {
+}

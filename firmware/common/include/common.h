@@ -50,6 +50,7 @@
 #include "interface/miscellany.h"
 #include "interface/sprites.h"
 #include "interface/tilemap.h"
+#include "interface/serial.h"
 //
 //		Other Includes
 //

@@ -25,6 +25,8 @@ Larger Additions
 		- something like AMAL 
 
 	- Serial uploading
+		- Packet writing code. Check it works okay.
+		- Devise packet protocol and implement it.
 
 	- 32x32 tiles
 	

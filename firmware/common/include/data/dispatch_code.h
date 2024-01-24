@@ -20,6 +20,9 @@ switch (*DCOMMAND) {
 			case 4:
 				CONWriteString((char *)whoList);
 				break;
+			case 5:
+				SERCheckDataAvailable();
+				break;
 		}
 		break;
 	case 2:

@@ -86,6 +86,10 @@ KReadCharacter:
 		jsr 	KWriteCharacterInline		; control X (reverse at cursor)
 		.byte 	24
 _KRCWait:		
+		jsr 	KSendMessage  				; check serial interface.
+		.byte 	1,5
+		jsr 	KWaitMessage
+
 		jsr 	KSendMessage 				; send command 2,1 read keyboard
 		.byte 	2,1
 		jsr 	KWaitMessage
