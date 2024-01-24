@@ -25,8 +25,7 @@ for i in range(0,40):
 	uc.generate(s1,"len",len(s1.get()))
 	uc.generate(n1,"sgn",sign(n1.get()))
 	fn1 = abs(n1.get())
-	in1 = math.floor(abs(n1.get()))
-	in1 = in1 if n1.get() > 0 else -in1
+	in1 = math.floor(n1.get())
 	uc.generate(n1,"int",in1)
 	n1 = TestNumber().absolute()
 	uc.generate(n1,"sqr",math.sqrt(n1.get()),0.8)
