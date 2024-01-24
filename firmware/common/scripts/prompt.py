@@ -13,11 +13,11 @@
 import sys
 from datetime import datetime
 
-h = open("scripts/build.count")
+h = open(sys.argv[1])
 version = int(h.read(-1))+1
 h.close()
 
-h = open("scripts/build.count","w")
+h = open(sys.argv[1],"w")
 h.write("{0}\n".format(version))
 h.close()
 

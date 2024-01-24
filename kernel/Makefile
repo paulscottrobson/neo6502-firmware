@@ -33,7 +33,7 @@ kernel:
 	$(CDEL) $(BINDIR)binary.h
 	$(CDEL) build$(S)binary.h
 	$(CDEL) $(BINDIR)kernel.bin
-	$(PYTHON) scripts$(S)vectors.py
+	$(PYTHON) scripts$(S)vectors.py $(COMDIR)include$(S)interface$(S)memory.h
 	$(ASSEMBLER) $(KERNELSOURCES) -o build$(S)kernel.bin -L build$(S)kernel.lst $(ASMEND)
 	$(PYTHON) $(ROOTDIR)basic$(S)scripts$(S)hconvert.py build$(S)kernel.bin build$(S)kernel_binary.h kernel
 	$(CCOPY) build$(S)kernel.bin $(BINDIR)

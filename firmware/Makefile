@@ -25,16 +25,7 @@ STORAGE = USBKEY
 
 all: build
 
-# ***************************************************************************************
-#
-#							Update the dispatcher generated code
-#
-# ***************************************************************************************
-
 always:
-	$(PYTHON) scripts$(S)makedispatch.py dispatch.config >include$(S)data$(S)dispatch_code.h
-	touch sources$(S)interface$(S)dispatch.cpp
-	$(CCOPY) $(BINDIR)basic_binary.h include$(S)data
 
 # ***************************************************************************************
 #
@@ -44,8 +35,8 @@ always:
 
 kernel: always
 	make -C ..$(S)kernel
-	$(CCOPY) $(BINDIR)kernel_binary.h include$(S)data
-	$(CCOPY) $(BINDIR)basic_binary.h include$(S)data
+	$(CCOPY) $(BINDIR)kernel_binary.h $(COMDIR)include$(S)data
+	$(CCOPY) $(BINDIR)basic_binary.h $(COMDIR)include$(S)data
 	$(TOUCH) sources$(S)memory.c*
 
 # ***************************************************************************************
@@ -64,12 +55,8 @@ rebuild: clean build
 
 prelim: kernel
 	make -B -C bootdisplay
-	$(PYTHON) scripts$(S)who.py >include$(S)data$(S)neowho.h
-	$(PYTHON) scripts$(S)keymaps.py >include$(S)data$(S)neolocale.h
-	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
-	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)sfxdata.h
-	$(PYTHON) scripts$(S)triangle.py >include$(S)data$(S)triangle.h
-
+	make -B -C $(COMDIR)
+	
 # ***************************************************************************************
 #
 #									Build the firmware
@@ -118,14 +105,10 @@ reset:
 #
 # ***************************************************************************************
 
-dual: kernel always
+dual: prelim always
 	$(CDEL)   firmware.elf firmware.uf2
 
 	make -B -C bootdisplay
-	$(PYTHON) scripts$(S)who.py >include$(S)data$(S)neowho.h
-	$(PYTHON) scripts$(S)keymaps.py >include$(S)data$(S)neolocale.h
-	$(PYTHON) scripts$(S)prompt.py >include$(S)data$(S)prompt.h
-	$(PYTHON) scripts$(S)sfx.py >include$(S)data$(S)sfxdata.h
 
 	rm -Rf build
 	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DSDCARD_STORAGE=1
@@ -139,8 +122,10 @@ dual: kernel always
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_usb.elf
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 $(BINDIR)$(BINARY)_usb.uf2
 
+	rm -Rf build
 	make -B clean
-	
+	make -C build
+		
 # ***************************************************************************************
 #
 #									Release rebuild

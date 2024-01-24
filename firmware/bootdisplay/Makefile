@@ -7,4 +7,4 @@ endif
 
 all: 
 	$(PYTHON) convert.py
-	$(CCOPY) *.h $(ROOTDIR)firmware$(S)include$(S)data
+	$(CCOPY) *.h $(COMDIR)include$(S)data

@@ -17,7 +17,7 @@ endif
 
 APPNAME = neo$(APPSTEM)
 FIRMDIR = $(ROOTDIR)firmware$(S)
-IMPSRC = $(FIRMDIR)sources$(S)interface$(S)
+IMPSRC = $(COMDIR)sources$(S)interface$(S)
 EMUSRC = $(ROOTDIR)emulator$(S)src$(S)
 FRASRC = $(ROOTDIR)emulator$(S)framework$(S)
 
@@ -28,7 +28,7 @@ SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp \
   			$(IMPSRC)fileinterface.cpp $(IMPSRC)sprites.cpp $(IMPSRC)logo.cpp $(IMPSRC)sprites_xor.cpp \
   			$(IMPSRC)sndmanager.cpp $(IMPSRC)sfxmanager.cpp $(IMPSRC)tick.cpp $(IMPSRC)tilemap.cpp
 
-INCLUDES= -I ../include -I ../framework -I .. -I $(FIRMDIR)include
+INCLUDES= -I ../include -I ../framework -I .. -I $(COMDIR)include
 
 all: 
 	x86_64-w64-mingw32-g++ -fpermissive -Wall -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -o neo.exe $(SOURCES) $(INCLUDES) `x86_64-w64-mingw32/bin/sdl2-config --cflags --static-libs` -static-libgcc -static-libstdc++ 

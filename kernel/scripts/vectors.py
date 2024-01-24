@@ -10,6 +10,8 @@
 # ***************************************************************************************
 # ***************************************************************************************
 
+import sys
+
 vectors = [
 		"KReadLine",
 		"KReadCharacter",
@@ -37,7 +39,7 @@ for v in vectors:
 	h.write("\tjmp\t{0}\n".format(v))
 h.close()
 
-s = open("../firmware/include/interface/memory.h").readlines()
+s = open(sys.argv[1]).readlines()
 s = [x for x in s if x.find("DEFAULT_PORT") > 0][0]
 n = int(s[(s.find("DEFAULT_PORT")+12):].strip()[2:],16)
 
