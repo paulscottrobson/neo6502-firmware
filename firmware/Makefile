@@ -107,8 +107,6 @@ reset:
 dual: prelim always
 	$(CDEL)   firmware.elf firmware.uf2
 
-	make -B -C bootdisplay
-
 	rm -Rf build
 	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DSDCARD_STORAGE=1
 	make -C build
