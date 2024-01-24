@@ -17,7 +17,7 @@ endif
 
 APPNAME = neo$(APPSTEM)
 FIRMDIR = $(ROOTDIR)firmware$(S)
-IMPSRC = $(FIRMDIR)sources$(S)interface$(S)
+IMPSRC = $(COMDIR)sources$(S)interface$(S)
 
 SOURCES = 	src$(S)core$(S)sys_processor.o  framework$(S)main.o framework$(S)gfx.o framework$(S)debugger.o \
 			src$(S)core$(S)sys_debugger.o src$(S)core$(S)hardware.o \
@@ -91,7 +91,7 @@ $(APPNAME): $(SOURCES)
 	$(CC) $(SOURCES) $(LDFLAGS) $(SDL_LDFLAGS) -o $@
 
 %.o:%.cpp
-	$(CC) $(CADDRESSES) $(CXXFLAGS) -fpermissive -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I framework -I include -I $(FIRMDIR)include -c -o $@ $<
+	$(CC) $(CADDRESSES) $(CXXFLAGS) -fpermissive -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I framework -I include -I $(COMDIR)include -c -o $@ $<
 
 always:
 

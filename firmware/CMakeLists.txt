@@ -28,6 +28,7 @@ set(DVI_DEFAULT_SERIAL_CONFIG "pico_sock_cfg" CACHE STRING
 
 include_directories(
     include
+    common/include
 )
 
 FetchContent_Declare(

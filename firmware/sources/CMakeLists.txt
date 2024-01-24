@@ -4,15 +4,17 @@ pico_generate_pio_header(firmware ${CMAKE_CURRENT_LIST_DIR}/system/sm0_memory_em
 
 add_definitions(-Wno-error=unused-variable)
 
+set(COMMONSRC "../common/sources/interface")
+
 target_sources(firmware PRIVATE main.cpp  
     #
-    #       Common interface routines
+    #       Common ${COMMONSRC} routines
     #
-    interface/graphics.cpp  interface/console.cpp  interface/keyboard.cpp  interface/memory.cpp  
-    interface/dispatch.cpp  interface/maths.cpp  interface/config.cpp  interface/efla.cpp 
-    interface/gfxcommands.cpp  interface/ellipse.cpp  interface/fileinterface.cpp  
-    interface/sprites.cpp  interface/logo.cpp  interface/sprites_xor.cpp  interface/tilemap.cpp
-    interface/sndmanager.cpp  interface/sfxmanager.cpp interface/tick.cpp
+    ${COMMONSRC}/graphics.cpp  ${COMMONSRC}/console.cpp  ${COMMONSRC}/keyboard.cpp  ${COMMONSRC}/memory.cpp  
+    ${COMMONSRC}/dispatch.cpp  ${COMMONSRC}/maths.cpp  ${COMMONSRC}/config.cpp  ${COMMONSRC}/efla.cpp 
+    ${COMMONSRC}/gfxcommands.cpp  ${COMMONSRC}/ellipse.cpp  ${COMMONSRC}/fileinterface.cpp  
+    ${COMMONSRC}/sprites.cpp  ${COMMONSRC}/logo.cpp  ${COMMONSRC}/sprites_xor.cpp  ${COMMONSRC}/tilemap.cpp
+    ${COMMONSRC}/sndmanager.cpp  ${COMMONSRC}/sfxmanager.cpp ${COMMONSRC}/tick.cpp
     #
     #       Hardware sources
     #
@@ -74,13 +76,13 @@ pico_add_extra_outputs(firmware)
 add_subdirectory(../libraries/no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI build)
 
 add_custom_target(upload
-    COMMAND openocd -f interface/cmsis-dap.cpp fg -f target/rp2040.cpp fg -c "adapter speed 5000" -c "program firmware.elf verify reset exit"
+    COMMAND openocd -f ${COMMONSRC}/cmsis-dap.cpp fg -f target/rp2040.cpp fg -c "adapter speed 5000" -c "program firmware.elf verify reset exit"
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     COMMENT "Upload via picoprobe..."
 )
 
 add_custom_target(reset
-    COMMAND openocd -f interface/cmsis-dap.cpp fg -f target/rp2040.cpp fg -c "adapter speed 5000" -c "init" -c "reset run" -c "exit"
+    COMMAND openocd -f ${COMMONSRC}/cmsis-dap.cpp fg -f target/rp2040.cpp fg -c "adapter speed 5000" -c "init" -c "reset run" -c "exit"
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     COMMENT "Reset via picoprobe..."
 )

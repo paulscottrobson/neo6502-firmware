@@ -24,6 +24,10 @@ Larger Additions
 	- Sprites 
 		- something like AMAL 
 
+	- Serial uploading
+
+	- 32x32 tiles
+	
 	- Add USB Joystick interface if stable.
 
 	- Sweet16 code run on the RP2040 and baby assembler for it :)
