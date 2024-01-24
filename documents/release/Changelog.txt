@@ -87,3 +87,5 @@ Changes
 			IMP: Sprites can now render as rotated triangle.
 
 24/01/24	IMP: Serial link to hardware alive at 460800 baud.
+			BUG: Fixed bug in maths test suite
+			
