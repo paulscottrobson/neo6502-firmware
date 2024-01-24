@@ -10,6 +10,11 @@ The release files on the right contain eveything you need to get started:
 - tools for cross development
 - Windows and Ubuntu emulators
 
+## Note:
+
+	There are two uf2 images, one for the SDCard, one for the USBHub. The USBHub requires the USBKey be present.
+	So if you are just experimenting without storage, use firmware_sd.uf2
+
 ## Building:
 ### required software:
 - Pico SDK (Remember to set PICO_SDK_PATH to point where it's installed)

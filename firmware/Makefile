@@ -88,7 +88,8 @@ build: prelim always
 # ***************************************************************************************
 
 clean: always
-	rm -Rf build
+	$(CMAKEDIR) build
+	- cd build ; cmake --build . --target clean
 	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -D$(STORAGE)_STORAGE=1
 
 # ***************************************************************************************
