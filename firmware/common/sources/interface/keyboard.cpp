@@ -36,7 +36,6 @@ static uint8_t KBDDefaultASCIIKeys(uint8_t keyCode,uint8_t isShift);
 static uint8_t KBDDefaultControlKeys(uint8_t keyCode,uint8_t isShift);
 static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers);
 static uint8_t KBDLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifiers);
-static void KBDInsertQueue(uint8_t ascii);
 
 // ***************************************************************************************
 //
@@ -111,7 +110,7 @@ uint8_t *KBDGetStateArray(void) {
 //
 // ***************************************************************************************
 
-static void KBDInsertQueue(uint8_t ascii) {
+void KBDInsertQueue(uint8_t ascii) {
 	if (queueSize < MAX_QUEUE_SIZE) {   										// Do we have a full queue ?
 		queue[queueSize] = ascii;  												// If not insert it.
 		queueSize++;

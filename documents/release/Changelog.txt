@@ -82,10 +82,13 @@ Changes
 			IMP: Enhanced solid drawing using 32 byte operations where possible.
 			IMP: Linux (Ubuntu) build in the release.
 			IMP: Can build emulators for windows & linux w/o Pico SDK
+			*** Release 9 ***
 
 23/01/24 	BUG: Sprite data is cleared during CLEAR/RUN			
 			IMP: Sprites can now render as rotated triangle.
 
-24/01/24	IMP: Serial link to hardware alive at 460800 baud.
+24/01/24	IMP: Much reorganisation of the build
+			IMP: Serial link to hardware alive at 460800 baud.
 			BUG: Fixed bug in maths test suite
 			
+25/01/24 	IMP: Can send programs,data and commands over serial link			
