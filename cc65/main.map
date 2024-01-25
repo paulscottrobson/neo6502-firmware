@@ -1,0 +1,117 @@
+Modules list:
+-------------
+main.o:
+    CODE              Offs=000000  Size=000034  Align=00001  Fill=0000
+    BSS               Offs=000000  Size=000002  Align=00001  Fill=0000
+neo6502.lib(condes.o):
+    CODE              Offs=000034  Size=00000C  Align=00001  Fill=0000
+    DATA              Offs=000000  Size=000025  Align=00001  Fill=0000
+    ONCE              Offs=000000  Size=00000C  Align=00001  Fill=0000
+neo6502.lib(copydata.o):
+    CODE              Offs=000040  Size=00002D  Align=00001  Fill=0000
+neo6502.lib(crt0.o):
+    STARTUP           Offs=000000  Size=000021  Align=00001  Fill=0000
+neo6502.lib(incaxy.o):
+    CODE              Offs=00006D  Size=00000B  Align=00001  Fill=0000
+neo6502.lib(zerobss.o):
+    CODE              Offs=000078  Size=000023  Align=00001  Fill=0000
+neo6502.lib(zeropage.o):
+    ZEROPAGE          Offs=000000  Size=00001A  Align=00001  Fill=0000
+
+
+Segment list:
+-------------
+Name                   Start     End    Size  Align
+----------------------------------------------------
+ZEROPAGE              000000  000019  00001A  00001
+STARTUP               000800  000820  000021  00001
+ONCE                  000821  00082C  00000C  00001
+CODE                  00082D  0008C7  00009B  00001
+DATA                  0008C8  0008EC  000025  00001
+BSS                   0008ED  0008EE  000002  00001
+
+
+Exports list by name:
+---------------------
+__BSS_RUN__               0008ED RLA    __BSS_SIZE__              000002 REA    
+__CONSTRUCTOR_COUNT__     000000 REA    __CONSTRUCTOR_TABLE__     00082D RLA    
+__DATA_LOAD__             0008C8 RLA    __DATA_RUN__              0008C8 RLA    
+__DATA_SIZE__             000025 REA    __DESTRUCTOR_COUNT__      000000 REA    
+__DESTRUCTOR_TABLE__      0008C8 RLA    __RAM_SIZE__              00EE00 REA    
+__RAM_START__             000800 RLA    __STACKSIZE__             000400 REA    
+__STARTUP__               000001 REA    _main                     00082D RLA    
+copydata                  00086D RLA    donelib                   000861 RLA    
+incax4                    00089A RLA    initlib                   000821 RLA    
+ptr1                      000008 RLZ    ptr2                      00000A RLZ    
+sp                        000000 RLZ    tmp1                      000010 RLZ    
+zerobss                   0008A5 RLA    
+
+
+Exports list by value:
+----------------------
+__CONSTRUCTOR_COUNT__     000000 REA    __DESTRUCTOR_COUNT__      000000 REA    
+sp                        000000 RLZ    __STARTUP__               000001 REA    
+__BSS_SIZE__              000002 REA    ptr1                      000008 RLZ    
+ptr2                      00000A RLZ    tmp1                      000010 RLZ    
+__DATA_SIZE__             000025 REA    __STACKSIZE__             000400 REA    
+__RAM_START__             000800 RLA    initlib                   000821 RLA    
+__CONSTRUCTOR_TABLE__     00082D RLA    _main                     00082D RLA    
+donelib                   000861 RLA    copydata                  00086D RLA    
+incax4                    00089A RLA    zerobss                   0008A5 RLA    
+__DATA_LOAD__             0008C8 RLA    __DATA_RUN__              0008C8 RLA    
+__DESTRUCTOR_TABLE__      0008C8 RLA    __BSS_RUN__               0008ED RLA    
+__RAM_SIZE__              00EE00 REA    
+
+
+Imports list:
+-------------
+__BSS_RUN__ ([linker generated]):
+    zerobss.o                 common/zerobss.s:8
+__BSS_SIZE__ ([linker generated]):
+    zerobss.o                 common/zerobss.s:8
+__CONSTRUCTOR_COUNT__ ([linker generated]):
+    condes.o                  runtime/condes.s:18
+__CONSTRUCTOR_TABLE__ ([linker generated]):
+    condes.o                  runtime/condes.s:18
+__DATA_LOAD__ ([linker generated]):
+    copydata.o                common/copydata.s:8
+__DATA_RUN__ ([linker generated]):
+    copydata.o                common/copydata.s:8
+__DATA_SIZE__ ([linker generated]):
+    copydata.o                common/copydata.s:8
+__DESTRUCTOR_COUNT__ ([linker generated]):
+    condes.o                  runtime/condes.s:19
+__DESTRUCTOR_TABLE__ ([linker generated]):
+    condes.o                  runtime/condes.s:19
+__RAM_SIZE__ ([linker generated]):
+    crt0.o                    crt0.s:9
+__RAM_START__ ([linker generated]):
+    crt0.o                    crt0.s:9
+__STACKSIZE__ ([linker generated]):
+    crt0.o                    crt0.s:10
+__STARTUP__ (crt0.o):
+    main.o                    main.s:13
+_main (main.o):
+    crt0.o                    crt0.s:6
+copydata (copydata.o):
+    crt0.o                    crt0.s:12
+donelib (condes.o):
+    crt0.o                    crt0.s:12
+incax4 (incaxy.o):
+    main.o                    main.s:58
+initlib (condes.o):
+    crt0.o                    crt0.s:12
+ptr1 (zeropage.o):
+    copydata.o                common/copydata.s:9
+    zerobss.o                 common/zerobss.s:9
+    main.o                    main.s:11
+ptr2 (zeropage.o):
+    copydata.o                common/copydata.s:9
+sp (zeropage.o):
+    crt0.o                    /aux/cc65/asminc/zeropage.inc:11
+tmp1 (zeropage.o):
+    copydata.o                common/copydata.s:9
+    incaxy.o                  runtime/incaxy.s:8
+zerobss (zerobss.o):
+    crt0.o                    crt0.s:12
+
