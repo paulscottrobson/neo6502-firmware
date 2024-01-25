@@ -25,9 +25,7 @@ Larger Additions
 		- something like AMAL 
 
 	- Serial uploading
-		- wrapper functions, test sending code and graphics.
-		- save to storage option. Build the nxmit.py as a zip app.
-		- document it		
+		- save to storage option. 
 		
 	- 32x32 tiles
 	
