@@ -23,7 +23,8 @@ DOCDIR = documents$(S)release$(S)
 DOCUMENTS =  $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
 BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(ROOTDIR)emulator$(S)cross-compile$(S)neowin.zip $(BINDIR)basic.bin \
 			 $(ROOTDIR)emulator$(S)neolinux.zip
-PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip
+PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip \
+			 $(BINDIR)nxmit.zip
 
 # ***************************************************************************************
 #
@@ -75,6 +76,7 @@ linux:
 		make -B -C basic clean
 		make -B -C emulator clean
 		make -B -C emulator elinux
+
 
 # ***************************************************************************************
 #

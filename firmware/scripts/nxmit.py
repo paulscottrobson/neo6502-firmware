@@ -54,19 +54,71 @@ class SerialInterface(object):
 			self.transmit([1]+data[:count])  										# Append command 1, data transmit and send it
 			data = data[count:]  													# Trim from data
 			packets += 1  															# Bump packet count.
-		print("Sent {0} bytes in {1} packets.".format(size,packets))
+		print("\tSent {0} bytes in {1} packets.".format(size,packets))
 	#
-	#		Insert the given string in the keyboard queue (use chr(13) for return)
+	#		Insert the given string in the keyboard queue (use ! for return)
 	#
 	def transmitString(self,s):
+		s = s.replace("!",chr(13))
 		for c in s:  																# Send all character in turn.
 			self.transmit([5,ord(c)])
+	#
+	#		Send a file to 6502 memory.
+	#
+	def transmit6502File(self,fileName,loadAddress,loadIndirect = False):
+		self.transmit([4 if loadIndirect else 2,   									# 4 is address indirect, 2 is address
+										loadAddress & 0xFF,loadAddress >> 8])
+		self._transmitFile(fileName)
+	#
+	#		Send a BASIC program *MUST* be tokenised
+	#
+	def transmitBASICCode(self,fileName):
+		self.transmit6502File(fileName,0x820,True)  								# In BASIC $820/1 holds PAGE.
+	#
+	#		Load a file to graphics memory
+	#
+	def transmitGraphicFile(self,fileName):
+		self.transmit([3,0,0])  													# 3 sends to graphic memory.
+		self._transmitFile(fileName)
+	#
+	#		Transmit a file.
+	#
+	def _transmitFile(self,file):
+		print("Sending file {0}".format(file))
+		self.transmitDataBlock([x for x in open(file,"rb").read(-1)])
+
+# ***************************************************************************************
+#
+#						A simple command line driven application
+#
+# ***************************************************************************************
 
 if __name__ == "__main__":
-	si = SerialInterface('/dev/ttyUSB0')
-	si.transmit([4,32,8])
-	d = [x for x in open("../basic/build/tokenised.dat","rb").read(-1)]
-	si.transmitDataBlock(d)
-	si.transmitString("RUN"+chr(13))
+	if len(sys.argv) < 2:
+		print("python nxmit.zip <port> <cmd list>")
+		print("\t<port> is COM1 or /dev/ttyUSB0 or similar.")
+		print("\tCommands supported are :")
+		print("\t\tB:<file>\t\tloads <file> as BASIC")
+		print("\t\tG:<file>\t\tloads <file> into Graphic Memory")
+		print("\t\tF:<file>@<hex>\tLoads <file> into CPU Memory at address <hex>")
+		print("\t\tK:<text>\t\tPush text into keyboard buffer. Use ! for return")
+		sys.exit(1)
+
+	serial = SerialInterface(sys.argv[1])
+	for cmd in sys.argv[2:]:
+		if cmd.startswith("b:"):
+			serial.transmitBASICCode(cmd[2:])
+		elif cmd.startswith("g:"):
+			serial.transmitGraphicFile(cmd[2:])
+		elif cmd.startswith("f:"):
+			cmd = cmd[2:].split("@")
+			serial.transmit6502File(cmd[0],int(cmd[1],16),False)
+		elif cmd.startswith("k:"):
+			serial.transmitString(cmd[2:])
+		else:
+			print("Unknown command "+cmd)
+			sys.exit(1)
+
+
 
 

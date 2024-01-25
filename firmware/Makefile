@@ -122,6 +122,12 @@ dual: prelim always
 	rm -Rf build
 	make -B clean
 	make -C build
+
+pythonapps:
+	$(CMAKEDIR) build
+	$(CCOPY) scripts$(S)nxmit.py build$(S)__main__.py
+	zip -j $(BINDIR)nxmit.zip build$(S)__main__.py
+	$(CDEL) build$(S)*.py
 		
 # ***************************************************************************************
 #
