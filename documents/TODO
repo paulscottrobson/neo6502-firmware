@@ -25,9 +25,10 @@ Larger Additions
 		- something like AMAL 
 
 	- Serial uploading
-		- Packet writing code. Check it works okay.
-		- Devise packet protocol and implement it.
-
+		- wrapper functions, test sending code and graphics.
+		- save to storage option. Build the nxmit.py as a zip app.
+		- document it		
+		
 	- 32x32 tiles
 	
 	- Add USB Joystick interface if stable.

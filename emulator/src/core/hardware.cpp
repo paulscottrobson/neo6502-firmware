@@ -216,6 +216,3 @@ bool SERIsByteAvailable(void) {
 uint8_t SERReadByte(void) {
 	return 0;
 }
-
-void SERCheckDataAvailable(void) {
-}

@@ -1,339 +1,38 @@
-dim u(6)
-dim d5v0(3,3)
-dim u6q2m(8)
-dim v(3)
-dim c1j9r$(1,5)
-dim s3e3m$(4,4)
-dim a9i1$(3)
-dim a(7)
-dim m0l(2,2)
-dim c9u3(8)
-dim m7t9a(4,3)
-dim p3w6$(3,3)
-dim r8p4$(5)
-dim j1(5,1)
-dim c8c3f(2,4)
-dim r5(5)
-dim v2i7j(6)
-dim w6v3n$(3)
-dim c1i4$(4,4)
-dim x6x$(4,5)
-r8p4$(4) = "RROHQOFLL"
-m7t9a(2,2) = -92.86
-p3w6$(2,1) = "YGBOHNEFGY"
-m7t9a(0,0) = -151
-a9i1$(3) = "DCCRFMD"
-d5v0(1,3) = 117
-c1i4$(0,0) = ""
-m7t9a(1,0) = 171
-p3w6$(0,0) = "NIT"
-v2i7j(2) = -411
-m0l(1,1) = -108.11
-m7t9a(1,3) = -310.19
-u(3) = 496.77
-x6x$(4,0) = "DOQGT"
-c8c3f(1,3) = 477
-c8c3f(1,3) = 712
-v2i7j(6) = -869
-w6v3n$(2) = "UMKRH"
-x6x$(3,2) = "HXWTZB"
-s3e3m$(3,4) = "UDUYXA"
-a9i1$(3) = "CNHVCL"
-c1i4$(1,0) = "VDDL"
-m7t9a(3,3) = -933.74
-u(3) = -640
-v(1) = -696.78
-j1(4,1) = -958.56
-j1(3,0) = 703.19
-u6q2m(8) = 788
-u(6) = 959
-u6q2m(8) = -786
-m7t9a(4,2) = -252
-j1(1,1) = -621.48
-p3w6$(3,2) = "LBFLYUIT"
-x6x$(2,2) = "GMJ"
-c8c3f(0,4) = -491
-c9u3(4) = -23
-m7t9a(1,3) = 167.74
-a(6) = -651
-u6q2m(5) = -522.78
-c1j9r$(1,1) = ""
-m0l(2,2) = -730
-u(0) = -87
-x6x$(0,0) = "WLOZXZVMKO"
-v2i7j(1) = 724
-r5(2) = -549
-m7t9a(4,0) = 180.52
-a(6) = -79
-a9i1$(3) = "MTAIXHX"
-r5(3) = -152.67
-p3w6$(1,2) = "XWRJTM"
-c9u3(3) = 779.61
-u(1) = 553.79
-c1i4$(4,2) = "NEK"
-m7t9a(1,0) = -526.12
-p3w6$(0,1) = "FZ"
-u(1) = 758.43
-m0l(0,1) = 10.13
-p3w6$(0,0) = ""
-c9u3(2) = 685.59
-m7t9a(0,3) = 666
-r8p4$(5) = "KWDASKLGVX"
-v(2) = 967.58
-r8p4$(2) = "QMCG"
-a(7) = 831
-u(4) = -560.67
-s3e3m$(4,3) = "PGI"
-j1(4,1) = -183.74
-r5(5) = 684.46
-r5(5) = 931.75
-d5v0(0,2) = -139
-w6v3n$(2) = ""
-u6q2m(5) = -908.83
-v2i7j(2) = 698.36
-s3e3m$(4,3) = ""
-a9i1$(3) = ""
-d5v0(1,1) = 73
-p3w6$(2,3) = "PSGKZESWRB"
-w6v3n$(0) = "ZQNGWEFWO"
-u6q2m(8) = 779
-x6x$(1,1) = "TXKMSBOZUF"
-x6x$(0,4) = "ZKAECRYV"
-m0l(0,1) = 505.44
-d5v0(2,0) = -516
-c1i4$(0,3) = "LBGW"
-a(0) = 705
-r5(2) = 496.13
-c8c3f(2,2) = 404.92
-a9i1$(2) = "WEMOXDQJJ"
-d5v0(0,1) = -405
-p3w6$(3,1) = ""
-c1i4$(0,0) = "MVTMAW"
-c1j9r$(1,4) = "WYDWCI"
-j1(5,1) = -542.7
-c9u3(4) = 337.23
-p3w6$(0,2) = "BAN"
-v(0) = -137
-u6q2m(5) = 25.66
-r5(1) = -833
-u6q2m(0) = 353.38
-r8p4$(2) = "E"
-u(4) = -381
-j1(0,0) = 968.3
-a(7) = 562
-c8c3f(1,4) = -832
-s3e3m$(1,3) = "SAMJGGBDEN"
-c1j9r$(0,5) = "ESYIC"
-r5(4) = -715
-w6v3n$(2) = "TJHBOXRIXO"
-v(2) = 963
-x6x$(3,0) = "CBEPNV"
-u6q2m(1) = -927
-r5(4) = -945
-p3w6$(3,2) = "FQMHERX"
-w6v3n$(0) = "EDDXOVRHO"
-u(6) = 556
-w6v3n$(2) = "EFB"
-a(2) = 582
-u(1) = 360
-v(2) = 598
-a9i1$(1) = "PMDSXJC"
-c9u3(6) = -803
-u6q2m(4) = -883.02
-c9u3(6) = 810
-d5v0(2,0) = 551.38
-u6q2m(1) = -219.01
-c1i4$(0,2) = "JUUFUWTUNW"
-v2i7j(0) = 993.08
-c8c3f(0,2) = -535
-p3w6$(0,1) = "VDYXYUY"
-r8p4$(0) = "RJOUCSTCA"
-a9i1$(1) = ""
-w6v3n$(3) = "BYTP"
-p3w6$(2,1) = "MESLAUBTIB"
-m0l(2,1) = -49
-c9u3(4) = 258
-c1i4$(2,1) = ""
-d5v0(0,0) = 703.86
-j1(2,0) = -992
-x6x$(0,0) = ""
-d5v0(0,2) = -933.83
-c8c3f(1,4) = 89
-c8c3f(0,3) = -790
-c8c3f(1,3) = -994
-w6v3n$(1) = "COFXXH"
-m0l(2,2) = -206.64
-r8p4$(5) = "UYXESXD"
-a9i1$(1) = "HFZPRYHTNM"
-m0l(2,2) = -86
-w6v3n$(1) = "XJA"
-m7t9a(3,0) = -712.39
-x6x$(1,0) = "CBL"
-m7t9a(4,0) = 840.13
-m7t9a(2,3) = -946.33
-a9i1$(2) = "KOCCFTUXYQ"
-w6v3n$(0) = "HVSL"
-v2i7j(2) = -283.26
-s3e3m$(3,2) = "Y"
-c1j9r$(1,0) = "RLFDG"
-r5(0) = 487
-m7t9a(3,1) = -663
-a(7) = 980
-w6v3n$(1) = "GQGJDQPCPT"
-r5(2) = 207
-j1(1,1) = -553.51
-u6q2m(4) = -351.83
-d5v0(1,2) = -669
-x6x$(0,0) = "Q"
-w6v3n$(1) = "GRAKTOEK"
-m0l(2,1) = -213.9
-c8c3f(1,0) = 175.4
-v(3) = -963.05
-w6v3n$(3) = ""
-d5v0(2,2) = -867
-v(1) = -190
-u(3) = -194.08
-a(4) = -692.83
-m7t9a(0,2) = -562
-c1i4$(3,4) = "SWSLNNTKAC"
-c8c3f(1,0) = 590.69
-a9i1$(2) = ""
-c1i4$(1,4) = "EOW"
-j1(5,1) = -404
-p3w6$(3,1) = "CWLTA"
-a(3) = 95
-c8c3f(1,2) = 884
-r5(5) = -695
-j1(3,0) = 387.49
-v2i7j(2) = 676.96
-w6v3n$(1) = "VHSTJR"
-u(2) = -669
-w6v3n$(1) = "XXN"
-c1j9r$(0,1) = "JYU"
-u(1) = -899.14
-v(1) = 11
-a(3) = 224
-r8p4$(2) = "JMD"
-p3w6$(3,1) = "UGQWAVP"
-u6q2m(1) = -425
-c1i4$(0,2) = "AGSMBPDI"
-s3e3m$(1,0) = "AUBVMRLGGJ"
-assert u(0) = -87
-assert u(1) = -899.14
-assert u(2) = -669
-assert u(3) = -194.08
-assert u(4) = -381
-assert u(6) = 556
-assert d5v0(0,0) = 703.86
-assert d5v0(0,1) = -405
-assert d5v0(0,2) = -933.83
-assert d5v0(1,1) = 73
-assert d5v0(1,2) = -669
-assert d5v0(1,3) = 117
-assert d5v0(2,0) = 551.38
-assert d5v0(2,2) = -867
-assert u6q2m(0) = 353.38
-assert u6q2m(1) = -425
-assert u6q2m(4) = -351.83
-assert u6q2m(5) = 25.66
-assert u6q2m(8) = 779
-assert v(0) = -137
-assert v(1) = 11
-assert v(2) = 598
-assert v(3) = -963.05
-assert c1j9r$(0,1) = "JYU"
-assert c1j9r$(0,5) = "ESYIC"
-assert c1j9r$(1,0) = "RLFDG"
-assert c1j9r$(1,1) = ""
-assert c1j9r$(1,4) = "WYDWCI"
-assert s3e3m$(1,0) = "AUBVMRLGGJ"
-assert s3e3m$(1,3) = "SAMJGGBDEN"
-assert s3e3m$(3,2) = "Y"
-assert s3e3m$(3,4) = "UDUYXA"
-assert s3e3m$(4,3) = ""
-assert a9i1$(1) = "HFZPRYHTNM"
-assert a9i1$(2) = ""
-assert a9i1$(3) = ""
-assert a(0) = 705
-assert a(2) = 582
-assert a(3) = 224
-assert a(4) = -692.83
-assert a(6) = -79
-assert a(7) = 980
-assert m0l(0,1) = 505.44
-assert m0l(1,1) = -108.11
-assert m0l(2,1) = -213.9
-assert m0l(2,2) = -86
-assert c9u3(2) = 685.59
-assert c9u3(3) = 779.61
-assert c9u3(4) = 258
-assert c9u3(6) = 810
-assert m7t9a(0,0) = -151
-assert m7t9a(0,2) = -562
-assert m7t9a(0,3) = 666
-assert m7t9a(1,0) = -526.12
-assert m7t9a(1,3) = 167.74
-assert m7t9a(2,2) = -92.86
-assert m7t9a(2,3) = -946.33
-assert m7t9a(3,0) = -712.39
-assert m7t9a(3,1) = -663
-assert m7t9a(3,3) = -933.74
-assert m7t9a(4,0) = 840.13
-assert m7t9a(4,2) = -252
-assert p3w6$(0,0) = ""
-assert p3w6$(0,1) = "VDYXYUY"
-assert p3w6$(0,2) = "BAN"
-assert p3w6$(1,2) = "XWRJTM"
-assert p3w6$(2,1) = "MESLAUBTIB"
-assert p3w6$(2,3) = "PSGKZESWRB"
-assert p3w6$(3,1) = "UGQWAVP"
-assert p3w6$(3,2) = "FQMHERX"
-assert r8p4$(0) = "RJOUCSTCA"
-assert r8p4$(2) = "JMD"
-assert r8p4$(4) = "RROHQOFLL"
-assert r8p4$(5) = "UYXESXD"
-assert j1(0,0) = 968.3
-assert j1(1,1) = -553.51
-assert j1(2,0) = -992
-assert j1(3,0) = 387.49
-assert j1(4,1) = -183.74
-assert j1(5,1) = -404
-assert c8c3f(0,2) = -535
-assert c8c3f(0,3) = -790
-assert c8c3f(0,4) = -491
-assert c8c3f(1,0) = 590.69
-assert c8c3f(1,2) = 884
-assert c8c3f(1,3) = -994
-assert c8c3f(1,4) = 89
-assert c8c3f(2,2) = 404.92
-assert r5(0) = 487
-assert r5(1) = -833
-assert r5(2) = 207
-assert r5(3) = -152.67
-assert r5(4) = -945
-assert r5(5) = -695
-assert v2i7j(0) = 993.08
-assert v2i7j(1) = 724
-assert v2i7j(2) = 676.96
-assert v2i7j(6) = -869
-assert w6v3n$(0) = "HVSL"
-assert w6v3n$(1) = "XXN"
-assert w6v3n$(2) = "EFB"
-assert w6v3n$(3) = ""
-assert c1i4$(0,0) = "MVTMAW"
-assert c1i4$(0,2) = "AGSMBPDI"
-assert c1i4$(0,3) = "LBGW"
-assert c1i4$(1,0) = "VDDL"
-assert c1i4$(1,4) = "EOW"
-assert c1i4$(2,1) = ""
-assert c1i4$(3,4) = "SWSLNNTKAC"
-assert c1i4$(4,2) = "NEK"
-assert x6x$(0,0) = "Q"
-assert x6x$(0,4) = "ZKAECRYV"
-assert x6x$(1,0) = "CBL"
-assert x6x$(1,1) = "TXKMSBOZUF"
-assert x6x$(2,2) = "GMJ"
-assert x6x$(3,0) = "CBEPNV"
-assert x6x$(3,2) = "HXWTZB"
-assert x6x$(4,0) = "DOQGT"
-sys 65535
+'
+'	Neo6502 speed test, written by Paul Robson 24/12/2023
+'	
+'	Emulator is inaccurate because I don't add 1 for the taken branch, speed is approx
+'	on emulation.
+'
+p = alloc(32)
+'
+'	Basically DEY ; bne Loop ; DEX ; bne Loop ; DEC ; bne Loop
+'
+.clockme
+	dey : bne clockme
+	dex : bne clockme
+	dec : bne clockme
+	rts
+'
+'	Do this many iterations with initial value of A
+'
+count = 5
+a = 50
+'
+'	Do code, measuring time.
+'
+x = 0:y = 0
+start = time()
+for i = 1 to count:print i:sys clockme:next
+tExec = (time()-start) / 100
+'
+'	Time for each iteration of the dex/dey bit
+'
+tExec = tExec / count / a
+print tExec;" secs per inner 2 loops"
+'
+'	Work out speed.
+'
+innerCycles = 1280 * 256
+cps = innerCycles / tExec
+print cps/1000/1000;" Mhz clock"
