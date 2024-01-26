@@ -40,4 +40,6 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $1a2 turtle
 	.word	Unimplemented            ; $1a3 sweet
 	.word	CommandTileMap           ; $1a4 tilemap
+	.word	Unimplemented            ; $1a5 penup
+	.word	Unimplemented            ; $1a6 pendown
 	.send code
