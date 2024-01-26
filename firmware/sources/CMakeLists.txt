@@ -15,6 +15,7 @@ target_sources(firmware PRIVATE main.cpp
     ${COMMONSRC}/gfxcommands.cpp  ${COMMONSRC}/ellipse.cpp  ${COMMONSRC}/fileinterface.cpp  
     ${COMMONSRC}/sprites.cpp  ${COMMONSRC}/logo.cpp  ${COMMONSRC}/sprites_xor.cpp  ${COMMONSRC}/tilemap.cpp
     ${COMMONSRC}/sndmanager.cpp  ${COMMONSRC}/sfxmanager.cpp ${COMMONSRC}/tick.cpp ${COMMONSRC}/serialmanager.cpp
+    ${COMMONSRC}/turtle.cpp
     #
     #       Hardware sources
     #

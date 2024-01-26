@@ -45,6 +45,9 @@ switch (*DCOMMAND) {
 			case 5:
 				*DERROR = CONUpdateUserFont(DPARAMS);
 				break;
+			case 6:
+				CONWrite(*DPARAMS);
+				break;
 		}
 		break;
 	case 3:
@@ -309,6 +312,22 @@ switch (*DCOMMAND) {
 				i1 = SNDGetNoteCount(DPARAMS[0]);
 				DPARAMS[0] = i1 & 0xFF;
 				*DERROR = (i1 < 0) ? 1 : 0;
+				break;
+		}
+		break;
+	case 9:
+		switch (*DFUNCTION) {
+			case 1:
+				TTLInitialise(DPARAMS[0]);
+				break;
+			case 2:
+				TTLRotate(DSPGetInt16(DCOMMAND,4));
+				break;
+			case 3:
+				TTLMove(DSPGetInt16(DCOMMAND,4),DCOMMAND[6]);
+				break;
+			case 4:
+				TTLHide();
 				break;
 		}
 		break;

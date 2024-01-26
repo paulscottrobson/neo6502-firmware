@@ -95,3 +95,4 @@ Changes
 			*** Release 10 ***			
 			IMP: Added 'waiting for USB Key' notice.
 			CHG: Removed serial echo of console 
+			CHG: Function 2,0 should now use function 2,6 (consistency, but 2,0 will be supported permanently so non-breaking)

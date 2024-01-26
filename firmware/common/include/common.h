@@ -51,6 +51,7 @@
 #include "interface/sprites.h"
 #include "interface/tilemap.h"
 #include "interface/serial.h"
+#include "interface/turtle.h"
 //
 //		Other Includes
 //
