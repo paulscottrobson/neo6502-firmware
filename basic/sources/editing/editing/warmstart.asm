@@ -26,8 +26,15 @@ WarmStart:
 		ldx 	#inputBuffer & $FF
 
 		jsr 	ReadLine 					; read using screen editor
+
 ;		jsr 	InputLine 					; input string to buffer direct typing (ignores YX)
 
+		lda 	inputBuffer 				; entered something ?
+		beq 	_WSNotSerialLink
+		lda 	inputBuffer+1 				; if first character is / start the serial link.
+		cmp 	#'/'
+		beq 	_WSSerialLink
+_WSNotSerialLink:		
 		stz 	ControlStatus 				; clear break flag.
 		jsr 	TOKTokenise 				; tokenise it.
 		lda 	tokLineNumber 				; any line number ? if not, execute it.
@@ -48,6 +55,12 @@ _WSExecute:
 		sta 	codePtr
 
 		jmp 	RUNNewLine 					; go to run it.
+
+_WSSerialLink:
+		.DoSendMessage 					 	; and reset it.
+		.byte 	1,5
+		.DoWaitMessage		
+		jmp 	WarmStart
 
 		.send code
 		

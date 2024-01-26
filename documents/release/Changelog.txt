@@ -95,7 +95,11 @@ Changes
 			*** Release 10 ***			
 			IMP: Added 'waiting for USB Key' notice.
 			CHG: Removed serial echo of console 
-			CHG: Function 2,0 should now use function 2,6 (consistency, but 2,0 will be supported permanently so non-breaking)
+
+26/01/24:	CHG: Function 2,0 should now use function 2,6 (consistency, but 2,0 will be supported permanently so non-breaking)
 			BUG: Reported issues with r10 not booting whereas r9 did. Need to check differences r9/r10 but removed serial code entirely.
 			*** Release 11 ***
-			
+			IMP: Added turtle graphics code (not complete yet)
+			BUG: Made serial operate independently, rather than in the keyboard handler.
+			CHG: Boots straight into BASIC, WozMon temporarily disabled.
+			CHG: Modifier warm start so can use the keyboard to start serial handler.
