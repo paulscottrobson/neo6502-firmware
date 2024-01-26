@@ -93,3 +93,5 @@ Changes
 			
 25/01/24 	IMP: Can send programs,data and commands over serial link.
 			*** Release 10 ***			
+			IMP: Added 'waiting for USB Key' notice.
+			CHG: Removed serial echo of console 

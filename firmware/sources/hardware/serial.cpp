@@ -29,6 +29,7 @@
 // ***************************************************************************************
 
 void SERInitialise(void) {
+	return;
 	uart_init(UART_ID, BAUD_RATE);
 	gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
 	gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
@@ -44,6 +45,7 @@ void SERInitialise(void) {
 // ***************************************************************************************
 
 bool SERIsByteAvailable(void) {
+	return false;
 	return uart_is_readable_within_us(UART_ID,0);
 }
 

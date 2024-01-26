@@ -1,20 +1,44 @@
 Modules list:
 -------------
 main.o:
-    CODE              Offs=000000  Size=000034  Align=00001  Fill=0000
+    CODE              Offs=000000  Size=000086  Align=00001  Fill=0000
+    RODATA            Offs=000000  Size=00000D  Align=00001  Fill=0000
     BSS               Offs=000000  Size=000002  Align=00001  Fill=0000
+neo6502.lib(_file.o):
+    DATA              Offs=000000  Size=00001E  Align=00001  Fill=0000
+neo6502.lib(addeqsp.o):
+    CODE              Offs=000086  Size=000011  Align=00001  Fill=0000
+neo6502.lib(addysp.o):
+    CODE              Offs=000097  Size=00000E  Align=00001  Fill=0000
 neo6502.lib(condes.o):
-    CODE              Offs=000034  Size=00000C  Align=00001  Fill=0000
-    DATA              Offs=000000  Size=000025  Align=00001  Fill=0000
+    CODE              Offs=0000A5  Size=00000C  Align=00001  Fill=0000
+    DATA              Offs=00001E  Size=000025  Align=00001  Fill=0000
     ONCE              Offs=000000  Size=00000C  Align=00001  Fill=0000
 neo6502.lib(copydata.o):
-    CODE              Offs=000040  Size=00002D  Align=00001  Fill=0000
+    CODE              Offs=0000B1  Size=00002D  Align=00001  Fill=0000
 neo6502.lib(crt0.o):
     STARTUP           Offs=000000  Size=000021  Align=00001  Fill=0000
 neo6502.lib(incaxy.o):
-    CODE              Offs=00006D  Size=00000B  Align=00001  Fill=0000
+    CODE              Offs=0000DE  Size=00000B  Align=00001  Fill=0000
+neo6502.lib(incsp2.o):
+    CODE              Offs=0000E9  Size=000015  Align=00001  Fill=0000
+neo6502.lib(incsp6.o):
+    CODE              Offs=0000FE  Size=000005  Align=00001  Fill=0000
+neo6502.lib(ldaxsp.o):
+    CODE              Offs=000103  Size=000009  Align=00001  Fill=0000
+neo6502.lib(pushax.o):
+    CODE              Offs=00010C  Size=00001A  Align=00001  Fill=0000
+neo6502.lib(pushwsp.o):
+    CODE              Offs=000126  Size=00001C  Align=00001  Fill=0000
+neo6502.lib(puts.o):
+    CODE              Offs=000142  Size=000063  Align=00001  Fill=0000
+    DATA              Offs=000043  Size=000001  Align=00001  Fill=0000
+neo6502.lib(strlen.o):
+    CODE              Offs=0001A5  Size=000016  Align=00001  Fill=0000
+neo6502.lib(subeqsp.o):
+    CODE              Offs=0001BB  Size=000015  Align=00001  Fill=0000
 neo6502.lib(zerobss.o):
-    CODE              Offs=000078  Size=000023  Align=00001  Fill=0000
+    CODE              Offs=0001D0  Size=000023  Align=00001  Fill=0000
 neo6502.lib(zeropage.o):
     ZEROPAGE          Offs=000000  Size=00001A  Align=00001  Fill=0000
 
@@ -26,41 +50,58 @@ Name                   Start     End    Size  Align
 ZEROPAGE              000000  000019  00001A  00001
 STARTUP               000800  000820  000021  00001
 ONCE                  000821  00082C  00000C  00001
-CODE                  00082D  0008C7  00009B  00001
-DATA                  0008C8  0008EC  000025  00001
-BSS                   0008ED  0008EE  000002  00001
+CODE                  00082D  000A1F  0001F3  00001
+RODATA                000A20  000A2C  00000D  00001
+DATA                  000A2D  000A70  000044  00001
+BSS                   000A71  000A72  000002  00001
 
 
 Exports list by name:
 ---------------------
-__BSS_RUN__               0008ED RLA    __BSS_SIZE__              000002 REA    
+__BSS_RUN__               000A71 RLA    __BSS_SIZE__              000002 REA    
 __CONSTRUCTOR_COUNT__     000000 REA    __CONSTRUCTOR_TABLE__     00082D RLA    
-__DATA_LOAD__             0008C8 RLA    __DATA_RUN__              0008C8 RLA    
-__DATA_SIZE__             000025 REA    __DESTRUCTOR_COUNT__      000000 REA    
-__DESTRUCTOR_TABLE__      0008C8 RLA    __RAM_SIZE__              00EE00 REA    
+__DATA_LOAD__             000A2D RLA    __DATA_RUN__              000A2D RLA    
+__DATA_SIZE__             000044 REA    __DESTRUCTOR_COUNT__      000000 REA    
+__DESTRUCTOR_TABLE__      000A2D RLA    __RAM_SIZE__              00EE00 REA    
 __RAM_START__             000800 RLA    __STACKSIZE__             000400 REA    
-__STARTUP__               000001 REA    _main                     00082D RLA    
-copydata                  00086D RLA    donelib                   000861 RLA    
-incax4                    00089A RLA    initlib                   000821 RLA    
-ptr1                      000008 RLZ    ptr2                      00000A RLZ    
-sp                        000000 RLZ    tmp1                      000010 RLZ    
-zerobss                   0008A5 RLA    
+__STARTUP__               000001 REA    _main                     0008A1 RLA    
+_puts                     00096F RLA    _stdout                   000A47 RLA    
+_strlen                   0009D2 RLA    _write                    00082D RLA    
+addeqysp                  0008B5 RLA    addysp                    0008C5 RLA    
+copydata                  0008DE RLA    donelib                   0008D2 RLA    
+incax4                    00090B RLA    incsp2                    00091D RLA    
+incsp6                    00092B RLA    initlib                   000821 RLA    
+ldaxysp                   000932 RLA    ptr1                      000008 RLZ    
+ptr2                      00000A RLZ    ptr4                      00000E RLZ    
+pusha0                    00093B RLA    pushax                    00093D RLA    
+pushwysp                  000955 RLA    sp                        000000 RLZ    
+sreg                      000002 RLZ    subeq0sp                  0009E8 RLA    
+tmp1                      000010 RLZ    zerobss                   0009FD RLA    
+
 
 
 Exports list by value:
 ----------------------
 __CONSTRUCTOR_COUNT__     000000 REA    __DESTRUCTOR_COUNT__      000000 REA    
 sp                        000000 RLZ    __STARTUP__               000001 REA    
-__BSS_SIZE__              000002 REA    ptr1                      000008 RLZ    
-ptr2                      00000A RLZ    tmp1                      000010 RLZ    
-__DATA_SIZE__             000025 REA    __STACKSIZE__             000400 REA    
+__BSS_SIZE__              000002 REA    sreg                      000002 RLZ    
+ptr1                      000008 RLZ    ptr2                      00000A RLZ    
+ptr4                      00000E RLZ    tmp1                      000010 RLZ    
+__DATA_SIZE__             000044 REA    __STACKSIZE__             000400 REA    
 __RAM_START__             000800 RLA    initlib                   000821 RLA    
-__CONSTRUCTOR_TABLE__     00082D RLA    _main                     00082D RLA    
-donelib                   000861 RLA    copydata                  00086D RLA    
-incax4                    00089A RLA    zerobss                   0008A5 RLA    
-__DATA_LOAD__             0008C8 RLA    __DATA_RUN__              0008C8 RLA    
-__DESTRUCTOR_TABLE__      0008C8 RLA    __BSS_RUN__               0008ED RLA    
-__RAM_SIZE__              00EE00 REA    
+__CONSTRUCTOR_TABLE__     00082D RLA    _write                    00082D RLA    
+_main                     0008A1 RLA    addeqysp                  0008B5 RLA    
+addysp                    0008C5 RLA    donelib                   0008D2 RLA    
+copydata                  0008DE RLA    incax4                    00090B RLA    
+incsp2                    00091D RLA    incsp6                    00092B RLA    
+ldaxysp                   000932 RLA    pusha0                    00093B RLA    
+pushax                    00093D RLA    pushwysp                  000955 RLA    
+_puts                     00096F RLA    _strlen                   0009D2 RLA    
+subeq0sp                  0009E8 RLA    zerobss                   0009FD RLA    
+__DATA_LOAD__             000A2D RLA    __DATA_RUN__              000A2D RLA    
+__DESTRUCTOR_TABLE__      000A2D RLA    _stdout                   000A47 RLA    
+__BSS_RUN__               000A71 RLA    __RAM_SIZE__              00EE00 REA    
+
 
 
 Imports list:
@@ -93,22 +134,63 @@ __STARTUP__ (crt0.o):
     main.o                    main.s:13
 _main (main.o):
     crt0.o                    crt0.s:6
+_puts (puts.o):
+    main.o                    main.s:14
+_stdout (_file.o):
+    puts.o                    ../libwrk/supervision/puts.s:19
+_strlen (strlen.o):
+    puts.o                    ../libwrk/supervision/puts.s:21
+_write (main.o):
+    puts.o                    ../libwrk/supervision/puts.s:22
+addeqysp (addeqsp.o):
+    main.o                    main.s:116
+addysp (addysp.o):
+    incsp6.o                  runtime/incsp6.s:8
 copydata (copydata.o):
     crt0.o                    crt0.s:12
 donelib (condes.o):
     crt0.o                    crt0.s:12
 incax4 (incaxy.o):
-    main.o                    main.s:58
+    main.o                    main.s:116
+incsp2 (incsp2.o):
+    puts.o                    ../libwrk/supervision/puts.s:93
+incsp6 (incsp6.o):
+    main.o                    main.s:116
 initlib (condes.o):
     crt0.o                    crt0.s:12
+ldaxysp (ldaxsp.o):
+    puts.o                    ../libwrk/supervision/puts.s:93
+    main.o                    main.s:116
 ptr1 (zeropage.o):
     copydata.o                common/copydata.s:9
     zerobss.o                 common/zerobss.s:9
+    puts.o                    ../libwrk/supervision/puts.s:11
     main.o                    main.s:11
 ptr2 (zeropage.o):
     copydata.o                common/copydata.s:9
+ptr4 (zeropage.o):
+    strlen.o                  common/strlen.s:12
+pusha0 (pushax.o):
+    puts.o                    ../libwrk/supervision/puts.s:93
+pushax (pushax.o):
+    puts.o                    ../libwrk/supervision/puts.s:93
+    main.o                    main.s:116
+pushwysp (pushwsp.o):
+    puts.o                    ../libwrk/supervision/puts.s:93
 sp (zeropage.o):
+    pushwsp.o                 runtime/pushwsp.s:8
+    incsp2.o                  runtime/incsp2.s:8
+    addysp.o                  runtime/addysp.s:8
+    subeqsp.o                 runtime/subeqsp.s:8
+    pushax.o                  runtime/pushax.s:8
+    ldaxsp.o                  runtime/ldaxsp.s:8
     crt0.o                    /aux/cc65/asminc/zeropage.inc:11
+    addeqsp.o                 runtime/addeqsp.s:8
+    main.o                    main.s:10
+sreg (zeropage.o):
+    main.o                    main.s:10
+subeq0sp (subeqsp.o):
+    main.o                    main.s:116
 tmp1 (zeropage.o):
     copydata.o                common/copydata.s:9
     incaxy.o                  runtime/incaxy.s:8
