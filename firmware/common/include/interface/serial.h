@@ -13,7 +13,7 @@
 #ifndef _SERIALHARDWARE_H
 #define _SERIALHARDWARE_H
 
-void SERInitialise(void);
+bool SERInitialise(void);
 bool SERIsByteAvailable(void);
 uint8_t SERReadByte(void);
 void SERCheckDataAvailable(void);

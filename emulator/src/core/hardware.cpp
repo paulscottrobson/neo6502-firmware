@@ -206,7 +206,8 @@ void STOSynchronise(void) {
 //
 // ***************************************************************************************
 
-void SERInitialise(void) {
+bool SERInitialise(void) {
+	return false;
 }
 
 bool SERIsByteAvailable(void) {

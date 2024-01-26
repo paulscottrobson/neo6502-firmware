@@ -30,19 +30,24 @@
 	Test = 1
 
 start
-	cld 								; set up
+	cld 									; set up
 	sei
 	ldx 	#$ff
 	txs
 
-	jsr 	KSendMessage  				; beep
+	jsr 	KSendMessage  					; beep
 	.byte 	8,3
 	jsr 	KWaitMessage
 
-	jmp 	WozMonStart
+	jsr 	KSendMessage  					; call "Load BASIC"
+	.byte 	1,3
+	jsr 	KWaitMessage
+	jmp 	(0)								; and start it.
+
+;	jmp 	WozMonStart
+;	.include 	"wozmon.asm"
 
 	.include 	"support.asm"
-	.include 	"wozmon.asm"
 
 	* = ControlPort
 	.word 	0,0,0,0,0,0,0,0

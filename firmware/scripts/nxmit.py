@@ -86,6 +86,11 @@ class SerialInterface(object):
 	def _transmitFile(self,file):
 		print("Sending file {0}".format(file))
 		self.transmitDataBlock([x for x in open(file,"rb").read(-1)])
+	#
+	#		End a transmission.
+	#
+	def endTransmit(self):
+		self.transmit([0]);
 
 # ***************************************************************************************
 #
@@ -118,7 +123,7 @@ if __name__ == "__main__":
 		else:
 			print("Unknown command "+cmd)
 			sys.exit(1)
-
+	serial.endTransmit();
 
 
 
