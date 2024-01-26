@@ -324,10 +324,13 @@ switch (*DCOMMAND) {
 				TTLRotate(DSPGetInt16(DCOMMAND,4));
 				break;
 			case 3:
-				TTLMove(DSPGetInt16(DCOMMAND,4));
+				TTLMove(DSPGetInt16(DCOMMAND,4),DCOMMAND[6],DCOMMAND[7]);
 				break;
 			case 4:
 				TTLHide();
+				break;
+			case 5:
+				TTLHome();TTLUpdate();
 				break;
 		}
 		break;

@@ -85,6 +85,10 @@ ClearCodeSetMemoryA:
 		.DoSendMessage 					
 		.byte 	6,6
 		.DoWaitMessage
+		;
+		;		Reset turtle system
+		;
+		jsr 	TurtleResetSystem
 		ply
 		rts
 

@@ -14,7 +14,9 @@
 
 static uint8_t turtleSpriteID = 0xFF; 											// ID of sprite
 static int turtleRotate; 														// Turtle rotation
-static int xTurtle,yTurtle; 													// Position
+static double xTurtle,yTurtle; 													// Position
+static uint8_t SUITurtle[8];													// Turtle info.
+
 
 #define TURTLE_COLOUR 	(3) 													// Yellow turtle
 
@@ -25,10 +27,8 @@ static int xTurtle,yTurtle; 													// Position
 // ***************************************************************************************
 
 void TTLInitialise(uint8_t spriteID) {
-	printf("TTL:Setup sprite %d\n",spriteID);
 	turtleSpriteID = spriteID;
-	turtleRotate = 0;
-	xTurtle = gMode.xGSize / 2;yTurtle = gMode.yGSize/2;
+	TTLHome();
 	SPRSetTurtleSprite(turtleSpriteID,turtleRotate,TURTLE_COLOUR);
 }
 
@@ -39,11 +39,21 @@ void TTLInitialise(uint8_t spriteID) {
 // ***************************************************************************************
 
 void TTLRotate(int16_t turn) {
-	printf("TTL:Right %d\n",turn);
 	if (turtleSpriteID == 0xFF) return;
 	int rotate = abs(turn) % 360;  												// Force into +/- 0..359 range.
 	turtleRotate = (turtleRotate + (turn < 0 ? -rotate : rotate)) % 360;  		// Work out the new angle
-	TTLMove(0); 																// Rotate but no move
+	TTLUpdate();																// Update it.
+}
+
+// ***************************************************************************************
+//
+//								Turtle to Home Position
+//
+// ***************************************************************************************
+
+void TTLHome(void) {
+	turtleRotate = 0;
+	xTurtle = gMode.xGSize / 2;yTurtle = gMode.yGSize/2;
 }
 
 // ***************************************************************************************
@@ -52,24 +62,36 @@ void TTLRotate(int16_t turn) {
 //
 // ***************************************************************************************
 
-static SUINFO SUITurtle;
-
-void TTLMove(int16_t distance) {
-	printf("TTL:Move %d\n",distance);
+void TTLMove(int16_t distance,uint8_t colour,uint8_t penDown) {
 	if (turtleSpriteID == 0xFF) return;
 	int xStart = xTurtle,yStart = yTurtle;
 	if (distance != 0) {
-		double radians = - (turtleRotate - 90) / (2 * 3.14159);  				// Convert to radians.
+		double radians = (turtleRotate+270) * 3.1415926 / 180;  				// Convert to radians.
 		xTurtle += cos(radians) * distance; 									// New position
 		yTurtle += sin(radians) * distance;
-		GFXFastLine(&gMode,xStart,yStart,xTurtle,yTurtle); 						// Draw it.
-	}
-	SPRSetTurtleSprite(turtleSpriteID,turtleRotate,TURTLE_COLOUR); 				// Rotate it
+		if (penDown) {
+			GFXSetColour(colour & 0x0F);  										// We have sprites.
+			GFXFastLine(&gMode,xStart,yStart,xTurtle,yTurtle); 					// Draw it.
+		}
+	}	
+	TTLUpdate();
+}
 
-	SUITurtle.spriteID = turtleSpriteID;  										// Prepare to update sprite
-	SUITurtle.x = xTurtle;SUITurtle.y = yTurtle;
-	SUITurtle.imageSize = 16;SUITurtle.flip = SUITurtle.anchor = 0;
-	SPRUpdate((uint8_t *)&SUITurtle); 											// Update, draw etc.
+// ***************************************************************************************
+//
+//							Update position and rotation
+//
+// ***************************************************************************************
+
+void TTLUpdate(void) {
+	int x = (int)(xTurtle+0.5);
+	int y = (int)(yTurtle+0.5);
+	SPRSetTurtleSprite(turtleSpriteID,turtleRotate,TURTLE_COLOUR); 				// Rotate it
+	SUITurtle[0] = turtleSpriteID;  											// Prepare to update sprite
+	SUITurtle[1] = x & 0xFF;SUITurtle[2] = x >> 8;
+	SUITurtle[3] = y & 0xFF;SUITurtle[4] = y >> 8;
+	SUITurtle[5] = 16;SUITurtle[6] = SUITurtle[7] = 0;
+	SPRUpdate(SUITurtle); 														// Update, draw etc.
 }
 
 // ***************************************************************************************
@@ -79,10 +101,9 @@ void TTLMove(int16_t distance) {
 // ***************************************************************************************
 
 void TTLHide(void) {
-	printf("TTL:Hide\n");
 	if (turtleSpriteID != 0xFF) {
-		SUITurtle.spriteID = turtleSpriteID;  									// Nothing else is used to hide
-		SPRHide((uint8_t *)&SUITurtle);
+		SUITurtle[0] = turtleSpriteID;  										// Nothing else is used to hide
+		SPRHide(SUITurtle);
 	}
 }
 

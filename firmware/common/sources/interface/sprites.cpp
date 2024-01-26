@@ -174,7 +174,7 @@ uint8_t SPRGetSpriteData(uint8_t *param) {
 // ***************************************************************************************
 
 static uint8_t *SPRUnpackTurtleGraphic(uint16_t angle) {
-	static uint8_t *gfx = turtleImage;
+	uint8_t *gfx = turtleImage;
 	for (int i = 0;i < 16;i++) {  												// One 16 bit bitmap at a time.
 		uint16_t bits = triangleBitData[angle * 16 + i];  						// Get bit pattern
 		for (int j = 0;j < 8;j++) {  											// 2 colours per pixel
@@ -234,7 +234,7 @@ int SPRUpdate(uint8_t *paramData) {
 			p->anchor = anchor;
 		}
 
-		if (isChanged) {  														// Image or size changed
+		if (isChanged != 0 && isTurtle == 0) {  								// Image or size changed, not turtle
 			p->imageSize = imageSize;  											// Update image size.
 			p->xSize = p->ySize = (imageSize & 0x40) ? 32:16;   				// Size of image.
 			int img = GFXFindImage((p->xSize == 16) ? 1 : 2,imageSize & 0x3F);	// Address of image (offset in gfx memory)													

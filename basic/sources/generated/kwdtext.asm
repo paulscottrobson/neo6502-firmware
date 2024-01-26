@@ -168,6 +168,7 @@ Shift1TokenText:
 	.byte	$07,$54,$49,$4c,$45,$4d,$41,$d0	; $1a4 TILEMAP
 	.byte	$05,$50,$45,$4e,$55,$d0       	; $1a5 PENUP
 	.byte	$07,$50,$45,$4e,$44,$4f,$57,$ce	; $1a6 PENDOWN
+	.byte	$04,$46,$41,$53,$d4           	; $1a7 FAST
 	.byte	$FF
 
 Shift2TokenText:

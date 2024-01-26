@@ -36,12 +36,6 @@ typedef struct _sprite_action {
 	uint8_t xBytes; 															// Bytes to copy.
 } SPRITE_ACTION;
 
-typedef struct _SpriteUpdateInfo {  											// Used to pass commands to sprite system.
-	uint8_t spriteID;
-	uint16_t x,y;
-	uint8_t imageSize,flip,anchor;
-} SUINFO;
-
 void SPRReset(void);  															// Sprite methods
 void SPRResetAll(void);
 void SPRHide(uint8_t *paramData);

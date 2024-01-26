@@ -34,12 +34,13 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $19c anchor
 	.word	Command_GLoad            ; $19d gload
 	.word	Command_DEFCHR           ; $19e defchr
-	.word	Unimplemented            ; $19f left
-	.word	Unimplemented            ; $1a0 right
-	.word	Unimplemented            ; $1a1 forward
+	.word	CommandLeft              ; $19f left
+	.word	CommandRight             ; $1a0 right
+	.word	CommandForward           ; $1a1 forward
 	.word	Unimplemented            ; $1a2 turtle
 	.word	Unimplemented            ; $1a3 sweet
 	.word	CommandTileMap           ; $1a4 tilemap
-	.word	Unimplemented            ; $1a5 penup
-	.word	Unimplemented            ; $1a6 pendown
+	.word	CommandPenup             ; $1a5 penup
+	.word	CommandPendown           ; $1a6 pendown
+	.word	Unimplemented            ; $1a7 fast
 	.send code
