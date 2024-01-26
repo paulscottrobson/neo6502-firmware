@@ -142,8 +142,6 @@ static void CONReverseCursorBlock(void) {
 
 void CONWrite(int c) {
 
-	FDBWrite(c);  																// Echo to debug stream
-	
 	switch (c) {
 
 		case CC_LEFT:															// A/1 left

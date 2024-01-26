@@ -19,9 +19,10 @@ endif
 
 BINARY = firmware
 #
-#		Can be SDCARD or USBKEY currently.
+#		Can be SDCARD or USBKEY currently. If you change this use make switch to
+#		rebuild as it cmake clean doesn't clean things up enough (probably me)
 #
-STORAGE = SDCARD
+STORAGE = USBKEY
 
 all: build
 
@@ -44,6 +45,10 @@ kernel: always
 #									Rebuild the firmware
 #
 # ***************************************************************************************
+
+switch: 
+	rm -Rf build
+	make rebuild 
 
 rebuild: clean build
 

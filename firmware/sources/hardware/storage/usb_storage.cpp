@@ -25,7 +25,7 @@ void STOInitialise(void) {
 }
 
 void STOSynchronise(void) {
-    CONWriteString("USB Storage\r");
+    CONWriteString("USB Storage\rWaiting for USB Key\r");
     while (!msc_inquiry_complete) {
         KBDSync();
         sleep_us(1000);
