@@ -40,6 +40,7 @@ void GFXSetMode(int Mode);
 void GFXDefaultPalette(void);
 void GFXResetDefaults(void);
 void GFXSetDefaults(uint8_t *cmd);
+void GFXSetColour(uint8_t colour);
 void GFXGraphicsCommand(uint8_t cmd,uint8_t *data);
 void GFXFastLine(struct GraphicsMode *gMode,int x, int y, int x2, int y2);
 void GFXPlotPixel(struct GraphicsMode *gMode,int x,int y);

@@ -121,7 +121,7 @@ clFrom: 									; LIST range.
 clTo:
 		.fill 	2		
 highMemoryUpper: 							; High byte of high memory
-		.fill 	1		
+		.fill 	1	
 
 ; ************************************************************************************************
 ;	
@@ -195,6 +195,15 @@ graphicsImageID: 							; ID of image
 graphicsFlip:								; flip bits of image (0 = horiz,1 = vertical)
 		.fill 	1
 
+turtleInitialised:							; turtle initialised ?
+		.fill 	1			
+turtlePenDown: 								; true if pen down
+		.fill 	1
+turtlePenColour: 							; pen colour.
+		.fill 	1		
+turtleFast: 								; turtle full speed
+		.fill 	1
+				
 ; ************************************************************************************************
 ;	
 ;					Sprites. Order here must match the order in the firmware

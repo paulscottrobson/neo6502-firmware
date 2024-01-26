@@ -15,8 +15,10 @@
 
 void TTLInitialise(uint8_t spriteID);
 void TTLRotate(int16_t turn);
-void TTLMove(int16_t distance);
+void TTLMove(int16_t distance,uint8_t colour,uint8_t penDown);
 void TTLHide(void);
+void TTLHome(void);
+void TTLUpdate(void);
 
 #endif
 

@@ -17,15 +17,10 @@ General
 Larger Additions
 ----------------
 
-	- Turtle Graphics System		
-		- write turtle library code and interface
-		- write BASIC interface.
-			LEFT n 
-			RIGHT n 
-			FORWARD n 
-			PENUP 
-			PENDOWN [<n>] 
-			TURTLE <HIDE>|<CLEAR>
+	- Turtle Graphics System	
+		- turtle forward 'slides'	
+		- write BASIC interface.		
+			TURTLE <HIDE>|<CLEAR>|<FAST>
 			
 	- Sprites 
 		- something like AMAL 
@@ -46,7 +41,8 @@ Other
 
 Add to Documentation
 --------------------
-
+	- Left, Right, Penup , Pendown <n>
+	
 Notes
 =====			
 

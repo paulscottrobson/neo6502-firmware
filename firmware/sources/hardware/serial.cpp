@@ -11,7 +11,7 @@
 // ***************************************************************************************
 
 #include "common.h"
-#include "hardware/uart.h"
+//#include "hardware/uart.h"
 
 #define UART_ID uart0
 #define BAUD_RATE 460800
@@ -30,12 +30,12 @@
 
 void SERInitialise(void) {
 	return;
-	uart_init(UART_ID, BAUD_RATE);
-	gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
-	gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
-	uart_set_hw_flow(UART_ID, false, false);
-	uart_set_format(UART_ID, DATA_BITS, STOP_BITS, PARITY);
-	uart_set_fifo_enabled(UART_ID, true);
+	// uart_init(UART_ID, BAUD_RATE);
+	// gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
+	// gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
+	// uart_set_hw_flow(UART_ID, false, false);
+	// uart_set_format(UART_ID, DATA_BITS, STOP_BITS, PARITY);
+	// uart_set_fifo_enabled(UART_ID, true);
 }
 
 // ***************************************************************************************
@@ -46,7 +46,7 @@ void SERInitialise(void) {
 
 bool SERIsByteAvailable(void) {
 	return false;
-	return uart_is_readable_within_us(UART_ID,0);
+	// return uart_is_readable_within_us(UART_ID,0);
 }
 
 // ***************************************************************************************
@@ -56,7 +56,8 @@ bool SERIsByteAvailable(void) {
 // ***************************************************************************************
 
 uint8_t SERReadByte(void) {
-	return uart_getc(UART_ID);
+	// return uart_getc(UART_ID);
+	return 0;
 }
 
 // ***************************************************************************************

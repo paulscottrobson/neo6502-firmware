@@ -14,7 +14,7 @@
 #define _MEMORY_h
 
 #define MEMORY_SIZE  0x10000 	// 64k
-#define GFX_MEMORY_SIZE 0xC000  // 48k for sprites/tiles/etc.
+#define GFX_MEMORY_SIZE 0x8000  // 32k for sprites/tiles/etc.
 
 #define DEFAULT_PORT 0xFF00
 

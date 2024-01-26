@@ -145,6 +145,7 @@ KWD_SWEET                          = $1a3 ; sweet
 KWD_TILEMAP                        = $1a4 ; tilemap
 KWD_PENUP                          = $1a5 ; penup
 KWD_PENDOWN                        = $1a6 ; pendown
+KWD_FAST                           = $1a7 ; fast
 KWD_ADC                            = $280 ; adc
 KWD_AND                            = $281 ; and
 KWD_ASL                            = $282 ; asl
