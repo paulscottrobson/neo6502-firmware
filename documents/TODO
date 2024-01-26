@@ -20,7 +20,13 @@ Larger Additions
 	- Turtle Graphics System		
 		- write turtle library code and interface
 		- write BASIC interface.
-		
+			LEFT n 
+			RIGHT n 
+			FORWARD n 
+			PENUP 
+			PENDOWN [<n>] 
+			TURTLE <HIDE>|<CLEAR>
+			
 	- Sprites 
 		- something like AMAL 
 

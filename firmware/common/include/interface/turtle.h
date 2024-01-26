@@ -14,8 +14,8 @@
 #define _TURTLE_H
 
 void TTLInitialise(uint8_t spriteID);
-void TTLRotate(uint16_t turn);
-void TTLMove(uint16_t distance,uint8_t colour);
+void TTLRotate(int16_t turn);
+void TTLMove(int16_t distance);
 void TTLHide(void);
 
 #endif
