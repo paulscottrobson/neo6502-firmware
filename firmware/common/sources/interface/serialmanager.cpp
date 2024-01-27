@@ -36,6 +36,10 @@ void SERCheckDataAvailable(void) {
 	bool completed = false;
 	CONWriteString("Serial link enabled.\r");
 	while (!completed) {
+		KBDSync();  																// Update USB stuff 
+		if (cpuMemory[controlPort+3] & 0x80) {  									// ESC pressed ?
+			completed = true;
+		}
 		if (SERIsByteAvailable()) {   												// Something waiting.
 			sBuffer[0] = SERReadByte();  											// Read length of data
 			sBuffer[1] = SERReadByte();  											// Read checksum
