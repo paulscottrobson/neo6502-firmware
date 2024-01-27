@@ -47,6 +47,50 @@ _TCIExit:
 
 ; ************************************************************************************************
 ;
+;								Turtle CLEAR|FAST|HIDE
+;
+; ************************************************************************************************
+
+CommandTurtle: ;; [turtle]
+		lda 	(codePtr),y 				; all 3 are in the minor group
+		iny
+		cmp 	#KWD_SYS_SH1 
+		bne 	_CTSyntax
+
+		lda 	(codePtr),y 				; check what it is
+		iny
+		cmp 	#KWD_CLEAR-$100
+		beq 	_CTClear
+		cmp 	#KWD_FAST-$100
+		beq 	_CTFast
+		cmp 	#KWD_Hide-$100
+		beq 	_CTHide
+_CTSyntax:
+		.error_syntax		
+
+_CTClear:
+		stz 	turtleInitialised 			; force reinitialisation
+		jsr 	TurtleCheckInitialised 		; reinitialise it
+		stz 	ControlParameters+0 		; rotate 0 to draw it
+		stz 	ControlParameters+1
+		.DoSendMessage 					 	
+		.byte 	9,2
+		.DoWaitMessage		
+		rts
+
+_CTHide:		
+		.DoSendMessage 					 	; hide command
+		.byte 	9,4
+		.DoWaitMessage		
+		rts
+
+_CTFast:
+		lda 	#1  						; move fast
+		sta 	turtleFast
+		rts		
+
+; ************************************************************************************************
+;
 ;									   Pen up
 ;
 ; ************************************************************************************************

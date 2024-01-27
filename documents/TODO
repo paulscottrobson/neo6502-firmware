@@ -17,12 +17,10 @@ General
 Larger Additions
 ----------------
 
-	- Turtle Graphics System	
-		- write BASIC interface.		
-			TURTLE <HIDE>|<CLEAR>|<FAST>
-			
+	- Serial upload timeout fix.
+
 	- Sprites 
-		- something like AMAL 
+		- something like AMAL - write spec document, probably bytecode
 
 	- Serial uploading
 		- save to storage option. 
@@ -37,10 +35,6 @@ Other
 -----
 	- Start the code review.
 	- Ongoing bug fixes
-
-Add to Documentation
---------------------
-	- Left, Right, Penup , Pendown <n>
 	
 Notes
 =====			

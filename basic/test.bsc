@@ -1,4 +1,5 @@
 cls
+turtle fast
 for i = 1 to 10
 pendown 3
 right 36
@@ -12,3 +13,5 @@ right 90
 forward 80
 right 90
 next
+forward 100
+turtle clear

@@ -37,7 +37,7 @@ ExtendedVectorTable:
 	.word	CommandLeft              ; $19f left
 	.word	CommandRight             ; $1a0 right
 	.word	CommandForward           ; $1a1 forward
-	.word	Unimplemented            ; $1a2 turtle
+	.word	CommandTurtle            ; $1a2 turtle
 	.word	Unimplemented            ; $1a3 sweet
 	.word	CommandTileMap           ; $1a4 tilemap
 	.word	CommandPenup             ; $1a5 penup
