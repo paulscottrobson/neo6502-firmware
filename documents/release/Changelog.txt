@@ -108,4 +108,4 @@ Changes
 27/01/24:	IMP: Added ESC option to serial link to break out.			
 			IMP: Completed turtle graphics 
 
-			
+28/01/24:	IMP: Tilemap Graphics can overlap the screen edges			

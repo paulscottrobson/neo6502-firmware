@@ -1,17 +1,21 @@
-cls
-turtle fast
-for i = 1 to 10
-pendown 3
-right 36
-forward 80
-pendown 2
-right 90
-forward 80
-right 90
-forward 80
-right 90
-forward 80
-right 90
+cls:gload "graphics.gfx"
+rect solid ink 2 from 0,0 to 319,239
+mem = alloc(8*6+3)
+poke mem,1:poke mem+1,8:poke mem+2,6
+for y = 0 to 5
+	base = (y & 1) * $F0
+	for x = 0 to 7
+		poke x+y*8+mem+3,base+x
+	next	
 next
-forward 100
-turtle clear
+tilemap mem,0,0
+call draw(10,10)
+call draw(114,183)
+call draw(250,-8)	
+call draw(-13,109)
+end
+
+
+proc draw(x,y)
+	tiledraw x,y to x+8*16,y+6*16
+endproc

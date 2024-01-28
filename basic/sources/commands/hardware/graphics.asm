@@ -280,10 +280,10 @@ GCSendDrawingInfo:
 GCGetCoordinates:
 		iny 								; consume TO or BY
 		ldx 	#0
-		jsr 	EXPEvalInteger16 			; x offset/pos
+		jsr 	EXPEvalInteger 				; x offset/pos
 		jsr 	ERRCheckComma
 		inx
-		jsr 	EXPEvalInteger16 			; y offset/pos
+		jsr 	EXPEvalInteger 				; y offset/pos
 		rts
 
 ; ************************************************************************************************
@@ -322,6 +322,7 @@ GraphicsReset:
 ;		==== 			=====
 ;		15/01/24 		Added FROM syntactic sugar really.
 ; 		21/01/24 		Added support for TILEDRAW
+; 		28/01/24 		Allow -ve coordinates
 ;
 ; ************************************************************************************************
 
