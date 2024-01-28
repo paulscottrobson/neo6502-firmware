@@ -101,7 +101,7 @@ void CPUReset(void) {
 			unsigned char *p;
 			*pos++ = '\0'; 															// Split it
 			if (strcmp(pos,"page") == 0) { 											// Load to page.
-				address = cpuMemory[0x809] + (cpuMemory[0x80A] << 8);
+				address = cpuMemory[0x820] + (cpuMemory[0x821] << 8);
 			} else {
 				if (sscanf(pos,"%x",&address) != 1)  								// Hex -> Decimal
 							exit(fprintf(stderr,"Bad format %s",pos));

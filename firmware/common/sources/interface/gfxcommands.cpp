@@ -237,10 +237,10 @@ void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int fl
 
 void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 	
-	uint16_t x1 = data[4]+(data[5] << 8);
-	uint16_t y1 = data[6]+(data[7] << 8);
-	uint16_t x2 = data[8]+(data[9] << 8);
-	uint16_t y2 = data[10]+(data[11] << 8);
+	int16_t x1 = data[4]+(data[5] << 8);
+	int16_t y1 = data[6]+(data[7] << 8);
+	int16_t x2 = data[8]+(data[9] << 8);
+	int16_t y2 = data[10]+(data[11] << 8);
 	bool isOk;
 
 	switch(cmd) {
@@ -281,5 +281,6 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 //		17-01-24 	Modified so graphics work ok with sprites.
 //		18-01-24 	Added function 33 (read pixel)
 //		19/01/24 	Added SOLID option to TEXT and IMAGE
+//		28/01/24 	Line parameters are now signed integers
 //
 // ***************************************************************************************
