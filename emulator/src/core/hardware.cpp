@@ -104,6 +104,8 @@ void HWQueueKeyboardEvent(int sdlCode,int isDown) {
 		int modifier = 0;
 		if (GFXIsKeyPressed(GFXKEY_SHIFT)) modifier |= KEY_SHIFT;
 		if (GFXIsKeyPressed(GFXKEY_CONTROL)) modifier |= KEY_CONTROL;
+		if (GFXIsKeyPressed(GFXKEY_ALT)) modifier |= KEY_ALT;
+		if (GFXIsKeyPressed(GFXKEY_ALTGR)) modifier |= KEY_ALTGR;
 		KBDEvent(isDown,found,modifier);
 	}
 }
