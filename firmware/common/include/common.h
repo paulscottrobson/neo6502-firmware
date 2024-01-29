@@ -52,6 +52,7 @@
 #include "interface/tilemap.h"
 #include "interface/serial.h"
 #include "interface/turtle.h"
+#include "interface/locale.h"
 //
 //		Other Includes
 //

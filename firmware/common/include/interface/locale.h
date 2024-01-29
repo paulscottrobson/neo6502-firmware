@@ -1,35 +1,26 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      config.cpp
+//      Name :      locale.h
 //      Authors :   Paul Robson (paul@robsons.org.uk)
-//      Date :      30th December 2023
+//      Date :      29th January 2024
 //      Reviewed :  No
-//      Purpose :   Configuration handler
+//      Purpose :   Locale handling
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-#include "common.h"
+#ifndef _NLOCALE_H
+#define _NLOCALE_H
 
-// ***************************************************************************************
-//
-//								Handle configuration
-//
-// ***************************************************************************************
+void LOCSetLocale(char c1,char c2);
+uint8_t LOCLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifiers);
 
-void CFGProcess(void) {
-#ifdef USBKEY_STORAGE
-	if (FIOReadFile(".config",0x100) == 0) {  									// Try to read config file
-		LOCSetLocale(cpuMemory[0x100],cpuMemory[0x101]);  						// Set locale from config file.
-	}
 #endif
-}
 
 // ***************************************************************************************
 //
 //		Date 		Revision
 //		==== 		========
-//		10/01/24 	Config load is for USB only. Doesn't work for SDCard. Don't know why.
 //
 // ***************************************************************************************

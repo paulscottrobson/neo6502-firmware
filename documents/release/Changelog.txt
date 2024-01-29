@@ -108,7 +108,8 @@ Changes
 27/01/24:	IMP: Added ESC option to serial link to break out.			
 			IMP: Completed turtle graphics 
 			*** Release 14 ***
-			
+
 28/01/24:	IMP: Tilemap Graphics can overlap the screen edges			
 
 29/01/24: 	IMP: Added keyboard support for ALT + ALTGR to emulator (framework/gfx)
+			IMP: Extracted locale code to a new file.
