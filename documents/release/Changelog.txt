@@ -109,3 +109,5 @@ Changes
 			IMP: Completed turtle graphics 
 
 28/01/24:	IMP: Tilemap Graphics can overlap the screen edges			
+
+29/01/24: 	IMP: Added keyboard support for ALT + ALTGR
