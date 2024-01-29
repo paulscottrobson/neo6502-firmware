@@ -34,15 +34,21 @@ static const uint8_t *_KBDLocaleCurrent = NULL;
 // ***************************************************************************************
 
 void LOCSetLocale(char c1,char c2) {
+	bool succeed = false;
 	c1 = tolower(c1);c2 = tolower(c2);	
 	const uint8_t *search = _KBDLocaleData;
 	_KBDLocaleCurrent = NULL;
 	while (search[0] != 0) {  													// Look through the locale table
 		if (c1 == search[1] && c2 == search[2]) {  								// Found the locale, use it
 			_KBDLocaleCurrent = search+3;	
+			CONWriteString("Locale is now '");
+			CONWrite(c1);CONWrite(c2);
+			CONWriteString("'\r");
+			succeed = true;
 		}  	
 		search += search[0];													// Follow the list.
 	}
+	if (!succeed) CONWriteString("Setting the locale failed.\r");
 }
 
 // ***************************************************************************************

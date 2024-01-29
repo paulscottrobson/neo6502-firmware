@@ -17,8 +17,6 @@ General
 Larger Additions
 ----------------
 
-	- Change keymap command.
-	
 	- Serial upload timeout fix.
 
 	- Serial uploading

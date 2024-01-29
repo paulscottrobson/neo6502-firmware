@@ -113,3 +113,5 @@ Changes
 
 29/01/24: 	IMP: Added keyboard support for ALT + ALTGR to emulator (framework/gfx)
 			IMP: Extracted locale code to a new file.
+			IMP: Added Locale
+			IMP: Added German keyboard file			

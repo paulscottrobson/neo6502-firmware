@@ -43,4 +43,6 @@ ExtendedVectorTable:
 	.word	CommandPenup             ; $1a5 penup
 	.word	CommandPendown           ; $1a6 pendown
 	.word	Unimplemented            ; $1a7 fast
+	.word	Unimplemented            ; $1a8 home
+	.word	Command_LOCALE           ; $1a9 locale
 	.send code

@@ -169,6 +169,8 @@ Shift1TokenText:
 	.byte	$05,$50,$45,$4e,$55,$d0       	; $1a5 PENUP
 	.byte	$07,$50,$45,$4e,$44,$4f,$57,$ce	; $1a6 PENDOWN
 	.byte	$04,$46,$41,$53,$d4           	; $1a7 FAST
+	.byte	$04,$48,$4f,$4d,$c5           	; $1a8 HOME
+	.byte	$06,$4c,$4f,$43,$41,$4c,$c5   	; $1a9 LOCALE
 	.byte	$FF
 
 Shift2TokenText:
