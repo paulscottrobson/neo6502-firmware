@@ -35,11 +35,16 @@ class SerialInterface(object):
 	def __init__(self,port):
 		self.port = serial.Serial(port)
 		self.port.baudrate = 460800
+		self.breakTranmission = 0 													# 0 checksum, 1 insufficient data
 	#
 	#		Transmit a command
 	#
 	def transmit(self,data):
 		header = [len(data),sum(data) & 0xFF]  										# Header is the length of attached data + checksum
+		if self.breakTranmission == 1:
+			header[0] = (header[0]+1) & 0xFF
+		if self.breakTranmission == 2:
+			data = data[0]
 		self.port.write(bytes(header))   											# Write header
 		self.port.write(bytes(data))  												# Write data block
 		#time.sleep(0)
