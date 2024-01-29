@@ -45,6 +45,8 @@ static uint8_t KBDLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifi
 
 void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 
+	CONWriteHex(modifiers);
+	
 	if (isDown && keyCode == KEY_ESC) {   										// Pressed ESC
 		cpuMemory[controlPort+3] |= 0x80;  										// Set that flag.
 	}

@@ -18,13 +18,17 @@
 //
 #define _KEY_MOD_LCTRL  0x01
 #define _KEY_MOD_LSHIFT 0x02
+#define _KEY_LEFT_ALT   0x04
 #define _KEY_MOD_RCTRL  0x10
 #define _KEY_MOD_RSHIFT 0x20
+#define _KEY_RIGHT_ALT 	0x40
 //
 //		Actual mask bits.
 //
 #define KEY_SHIFT 		(_KEY_MOD_LSHIFT|_KEY_MOD_RSHIFT)
 #define KEY_CONTROL 	(_KEY_MOD_LCTRL|_KEY_MOD_RCTRL)
+#define KEY_ALT  		(_KEY_LEFT_ALT)
+#define KEY_ALTGR 		(_KEY_RIGHT_ALT)
 //
 //		Keys A-Z are in order
 //
@@ -84,5 +88,6 @@
 //
 //		Date 		Revision
 //		==== 		========
+//		29-01-24 	Added constants for left gr/right gr
 //
 // ***************************************************************************************

@@ -39,7 +39,7 @@ static void usbProcessReport(uint8_t const *report) {
 			lastReport[key] = 1;                                                // Flag it as now being down.
 		}
 	} 
-	for (int i = 0;i < KBD_MAX_KEYCODE;i++) {                                   // Any remaining -ve keys are up actions.
+	for (int i = 0;i < KBD_MAX_KEYCODE;i++) {                              		// Any remaining -ve keys are up actions.
 		if (lastReport[i] < 0) {
 			KBDEvent(0,i,0);                                                    // Flag going up.
 			lastReport[i] = 0;                                                  // Mark as now up
