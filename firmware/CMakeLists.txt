@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 3.14)
 
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+
+set(PICO_SDK_FETCH_FROM_GIT on)
+include(pico_sdk_import.cmake)
+
+project(firmware C CXX ASM)
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -8,12 +16,7 @@ FetchContent_Declare(
     GIT_TAG        0.16.0
 )
 FetchContent_MakeAvailable(tinyusb)
-
 set(PICO_TINYUSB_PATH ${tinyusb_SOURCE_DIR})
-include($ENV{PICO_SDK_PATH}/pico_sdk_init.cmake)
-project(firmware C CXX ASM)
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
