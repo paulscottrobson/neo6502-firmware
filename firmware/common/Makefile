@@ -25,8 +25,9 @@ all:
 	$(CCOPY) $(BINDIR)basic_binary.h include$(S)data
 
 	$(PYTHON) $(COMDIR)scripts$(S)who.py >$(COMDIR)include$(S)data$(S)neowho.h
-	$(PYTHON) $(COMDIR)scripts$(S)keymaps.py >$(COMDIR)include$(S)data$(S)neolocale.h
 	$(PYTHON) $(COMDIR)scripts$(S)prompt.py $(COMDIR)scripts$(S)build.count >$(COMDIR)include$(S)data$(S)prompt.h
 	$(PYTHON) $(COMDIR)scripts$(S)sfx.py >$(COMDIR)include$(S)data$(S)sfxdata.h
 	$(PYTHON) $(COMDIR)scripts$(S)triangle.py >$(COMDIR)include$(S)data$(S)triangle.h
+
+	$(PYTHON) $(COMDIR)locale$(S)keymaps.py >$(COMDIR)include$(S)data$(S)neolocale.h
 

@@ -47,14 +47,10 @@ void LOCSetLocale(char c1,char c2) {
 // ***************************************************************************************
 
 uint8_t LOCLocaleMapping(uint8_t asciiCode,uint8_t keyCode,uint8_t modifiers) {
+	//CONWriteHex(asciiCode);CONWriteHex(keyCode);CONWriteHex(modifiers);CONWrite('\r');
+
 	if (_KBDLocaleCurrent != NULL) {  											// Is there a locale conversion ?	
-		uint8_t checkValue = ((modifiers & KEY_SHIFT) != 0) ?  					// Byte to check ; bit 7 shift, 0-6 keycode
-													0x80+keyCode : keyCode;
-		const uint8_t *check = _KBDLocaleCurrent; 								// Scan our locale table for the keycode/shift
-		while (check[0] != 0xFF) {
-			if (check[0] == checkValue) asciiCode = check[1];   				// If found use that
-			check += 2;	
-		}
+
 	}
 	return asciiCode;
 }

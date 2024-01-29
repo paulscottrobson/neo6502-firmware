@@ -3,25 +3,15 @@
 #
 #      Name :      keymaps.py
 #      Authors :   Paul Robson (paul@robsons.org.uk)
-#      Date :      29th December 2023
+#      Date :      29th January 2024
 #      Reviewed :  No
-#      Purpose :   Prompt creator (counts builds etc.)
+#      Purpose :   Locale Processor
 #
 # ***************************************************************************************
 # ***************************************************************************************
 
 import sys,os,re
 
-keys = """
-#
-#		GB (e.g. United Kingdom) keyboard variations.
-#
-	[GB]
-
-"""
-
-src = [x for x in keys.replace("\t"," ").split("\n") if not x.startswith("#")]
-src = " ".join(src)
 code = []
 current = []
 code += [0]
