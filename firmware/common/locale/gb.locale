@@ -12,8 +12,8 @@
 #
 #		Unshifted keys. For example the French AZERTY and the German QWERTZ
 #
-[unshifted]
-	49:#		
+[noshift]
+	49:35		
 #
 #		Shifted keys. QWERTZ and AZERTY again, but also things like the number shifts.
 #

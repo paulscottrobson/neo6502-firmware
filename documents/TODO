@@ -17,8 +17,8 @@ General
 Larger Additions
 ----------------
 
-	- New Locale Driver etc.
-
+	- Change keymap command.
+	
 	- Serial upload timeout fix.
 
 	- Serial uploading

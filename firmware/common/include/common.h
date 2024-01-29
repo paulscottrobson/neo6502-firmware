@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <ctype.h>
+
 //
 //		RP2040 specific includes
 //
@@ -53,10 +55,6 @@
 #include "interface/serial.h"
 #include "interface/turtle.h"
 #include "interface/locale.h"
-//
-//		Other Includes
-//
-#include "string.h"
 
 #endif
 

@@ -25,6 +25,7 @@
 //
 //		Actual mask bits.
 //
+#define KEY_NOSHIFT 	(0)
 #define KEY_SHIFT 		(_KEY_MOD_LSHIFT|_KEY_MOD_RSHIFT)
 #define KEY_CONTROL 	(_KEY_MOD_LCTRL|_KEY_MOD_RCTRL)
 #define KEY_ALT  		(_KEY_LEFT_ALT)
