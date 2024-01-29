@@ -15,7 +15,7 @@
 
 bool SERInitialise(void);
 bool SERIsByteAvailable(void);
-int  SERReadByte(void);
+uint8_t SERReadByte(void);
 void SERCheckDataAvailable(void);
 
 #endif

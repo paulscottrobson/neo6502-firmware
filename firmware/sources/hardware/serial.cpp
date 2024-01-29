@@ -54,7 +54,7 @@ bool SERIsByteAvailable(void) {
 //
 // ***************************************************************************************
 
-int SERReadByte(void) {
+uint8_t SERReadByte(void) {
 	return uart_getc(UART_ID);
 }
 
