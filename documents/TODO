@@ -17,17 +17,21 @@ General
 Larger Additions
 ----------------
 
+	- New Locale Driver etc.
+
 	- Serial upload timeout fix.
 
-	- tilemap edging
-	
+	- Serial uploading
+		- save to storage option. 
+
+After Holiday
+-------------
+
 	- 32x32 tiles (scaled)
 
 	- Sprites 
 		- something like AMAL - write spec document, probably bytecode
 
-	- Serial uploading
-		- save to storage option. 
 		
 	- Add USB Joystick interface if stable.
 
