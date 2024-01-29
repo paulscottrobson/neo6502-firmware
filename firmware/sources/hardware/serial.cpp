@@ -54,7 +54,7 @@ bool SERIsByteAvailable(void) {
 //
 // ***************************************************************************************
 
-uint8_t SERReadByte(void) {
+int SERReadByte(void) {
 	return uart_getc(UART_ID);
 }
 
@@ -62,5 +62,6 @@ uint8_t SERReadByte(void) {
 //
 //		Date 		Revision
 //		==== 		========
+//		29-01-24 	Added timeout to readbyte.
 //
 // ***************************************************************************************
