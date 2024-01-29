@@ -73,6 +73,7 @@
 	.include "sources/commands/hardware/fkey.asm"
 	.include "sources/commands/hardware/graphics.asm"
 	.include "sources/commands/hardware/ink.asm"
+	.include "sources/commands/hardware/locale.asm"
 	.include "sources/commands/hardware/palette.asm"
 	.include "sources/commands/hardware/sfx.asm"
 	.include "sources/commands/hardware/sound.asm"

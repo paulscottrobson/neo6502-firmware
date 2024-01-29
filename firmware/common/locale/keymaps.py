@@ -70,12 +70,12 @@ class Keymap(object):
 		keyID = m.group(1) 		 												# check the key ID
 		assert int(keyID) < 128,"Bad key id in "+mapping
 		if len(m.group(2)) == 1:  												# character to map to
-			keyCode = "'"+m.group(2)[0]+"'"
+			keyCode = str(ord(m.group(2)[0]))
 		else:
 			mn = re.match("^\\d+$",m.group(2))   								# must be ASCII value
 			assert mn is not None,"Bad mapping character "+mapping
 			keyCode = m.group(2)
-
+		assert int(keyCode) >= 32 and int(keyCode) < 127,"Bad character value : "+mapping
 		return [keyMask,keyID,keyCode]
 
 mapList = []

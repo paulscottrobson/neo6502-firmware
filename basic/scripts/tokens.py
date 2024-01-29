@@ -125,6 +125,7 @@ class TokenSet(object):
 			CLS 	INK		FRAME	SOLID	BY 		WHO 	PALETTE DRAW	
 			HIDE 	FLIP 	SOUND 	SFX 	ANCHOR	GLOAD	DEFCHR  LEFT
 			RIGHT 	FORWARD	TURTLE 	SWEET 	TILEMAP PENUP   PENDOWN FAST
+			HOME 	LOCALE
 			""")
 		#
 		#		Keyword tokens (assembler)

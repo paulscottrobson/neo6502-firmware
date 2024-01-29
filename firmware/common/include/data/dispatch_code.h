@@ -23,6 +23,9 @@ switch (*DCOMMAND) {
 			case 5:
 				SERCheckDataAvailable();
 				break;
+			case 6:
+				LOCSetLocale(DPARAMS[0],DPARAMS[1]);
+				break;
 		}
 		break;
 	case 2:
