@@ -68,7 +68,13 @@ static void CONDrawCharacter(uint16_t x,uint16_t y,uint16_t ch,uint16_t fcol,uin
 static void CONClearScreen(void) {
 	graphMode->xCursor = graphMode->yCursor = 0;  								// Home cursor
 	if (graphMode->xGSize != 0) {  												// Graphics present ?
-		memset(graphMode->graphicsMemory,graphMode->backCol,MAXGRAPHICSMEMORY); // Erase graphics screen to black
+		if (SPRSpritesInUse()) {  												// Sprites present, only delete that layer
+			for (int i = 0;i < gMode.xGSize*gMode.yGSize;i++) {
+				graphMode->graphicsMemory[i] &= 0xF0;
+			}
+		} else {																// Erase graphics screen to black
+			memset(graphMode->graphicsMemory,graphMode->backCol,MAXGRAPHICSMEMORY); 
+		}
 	}
 	memset(graphMode->consoleMemory,' ',MAXCONSOLEMEMORY); 						// Erase character display to spaces.
 	for (int y = 0;y < graphMode->yCSize;y++) {  								// No extended lines.
@@ -273,5 +279,6 @@ void CONWriteString(const char *s) {
 //		==== 		========
 //		11-01-24	Added user defined font option.
 //		17-01-24 	TAB goes down at end of line.
+//		30-01-24 	Fixed clear screen to clear text area only, not sprites too.
 //
 // ***************************************************************************************

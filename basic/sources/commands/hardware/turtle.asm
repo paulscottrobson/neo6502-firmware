@@ -59,7 +59,7 @@ CommandTurtle: ;; [turtle]
 
 		lda 	(codePtr),y 				; check what it is
 		iny
-		cmp 	#KWD_CLEAR-$100
+		cmp 	#KWD_HOME-$100
 		beq 	_CTClear
 		cmp 	#KWD_FAST-$100
 		beq 	_CTFast
@@ -206,6 +206,7 @@ _TDExit:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		30-01-24 		TURTLE HOME replaces TURTLE CLEAR
 ;
 ; ************************************************************************************************
 

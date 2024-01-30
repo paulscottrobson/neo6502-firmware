@@ -282,9 +282,6 @@ switch (*DCOMMAND) {
 			case 5:
 				*DERROR = SPRGetSpriteData(DPARAMS);
 				break;
-			case 6:
-				SPRResetAll();
-				break;
 		}
 		break;
 	case 7:

@@ -1,5 +1,8 @@
 cls:gload "graphics.gfx"
 rect solid ink 2 from 0,0 to 319,239
+for i = 0 to 31:line i*10,0 ink 3 to i*10,239:next
+sprite 0 image $C0 to 100,100
+end
 mem = alloc(8*6+3)
 poke mem,1:poke mem+1,8:poke mem+2,6
 for y = 0 to 5

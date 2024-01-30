@@ -8,7 +8,7 @@ General
 			SDCard should be a backup if at all possible as can block UEXT SPI usage.
 
 	- The peculiar LoadROM bug, currently worked round. Now resets on reload
-			so now only loaded at boot.
+			so now only loaded at boot (does this still happen ???)
 
 	- Current clock 6.25 Mhz, this may be reduced if some board can't cope.
 
@@ -17,10 +17,12 @@ General
 Larger Additions
 ----------------
 
-	- Turtle fixes
-	
+	- SPOINT possibly 
+
 	- Serial uploading
 		- save to storage option. 
+
+	- Finish Invaders 
 
 After Holiday
 -------------
