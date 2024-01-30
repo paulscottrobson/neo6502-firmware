@@ -10,15 +10,43 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 
+
+		.section code	
+
 ; ************************************************************************************************
 ;
 ;									Read Pixel from screen
 ;
 ; ************************************************************************************************
 
-		.section code	
-
 EXPUnaryPoint: ;; [point(]
+		jsr 	PointCommonCode
+		.DoSendMessage 						; read pixel
+		.byte 	5,33
+		.DoWaitMessage
+
+PointCommonExit:
+		lda 	ControlError 				; failed ?
+		bne 	_EUPError
+		lda 	ControlParameters+0 		; true/false option.
+		jmp 	EXPUnaryReturnA
+_EUPError:
+		.error_range
+
+; ************************************************************************************************
+;
+;								Read Pixel from sprite layer
+;
+; ************************************************************************************************
+
+EXPUnarySPoint: ;; [spoint(]
+		jsr 	PointCommonCode
+		.DoSendMessage 						; read pixel on sprite layer
+		.byte 	5,36
+		.DoWaitMessage
+		bra 	PointCommonExit
+
+PointCommonCode:		
 		jsr 	EXPEvalInteger16 			; x
 		inx
 		jsr 	ERRCheckComma
@@ -34,19 +62,8 @@ EXPUnaryPoint: ;; [point(]
 		sta 	ControlParameters+2
 		lda 	XSNumber1+1,x
 		sta 	ControlParameters+3
+		rts
 
-		.DoSendMessage 						; read pixel
-		.byte 	5,33
-		.DoWaitMessage
-
-		lda 	ControlError 				; failed ?
-		bne 	_EUPError
-
-		lda 	ControlParameters+0 		; true/false option.
-		jmp 	EXPUnaryReturnA
-
-_EUPError:
-		.error_range
 
 		.send code
 
@@ -59,6 +76,7 @@ _EUPError:
 ;
 ;		Date			Notes
 ;		==== 			=====
+; 		30-01-24 		Added support for SPOINT which is almost identical.
 ;
 ; ************************************************************************************************
 

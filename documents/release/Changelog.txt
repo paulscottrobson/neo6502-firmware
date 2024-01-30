@@ -113,10 +113,13 @@ Changes
 
 29/01/24: 	IMP: Added keyboard support for ALT + ALTGR to emulator (framework/gfx)
 			IMP: Extracted locale code to a new file.
-			IMP: Added Locale
+			IMP: Added new Locale code
 			IMP: Added German keyboard file			
 
 30/01/24: 	BUG: CLS now clears the graphics screen but *not* the sprites if present
 			BUG: SPRITE CLEAR clears the sprites only
 			BUG: CLEAR now resets the sprites and clears the sprite layer, which makes them consistent.
 			IMP: TURTLE CLEAR is now TURTLE HOME			
+			IMP: Added SPOINT() to read sprite layer.
+			*** Release 15 ***
+

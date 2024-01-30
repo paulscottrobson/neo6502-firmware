@@ -20,7 +20,7 @@ StandardVectorTable:
 	.word	UnaryAbs                 ; $8e abs(
 	.word	UnarySgn                 ; $8f sgn(
 	.word	EXPUnaryHit              ; $90 hit(
-	.word	Unimplemented            ; $91 !!un9
+	.word	EXPUnarySPoint           ; $91 spoint(
 	.word	Unary_Mid                ; $92 mid$(
 	.word	Unary_Left               ; $93 left$(
 	.word	Unary_Right              ; $94 right$(
