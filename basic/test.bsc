@@ -1,25 +1,229 @@
-cls:gload "graphics.gfx"
-rect solid ink 1 from 0,0 to 319,239
-for i = 0 to 31:line i*10,0 ink 3 to i*10,239:next
-sprite 0 image $C3 to 200,100
-for i = 8 to 12:y = i * 10:print y,point(201,y),spoint(201,y):next
-end
-mem = alloc(8*6+3)
-poke mem,1:poke mem+1,8:poke mem+2,6
-for y = 0 to 5
-	base = (y & 1) * $F0
-	for x = 0 to 7
-		poke x+y*8+mem+3,base+x
-	next	
-next
-tilemap mem,0,0
-call draw(10,10)
-call draw(114,183)
-call draw(250,-8)	
-call draw(-13,109)
+cls:sprite clear
+gload "invaders.gfx"
+
+invader_sprite_start = 0
+invader_off_x = 24
+invader_off_y = 80
+invader_cursor = 0
+rank_swap = 0
+invader_direction = 2
+invader_x = 0
+invader_y = 0
+invader_t = 0
+min_rank_x = 10
+max_rank_x = 200
+tinvaders = 0
+
+'
+' Data for alien sprite collision pixel checking
+dim invmask(96)
+for i = 0 to 95:read invmask(i):next
+
+' Frame 1
+
+data $03,$C0  ' 0000001111000000
+data $1F,$F8  ' 0001111111111000
+data $3F,$FC  ' 0011111111111100
+data $39,$9C  ' 0011100110011100
+data $3F,$FC  ' 0011111111111100
+data $06,$60  ' 0000011001100000
+data $0D,$D0  ' 0000110110110000
+data $30,$0C  ' 0011000000001100
+
+data $04,$10  ' 0000010000010000
+data $12,$24  ' 0001001000100100
+data $17,$F4  ' 0001011111110100
+data $1D,$DC  ' 0001110111011100
+data $1F,$FC  ' 0001111111111100
+data $0F,$F8  ' 0000111111111000
+data $04,$10  ' 0000010000010000
+data $08,$08  ' 0000100000001000
+
+data $01,$80  ' 0000000110000000
+data $04,$C0  ' 0000001111000000
+data $07,$E0  ' 0000011111100000
+data $0D,$B0  ' 0000110110110000
+data $0F,$F0  ' 0000111111110000
+data $02,$40  ' 0000001001000000
+data $05,$A0  ' 0000010110100000
+data $0A,$50  ' 0000101001010000
+
+' Frame 2
+
+data $03,$C0  ' 0000001111000000
+data $1F,$F8  ' 0001111111111000
+data $3F,$FC  ' 0011111111111100
+data $39,$9C  ' 0011100110011100
+data $3F,$FC  ' 0011111111111100
+data $06,$60  ' 0000011001100000
+data $0D,$D0  ' 0000110110110000
+data $06,$60  ' 0000011001100000
+
+data $04,$10  ' 0000010000010000
+data $02,$20  ' 0000001000100000
+data $07,$F0  ' 0000011111110000
+data $0D,$D8  ' 0000110111011000
+data $1F,$FC  ' 0001111111111100
+data $1F,$FC  ' 0001111111111100
+data $14,$14  ' 0001010000010100
+data $03,$60  ' 0000001101100000
+
+data $01,$80  ' 0000000110000000
+data $04,$C0  ' 0000001111000000
+data $07,$E0  ' 0000011111100000
+data $0D,$B0  ' 0000110110110000
+data $0F,$F0  ' 0000111111110000
+data $05,$A0  ' 0000010110100000
+data $08,$10  ' 0000100000010000
+data $04,$20  ' 0000010000100000
+
+
+player_sprite = invader_sprite_start + 55
+player_shot_sprite = player_sprite + 1
+player_x = 35
+player_y = 165
+player_shot_x = 0
+player_shot_y = 0
+player_shot_active = 0
+tplayer = 0
+
+invaders = alloc(55)
+
+call initInvaders()
+call initPlayer()
+call drawShields()
+
+repeat
+  ft = time()
+  if event(tplayer, 2)
+    call movePlayer()
+    call drawPlayer()
+    call updatePlayerShot()
+  endif
+  if event(tinvaders, 2) 
+    repeat
+      invader_cursor = invader_cursor + 1
+      if invader_cursor >= 25 then invader_cursor = 0
+    until peek(invaders + invader_cursor) = 0
+    call drawInvaders()
+  endif
+  ft = time() - ft
+  print chr$(20);ft
+until 0
+
 end
 
 
-proc draw(x,y)
-	tiledraw x,y to x+8*16,y+6*16
+proc initInvaders() 
+  for i = 0 to 54
+    poke invaders + i, 1
+  next:poke invaders+22,0
+  ' poke invaders + 22, 0
+  ' poke invaders + 12, 0
+  poke invaders + 54, 1
+  rank_swap = 0
+  invader_off_x = 24
+  invader_off_y = 80
+  invader_direction = 2
+  invader_cursor = -1
 endproc
+
+
+proc drawInvaders()
+  call getInvaderPos(invader_cursor)
+  if invader_x >= max_rank_x | invader_x <= min_rank_x
+    rank_swap = 1
+  endif
+  sprite invader_cursor image $80 + invader_t to invader_x, invader_y anchor 7
+endproc
+
+
+proc getInvaderPos(index)
+  invader_x = invader_off_x + ((index % 11) << 4)
+  local row
+  row = index \ 11
+  invader_y = invader_off_y - (row << 4)
+  invader_t = (row \ 2) << 1 + invader_frame
+endproc
+
+
+proc initPlayer() 
+  player_x = 35
+  player_y = 165
+  player_shot_active = 0
+endproc
+
+
+proc movePlayer()
+  local fire, dx, dy
+  fire = joypad(dx, dy)
+  player_x = max(8, min(200, player_x + dx))
+  if fire <> 0 & player_shot_active = 0
+    player_shot_x = player_x + 8
+    player_shot_y = player_y
+    player_shot_active = 1
+  endif
+endproc
+
+
+proc drawPlayer()
+  sprite player_sprite image $86 to player_x, player_y anchor 7
+endproc
+
+
+proc updatePlayerShot()
+  if player_shot_active = 1 
+    sprite player_shot_sprite image $88 to player_shot_x, player_shot_y anchor 7
+    player_shot_y = player_shot_y - 4
+    if player_shot_y < 0
+      player_shot_active = false
+      sprite player_shot_sprite image $88 to -16, -16 anchor 7
+    else
+      if player_shot_x > invader_off_x & player_shot_x < (invader_off_x + 176)
+        if player_shot_y < (invader_off_y + 16) & player_shot_y > (invader_off_y - 64)
+          local inv_hit_row, inv_hit_col, inv_hit
+          inv_hit_row = ((invader_off_y + 16) - player_shot_y) >> 4
+          inv_hit_col = (player_shot_x - invader_off_x) >> 4 
+          inv_hit = inv_hit_row * 11 + inv_hit_col
+          invader_t = inv_hit_row >> 1
+          if inv_hit_row >= 0 & inv_hit_row < 5 & peek(invaders + inv_hit) = 0
+            local cpoint_x, cpoint_y
+            cpoint_x = player_shot_x - (invader_off_x + (inv_hit_col << 4))
+            cpoint_y = player_shot_y - (invader_off_y - (inv_hit_row << 4))
+
+            ' Bottom 8 lines of all alien sprites are blank.
+            if cpoint_y <= 7 
+              local mask_byte, mask_col_index, bit_test, mask_offset
+              mask_col_index = cpoint_x >> 3
+              mask_offset = (cpoint_y << 1) + (invader_t << 4) + mask_col_index
+              mask_byte = invmask(mask_offset) + (invader_frame * 48)
+              bit_test = $80 >> ((cpoint_x - (8 * mask_col_index)) & $7)
+              if mask_byte & bit_test
+                poke invaders + inv_hit, 1
+                sprite (invader_sprite_start + inv_hit) image $80 to -16, -16 anchor 7
+                player_shot_active = false
+                sprite player_shot_sprite to -16, 1-6 anchor 7
+              endif
+            endif
+          endif
+        endif
+      endif
+    endif
+  endif
+endproc
+
+
+proc drawShields()
+  local xpos, ypos
+  xpos = 28 
+  ypos = 132
+  image $C0 to xpos, ypos
+  xpos = xpos + (22 + 23)
+  image $C0 to xpos, ypos
+  xpos = xpos + (22 + 23)
+  image $C0 to xpos, ypos
+  xpos = xpos + (22 + 23)
+  image $C0 to xpos, ypos
+endproc
+
+

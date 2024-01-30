@@ -1,0 +1,25 @@
+cls:gload "graphics.gfx"
+rect solid ink 1 from 0,0 to 319,239
+for i = 0 to 31:line i*10,0 ink 3 to i*10,239:next
+sprite 0 image $C3 to 200,100
+for i = 8 to 12:y = i * 10:print y,point(201,y),spoint(201,y):next
+end
+mem = alloc(8*6+3)
+poke mem,1:poke mem+1,8:poke mem+2,6
+for y = 0 to 5
+	base = (y & 1) * $F0
+	for x = 0 to 7
+		poke x+y*8+mem+3,base+x
+	next	
+next
+tilemap mem,0,0
+call draw(10,10)
+call draw(114,183)
+call draw(250,-8)	
+call draw(-13,109)
+end
+
+
+proc draw(x,y)
+	tiledraw x,y to x+8*16,y+6*16
+endproc
