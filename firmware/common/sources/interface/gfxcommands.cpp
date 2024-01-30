@@ -270,6 +270,14 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 				if (SPRSpritesInUse()) data[4] &= 0x0F;
 			}
 			break;
+		case 36:
+			isOk = (x1 >= 0 && y1 >= 0 && x1 < gMode.xGSize && y1 < gMode.yGSize);
+			data[2] = isOk ? 0 : 1;
+			data[4] = 0;
+			if (isOk && SPRSpritesInUse()) {
+				data[4] = gMode.graphicsMemory[x1 + y1 * gMode.xGSize] >> 4;
+			}
+			break;
 	}
 }
 
@@ -282,5 +290,6 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 //		18-01-24 	Added function 33 (read pixel)
 //		19/01/24 	Added SOLID option to TEXT and IMAGE
 //		28/01/24 	Line parameters are now signed integers
+//		30/01/24 	Added SPOINT to read sprite pixel (36)
 //
 // ***************************************************************************************

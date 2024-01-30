@@ -263,6 +263,9 @@ switch (*DCOMMAND) {
 			case 35:
 				TMPSelectTileMap(cpuMemory+DSPGetInt16(DCOMMAND,4),DSPGetInt16(DCOMMAND,6),DSPGetInt16(DCOMMAND,8));
 				break;
+			case 36:
+				GFXGraphicsCommand(36,DCOMMAND);
+				break;
 		}
 		break;
 	case 6:
