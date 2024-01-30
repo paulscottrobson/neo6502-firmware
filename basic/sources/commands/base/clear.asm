@@ -80,10 +80,10 @@ ClearCodeSetMemoryA:
 		;
 		jsr 	GraphicsReset
 		;
-		;		Reset sprite data
+		;		Reset sprite data and clear sprite layer
 		;
 		.DoSendMessage 					
-		.byte 	6,6
+		.byte 	6,1
 		.DoWaitMessage
 		;
 		;		Reset turtle system
@@ -236,6 +236,7 @@ _CVExit:
 ;		==== 			=====
 ;		16-01-24		CLEAR was looping (Y was reset to 3 causing it to loop infinitely)
 ;		23-01-24 		CLEAR resets all sprite settings as well.
+; 		30-01-24 		CLEAR clears the sprite layer to maintain consistency.
 ;
 ; ************************************************************************************************
 

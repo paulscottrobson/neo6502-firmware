@@ -115,3 +115,8 @@ Changes
 			IMP: Extracted locale code to a new file.
 			IMP: Added Locale
 			IMP: Added German keyboard file			
+
+30/01/24: 	BUG: CLS now clears the graphics screen but *not* the sprites if present
+			BUG: SPRITE CLEAR clears the sprites only
+			BUG: CLEAR now resets the sprites and clears the sprite layer, which makes them consistent.
+			IMP: TURTLE CLEAR is now TURTLE HOME			
