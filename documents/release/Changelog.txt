@@ -122,4 +122,11 @@ Changes
 			IMP: TURTLE CLEAR is now TURTLE HOME			
 			IMP: Added SPOINT() to read sprite layer.
 			*** Release 15 ***
+			BUG: neo6502-games wasn't uploading to firmware properly
+			*** Release 15a ***
+
+31/01/24:	BUG: IMAGE not drawing correctly.
+			*** Release 15b ***
+
+						
 
