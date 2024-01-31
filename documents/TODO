@@ -17,9 +17,6 @@ General
 Larger Additions
 ----------------
 
-	- Shooting the player
-	- Animating the Invaders
-
 	- Serial uploading
 		- save to storage option. 
 
@@ -30,7 +27,6 @@ After Holiday
 
 	- Sprites 
 		- something like AMAL - write spec document, probably bytecode
-
 		
 	- Add USB Joystick interface if stable.
 

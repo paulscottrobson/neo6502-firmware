@@ -43,6 +43,9 @@ _CTCopyParam:
 		bne 	_CTCopyParam
 		ply
 
+		lda 	#16  						; set tile size (currently 16 only)
+		sta 	ControlParameters+6
+
 		.DoSendMessage 						; transmit information
 		.byte 	5,35
 		.DoWaitMessage
@@ -58,6 +61,7 @@ _CTCopyParam:
 ;
 ;		Date			Notes
 ;		==== 			=====
+; 		31-01-24 		Added the extra parameter, the default tile size.
 ;
 ; ************************************************************************************************
 
