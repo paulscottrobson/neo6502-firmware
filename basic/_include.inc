@@ -69,6 +69,7 @@
 	.include "sources/commands/extras/undefined.asm"
 	.include "sources/commands/extras/who.asm"
 	.include "sources/commands/hardware/cls.asm"
+	.include "sources/commands/hardware/cursor.asm"
 	.include "sources/commands/hardware/defchr.asm"
 	.include "sources/commands/hardware/fkey.asm"
 	.include "sources/commands/hardware/graphics.asm"

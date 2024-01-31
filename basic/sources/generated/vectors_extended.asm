@@ -45,4 +45,5 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $1a7 fast
 	.word	Unimplemented            ; $1a8 home
 	.word	Command_LOCALE           ; $1a9 locale
+	.word	Command_Cursor           ; $1aa cursor
 	.send code

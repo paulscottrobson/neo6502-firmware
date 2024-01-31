@@ -85,6 +85,19 @@ static void CONClearScreen(void) {
 
 // ***************************************************************************************
 //
+//								   Reposition cursor
+//
+// ***************************************************************************************
+
+uint8_t CONSetCursorPosition(uint8_t x,uint8_t y) {
+	if (x >= graphMode->xCSize || y >= graphMode->yCSize) return 1;  			// Range error
+	graphMode->xCursor = x;  													// Set new position.
+	graphMode->yCursor = y;
+	return 0;
+}
+
+// ***************************************************************************************
+//
 //								Initialise the console system
 //
 // ***************************************************************************************
@@ -280,5 +293,6 @@ void CONWriteString(const char *s) {
 //		11-01-24	Added user defined font option.
 //		17-01-24 	TAB goes down at end of line.
 //		30-01-24 	Fixed clear screen to clear text area only, not sprites too.
+//		31-01-24 	Added functionality to set cursor position.
 //
 // ***************************************************************************************

@@ -127,6 +127,6 @@ Changes
 
 31/01/24:	BUG: IMAGE not drawing correctly.
 			*** Release 15b ***
-
+			IMP: Added CURSOR command and message to support.
 						
 

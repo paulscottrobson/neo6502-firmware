@@ -51,6 +51,9 @@ switch (*DCOMMAND) {
 			case 6:
 				CONWrite(*DPARAMS);
 				break;
+			case 7:
+				*DERROR = CONSetCursorPosition(DPARAMS[0],DPARAMS[1]);
+				break;
 		}
 		break;
 	case 3:

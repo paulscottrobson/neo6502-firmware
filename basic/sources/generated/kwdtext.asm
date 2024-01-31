@@ -171,6 +171,7 @@ Shift1TokenText:
 	.byte	$04,$46,$41,$53,$d4           	; $1a7 FAST
 	.byte	$04,$48,$4f,$4d,$c5           	; $1a8 HOME
 	.byte	$06,$4c,$4f,$43,$41,$4c,$c5   	; $1a9 LOCALE
+	.byte	$06,$43,$55,$52,$53,$4f,$d2   	; $1aa CURSOR
 	.byte	$FF
 
 Shift2TokenText:
