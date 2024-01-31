@@ -217,8 +217,8 @@ void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int fl
 	for (int xc = 0;xc < size;xc++) {  											// For each pixel
 		for (int yc = 0;yc < size;yc++) {
 			int pixel = gfxMemory[address+xc/2+(yc * size / 2)];   				// Access the pixel pair.
-			if (pixel != 0 || type == 0 || solidFill) {
-				pixel = (xc & 1) ? pixel & 0x0F : pixel >> 4;					// Extract the half pixel to draw.
+			pixel = (xc & 1) ? pixel & 0x0F : pixel >> 4;						// Extract the half pixel to draw.
+			if (pixel != 0 || type == 0 || solidFill) {  						// If non-zero, or tile, or solid then draw it.
 				pixelXor = pixel;
 				pixelAnd = 0;
 				int x1 = x + (xc ^ xFlip) * scale;
@@ -291,5 +291,6 @@ void GFXGraphicsCommand(uint8_t cmd,uint8_t *data) {
 //		19/01/24 	Added SOLID option to TEXT and IMAGE
 //		28/01/24 	Line parameters are now signed integers
 //		30/01/24 	Added SPOINT to read sprite pixel (36)
+//		31/01/24 	Fixed pixel leakage on IMAGE.
 //
 // ***************************************************************************************
