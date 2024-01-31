@@ -10,7 +10,7 @@ General
 	- The peculiar LoadROM bug, currently worked round. Now resets on reload
 			so now only loaded at boot (does this still happen ???)
 
-	- Current clock 6.25 Mhz, this may be reduced if some board can't cope.
+	- Current clock 6.25 Mhz, this may be reduced if some boards can't cope.
 
 	- Possible listing corruption bug (emulator) ? Cannot reproduce.
 
@@ -19,9 +19,6 @@ Larger Additions
 
 	- Serial uploading
 		- save to storage option. 
-
-After Holiday
--------------
 
 	- 32x32 tiles (scaled)
 
