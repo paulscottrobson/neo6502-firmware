@@ -148,6 +148,7 @@ KWD_PENDOWN                        = $1a6 ; pendown
 KWD_FAST                           = $1a7 ; fast
 KWD_HOME                           = $1a8 ; home
 KWD_LOCALE                         = $1a9 ; locale
+KWD_CURSOR                         = $1aa ; cursor
 KWD_ADC                            = $280 ; adc
 KWD_AND                            = $281 ; and
 KWD_ASL                            = $282 ; asl
