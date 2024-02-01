@@ -42,7 +42,15 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(PicoDVI)
 
 add_subdirectory(${picodvi_SOURCE_DIR}/software/libdvi ${picodvi_BINARY_DIR})
-add_subdirectory(libraries/fatfs/source)
+
+add_library(fatfs INTERFACE)
+target_sources(fatfs INTERFACE
+    ${tinyusb_SOURCE_DIR}/lib/fatfs/source/ff.c
+    ${tinyusb_SOURCE_DIR}/lib/fatfs/source/ffsystem.c
+    ${tinyusb_SOURCE_DIR}/lib/fatfs/source/ffunicode.c
+)
+target_include_directories(fatfs INTERFACE ${tinyusb_SOURCE_DIR}/lib/fatfs/source/)
+
 add_subdirectory(sources)
 
 pico_enable_stdio_usb(firmware 0)
