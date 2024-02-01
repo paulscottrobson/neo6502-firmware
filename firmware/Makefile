@@ -68,6 +68,7 @@ prelim: kernel
 # ***************************************************************************************
 
 build: prelim always
+	cmake --fresh -B build -D$(STORAGE)_STORAGE=1
 	make -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .
@@ -79,9 +80,8 @@ build: prelim always
 # ***************************************************************************************
 
 clean: always
-	$(CMAKEDIR) build
-	- cd build ; cmake --build . --target clean
-	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -D$(STORAGE)_STORAGE=1
+	cmake --fresh -B build -D$(STORAGE)_STORAGE=1
+	cmake --build build --target clean
 
 # ***************************************************************************************
 #
@@ -112,21 +112,17 @@ reset:
 dual: prelim always
 	$(CDEL)   firmware.elf firmware.uf2
 
-	rm -Rf build
-	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DSDCARD_STORAGE=1
+	cmake --fresh -B build -DSDCARD_STORAGE=1
+	cmake --build build --target clean
 	make -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_sd.elf
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 $(BINDIR)$(BINARY)_sd.uf2
 
-	rm -Rf build
-	export PICO_SDK_PATH=$(PICO_SDK_LOCATION) ; cmake -B build -S . -DUSBKEY_STORAGE=1
+	cmake --fresh -B build -DUSBKEY_STORAGE=1
+	cmake --build build --target clean
 	make -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_usb.elf
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 $(BINDIR)$(BINARY)_usb.uf2
-
-	rm -Rf build
-	make -B clean
-	make -C build
 
 pythonapps:
 	$(CMAKEDIR) build
