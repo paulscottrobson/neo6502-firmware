@@ -1,5 +1,12 @@
 add_executable(firmware)
 
+FetchContent_Declare(
+    no-OS-FatFS-SD-SPI-RPi-Pico
+    GIT_REPOSITORY https://github.com/carlk3/no-OS-FatFS-SD-SPI-RPi-Pico.git
+    GIT_TAG        bbccc5d2deea09e128e2576ef35f72b473c5ba5f # just the latest on 30/01/2024
+)
+FetchContent_MakeAvailable(no-OS-FatFS-SD-SPI-RPi-Pico)
+
 pico_generate_pio_header(firmware ${CMAKE_CURRENT_LIST_DIR}/system/sm0_memory_emulation_with_clock.pio)
 
 add_definitions(-Wno-error=unused-variable)
@@ -36,7 +43,7 @@ if(USBKEY_STORAGE)
 endif()
 if(SDCARD_STORAGE)
     add_definitions(-DSDCARD_STORAGE=1)
-     target_sources(firmware PRIVATE hardware/storage/sdcard_storage.cpp )
+    target_sources(firmware PRIVATE hardware/storage/sdcard_storage.cpp )
 endif()
 
 target_compile_definitions(firmware
@@ -69,23 +76,8 @@ if(USBKEY_STORAGE)
 endif()
 if(SDCARD_STORAGE)
     target_link_libraries(firmware FatFs_SPI)
+    add_subdirectory(${no-os-fatfs-sd-spi-rpi-pico_SOURCE_DIR}/FatFs_SPI ${no-os-fatfs-sd-spi-rpi-pico_BINARY_DIR})
 endif()
 
 target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 pico_add_extra_outputs(firmware)
-
-add_subdirectory(../libraries/no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI build)
-
-add_custom_target(upload
-    COMMAND openocd -f ${COMMONSRC}/cmsis-dap.cpp fg -f target/rp2040.cpp fg -c "adapter speed 5000" -c "program firmware.elf verify reset exit"
-    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-    COMMENT "Upload via picoprobe..."
-)
-
-add_custom_target(reset
-    COMMAND openocd -f ${COMMONSRC}/cmsis-dap.cpp fg -f target/rp2040.cpp fg -c "adapter speed 5000" -c "init" -c "reset run" -c "exit"
-    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-    COMMENT "Reset via picoprobe..."
-)
-
-add_dependencies(upload firmware)

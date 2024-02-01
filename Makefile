@@ -32,7 +32,8 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks
 #
 # ***************************************************************************************
 
-all: 
+all:
+	$(CMAKEDIR) bin
 	$(CMAKEDIR) release
 	make -B -C kernel release
 	make -B -C basic release
