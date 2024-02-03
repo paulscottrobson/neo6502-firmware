@@ -14,6 +14,8 @@
 #include <inttypes.h>
 #include "ff.h"
 
+static FIL fileHandles[FIO_NUM_FILES];
+
 // ***************************************************************************************
 //
 //									Directory Functions
@@ -85,6 +87,117 @@ uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 		f_write(&file,cpuMemory+startAddress,size,&bytesWritten);
 		f_close(&file);
 	}
+	return (result == FR_OK) ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//								File-handle based functions
+//
+// ***************************************************************************************
+
+uint8_t FISOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
+	if (fileno >= FIO_NUM_FILES)
+		return 1;
+	FIL* f = &fileHandles[fileno];
+
+	/* Check if already open. */
+	if (f->obj.fs)
+		return 1;
+
+	static int const modes[] = {
+		FA_READ,							// 0: FIOMODE_READ
+		FA_WRITE, 							// 1: FIOMODE_WRITE
+		FA_READ|FA_WRITE,                 	// 2: FIOMODE_RDWR
+		FA_READ|FA_WRITE|FA_CREATE_ALWAYS,	// 3: FIOMODE_CREATE
+	};
+	if (mode >= 3)
+		return 1;
+
+	FRESULT result = f_open(f, filename, modes[mode]);
+	return (result == FR_OK) ? 0 : 1;
+}
+
+static FIL* getF(uint8_t fileno) {
+	if (fileno >= FIO_NUM_FILES)
+		return NULL;
+	FIL* f = &fileHandles[fileno];
+	if (!f->obj.fs)
+		return NULL;
+	return f;
+}
+
+uint8_t FISCloseFileHandle(uint8_t fileno) {
+	FIL* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	FRESULT result = f_close(f);
+	return (result == FR_OK) ? 0 : 1;
+}
+
+uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {
+	FIL* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	FRESULT result = f_lseek(f, offset);
+	return (result == FR_OK) ? 0 : 1;
+}
+
+uint8_t FISTellFileHandle(uint8_t fileno, uint32_t* offset) {
+	FIL* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	*offset = f_tell(f);
+	return 0;
+}
+
+uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
+	FIL* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	UINT written;
+	FRESULT result = f_read(f, cpuMemory+address, *size, &written);
+	*size = written;
+
+	return (result == FR_OK) ? 0 : 1;
+}
+
+uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
+	FIL* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	UINT written;
+	FRESULT result = f_write(f, cpuMemory+address, *size, &written);
+	*size = written;
+
+	return (result == FR_OK) ? 0 : 1;
+}
+
+uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
+	FIL* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	*size = f_size(f);
+	return 0;
+}
+
+uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size) {
+	FIL* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	uint32_t oldPos = f_tell(f);
+	FRESULT result = f_lseek(f, size);
+	if (result == FR_OK)
+		result = f_truncate(f);
+
+	f_lseek(f, oldPos);
 	return (result == FR_OK) ? 0 : 1;
 }
 
