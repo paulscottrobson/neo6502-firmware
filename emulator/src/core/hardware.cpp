@@ -19,6 +19,9 @@
 #include "sys/types.h"
 #include <limits.h>
 #include <dirent.h>
+#include <unistd.h>
+
+static FILE* fileHandles[FIO_NUM_FILES];
 
 // *******************************************************************************************************************************
 //
@@ -187,6 +190,111 @@ uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 		fclose(f);
 	}
 	return (f == NULL) ? 1 : 0;
+}
+
+// ***************************************************************************************
+//
+//								File-handle based functions
+//
+// ***************************************************************************************
+
+uint8_t FISOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
+	if (fileno >= FIO_NUM_FILES)
+		return 1;
+
+	/* Check if already open. */
+	if (fileHandles[fileno])
+		return 1;
+
+	static const char* const modes[] = {
+		"rb",	// 0: FIOMODE_READ
+		"r+b", 	// 1: FIOMODE_WRITE
+		"r+b",	// 2: FIOMODE_RDWR
+		"w+b",	// 3: FIOMODE_CREATE
+	};
+	if (mode >= 3)
+		return 1;
+
+	fileHandles[fileno] = fopen(filename, modes[mode]);
+	return fileHandles[fileno] ? 0 : 1;
+}
+
+static FILE* getF(uint8_t fileno) {
+	if (fileno >= FIO_NUM_FILES)
+		return NULL;
+	return fileHandles[fileno];
+}
+
+uint8_t FISCloseFileHandle(uint8_t fileno) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	int result = fclose(f);
+	return !result ? 0 : 1;
+}
+
+uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	int result = fseek(f, offset, SEEK_SET);
+	return (result >= 0) ? 0 : 1;
+}
+
+uint8_t FISTellFileHandle(uint8_t fileno, uint32_t* offset) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	*offset = ftell(f);
+	return 0;
+}
+
+uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	size_t result = fread(cpuMemory+address, *size, 1, f);
+	*size = result;
+
+	return (result >= 0) ? 0 : 1;
+}
+
+uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	size_t result = fwrite(cpuMemory+address, *size, 1, f);
+	*size = result;
+
+	return (result >= 0) ? 0 : 1;
+}
+
+uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	size_t oldpos = fseek(f, SEEK_END, 0);
+	*size = ftell(f);
+	fseek(f, SEEK_SET, oldpos);
+
+	return 0;
+}
+
+uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	fflush(f);
+	int result = ftruncate(::fileno(f), size);
+
+	return !result ? 0 : 1;
 }
 
 // ***************************************************************************************

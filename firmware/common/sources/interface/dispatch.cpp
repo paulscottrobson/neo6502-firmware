@@ -104,6 +104,20 @@ uint16_t DSPGetInt16(uint8_t *command,uint8_t paramOffset) {
     return command[paramOffset] + (command[paramOffset+1] << 8);
 }
 
+uint32_t DSPGetInt32(uint8_t *command,uint8_t paramOffset) {
+    return DSPGetInt16(command, paramOffset) | (DSPGetInt16(command, paramOffset+2) << 16);
+}
+
+void DSPSetInt16(uint8_t *command,uint8_t paramOffset,uint16_t value) {
+    command[paramOffset] = value;
+    command[paramOffset+1] = value >> 8;
+}
+
+void DSPSetInt32(uint8_t *command,uint8_t paramOffset,uint32_t value) {
+    DSPSetInt16(command, paramOffset, value);
+    DSPSetInt16(command, paramOffset+2, value >> 16);
+}
+
 // ***************************************************************************************
 //
 //      Date        Revision

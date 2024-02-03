@@ -64,6 +64,46 @@ uint8_t FIOWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 
 // ***************************************************************************************
 //
+//								File-handle based functions
+//
+// ***************************************************************************************
+
+uint8_t FIOOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
+	return FISOpenFileHandle(fileno, filename, mode);
+}
+
+uint8_t FIOCloseFileHandle(uint8_t fileno) {
+	return FISCloseFileHandle(fileno);
+}
+
+uint8_t FIOSeekFileHandle(uint8_t fileno, uint32_t pos) {
+	return FISSeekFileHandle(fileno, pos);
+}
+
+uint8_t FIOTellFileHandle(uint8_t fileno, uint32_t* pos) {
+	return FISTellFileHandle(fileno, pos);
+}
+
+uint8_t FIOReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
+	if (address == 0xFFFF) return 1;
+	return FISReadFileHandle(fileno, address, size);
+}
+
+uint8_t FIOWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
+	if (address == 0xFFFF) return 1;
+	return FISWriteFileHandle(fileno, address, size);
+}
+
+uint8_t FIOGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
+	return FISGetSizeFileHandle(fileno, size);
+}
+
+uint8_t FIOSetSizeFileHandle(uint8_t fileno, uint32_t size) {
+	return FISSetSizeFileHandle(fileno, size);
+}
+
+// ***************************************************************************************
+//
 //		Date 		Revision
 //		==== 		========
 //		16-01-24 	Modified so fileSize < 0 doesn't display information.
