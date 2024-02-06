@@ -6,6 +6,10 @@
 # requires '64tass' assembler
 
 
+# environment checks
+which 64tass > /dev/null || ! echo "could not find '64tass' program" || exit 1
+
+
 # cleanup
 rm -f hello.lst hello.neo
 
