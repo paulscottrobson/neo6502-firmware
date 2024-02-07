@@ -39,12 +39,12 @@
 
 void TIMECRITICAL(DSPHandler)(uint8_t *cBlock, uint8_t *memory) 
 {
-    float f1,f2;
-    int i1,i2,r;
-    uint32_t u1;
-    *DERROR = 0;                                                                // Clear error state.
-    #include "data/dispatch_code.h"  
-    *DCOMMAND = 0;					     										// Clear the message indicating completion.
+	float f1,f2;
+	int i1,i2,r;
+	uint32_t u1;
+	*DERROR = 0;                                                                // Clear error state.
+	#include "data/dispatch_code.h"  
+	*DCOMMAND = 0;					     										// Clear the message indicating completion.
 }
 
 // ***************************************************************************************
@@ -55,7 +55,7 @@ void TIMECRITICAL(DSPHandler)(uint8_t *cBlock, uint8_t *memory)
 
 void TIMECRITICAL(DSPSync)(void) 
 {
-    KBDSync();
+	KBDSync();
 }
 
 // ***************************************************************************************
@@ -65,24 +65,24 @@ void TIMECRITICAL(DSPSync)(void)
 // ***************************************************************************************
 
 void DSPReset(void) {
-    const char bootString[] = PROMPT;
-    MEMInitialiseMemory();                                                      // Set up memory, load kernel ROM
-    GFXSetMode(0);                                                              // Initialise graphics
-    SPRReset();                                                                 // Reset sprites.
-    LOGDrawLogo();                                                              // Draw logo
-    CONWrite(0x80+3);                                                           // Yellow text
-    for (int i = 0;i < 22;i++) CONWrite(19); 
-    const char *c = bootString;
-    while (*c != '\0') CONWrite(*c++);	
-    
-    KBDInitialise();                                                            // Initialise keyboard & USB system.
-    KBDEvent(0,0xFF,0);                                                         // Reset the keyboard manager
-    SNDInitialise();                                                            // Initialise sound hardware
-    SNDManager();                                                               // Initialise sound manager
-    CONWrite(0x80+6);
-    STOSynchronise();                                                           // Synchronise storage
-    CONWrite(0x80+2);
-    CFGProcess();                                                               // Process configuration file.
+	const char bootString[] = PROMPT;
+	MEMInitialiseMemory();                                                      // Set up memory, load kernel ROM
+	GFXSetMode(0);                                                              // Initialise graphics
+	SPRReset();                                                                 // Reset sprites.
+	LOGDrawLogo();                                                              // Draw logo
+	CONWrite(0x80+3);                                                           // Yellow text
+	for (int i = 0;i < 22;i++) CONWrite(19); 
+	const char *c = bootString;
+	while (*c != '\0') CONWrite(*c++);	
+	
+	KBDInitialise();                                                            // Initialise keyboard & USB system.
+	KBDEvent(0,0xFF,0);                                                         // Reset the keyboard manager
+	SNDInitialise();                                                            // Initialise sound hardware
+	SNDManager();                                                               // Initialise sound manager
+	CONWrite(0x80+6);
+	STOSynchronise();                                                           // Synchronise storage
+	CONWrite(0x80+2);
+	CFGProcess();                                                               // Process configuration file.
 }
 
 // ***************************************************************************************
@@ -94,14 +94,14 @@ void DSPReset(void) {
 static char szBuffer[32];  
 
 char *DSPGetString(uint8_t *command,uint8_t paramOffset) {
-    uint8_t *mem = cpuMemory+command[paramOffset]+(command[paramOffset+1]<<8);  // From here.
-    memcpy(szBuffer,mem+1,*mem);                                                // Make ASCIIZ string
-    szBuffer[*mem] = '\0';
-    return szBuffer;
+	uint8_t *mem = cpuMemory+command[paramOffset]+(command[paramOffset+1]<<8);  // From here.
+	memcpy(szBuffer,mem+1,*mem);                                                // Make ASCIIZ string
+	szBuffer[*mem] = '\0';
+	return szBuffer;
 }
 
 uint16_t DSPGetInt16(uint8_t *command,uint8_t paramOffset) {
-    return command[paramOffset] + (command[paramOffset+1] << 8);
+	return command[paramOffset] + (command[paramOffset+1] << 8);
 }
 
 uint32_t DSPGetInt32(uint8_t *command,uint8_t paramOffset) {

@@ -260,6 +260,34 @@ static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers) {
 	}
 }
 
+
+// ***************************************************************************************
+//
+//								   List function keys
+//
+// ***************************************************************************************
+
+void KBDShowFunctionKeys(void) {
+	char szBuffer[16];
+	for (int i = 1;i <= 10;i++) {
+		char *k = FKEYTEXT(i);
+		if (*k != '\0') {
+			sprintf(szBuffer,"F%-2d : \"",i);
+			CONWriteString(szBuffer);
+			while (*k != '\0') {
+				if (*k == 13) {
+					CONWriteString("<Enter>");
+				} else {
+					CONWrite(*k);
+				}
+				k++;
+			}
+			CONWrite(34);CONWrite(13);
+		}
+	}	
+}
+
+
 // ***************************************************************************************
 //
 //							Read the keyboard controller
@@ -281,5 +309,6 @@ uint8_t KBDKeyboardController(void) {
 //
 //		Date 		Revision
 //		==== 		========
+//		07-02-24 	Added ability to list function keys
 //
 // ***************************************************************************************
