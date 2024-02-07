@@ -23,6 +23,7 @@ bool KBDIsKeyAvailable(void);
 uint8_t KBDGetKey(void);
 void KBDSetLocale(char c1,char c2);
 uint8_t KBDSetFunctionKey(int fKey,const char *keyText);
+void KBDShowFunctionKeys(void);
 uint8_t KBDKeyboardController(void);
 void KBDInsertQueue(uint8_t ascii);
 

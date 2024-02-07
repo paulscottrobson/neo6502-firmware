@@ -23,4 +23,5 @@ ErrorMessageText:
 	.text	"File I/O Error",0
 	.text	"Out Of Data",0
 	.text	"Label Has Changed Value",0
+	.text	"Array Not Declared",0
 	.send code
