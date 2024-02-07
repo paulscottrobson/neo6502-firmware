@@ -20,6 +20,8 @@ static uint8_t *gDraw; 														// Draw from here.
 static uint8_t *tilePtr; 													// Tile data from here.
 static uint8_t *tilePixels; 												// Tile pixel data.
 static uint16_t yTile; 														// Tracking tile draw position.
+static uint8_t tileSize;  													// Tile Size = 16 or 32
+static uint8_t tileShift;  													// Tile shift to divide (4 or 5)
 
 static void TMRRenderTileLine(uint8_t count);
 static void TMRenderTileLineStart(uint8_t count);	
@@ -45,11 +47,17 @@ void TMPSelectTileMap(uint8_t *data,uint16_t xOffset,uint16_t yOffset) {
 // ***************************************************************************************
 
 uint8_t TMPDrawTileMap(uint8_t *data) {
+
 	int xPos = xTilePos,yPos = yTilePos;
+
+	tileSize = 16;tileShift = 4;  											// Work out size and shift
+	if (GFXGetDrawSize() == 2) {
+		tileSize = 32;tileShift = 5;
+	}
 
 	if (mapData == NULL) return 1;  										// No map specified.
 	if (xPos < 0 ||  yPos < 0 ||  											// Invalid draw position.
-				xPos >= width * 16 || yPos >= height * 16) return 1;
+				xPos >= width * tileSize || yPos >= height * tileSize) return 1;
 
 	int16_t x1 = data[4]+(data[5] << 8);  									// Parameters.
 	int16_t y1 = data[6]+(data[7] << 8);
@@ -58,7 +66,7 @@ uint8_t TMPDrawTileMap(uint8_t *data) {
 
 	xWindow = (x1 < x2) ? x1 : x2;yWindow = (y1 < y2) ? y1 : y2; 			// Work out drawing window
 	wWindow = abs(x1-x2);hWindow = abs(y1-y2);
-	if (wWindow < 16) return 1;  											// Reject this special case.
+	if (wWindow < tileSize) return 1;  										// Reject this special case.
 
 	if (xWindow < 0) {  													// Adjust for off left
 		xPos += abs(xWindow);
@@ -84,22 +92,22 @@ uint8_t TMPDrawTileMap(uint8_t *data) {
 	int xLeader,xBlock16,xTrailer;
 
 	int todo = wWindow;   													// Pixels horizontally
-	if (xPos+wWindow >= width * 16) todo = width*16-xPos;  					// Trim to right side
-	xLeader = (-xPos & 15);  												// Pixels to display to first whole tile.
-	xBlock16 = (todo - xLeader) / 16;   									// Number of whole tiles to display
-	xTrailer = todo - xLeader - xBlock16 * 16;  							// Pixels to display to edge.
+	if (xPos+wWindow >= width * tileSize) todo = width*tileSize-xPos;  		// Trim to right side
+	xLeader = (-xPos & (tileSize-1));  										// Pixels to display to first whole tile.
+	xBlock16 = (todo - xLeader) / tileSize; 								// Number of whole tiles to display
+	xTrailer = todo - xLeader - xBlock16 * tileSize;  						// Pixels to display to edge.
 
 	gDraw = gMode.graphicsMemory + x + yWindow * gMode.xGSize;				// Start drawing here.
 
 //	printf("TD:%d,%d %d,%d\n",xWindow,yWindow,wWindow,hWindow);	
 //	printf("%d %d %d\n",xLeader,xBlock16,xTrailer);	
 
-	while (lineCount > 0 && yTile < height * 16) {  						// Until complete or off tile map
-		tilePtr = mapData + 3 + (yTile >> 4) * width + (xPos >> 4);			// Tile data comes from here.
+	while (lineCount > 0 && yTile < height * tileSize) {  					// Until complete or off tile map
+		tilePtr = mapData + 3 + (yTile>>tileShift)*width+(xPos>>tileShift);	// Tile data comes from here.
 		uint8_t *gStart = gDraw;  											// Start of drawing.
 		if (y >= 0 && y <= gMode.yGSize) {
 			if (xLeader != 0) TMRenderTileLineStart(xLeader); 				// Do the first pixels.
-			for (int i = 0;i < xBlock16;i++) TMRRenderTileLine(16); 		// Render complete 16 pixel tiles.
+			for (int i = 0;i < xBlock16;i++) TMRRenderTileLine(tileSize); 	// Render complete 16 pixel tiles.
 			if (xTrailer != 0) TMRRenderTileLine(xTrailer); 				// Do the last pixels.
 			if (todo != wWindow) TMROutputBackground(wWindow-todo);			// Any following blanks
 		}
@@ -107,7 +115,7 @@ uint8_t TMPDrawTileMap(uint8_t *data) {
 		gDraw = gStart + gMode.xGSize;  									// Down on screen
 		yTile++; 															// Next tile position
 	}
-	while (lineCount-- > 0) {
+	while (lineCount-- > 0) {  												// Blank the bottom unused area to sprites only.
 		for (uint16_t i = 0;i < wWindow;i++) {
 			gDraw[i] &= 0xF0;
 		}
@@ -227,5 +235,6 @@ static void TMRenderTileLineStart(uint8_t count) {
 //		Date 		Revision
 //		==== 		========
 //		28-01-24 	Amended to allow tilemaps to overlap windows.
+//		07-02-24 	Started conversion to allow 32x32 tiles (scaled)
 //
 // ***************************************************************************************

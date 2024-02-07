@@ -17,17 +17,16 @@ General
 Larger Additions
 ----------------
 
+	- Complete 32x32 tiles (scaled)
+
 	- Reference Parameters
 	
-	- 32x32 tiles (scaled)
-
 	- Merge CPM65 PR
 
 	- Cat Wildcard (post Merge ?)
 
 	- Serial uploading
 		- save to storage option. 
-
 
 	- Sprites 
 		- something like AMAL - write spec document, probably bytecode

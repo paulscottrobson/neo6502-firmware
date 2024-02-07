@@ -136,4 +136,5 @@ Changes
 			IMP: Insert and Delete work, Backspace works properly.
 			IMP: Added DELETE command
 			IMP: Added RENUMBER command
+			BRK: The size is now passed via DIM in the TILEDRAW not TILEMAP.
 			
