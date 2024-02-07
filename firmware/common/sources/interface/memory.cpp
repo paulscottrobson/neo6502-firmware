@@ -16,7 +16,7 @@
 #include "data/basic_binary.h" 													// NeoBasic
 
 #ifdef PICO
-/* _Alignas(MEMORY_SIZE) */ uint8_t cpuMemory[MEMORY_SIZE] = {0};  					// Processor memory, aligned for Pico
+/* _Alignas(MEMORY_SIZE) */ uint8_t cpuMemory[MEMORY_SIZE] = {0};  				// Processor memory, aligned for Pico
 uint8_t gfxMemory[GFX_MEMORY_SIZE] = {0}; 										// Graphics memory.
 uint8_t graphicsMemory[MAXGRAPHICSMEMORY] = {0};								// RAM used for graphics and console text.
 uint8_t consoleMemory[MAXCONSOLEMEMORY] = {0};  								// Console RAM
@@ -37,9 +37,7 @@ uint16_t controlPort = DEFAULT_PORT;       										// Control point.
 // ***************************************************************************************
 
 static void loadROM(const uint8_t *vROM, uint16_t startAddress, uint16_t romSize) {
-	for (uint16_t i = 0; i < romSize; i++) {
-		cpuMemory[i + startAddress] = vROM[i];
-	}
+	memcpy(cpuMemory+startAddress,vROM,romSize);
 }
 
 // ***************************************************************************************
@@ -50,7 +48,7 @@ static void loadROM(const uint8_t *vROM, uint16_t startAddress, uint16_t romSize
 
 void MEMInitialiseMemory(void) {
 	loadROM(kernel_bin,KERNEL_LOAD,KERNEL_SIZE);    							// Load in the kernel
-	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  									// **** Temp fix ****
+	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  									// Load in BASIC to run by default
 	cpuMemory[DEFAULT_PORT] = 0x00;               								// Clear the default command port
 }
 
@@ -61,7 +59,7 @@ void MEMInitialiseMemory(void) {
 // ***************************************************************************************
 
 void MEMLoadBasic(void) {
-	//loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  								// Copy ROM image into memory crashes
+//	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  									// Copy ROM image into memory crashes
 	cpuMemory[0x0] = BASIC_LOAD & 0xFF;  										// Start with jmp (0)
 	cpuMemory[0x1] = BASIC_LOAD >> 8;
 }
