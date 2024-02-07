@@ -53,6 +53,9 @@ run: always emulator
 krun: always kernel emulator
 	$(EMULATOR) $(BINDIR)kernel.bin@FC00 
 
+kernel:
+	make -C ..$(S)kernel
+
 # ***************************************************************************************
 #
 #									Make the emulator

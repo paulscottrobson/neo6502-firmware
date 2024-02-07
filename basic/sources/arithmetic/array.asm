@@ -39,12 +39,17 @@ _AAEndEval:
 		jsr 	ERRCheckRParen 				; check closing )
 		phy
 		;
-		;		Validate those dimensions.
+		;		Validate the array and those dimensions.
 		;
 		lda 	XSNumber0,x 				; copy array descriptor address to zTemp0
 		sta 	zTemp0
 		lda 	XSNumber1,x 				
 		sta 	zTemp0+1
+		;
+		ldy 	#1  						; check memory allocated
+		lda 	(zTemp0)
+		ora 	(zTemp0),y
+		beq 	_AANoArray
 		;
 		lda 	(zTemp0) 					; copy data address into XSNumber,x
 		sta 	XSNumber0,x
@@ -103,6 +108,8 @@ _AANotString:
 
 _AARange:
 		.error_range
+_AANoArray:
+		.error_array
 
 		.send 		code
 
@@ -114,6 +121,7 @@ _AARange:
 ;
 ;		Date			Notes
 ;		==== 			=====
+; 		07-02-24 		Check to see array initialised.
 ;
 ; ************************************************************************************************
 

@@ -54,6 +54,9 @@ switch (*DCOMMAND) {
 			case 7:
 				*DERROR = CONSetCursorPosition(DPARAMS[0],DPARAMS[1]);
 				break;
+			case 8:
+				KBDShowFunctionKeys();
+				break;
 		}
 		break;
 	case 3:
