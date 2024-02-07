@@ -32,6 +32,7 @@ errors = """
 	file :		file i/o error
 	data : 		out of data
 	label : 	label has changed value
+	array : 	array not declared
 """
 
 err = []
