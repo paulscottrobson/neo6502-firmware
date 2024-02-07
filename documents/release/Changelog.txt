@@ -134,4 +134,6 @@ Changes
 			BUG: No DIM check for arrays.
 			IMP: FKEY on its own lists function keys
 			IMP: Insert and Delete work, Backspace works properly.
+			IMP: Added DELETE command
+			IMP: Added RENUMBER command
 			

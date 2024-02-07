@@ -46,7 +46,7 @@ ExtendedVectorTable:
 	.word	Unimplemented            ; $1a8 home
 	.word	Command_LOCALE           ; $1a9 locale
 	.word	Command_Cursor           ; $1aa cursor
-	.word	Unimplemented            ; $1ab renumber
-	.word	Unimplemented            ; $1ac delete
+	.word	Command_Renumber         ; $1ab renumber
+	.word	Command_Delete           ; $1ac delete
 	.word	Unimplemented            ; $1ad editor
 	.send code
