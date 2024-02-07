@@ -19,6 +19,13 @@
 		.section code
 
 Command_FKEY:	;; [fkey]
+
+		lda 	(codePtr),y 				; check for FKEY on its own
+		cmp 	#KWD_COLON
+		beq 	_CFList
+		cmp 	#KWD_SYS_END
+		beq 	_CFList
+
 		ldx 	#0
 		jsr 	EXPEvalInteger8 			; key number
 		jsr 	ERRCheckComma
@@ -42,6 +49,12 @@ Command_FKEY:	;; [fkey]
 _CFError:
 		.error_range		
 
+_CFList:
+		.DoSendMessage 						; send message 2,4 define fkey
+		.byte 2,8
+		.DoWaitMessage
+		rts
+
 		.send code
 
 ; ************************************************************************************************
@@ -52,6 +65,7 @@ _CFError:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		07-02-24 		Added option to list with just FKEY
 ;
 ; ************************************************************************************************
 

@@ -131,3 +131,5 @@ Changes
 						
 
 07/02/24: 	IMP: Added ability to arbitrarily execute code in emulator.
+			BUG: No DIM check for arrays.
+			IMP: FKEY on its own lists function keys
