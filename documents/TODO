@@ -5,17 +5,26 @@ General
 -------
 
 	- Working release is dependent on USB Flash progress.
-			SDCard should be a backup if at all possible as can block UEXT SPI usage.
+ 	  SDCard should be a backup if at all possible as can block UEXT SPI usage.
 
-	- The peculiar LoadROM bug, currently worked round. Now resets on reload
-			so now only loaded at boot (does this still happen ???)
+	- The peculiar LoadROM bug. It will not copy from Flash memory when the display is initialised
+	  beyond a certain non-consistent amount. This suggests some sort of timing issue or cache crash ?
+	  May need specialist help with this one. It is not important, save the difficulty of a clean
+	  restart of BASIC.
 
 	- Current clock 6.25 Mhz, this may be reduced if some boards can't cope.
 
-	- Possible listing corruption bug (emulator) ? Cannot reproduce.
-
 Larger Additions
 ----------------
+	- Insertion/Deletion issue
+
+	- Renumber, made Generic
+
+	- Delete range (can use LIST code partly)
+
+	- Merge CPM65 PR
+
+	- Cat Wildcard (post Merge ?)
 
 	- Serial uploading
 		- save to storage option. 
