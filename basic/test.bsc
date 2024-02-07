@@ -1,21 +1,22 @@
-renumber
-cls
-list
-' "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-' "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-' "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-print "abcdefghi"
-a
-b
-c
-d
-e
-f
-g
-h
-i
-j
-k
-l
-m
-n
+cls:gload "graphics.gfx"
+mem = alloc(8*6+3):rect solid ink 4 from 0,0 to 319,239
+poke mem,1:poke mem+1,8:poke mem+2,6
+for y = 0 to 5
+	base = (y & 1) * $F0
+	for x = 0 to 7
+		poke x+y*8+mem+3,base+x
+	next	
+next
+tilemap mem,0,0
+call draw(10,10)
+end
+call draw(114,183)
+call draw(250,-8)	
+call draw(-11,109)
+end
+
+
+proc draw(x,y)
+	s = 1
+	tiledraw x,y dim s to x+8*s*16,y+6*s*16
+endproc
