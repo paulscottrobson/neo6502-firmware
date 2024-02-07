@@ -207,12 +207,12 @@ uint8_t FISOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
 		return 1;
 
 	static const char* const modes[] = {
-		"rb",	// 0: FIOMODE_READ
-		"r+b", 	// 1: FIOMODE_WRITE
+		"rb",	// 0: FIOMODE_RDONLY
+		"r+b", 	// 1: FIOMODE_WRONLY
 		"r+b",	// 2: FIOMODE_RDWR
-		"w+b",	// 3: FIOMODE_CREATE
+		"w+b",	// 3: FIOMODE_RDWR_CREATE
 	};
-	if (mode >= 3)
+	if (mode >= sizeof(modes)/sizeof(*modes))
 		return 1;
 
 	fileHandles[fileno] = fopen(filename, modes[mode]);

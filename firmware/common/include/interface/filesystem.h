@@ -30,10 +30,10 @@ uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size);
 uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size);
 
 #define FIO_NUM_FILES  8
-#define FIOMODE_READ   0
-#define FIOMODE_WRITE  1
+#define FIOMODE_RDONLY   0
+#define FIOMODE_WRONLY  1
 #define FIOMODE_RDWR   2
-#define FIOMODE_CREATE 3 // truncates
+#define FIOMODE_RDWR_CREATE 3 // truncates
 
 void FIODirectory(void);
 uint8_t FIOReadFile(const char *fileName,uint16_t loadAddress);
