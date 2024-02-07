@@ -16,11 +16,14 @@ General
 
 Larger Additions
 ----------------
-	- Insertion/Deletion issue
 
 	- Renumber, made Generic
 
 	- Delete range (can use LIST code partly)
+
+	- Reference Parameters
+	
+	- 32x32 tiles (scaled)
 
 	- Merge CPM65 PR
 
@@ -29,7 +32,6 @@ Larger Additions
 	- Serial uploading
 		- save to storage option. 
 
-	- 32x32 tiles (scaled)
 
 	- Sprites 
 		- something like AMAL - write spec document, probably bytecode
