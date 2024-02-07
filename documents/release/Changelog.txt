@@ -130,3 +130,4 @@ Changes
 			IMP: Added CURSOR command and message to support.
 						
 
+07/02/24: 	IMP: Added ability to arbitrarily execute code in emulator.

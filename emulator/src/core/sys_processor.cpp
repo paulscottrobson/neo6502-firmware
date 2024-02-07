@@ -106,17 +106,23 @@ void CPUReset(void) {
 				if (sscanf(pos,"%x",&address) != 1)  								// Hex -> Decimal
 							exit(fprintf(stderr,"Bad format %s",pos));
 			}
-			p = cpuMemory+address;				 									// Load here.	
-			if (address == 0xFFFF) p = gfxMemory;  									// Load to graphics memory
-			printf("Load %s to %x\n",command,address);
-			FILE *f = fopen(command,"rb");  										// Read file in and copy to RAM.
-			if (f == NULL) exit(fprintf(stderr,"Bad file %s",command));
-			while (ch = fgetc(f),ch >= 0) {
-				*p++ = ch;
-				address = (address+1) & 0xFFFF;
+			if (strcmp(command,"run") == 0) {  										// Arbitrary run address run@x
+				printf("Run machine code from $%x\n",address);
+				cpuMemory[0xFFFC] = address & 0xFF;
+				cpuMemory[0xFFFD] = address >> 8;
+			} else {
+				p = cpuMemory+address;				 								// Load here.	
+				if (address == 0xFFFF) p = gfxMemory;  								// Load to graphics memory
+				printf("Load %s to %x\n",command,address);
+				FILE *f = fopen(command,"rb");  									// Read file in and copy to RAM.
+				if (f == NULL) exit(fprintf(stderr,"Bad file %s",command));
+				while (ch = fgetc(f),ch >= 0) {
+					*p++ = ch;
+					address = (address+1) & 0xFFFF;
+				}
+				fclose(f);
 			}
-			fclose(f);
-		} else {
+		} else {			
 			if (strcmp(command,"cold") == 0) { 										// Cold boots from $800
 				printf("Cold boot $800\n");
 				cpuMemory[0xFFFC] = 0;cpuMemory[0xFFFD] = 8;
