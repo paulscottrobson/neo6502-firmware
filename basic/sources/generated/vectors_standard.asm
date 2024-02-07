@@ -106,4 +106,5 @@ StandardVectorTable:
 	.word	Unimplemented            ; $e4 ]
 	.word	Unimplemented            ; $e5 @
 	.word	Command_TileDraw         ; $e6 tiledraw
+	.word	Unimplemented            ; $e7 ref
 	.send code
