@@ -3,13 +3,18 @@
 
 unsigned char *cmd = (unsigned char *)0xFF00;
 
-int write (unsigned char* buf, unsigned count) {
- 	while (count--) {
- 		while(cmd[0]) {}
-	 	cmd[1] = 0;
- 		cmd[4] = *buf++;
- 		cmd[0] = 2;
- 	}
+int write(int /* fildes */, const unsigned char* buf, unsigned count)
+{
+  while (count--)
+  {
+    while(cmd[0]) {}
+
+    cmd[1] = 0;
+    cmd[4] = *buf++;
+    cmd[0] = 2;
+  }
+
+  return 0;
 }
 
 void drawLine(int x1,int y1,int x2,int y2) {
