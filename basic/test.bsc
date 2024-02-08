@@ -1,4 +1,5 @@
 cls
+assert 0,"Hello world"
 a = 11:b$ = "$12"c = 13:d = 14
 a1 = 43
 b1$ = "$44"
