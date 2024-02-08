@@ -42,14 +42,15 @@ Command_CALL:	;; [call]
 _CCParamLoop		
 		inc 	paramCount 					; one more parameter
 		ldx 	paramCount 					; put in that slot, e.g. param#1 => slot #1
-		jsr 	EXPEvaluateExpressionAtX 	; evaluate it
-		jsr 	DereferenceTOS 				; dereference it.
+
+		jsr 	EXPEvaluateExpressionAtX 	; evaluate the parameter value, keep as referenced.
 		lda 	(codePtr),y 				; get next
 		cmp 	#KWD_RPAREN 				; ) ?
 		beq 	_CCEndCall
 		iny 								; consume
 		cmp 	#KWD_COMMA 					; get next if comma
 		beq 	_CCParamLoop
+_CCSyntax:
 		.error_syntax 						
 
 _CCEndCall:		
@@ -77,7 +78,30 @@ _CCEndCall:
 _CCUpdateParamLoop:		
 		cpx 	paramCount 					; done all the parameters ?
 		beq 	_CCDoneParameters
-		jsr 	LocaliseNextTerm 			; get a term into the slot.
+
+		lda 	(codePtr),y 				; save next byte on stack
+		pha
+		cmp 	#KWD_REF  					; consume if it is REF
+		bne 	_CCNotReference1
+		iny
+_CCNotReference1:
+
+		jsr 	EvaluateTerm 				; evaluate the term (the target variable)
+		lda 	XSControl,x 				; check it is a reference
+		and 	#XS_ISVARIABLE
+		beq 	_CCSyntax
+
+		jsr 	LocaliseTermX 				; localise that term.
+
+		pla    								; get REF perhaps
+		cmp 	#KWD_REF
+		bne 	_CCNotReference2
+		jsr 	CCCreateRestore 			; create code to copy the result.
+_CCNotReference2:		
+
+		inx  								; dereference the parameter value 
+		jsr 	DereferenceTOS 				
+		dex
 		jsr 	AssignValueToReference	 	; assign the parameter value to the parameter variable
 		inx 								; do the next one.
 		lda 	(codePtr),y 				; if , follows then consume it
@@ -90,10 +114,72 @@ _CCDoneParameters:
 		jsr 	ERRCheckRParen 				; check right bracket and continue.
 		rts
 
-_CCSyntax:
-		.error_syntax
 _CCUnknown:
 		.error_unknown
+
+; ************************************************************************************************
+;
+;		Create a result copy. On entry Stack,X+1 is the *target* variable - this is where the 
+;		value that is copied back goes. Stack,X is the *source* variable - this is the value
+;		that is copied back - what is currently in the parameter
+;
+; ************************************************************************************************
+
+CCCreateRestore:
+		lda 	XSControl+1,x 				; check the parameter value, is actually a reference
+		and 	#XS_ISVARIABLE
+		beq 	_CCCSyntax
+		;
+		lda 	XSControl,x 				; push the type byte
+		jsr 	StackPushByte
+		lda 	XSNumber0,x  				; push the source on first
+		jsr 	StackPushByte
+		lda 	XSNumber1,x
+		jsr 	StackPushByte
+		lda 	XSNumber0+1,x  				; push the target first
+		jsr 	StackPushByte
+		lda 	XSNumber1+1,x
+		jsr 	StackPushByte
+		lda 	#STK_REFPARAM 				; push the reference marker.
+		jsr 	StackPushByte
+		rts
+_CCCSyntax:
+		.error_syntax
+
+; ************************************************************************************************
+;
+;									 Copy reference back
+;
+; ************************************************************************************************
+
+CCCopyReferenceBack:
+		phy
+		jsr 	StackPopByte 				; throw reference marker.
+		;
+		jsr 	StackPopByte 				; pop the target
+		sta 	zTemp0+1
+		jsr 	StackPopByte
+		sta 	zTemp0
+		;
+		jsr 	StackPopByte 				; pop the value to copy
+		sta 	zTemp1+1
+		jsr 	StackPopByte
+		sta 	zTemp1
+		;
+		jsr 	StackPopByte 				; this is the type byte.
+		and 	#XS_ISSTRING
+		bne 	_CCCStringReference
+		ldy 	#3 							; copy it back
+_CCCopyBack:
+		lda 	(zTemp1),y
+		sta 	(zTemp0),y
+		dey
+		bpl 	_CCCopyBack
+		ply
+		rts
+
+_CCCStringReference:
+		.error_type
 
 ; ************************************************************************************************
 ;
@@ -116,5 +202,6 @@ _CEContinue:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		08-02-24 		Add reference parameter code
 ;
 ; ************************************************************************************************

@@ -49,4 +49,5 @@ ExtendedVectorTable:
 	.word	Command_Renumber         ; $1ab renumber
 	.word	Command_Delete           ; $1ac delete
 	.word	Unimplemented            ; $1ad editor
+	.word	Unimplemented            ; $1ae mon
 	.send code
