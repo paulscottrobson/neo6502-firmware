@@ -1,25 +1,17 @@
-cls:gload "graphics.gfx"
-mem = alloc(8*6+3):rect solid ink 4 from 0,0 to 319,239
-poke mem,1:poke mem+1,8:poke mem+2,6
-for y = 0 to 5
-	base = (y & 1) * $F0
-	'base = $F0+(y & 3)
-	for x = 0 to 7
-		poke x+y*8+mem+3,base+(((x >> 1)+y)&3)
-	next	
-next
-t1 = time()
-for i = 1 to 100
-tilemap mem,i,0
-call draw(10,10,1)
-call draw(20,100,2)
-next
-t1 = (time()-t1)/100/100
-cursor x,y:print 1/t1
+cls
+a = 11:b$ = "$12"c = 13:d = 14
+a1 = 43
+b1$ = "$44"
+c1 = 45
+d1 = 46
+print "Before",a1,b1$,c1,d1
+call proc1(a1,b$,-1,d1)
+print "After",a1,b1$,c1,d1
+print "ParamV",a,b$,c,d
 end
 
-
-proc draw(x,y,s)
-	tiledraw x,y dim s to x+8*s*16-7,y+6*s*16
-	rect x,y frame ink 7 to x+8*s*16-7,y+6*s*16
+proc proc1(ref a,b$,c,ref d)
+	print "Inside",a,b$,c,d
+	a = -2:d = 123456
+	b$ = "Hello":print b$
 endproc
