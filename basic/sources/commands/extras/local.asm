@@ -36,6 +36,7 @@ Command_LOCAL: ;; [local]
 
 LocaliseNextTerm:		
 		jsr 	EvaluateTerm 				; evaluate the term
+LocaliseTermX:		
 		lda 	XSControl,x 				; check it is a reference
 		and 	#XS_ISVARIABLE
 		beq		_LNTError

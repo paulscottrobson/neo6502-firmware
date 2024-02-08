@@ -52,8 +52,14 @@ StackRemoveLocals:
 		lda 	(basicStack) 				; locals to unstack ?
 		cmp 	#STK_LOCALINFO
 		bcs 	_SRLExit
+		cmp 	#STK_REFPARAM 				; reference parameter
+		beq 	_SRLIsReference
 		jsr 	LocalPopValue
 		bra 	StackRemoveLocals
+_SRLIsReference:
+		jsr 	CCCopyReferenceBack
+		bra 	StackRemoveLocals
+				
 _SRLExit:
 		rts		
 
