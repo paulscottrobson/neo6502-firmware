@@ -155,6 +155,77 @@ static void CONReverseCursorBlock(void) {
 
 // ***************************************************************************************
 //
+//						Copy a character on display and console mirror
+//	
+// ***************************************************************************************
+
+static void CONCopy(uint16_t xFrom,uint16_t yFrom,uint16_t xTo,uint16_t yTo) {
+	graphMode->consoleMemory[xTo + yTo * MAXCONSOLEWIDTH] =  					// Copy console mirror
+							graphMode->consoleMemory[xFrom + yFrom * MAXCONSOLEWIDTH];
+	uint8_t *tgt = graphMode->graphicsMemory +  								// Goes here
+					(yTo * graphMode->fontHeight * graphMode->xGSize) + (xTo * graphMode->fontWidth);							
+	uint8_t *src = graphMode->graphicsMemory +  								// From here
+					(yFrom * graphMode->fontHeight * graphMode->xGSize) + (xFrom * graphMode->fontWidth);							
+	for (int y = 0;y < graphMode->fontHeight;y++) {  							// Copy character graphics
+		memcpy(tgt,src,graphMode->fontWidth);   								// One row at a time.
+		tgt += graphMode->xGSize;
+		src += graphMode->xGSize;
+	}
+}
+
+// ***************************************************************************************
+//
+//										Get end position
+//	
+// ***************************************************************************************
+
+static uint16_t CONGetEndPosition(uint8_t y) {
+	while (y < graphMode->yCSize-1) {  											// Until reached the last line.
+		if (!graphMode->isExtLine[y]) return y; 								// This is a line end
+		y++;  																	// Continuation, try next line.
+	}
+	return y;
+}
+
+// ***************************************************************************************
+//
+//								Delete character at cursor
+//
+// ***************************************************************************************
+
+static void CONDeleteCharacter(void) {
+	int yBase = CONGetEndPosition(graphMode->yCursor);  						// End of line
+	int x = graphMode->xCursor,y = graphMode->yCursor;  						// Current position
+	int xNext,yNext;
+	while (x != graphMode->xCSize-1 || y != yBase) {  							// While not end of line
+		xNext = x+1;yNext = y;if (xNext == graphMode->xCSize) { xNext = 0;yNext++; }
+		CONCopy(xNext,yNext,x,y);
+		x = xNext;y = yNext;
+	}
+	CONDrawCharacter(x,y,' ',7,0);	
+}
+
+// ***************************************************************************************
+//
+//								Insert Space at cursor
+//
+// ***************************************************************************************
+
+static void CONInsertCharacter(void) {
+	int y = CONGetEndPosition(graphMode->yCursor);  						// End of line
+	int x = graphMode->xCSize-1;
+
+	while (x != graphMode->xCursor || y != graphMode->yCursor) {  			// While not end of line
+		int xPrev = x-1;int yPrev = y;   									// Work out prior character
+		if (xPrev < 0) { yPrev--;xPrev = graphMode->xCSize-1; }
+		CONCopy(xPrev,yPrev,x,y);  											// Copy previous forward.
+		x = xPrev;y = yPrev;
+	}
+	CONDrawCharacter(x,y,' ',7,0);	
+}
+
+// ***************************************************************************************
+//
 //			Send command to console. Similar to BBC Micro, not all supported.
 //
 // ***************************************************************************************
@@ -173,11 +244,18 @@ void CONWrite(int c) {
 				graphMode->xCursor = 0;
 			break;
 
+		case CC_INSERT:  														// E/5 Insert
+			CONInsertCharacter();break;
+
 		case CC_BACKSPACE: 														// H/8 backspace
-			if (graphMode->xCursor > 0) {
+			if (graphMode->xCursor == 0) {  									// Start of line ?
+				if (graphMode->yCursor == 0) return; 							// Top of screen.
+				if (!graphMode->isExtLine[graphMode->yCursor-1]) return; 		// Start of a line ? 
+				graphMode->xCursor = graphMode->xCSize-1;graphMode->yCursor--;	// Go to end of previous line.
+			} else {
 				graphMode->xCursor--;
-				CONDrawCharacter(graphMode->xCursor,graphMode->yCursor,' ',graphMode->backCol,graphMode->backCol);
 			}
+			CONDeleteCharacter();
 			break;
 
 		case CC_TAB:  															// I/9 Tab
@@ -222,6 +300,9 @@ void CONWrite(int c) {
 
 		case CC_REVERSE:  														// X/24 reverse character at cursor
 			CONReverseCursorBlock();break;
+
+		case CC_DELETE:  														// Z/26 delete
+			CONDeleteCharacter();break;
 
 		default:
 			if ((c >= ' ' && c < 127) || c >= 192) {  							// 32-126,192+ output a character.
@@ -294,5 +375,6 @@ void CONWriteString(const char *s) {
 //		17-01-24 	TAB goes down at end of line.
 //		30-01-24 	Fixed clear screen to clear text area only, not sprites too.
 //		31-01-24 	Added functionality to set cursor position.
+//		07-02-24	Added Insert and Delete functionality
 //
 // ***************************************************************************************

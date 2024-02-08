@@ -25,48 +25,10 @@ Command_LIST:	;; [list]
 
 		lda 	(codePtr),y 				; is there a to line (e.g. LIST ,xxx)
 		cmp 	#$20 						; is it an identifier
-		bcs 	_CLListToFrom
+		bcs 	_CLList
 		jmp 	_CLListProcedure
-;
-;		List to/from
-;		
-_CLListToFrom:
-		cmp 	#KWD_COMMA
-		beq 	_CLToLine
-		cmp 	#KWD_SYS_END 				; EOL, default TO
-		beq 	_CLDefaultTo
-
-		ldx 	#0
-		jsr 	EXPEvalInteger16 			; from value *and* to value now.
-		lda 	XSNumber0
-		sta 	CLFrom
-		sta 	CLTo
-		lda 	XSNumber1
-		sta 	CLFrom+1
-		sta 	CLTo+1
-		lda 	(codePtr),y
-		cmp 	#KWD_SYS_END 				; that's the lot ?
-		beq 	_CLList
-_CLToLine:		
-		lda 	(codePtr),y 				; what follows.	
-		cmp 	#KWD_SYS_END 				; EOL, default TO
-		beq 	_CLDefaultTo		
-		jsr 	ERRCheckComma 				; sep comma
-		lda 	(codePtr),y 				; if it is just LIST , then default TO
-		cmp 	#KWD_SYS_END
-		beq 	_CLDefaultTo
-		ldx 	#0
-		jsr 	EXPEvalInteger16 			; there's a To value.
-		lda 	XSNumber0
-		sta 	CLTo
-		lda 	XSNumber1
-		sta 	CLTo+1
-		bra 	_CLList
-_CLDefaultTo: 								; to the end.
-		lda 	#$FF
-		sta 	CLTo
-		sta 	CLTo+1
 _CLList:
+		jsr 	LISTGetLinesToFrom 			; get range.
 		lda 	Program 					; point out code start.
 		clc
 		adc 	#Program >> 8
@@ -81,11 +43,11 @@ _CLLoop:
 		bit 	ControlStatus 				; break pressed ?
 		bmi 	_CLBreak
 		ldx 	#CLFrom-CLFrom 				; compare line number vs from
-		jsr 	_CLCompareLine
+		jsr 	LISTCompareLine
 		cmp 	#255 						; < from then skip
 		beq 	_CLNext
 		ldx 	#CLTo-CLFrom   				; compare line number vs IFR0
-		jsr 	_CLCompareLine
+		jsr 	LISTCompareLine
 		cmp 	#1 							; > to then skip
 		beq 	_CLNext
 		jsr 	ListCurrentLine
@@ -138,10 +100,14 @@ _CLListLoop2:
 		bcc 	_CLListLoop2
 		inc 	codePtr+1
 		bra 	_CLListLoop2
+
+; ************************************************************************************************
 ;
-;		Compare current line number to range.
+;									Compare current line number to range.
 ;
-_CLCompareLine:
+; ************************************************************************************************
+
+LISTCompareLine:
 		ldy 	#1
 		sec
 		lda 	(codePtr),y
@@ -161,9 +127,13 @@ _CLIsPositive:
 _CLIsNegative:
 		lda 	#255		
 		rts
+
+; ************************************************************************************************
 ;
-;		List the current line.
+;										List the current line.
 ;
+; ************************************************************************************************
+
 ListCurrentLine:
 		lda 	#6 							; colour line #
 		jsr 	DTKColour
@@ -219,6 +189,51 @@ _CLASpaces:
 _CLASExit:
 		rts
 
+; ************************************************************************************************
+;
+;									Get a range of line numbers
+;		
+; ************************************************************************************************
+
+LISTGetLinesToFrom:
+		lda 	(codePtr),y
+		cmp 	#KWD_COMMA
+		beq 	_CLToLine
+		cmp 	#KWD_SYS_END 				; EOL, default TO
+		beq 	_CLDefaultTo
+
+		ldx 	#0
+		jsr 	EXPEvalInteger16 			; from value *and* to value now.
+		lda 	XSNumber0
+		sta 	CLFrom
+		sta 	CLTo
+		lda 	XSNumber1
+		sta 	CLFrom+1
+		sta 	CLTo+1
+		lda 	(codePtr),y
+		cmp 	#KWD_SYS_END 				; that's the lot ?
+		beq 	_CLExit
+_CLToLine:		
+		lda 	(codePtr),y 				; what follows.	
+		cmp 	#KWD_SYS_END 				; EOL, default TO
+		beq 	_CLDefaultTo		
+		jsr 	ERRCheckComma 				; sep comma
+		lda 	(codePtr),y 				; if it is just LIST , then default TO
+		cmp 	#KWD_SYS_END
+		beq 	_CLDefaultTo
+		ldx 	#0
+		jsr 	EXPEvalInteger16 			; there's a To value.
+		lda 	XSNumber0
+		sta 	CLTo
+		lda 	XSNumber1
+		sta 	CLTo+1
+		bra 	_CLExit
+_CLDefaultTo: 								; to the end.
+		lda 	#$FF
+		sta 	CLTo
+		sta 	CLTo+1
+_CLExit:
+		rts
 		.send code
 					
 ; ************************************************************************************************
@@ -229,6 +244,7 @@ _CLASExit:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		07-02-24 		Extracted code to be re-used in DELETE.
 ;
 ; ************************************************************************************************
 

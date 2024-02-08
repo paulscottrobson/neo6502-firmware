@@ -47,6 +47,7 @@ void GFXPlotPixel(struct GraphicsMode *gMode,int x,int y);
 void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y);
 void GFXEllipse(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int useSolidFill);
 int GFXFindImage(int type,int id);
+uint8_t GFXGetDrawSize(void);
 
 #endif
 
