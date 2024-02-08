@@ -226,12 +226,22 @@ static FILE* getF(uint8_t fileno) {
 }
 
 uint8_t FISCloseFileHandle(uint8_t fileno) {
-	FILE* f = getF(fileno);
-	if (!f)
-		return 1;
+	if (fileno == 0xff) {
+		for (FILE*& f : fileHandles) {
+			if (f) {
+				fclose(f);
+				f = NULL;
+			}
+		}
+		return 0;
+	} else {
+		FILE* f = getF(fileno);
+		if (!f)
+			return 1;
 
-	int result = fclose(f);
-	return !result ? 0 : 1;
+		int result = fclose(f);
+		return !result ? 0 : 1;
+	}
 }
 
 uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {

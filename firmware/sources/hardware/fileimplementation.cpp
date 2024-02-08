@@ -128,12 +128,21 @@ static FIL* getF(uint8_t fileno) {
 }
 
 uint8_t FISCloseFileHandle(uint8_t fileno) {
-	FIL* f = getF(fileno);
-	if (!f)
-		return 1;
+	if (fileno == 0xff) {
+		for (FIL& f : fileHandles)
+		{
+			if (f.obj.fs)
+				f_close(&f);
+		}
+		return 0;
+	} else {
+		FIL* f = getF(fileno);
+		if (!f)
+			return 1;
 
-	FRESULT result = f_close(f);
-	return (result == FR_OK) ? 0 : 1;
+		FRESULT result = f_close(f);
+		return (result == FR_OK) ? 0 : 1;
+	}
 }
 
 uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {
