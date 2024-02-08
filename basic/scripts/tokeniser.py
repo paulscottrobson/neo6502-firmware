@@ -133,6 +133,7 @@ class Tokeniser(object):
 			s = s[1:].strip()
 			self.code.append(self.getTokenID("'"))
 			if s != "":
+				s = s.replace('"','')
 				self.code.append(self.getTokenID("!!str"))
 				self.code.append(len(s))
 				self.code += [ord(c) for c in s]

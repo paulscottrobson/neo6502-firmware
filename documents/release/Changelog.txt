@@ -133,3 +133,8 @@ Changes
 07/02/24: 	IMP: Added ability to arbitrarily execute code in emulator.
 			BUG: No DIM check for arrays.
 			IMP: FKEY on its own lists function keys
+			IMP: Insert and Delete work, Backspace works properly.
+			IMP: Added DELETE command
+			IMP: Added RENUMBER command
+			BRK: The size is now passed via DIM in the TILEDRAW not TILEMAP.
+			
