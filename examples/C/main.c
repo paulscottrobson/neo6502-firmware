@@ -5,7 +5,7 @@ unsigned char *cmd = (unsigned char *)0xFF00;
 
 int write (unsigned char* buf, unsigned count) {
  	while (count--) {
- 		while(cmd[0]) {}	
+ 		while(cmd[0]) {}
 	 	cmd[1] = 0;
  		cmd[4] = *buf++;
  		cmd[0] = 2;
