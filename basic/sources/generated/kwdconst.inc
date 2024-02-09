@@ -154,6 +154,7 @@ KWD_RENUMBER                       = $1ab ; renumber
 KWD_DELETE                         = $1ac ; delete
 KWD_EDITOR                         = $1ad ; editor
 KWD_MON                            = $1ae ; mon
+KWD_OLD                            = $1af ; old
 KWD_ADC                            = $280 ; adc
 KWD_AND                            = $281 ; and
 KWD_ASL                            = $282 ; asl
