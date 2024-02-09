@@ -1,9 +1,9 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		time.asm
-;		Purpose:	Return time in cs
-;		Created:	11th December 2023
+;		Name:		vblanks.asm
+;		Purpose:	Return vertical blanks count
+;		Created:	9th February 2024
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -12,30 +12,19 @@
 
 ; ************************************************************************************************
 ;
-;										Return time in cs
+;										Return VBlank count
 ;
 ; ************************************************************************************************
 
 		.section code	
 
-EXPUnaryTime: ;; [time(]
+EXPUnaryVBlanks: ;; [vblanks(]
 		jsr 	ERRCheckRParen 					; )
 
-		.DoSendMessage 							; get time.
-		.byte 	1,1
+		.DoSendMessage 							; get vblanks
+		.byte 	5,37
 		.DoWaitMessage
-		
-EXPReturn32BitInteger:		
-		lda 	ControlParameters+0				; return as integer
-		sta 	XSNumber0,x
-		lda 	ControlParameters+1
-		sta 	XSNumber1,x
-		lda 	ControlParameters+2
-		sta 	XSNumber2,x
-		lda 	ControlParameters+3
-		sta 	XSNumber3,x
-		stz 	XSControl,x
-		rts
+		jmp 	EXPReturn32BitInteger		
 
 		.send code
 

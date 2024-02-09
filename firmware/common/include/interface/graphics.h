@@ -35,6 +35,7 @@ extern struct GraphicsMode gMode;
 
 void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b); 				// Implementation specific.
 void RNDStartMode0(struct GraphicsMode *gMode);
+int  RNDGetFrameCount(void);
 
 void GFXSetMode(int Mode);
 void GFXDefaultPalette(void);
