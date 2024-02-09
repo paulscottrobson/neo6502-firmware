@@ -19,6 +19,11 @@
 #include "sys/types.h"
 #include <limits.h>
 #include <dirent.h>
+#include <unistd.h>
+#include <errno.h>
+#include <string>
+
+static FILE* fileHandles[FIO_NUM_FILES];
 
 // *******************************************************************************************************************************
 //
@@ -150,15 +155,23 @@ int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize) {
 
 // ***************************************************************************************
 //
+//									File utils
+//
+// ***************************************************************************************
+
+static std::string getAbspath(std::string filename) {
+	return "storage/" + filename;
+}
+
+// ***************************************************************************************
+//
 //									Read File
 //
 // ***************************************************************************************
 
 uint8_t FISReadFile(const char *fileName,uint16_t loadAddress,uint16_t maxSize) {
 	printf("Reading %s to $%x\n",fileName,loadAddress);
-	char szFileName[64];
-	sprintf(szFileName,"storage/%s",fileName);
-	FILE *f = fopen(szFileName,"rb");
+	FILE *f = fopen(getAbspath(fileName).c_str(), "rb");
 	if (f != NULL) {
 		int b;
 		if (loadAddress == 0xFFFF) {
@@ -179,14 +192,132 @@ uint8_t FISReadFile(const char *fileName,uint16_t loadAddress,uint16_t maxSize) 
 
 uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 	printf("Writing %s from $%x size $%x\n",fileName,startAddress,size);
-	char szFileName[64];
-	sprintf(szFileName,"storage/%s",fileName);
-	FILE *f = fopen(szFileName,"wb");
+	FILE *f = fopen(getAbspath(fileName).c_str(), "wb");
 	if (f != NULL) {
 		fwrite(CPUAccessMemory()+startAddress,1,size,f);
 		fclose(f);
 	}
 	return (f == NULL) ? 1 : 0;
+}
+
+// ***************************************************************************************
+//
+//								File-handle based functions
+//
+// ***************************************************************************************
+
+uint8_t FISOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
+	fprintf(stderr, "OpenFileHandle(%d, '%s', 0x%02x)\n", fileno, filename, mode);
+
+	if (fileno >= FIO_NUM_FILES)
+		return 1;
+
+	/* Check if already open. */
+	if (fileHandles[fileno])
+		return 1;
+
+	static const char* const modes[] = {
+		"rb",	// 0: FIOMODE_RDONLY
+		"r+b", 	// 1: FIOMODE_WRONLY
+		"r+b",	// 2: FIOMODE_RDWR
+		"w+b",	// 3: FIOMODE_RDWR_CREATE
+	};
+	if (mode >= sizeof(modes)/sizeof(*modes))
+		return 1;
+
+	errno = 0;
+	fileHandles[fileno] = fopen(getAbspath(filename).c_str(), modes[mode]);
+	fprintf(stderr, "Result: %s\n", strerror(errno));
+	return fileHandles[fileno] ? 0 : 1;
+}
+
+static FILE* getF(uint8_t fileno) {
+	if (fileno >= FIO_NUM_FILES)
+		return NULL;
+	return fileHandles[fileno];
+}
+
+uint8_t FISCloseFileHandle(uint8_t fileno) {
+	fprintf(stderr, "CloseFileHandle(%d)\n", fileno);
+	if (fileno == 0xff) {
+		for (FILE*& f : fileHandles) {
+			if (f) {
+				fclose(f);
+				f = NULL;
+			}
+		}
+		return 0;
+	} else {
+		FILE* f = getF(fileno);
+		if (!f)
+			return 1;
+
+		int result = fclose(f);
+		return !result ? 0 : 1;
+	}
+}
+
+uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	int result = fseek(f, offset, SEEK_SET);
+	return (result >= 0) ? 0 : 1;
+}
+
+uint8_t FISTellFileHandle(uint8_t fileno, uint32_t* offset) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	*offset = ftell(f);
+	return 0;
+}
+
+uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	size_t result = fread(cpuMemory+address, *size, 1, f);
+	*size = result;
+
+	return (result >= 0) ? 0 : 1;
+}
+
+uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	size_t result = fwrite(cpuMemory+address, *size, 1, f);
+	*size = result;
+
+	return (result >= 0) ? 0 : 1;
+}
+
+uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	size_t oldpos = fseek(f, SEEK_END, 0);
+	*size = ftell(f);
+	fseek(f, SEEK_SET, oldpos);
+
+	return 0;
+}
+
+uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size) {
+	FILE* f = getF(fileno);
+	if (!f)
+		return 1;
+
+	fflush(f);
+	int result = ftruncate(::fileno(f), size);
+
+	return !result ? 0 : 1;
 }
 
 // ***************************************************************************************
