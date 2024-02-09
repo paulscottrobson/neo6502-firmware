@@ -1,18 +1,17 @@
 cls
-assert 0,"Hello world"
 a = 11:b$ = "$12"c = 13:d = 14
 a1 = 43
 b1$ = "$44"
 c1 = 45
 d1 = 46
 print "Before",a1,b1$,c1,d1
-call proc1(a1,b$,-1,d1)
+call proc1(a1,b1$,-1,d1)
 print "After",a1,b1$,c1,d1
 print "ParamV",a,b$,c,d
 end
 
-proc proc1(ref a,b$,c,ref d)
+proc proc1(ref a,ref b$,c,ref d)
 	print "Inside",a,b$,c,d
 	a = -2:d = 123456
-	b$ = "Hello":print b$
+	b$ = "Hello!":print b$
 endproc

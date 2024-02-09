@@ -169,6 +169,9 @@ CCCopyReferenceBack:
 		jsr 	StackPopByte 				; this is the type byte.
 		and 	#XS_ISSTRING
 		bne 	_CCCStringReference
+		;
+		;		Copy number reference back
+		;
 		ldy 	#3 							; copy it back
 _CCCopyBack:
 		lda 	(zTemp1),y
@@ -177,8 +180,23 @@ _CCCopyBack:
 		bpl 	_CCCopyBack
 		ply
 		rts
-
+		;
+		;		Copy string reference back
+		;
 _CCCStringReference:
+		phx
+		lda 	(zTemp1)
+		sta 	zsTemp
+		ldy 	#1
+		lda 	(zTemp1),y
+		sta 	zsTemp+1
+
+		ldy 	zTemp0+1
+		lda 	zTemp0
+		jsr 	StringConcrete
+		plx
+		ply	
+		rts
 		.error_type
 
 ; ************************************************************************************************
@@ -203,5 +221,6 @@ _CEContinue:
 ;		Date			Notes
 ;		==== 			=====
 ;		08-02-24 		Add reference parameter code
+;		09-02-24 		Add string reference code.
 ;
 ; ************************************************************************************************
