@@ -177,6 +177,7 @@ Shift1TokenText:
 	.byte	$06,$44,$45,$4c,$45,$54,$c5   	; $1ac DELETE
 	.byte	$06,$45,$44,$49,$54,$4f,$d2   	; $1ad EDITOR
 	.byte	$03,$4d,$4f,$ce               	; $1ae MON
+	.byte	$03,$4f,$4c,$c4               	; $1af OLD
 	.byte	$FF
 
 Shift2TokenText:
