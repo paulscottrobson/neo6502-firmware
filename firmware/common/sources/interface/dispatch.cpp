@@ -100,6 +100,11 @@ char *DSPGetString(uint8_t *command,uint8_t paramOffset) {
 	return szBuffer;
 }
 
+std::string DSPGetStdString(uint8_t *command,uint8_t paramOffset) {
+	uint8_t *mem = cpuMemory+command[paramOffset]+(command[paramOffset+1]<<8);  // From here.
+	return std::string((char*)mem+1, *mem);
+}
+
 uint16_t DSPGetInt16(uint8_t *command,uint8_t paramOffset) {
 	return command[paramOffset] + (command[paramOffset+1] << 8);
 }

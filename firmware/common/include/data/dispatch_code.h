@@ -112,6 +112,11 @@ switch (*DCOMMAND) {
 				*DERROR = FIOSetSizeFileHandle(DPARAMS[0],DSPGetInt32(DPARAMS,1));
 				}
 				break;
+			case 12:
+				{
+				*DERROR = FIORenameFile(DSPGetStdString(DPARAMS, 0), DSPGetStdString(DPARAMS, 1));
+				}
+				break;
 		}
 		break;
 	case 4:
