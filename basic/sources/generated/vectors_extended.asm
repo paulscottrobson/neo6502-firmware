@@ -50,4 +50,5 @@ ExtendedVectorTable:
 	.word	Command_Delete           ; $1ac delete
 	.word	Unimplemented            ; $1ad editor
 	.word	Unimplemented            ; $1ae mon
+	.word	Command_Old              ; $1af old
 	.send code
