@@ -21,7 +21,6 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <errno.h>
-#include <string>
 
 static FILE* fileHandles[FIO_NUM_FILES];
 static int frameCount = 0;
@@ -204,6 +203,21 @@ uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 		fclose(f);
 	}
 	return (f == NULL) ? 1 : 0;
+}
+
+// ***************************************************************************************
+//
+//									Rename file
+//
+// ***************************************************************************************
+
+uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFilename) {
+	printf("Renaming %s to %s: ", oldFilename.c_str(), newFilename.c_str());
+	errno = 0;
+	rename(getAbspath(oldFilename).c_str(), getAbspath(newFilename).c_str());
+	printf("%s\n", strerror(errno));
+
+	return (errno == 0) ? 1 : 0;
 }
 
 // ***************************************************************************************
