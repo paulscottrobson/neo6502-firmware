@@ -21,14 +21,14 @@ done
 
 
 # cleanup
-rm -f *.o main2.neo hello.map neo6502.lib{,.temp}
+rm -f *.o hello.neo hello.map neo6502.lib{,.temp}
 
 # compile
 export CC65_HOME="$_CC65_HOME"
 ca65 crt0.s
 ar65 a neo6502.lib crt0.o
 cl65 --static-locals -C neo6502.cfg -O --cpu 65c02 -m hello.map \
-     -o main2 main.c neo6502.lib
+     -o hello.neo hello.c neo6502.lib
 
 # launch emulator
-test -f main2 && ../../bin/neo main2@800 cold
+test -f hello.neo && ../../bin/neo hello.neo@800 cold
