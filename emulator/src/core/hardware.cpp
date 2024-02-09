@@ -24,6 +24,7 @@
 #include <string>
 
 static FILE* fileHandles[FIO_NUM_FILES];
+static int frameCount = 0;
 
 // *******************************************************************************************************************************
 //
@@ -47,6 +48,11 @@ void HWReset(void) {
 
 void HWSync(void) {
 	TICKProcess();
+	frameCount++;
+}
+
+int  RNDGetFrameCount(void) {
+	return frameCount;
 }
 
 // *******************************************************************************************************************************

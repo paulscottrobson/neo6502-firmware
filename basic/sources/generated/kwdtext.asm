@@ -291,6 +291,7 @@ Shift2TokenText:
 	.byte	$08,$53,$50,$52,$49,$54,$45,$59,$a8	; $2ec SPRITEY(
 	.byte	$06,$4e,$4f,$54,$45,$53,$a8   	; $2ed NOTES(
 	.byte	$05,$48,$49,$4d,$45,$cd       	; $2ee HIMEM
+	.byte	$08,$56,$42,$4c,$41,$4e,$4b,$53,$a8	; $2ef VBLANKS(
 	.byte	$FF
 
 BinaryPrecedence:

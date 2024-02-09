@@ -259,3 +259,4 @@ KWD_SPRITEXLPAREN                  = $2eb ; spritex(
 KWD_SPRITEYLPAREN                  = $2ec ; spritey(
 KWD_NOTESLPAREN                    = $2ed ; notes(
 KWD_HIMEM                          = $2ee ; himem
+KWD_VBLANKSLPAREN                  = $2ef ; vblanks(

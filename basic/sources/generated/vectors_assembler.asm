@@ -114,4 +114,5 @@ AssemblerVectorTable:
 	.word	EXPUnarySpriteY          ; $2ec spritey(
 	.word	UnaryNotes               ; $2ed notes(
 	.word	EXPUnaryHimem            ; $2ee himem
+	.word	EXPUnaryVBlanks          ; $2ef vblanks(
 	.send code

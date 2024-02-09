@@ -314,6 +314,9 @@ switch (*DCOMMAND) {
 			case 36:
 				GFXGraphicsCommand(36,DCOMMAND);
 				break;
+			case 37:
+				*((uint32_t *)DPARAMS) = RNDGetFrameCount();
+				break;
 		}
 		break;
 	case 6:

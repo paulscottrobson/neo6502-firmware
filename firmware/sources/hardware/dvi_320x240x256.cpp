@@ -45,6 +45,7 @@ uint16_t palette[256];														  	// Current DVI palette (RGB565)
 uint8_t  *screenMemory;															// Graphics RAM (max 320x240)
 uint16_t buffer1[FRAME_WIDTH+32],buffer2[FRAME_WIDTH+32];					   	// 2 buffers for scanline used alternatively
 uint16_t frameCounter = 0,lineCounter = 0;									  	// Tracking line/frame counts.
+
 bool  isInitialised = false;													// Only start core once.
 
 // ***************************************************************************************
@@ -109,6 +110,16 @@ void RNDStartMode0(struct GraphicsMode *gMode) {
    screenMemory = gMode->graphicsMemory; 										// Remember where drawing.
    if (!isInitialised) DVIStart();												// Start hardware, only once (!)
    isInitialised = true;
+}
+
+// ***************************************************************************************
+//
+//								Get frame counter
+//
+// ***************************************************************************************
+
+int  RNDGetFrameCount(void) {
+	return frameCounter;
 }
 
 // ***************************************************************************************
