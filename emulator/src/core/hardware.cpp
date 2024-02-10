@@ -154,7 +154,7 @@ int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize) {
 	if (dirEntry != NULL) {
 		strcpy(buffer,dirEntry->d_name);
 		*isDirectory = 0;
-		*fileSize = -1;
+		*fileSize = 42;
 	}
 	return (dirEntry == NULL) ? 1 : 0;
 }   
