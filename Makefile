@@ -57,8 +57,17 @@ crossdev:
 	cd documents$(S)release$(S)crossdev ; $(CDEL) crossdev.zip ; zip -r -q crossdev.zip *
 
 samples:
-	zip -r -j -q release$(S)samples.zip basic$(S)code basic$(S)images$(S)test$(S)test.gfx basic$(S)images$(S)graphics.gfx
-	zip -d -q release$(S)samples.zip *.tass 
+	# copy BASIC examples into examples/ tree
+	ifeq ($(OS),Windows_NT)
+	     ROBOCOPY basic\code\ examples\basic\ /XF *.tass
+	else
+	     cp -a basic/code/ examples/BASIC/
+	     find -type f -name '*.tass' --delete
+	endif
+
+	# generate examples tarball
+	zip --recurse-paths --quiet samples.zip examples
+
 
 # ***************************************************************************************
 #
