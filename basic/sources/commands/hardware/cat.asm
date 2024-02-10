@@ -19,6 +19,23 @@
 		.section code
 
 Command_CAT:	;; [cat]
+		lda 	(codePtr),y
+		cmp 	#KWD_SYS_END
+		beq 	_CATDefault
+		cmp 	#KWD_COLON
+		beq 	_CATDefault
+		;
+		jsr 	EXPEvalString
+		lda 	zTemp0
+		sta 	ControlParameters
+		lda 	zTemp0+1
+		sta 	ControlParameters+1
+		DoSendMessage
+		.byte 	3,12
+		rts
+
+
+_CATDefault:		
 		DoSendMessage
 		.byte 	3,1
 		rts
@@ -34,6 +51,7 @@ Command_CAT:	;; [cat]
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		10-02-24 		Modifications to support wildcard
 ;
 ; ************************************************************************************************
 
