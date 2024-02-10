@@ -10,11 +10,21 @@
 // ***************************************************************************************
 // ***************************************************************************************
 
-	function 32 									// Append decimal digits, convert to float
-		MATHProcessDecimal(DCOMMAND);
-		
-	function 33 						 			// Convert to int/float
-		MATHConvertStringToNumber(DCOMMAND);
 
-	function 34 									// Convert int/float to string
+	FUNCTION 32 Number to Decimal
+		MATHProcessDecimal(DCOMMAND);
+	DOCUMENTATION
+		Number to Decimal
+		\newline TODO: describe the parameters
+
+	FUNCTION 33 String to Number
+		MATHConvertStringToNumber(DCOMMAND);
+	DOCUMENTATION
+		String to Number
+		\newline TODO: describe the parameters
+
+	FUNCTION 34 Number to String
 		MATHConvertNumberToString(DCOMMAND);
+	DOCUMENTATION
+		Number to String
+		\newline TODO: describe the parameters

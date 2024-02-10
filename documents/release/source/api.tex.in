@@ -1,0 +1,600 @@
+%% meta-data %%
+
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{wrapfig}
+
+
+%% configuration %%
+
+\title{Neo6502 Assembly - Messaging API}
+\author{Paul Robson}
+\date{@DATE@}
+
+\graphicspath{ {./documents/release/source/img/} {../documents/release/source/img/} }
+\setcounter{tocdepth}{1}
+\hypersetup{hidelinks , linktoc=all}
+
+
+%% generic macros %%
+
+% \MonoSp presents the given argument as a smaller mono-spaced font
+\newcommand{\MonoSp}[1] {\fontsize{10pt}{10pt}\selectfont\texttt{#1}\normalsize}
+
+% \Param presents the given argument as a "Param" in bold, mono-spaced font
+\newcommand{\Param}[1] {\textbf{\texttt{Params[#1]}}}
+
+% \ParamsBits illustrates a bit-field
+\newcommand{\ParamBits}[9] {
+  \fontsize{10pt}{10pt}\selectfont
+  \textbf{#1}
+  \newline
+  \begin{tabular}{ | c | c | c | c | c | c | c | c | }
+    \hline
+    bit-7 & bit-6 & bit-5 & bit-4 & bit-3 & bit-2 & bit-1 & bit-0 \\ \hline
+    #2    & #3    & #4    & #5    & #6    & #7    & #8    & #9    \\ \hline
+  \end{tabular}
+  \normalsize
+  \newline
+}
+
+
+%% special case macros %%
+
+% \AddressCol expects to occupy a multicolumn(x2) column
+% used in the "API Messaging Addresses" table, along with \BitsCol
+\newcommand{\AddressCol}[1] { \multicolumn{2}{c|}{\MonoSp{#1}} }
+
+% \BitsCol expects to occupy the second and third to last columns
+% within a multirow(x8) row
+% used in the "API Messaging Addresses" table, along with \AddressCol
+\newcommand{\BitsCol}[9]{
+    \multirow{8}{*}{\MonoSp{#1}} & \MonoSp{bit-7} & #2 \\ \cline{3-4}
+  &                              & \MonoSp{bit-6} & #3 \\ \cline{3-4}
+  &                              & \MonoSp{bit-5} & #4 \\ \cline{3-4}
+  &                              & \MonoSp{bit-4} & #5 \\ \cline{3-4}
+  &                              & \MonoSp{bit-3} & #6 \\ \cline{3-4}
+  &                              & \MonoSp{bit-2} & #7 \\ \cline{3-4}
+  &                              & \MonoSp{bit-1} & #8 \\ \cline{3-4}
+  &                              & \MonoSp{bit-0} & #9 \\ \cline{3-4}
+    \hline
+}
+
+% \ApiFnRow could technically work anyplace,
+% but is mainly relevant for the API Functions table
+\newcommand{\ApiFnRow}[3] {
+  \makecell[tc]{#1 \\ #2}                                      &
+  \makecell[tl]{\MonoSp{LDA \#\$0#1} \\ \MonoSp{STA \#\$FF01}} &
+  #3                                                           \\ \hline
+}
+
+% \ParamsBytes could technically work anyplace,
+% but is specifically for illustrating the Parameters to an API Function
+\newcommand{\ParamsBytes}[9] {
+  \fontsize{10pt}{10pt}\selectfont
+  \textbf{#1}
+  \newline
+    \begin{tabular}{ | c | c | c | c | c | c | c | c | }                       \hline
+      P0 & P1 & P2 & P3 & P4 & P5 & P6 & P7                                 \\
+      \hline
+      \MonoSp{\$FF04} & \MonoSp{\$FF05} & \MonoSp{\$FF06} & \MonoSp{\$FF07} &
+      \MonoSp{\$FF08} & \MonoSp{\$FF09} & \MonoSp{\$FF0A} & \MonoSp{\$FF0B} \\ \hline
+      \MonoSp{#2}     & \MonoSp{#3}     & \MonoSp{#4}     & \MonoSp{#5}     &
+      \MonoSp{#6}     & \MonoSp{#7}     & \MonoSp{#8}     & \MonoSp{#9}     \\ \hline
+    \end{tabular}
+  \normalsize
+  \newline
+}
+
+% \SpriteParamBits could technically work anyplace,
+% but is specialized to illustrate the Sprite bit-field layout
+\newcommand{\SpriteParamBits}[4] {
+  \fontsize{10pt}{10pt}\selectfont
+  \textbf{#1}
+  \newline
+  \begin{tabular}{ | c | c | c | c | c | c | c | c | }                    \hline
+    \MonoSp{bit-7} & \MonoSp{bit-6} & \MonoSp{bit-5} & \MonoSp{bit-4}  &
+    \MonoSp{bit-3} & \MonoSp{bit-2} & \MonoSp{bit-1} & \MonoSp{bit-0}  \\ \hline
+    \MonoSp{#2}    & \MonoSp{#3}    & \multicolumn{6}{c|}{\MonoSp{#4}} \\ \hline
+  \end{tabular}
+  \normalsize
+  \newline
+}
+
+
+%% document body %%
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+  \includegraphics[scale=2.0]{neo6502-text-logo.png}
+\end{center}
+
+\tableofcontents
+
+
+\pagebreak
+
+
+\section{Neo6502 Messaging API}\label{api}
+
+The Neo6502 API is a messaging system.
+There are no methods to access the hardware directly.
+Messages are passed via the block of memory from \MonoSp{\$FF00} to \MonoSp{\$FF0F},
+as specified in the "API Messaging Addresses" table on the following page.
+\newline
+
+The kernel include file \MonoSp{documents/release/neo6502.inc}
+specifies the beginning of this address range as the identifier \MonoSp{ControlPort},
+along with the addresses of \MonoSp{WaitMessage} and \MonoSp{SendMessage} (described later),
+various related kernel jump vectors, and some helper functions.
+\newline
+
+The application include files \MonoSp{examples/assembly/neo6502.asm.inc}
+and \MonoSp{examples/C/neo6502.h}
+also specify the beginning of this address range as the identifier \MonoSp{ControlPort}.
+The assembly include also specifies \MonoSp{ControlPort} and the other controls as
+\MonoSp{API\_COMMAND}, \MonoSp{API\_FUNCTION}, \MonoSp{API\_ERROR},
+\MonoSp{API\_STATUS}, and \MonoSp{API\_PARAMETERS}.
+The C header also specifies \MonoSp{ControlPort} and the other controls as
+\MonoSp{API\_COMMAND\_ADDR}, \MonoSp{API\_FUNCTION\_ADDR},
+\MonoSp{API\_ERROR\_ADDR}, \MonoSp{API\_STATUS\_ADDR},
+and \MonoSp{API\_PARAMETERS\_ADDR}.
+\newline
+
+API Commands/Functions are grouped by functionality.
+For example, Group 1 are the system-related, and Group 2 are console-I/O-related.
+All Groups and their Commands/Functions are shown in the following table.
+\newline
+
+Command/Function Parameters are notated in this document as \Param{0} through \Param{7},
+or as a list or range (eg: \Param{1,2}, \Param{0..7}).
+Note that these are referring to a mapping to memory locations.
+The numbers represent offsets from the Parameters base address \MonoSp{\$FF04}.
+Ie: the actual bytes are not necessarily all distinct "parameters" in the conventional sense.
+Depending on the routine, a logical parameter may be an individual byte,
+one or more bits of a byte interpreted as a composite or bit-field,
+or multiple adjacent bytes interpreted as 16 or 32 bit values.
+For example, the list \Param{0,1} would indicate a single logical parameter,
+comprised of the two adjacent bytes \MonoSp{\$FF04} and \MonoSp{\$FF05}.
+The range \Param{4..7} would indicate a single logical parameter,
+spanning consecutive bytes between \MonoSp{\$FF08} and \MonoSp{\$FF0B}.
+\newline
+
+\textbf{Note that strings referenced by Parameters are not ASCIIZ, but are length-prefixed.}
+The first byte represents the length of the string (not counting itself). The string begins at the second byte.
+Consequently, strings must be 256 bytes or less (not counting the length header).
+\newline
+
+
+\pagebreak
+
+
+\begin{table}[h]
+\centering\textbf{API Messaging Addresses} \\
+\begin{tabularx}{1\textwidth}{|>{\centering\arraybackslash}m{0.150\textwidth}|
+                               >{\centering\arraybackslash}m{0.075\textwidth}|
+                               >{\centering\arraybackslash}m{0.075\textwidth}|
+                               >{\arraybackslash}m{0.594\textwidth}|}
+  \hline
+  \textbf{Meta} & \AddressCol{Address} & \textbf{Contents}
+  \\ \hline
+  Group & \AddressCol{\MonoSp{\$FF00}} &
+  Group selector and status.
+  Writing a non-zero value to this location triggers the routine specified in \MonoSp{\$FF01}.
+  The system will respond by setting the 'Error', 'Information', and 'Parameters'
+  values appropriately.
+  Upon completion, this memory location will be will cleared.
+  \\ \hline
+  Function & \AddressCol{\$FF01} &
+  A command or function within the selected Group.
+  For example, Group 1 Function 0 writes a value to the console;
+  and Group 1 Function 1 reads the keyboard.
+  \\ \hline
+  Error & \AddressCol{\$FF02} &
+  Return any error values, 0 = no error.
+  \\ \hline
+  \multirow{8}{*}{Information} &
+  \BitsCol{\$FF03}{                                                    % address
+  Set (\MonoSp{1}) if the ESCape key has been pressed.                 % desc of bit0
+  This is not automatically reset.                                     % desc of bit0
+  }{\textit{unused}}{\textit{unused}}{\textit{unused}}                 % desc of bits1..3
+  {\textit{unused}}{\textit{unused}}{\textit{unused}}{\textit{unused}} % desc of bits4..7
+  Parameters & \AddressCol{\$FF04..B} &
+  This memory block is notated in this document as \Param{0} through \Param{7},
+  or as a composite list or range (eg: \Param{1,2}, \Param{0..7}).
+  Some Functions require Parameters in these locations
+  and some return values in these locations; yet others do neither.
+  \\ \hline
+  Reserved & \AddressCol{\$FF0C..F} &
+  Reserved.
+  \\ \hline
+\end{tabularx}
+\end{table}
+
+
+\pagebreak
+
+
+\subsection{API Interfacing Protocol}\label{subsec:api-protocol}
+
+Neo6502 application programmers should interact with the API
+per the following algorithm:
+
+\begin{enumerate}
+  \item Wait for any pending command to complete.
+        There is a subroutine WaitMessage which does this for the developer.
+  \item Setup the Function code at \MonoSp{\$FF01};
+        and any Parameters across \MonoSp{\$FF04..\$FF0B}.
+        To print a character for example, set \MonoSp{\$FF01} to \MonoSp{\$06}
+        and set \MonoSp{\$FF04} to the character's ASCII value.
+        To draw a line, set \MonoSp{\$FF01} to \MonoSp{\$02}
+        and set \MonoSp{\$FF04..\$FF0B} as four 16-bit pixel coordinates:
+
+        \ParamsBytes{Params}{srcX lo}{srcX hi}{srcY lo}{srcY hi}{destX lo}{destX hi}{destY lo}{destY hi}
+  \item Setup the command code at \MonoSp{\$FF00}. This triggers the routine;
+        so mind that the Function code and Parameters are setup sanely prior.
+        On a technical point, both implementations process the message immediately on write.
+  \item Optionally, wait for completion.
+        Most commands (eg: writing to the console) do not require waiting,
+        as any subsequent command will wait/queue as per step 1.
+        Query commands (e.g. reading from the keyboard queue),
+        return a value in a parameter.
+        Programs must wait until the control address \MonoSp{\$FF00} has been cleared
+        before reading the result of a query.
+\end{enumerate}
+
+There is a support function \MonoSp{SendMessage},
+which inlines the command and function.
+E.g.: this code from the Kernel:
+
+\begin{verbatim}
+jsr KSendMessage ; send message for command 2,1 (read keyboard)
+.byte 2,1
+jsr KWaitMessage ; wait to receive the result message
+lda DParameters  ; read result
+\end{verbatim}
+
+The instructions above are equivalent to the following explicit steps:
+\begin{verbatim}
+lda #1
+sta DFunction
+lda #2
+sta DCommand    ; trigger API function 2,1 (read keyboard)
+Loop:
+lda DCommand    ; load the result - non-zero until the routine's completion
+bne Loop        ; wait for API routine to complete
+lda DParameters ; read result (a key-code)
+\end{verbatim}
+
+
+\pagebreak
+
+
+\section{API Functions}\label{api-functions}
+
+The following tables are a comprehansive list of all supported API functions.
+\newline
+
+For the conveniance of application programmers,
+the application include files \MonoSp{examples/C/neo6502.h}
+and \MonoSp{examples/assembly/neo6502.asm.inc}
+define macros for these groups, their functions,
+and common parameters (colors, musical notes, etc).
+
+
+@FN_TABLES@
+
+
+\pagebreak
+
+
+\section{Console Codes}\label{console-codes}
+
+The following are console key codes.
+They can be printed in BASIC programs using \MonoSp{chr\$(n)},
+and are also related to the character keys returned by \MonoSp{inkey\$()}.
+The \MonoSp{key()} function uses physical key numbers.
+Some control codes do not have corresponding keyboard keys;
+and some console outputs are not yet implemented.
+\newline
+
+\MonoSp{Backspace} (8), \MonoSp{Tab} (9), \MonoSp{Enter/CR} (13), \MonoSp{Escape} (27),
+and the printable characters (32..127) are the standard ASCII set.
+Other typical control keys (eg: Home and arrows) are mapped into the 0..31 range.
+
+\begin{table}[h]
+\centering\textbf{Console Key Codes - Non-Printable}                              \\
+\begin{tabular}{ | c | c | c | l | }                                                 \hline
+\textbf{ASCII} & \textbf{CTRL+Key} & \textbf{Key} & \textbf{Output}               \\ \hline
+1              & A                 & Left Arrow   & Cursor Left                   \\ \hline
+4              & D                 & Right Arrow  & Cursor Right                  \\ \hline
+5              & E                 & Insert       & Insertion Mode                \\ \hline
+6              & F                 & Page Down    & Cursor Page Down              \\ \hline
+7              & G                 & End          & Cursor Line End               \\ \hline
+8              & H                 & Backspace    & Delete Character Left         \\ \hline
+9              & I                 & Tab          & Tab Character                 \\ \hline
+10             & J                 &              & Line Feed                     \\ \hline
+12             & L                 &              & Clear Screen                  \\ \hline
+13             & M                 & Enter        & Carriage Return (Accept Line) \\ \hline
+18             & R                 & Page Up      & Cursor Page Up                \\ \hline
+19             & S                 & Down         & Cursor Down                   \\ \hline
+20             & T                 & Home         & Cursor Line Begin             \\ \hline
+22             & V                 &              & Cursor Down (8 Lines)         \\ \hline
+23             & W                 & Up           & Cursor Up                     \\ \hline
+24             & X                 &              & Cursor Color Inverse          \\ \hline
+26             & Z                 & Delete       & Delete Character Right        \\ \hline
+27             & [                 & Escape       & Exit                          \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering\textbf{Console Key Codes - Printable}        \\
+\begin{tabular}{ | c | c | c | l | }                       \hline
+\textbf{Hex} & \textbf{Key} & \textbf{Output}           \\ \hline
+20-7F        & ASCII Set    & Standard ASCII Characters \\ \hline
+80-8F        &              & Set Foreground Color      \\ \hline
+90-9F        &              & Set Background Color      \\ \hline
+C0-FF        &              & User-definable Characters \\ \hline
+\end{tabular}
+\end{table}
+
+
+\pagebreak
+
+
+\section{Graphics}\label{graphics}
+
+\subsection{Graphics Settings}\label{subsec:graphics-settings}
+
+Function 5,1 configures the global graphics system settings.
+Not all Parameters are relevant for all graphics commands;
+but all Parameters will be set by this command. So mind their values.
+\newline
+
+The actual color of each drawn pixel will be computed at runtime
+by AND'ing the existing pixel color with the value specified in \Param{0},
+then XOR'ing the result with the value specified in \Param{1}.
+\newline
+
+The value in \Param{2} is a flag which determines the paint fill mode
+for the Draw Rectangle and Draw Elipse commands:
+reset (\MonoSp{1}) for outline, set (\MonoSp{1}) for solid fill.
+\newline
+
+The value in \Param{3} is the draw extent (window) for the Draw Image command.
+\newline
+
+The value in \Param{4} is a bit-field of flags for the Draw Image command,
+which determine if the image will be inverted (flipped) horizontally or vertically:
+\MonoSp{bit-0} for horizontal, \MonoSp{bit-1} for vertical,
+reset (\MonoSp{1}) for normal, set (\MonoSp{1}) for inverted.
+\newline
+
+For the "Draw Rectangle" and "Draw Elipse" commands,
+the given order and position of the coordinates are not significant.
+To be precise, one is "a corner" and the other is "the opposite corner".
+For the "Draw Elipse" command, these corners are referring to the bounding-box.
+The coordinates for an elipse lie outside of the ellipse itself.
+
+
+\pagebreak
+
+
+\subsection{Graphics Data}\label{subsec:graphics-data}
+
+Graphics data files are conventionally named ending in the .gfx suffix;
+though this is not mandatory.
+The format is quite simple.
+
+\begin{table}[h]
+\centering\textbf{Graphics Data Format}                           \\
+\begin{tabular}{ | c | c | l | }                                     \hline
+\textbf{Offset} & \textbf{Data}  & \textbf{Description}           \\ \hline
+0               & 1              & Graphics Data Format ID        \\ \hline
+1               & Count          & Number of 16x16 tiles in use   \\ \hline
+2               & Count          & Number of 16x16 sprites in use \\ \hline
+3               & Count          & Number of 32x32 sprites in use \\ \hline
+4..255          &                & Reserved                       \\ \hline
+256             & Raw            & Sprites graphics data          \\ \hline
+\end{tabular}
+\end{table}
+
+Sprites graphics data is all of the 16x16 tiles,
+followed by all the 16x16 sprites,
+followed by all the 32x32 sprites, all in their respective orders.
+As there is currently only about 20kB of Graphics Memory,
+these should be used somewhat sparingly.
+\newline
+
+Each byte specifies 2 pixels. The upper 4 bits represent the first pixel colour;
+and the lower 4 bits represent the second pixel colour.
+So tiles and 16x16 sprites occupy 16x16/2 bytes (128 bytes) each.
+Each 32x32 sprite occupies 32x32/2 bytes (512 bytes).
+Colour 0 is transparent for sprites (colour 9 should be used for a black pixel).
+\newline
+
+The release package includes Python scripts for creating graphics files,
+which allow you to design graphics using your preferred editing tools
+(eg: Gimp, Inkscape, Krita, etc).
+There is an example in the \MonoSp{crossdev/} directory,
+which demonstrates how to get started importing graphics into the Neo6502.
+
+
+\pagebreak
+
+
+\subsection{Pixel Colors}\label{subsec:graphics-colors}
+
+\begin{table}[h]
+\centering\textbf{Pixel Colors}   \\
+\begin{tabular}{ | c | c | }         \hline
+\textbf{Byte} & \textbf{Color}    \\ \hline
+\MonoSp{\$80} & Black/Transparent \\ \hline
+\MonoSp{\$81} & Red               \\ \hline
+\MonoSp{\$82} & Green             \\ \hline
+\MonoSp{\$83} & Yellow            \\ \hline
+\MonoSp{\$84} & Blue              \\ \hline
+\MonoSp{\$85} & Magenta           \\ \hline
+\MonoSp{\$86} & Cyan              \\ \hline
+\MonoSp{\$87} & White             \\ \hline
+\MonoSp{\$88} & Black             \\ \hline
+\MonoSp{\$89} & Dark Grey         \\ \hline
+\MonoSp{\$8A} & Dark Green        \\ \hline
+\MonoSp{\$8B} & Orange            \\ \hline
+\MonoSp{\$8C} & Dark Orange       \\ \hline
+\MonoSp{\$8D} & Brown             \\ \hline
+\MonoSp{\$8E} & Pink              \\ \hline
+\MonoSp{\$8F} & Light grey        \\ \hline
+\end{tabular}
+\end{table}
+
+
+\pagebreak
+
+
+\section{Tile Maps}\label{tilemaps}
+
+A tile map occupies an area of user memory in 65C02.
+It is comprised of three meta-data bytes, followed by one byte for each tile,
+which is it's tile number in the graphic file (refer to the following section).
+\newline
+
+\MonoSp{F0-FF} are special reserved tile numbers.
+\MonoSp{F0} is a transparent tile;
+and \MonoSp{F1-FF} are a solid tile in the current palette colour.
+The format is very simple.
+
+\begin{table}[h]
+\centering\textbf{Tile Maps Format} \\
+\begin{tabular}{ | c | c | l | }                                                \hline
+\textbf{Offset} & \textbf{Data} & \textbf{Description}                       \\ \hline
+0               & 1             & Graphics Data Format ID                    \\ \hline
+1               & Width         & Width of tilemap (number of tiles)         \\ \hline
+2               & Height        & Height of tilemap (number of tiles)        \\ \hline
+3..             & Raw           & Tiles graphics data (width * height bytes) \\ \hline
+\end{tabular}
+\end{table}
+
+
+\pagebreak
+
+
+\section{Sprites}\label{sprite}
+
+There is one sprite layer (z-plane) in the conventional sense.
+Technically, there is no "sprite layer", per-se.
+The system uses palette manipulation to create, what is in practice,
+a pair of 4-bit bit-planes.
+The sprite graphics are in the upper nibble, the background is in the lower nibble,
+and the background is drawn only if the sprite graphic layer is zero.
+It's this top nibble which is read by Function 5,36 "Read Sprite Pixel".
+\newline
+
+Function 6,2 sets or updates a sprite.
+Sprites are assigned to one of 16 depth layers. Layer 0 is transparency.
+These parameters (eg: the X and Y coordinates) cannot be set independently.
+To retain/reuse the current value of a parameter for a subsequent call,
+set each of the associated byte(s) to \MonoSp{\$80}
+(\MonoSp{\$80,\$80,\$80,\$80} for coordinates).
+\newline
+
+The 'Sprite' Parameter \Param{0} specifies the index of the sprite in the graphics system.
+Sprite 0 is the turtle sprite.
+\newline
+
+\Param{1,2},\Param{3,4} specifies the X and Y coordinates.
+\newline
+
+Bits 0-5 of the 'Image' Parameter \Param{5} specify
+the index of a specific graphic within the sprites data.
+Bit 6 of the 'Image' Parameter specifies the sprite dimensions:
+reset (\MonoSp{0}) for 16x16, set (\MonoSp{1}) for 32x32.
+In practice, the index is the same as the sprite number
+(\MonoSp{\$80}-\MonoSp{\$BF} for 16x16 sprites,
+\MonoSp{\$C0}-\MonoSp{\$FF} for 32x32 sprites), but without bit-7 set.
+\newline
+
+The value in \Param{6} specifies a bit-field of flags,
+which determine if the graphic will be inverted (flipped) horizontally or vertically:
+\MonoSp{bit-0} for horizontal, \MonoSp{bit-1} for vertical,
+reset (\MonoSp{0}) for normal, set (\MonoSp{1}) for inverted.
+\newline
+
+\Param{7} specifies the anchor alignment.
+\newline
+
+
+\pagebreak
+
+
+\subsection{Sprite Anchors}\label{subsec:sprite-anchors}
+
+The table below shows the valid anchor alignments for a sprite.
+The anchor position is the origin of the relative coordinate given.
+That is, coordinates 0,0 of the sprite
+will coincide with one of the positions shown in the table below.
+The default anchor alignment is zero (middle-center).
+
+\begin{table}[h]
+\centering\textbf{Sprite Anchors} \\
+\begin{tabular}{| l | c | r | }      \hline
+7~~~~~~~~~&~~~~~8~~~~~&~~~~~~~~~9 \\
+          &           &           \\
+          &           &           \\ \hline
+          &           &           \\
+4         &    0/5    &         6 \\
+          &           &           \\ \hline
+          &           &           \\
+          &           &           \\
+1         &     2     &         3 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{wrapfigure}[11]{r}{0pt}
+  \includegraphics[width=0.25\textwidth]{neo6502-rocket.png}
+\end{wrapfigure}
+~\newline
+
+To the right are two examples. Assume this is a 32x32 sprite.
+In the upper example, the anchor point is at 8, the top-center.
+Considering the origin at the bottom-left,
+this sprite is drawn at 16,32, the midpoint of the top of the square.
+\newline
+
+In the lower example, the anchor point is at 0;
+and this sprite is drawn at 16,16 (the middle of the square).
+The anchor point should be something like the centre point.
+So for a walking character, this might be anchor point 2 (the bottom-center).
+
+
+\pagebreak
+
+
+\section{Sound}\label{sound}
+
+Function 8,4 queues a sound. Queued sounds are played sequentiually,
+each after the previous has completed,
+such that sounds within a channel queue will not conflict, interrupt, or overlap.
+\newline
+
+Frequency is in untis of Hertz.
+Duration is in units of 100ths of a second.
+Slide is a gradual linear change in frequency, in units of Hz per 100th of a second.
+Sound source type 0 is the beeper.
+Currently, the beeper is the only available sound source.
+\newline
+
+\ParamsBytes{Queue Sound Parameters}{Channel}{Freq hi}{Freq lo}{Duration lo}
+                                    {Duration hi}{Slide lo}{Slide hi}{Source}
+
+
+\end{document}
