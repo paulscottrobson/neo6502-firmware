@@ -113,7 +113,9 @@ switch (*DCOMMAND) {
 				}
 				break;
 			case 12:
-				FIODirectory(DSPGetString(DCOMMAND,4));
+				{
+				*DERROR = FIORenameFile(DSPGetStdString(DPARAMS, 0), DSPGetStdString(DPARAMS, 1));
+				}
 				break;
 		}
 		break;

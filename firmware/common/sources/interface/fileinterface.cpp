@@ -66,6 +66,16 @@ uint8_t FIOWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 
 // ***************************************************************************************
 //
+//									Rename File
+//
+// ***************************************************************************************
+
+uint8_t FIORenameFile(const std::string& oldFilename, const std::string& newFilename) {
+	return FISRenameFile(oldFilename, newFilename);
+}
+
+// ***************************************************************************************
+//
 //								File-handle based functions
 //
 // ***************************************************************************************
