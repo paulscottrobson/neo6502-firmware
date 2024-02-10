@@ -62,7 +62,7 @@ switch (*DCOMMAND) {
 	case 3:
 		switch (*DFUNCTION) {
 			case 1:
-				FIODirectory();
+				FIODirectory("");
 				break;
 			case 2:
 				*DERROR = FIOReadFile(DSPGetString(DCOMMAND,4),DSPGetInt16(DCOMMAND,6));
@@ -111,6 +111,9 @@ switch (*DCOMMAND) {
 				{
 				*DERROR = FIOSetSizeFileHandle(DPARAMS[0],DSPGetInt32(DPARAMS,1));
 				}
+				break;
+			case 12:
+				FIODirectory(DSPGetString(DCOMMAND,4));
 				break;
 		}
 		break;
