@@ -62,7 +62,7 @@ switch (*DCOMMAND) {
 	case 3:
 		switch (*DFUNCTION) {
 			case 1:
-				FIODirectory();
+				FIODirectory("");
 				break;
 			case 2:
 				*DERROR = FIOReadFile(DSPGetString(DCOMMAND,4),DSPGetInt16(DCOMMAND,6));
