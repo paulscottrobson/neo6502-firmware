@@ -92,6 +92,18 @@ uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 
 // ***************************************************************************************
 //
+//									Rename File
+//
+// ***************************************************************************************
+
+uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFilename) {
+	STOInitialise();
+	FRESULT result = f_rename(oldFilename.c_str(), newFilename.c_str());
+	return (result == FR_OK) ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
 //								File-handle based functions
 //
 // ***************************************************************************************
@@ -114,6 +126,7 @@ uint8_t FISOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
 	if (mode >= sizeof(modes)/sizeof(*modes))
 		return 1;
 
+	STOInitialise();
 	FRESULT result = f_open(f, filename, modes[mode]);
 	return (result == FR_OK) ? 0 : 1;
 }
