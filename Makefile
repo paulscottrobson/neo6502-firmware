@@ -20,7 +20,7 @@ RELEASEFILE = neo6502.zip
 
 DOCDIR = documents$(S)release$(S)
 
-DOCUMENTS =  $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
+DOCUMENTS = $(DOCDIR)*.odt $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
 BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(ROOTDIR)emulator$(S)cross-compile$(S)neowin.zip $(BINDIR)basic.bin \
 			 $(ROOTDIR)emulator$(S)neolinux.zip
 PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip \
@@ -48,13 +48,20 @@ all:
 #
 # ***************************************************************************************
 
-zipfile: crossdev
+zipfile: crossdev documentation
 	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) \
 						examples$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
 	$(CDEL) documents$(S)release$(S)crossdev$(S)crossdev.zip
 
 crossdev:
 	cd documents$(S)release$(S)crossdev ; $(CDEL) crossdev.zip ; zip -r -q crossdev.zip *
+
+documentation:
+	# generate ODT documentation (requires 'pandoc')
+	pandoc -f latex -t odt -o $(DOCDIR)api.odt documents$(S)api.texi
+	# generate PDF documentation (requires 'texlive-latex')
+	pdflatex -output-directory=$(DOCDIR) documents$(S)api.texi
+
 
 # ***************************************************************************************
 #
