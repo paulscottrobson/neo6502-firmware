@@ -12,7 +12,7 @@
 
 #include "common.h"
 
-#include "data/palette.h"  														// Default palette.make
+#include "interface/palette.h"  												// Default palette.
 
 struct GraphicsMode gMode;														// Info about current mode.
 

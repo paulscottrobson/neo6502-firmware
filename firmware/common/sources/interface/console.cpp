@@ -11,7 +11,7 @@
 // ***************************************************************************************
 
 #include "common.h"
-#include "data/font_5x7.h"
+#include "interface/font_5x7.h"
 
 struct GraphicsMode *graphMode;                                         
 
