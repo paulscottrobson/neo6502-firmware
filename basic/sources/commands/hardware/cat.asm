@@ -31,7 +31,7 @@ Command_CAT:	;; [cat]
 		lda 	zTemp0+1
 		sta 	ControlParameters+1
 		DoSendMessage
-		.byte 	3,12
+		.byte 	3,32
 		rts
 
 
