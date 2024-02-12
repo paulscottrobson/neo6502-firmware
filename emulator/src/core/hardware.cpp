@@ -32,10 +32,10 @@ static int frameCount = 0;
 // *******************************************************************************************************************************
 
 void HWReset(void) {
-	#ifdef LINUX
-	mkdir("storage",0755);
-	#else
-	mkdir("storage");
+	#ifdef WINDOWS
+		mkdir("storage");
+	#else 
+		mkdir("storage",0755);
 	#endif
 }
 

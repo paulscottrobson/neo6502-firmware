@@ -11,10 +11,10 @@
 // ***************************************************************************************
 // ***************************************************************************************
 #ifndef _IMG_ASSET_SECTION
-#define _IMG_ASSET_SECTION ".data"
+#define _IMG_ASSET_SECTION ".data,.font_5x7"
 #endif
 
-const unsigned char __attribute__((aligned(4), section(_IMG_ASSET_SECTION ".font_5x7"))) font_5x7[] = {
+const unsigned char __attribute__((aligned(4), section(_IMG_ASSET_SECTION))) font_5x7[] = {
 
       0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,              // $20
       0x20,0x20,0x20,0x20,0x00,0x00,0x20,0x00,

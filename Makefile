@@ -74,6 +74,12 @@ linux:
 		make -B -C emulator clean
 		make -B -C emulator elinux
 
+macos:
+		make -B -C kernel clean
+		make -B -C basic clean
+		make -B -C emulator clean
+		make -B -C emulator emacos
+
 
 # ***************************************************************************************
 #

@@ -95,7 +95,7 @@ $(APPNAME): $(SOURCES)
 	$(CC) $(SOURCES) $(LDFLAGS) $(SDL_LDFLAGS) -o $@
 
 %.o:%.cpp
-	$(CC) $(CADDRESSES) $(CXXFLAGS) -fpermissive -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I framework -I include -I $(COMDIR)include -c -o $@ $<
+	$(CC) $(CADDRESSES) $(CXXFLAGS) -fms-extensions -fpermissive -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I framework -I include -I $(COMDIR)include -c -o $@ $<
 
 always:
 
@@ -156,6 +156,11 @@ release:
 # ***************************************************************************************
 
 elinux:
+		make -C $(ROOTDIR)firmware prelim
+		make -B clean
+		make -B emulator
+
+emacos:
 		make -C $(ROOTDIR)firmware prelim
 		make -B clean
 		make -B emulator
