@@ -16,17 +16,17 @@ else
 include build_env/common.make
 endif
 
-DOCDIR = documents$(S)release$(S)
+DOCDIR      = documents$(S)release$(S)
 RELEASEFILE = release$(S)neo6502.zip
 
-DOCUMENTS =  $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
-BINARIES = bin$(S)*.uf2 bin$(S)*.elf bin$(S)basic.bin bin$(S)neo bin$(S)neo.exe
-PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip \
-			 $(BINDIR)nxmit.zip
+DOCUMENTS  = $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
+BINARIES   = bin$(S)*.uf2 bin$(S)*.elf bin$(S)basic.bin bin$(S)neo bin$(S)neo.exe
+PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip \
+             $(BINDIR)makeimg.zip $(BINDIR)nxmit.zip
 
 # ***************************************************************************************
 #
-#						Remake everything to release state
+# Remake everything to release state
 #
 # ***************************************************************************************
 
@@ -37,11 +37,11 @@ all:
 	make -B -C basic release
 	make -B -C firmware release
 	make -B -C emulator release
-	make -B zipfile 
+	make -B zipfile
 
 # ***************************************************************************************
 #
-#								Make the release zip
+# Make the release zip
 #
 # ***************************************************************************************
 
@@ -53,7 +53,7 @@ zipfile:
 
 # ***************************************************************************************
 #
-#							Make windows & linux versions
+# Make windows & linux versions
 #
 # ***************************************************************************************
 
@@ -72,7 +72,7 @@ linux:
 
 # ***************************************************************************************
 #
-#								Clean everything
+# Clean everything
 #
 # ***************************************************************************************
 
