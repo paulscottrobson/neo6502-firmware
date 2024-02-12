@@ -2,12 +2,13 @@
 rem
 rem		Where executables are
 rem
-set BINDIR=..
+set BINDIR=../../../bin
 rem
 rem		Convert graphics files and put in storage (which is the SD Card/USB stick in the emulator.)
 rem		This takes the 3 png files and creates graphics.gfx
 rem 
 python %BINDIR%\makeimg.zip
+if not exist storage md storage
 copy graphics.gfx storage
 rem
 rem		Convert source.bsc to a tokenised program

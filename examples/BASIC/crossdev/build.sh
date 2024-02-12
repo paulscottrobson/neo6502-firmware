@@ -7,7 +7,8 @@ BINDIR=../../../bin
 #		This takes the 3 png files and creates graphics.gfx
 # 
 python $BINDIR/makeimg.zip
-cp graphics.gfx storage
+mkdir -p storage
+cp graphics.gfx storage/
 #
 #		Convert source.bsc to a tokenised program
 #
