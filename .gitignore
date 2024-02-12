@@ -2,6 +2,7 @@ basic/build/basic.bin
 basic/build/basic_binary.h
 basic/build/basic.lst
 basic/build/tokenised.dat
+basic/sources/generated/
 basic/scripts/__pycache__/tokens.cpython-310.pyc
 bin
 emulator/framework/debugger.o
@@ -15,6 +16,7 @@ emulator/src/core/sys_debugger.o
 emulator/src/core/sys_processor.o
 firmware/build/
 firmware/build.sh
+firmware/common/include/data/
 firmware/firmware.elf
 firmware/firmware.uf2
 firmware/include/data/basic_binary.h
