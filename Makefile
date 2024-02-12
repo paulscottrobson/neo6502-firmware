@@ -35,12 +35,12 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks
 all:
 	$(CMAKEDIR) bin
 	$(CMAKEDIR) release
-	make -B -C kernel release
-	make -B -C basic release
-	make -B -C firmware release
-	make -B -C emulator release
-	make -B -C examples release
-	make -B zipfile 
+	$(MAKE) -B -C kernel release
+	$(MAKE) -B -C basic release
+	$(MAKE) -B -C firmware release
+	$(MAKE) -B -C emulator release
+	$(MAKE) -B -C examples release
+	$(MAKE) -B zipfile 
 
 # ***************************************************************************************
 #
@@ -63,16 +63,16 @@ crossdev:
 # ***************************************************************************************
 
 windows:
-		make -B -C kernel clean
-		make -B -C basic clean
-		make -B -C emulator clean
-		make -B -C emulator ewindows
+		$(MAKE) -B -C kernel clean
+		$(MAKE) -B -C basic clean
+		$(MAKE) -B -C emulator clean
+		$(MAKE) -B -C emulator ewindows
 
 linux:
-		make -B -C kernel clean
-		make -B -C basic clean
-		make -B -C emulator clean
-		make -B -C emulator elinux
+		$(MAKE) -B -C kernel clean
+		$(MAKE) -B -C basic clean
+		$(MAKE) -B -C emulator clean
+		$(MAKE) -B -C emulator elinux
 
 
 # ***************************************************************************************
@@ -82,8 +82,8 @@ linux:
 # ***************************************************************************************
 
 clean:
-	make -B -C kernel clean
-	make -B -C basic clean
-	make -B -C emulator clean
-	make -B -C firmware clean
+	$(MAKE) -B -C kernel clean
+	$(MAKE) -B -C basic clean
+	$(MAKE) -B -C emulator clean
+	$(MAKE) -B -C firmware clean
 

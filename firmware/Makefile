@@ -35,7 +35,7 @@ always:
 # ***************************************************************************************
 
 kernel: always
-	make -C ..$(S)kernel
+	$(MAKE) -C ..$(S)kernel
 	$(CCOPY) $(BINDIR)kernel_binary.h $(COMDIR)include$(S)data
 	$(CCOPY) $(BINDIR)basic_binary.h $(COMDIR)include$(S)data
 	$(TOUCH) sources$(S)memory.c*
@@ -48,7 +48,7 @@ kernel: always
 
 switch: 
 	rm -Rf build
-	make rebuild 
+	$(MAKE) rebuild 
 
 rebuild: clean build
 
@@ -59,7 +59,7 @@ rebuild: clean build
 # ***************************************************************************************
 
 prelim: kernel
-	make -B -C $(COMDIR)
+	$(MAKE) -B -C $(COMDIR)
 	
 # ***************************************************************************************
 #
@@ -69,7 +69,7 @@ prelim: kernel
 
 build: prelim always
 	cmake --fresh -B build -D$(STORAGE)_STORAGE=1
-	make -C build
+	$(MAKE) -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .
 
@@ -89,9 +89,9 @@ clean: always
 #
 # ***************************************************************************************
 
-run: build upload
+run: upload
 
-upload:	
+upload: build
 	$(UPLOADER) $(UPCONFIG) $(UPCOMMANDS)
 
 # ***************************************************************************************
@@ -114,13 +114,13 @@ dual: prelim always
 
 	cmake --fresh -B build -DSDCARD_STORAGE=1
 	cmake --build build --target clean
-	make -C build
+	$(MAKE) -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_sd.elf
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 $(BINDIR)$(BINARY)_sd.uf2
 
 	cmake --fresh -B build -DUSBKEY_STORAGE=1
 	cmake --build build --target clean
-	make -C build
+	$(MAKE) -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_usb.elf
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 $(BINDIR)$(BINARY)_usb.uf2
 
@@ -137,4 +137,4 @@ pythonapps:
 # ***************************************************************************************
 
 release:
-	make -B dual
+	$(MAKE) -B dual

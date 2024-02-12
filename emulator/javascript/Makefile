@@ -37,7 +37,7 @@ all: app
 
 app:
 	$(CMAKEDIR) storage
-	make -B -C $(ROOTDIR)basic release
+	$(MAKE) -B -C $(ROOTDIR)basic release
 	$(CCOPY) $(ROOTDIR)basic$(S)storage$(S)* storage
 	emcc  -D EMSCRIPTEN -D LINUX -D INCLUDE_DEBUGGING_SUPPORT $(FLAGS) $(SOURCES) -o neo.html
 
