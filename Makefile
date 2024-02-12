@@ -39,6 +39,7 @@ all:
 	make -B -C basic release
 	make -B -C firmware release
 	make -B -C emulator release
+	make -B -C examples release
 	make -B zipfile 
 
 # ***************************************************************************************
@@ -47,18 +48,13 @@ all:
 #
 # ***************************************************************************************
 
-zipfile: samples crossdev
+zipfile: crossdev
 	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) \
-						release$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
-	$(CDEL) release$(S)samples.zip
+						examples$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
 	$(CDEL) documents$(S)release$(S)crossdev$(S)crossdev.zip
 
 crossdev:
 	cd documents$(S)release$(S)crossdev ; $(CDEL) crossdev.zip ; zip -r -q crossdev.zip *
-
-samples:
-	zip -r -j -q release$(S)samples.zip basic$(S)code basic$(S)images$(S)test$(S)test.gfx basic$(S)images$(S)graphics.gfx
-	zip -d -q release$(S)samples.zip *.tass 
 
 # ***************************************************************************************
 #
