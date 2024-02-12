@@ -35,10 +35,10 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks
 all:
 	$(CMAKEDIR) bin
 	$(CMAKEDIR) release
-	$(MAKE) -B -C kernel release
 	$(MAKE) -B -C basic release
 	$(MAKE) -B -C firmware release
 	$(MAKE) -B -C emulator release
+  $(MAKE) -B -C examples release
 	$(MAKE) -B zipfile 
 
 # ***************************************************************************************
@@ -47,18 +47,13 @@ all:
 #
 # ***************************************************************************************
 
-zipfile: samples crossdev
+zipfile: crossdev
 	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) \
-						release$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
-	$(CDEL) release$(S)samples.zip
+						examples$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
 	$(CDEL) documents$(S)release$(S)crossdev$(S)crossdev.zip
 
 crossdev:
 	cd documents$(S)release$(S)crossdev ; $(CDEL) crossdev.zip ; zip -r -q crossdev.zip *
-
-samples:
-	zip -r -j -q release$(S)samples.zip basic$(S)code basic$(S)images$(S)test$(S)test.gfx basic$(S)images$(S)graphics.gfx
-	zip -d -q release$(S)samples.zip *.tass 
 
 # ***************************************************************************************
 #

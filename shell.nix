@@ -1,7 +1,7 @@
 with import <nixpkgs> {};
 mkShell {
 	nativeBuildInputs = [ 
-		(python3.withPackages(ps: with ps; [ pillow]))
+		(python3.withPackages(ps: with ps; [ pillow gitpython ]))
 		gcc-arm-embedded-13
 		cmake
 		openocd-rp2040

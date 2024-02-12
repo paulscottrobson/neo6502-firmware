@@ -19,21 +19,23 @@
 //
 // ***************************************************************************************
 
-void FIODirectory(void) {
+void FIODirectory(const char *subString) {
 	if (FISDirectoryOpen() == 0) {
 		char szBuffer[320];
 		int isDirectory,fileSize;
 		while (FISDirectoryNext(szBuffer,&isDirectory,&fileSize) == 0) {
 			if (szBuffer[0] != '.') {
 				if (fileSize >= 0) {
-					while (strlen(szBuffer) < 32) strcat(szBuffer," ");
-					if (isDirectory != 0) {
-						strcat(szBuffer,"<Dir>");
-					} else {
-						sprintf(szBuffer+strlen(szBuffer),"%d bytes.",fileSize);
+					if (strstr(szBuffer,subString) != NULL) {
+						while (strlen(szBuffer) < 32) strcat(szBuffer," ");
+						if (isDirectory != 0) {
+							strcat(szBuffer,"<Dir>");
+						} else {
+							sprintf(szBuffer+strlen(szBuffer),"%d bytes.",fileSize);
+					 	}
+					CONWriteString(szBuffer);CONWriteString("\r");				
 					}
 				}
-				CONWriteString(szBuffer);CONWriteString("\r");				
 			}
 		}
 		FISDirectoryClose();
@@ -117,5 +119,6 @@ uint8_t FIOSetSizeFileHandle(uint8_t fileno, uint32_t size) {
 //		Date 		Revision
 //		==== 		========
 //		16-01-24 	Modified so fileSize < 0 doesn't display information.
+//		10-02-24 	Added support for cat wildcards.
 //
 // ***************************************************************************************

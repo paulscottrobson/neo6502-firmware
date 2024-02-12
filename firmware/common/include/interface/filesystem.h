@@ -36,7 +36,7 @@ uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size);
 #define FIOMODE_RDWR   2
 #define FIOMODE_RDWR_CREATE 3 // truncates
 
-void FIODirectory(void);
+void FIODirectory(const char *subString);
 uint8_t FIOReadFile(const char *fileName,uint16_t loadAddress);
 uint8_t FIOWriteFile(const char *fileName,uint16_t startAddress,uint16_t size);
 uint8_t FIORenameFile(const std::string& oldFilename, const std::string& newFilename);

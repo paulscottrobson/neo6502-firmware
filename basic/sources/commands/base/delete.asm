@@ -19,6 +19,12 @@
 		.section code
 
 Command_Delete:	;; [delete]
+		lda 	(codePtr),y 				; check on its own
+		cmp 	#KWD_SYS_END
+		beq 	_CDSyntax
+		cmp 	#KWD_COLON
+		beq 	_CDSyntax
+
 		jsr 	LISTGetLinesToFrom 			; get range.
 		lda 	Program 					; point out code start.
 		clc
@@ -56,6 +62,9 @@ _DLExit:
 		jsr 	ClearCode 					; clear memory as deleting stuff
 		jmp 	WarmStart 					; and warm start
 
+_CDSyntax:
+		.error_syntax
+
 DeleteCurrentLine:
 		jsr 	ClearResetFreeMemory 		; end of program into zTemp0
 		lda 	(codePtr) 					; memory chunk to delete into Y
@@ -88,6 +97,7 @@ _DCLCopy:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		09-02-24		DELETE doesn't work on its own.
 ;
 ; ************************************************************************************************
 

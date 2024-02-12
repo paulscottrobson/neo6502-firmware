@@ -31,7 +31,6 @@ release:
 		$(MAKE) -B -C images
 		$(MAKE) -B convert
 		$(MAKE) -B build
-		$(MAKE) -B demos
 		
 # ***************************************************************************************
 #
@@ -189,35 +188,7 @@ tokens: prelim
 	$(PYTHON) tests$(S)makeprogram.py
 	$(ASSEMBLER) -DBASICBUILD=2 basic.asm -L build/basic.lst -o build/basic.bin
 	$(RUNCMD) cold
-	$(PYTHON) tests$(S)testprogram.py
-
-# ***************************************************************************************
-#
-#										BASIC demos
-#
-# ***************************************************************************************
-
-DEMOSRC = $(shell find code -name '*.bsc')
-DEMOBAS = $(subst bsc,bas,$(DEMOSRC))
-DEMOGFX = $(shell find code -name '*.gfx')
-
-demos: clearstorage $(DEMOBAS)
-	$(CCOPY) $(DEMOGFX) storage
-	$(CCOPY) images$(S)graphics.gfx storage
-	$(CCOPY) images$(S)test$(S)test.gfx storage
-	$(CCOPY) storage$(S)*.* ..$(S)emulator$(S)storage
-
-clearstorage:
-	$(CMAKEDIR) build
-	$(CMAKEDIR) storage
-	$(CMAKEDIR) ..$(S)emulator$(S)storage
-	$(CDEL) storage$(S)*.*
-	$(CDEL) ..$(S)emulator$(S)storage$(S)*.*
-
-%.bas : %.bsc
-	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
-	$(CCOPY) $@ $< storage
-	
+	$(PYTHON) tests$(S)testprogram.py	
 
 # ***************************************************************************************
 #

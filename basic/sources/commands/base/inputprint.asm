@@ -3,8 +3,8 @@
 ;
 ;		Name:		inputprint.asm 
 ;		Purpose:	Input (from keyboard) Print (to Screen)
-;		Created:	5th December 2024
-;		Reviewed:   No
+;		Created:	5th December 2023
+;		Reviewed:	5No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
 ; ************************************************************************************************
