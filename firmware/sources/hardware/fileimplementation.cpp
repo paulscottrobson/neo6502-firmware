@@ -161,15 +161,15 @@ uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs) {
 
 	FILINFO fno;
 	FRESULT result = f_readdir(&readDir, &fno);
-	if (result == FR_OK) {
+	if ((result == FR_OK) && fno.fname[0]) {
 		filename = fno.fname;
 		*attribs = getAttributes(&fno);
 		*size = fno.fsize;
+		return 0;
 	} else {
 		f_closedir(&readDir);
+		return 1;
 	}
-
-	return (result == FR_OK) ? 0 : 1;
 }
 
 uint8_t FISCloseDir() {
