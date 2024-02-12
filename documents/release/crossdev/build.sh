@@ -1,7 +1,7 @@
 #
 #		Where executables are
 #
-BINDIR=..
+BINDIR=../../../bin
 #
 #		Convert graphics files and put in storage (which is the SD Card/USB stick in the emulator.)
 #		This takes the 3 png files and creates graphics.gfx
