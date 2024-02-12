@@ -34,8 +34,6 @@ static int background;
 static void _GFXInitialiseKeyRecord(void);
 static void _GFXUpdateKeyRecord(int scancode,int isDown);
 
-static Beeper beeper;
-
 // *******************************************************************************************************************************
 //
 //								Open window of specified size, set title and background.
@@ -48,7 +46,6 @@ void GFXOpenWindow(const char *title,int width,int height,int colour) {
 		exit(printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError()));
 	}
 
-	beeper.setup();
 	mainWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, 					// Try to create a window
 							SDL_WINDOWPOS_UNDEFINED, width,height, SDL_WINDOW_SHOWN );
 	if (mainWindow == NULL) {
@@ -59,6 +56,9 @@ void GFXOpenWindow(const char *title,int width,int height,int colour) {
 
 	background = colour;															// Remember required backgrounds.
 	_GFXInitialiseKeyRecord();														// Set up key system.
+	Beeper::open();
+	Beeper::setVolume(0.0);
+	Beeper::play();
 }
 
 // *******************************************************************************************************************************
@@ -79,6 +79,7 @@ void GFXStart(void) {
 		_GFXMainLoop(NULL);
 	}
 	#endif
+	Beeper::stop();
 	SDL_CloseAudio();
 }
 
@@ -387,9 +388,10 @@ int  GFXTimer(void) {
 // *******************************************************************************************************************************
 
 void GFXSetFrequency(int freq,int channel) {
-	beeper.setFrequency(freq,channel);
+	Beeper::setVolume(1.0);
+	Beeper::setFrequency(freq);
 }
 
 void GFXSilence(void) {
-	beeper.setFrequency(0,1);
+	Beeper::setVolume(0.0);
 }
