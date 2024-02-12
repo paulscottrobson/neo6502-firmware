@@ -38,7 +38,7 @@ all:
 	$(MAKE) -B -C basic release
 	$(MAKE) -B -C firmware release
 	$(MAKE) -B -C emulator release
-  $(MAKE) -B -C examples release
+	$(MAKE) -B -C examples release
 	$(MAKE) -B zipfile 
 
 # ***************************************************************************************
