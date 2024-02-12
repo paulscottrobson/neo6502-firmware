@@ -20,25 +20,29 @@
 // ***************************************************************************************
 
 void FIODirectory(const char *subString) {
-	if (FISDirectoryOpen() == 0) {
-		char szBuffer[320];
-		int isDirectory,fileSize;
-		while (FISDirectoryNext(szBuffer,&isDirectory,&fileSize) == 0) {
-			if (szBuffer[0] != '.') {
+	if (FISOpenDir(".") == 0) {
+		std::string buffer;
+		uint32_t fileSize;
+		uint8_t attribs;
+
+		buffer.reserve(64);
+		while (FISReadDir(buffer, &fileSize, &attribs) == 0) {
+			if (buffer[0] != '.') {
 				if (fileSize >= 0) {
-					if (strstr(szBuffer,subString) != NULL) {
-						while (strlen(szBuffer) < 32) strcat(szBuffer," ");
-						if (isDirectory != 0) {
-							strcat(szBuffer,"<Dir>");
-						} else {
-							sprintf(szBuffer+strlen(szBuffer),"%d bytes.",fileSize);
-					 	}
-					CONWriteString(szBuffer);CONWriteString("\r");				
+					while (buffer.size() < 32)
+					 	buffer += ' ';
+					if (attribs & FIOATTR_DIR)
+						buffer += "<Dir>";
+					else {
+						buffer += std::to_string(fileSize);
+						buffer += " bytes.";
 					}
 				}
+				CONWriteString(buffer.c_str());
+				CONWriteString("\r");				
 			}
 		}
-		FISDirectoryClose();
+		FISCloseDir();
 	}
 }   
 
@@ -48,9 +52,9 @@ void FIODirectory(const char *subString) {
 //
 // ***************************************************************************************
 
-uint8_t FIOReadFile(const char *fileName,uint16_t loadAddress) {
+uint8_t FIOReadFile(const std::string& filename, uint16_t loadAddress) {
 	uint16_t maxRead = (loadAddress == 0xFFFF) ? GFX_MEMORY_SIZE : 0x10000-loadAddress;
-	return FISReadFile(fileName,loadAddress,maxRead);
+	return FISReadFile(filename, loadAddress,maxRead);
 }
 
 // ***************************************************************************************
@@ -59,9 +63,9 @@ uint8_t FIOReadFile(const char *fileName,uint16_t loadAddress) {
 //
 // ***************************************************************************************
 
-uint8_t FIOWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
+uint8_t FIOWriteFile(const std::string& filename, uint16_t startAddress,uint16_t size) {
 	if (startAddress == 0xFFFF) return 1;
-	return FISWriteFile(fileName,startAddress,size);
+	return FISWriteFile(filename, startAddress,size);
 }
 
 // ***************************************************************************************
@@ -76,11 +80,69 @@ uint8_t FIORenameFile(const std::string& oldFilename, const std::string& newFile
 
 // ***************************************************************************************
 //
+//									Delete File
+//
+// ***************************************************************************************
+
+uint8_t FIODeleteFile(const std::string& filename) {
+	return FISDeleteFile(filename);
+}
+
+// ***************************************************************************************
+//
+//									Create directory
+//
+// ***************************************************************************************
+
+uint8_t FIOCreateDirectory(const std::string& filename) {
+	return FISCreateDirectory(filename);
+}
+
+// ***************************************************************************************
+//
+//									Change directory
+//
+// ***************************************************************************************
+
+uint8_t FIOChangeDirectory(const std::string& filename) {
+	return FISChangeDirectory(filename);
+}
+
+// ***************************************************************************************
+//
+//									Stat file
+//
+// ***************************************************************************************
+
+uint8_t FIOStatFile(const std::string& filename, uint32_t* length, uint8_t* mode) {
+	return FISStatFile(filename, length, mode);
+}
+
+// ***************************************************************************************
+//
+//								Directory enumeration
+//
+// ***************************************************************************************
+
+uint8_t FIOOpenDir(const std::string& filename) {
+	return FISOpenDir(filename);
+}
+
+uint8_t FIOReadDir(std::string& result, uint32_t* size, uint8_t* attribs) {
+	return FISReadDir(result, size, attribs);
+}
+
+uint8_t FIOCloseDir() {
+	return FISCloseDir();
+}
+
+// ***************************************************************************************
+//
 //								File-handle based functions
 //
 // ***************************************************************************************
 
-uint8_t FIOOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
+uint8_t FIOOpenFileHandle(uint8_t fileno, const std::string& filename, uint8_t mode) {
 	return FISOpenFileHandle(fileno, filename, mode);
 }
 

@@ -16,37 +16,18 @@
 
 static FIL fileHandles[FIO_NUM_FILES];
 
-// ***************************************************************************************
-//
-//									Directory Functions
-//
-// ***************************************************************************************
-
-static DIR dir;
-static FILINFO fi;
-
-int FISDirectoryOpen(void) {
-	STOInitialise();
-	FRESULT rDir = f_opendir(&dir,"/");
-	return (rDir == FR_OK) ? 0 : 1;
+static uint8_t getAttributes(const FILINFO* fno) {
+	uint8_t attrs = 0;
+	if (fno->fattrib & AM_DIR)
+		attrs |= FIOATTR_DIR;
+	if (fno->fattrib & AM_ARC)
+		attrs |= FIOATTR_ARCHIVE;
+	if (fno->fattrib & AM_HID)
+		attrs |= FIOATTR_HIDDEN;
+	if (fno->fattrib & AM_RDO)
+		attrs |= FIOATTR_READONLY;
+	return attrs;
 }
-
-int FISDirectoryClose(void) {
-	f_closedir(&dir);
-	return 0;
-}
-
-int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize) {
-	int isError = 1;
-	if (f_readdir(&dir,&fi) == FR_OK && fi.fname[0] != '\0') {
-		strcpy(buffer,fi.fname);
-		*isDirectory = (fi.fattrib & AM_DIR) != 0;
-		*fileSize = fi.fsize;
-		isError = 0;
-
-	}
-	return isError;
-}   
 
 // ***************************************************************************************
 //
@@ -54,12 +35,12 @@ int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize) {
 //
 // ***************************************************************************************
 
-uint8_t FISReadFile(const char *fileName,uint16_t loadAddress,uint16_t maxSize) {
+uint8_t FISReadFile(const std::string& filename,uint16_t loadAddress,uint16_t maxSize) {
 	FIL file;
 	FRESULT result;
 	UINT bytesRead;
 	STOInitialise();
-	result = f_open(&file, fileName, FA_READ);
+	result = f_open(&file, filename.c_str(), FA_READ);
 	if (result == FR_OK) {
 		if (loadAddress == 0xFFFF) {
 			f_read(&file,gfxMemory,maxSize,&bytesRead);
@@ -77,12 +58,12 @@ uint8_t FISReadFile(const char *fileName,uint16_t loadAddress,uint16_t maxSize) 
 //
 // ***************************************************************************************
 
-uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
+uint8_t FISWriteFile(const std::string& filename,uint16_t startAddress,uint16_t size) {
 	FIL file;
 	FRESULT result;
 	UINT bytesWritten;
 	STOInitialise();
-	result = f_open(&file, fileName, FA_WRITE|FA_CREATE_ALWAYS);
+	result = f_open(&file, filename.c_str(), FA_WRITE|FA_CREATE_ALWAYS);
 	if (result == FR_OK) {
 		f_write(&file,cpuMemory+startAddress,size,&bytesWritten);
 		f_close(&file);
@@ -104,11 +85,107 @@ uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFile
 
 // ***************************************************************************************
 //
+//									Delete File
+//
+// ***************************************************************************************
+
+uint8_t FISDeleteFile(const std::string& filename) {
+	STOInitialise();
+	FRESULT result = f_unlink(filename.c_str());
+	return (result == FR_OK) ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//									Create Directory
+//
+// ***************************************************************************************
+
+uint8_t FISCreateDirectory(const std::string& filename) {
+	STOInitialise();
+	FRESULT result = f_mkdir(filename.c_str());
+	return (result == FR_OK) ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//									Change Directory
+//
+// ***************************************************************************************
+
+uint8_t FISChangeDirectory(const std::string& filename) {
+	STOInitialise();
+	FRESULT result = f_chdir(filename.c_str());
+	return (result == FR_OK) ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//									   Stat file
+//
+// ***************************************************************************************
+
+uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attribs) {
+	STOInitialise();
+
+	FILINFO fno;
+	FRESULT result = f_stat(filename.c_str(), &fno);
+
+	*length = fno.fsize;
+	*attribs = getAttributes(&fno);
+
+	return (result == FR_OK) ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//								Directory enumeration
+//
+// ***************************************************************************************
+
+static DIR readDir;
+
+uint8_t FISOpenDir(const std::string& filename) {
+	STOInitialise();
+
+	if (readDir.obj.fs)
+		f_closedir(&readDir);
+
+	FRESULT result = f_opendir(&readDir, filename.c_str());
+	return (result == FR_OK) ? 0 : 1;
+}
+
+uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs) {
+	if (!readDir.obj.fs)
+		return 1;
+
+	FILINFO fno;
+	FRESULT result = f_readdir(&readDir, &fno);
+	if (result == FR_OK) {
+		filename = fno.fname;
+		*attribs = getAttributes(&fno);
+		*size = fno.fsize;
+	} else {
+		f_closedir(&readDir);
+	}
+
+	return (result == FR_OK) ? 0 : 1;
+}
+
+uint8_t FISCloseDir() {
+	if (readDir.obj.fs)
+		f_closedir(&readDir);
+
+	return 0;
+}
+
+// ***************************************************************************************
+//
 //								File-handle based functions
 //
 // ***************************************************************************************
 
-uint8_t FISOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
+uint8_t FISOpenFileHandle(uint8_t fileno, const std::string& filename, uint8_t mode) {
 	if (fileno >= FIO_NUM_FILES)
 		return 1;
 	FIL* f = &fileHandles[fileno];
@@ -127,7 +204,7 @@ uint8_t FISOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
 		return 1;
 
 	STOInitialise();
-	FRESULT result = f_open(f, filename, modes[mode]);
+	FRESULT result = f_open(f, filename.c_str(), modes[mode]);
 	return (result == FR_OK) ? 0 : 1;
 }
 
