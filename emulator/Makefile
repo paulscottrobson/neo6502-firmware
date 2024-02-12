@@ -20,7 +20,7 @@ FIRMDIR = $(ROOTDIR)firmware$(S)
 IMPSRC = $(COMDIR)sources$(S)interface$(S)
 
 SOURCES = 	src$(S)core$(S)sys_processor.o  framework$(S)main.o framework$(S)gfx.o framework$(S)debugger.o \
-			src$(S)core$(S)sys_debugger.o src$(S)core$(S)hardware.o \
+			src$(S)core$(S)sys_debugger.o src$(S)core$(S)hardware.o framework$(S)beeper.o \
   			$(IMPSRC)memory.o $(IMPSRC)graphics.o $(IMPSRC)console.o $(IMPSRC)keyboard.o $(IMPSRC)dispatch.o \
   			$(IMPSRC)maths.o  $(IMPSRC)config.o $(IMPSRC)gfxcommands.o $(IMPSRC)efla.o $(IMPSRC)ellipse.o \
   			$(IMPSRC)fileinterface.o $(IMPSRC)sprites.o $(IMPSRC)logo.o $(IMPSRC)sprites_xor.o \
