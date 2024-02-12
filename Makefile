@@ -35,6 +35,7 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks
 all:
 	$(CMAKEDIR) bin
 	$(CMAKEDIR) release
+	$(MAKE) -B -C kernel release
 	$(MAKE) -B -C basic release
 	$(MAKE) -B -C firmware release
 	$(MAKE) -B -C emulator release
