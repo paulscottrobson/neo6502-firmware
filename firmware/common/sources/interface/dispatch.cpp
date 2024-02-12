@@ -91,12 +91,13 @@ void DSPReset(void) {
 //
 // ***************************************************************************************
 
-static char szBuffer[32];  
+static char szBuffer[81];  
 
 char *DSPGetString(uint8_t *command,uint8_t paramOffset) {
 	uint8_t *mem = cpuMemory+command[paramOffset]+(command[paramOffset+1]<<8);  // From here.
-	memcpy(szBuffer,mem+1,*mem);                                                // Make ASCIIZ string
-	szBuffer[*mem] = '\0';
+	uint8_t length = *mem < sizeof(szBuffer)-1 ? *mem : sizeof(szBuffer)-1;  	// Length to copy.
+	memcpy(szBuffer,mem+1,length);                                              // Make ASCIIZ string
+	szBuffer[length] = '\0';
 	return szBuffer;
 }
 
@@ -127,5 +128,6 @@ void DSPSetInt32(uint8_t *command,uint8_t paramOffset,uint32_t value) {
 //
 //      Date        Revision
 //      ====        ========
+//		12-02-24 	Increased buffer size to screen size and truncated to avoid buffer overflow.
 //
 // ***************************************************************************************

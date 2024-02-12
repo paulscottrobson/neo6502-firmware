@@ -1,4 +1,9 @@
-sfx 0,8:end
+s0$ = "Lorem ipsum dolor sit amet, conseaislsuidusioudosduosus dioaud oiua oiud aoiu doaui dioua sdoiua osiu oiu oiusd aoiusd aosi ioua osdu aioud"
+text s0$ dim 1 solid ink 2 to 0,0
+end
+begin
+    NeoSetColor(0,127,1,1,0);
+    NeoDrawString(0, 0, s0);sfx 0,8:end
 
 a = 11:b$ = "$12"c = 13:d = 14
 a1 = 43
