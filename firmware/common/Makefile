@@ -18,7 +18,7 @@ include ../../build_env/common.make
 endif
 
 all: 
-	make -B -C bootdisplay
+	$(MAKE) -B -C bootdisplay
 
 	$(PYTHON) $(COMDIR)scripts$(S)makedispatch.py dispatch.config >$(COMDIR)include$(S)data$(S)dispatch_code.h
 	touch sources$(S)interface$(S)dispatch.cpp

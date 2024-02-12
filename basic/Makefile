@@ -28,9 +28,9 @@ all: build
 # ***************************************************************************************
 
 release:
-		make -B -C images
-		make -B convert
-		make -B build
+		$(MAKE) -B -C images
+		$(MAKE) -B convert
+		$(MAKE) -B build
 		
 # ***************************************************************************************
 #
@@ -89,7 +89,7 @@ trun:tbuild
 	$(RUNCMD) exec
 
 tneo: tbuild
-	make -C ..$(S)firmware run 
+	$(MAKE) -C ..$(S)firmware run 
 	
 # ***************************************************************************************
 #
@@ -113,17 +113,17 @@ run:build
 # ***************************************************************************************
 
 kernel:
-	make -C ..$(S)kernel
+	$(MAKE) -C ..$(S)kernel
 
 import: kernel
-	make -C ..$(S)emulator import
-	make -C ..$(S)emulator
+	$(MAKE) -C ..$(S)emulator import
+	$(MAKE) -C ..$(S)emulator
 
 emulator:
-	make -C ..$(S)emulator
+	$(MAKE) -C ..$(S)emulator
 
 firmware:
-	make -C ..$(S)firmware
+	$(MAKE) -C ..$(S)firmware
 	
 fik : emulator
 
@@ -137,12 +137,12 @@ always:
 # ***************************************************************************************
 
 test:
-	make binary 
-	make brackets
-	make unary
-	make string
-	make assign
-	make array
+	$(MAKE) binary 
+	$(MAKE) brackets
+	$(MAKE) unary
+	$(MAKE) string
+	$(MAKE) assign
+	$(MAKE) array
 
 testrun: prelim
 	$(ASSEMBLER) basic.asm -L build/basic.lst -o build/basic.bin
@@ -150,22 +150,22 @@ testrun: prelim
 
 binary:
 	$(PYTHON) tests$(S)binary.py >test.bsc
-	make testrun
+	$(MAKE) testrun
 brackets:	
 	$(PYTHON) tests$(S)brackets.py >test.bsc
-	make testrun
+	$(MAKE) testrun
 unary:
 	$(PYTHON) tests$(S)unary.py >test.bsc
-	make testrun
+	$(MAKE) testrun
 string:
 	$(PYTHON) tests$(S)string.py >test.bsc
-	make testrun
+	$(MAKE) testrun
 assign:
 	$(PYTHON) tests$(S)assign.py >test.bsc
-	make testrun
+	$(MAKE) testrun
 array:
 	$(PYTHON) tests$(S)array.py >test.bsc
-	make testrun
+	$(MAKE) testrun
 
 # ***************************************************************************************
 #
@@ -174,15 +174,15 @@ array:
 # ***************************************************************************************
 
 manytokens:
-	make tokens 
-	make tokens 
-	make tokens 
-	make tokens 
-	make tokens 
-	make tokens 
-	make tokens 
-	make tokens 
-	make tokens 
+	$(MAKE) tokens 
+	$(MAKE) tokens 
+	$(MAKE) tokens 
+	$(MAKE) tokens 
+	$(MAKE) tokens 
+	$(MAKE) tokens 
+	$(MAKE) tokens 
+	$(MAKE) tokens 
+	$(MAKE) tokens 
 
 tokens: prelim	
 	$(PYTHON) tests$(S)makeprogram.py

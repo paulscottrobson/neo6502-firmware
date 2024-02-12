@@ -54,7 +54,7 @@ krun: always kernel emulator
 	$(EMULATOR) $(BINDIR)kernel.bin@FC00 
 
 kernel:
-	make -C ..$(S)kernel
+	$(MAKE) -C ..$(S)kernel
 
 # ***************************************************************************************
 #
@@ -83,7 +83,7 @@ clearobj:
 
 windows: clearobj $(APPNAME)	
 	$(CCOPY) $(APPNAME)	 ..$(S)bin
-	make -B clearobj
+	$(MAKE) -B clearobj
 
 # ***************************************************************************************
 #
@@ -122,7 +122,7 @@ clean:
 
 prebuild:
 	$(CMAKEDIR) 6502
-	make -C processor
+	$(MAKE) -C processor
 	$(PYTHON) scripts$(S)mapper.py >include$(S)hid2sdl.h
 	$(CCOPY) $(BINDIR)*_binary.h include
 
@@ -133,7 +133,7 @@ prebuild:
 # ***************************************************************************************
 
 fwbuild:
-	make -B -C $(FIRMWARE)
+	$(MAKE) -B -C $(FIRMWARE)
 
 # ***************************************************************************************
 #
@@ -142,12 +142,12 @@ fwbuild:
 # ***************************************************************************************
 
 release:
-		make -C $(ROOTDIR)firmware prelim
-		make -B clean
-		make -B emulator
+		$(MAKE) -C $(ROOTDIR)firmware prelim
+		$(MAKE) -B clean
+		$(MAKE) -B emulator
 		$(CDEL) neolinux.zip
 		zip neolinux.zip neo
-		make -B -C cross-compile
+		$(MAKE) -B -C cross-compile
 
 # ***************************************************************************************
 #
@@ -156,12 +156,12 @@ release:
 # ***************************************************************************************
 
 elinux:
-		make -C $(ROOTDIR)firmware prelim
-		make -B clean
-		make -B emulator
+		$(MAKE) -C $(ROOTDIR)firmware prelim
+		$(MAKE) -B clean
+		$(MAKE) -B emulator
 
 ewindows: 
-		make -C $(ROOTDIR)firmware prelim
-		make -B clean
-		make -B prebuild
-		make -B -C cross-compile
+		$(MAKE) -C $(ROOTDIR)firmware prelim
+		$(MAKE) -B clean
+		$(MAKE) -B prebuild
+		$(MAKE) -B -C cross-compile
