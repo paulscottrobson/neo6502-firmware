@@ -17,6 +17,9 @@ General
 Larger Additions
 ----------------
 
+	- Add assignment side of [] (currently access only)
+	- Document it.
+	
 	- Serial uploading
 		- save to storage option. 
 
