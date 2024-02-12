@@ -36,6 +36,7 @@ XS_TYPEBIT = $80
 XS_ISSTRING = $80
 XS_ISVARIABLE = $20
 XS_ISARRAY = $10
+XS_ISWORDREF = $08
 XS_ISPROC = $C0
 
 		.section zeropage
@@ -234,6 +235,7 @@ spriteBlockSize = * - spriteID
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		12/02/24 		Added [] for word indirection operator.
 ;
 ; ************************************************************************************************
 

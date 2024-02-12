@@ -129,7 +129,34 @@ _ETNotArray:
 		ora 	#XS_ISVARIABLE 				; set variable reference bit (is word)
 		ply
 		sta 	XSControl,x
+		;
+		lda 	(codePtr),y 				; is it followed by [ ?		
+		cmp 	#KWD_LSQ  					; this is a 16 bit word reference
+		bne 	_ETNotWordReference
+
+		iny  								; consume [	
+		jsr 	DereferenceTOS 				; convert to a value
+
+		inx 								; get offset
+		jsr 	EXPEvalInteger8 			; get offset (0-127)
+		dex 								; back to reference.
+		asl 	a 							; double it as 16 bit word access
+		bcs 	_ETRange 					; out of range
+
+		adc 	XSNumber0,x 				; add to the reference address
+		sta 	XSNumber0,x
+		bcc 	_ETWRNoCarry
+		inc 	XSNumber1,x 				; handle carry out
+_ETWRNoCarry:
+		lda 	#XS_ISWORDREF|XS_ISVARIABLE ; make it a 16 bit word reference
+		sta 	XSControl,x 				
+		lda 	#KWD_RSQ 					; check for closing ]
+		jsr 	ERRCheckA
+_ETNotWordReference		
 		rts
+
+_ETRange:
+		.error_range
 
 ; ************************************************************************************************
 ;
@@ -274,6 +301,7 @@ DoMathCommand:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		12/02/24 		Added code to parse [offset] on the 16 bit word offset.
 ;
 ; ************************************************************************************************
 
