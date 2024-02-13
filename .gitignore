@@ -10,6 +10,7 @@ emulator/framework/gfx.o
 emulator/framework/main.o
 emulator/include/basic_binary.h
 emulator/javascript/build
+emulator/javascript/neo.*
 emulator/neo
 emulator/src/core/hardware.o
 emulator/src/core/sys_debugger.o

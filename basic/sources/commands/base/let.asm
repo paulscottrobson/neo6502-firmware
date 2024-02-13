@@ -62,7 +62,12 @@ AssignValueToReference:
 		ldy 	#1 				
 		lda 	XSNumber1+1,x
 		sta 	(zTemp0),y
-		iny
+		;
+		lda 	XSControl,x 				; check if target is a 16 bit reference.
+		and 	#XS_ISWORDREF
+		bne 	_AVTR16Bit  				; if so, exit now.
+		;
+		iny  								; do the rest & type
 		lda 	XSNumber2+1,x
 		sta 	(zTemp0),y
 		iny
@@ -72,8 +77,11 @@ AssignValueToReference:
 		lda 	XSControl+1,x 				; copy the type
 		and 	#$FF-XS_ISVARIABLE 			; without the variable bit set
 		sta 	(zTemp0),y
+_AVTR16Bit:
 		ply
 		rts
+
+
 _AVTRSyntax:
 		.error_syntax
 _AVTRType:
@@ -106,6 +114,7 @@ _AVTRString:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		13-02-24 		Added [] assignment
 ;
 ; ************************************************************************************************
 
