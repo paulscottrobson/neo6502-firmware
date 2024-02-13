@@ -27,7 +27,7 @@ rm -f *.o hello.neo hello.map neo6502.lib{,.temp}
 export CC65_HOME="$_CC65_HOME"
 ca65 crt0.s
 ar65 a neo6502.lib crt0.o
-cl65 --static-locals -C neo6502.cfg -O --cpu 65c02 -m hello.map \
+cl65 --static-locals -t none -C neo6502.cfg -O --cpu 65c02 -m hello.map \
      -o hello.neo hello.c neo6502.lib
 
 # launch emulator

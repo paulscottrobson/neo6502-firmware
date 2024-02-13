@@ -1,0 +1,181 @@
+Modules list:
+-------------
+main.o:
+    CODE              Offs=000000  Size=000166  Align=00001  Fill=0000
+    RODATA            Offs=000000  Size=00001B  Align=00001  Fill=0000
+    DATA              Offs=000000  Size=000002  Align=00001  Fill=0000
+neo6502.lib(crt0.o):
+    STARTUP           Offs=000000  Size=000021  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(addysp.o):
+    CODE              Offs=000166  Size=00000E  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(condes.o):
+    CODE              Offs=000174  Size=00000C  Align=00001  Fill=0000
+    DATA              Offs=000002  Size=000025  Align=00001  Fill=0000
+    ONCE              Offs=000000  Size=00000C  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(copydata.o):
+    CODE              Offs=000180  Size=00002D  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(decax1.o):
+    CODE              Offs=0001AD  Size=000007  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(incsp2.o):
+    CODE              Offs=0001B4  Size=000016  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(incsp4.o):
+    CODE              Offs=0001CA  Size=000005  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(incsp8.o):
+    CODE              Offs=0001CF  Size=000005  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(ldaxsp.o):
+    CODE              Offs=0001D4  Size=000009  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(pushax.o):
+    CODE              Offs=0001DD  Size=00001A  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(staspidx.o):
+    CODE              Offs=0001F7  Size=000016  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(staxsp.o):
+    CODE              Offs=00020D  Size=00000B  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(zerobss.o):
+    CODE              Offs=000218  Size=000023  Align=00001  Fill=0000
+/usr/share/cc65/lib/none.lib(zeropage.o):
+    ZEROPAGE          Offs=000000  Size=00001A  Align=00001  Fill=0000
+
+
+Segment list:
+-------------
+Name                   Start     End    Size  Align
+----------------------------------------------------
+ZEROPAGE              000000  000019  00001A  00001
+STARTUP               000800  000820  000021  00001
+ONCE                  000821  00082C  00000C  00001
+CODE                  00082D  000A67  00023B  00001
+RODATA                000A68  000A82  00001B  00001
+DATA                  000A83  000AA9  000027  00001
+
+
+Exports list by name:
+---------------------
+__BSS_RUN__               000AAA RLA    __BSS_SIZE__              000000 REA    
+__CONSTRUCTOR_COUNT__     000000 REA    __CONSTRUCTOR_TABLE__     00082D RLA    
+__DATA_LOAD__             000A83 RLA    __DATA_RUN__              000A83 RLA    
+__DATA_SIZE__             000027 REA    __DESTRUCTOR_COUNT__      000000 REA    
+__DESTRUCTOR_TABLE__      000A83 RLA    __RAM_SIZE__              00EE00 REA    
+__RAM_START__             000800 RLA    __STACKSIZE__             000400 REA    
+__STARTUP__               000001 REA    _main                     000963 RLA    
+addysp                    000994 RLA    copydata                  0009AD RLA    
+decax1                    0009DA RLA    donelib                   0009A1 RLA    
+incsp2                    0009E9 RLA    incsp4                    0009F7 RLA    
+incsp8                    0009FC RLA    initlib                   000821 RLA    
+ldax0sp                   000A01 RLA    ldaxysp                   000A03 RLA    
+ptr1                      000008 RLZ    ptr2                      00000A RLZ    
+pusha0                    000A0C RLA    pushax                    000A0E RLA    
+regsave                   000004 RLZ    sp                        000000 RLZ    
+staspidx                  000A24 RLA    stax0sp                   000A3A RLA    
+staxysp                   000A3C RLA    tmp1                      000010 RLZ    
+zerobss                   000A45 RLA    
+
+
+Exports list by value:
+----------------------
+__BSS_SIZE__              000000 REA    __CONSTRUCTOR_COUNT__     000000 REA    
+__DESTRUCTOR_COUNT__      000000 REA    sp                        000000 RLZ    
+__STARTUP__               000001 REA    regsave                   000004 RLZ    
+ptr1                      000008 RLZ    ptr2                      00000A RLZ    
+tmp1                      000010 RLZ    __DATA_SIZE__             000027 REA    
+__STACKSIZE__             000400 REA    __RAM_START__             000800 RLA    
+initlib                   000821 RLA    __CONSTRUCTOR_TABLE__     00082D RLA    
+_main                     000963 RLA    addysp                    000994 RLA    
+donelib                   0009A1 RLA    copydata                  0009AD RLA    
+decax1                    0009DA RLA    incsp2                    0009E9 RLA    
+incsp4                    0009F7 RLA    incsp8                    0009FC RLA    
+ldax0sp                   000A01 RLA    ldaxysp                   000A03 RLA    
+pusha0                    000A0C RLA    pushax                    000A0E RLA    
+staspidx                  000A24 RLA    stax0sp                   000A3A RLA    
+staxysp                   000A3C RLA    zerobss                   000A45 RLA    
+__DATA_LOAD__             000A83 RLA    __DATA_RUN__              000A83 RLA    
+__DESTRUCTOR_TABLE__      000A83 RLA    __BSS_RUN__               000AAA RLA    
+__RAM_SIZE__              00EE00 REA    
+
+
+Imports list:
+-------------
+__BSS_RUN__ ([linker generated]):
+    zerobss.o                 common/zerobss.s(8)
+__BSS_SIZE__ ([linker generated]):
+    zerobss.o                 common/zerobss.s(8)
+__CONSTRUCTOR_COUNT__ ([linker generated]):
+    condes.o                  runtime/condes.s(18)
+__CONSTRUCTOR_TABLE__ ([linker generated]):
+    condes.o                  runtime/condes.s(18)
+__DATA_LOAD__ ([linker generated]):
+    copydata.o                common/copydata.s(8)
+__DATA_RUN__ ([linker generated]):
+    copydata.o                common/copydata.s(8)
+__DATA_SIZE__ ([linker generated]):
+    copydata.o                common/copydata.s(8)
+__DESTRUCTOR_COUNT__ ([linker generated]):
+    condes.o                  runtime/condes.s(19)
+__DESTRUCTOR_TABLE__ ([linker generated]):
+    condes.o                  runtime/condes.s(19)
+__RAM_SIZE__ ([linker generated]):
+    crt0.o                    crt0.s(9)
+__RAM_START__ ([linker generated]):
+    crt0.o                    crt0.s(9)
+__STACKSIZE__ ([linker generated]):
+    crt0.o                    crt0.s(10)
+__STARTUP__ (crt0.o):
+    main.o                    main.s(13)
+_main (main.o):
+    crt0.o                    crt0.s(6)
+addysp (addysp.o):
+    incsp8.o                  runtime/incsp8.s(8)
+    incsp4.o                  runtime/incsp4.s(8)
+copydata (copydata.o):
+    crt0.o                    crt0.s(12)
+decax1 (decax1.o):
+    main.o                    main.s(227)
+donelib (condes.o):
+    crt0.o                    crt0.s(12)
+incsp2 (incsp2.o):
+    staspidx.o                runtime/staspidx.s(8)
+incsp4 (incsp4.o):
+    main.o                    main.s(227)
+incsp8 (incsp8.o):
+    main.o                    main.s(227)
+initlib (condes.o):
+    crt0.o                    crt0.s(12)
+ldax0sp (ldaxsp.o):
+    main.o                    main.s(227)
+ldaxysp (ldaxsp.o):
+    main.o                    main.s(227)
+ptr1 (zeropage.o):
+    zerobss.o                 common/zerobss.s(9)
+    staspidx.o                runtime/staspidx.s(9)
+    copydata.o                common/copydata.s(9)
+    main.o                    main.s(11)
+ptr2 (zeropage.o):
+    copydata.o                common/copydata.s(9)
+pusha0 (pushax.o):
+    main.o                    main.s(227)
+pushax (pushax.o):
+    main.o                    main.s(227)
+    main.o                    main.s(227)
+    main.o                    main.s(227)
+regsave (zeropage.o):
+    main.o                    main.s(10)
+sp (zeropage.o):
+    incsp2.o                  runtime/incsp2.s(8)
+    addysp.o                  runtime/addysp.s(8)
+    staxsp.o                  runtime/staxsp.s(8)
+    staspidx.o                runtime/staspidx.s(9)
+    pushax.o                  runtime/pushax.s(8)
+    ldaxsp.o                  runtime/ldaxsp.s(8)
+    crt0.o                    /usr/share/cc65/asminc/zeropage.inc(11)
+    main.o                    main.s(10)
+staspidx (staspidx.o):
+    main.o                    main.s(227)
+stax0sp (staxsp.o):
+    main.o                    main.s(227)
+staxysp (staxsp.o):
+    main.o                    main.s(227)
+tmp1 (zeropage.o):
+    staspidx.o                runtime/staspidx.s(9)
+    copydata.o                common/copydata.s(9)
+zerobss (zerobss.o):
+    crt0.o                    crt0.s(12)
+
