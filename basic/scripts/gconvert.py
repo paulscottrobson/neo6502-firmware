@@ -51,10 +51,10 @@ class ImageExtractor(object):
 	#
 	#		Start using a preloaded image with optional transparency
 	#
-	def __init__(self,image,transparent = None):
+	def __init__(self,image,isSprite,transparent):
 		self.image = image.convert(mode="RGB")
-		self.isSprite = transparent is not None
-		self.transparent = transparent if self.isSprite else (-1,-1,-1)
+		self.isSprite = isSprite
+		self.transparent = transparent
 		self.palette = self.getPalette()
 	#
 	#		Convert one sprite or tile to an array of colours, 2 pixels
@@ -80,7 +80,7 @@ class ImageExtractor(object):
 	#
 	def convertPixel(self,px,py):
 		rgb = self.image.getpixel((px,py))
-		if rgb == self.transparent and self.isSprite:
+		if rgb == self.transparent:
 			return 0
 		best = 99999999
 		select = -1
