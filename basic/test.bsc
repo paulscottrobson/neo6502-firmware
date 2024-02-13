@@ -4,3 +4,8 @@ print deek(test+2),deek(test+6)
 for i = 0 to 15
 	poke i+$400,i*17+1
 next
+t2 = $402
+'t2[1] = $7FFE
+for i = 0 to 15
+	print i,peek(i+$400)
+next

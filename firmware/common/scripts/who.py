@@ -19,6 +19,10 @@ whoList = """
 	Tsvetan Usunov
 	Oliver Schmidt
 	Veselin Sladkov
+	David Given
+	Bocianu Boczansky 
+	Bill Auger
+
 """.strip().split("\n")
 whoList = [x.strip() for x in whoList]
 whoList.sort(key = lambda x:x.split()[1])
