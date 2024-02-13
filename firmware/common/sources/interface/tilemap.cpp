@@ -150,7 +150,7 @@ static void TMRRenderTileLine(uint8_t count) {
 	tilePixels = TMPGetTileRowAddress(*tilePtr,yOffset & 15);  			// Tile Pixel data comes from here.
 
 	if (tilePixels == NULL) {   										// Transparent/Solid tile.
-		if (*tilePtr >= 0xF0) {  										// Handle solid tile			
+		if (*tilePtr > 0xF0) {  										// Handle solid tile			
 			uint8_t b = *tilePtr & 0x0F;  								// Colour
 			uint32_t b2 = b | (b << 8) | (b << 16) | (b << 24);  		// Colour in 32 bits
 			//
@@ -271,5 +271,6 @@ static void TMRenderTileLineStart(uint8_t count) {
 //		==== 		========
 //		28-01-24 	Amended to allow tilemaps to overlap windows.
 //		07-02-24 	Started conversion to allow 32x32 tiles (scaled)
+//		13-02-24 	Fixed $F0 tile not transparent bug.
 //
 // ***************************************************************************************

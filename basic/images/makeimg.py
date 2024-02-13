@@ -28,7 +28,7 @@ def importSheet(coll,isTile,size,rows):
 
 	fName = "{0}_{1}.png".format("tile" if isTile else "sprite",size)  			# access the file
 	im = Image.open(fName)  	
-	xt = ImageExtractor(im,None if isTile else (255,0,255))   					# create an extractor.
+	xt = ImageExtractor(im,not isTile,(255,0,255))   							# create an extractor.
 	count = 0
 
 	for row in range(0,rows):
