@@ -1,23 +1,11 @@
-s0$ = "Lorem ipsum dolor sit amet, conseaislsuidusioudosduosus dioaud oiua oiud aoiu doaui dioua sdoiua osiu oiu oiusd aoiusd aosi ioua osdu aioud"
-text s0$ dim 1 solid ink 2 to 0,0
-end
-begin
-    NeoSetColor(0,127,1,1,0);
-    NeoDrawString(0, 0, s0);sfx 0,8:end
-
-a = 11:b$ = "$12"c = 13:d = 14
-a1 = 43
-b1$ = "$44"
-c1 = 45
-d1 = 46
-print "Before",a1,b1$,c1,d1
-call proc1(a1,b1$,-1,d1)
-print "After",a1,b1$,c1,d1
-print "ParamV",a,b$,c,d
-end
-
-proc proc1(ref a,ref b$,c,ref d)
-	print "Inside",a,b$,c,d
-	a = -2:d = 123456
-	b$ = "Hello!":print b$
-endproc
+test = $8FF
+print test[1],test[3]
+print deek(test+2),deek(test+6)
+for i = 0 to 15
+	poke i+$400,i*17+1
+next
+t2 = $402
+'t2[1] = $7FFE
+for i = 0 to 15
+	print i,peek(i+$400)
+next

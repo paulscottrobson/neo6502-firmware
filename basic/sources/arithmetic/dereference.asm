@@ -41,11 +41,25 @@ DereferenceTOS:
 		lda 	(zTemp0),y
 		sta 	XSNumber1,x
 		iny
-		lda 	(zTemp0),y
+
+		lda 	XSControl,x 				; check for word reference
+		and 	#XS_ISWORDREF
+		bne 	_DRTWordRef
+
+		lda 	(zTemp0),y 					; 32 bit dereference
 		sta 	XSNumber2,x
 		iny
 		lda 	(zTemp0),y
 		sta 	XSNumber3,x
+		ply
+		bra 	_DRTExit
+
+_DRTWordRef:
+		stz 	XSControl,x 				; clear type
+		lda 	#0  						; clear 2 upper bytes
+		sta 	(zTemp0),y
+		iny
+		sta 	(zTemp0),y
 		ply
 		bra 	_DRTExit
 
@@ -87,5 +101,6 @@ _DRTNullStringAddr:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		12/02/24 		Dereferences 16 bit references successfully (for [])
 ;
 ; ************************************************************************************************
