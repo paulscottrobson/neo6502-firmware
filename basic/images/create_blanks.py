@@ -42,8 +42,7 @@ def createSheet(isTile,size,rows):
 		x = w * i + (width - w*16) // 2
 		draw.rectangle([x+1,1,x+w-1,yPaletteSpace-2],fill = getPalette(palette,i),outline = (255,255,255),width = 1)
 
-	filler = (0,0,0) if isTile else (255,0,255)  								# what to use as solid background / see through
-
+	filler = (255,255,255)  													# transparency
 	for col in range(0,tileCount):  											# draw the work boxes.
 		for row in range(0,rows):
 			x = col * (size+8) + 8
