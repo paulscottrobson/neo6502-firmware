@@ -20,7 +20,7 @@ extern const unsigned char font_5x7[];
 void CONInitialise(struct GraphicsMode *gMode);
 void CONWrite(int c);
 void CONWriteHex(uint16_t h);	
-void CONWriteString(const char *s);
+void CONWriteString(const char *s, ...);
 void CONGetScreenLine(uint16_t addr);
 uint8_t CONUpdateUserFont(uint8_t *data);
 uint8_t CONSetCursorPosition(uint8_t x,uint8_t y);

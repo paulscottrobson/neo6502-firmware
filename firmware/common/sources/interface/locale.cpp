@@ -41,9 +41,7 @@ void LOCSetLocale(char c1,char c2) {
 	while (search[0] != 0) {  													// Look through the locale table
 		if (c1 == search[1] && c2 == search[2]) {  								// Found the locale, use it
 			_KBDLocaleCurrent = search+3;	
-			CONWriteString("Locale is now '");
-			CONWrite(c1);CONWrite(c2);
-			CONWriteString("'\r");
+			CONWriteString("Locale is now '%c%c'\r", c1, c2);
 			succeed = true;
 		}  	
 		search += search[0];													// Follow the list.

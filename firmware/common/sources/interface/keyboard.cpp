@@ -268,12 +268,10 @@ static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers) {
 // ***************************************************************************************
 
 void KBDShowFunctionKeys(void) {
-	char szBuffer[16];
 	for (int i = 1;i <= 10;i++) {
 		char *k = FKEYTEXT(i);
 		if (*k != '\0') {
-			sprintf(szBuffer,"F%-2d : \"",i);
-			CONWriteString(szBuffer);
+			CONWriteString("F%-2d : \"", i);
 			while (*k != '\0') {
 				if (*k == 13) {
 					CONWriteString("<Enter>");
