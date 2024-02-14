@@ -43,9 +43,9 @@ uint8_t FISReadFile(const std::string& filename,uint16_t loadAddress,uint16_t ma
 	result = f_open(&file, filename.c_str(), FA_READ);
 	if (result == FR_OK) {
 		if (loadAddress == 0xFFFF) {
-			f_read(&file,gfxMemory,maxSize,&bytesRead);
+			result = f_read(&file,gfxMemory,maxSize,&bytesRead);
 		} else {
-			f_read(&file,cpuMemory+loadAddress,0x10000-loadAddress,&bytesRead);
+			result = f_read(&file,cpuMemory+loadAddress,0x10000-loadAddress,&bytesRead);
 		}
 		f_close(&file);
 	}
@@ -148,6 +148,7 @@ static DIR readDir;
 uint8_t FISOpenDir(const std::string& filename) {
 	STOInitialise();
 
+	// CONWriteString("FISOpenDir('%s')\r", filename.c_str());
 	if (readDir.obj.fs)
 		f_closedir(&readDir);
 
@@ -159,20 +160,24 @@ uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs) {
 	if (!readDir.obj.fs)
 		return 1;
 
+	// CONWriteString("FISReadDir() ->");
 	FILINFO fno;
 	FRESULT result = f_readdir(&readDir, &fno);
 	if ((result == FR_OK) && fno.fname[0]) {
 		filename = fno.fname;
 		*attribs = getAttributes(&fno);
 		*size = fno.fsize;
+		// CONWriteString("'%s'\r", fno.fname);
 		return 0;
 	} else {
+		// CONWriteString("finished\r");
 		f_closedir(&readDir);
 		return 1;
 	}
 }
 
 uint8_t FISCloseDir() {
+	// CONWriteString("FISCloseDir()\r");
 	if (readDir.obj.fs)
 		f_closedir(&readDir);
 
@@ -186,6 +191,7 @@ uint8_t FISCloseDir() {
 // ***************************************************************************************
 
 uint8_t FISOpenFileHandle(uint8_t fileno, const std::string& filename, uint8_t mode) {
+	// CONWriteString("FISOpen(%d, '%s')\r", fileno, filename.c_str());
 	if (fileno >= FIO_NUM_FILES)
 		return 1;
 	FIL* f = &fileHandles[fileno];
@@ -218,6 +224,7 @@ static FIL* getF(uint8_t fileno) {
 }
 
 uint8_t FISCloseFileHandle(uint8_t fileno) {
+	// CONWriteString("FISCloseFileHandle(%d)\r", fileno);
 	if (fileno == 0xff) {
 		for (FIL& f : fileHandles)
 		{
@@ -258,11 +265,13 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	if (!f)
 		return 1;
 
-	UINT written;
-	FRESULT result = f_read(f, cpuMemory+address, *size, &written);
-	*size = written;
+	uint16_t toread = std::min(*size, uint16_t(0x10000 - address));
 
-	return (result == FR_OK) ? 0 : 1;
+	UINT read;
+	FRESULT result = f_read(f, cpuMemory+address, toread, &read);
+	*size = read;
+
+	return ((result == FR_OK) && (toread == read)) ? 0 : 1;
 }
 
 uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
@@ -270,11 +279,13 @@ uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	if (!f)
 		return 1;
 
+	uint16_t towrite = std::min(*size, uint16_t(0x10000 - address));
+
 	UINT written;
-	FRESULT result = f_write(f, cpuMemory+address, *size, &written);
+	FRESULT result = f_write(f, cpuMemory+address, towrite, &written);
 	*size = written;
 
-	return (result == FR_OK) ? 0 : 1;
+	return ((result == FR_OK) && (towrite == written)) ? 0 : 1;
 }
 
 uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
@@ -283,6 +294,7 @@ uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
 		return 1;
 
 	*size = f_size(f);
+	// CONWriteString("FISGetSize(%d) -> 0x%08x\r", fileno, *size);
 	return 0;
 }
 

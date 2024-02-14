@@ -38,8 +38,7 @@ void FIODirectory(const char *subString) {
 						buffer += " bytes.";
 					}
 				}
-				CONWriteString(buffer.c_str());
-				CONWriteString("\r");				
+				CONWriteString("%s\r", buffer.c_str());
 			}
 		}
 		FISCloseDir();
