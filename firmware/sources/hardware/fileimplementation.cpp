@@ -271,7 +271,7 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	FRESULT result = f_read(f, cpuMemory+address, toread, &read);
 	*size = read;
 
-	return ((result == FR_OK) && (toread == read)) ? 0 : 1;
+	return ((result == FR_OK) && (toread != 0)) ? 0 : 1;
 }
 
 uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
@@ -285,7 +285,7 @@ uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	FRESULT result = f_write(f, cpuMemory+address, towrite, &written);
 	*size = written;
 
-	return ((result == FR_OK) && (towrite == written)) ? 0 : 1;
+	return ((result == FR_OK) && (towrite != 0)) ? 0 : 1;
 }
 
 uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
