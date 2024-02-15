@@ -30,8 +30,10 @@ void drawLine(int x1,int y1,int x2,int y2) {
 }
 
 int main() {
+	unsigned char cr[2];
 	write("Hello world\n",12);
-	write("Hello world2\r",12);
+	write("Hello world2\r",13);
+	write("Hello world3\r",13);
 	drawLine(10,10,100,100);
 	return 0;
 }
