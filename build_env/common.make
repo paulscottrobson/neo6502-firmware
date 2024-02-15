@@ -47,6 +47,7 @@ CDEL = rm -f
 CDELQ = 
 CMAKEDIR = mkdir -p 
 CMAKE = make
+TOUCH = touch
 APPSTEM =
 S = /
 SDL_CFLAGS = $(shell sdl2-config --cflags)
@@ -71,7 +72,7 @@ S = /
 SDL_CFLAGS = $(shell sdl2-config --cflags)
 SDL_LDFLAGS = $(shell sdl2-config --libs)
 LDFLAGS = 
-
+TOUCH = touch
 
 endif
 
