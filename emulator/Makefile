@@ -151,13 +151,19 @@ release:
 
 # ***************************************************************************************
 #
-#						Make windows/linux emulator only
+#						Make emulator
 #
 # ***************************************************************************************
 
 elinux:
 		$(MAKE) -C $(ROOTDIR)firmware prelim
 		$(MAKE) -B clean
+		$(MAKE) -B emulator
+
+emacos:
+		$(MAKE) -C $(ROOTDIR)firmware prelim
+		$(MAKE) -B clean
+		$(MAKE) -B prebuild
 		$(MAKE) -B emulator
 
 ewindows: 
