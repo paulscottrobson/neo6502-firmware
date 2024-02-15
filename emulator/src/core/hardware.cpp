@@ -156,9 +156,6 @@ uint8_t FISReadFile(const std::string& fileName,uint16_t loadAddress,uint16_t ma
 			r = fread(CPUAccessMemory()+loadAddress,1,maxSize,f);
 		}
 		fclose(f);
-
-		if (r != maxSize)
-			return 1;
 	}
 	return (f == NULL) ? 1 : 0;
 }
