@@ -32,6 +32,14 @@ TOUCH =
 PICO_SDK_PATH=<somewhere, god alone knows>
 PYTHON = c:\Python312\python.exe
 else
+
+UNAME_S := $(shell uname -s)
+
+### LINUX
+
+ifeq ($(UNAME_S),Linux)
+OSNAME = linux
+CXXFLAGS = $(SDL_CFLAGS) -O2 -DLINUX  -fmax-errors=5 -I.  
 PYTHON = python3
 CCOPY = cp
 CCOPYREC = cp -r
@@ -43,12 +51,32 @@ APPSTEM =
 S = /
 SDL_CFLAGS = $(shell sdl2-config --cflags)
 SDL_LDFLAGS = $(shell sdl2-config --libs)
-CXXFLAGS = $(SDL_CFLAGS) -O2 -DLINUX  -fmax-errors=5 -I.  
 LDFLAGS = 
-OSNAME = linux
-EXTRAFILES = 
+
+else
+
+### MACOS
+
+OSNAME = macos
+CXXFLAGS = $(SDL_CFLAGS) -O2 -DMACOS -fms-extensions -std=c++17 -I.  
 PYTHON = python3
-TOUCH = touch -c
+CCOPY = cp
+CCOPYREC = cp -r
+CDEL = rm -f
+CDELQ = 
+CMAKEDIR = mkdir -p
+CMAKE = make
+APPSTEM =
+S = /
+SDL_CFLAGS = $(shell sdl2-config --cflags)
+SDL_LDFLAGS = $(shell sdl2-config --libs)
+LDFLAGS = 
+
+
+endif
+
+
+
 endif
 #
 #		Directories
