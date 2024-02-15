@@ -14,8 +14,7 @@
 #define _CONSOLE_H
 
 #include "interface/graphics.h"
-
-extern const unsigned char font_5x7[];
+extern const uint8_t font_5x7[];
 
 void CONInitialise(struct GraphicsMode *gMode);
 void CONWrite(int c);
