@@ -74,6 +74,9 @@ linux:
 		$(MAKE) -B -C emulator clean
 		$(MAKE) -B -C emulator elinux
 
+macos:
+		make -B -C emulator emacos
+
 
 # ***************************************************************************************
 #
