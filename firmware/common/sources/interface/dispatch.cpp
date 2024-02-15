@@ -106,6 +106,12 @@ std::string DSPGetStdString(uint8_t *command,uint8_t paramOffset) {
 	return std::string((char*)mem+1, *mem);
 }
 
+void DSPSetStdString(uint8_t *command, uint8_t paramOffset, const std::string& value) {
+	uint8_t *mem = cpuMemory+command[paramOffset]+(command[paramOffset+1]<<8);  // From here.
+	*mem = std::min(*mem, (uint8_t)value.size());
+	memcpy(mem+1, value.data(), *mem);
+}
+
 uint16_t DSPGetInt16(uint8_t *command,uint8_t paramOffset) {
 	return command[paramOffset] + (command[paramOffset+1] << 8);
 }

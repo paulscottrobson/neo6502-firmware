@@ -12,6 +12,7 @@
 
 #include "common.h"
 #include "interface/font_5x7.h"
+#include <stdarg.h>
 
 struct GraphicsMode *graphMode;                                         
 
@@ -363,7 +364,16 @@ void CONWriteHex(uint16_t h) {
 	}
 }
 
-void CONWriteString(const char *s) {
+void CONWriteString(const char *s, ...) {
+	va_list ap;
+
+	va_start(ap, s);
+	int len = vsnprintf(NULL, 0, s, ap);
+	char buffer[len+1];
+	vsnprintf(buffer, len+1, s, ap);
+	va_end(ap);
+	
+	s = buffer;
 	while (*s != '\0') CONWrite(*s++);
 }
 
