@@ -38,7 +38,8 @@ void FIODirectory(const char *subString) {
 						buffer += " bytes.";
 					}
 				}
-				CONWriteString("%s\r", buffer.c_str());
+				CONWriteString(buffer.c_str());
+				CONWrite('\r');
 			}
 		}
 		FISCloseDir();
@@ -181,5 +182,6 @@ uint8_t FIOSetSizeFileHandle(uint8_t fileno, uint32_t size) {
 //		==== 		========
 //		16-01-24 	Modified so fileSize < 0 doesn't display information.
 //		10-02-24 	Added support for cat wildcards.
+//		16-02-24 	cat is broken.
 //
 // ***************************************************************************************
