@@ -16,16 +16,6 @@ else
 include build_env/common.make
 endif
 
-RELEASEFILE = neo6502.zip
-
-DOCDIR = documents$(S)release$(S)
-
-DOCUMENTS =  $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
-BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(ROOTDIR)emulator$(S)cross-compile$(S)neowin.zip $(BINDIR)basic.bin \
-			 $(ROOTDIR)emulator$(S)neolinux.zip
-PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip \
-			 $(BINDIR)nxmit.zip
-
 # ***************************************************************************************
 #
 #						Remake everything to release state
@@ -40,21 +30,7 @@ all:
 	$(MAKE) -B -C firmware release
 	$(MAKE) -B -C emulator release
 	$(MAKE) -B -C examples release
-	$(MAKE) -B zipfile 
-
-# ***************************************************************************************
-#
-#								Make the release zip
-#
-# ***************************************************************************************
-
-zipfile: crossdev
-	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) \
-						examples$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
-	$(CDEL) documents$(S)release$(S)crossdev$(S)crossdev.zip
-
-crossdev:
-	cd documents$(S)release$(S)crossdev ; $(CDEL) crossdev.zip ; zip -r -q crossdev.zip *
+	$(MAKE) -B -C release
 
 # ***************************************************************************************
 #
