@@ -31,48 +31,6 @@ static uint8_t getAttributes(const FILINFO* fno) {
 
 // ***************************************************************************************
 //
-//									Read File
-//
-// ***************************************************************************************
-
-uint8_t FISReadFile(const std::string& filename,uint16_t loadAddress,uint16_t maxSize) {
-	FIL file;
-	FRESULT result;
-	UINT bytesRead;
-	STOInitialise();
-	result = f_open(&file, filename.c_str(), FA_READ);
-	if (result == FR_OK) {
-		if (loadAddress == 0xFFFF) {
-			result = f_read(&file,gfxMemory,maxSize,&bytesRead);
-		} else {
-			result = f_read(&file,cpuMemory+loadAddress,0x10000-loadAddress,&bytesRead);
-		}
-		f_close(&file);
-	}
-	return (result == FR_OK) ? 0 : 1;
-}
-
-// ***************************************************************************************
-//
-//									Write File
-//
-// ***************************************************************************************
-
-uint8_t FISWriteFile(const std::string& filename,uint16_t startAddress,uint16_t size) {
-	FIL file;
-	FRESULT result;
-	UINT bytesWritten;
-	STOInitialise();
-	result = f_open(&file, filename.c_str(), FA_WRITE|FA_CREATE_ALWAYS);
-	if (result == FR_OK) {
-		f_write(&file,cpuMemory+startAddress,size,&bytesWritten);
-		f_close(&file);
-	}
-	return (result == FR_OK) ? 0 : 1;
-}
-
-// ***************************************************************************************
-//
 //									Rename File
 //
 // ***************************************************************************************
@@ -268,7 +226,12 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	uint16_t toread = std::min(*size, uint16_t(0x10000 - address));
 
 	UINT read;
-	FRESULT result = f_read(f, cpuMemory+address, toread, &read);
+	FRESULT result;
+	if (address != 0xFFFF) {
+		result = f_read(f, cpuMemory+address, toread, &read);
+	} else {
+		result = f_read(f, gfxObjectMemory, GFX_MEMORY_SIZE, &read);	
+	}
 	*size = read;
 
 	return ((result == FR_OK) && (toread != 0)) ? 0 : 1;

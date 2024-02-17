@@ -135,8 +135,8 @@ static void TMROutputBackground(uint16_t n) {
 // ***************************************************************************************
 
 static uint8_t *TMPGetTileRowAddress(uint8_t tileID,uint8_t yOffset) {
-	if (tileID >= gfxMemory[1]) return NULL;
-	return gfxMemory + 256 + tileID * 16*16/2 + yOffset * 8;
+	if (tileID >= gfxObjectMemory[1]) return NULL;
+	return gfxObjectMemory + 256 + tileID * 16*16/2 + yOffset * 8;
 }
 
 // ***************************************************************************************

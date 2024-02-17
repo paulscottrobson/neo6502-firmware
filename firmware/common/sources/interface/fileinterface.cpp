@@ -29,17 +29,19 @@ void FIODirectory(const char *subString) {
 		while (FISReadDir(buffer, &fileSize, &attribs) == 0) {
 			if (buffer[0] != '.') {
 				if (fileSize >= 0) {
-					while (buffer.size() < 32)
-					 	buffer += ' ';
-					if (attribs & FIOATTR_DIR)
-						buffer += "<Dir>";
-					else {
-						buffer += std::to_string(fileSize);
-						buffer += " bytes.";
+					if (strstr(buffer.c_str(),subString) != NULL) {
+						while (buffer.size() < 32)
+						 	buffer += ' ';
+						if (attribs & FIOATTR_DIR)
+							buffer += "<Dir>";
+						else {
+							buffer += std::to_string(fileSize);
+							buffer += " bytes.";
+						}
+						CONWriteString(buffer.c_str());
+						CONWrite('\r');
 					}
 				}
-				CONWriteString(buffer.c_str());
-				CONWrite('\r');
 			}
 		}
 		FISCloseDir();
@@ -52,9 +54,21 @@ void FIODirectory(const char *subString) {
 //
 // ***************************************************************************************
 
-uint8_t FIOReadFile(const std::string& filename, uint16_t loadAddress) {
+uint8_t FIOReadFile(const std::string& fileName,uint16_t loadAddress) {
+	STOInitialise();
+	printf("Reading %s to $%x\n",fileName.c_str(),loadAddress);
 	uint16_t maxRead = (loadAddress == 0xFFFF) ? GFX_MEMORY_SIZE : 0x10000-loadAddress;
-	return FISReadFile(filename, loadAddress,maxRead);
+	uint8_t error = FISOpenFileHandle(0,fileName,FIOMODE_RDONLY);
+	printf("Open %d\n",error);
+	if (error == 0) {
+		error = FISReadFileHandle(0,loadAddress,&maxRead);
+	}
+	printf("Read %d\n",error);
+	if (error == 0) {
+		error = FISCloseFileHandle(0);
+	}
+	printf("%d\n",error);
+	return error;
 }
 
 // ***************************************************************************************
@@ -63,9 +77,17 @@ uint8_t FIOReadFile(const std::string& filename, uint16_t loadAddress) {
 //
 // ***************************************************************************************
 
-uint8_t FIOWriteFile(const std::string& filename, uint16_t startAddress,uint16_t size) {
+uint8_t FIOWriteFile(const std::string& filename,uint16_t startAddress,uint16_t size) {
+	STOInitialise();
 	if (startAddress == 0xFFFF) return 1;
-	return FISWriteFile(filename, startAddress,size);
+	uint8_t error = FISOpenFileHandle(0,filename,FIOMODE_RDWR_CREATE);
+	if (error == 0) {
+		error = FISWriteFileHandle(0,startAddress,&size);
+	}
+	if (error == 0) {
+		error = FISCloseFileHandle(0);
+	}
+	return error;
 }
 
 // ***************************************************************************************
@@ -159,7 +181,6 @@ uint8_t FIOTellFileHandle(uint8_t fileno, uint32_t* pos) {
 }
 
 uint8_t FIOReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
-	if (address == 0xFFFF) return 1;
 	return FISReadFileHandle(fileno, address, size);
 }
 
