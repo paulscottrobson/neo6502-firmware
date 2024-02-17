@@ -22,7 +22,7 @@ CMAKEDIR = md
 APPSTEM = .exe
 S = \\
 SDLDIR = C:\\sdl2
-CXXFLAGS = -I$(SDLDIR)$(S)include$(S)SDL2 -I . -fno-stack-protector -w -Wl,-subsystem,windows -DSDL_MAIN_HANDLED 
+CXXFLAGS = -I$(SDLDIR)$(S)include$(S)SDL2 -I . -fno-stack-protector -w -Wl,-subsystem,windows -DSDL_MAIN_HANDLED -std=c++17
 LDFLAGS = -lmingw32
 SDL_LDFLAGS = -L$(SDLDIR)$(S)lib -lSDL2 -lSDL2main -static-libstdc++ -static-libgcc
 OSNAME = windows
@@ -39,7 +39,7 @@ UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
 OSNAME = linux
-CXXFLAGS = $(SDL_CFLAGS) -O2 -DLINUX  -fmax-errors=5 -I.  
+CXXFLAGS = $(SDL_CFLAGS) -O2 -DLINUX  -fmax-errors=5 -I. -std=c++17
 PYTHON = python3
 CCOPY = cp
 CCOPYREC = cp -r
