@@ -23,8 +23,6 @@ int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize);
 #define FIOATTR_READONLY (1<<3)
 #define FIOATTR_HIDDEN   (1<<4)
 
-uint8_t FISReadFile(const std::string& filename,uint16_t loadAddress,uint16_t maxSize);
-uint8_t FISWriteFile(const std::string& filename,uint16_t startAddress,uint16_t size);
 uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFilename);
 uint8_t FISDeleteFile(const std::string& filename);
 uint8_t FISCreateDirectory(const std::string& filename);

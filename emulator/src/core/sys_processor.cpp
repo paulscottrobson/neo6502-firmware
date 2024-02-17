@@ -112,7 +112,7 @@ void CPUReset(void) {
 				cpuMemory[0xFFFD] = address >> 8;
 			} else {
 				p = cpuMemory+address;				 								// Load here.	
-				if (address == 0xFFFF) p = gfxMemory;  								// Load to graphics memory
+				if (address == 0xFFFF) p = gfxObjectMemory;  						// Load to graphics memory
 				printf("Load %s to %x\n",command,address);
 				FILE *f = fopen(command,"rb");  									// Read file in and copy to RAM.
 				if (f == NULL) exit(fprintf(stderr,"Bad file %s",command));

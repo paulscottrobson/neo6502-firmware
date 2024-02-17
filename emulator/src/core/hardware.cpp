@@ -140,45 +140,6 @@ void FDBWrite(uint8_t c) {
 
 // ***************************************************************************************
 //
-//									Read File
-//
-// ***************************************************************************************
-
-uint8_t FISReadFile(const std::string& fileName,uint16_t loadAddress,uint16_t maxSize) {
-	std::string abspath = getAbspath(fileName);
-	printf("Reading %s to $%x\n",abspath.c_str(),loadAddress);
-	FILE *f = fopen(abspath.c_str(), "rb");
-	if (f != NULL) {
-		size_t r;
-		if (loadAddress == 0xFFFF) {
-			r = fread(gfxMemory,1,maxSize,f);
-		} else {
-			r = fread(CPUAccessMemory()+loadAddress,1,maxSize,f);
-		}
-		fclose(f);
-	}
-	return (f == NULL) ? 1 : 0;
-}
-
-// ***************************************************************************************
-//
-//									Write File
-//
-// ***************************************************************************************
-
-uint8_t FISWriteFile(const std::string& fileName,uint16_t startAddress,uint16_t size) {
-	std::string abspath = getAbspath(fileName);
-	printf("Writing %s from $%x size $%x\n",abspath.c_str(),startAddress,size);
-	FILE *f = fopen(abspath.c_str(), "wb");
-	if (f != NULL) {
-		fwrite(CPUAccessMemory()+startAddress,1,size,f);
-		fclose(f);
-	}
-	return (f == NULL) ? 1 : 0;
-}
-
-// ***************************************************************************************
-//
 //									Rename file
 //
 // ***************************************************************************************
@@ -408,7 +369,12 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 
 	errno = 0;
 	printf("FISReadFileHandle(%d, @0x%x, %d) -> ", fileno, address, *size);
-	size_t result = fread(cpuMemory+address, *size, 1, f);
+	size_t result;
+	if (address != 0xFFFF) {
+		result = fread(cpuMemory+address, 1,*size, f);
+	} else {
+		result = fread(gfxObjectMemory,1,GFX_MEMORY_SIZE,f);
+	}
 	printf("%d: %s\n", (int)result, (result != *size) ? strerror(errno) : "OK");
 	*size = result;
 
@@ -422,8 +388,8 @@ uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 
 	printf("FISWriteFileHandle(%d, @0x%x, %d) -> ", fileno, address, *size);
 	size_t result = fwrite(cpuMemory+address, *size, 1, f);
-	printf("%d: %s\n", (int)result, (result != *size) ? strerror(errno) : "OK");
-	*size = result;
+	printf("%d: %s\n", (int)result, (result != 1) ? strerror(errno) : "OK");
+	//*size = result;
 
 	return (result > 0) ? 0 : 1;
 }
@@ -487,3 +453,4 @@ bool SERIsByteAvailable(void) {
 uint8_t SERReadByte(void) {
 	return 0;
 }
+
