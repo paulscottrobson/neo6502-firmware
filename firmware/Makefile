@@ -109,7 +109,7 @@ reset:
 #
 # ***************************************************************************************
 
-dual: prelim always
+dual: prelim always pythonapps
 	$(CDEL)   firmware.elf firmware.uf2
 
 	cmake --fresh -B build -DSDCARD_STORAGE=1
@@ -128,7 +128,7 @@ pythonapps:
 	$(CMAKEDIR) build
 	$(CCOPY) scripts$(S)nxmit.py build$(S)__main__.py
 	zip -j $(BINDIR)nxmit.zip build$(S)__main__.py
-	$(CDEL) build$(S)*.py
+	$(CDEL) build$(S)*.p
 		
 # ***************************************************************************************
 #
