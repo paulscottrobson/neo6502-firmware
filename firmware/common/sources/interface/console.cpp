@@ -459,7 +459,10 @@ void CONWriteString(const char *s, ...) {
 
 	va_start(ap, s);
 	int len = vsnprintf(NULL, 0, s, ap);
+	va_end(ap);
+
 	char buffer[len+1];
+	va_start(ap, s);
 	vsnprintf(buffer, len+1, s, ap);
 	va_end(ap);
 	
