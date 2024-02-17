@@ -1,4 +1,4 @@
-
+load "frogger.neo"
 cls:sprite clear:gload "graphics.gfx"
 for i = 0 to 3
 	sprite i image $80+i to i*40+20,100

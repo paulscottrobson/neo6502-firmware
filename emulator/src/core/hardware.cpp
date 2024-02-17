@@ -373,7 +373,7 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	if (address != 0xFFFF) {
 		result = fread(cpuMemory+address, 1,*size, f);
 	} else {
-		result = fread(gfxObjectMemory,1,GFX_MEMORY_SIZE,f);
+		result = fread(gfxObjectMemory,1,*size,f);
 	}
 	printf("%d: %s\n", (int)result, (result != *size) ? strerror(errno) : "OK");
 	*size = result;

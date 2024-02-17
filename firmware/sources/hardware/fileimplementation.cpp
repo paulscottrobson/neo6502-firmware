@@ -223,14 +223,15 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	if (!f)
 		return 1;
 
-	uint16_t toread = std::min(*size, uint16_t(0x10000 - address));
+	uint16_t toread = *size;
+	if (address != 0xFFFF) address = std::min(*size, uint16_t(0x10000 - address));
 
 	UINT read;
 	FRESULT result;
 	if (address != 0xFFFF) {
 		result = f_read(f, cpuMemory+address, toread, &read);
 	} else {
-		result = f_read(f, gfxObjectMemory, GFX_MEMORY_SIZE, &read);	
+		result = f_read(f, gfxObjectMemory, toread, &read);	
 	}
 	*size = read;
 

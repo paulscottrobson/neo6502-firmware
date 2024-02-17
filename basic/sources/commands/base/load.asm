@@ -66,8 +66,10 @@ CLLoad:
 		.byte 	3,2
 		DoWaitMessage
 		lda 	ControlError  				; error check
-		beq 	_CLExit
+		beq 	_CLPostLoad
 		.error_file
+_CLPostLoad:
+		jsr 	ControlParameters+4 		; call the post-load execution code.
 _CLExit:
 		rts
 

@@ -26,6 +26,7 @@ class Executable(object):
 	def new(self):
 		self.code = [ 0x03,ord('N'),ord('E'),ord('O')]  							# Magic number $03 $4E $45 $4F
 		self.code += [ 0, 0 ]  														# Requires at least this minimum/maximum version.
+		self.code += [ 0xFF,0xFF ]  												# Execution address
 		self.lastControlByte = None  												# so we can fix up continuations.
 		return self
 	#
@@ -53,6 +54,12 @@ class Executable(object):
 		self.code += data  															# actual data
 		return self
 	#
+	#		Set exec point
+	#
+	def execFrom(self,addr):
+		self.code[6] = addr & 0xFF
+		self.code[7] = addr >> 8
+	#
 	# 		Write file
 	#
 	def writeFile(self,fileName):
@@ -70,7 +77,9 @@ class Executable(object):
 			print("Not a neo6502 executable")
 			return self 
 		print("Firmware: v{0}.{1}.0".format(data[4],data[5]))  						# min firmware version
-		data = data[6:]   															# strip header
+		execAddress = data[6] + data[7] * 256  										# get load and size
+		print("Exec from : ${0:04x} ({0})".format(execAddress))
+		data = data[8:]   															# strip header
 		blockCount = 0
 		continueDecode = True
 		while continueDecode:  														# while block left
@@ -96,5 +105,6 @@ Executable.LOAD_TO_PAGE = 0xFFFD
 e = Executable().new()
 e.addFile("storage/frogger.gfx",Executable.GRAPHIC_OBJECT_MEMORY)
 e.addFile("storage/frogger.bas",Executable.LOAD_TO_PAGE)
+e.execFrom(0x806)
 e.writeFile("storage/frogger.neo")
 e.dumpFile("storage/frogger.neo")
