@@ -17,9 +17,11 @@ General
 Larger Additions
 ----------------
 
+	- What do we do if loading overwrites the area. Need to have a kernel function for load/execute. Patch into BASIC.
+
 	- Complete the packing/listing app for executables
 
-	- Document the executable file format.
+	- Document the executable file format / app.
 		
 	- Serial uploading
 		- save to storage option. 
