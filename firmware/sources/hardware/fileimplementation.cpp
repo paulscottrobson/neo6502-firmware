@@ -224,7 +224,7 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 		return 1;
 
 	uint16_t toread = *size;
-	if (address != 0xFFFF) address = std::min(*size, uint16_t(0x10000 - address));
+	if (address != 0xFFFF) toread = std::min(toread, uint16_t(0x10000 - address));
 
 	UINT read;
 	FRESULT result;

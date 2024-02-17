@@ -20,10 +20,9 @@
 
 void CFGProcess(void) {
 #ifdef USBKEY_STORAGE
-//	uint8_t dummySpace[12];
-//	if (FIOReadFileBasic(".config",0x100) == 0) {  								// Try to read config file
-//		LOCSetLocale(cpuMemory[0x100],cpuMemory[0x101]);  						// Set locale from config file.
-//	}
+	if (FIOReadFileBasic(".config",0x100) == 0) {  								// Try to read config file
+		LOCSetLocale(cpuMemory[0x100],cpuMemory[0x101]);  						// Set locale from config file.
+	}
 #endif
 }
 
