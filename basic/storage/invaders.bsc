@@ -1,0 +1,251 @@
+'
+'		*** Space Invaders ***
+'
+cls:gload "invaders.gfx"
+call Initialise()
+
+call ResetMap():call RedrawGame():call ResetBullets():call RepaintInvaders()
+repeat
+	call PlayLevel()
+until lives = 0
+end
+'
+'		Play/Continue the current level
+'
+proc PlayLevel()
+	dead = false
+	tMoveInvaders = 0:tMovePlayer = 0:tMoveBullets = 0:tCheckFire = 0
+	tFireCheckTime = 100
+	repeat
+		if event(tMoveInvaders,moveRate) then call MoveInvaders():call RepaintInvaders():sprite 10 hide
+		if event(tMovePlayer,3) then call MovePlayer()
+		if event(tMoveBullets,3)
+				if yPBullet > -20 then call MovePlayerBullet()
+			call MoveInvaderBullets()
+		endif
+		if event(tCheckFire,tFireCheckTime) then tFireCheckTime = rand(70)+20:call CheckInvaderFire()
+	until dead|remaining = 0
+	if remaining = 0 then call ResetMap()
+	if dead then lives = lives - 1
+
+	if lives > 0 
+		call Delay(200)
+		call RedrawGame():call ResetBullets():call RepaintInvaders()
+	endif
+
+	endproc
+'
+'		The invaders are actually a tilemap, so create it.
+'
+proc Initialise()
+	invBulletCount = 2
+	invMap = alloc(13 * 5 + 3)
+	poke invMap,1:poke invMap+1,13:poke invMap+2,6
+	tilemap invMap,8,0
+	dim colAlive(11),xBullet(invBulletCount),yBullet(invBulletCount)
+	score = 0:highScore = 1000:lives = 3:level = 0
+	xPlayer = 160
+endproc
+'
+'		Redraw the score
+'
+proc DrawScore()
+	text right$("000000"+str$(score),6) ink 7 dim 1 solid to 62,10
+	if score = 0 | score = highScore then text right$("000000"+str$(highScore),6) ink 7 dim 1 to 142,10
+endproc
+'
+'		Initialise the invaders map and counts
+'
+proc ResetMap()
+	local a,c,i,x,y	
+	for y = 0 to 4
+		a = y * 13 + invMap + 3:c = (y+1)  \ 2
+		poke a,$F8:poke a+12,$F8
+		for i = 1 to 11:poke a+i,c:next
+	next
+	xLeft = 160 - 13 * 8:yTop = 28+level*6:xDirection = 4
+	for i = 1 to 11:colAlive(i) = $1F:next
+	remaining = 5*11:moveRate = 3+2*remaining
+	level = (level+1) % 10
+	call ResetColumns()
+	call AnimationFlipCode()
+endproc
+'
+'		Redraw the main game screen
+'
+proc RedrawGame()
+	local i
+	cls:sprite clear:text "000000" solid ink 7 dim 1 to 222,10
+	text "SCORE<1>" to 56,0:text "SCORE<2>" to 216,0:text "HI-SCORE" to 136,0
+	call DrawScore():call DrawLives()
+	for i = 1 to 3:call DrawShield(i*80,180):next
+	sprite 0 image $85 to xPlayer,230
+endproc
+'
+'		Move Player
+'
+proc MovePlayer()
+	local fire,dx,dy
+	fire = joypad(dx,dy)
+	xPlayer = max(0,min(319,xPlayer+dx*6))
+	sprite 0 to xPlayer,230
+	if yPBullet < 0 then if fire then xPBullet = xPlayer:yPBullet = 230-8:sfx 0,22
+endproc
+'
+'		Draw lives
+'
+proc DrawLives()
+	local i
+	text str$(lives) solid dim 1 ink 2 to 8,230
+	if lives > 1 then for i = 1 to lives-1:image $85 to i*16+4,228:next
+endproc
+'
+'		Draw the shield
+'
+proc DrawShield(x,y)
+	local i,w,h:w = 50:h = 30
+	rect x-w\2,y ink 2 solid to x+w\2,y+h
+	ellipse ink 0 from x-h\3,y+h-h\3 to x+h\3,y+h+h\3
+	for i = 0 to w\4
+		line x-w\2+i,y-1 to x-w\2,y+i
+		line x+w\2-i,y-1 to x+w\2,y+i
+	next
+endproc
+'
+'		Move all the invaders
+'
+proc MoveInvaders()
+	sys Animate6502
+	xLeft = xLeft + xDirection
+	if xLeft + rightColumn * 16 > 303 | xLeft < 16-16 * leftColumn
+		xDirection = -xDirection
+		xLeft = max(min(xLeft,303-rightColumn*16),0)
+		rect ink 0 solid from 0,yTop to 319,yTop+8
+		yTop = yTop + 8:if yTop > 170 then dead = true
+		if sfxPitch = 100:sfxPitch = 200:else:sfxPitch = 100:endif
+		sound 0 clear:sound 0,sfxPitch,8
+	endif
+endproc
+'
+' 		Repaint the tile map
+'
+proc RepaintInvaders()
+	tiledraw from xLeft,yTop to xLeft+191,yTop+80
+endproc
+'
+'		Reset Bullets
+'
+proc ResetBullets()
+	sprite 9 hide:xPBullet = 0:yPBullet = -99
+	local i
+	for i = 1 to invBulletCount:yBullet(i) = -1:sprite i hide:next
+endproc
+'
+'		Move Player Bullet
+'
+proc MovePlayerBullet()
+	yPBullet = yPBullet - 4
+	if yPBullet > 180 then if point(xPBullet,yPBullet) = 2 then call BreakShield(xPBullet,yPBullet+3):yPBullet = -99
+	if yPBullet > xTop & yPBullet < yTop+80 
+		local row,col,pos
+		row = (yPBullet - yTop) >> 4
+		col = (xPBullet - xLeft + 4) >> 4
+		pos = (xPBullet - xLeft + 4) & 15
+		if col >= 1 & col <= 11 & pos <= 12
+			mask = 1 << (row)
+			if (colAlive(col) & mask) <> 0 
+				colAlive(col) = colAlive(col)-mask
+				if colAlive(col) = 0 then call ResetColumns()
+				sprite 10 image $86 to xLeft+col*16,yTop+row*16+8
+				call DeleteAlien(col,row)
+				score = score + (6-row)\2*10:call DrawScore()
+				yPBullet = -99	
+			endif
+		endif
+	endif
+	sprite 9 image $80+((yPBullet >> 2) & 3) to xPBullet,yPBullet
+endproc
+'
+'		Hit shields
+'
+proc BreakShield(x,y)
+	ellipse from x-5,y-5 ink 0 solid to x+5,y+5
+endproc
+'
+'		Delete Alien
+'
+proc DeleteAlien(x,y)
+	poke invMap+3+x+y*13,$F8
+	remaining = remaining - 1
+	call RepaintInvaders()
+	sfx 0,21
+	endproc	
+'
+'		Delay n cs
+'
+proc Delay(n)
+	n = time()+n
+	repeat:until time() > n
+endproc
+'
+'		Check if invaders should fire.
+'
+proc CheckInvaderFire()
+	currentCheck = currentCheck + 1:if currentCheck > invBulletCount then currentCheck = 1
+	if remaining > 0 & yBullet(currentCheck) < 0
+		local col,row,n
+		repeat:col = rand(11)+1:until colAlive(col) <> 0
+		n = colAlive(col) >> 1:row = 0
+		while n <> 0:row = row + 1:n = n >> 1:wend
+		xBullet(currentCheck) = xLeft + col * 16
+		yBullet(currentCheck) = yTop + row * 16
+		sfx 0,23
+	endif
+endproc
+'
+'		Move invader bullets
+'
+proc MoveInvaderBullets()
+	local i
+	for i = 1 to invBulletCount
+		if yBullet(i) >= 0
+			yBullet(i) = yBullet(i)+4
+			if point(xBullet(i),yBullet(i)) = 2 then call BreakShield(xBullet(i),yBullet(i)):yBullet(i) = -99
+			if yBullet(i) > 235 then yBullet(i) = -99
+			if yBullet(i) > 224 then if abs(xBullet(i)-xPlayer) < 6 then dead = true:sfx 0,19
+			sprite i image ($80+(yBullet(i) >> 2) & 3) to xBullet(i),yBullet(i)
+		endif
+	next
+endproc
+'
+'		Reset left/right column
+'
+proc ResetColumns()
+	if remaining > 0
+		leftColumn = 1:rightColumn = 11
+		while colAlive(leftColumn) = 0:leftColumn = leftColumn+1:wend
+		while colAlive(rightColumn) = 0:rightColumn = rightColumn-1:wend
+	endif
+endproc
+'
+'		Animation flip
+'
+proc AnimationFlipCode()
+Animate6502 = alloc(64)
+	for pass = 0 to 1
+		p = Animate6502:o = pass * 3
+			ldx 	#3
+		.animloop
+			lda 	invMap,x
+			bmi 	animxskip
+			cmp 	#$F0
+			bcs 	animxskip
+			eor 	#4
+			sta 	invMap,x
+		.animxskip
+			inx
+			cpx 	#3+13*5
+			bne  	animloop
+			rts
+	next
+endproc

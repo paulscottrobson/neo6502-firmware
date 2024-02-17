@@ -1,0 +1,61 @@
+' =====================================
+'		Simple Squash Game
+'		Paul Robson
+' =====================================
+
+cls:sprite clear
+gload "squash.gfx"
+'
+'		Initialise
+'
+xBat = 20:yBat = 120:sprite 1 image $C0 to xBat,yBat
+xBall = xBat+20:yBall = rand(200)+20:sprite 2 image $80 to xBall,yBall
+score = 0:call UpdateScore()
+repeat
+	xBallInc = 4:yBallInc = rand(9)-4
+until yBallInc <> 0
+'
+'		Main loop
+'
+repeat
+	if event(t1,4) then call UpdateBat()
+	if event(t2,2) then call UpdateBall()
+until xball < 10
+sprite 2 hide
+repeat:until inkey$() = ""
+end
+'
+'		Update the bat position
+'
+proc UpdateBat()
+	local x,dx,dy
+	x = joypad(dx,dy)
+	yBat = max(16,min(223,yBat+dy*8))
+	sprite 1 to xBat,yBat
+endproc
+'
+'		Update the ball position
+'
+proc UpdateBall()
+	xBall = xBall + xBallInc:yBall = yBall+yBallInc
+	if xBall > 310 then xBallInc = -xBallInc
+	if yBall < 10 | yBall > 230 then yBallInc = -yBallInc
+	sprite 2 to xBall,yBall
+	if xBall <= xBat
+		offset = yBall-yBat
+		if abs(offset) <= 16
+			xBallInc = -xBallInc
+			yBallInc = abs(offset) >> 2
+			if yBallInc = 0 then yBallInc = 1
+			if offset < 0 then yBallInc = -yBallInc
+			score = score + 10
+			call UpdateScore()
+		endif
+	endif
+endproc
+'
+'		Update the score
+'
+proc UpdateScore()
+	ink 2:print chr$(20),,"    Score : ";right$("00000"+str$(score),5)
+endproc
