@@ -226,6 +226,7 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	uint16_t toread = *size;
 	if (address != 0xFFFF) toread = std::min(toread, uint16_t(0x10000 - address));
 
+	// CONWriteString("FISReadFileHandle(%d, @0x%04x, 0x%04x) -> ", fileno, address, *size);
 	UINT read;
 	FRESULT result;
 	if (address != 0xFFFF) {
@@ -234,8 +235,9 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 		result = f_read(f, gfxObjectMemory, toread, &read);	
 	}
 	*size = read;
+	// CONWriteString("%d, 0x%04x\r", result, read);
 
-	return ((result == FR_OK) && (toread != 0)) ? 0 : 1;
+	return ((result == FR_OK) && (read != 0)) ? 0 : 1;
 }
 
 uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
@@ -245,11 +247,13 @@ uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 
 	uint16_t towrite = std::min(*size, uint16_t(0x10000 - address));
 
+	// CONWriteString("FISWriteFileHandle(%d, @0x%04x, 0x%04x) -> ", fileno, address, *size);
 	UINT written;
 	FRESULT result = f_write(f, cpuMemory+address, towrite, &written);
 	*size = written;
+	// CONWriteString("%d, 0x%04x\r", result, written);
 
-	return ((result == FR_OK) && (towrite != 0)) ? 0 : 1;
+	return ((result == FR_OK) && (written != 0)) ? 0 : 1;
 }
 
 uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
