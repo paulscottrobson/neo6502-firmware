@@ -1,5 +1,8 @@
-load "frogger.neo"
-cls:sprite clear:gload "graphics.gfx"
-for i = 0 to 3
-	sprite i image $80+i to i*40+20,100
-next
+cls
+repeat
+	f = joypad(x,y)
+	print chr$(20);f;" ";x;" ";y;"   "
+	for i = 0 to 127
+		if key(i) then print i;" down "
+	next
+until false

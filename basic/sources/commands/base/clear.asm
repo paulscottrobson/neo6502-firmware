@@ -89,6 +89,12 @@ ClearCodeSetMemoryA:
 		;		Reset turtle system
 		;
 		jsr 	TurtleResetSystem
+		;
+		;		Clearer the error handler link
+		;
+		stz		errCode
+		stz 	errCode+1
+		
 		ply
 		rts
 
