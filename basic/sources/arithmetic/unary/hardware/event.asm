@@ -46,9 +46,13 @@ EXPUnaryEvent: ;; [event(]
 		cmp 	#$FF
 		bmi 	_EUEFrozen
 
-		ldy 	#1 								; reset timer if lower 16 bits are zero
-		lda 	(zTemp0),y 						; one time in 64k this will fire wrongly.
-		ora 	(zTemp0)	 				
+		lda 	(zTemp0)	 					; reset timer if zero
+		ldy 	#1 								
+		ora 	(zTemp0),y 						
+		iny 	
+		ora 	(zTemp0),y
+		iny 	
+		ora 	(zTemp0),y
 		beq 	_EUEInitialise
 
 		ldy 	#1  							; calc timer() - value in variable
@@ -82,7 +86,7 @@ _EUECopy1:
 		dey 	
 		bpl 	_EUECopy1
 _EUETrigger:
-		clc 									; add timer rate to time() to give next fire time.
+		clc 									; add timer rate to time variable to give next fire time.
 		lda 	(zTemp0)
 		adc 	XSNumber0+1,x
 		sta 	(zTemp0)
