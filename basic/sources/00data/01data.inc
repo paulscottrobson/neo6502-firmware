@@ -124,6 +124,13 @@ clTo:
 highMemoryUpper: 							; High byte of high memory
 		.fill 	1	
 
+errNumber: 									; error number (ERR)
+		.fill 	1 
+errLineNumber: 								; error line number (ERL)
+		.fill 	2		
+errCode: 									; error line address (2 bytes) offset (1 bytes)
+		.fill 	3		
+		
 ; ************************************************************************************************
 ;	
 ;										Tokenisation / Input
