@@ -1,0 +1,4 @@
+'
+'		*** Asteroids ***
+'
+cls:sprite clear:gload "asteroids.gfx":cls

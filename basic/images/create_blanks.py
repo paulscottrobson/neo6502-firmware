@@ -35,14 +35,14 @@ def createSheet(isTile,size,rows):
 	width = 8 + (size + 8) * tileCount  										# width of image
 	height = yPaletteSpace + 8 + (size + 8) * rows
 	im = Image.new("RGB",(width,height),color = (64,64,64)) 					# create it
-	palette = ImageExtractor(im).getPalette()	 								# get the default palette.
+	palette = ImageExtractor(im,True,True).getPalette()	 						# get the default palette.
 	draw = ImageDraw.Draw(im)
 	for i in range(0,16):  														# draw the palette colours.
 		w = width // 16
 		x = w * i + (width - w*16) // 2
 		draw.rectangle([x+1,1,x+w-1,yPaletteSpace-2],fill = getPalette(palette,i),outline = (255,255,255),width = 1)
 
-	filler = (255,255,255)  													# transparency
+	filler = (0,0,0) if isTile else (255,0,255) 								# transparency
 	for col in range(0,tileCount):  											# draw the work boxes.
 		for row in range(0,rows):
 			x = col * (size+8) + 8
