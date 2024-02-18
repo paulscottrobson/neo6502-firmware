@@ -1,4 +1,5 @@
 ControlPort = $ff00
+LoadExtended = $ffe8
 ReadLine = $ffeb
 ReadCharacter = $ffee
 WriteCharacter = $fff1
