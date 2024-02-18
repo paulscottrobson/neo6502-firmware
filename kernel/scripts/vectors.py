@@ -13,6 +13,8 @@
 import sys
 
 vectors = [
+		"KWriteCharacterInline",
+		"KLoadExtended",
 		"KReadLine",
 		"KReadCharacter",
 		"KWriteCharacter",

@@ -70,7 +70,7 @@ int  RNDGetFrameCount(void) {
 // *******************************************************************************************************************************
 
 uint32_t TMRRead(void) {
-	return GFXTimer() / 10+104867;
+	return GFXTimer() / 10;
 }
 
 // *******************************************************************************************************************************
@@ -373,7 +373,7 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	if (address != 0xFFFF) {
 		result = fread(cpuMemory+address, 1,*size, f);
 	} else {
-		result = fread(gfxObjectMemory,1,GFX_MEMORY_SIZE,f);
+		result = fread(gfxObjectMemory,1,*size,f);
 	}
 	printf("%d: %s\n", (int)result, (result != *size) ? strerror(errno) : "OK");
 	*size = result;

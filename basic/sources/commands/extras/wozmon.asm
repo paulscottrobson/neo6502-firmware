@@ -14,7 +14,9 @@ WMMode = WMModeAddress + 1 					; current mode of operation
 WMCurrent = WMCurrentAddress + 1  			; current address
 WMCurrentWrite = WMCurrentWriteAddress+1 	; current store address
 
-lineBuffer = $200  							; line stored here.
+lineBuffer = inputBuffer					; line stored here.
+
+		.section code
 
 ; ***************************************************************************************
 ;
@@ -22,8 +24,8 @@ lineBuffer = $200  							; line stored here.
 ;
 ; ***************************************************************************************
 
-WozMonStart:
-	jsr 	KWriteCharacterInline			; write \
+WozMonStart: ;; [mon]
+	jsr 	WriteCharacterInline			; write \
 	.byte 	$5C
 WMNewCommand: 					
 	lda 	#13								; write CR
@@ -35,8 +37,8 @@ WMStartOfLine:
 WMNextCharacter:
 	inx
 WMNoIncrement:
-	jsr 	KWriteCharacter 				; echo it.	
-	jsr 	KReadCharacter 					; get character
+	jsr 	WriteCharacter 					; echo it.	
+	jsr 	ReadCharacter 					; get character
 	and 	#$7F 							; drop bit 7
 	cmp 	#'a'							; capitalise.
 	bcc 	WMNotUpper
@@ -59,7 +61,7 @@ WMNotUpper:
 ; ***************************************************************************************
 
 WMCommand:	
-	jsr 	KWriteCharacter 				; write CR out
+	jsr 	WriteCharacter 					; write CR out
 	ldx 	#$FF							; line pointer.
 	lda 	#$80
 WMSetMode: 									; set mode to A, next character
@@ -146,7 +148,7 @@ WMNotStore:
 	
 WMModeAddress:
 	lda 	#$FF 							; get the mode
-	bpl 	WMCheckCompare 				; if . mode then list from WMCurrent -> WMNewHex
+	bpl 	WMCheckCompare 					; if . mode then list from WMCurrent -> WMNewHex
 
 	ldy 	#2 								; copy WMNewHex -> WMCurrent & WMCurrentWrite
 WMCopyAddress:
@@ -160,17 +162,17 @@ WMCopyAddress:
 ;
 WMNextDisplay:
 	bne 	WMNoAddress
-	jsr 	KWriteCharacterInline
+	jsr 	WriteCharacterInline
 	.byte 	13
 	lda 	WMCurrent+1 					; address
 	jsr 	PrintHexByte
 	lda 	WMCurrent
 	jsr 	PrintHexByte
-	jsr 	KWriteCharacterInline
+	jsr 	WriteCharacterInline
 	.byte 	':'
 WMNoAddress:	
 	lda 	#' ' 							; print space
-	jsr 	KWriteCharacter
+	jsr 	WriteCharacter
 WMCurrentAddress:
 	lda 	@w $0000 						; print current address
 	jsr 	PrintHexByte
@@ -210,10 +212,7 @@ WMRunCode:
  	jmp 	(WMCurrent)
 
 WMRunBasic:
-	jsr 	KSendMessage  					; call "Load BASIC"
-	.byte 	1,3
-	jsr 	KWaitMessage
-	jmp 	(0)								; and start it.
+	jmp 	WarmStart
 
 ; ***************************************************************************************
 ;
@@ -237,5 +236,19 @@ PrintHexNibble:
 	adc 	#6
 nothex:
 	adc 	#48
-	jsr 	KWriteCharacter
+	jsr 	WriteCharacter
 	rts
+
+	.send code
+
+; ************************************************************************************************
+;
+;									Changes and Updates
+;
+; ************************************************************************************************
+;
+;		Date			Notes
+;		==== 			=====
+;
+; ************************************************************************************************
+
