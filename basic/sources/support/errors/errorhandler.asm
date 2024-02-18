@@ -23,7 +23,34 @@ Unimplemented:
 
 ErrorHandler:		
 		tax 								; error number in X
-		lda 	#ErrorMessageText & $FF
+		sta 	errNumber		 			; save error number
+		lda 	ERRLine 		 			; save error line number
+		sta 	errLineNumber
+		lda 	ERRLine+1
+		sta 	errLineNumber+1
+
+		lda 	errCode 					; do we have ON ERROR active		
+		ora 	errCode+1
+		beq 	_EHDisplayMessage 			; if no, display the message.
+		;
+		;		Handle ON ERROR code
+		;
+		lda 	errCode 					; set up to run that code
+		sta 	codePtr
+		lda 	errCode+1
+		sta 	codePtr+1
+		ldy 	errCode+2
+
+		stz 	errCode 					; zero code handler
+		stz 	errCode+1
+		ldx 	#$FF 						; 6502 stack reset.
+		txs
+		jmp 	RUNNewCommand 				; and go do that.
+		;
+		;		Display error message
+		;
+_EHDisplayMessage:		
+		lda 	#ErrorMessageText & $FF		
 		sta 	zTemp0
 		lda 	#ErrorMessageText >> 8
 		sta 	zTemp0+1
