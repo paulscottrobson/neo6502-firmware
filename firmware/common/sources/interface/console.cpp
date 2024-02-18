@@ -174,7 +174,7 @@ void CONDeleteLine(uint8_t y) {
 	uint8_t* tsrc = tdest + MAXCONSOLEWIDTH;
 	int tlen = (graphMode->yCSize - y - 1)*MAXCONSOLEWIDTH;
 	memmove(tdest, tsrc, tlen);
-	memset(tsrc+tlen, ' ', MAXCONSOLEWIDTH);
+	memset(tdest+tlen, ' ', MAXCONSOLEWIDTH);
 
 	/* Line extension data */
 
