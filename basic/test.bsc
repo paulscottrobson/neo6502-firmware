@@ -1,8 +1,8 @@
-on error call Handle()
-stop
-end
-'
-proc handle()
-	print "Error",err,erl
-	stop
-endproc
+cls
+repeat
+	f = joypad(x,y)
+	print chr$(20);f;" ";x;" ";y;"   "
+	for i = 0 to 127
+		if key(i) then print i;" down "
+	next
+until false
