@@ -134,3 +134,18 @@ _KRLExit:
 		.byte 	2,3
 		jsr 	KWaitMessage
 		rts				
+
+; ***************************************************************************************
+;
+;								Extended load functionality
+;
+; ***************************************************************************************
+
+KLoadExtended:
+		jsr 	KSendMessage 				; call the file loader
+		.byte 	3,2
+		lda 	DError  					; no autorun on error
+		bne 	_KLEExit
+		jsr 	DParameters+4 				; call the autorun, if defined
+_KLEExit:		
+		rts

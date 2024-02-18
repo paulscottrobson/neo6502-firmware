@@ -62,14 +62,10 @@ CLLoad:
 		lda 	XSNumber1
 		sta 	ControlParameters+1
 
-		DoSendMessage 						; do the load
-		.byte 	3,2
-		DoWaitMessage
+		jsr 	LoadExtended 				; call the extended load code
 		lda 	ControlError  				; error check
-		beq 	_CLPostLoad
+		beq 	_CLExit
 		.error_file
-_CLPostLoad:
-		jsr 	ControlParameters+4 		; call the post-load execution code.
 _CLExit:
 		rts
 

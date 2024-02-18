@@ -2,7 +2,7 @@
 # *******************************************************************************************
 #
 #		Name : 		makeexec.py
-#		Purpose :	Build (or list) an executable
+#		Purpose :	Library for building (or listing) an executable
 #		Date :		17th February 2024
 #		Author : 	Paul Robson (paul@robsons.org.uk)
 #
@@ -54,11 +54,26 @@ class Executable(object):
 		self.code += data  															# actual data
 		return self
 	#
+	#		Add a BASIC program
+	#	
+	def addBasic(self,fileName):
+		self.addFile(fileName,Executable.LOAD_TO_PAGE)
+	#
+	#		Add a Graphics object file:
+	#
+	def addGraphicsObjectFile(self,fileName):
+		self.addFile(fileName,Executable.GRAPHIC_OBJECT_MEMORY)
+	#
 	#		Set exec point
 	#
 	def execFrom(self,addr):
 		self.code[6] = addr & 0xFF
 		self.code[7] = addr >> 8
+	#
+	#		Run as Basic program
+	#
+	def execBasic(self):
+		self.execFrom(0x806)
 	#
 	# 		Write file
 	#
@@ -102,9 +117,10 @@ class Executable(object):
 Executable.GRAPHIC_OBJECT_MEMORY = 0xFFFF
 Executable.LOAD_TO_PAGE = 0xFFFD
 
-e = Executable().new()
-e.addFile("storage/frogger.gfx",Executable.GRAPHIC_OBJECT_MEMORY)
-e.addFile("storage/frogger.bas",Executable.LOAD_TO_PAGE)
-e.execFrom(0x806)
-e.writeFile("storage/frogger.neo")
-e.dumpFile("storage/frogger.neo")
+if __name__ == "__main__":
+	e = Executable()
+	e.addGraphicsObjectFile("storage/frogger.gfx")
+	e.addBasic("storage/frogger.bas")
+	e.execBasic()
+	e.writeFile("storage/frogger.neo")
+	e.dumpFile("storage/frogger.neo")

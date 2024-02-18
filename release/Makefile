@@ -35,7 +35,7 @@ BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf \
 #
 #		Python applications included.
 #
-PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip \
+PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR) exec.zip  \
 			 $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip \
 			 $(BINDIR)nxmit.zip
 
