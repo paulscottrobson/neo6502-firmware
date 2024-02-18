@@ -16,11 +16,7 @@ General
 
 Larger Additions
 ----------------
-		
-	- Change the keyboard defaults, and document that.
-
-	- Remove the spare code in tilemap and check it works.
-	
+			
 	- Serial uploading
 		- save to storage option. 
 
