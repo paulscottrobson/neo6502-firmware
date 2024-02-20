@@ -126,7 +126,7 @@ class TokenSet(object):
 			HIDE 	FLIP 	SOUND 	SFX 	ANCHOR	GLOAD	DEFCHR  LEFT
 			RIGHT 	FORWARD	TURTLE 	SWEET 	TILEMAP PENUP   PENDOWN FAST
 			HOME 	LOCALE 	CURSOR 	RENUMBER DELETE EDITOR  MON     OLD
-			ON 		ERROR 	PIN 	PULSE 	INVERT
+			ON 		ERROR
 			""")
 		#
 		#		Keyword tokens (assembler)
@@ -147,7 +147,7 @@ class TokenSet(object):
 		self.add(0x2E0,"""
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
 			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM 	VBLANKS(
-			ERR 	ERL 	PIN(
+			ERR 	ERL
 		""")
 		
 if __name__ == "__main__":
