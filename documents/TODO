@@ -14,10 +14,6 @@ General
 
 	- Current clock 6.25 Mhz, this may be reduced if some boards can't cope.
 
-Current
--------
-	- Physical version.
-		
 Other
 -----
 	- Start the code review.
