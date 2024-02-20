@@ -454,3 +454,20 @@ uint8_t SERReadByte(void) {
 	return 0;
 }
 
+// ***************************************************************************************
+//
+//								Dummy GPIO functions
+//
+// ***************************************************************************************
+
+int UEXTSetGPIO(int pinID,bool isOn) {
+	printf("Attempting to set Pin %d to %d\n",pinID,isOn ? 1 : 0);
+	return pinID < 1 || pinID > 10;
+}
+
+int UEXTGetGPIO(int pinID,bool *pIsHigh) {
+	printf("Attempting to read pin %d, value is (not) %d\n",pinID,pinID & 1);
+	if (pinID < 1 || pinID > 10) return 1;
+	*pIsHigh = (pinID & 1) != 0;
+	return 0;
+}

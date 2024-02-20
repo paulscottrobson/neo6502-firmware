@@ -41,6 +41,7 @@ void TIMECRITICAL(DSPHandler)(uint8_t *cBlock, uint8_t *memory)
 {
 	float f1,f2;
 	int i1,i2,r;
+	bool b1;
 	uint32_t u1;
 	*DERROR = 0;                                                                // Clear error state.
 	#include "data/dispatch_code.h"  

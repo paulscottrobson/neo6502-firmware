@@ -1,8 +1,8 @@
 cls
+n = 0
 repeat
-	f = joypad(x,y)
-	print chr$(20);f;" ";x;" ";y;"   "
-	for i = 0 to 127
-		if key(i) then print i;" down "
-	next
+	pin 7,n
+	n = 1-n
+	t1 = time():repeat:until time() > t1 + 30
+	print n;" ";
 until false
