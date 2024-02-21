@@ -27,7 +27,7 @@ SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp $(FRASRC)bee
   			$(IMPSRC)maths.cpp  $(IMPSRC)config.cpp $(IMPSRC)gfxcommands.cpp $(IMPSRC)efla.cpp $(IMPSRC)ellipse.cpp \
   			$(IMPSRC)fileinterface.cpp $(IMPSRC)sprites.cpp $(IMPSRC)logo.cpp $(IMPSRC)sprites_xor.cpp \
   			$(IMPSRC)sndmanager.cpp $(IMPSRC)sfxmanager.cpp $(IMPSRC)tick.cpp $(IMPSRC)tilemap.cpp \
-  			$(IMPSRC)serialmanager.cpp $(IMPSRC)turtle.cpp $(IMPSRC)locale.cpp $(IMPSRC)pininterface.cpp
+  			$(IMPSRC)serialmanager.cpp $(IMPSRC)turtle.cpp $(IMPSRC)locale.cpp
   			
 INCLUDES= -I ../include -I ../framework -I .. -I $(COMDIR)include
 
