@@ -25,7 +25,7 @@ SOURCES = 	src$(S)core$(S)sys_processor.o  framework$(S)main.o framework$(S)gfx.
   			$(IMPSRC)maths.o  $(IMPSRC)config.o $(IMPSRC)gfxcommands.o $(IMPSRC)efla.o $(IMPSRC)ellipse.o \
   			$(IMPSRC)fileinterface.o $(IMPSRC)sprites.o $(IMPSRC)logo.o $(IMPSRC)sprites_xor.o \
   			$(IMPSRC)sndmanager.o $(IMPSRC)sfxmanager.o $(IMPSRC)tick.o $(IMPSRC)tilemap.o \
-  			$(IMPSRC)serialmanager.o $(IMPSRC)turtle.o $(IMPSRC)locale.o
+  			$(IMPSRC)serialmanager.o $(IMPSRC)turtle.o $(IMPSRC)locale.o $(IMPSRC)pininterface.o
 
 CC = g++
 

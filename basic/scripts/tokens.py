@@ -126,7 +126,11 @@ class TokenSet(object):
 			HIDE 	FLIP 	SOUND 	SFX 	ANCHOR	GLOAD	DEFCHR  LEFT
 			RIGHT 	FORWARD	TURTLE 	SWEET 	TILEMAP PENUP   PENDOWN FAST
 			HOME 	LOCALE 	CURSOR 	RENUMBER DELETE EDITOR  MON     OLD
+<<<<<<< HEAD
+			ON 		ERROR 	PIN 	OUTPUT
+=======
 			ON 		ERROR
+>>>>>>> main
 			""")
 		#
 		#		Keyword tokens (assembler)

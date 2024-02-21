@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+pin 4,output
+pin 5,output
+pin 6,input
+pin 5,true:pin 4,1
+for i = 3 to 10
+	print i,pin(i)
+next
+=======
 cls
 repeat
 	f = joypad(x,y)
@@ -6,3 +15,4 @@ repeat
 		if key(i) then print i;" down "
 	next
 until false
+>>>>>>> main

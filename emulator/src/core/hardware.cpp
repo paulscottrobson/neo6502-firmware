@@ -454,3 +454,34 @@ uint8_t SERReadByte(void) {
 	return 0;
 }
 
+<<<<<<< HEAD
+// ***************************************************************************************
+//
+//								Dummy GPIO functions
+//
+// ***************************************************************************************
+
+int UEXTSetGPIODirection(int gpio,int pinType) {
+	printf("Pin %d set direction to %d\n",gpio,pinType);
+	return 0;
+}
+
+int UEXTSetGPIO(int gpio,bool isOn) {
+	printf("Set Pin %d to %d\n",gpio,isOn ? 1 : 0);
+	return 0;
+}
+
+int UEXTGetGPIO(int gpio,bool *pIsHigh) {
+	printf("Read pin %d, value is (not) %d\n",gpio,gpio & 1);
+	*pIsHigh = (gpio & 1) != 0;
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//		Date 		Revision
+//		==== 		========
+//
+// ***************************************************************************************
+=======
+>>>>>>> main

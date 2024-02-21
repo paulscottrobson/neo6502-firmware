@@ -83,6 +83,7 @@ void DSPReset(void) {
 	STOSynchronise();                                                           // Synchronise storage
 	CONWrite(0x80+2);
 	CFGProcess();                                                               // Process configuration file.
+	IOInitialise(); 															// Set up UEXT
 }
 
 // ***************************************************************************************
