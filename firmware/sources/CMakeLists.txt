@@ -27,7 +27,7 @@ target_sources(firmware PRIVATE main.cpp
     #       Hardware sources
     #
     hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp  
-    hardware/fileimplementation.cpp hardware/tick.cpp hardware/serial.cpp hardware/ports.cpp
+    hardware/fileimplementation.cpp hardware/tick.cpp hardware/serial.cpp
     #
     #       CPU type (pretty much permanently PIO now)
     #
