@@ -57,6 +57,7 @@
 #include "interface/serial.h"
 #include "interface/turtle.h"
 #include "interface/locale.h"
+#include "interface/ports.h"
 
 #endif
 
