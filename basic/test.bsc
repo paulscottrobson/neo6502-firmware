@@ -1,8 +1,7 @@
-cls
-n = 0
-repeat
-	pin 7,n
-	n = 1-n
-	t1 = time():repeat:until time() > t1 + 30
-	print n;" ";
-until false
+pin 4,output
+pin 5,output
+pin 6,input
+pin 5,true:pin 4,1
+for i = 3 to 10
+	print i,pin(i)
+next
