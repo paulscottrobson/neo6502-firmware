@@ -49,6 +49,10 @@ void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y);
 void GFXEllipse(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int useSolidFill);
 int GFXFindImage(int type,int id);
 uint8_t GFXGetDrawSize(void);
+void GFXSetDrawColour(uint8_t colour);
+void GFXSetSolidFlag(uint8_t isSolid);
+void GFXSetDrawSize(uint8_t size);
+void GFXSetFlipBits(uint8_t flip);
 
 #endif
 

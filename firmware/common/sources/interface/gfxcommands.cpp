@@ -53,6 +53,28 @@ void GFXSetDefaults(uint8_t *cmd) {
 
 // ***************************************************************************************
 //
+// 								  Set Defaults specifically
+//
+// ***************************************************************************************
+
+void GFXSetDrawColour(uint8_t colour) {
+	pixelAnd = 0;pixelXor = colour;
+}
+
+void GFXSetSolidFlag(uint8_t isSolid) {
+	useSolidFill = (isSolid != 0) ? 0xFF : 0x00;
+}
+
+void GFXSetDrawSize(uint8_t size) {
+	drawSize = size;
+}
+
+void GFXSetFlipBits(uint8_t flip) {
+	flipBits = flip;
+}
+
+// ***************************************************************************************
+//
 //									Accessor for draw size
 //
 // ***************************************************************************************
