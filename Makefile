@@ -39,14 +39,16 @@ all:
 # ***************************************************************************************
 
 windows:
-		$(MAKE) -B -C kernel clean
-		$(MAKE) -B -C basic clean
+		$(CMAKEDIR) bin
+		$(MAKE) -B -C kernel
+		$(MAKE) -B -C basic release
 		$(MAKE) -B -C emulator clean
 		$(MAKE) -B -C emulator ewindows
 
 linux:
-		$(MAKE) -B -C kernel clean
-		$(MAKE) -B -C basic clean
+		$(CMAKEDIR) bin
+		$(MAKE) -B -C kernel
+		$(MAKE) -B -C basic release
 		$(MAKE) -B -C emulator clean
 		$(MAKE) -B -C emulator elinux
 
