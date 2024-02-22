@@ -50,7 +50,10 @@ static void _LOGDraw(const uint8_t *data,uint8_t colour,int yPos) {
 }
 
 void LOGDrawLogo(void) {
-	_LOGDraw(graphic_logo,3,32);
+	gMode.setPalette(5,255,0,255);
+	gMode.setPalette(6,0,255,255);
+	gMode.setPalette(1,255,0,0);
+	_LOGDraw(graphic_logo,5,32);
 	_LOGDraw(graphic_text,6,100);
 	_LOGDraw(graphic_olimex,1,140);
 }
