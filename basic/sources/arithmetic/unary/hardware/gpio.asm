@@ -29,8 +29,11 @@ UnaryPin: ;; [pin(]
 		.DoWaitMessage
 		lda 	ControlError
 		bne 	_UPRange
-		lda 	ControlParameters
-		jmp 	ReturnBoolean
+		lda 	ControlParameters  			; return 0 / 1
+		beq 	_UPZero
+		lda 	#1
+_UPZero:		
+		jmp 	EXPUnaryReturnA
 _UPRange:
 		.error_range
 
@@ -44,5 +47,6 @@ _UPRange:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		22-02-24 		PIN() returns 0 or 1.
 ;
 ; ************************************************************************************************
