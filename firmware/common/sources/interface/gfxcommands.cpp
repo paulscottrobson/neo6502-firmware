@@ -250,7 +250,7 @@ void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int fl
 		for (int yc = 0;yc < size;yc++) {
 			int pixel = gfxObjectMemory[address+xc/2+(yc * size / 2)];   		// Access the pixel pair.
 			pixel = (xc & 1) ? pixel & 0x0F : pixel >> 4;						// Extract the half pixel to draw.
-			if (pixel != 0 || type == 0 || solidFill) {  						// If non-zero, or tile, or solid then draw it.
+			if (pixel != 0 || solidFill) {  									// If not transparent or solid then draw it.
 				pixelXor = pixel;
 				pixelAnd = 0;
 				int x1 = x + (xc ^ xFlip) * scale;
