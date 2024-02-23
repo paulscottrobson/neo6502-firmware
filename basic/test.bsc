@@ -1,5 +1,8 @@
-cls:gload "graphics.gfx"
-rect 0,0 ink 1 solid to 319,239
-for i = 0 to 5
-	image i dim 1 frame to i*24+16,10
-next	
+pin 4,output
+t1 = time()
+for i = 1 to 1000
+	pin 4,0:pin 4,1
+next
+t = (time()-t1)/1000/100
+print t
+print 1/t
