@@ -1,2 +1,8 @@
 ' test program goes here
+a$ = "Hello "+chr$(0)+chr$(142)+"world"
+print a$
+for i = 1 to len(a$)
+	print i,asc(mid$(a$,i,1))
+next	
+
 
