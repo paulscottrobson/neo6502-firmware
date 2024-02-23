@@ -1,9 +1,9 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		cat.asm
-;		Purpose:	Display directory
-;		Created:	18th December 2023
+;		Name:		wait.asm
+;		Purpose:	Wait for n centiseconds
+;		Created:	23rd February 2024
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -12,33 +12,37 @@
 
 ; ************************************************************************************************
 ;
-;										CAT Command
+;										WAIT Command
 ;
 ; ************************************************************************************************
 
 		.section code
 
-Command_CAT:	;; [cat]
+Command_Wait:	;; [wait]
 		ldx 	#0
-		lda 	(codePtr),y
-		cmp 	#KWD_SYS_END
-		beq 	_CATDefault
-		cmp 	#KWD_COLON
-		beq 	_CATDefault
+		jsr 	EXPEvalInteger16 			; count of centiseconds (max 653 seconds)
+		jsr 	_CWGetTimer 				; read timer
 		;
-		jsr 	EXPEvalString
-		lda 	zTemp0
-		sta 	ControlParameters
-		lda 	zTemp0+1
-		sta 	ControlParameters+1
-		DoSendMessage
-		.byte 	3,32
+		clc
+		lda 	XSNumber0 					; work out end time.
+		adc 	ControlParameters+0
+		sta 	zTemp0
+		lda 	XSNumber1
+		adc 	ControlParameters+1
+		sta 	zTemp0+1
+_CWLoop:
+		jsr 	_CWGetTimer 				; read timer
+		lda 	ControlParameters+0 		; if < keep trying
+		cmp 	zTemp0
+		lda 	ControlParameters+1
+		sbc 	zTemp0+1
+		bmi 	_CWLoop
 		rts
 
-
-_CATDefault:		
-		DoSendMessage
-		.byte 	3,1
+_CWGetTimer:
+		.DoSendMessage 						; get time to CP[0],CP[1]
+		.byte 	1,1
+		.DoWaitMessage
 		rts
 
 
@@ -52,8 +56,6 @@ _CATDefault:
 ;
 ;		Date			Notes
 ;		==== 			=====
-;		10-02-24 		Modifications to support wildcard
-;		23-02-24 		X not initialised.
 ;
 ; ************************************************************************************************
 
