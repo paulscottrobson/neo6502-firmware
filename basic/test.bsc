@@ -1,4 +1,0 @@
-repeat
-	print "*";
-	wait 100
-until 0
