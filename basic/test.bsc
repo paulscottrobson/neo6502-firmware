@@ -1,4 +1,5 @@
 cls
+iwrite $51,4,$11
 repeat
  	call GetBCD(4,$3F)
  	a$ = n$
