@@ -28,6 +28,8 @@
 #include "pico/stdlib.h"
 #include "pico/stdio.h"
 #include "hardware/gpio.h"
+#include "pico/binary_info.h"
+#include "hardware/i2c.h"
 #endif
 //
 //		PC specific includes

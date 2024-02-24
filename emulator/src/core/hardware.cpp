@@ -476,6 +476,41 @@ int UEXTGetGPIO(int gpio,bool *pIsHigh) {
 	return 0;
 }
 
+
+// ***************************************************************************************
+//
+//                                     Dummy I2C functions
+//
+// ***************************************************************************************
+
+int UEXTI2CInitialise(void) {
+	printf("I2C Initialise\n");
+    return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Write byte to I2C device register 
+//
+// ***************************************************************************************
+
+int UEXTI2CWrite(uint8_t device,uint8_t reg,uint8_t data) {
+	printf("I2C Write to $%02x:$%02x %3d $%02x\n",device,reg,data,data);
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Read byte from I2C device register 
+//
+// ***************************************************************************************
+
+int UEXTI2CRead(uint8_t device,uint8_t reg,uint8_t *pData) {
+	*pData = (device + reg) & 0xFF;
+	printf("I2C Read from $%02x:$%02x %3d $%02x\n",device,reg,*pData,*pData);
+    return 0;
+}
+
 // ***************************************************************************************
 //
 //		Date 		Revision

@@ -30,6 +30,7 @@ static int GPIOMapping[11] = {
 static bool IOPINOutputLatch[IOPIN_MAX+1]; 											// State of output latch
 static int  IOPINPinDirection[IOPIN_MAX+1]; 										// What the pin direction is set to.
 static bool IOPINDisabled[IOPIN_MAX+1];  											// Pin usage disabled
+static bool IOI2CInitialised = false; 												// True if I2C initialised.
 
 // ***************************************************************************************
 //
@@ -59,6 +60,7 @@ void IOInitialise(void) {
 			UEXTSetGPIODirection(GPIOMapping[i],UEXT_INPUT); 						// Set port to input. 
 		}
 	}
+	IOI2CInitialised = false;
 }
 
 // ***************************************************************************************
@@ -95,6 +97,7 @@ int IOWrite(int pinID,bool isHigh) {
 
 // ***************************************************************************************
 //
+//											Read GPIO pin
 //
 // ***************************************************************************************
 
@@ -108,6 +111,25 @@ int IORead(int pinID,bool *pIsHigh) {
 		}
 	}
 	return (gpio > 0) ? 0 : 1;  													// 0 if okay,1 if bad
+}
+
+
+static void IOI2CInitialise(void) {
+	if (!IOI2CInitialised) {  														// If not initialised
+		IOI2CInitialised = true;  													// Mark initialised
+		UEXTI2CInitialise();  														// Set it up
+		IOPINDisabled[3] = IOPINDisabled[4] = true; 								// Disable SCL/SDA from GPIO usage.
+	}
+}
+
+int IOI2CWrite(uint8_t device,uint8_t reg,uint8_t data) {
+	IOI2CInitialise();
+	return UEXTI2CWrite(device,reg,data);
+}
+
+int IOI2CRead(uint8_t device,uint8_t reg,uint8_t *pData) {
+	IOI2CInitialise();
+	return UEXTI2CRead(device,reg,pData);
 }
 
 // ***************************************************************************************
