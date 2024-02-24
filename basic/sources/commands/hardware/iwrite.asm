@@ -1,8 +1,8 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		iread.asm
-;		Purpose:	Read I2C Device
+;		Name:		iwrite.asm
+;		Purpose:	Write to i2C device
 ;		Created:	24th February 2024
 ;		Reviewed: 	No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
@@ -14,33 +14,38 @@
 
 ; ************************************************************************************************
 ;
-; 										IREAD() function
+;									IWRITE <dev>,<addr>,<data>
 ;
 ; ************************************************************************************************
 
-UnaryIRead: ;; [iread(]	
-		jsr 	EXPEvalInteger8				; get device to read
-		pha
+IWriteCommand: ;; [iwrite]
+		ldx 	#0
+		jsr 	EXPEvalInteger16			; device address
 		jsr 	ERRCheckComma
-		jsr 	EXPEvalInteger8 			; get register to read
-		pha
-		jsr 	ERRCheckRParen 				
+		inx
+		jsr 	EXPEvalInteger8				; register address
+		jsr 	ERRCheckComma
 
-		pla 								; set up for read
+		ldx 	#2 							; register data
+		jsr 	EXPEvalInteger8
+
+		lda 	XSNumber0 					; send data out.
+		sta 	ControlParameters+0
+		lda 	XSNumber0+1
 		sta 	ControlParameters+1
-		pla 	
-		sta 	ControlParameters
+		lda 	XSNumber0+2
+		sta 	ControlParameters+2
 
-		.DoSendMessage 						; read it.
-		.byte 	10,6
+		.DoSendMessage 					
+		.byte 	10,5
 		.DoWaitMessage
-		lda 	ControlError
-		bne 	_URError
-		lda 	ControlParameters  			; return 0 / 1
-		jmp 	EXPUnaryReturnA
 
-_URError
-		.error_hardware
+		lda 	ControlError
+		bne 	_IWFail
+		rts
+
+_IWFail:
+		.error_hardware		
 
 		.send code
 
@@ -52,6 +57,5 @@ _URError
 ;
 ;		Date			Notes
 ;		==== 			=====
-;		22-02-24 		PIN() returns 0 or 1.
 ;
 ; ************************************************************************************************

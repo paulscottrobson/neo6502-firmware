@@ -39,7 +39,7 @@ BColdStart:
 		.endif
 		
 		.if 	BASICBUILD==1
-		jsr 	Command_RUN
+		jsr 	Command_RUN_Always
 		.endif		
 
 		.if 	BASICBUILD==2
