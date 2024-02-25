@@ -1,3 +1,10 @@
-stop
-poke $FF01,7
-poke $FF00,1
+a$ = "xxx":b = 42
+call demo(a$,b)
+print a$,b
+end
+'
+proc demo(ref a$,ref b)
+	a$ = "Hello":b = 99
+endproc
+
+
