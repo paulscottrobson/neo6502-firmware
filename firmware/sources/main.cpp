@@ -13,6 +13,25 @@
 #include "common.h"
 #include "system/processor.h"
 #include "system/tick.h"
+#include "hardware/watchdog.h"
+
+// ***************************************************************************************
+//
+//                                  Reset the RP2040
+//
+// ***************************************************************************************
+
+void ResetSystem(void) {
+    CONWriteString("Resetting.\n");
+    watchdog_enable(1,1);                                                       // Enable the watchdog timer
+    while (true) {}                                                             // Ignore it.
+}
+
+// ***************************************************************************************
+//
+//                                  Main program
+//
+// ***************************************************************************************
 
 int main() {
     DSPReset();                                                                 // Initialises everything.
