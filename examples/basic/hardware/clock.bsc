@@ -1,5 +1,5 @@
 '
-'	Display the clock time. Requires Olimex 
+'	Display the clock time. Requires Olimex MOD-RTC (PCF8563 version)
 '
 repeat
 	cls
