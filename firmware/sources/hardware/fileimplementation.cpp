@@ -62,13 +62,16 @@ uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilena
 	std::unique_ptr<uint8_t[]> buffer(new (std::nothrow) uint8_t[COPY_BUFFER_SIZE]);
 	if (!oldFile || !newFile || !buffer) {
 		// Out of memory.
+		// CONWriteString("Out of memory\r");
 		return 1;
 	}
 
 	FRESULT result = f_open(&*oldFile, oldFilename.c_str(), FA_READ);
+	// CONWriteString("Opened '%s' for read -> %d\r", oldFilename.c_str(), result);
 	if (result == FR_OK)
 	{
-		result = f_open(&*newFile, newFilename.c_str(), FA_WRITE);
+		result = f_open(&*newFile, newFilename.c_str(), FA_WRITE|FA_CREATE_ALWAYS);
+		// CONWriteString("Opened '%s' for write -> %d\r", newFilename.c_str(), result);
 		if (result == FR_OK)
 		{
 			for (;;) {
