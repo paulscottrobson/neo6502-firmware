@@ -185,6 +185,16 @@ uint8_t FIORenameFile(const std::string& oldFilename, const std::string& newFile
 
 // ***************************************************************************************
 //
+//									 Copy file 
+//
+// ***************************************************************************************
+
+uint8_t FIOCopyFile(const std::string& oldFilename, const std::string& newFilename) {
+	return FISCopyFile(oldFilename, newFilename);
+}
+
+// ***************************************************************************************
+//
 //									Delete File
 //
 // ***************************************************************************************
