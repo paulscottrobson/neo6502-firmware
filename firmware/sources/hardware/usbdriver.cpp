@@ -15,6 +15,12 @@
 #include "tusb.h"
 #include "interface/kbdcodes.h"
 
+#include "GamepadController.h"
+
+#include <cstdint>
+
+extern uint8_t gamepadState;
+
 // ***************************************************************************************
 //
 //                          Process USB HID Keyboard Report
@@ -59,18 +65,25 @@ static void usbProcessReport(uint8_t const *report) {
 //
 // ***************************************************************************************
 
+GamepadController gamepad_controller;
+
 void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* desc_report, uint16_t desc_len) {
- 
+	uint16_t vid, pid;
+	tuh_vid_pid_get(dev_addr, &vid, &pid);
+
 	switch(tuh_hid_interface_protocol(dev_addr, instance)) {
 
 		case HID_ITF_PROTOCOL_KEYBOARD:
-			tuh_hid_receive_report(dev_addr, instance);
 		break;
 
 		case HID_ITF_PROTOCOL_MOUSE:
-			tuh_hid_receive_report(dev_addr, instance);
+		break;
+
+		case HID_ITF_PROTOCOL_NONE:
+			gamepad_controller.add(vid, pid, dev_addr, instance, desc_report, desc_len);
 		break;
 	}
+	tuh_hid_receive_report(dev_addr, instance);
 }
 
 void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance) {
@@ -79,17 +92,19 @@ void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance) {
 void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* report, uint16_t len) {
 
   switch(tuh_hid_interface_protocol(dev_addr, instance)) {
-	case HID_ITF_PROTOCOL_KEYBOARD:  
-	  tuh_hid_receive_report(dev_addr, instance);
+	case HID_ITF_PROTOCOL_KEYBOARD:
 	  usbProcessReport(report);
-	  tuh_hid_receive_report(dev_addr, instance);     
 	break;
 	
 	case HID_ITF_PROTOCOL_MOUSE:
-	  tuh_hid_receive_report(dev_addr, instance);
-	  tuh_hid_receive_report(dev_addr, instance);
+	break;
+
+	case HID_ITF_PROTOCOL_NONE:
+		gamepad_controller.update(dev_addr, instance, report, len);
+		gamepadState = gamepad_controller.getState();
 	break;
   }
+	tuh_hid_receive_report(dev_addr, instance);
 }
 
 // ***************************************************************************************

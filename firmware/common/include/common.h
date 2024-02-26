@@ -64,6 +64,7 @@
 #include "interface/locale.h"
 #include "interface/ports.h"
 #include "interface/blitter.h"
+#include "interface/gamepad.h"
 
 #endif
 
