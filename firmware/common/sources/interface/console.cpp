@@ -293,7 +293,7 @@ static void CONDeleteCharacter(void) {
 		CONCopy(xNext,yNext,x,y);
 		x = xNext;y = yNext;
 	}
-	CONDrawCharacter(x,y,' ',7,0);	
+	CONDrawCharacter(x,y,' ',graphMode->foreCol,graphMode->backCol);	
 }
 
 // ***************************************************************************************
@@ -312,7 +312,7 @@ static void CONInsertCharacter(void) {
 		CONCopy(xPrev,yPrev,x,y);  											// Copy previous forward.
 		x = xPrev;y = yPrev;
 	}
-	CONDrawCharacter(x,y,' ',7,0);	
+	CONDrawCharacter(x,y,' ',graphMode->foreCol,graphMode->backCol);	
 }
 
 // ***************************************************************************************
@@ -479,5 +479,6 @@ void CONWriteString(const char *s, ...) {
 //		30-01-24 	Fixed clear screen to clear text area only, not sprites too.
 //		31-01-24 	Added functionality to set cursor position.
 //		07-02-24	Added Insert and Delete functionality
+//		26-02-24 	Fixed black background character on insert.
 //
 // ***************************************************************************************
