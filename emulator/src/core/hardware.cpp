@@ -155,7 +155,7 @@ uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFile
 	else
 		printf("OK\n");
 
-	return !ec ? 1 : 0;
+	return !ec ? 0 : 1;
 }
 
 // ***************************************************************************************
@@ -176,7 +176,7 @@ uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilena
 	else
 		printf("OK\n");
 
-	return !ec ? 1 : 0;
+	return !ec ? 0 : 1;
 }
 
 // ***************************************************************************************
