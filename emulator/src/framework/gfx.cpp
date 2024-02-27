@@ -95,6 +95,9 @@ static void _GFXMainLoop(void *arg) {
 			_GFXUpdateKeyRecord(event.key.keysym.sym,event.type == SDL_KEYDOWN);
 			HWQueueKeyboardEvent(event.key.keysym.scancode,event.type == SDL_KEYDOWN);
 		}
+		if (event.type == SDL_QUIT) {  												// GUI hardware.
+			isRunning = 0;
+		}
 	}
 	SDL_FillRect(mainSurface, NULL, 												// Draw the background.
 						SDL_MapRGB(mainSurface->format, RED(background),GREEN(background),BLUE(background)));
