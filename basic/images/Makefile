@@ -25,5 +25,10 @@ builder: always
 	zip -j $(BINDIR)makeimg.zip build$(S)__main__.py build$(S)gconvert.py
 	$(CDEL) build$(S)*.py
 
+checklib:
+	$(PYTHON) ..$(S)scripts$(S)gfxtext.py
+	cmp _test.gfx graphics.gfx
+	$(CDEL) _test.gfx
+	
 always:
 
