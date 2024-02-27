@@ -155,7 +155,28 @@ uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFile
 	else
 		printf("OK\n");
 
-	return !ec ? 1 : 0;
+	return !ec ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//									 Copy file 
+//
+// ***************************************************************************************
+
+uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilename) {
+	std::string oldAbspath = getAbspath(oldFilename);
+	std::string newAbspath = getAbspath(newFilename);
+	printf("FISCopyFile('%s', '%s') -> ", oldAbspath.c_str(), newAbspath.c_str());
+	std::error_code ec;
+	std::filesystem::copy(oldAbspath, newAbspath,
+		std::filesystem::copy_options::overwrite_existing, ec);
+	if (ec)
+		printf("%s\n", ec.message().c_str());
+	else
+		printf("OK\n");
+
+	return !ec ? 0 : 1;
 }
 
 // ***************************************************************************************
