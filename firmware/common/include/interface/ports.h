@@ -21,16 +21,16 @@ int IOSetDirection(int pinID,int pinType);
 int IOWrite(int pinID,bool isHigh);
 int IORead(int pinID,bool *pIsHigh);
 
-int IOI2CWrite(uint8_t device,uint8_t reg,uint8_t data);
-int IOI2CRead(uint8_t device,uint8_t reg,uint8_t *pData);
+int IOI2CWriteRegister(uint8_t device,uint8_t reg,uint8_t data);
+int IOI2CReadRegister(uint8_t device,uint8_t reg,uint8_t *pData);
 
 int UEXTSetGPIODirection(int gpio,int pinType);
 int UEXTSetGPIO(int gpio,bool isOn);
 int UEXTGetGPIO(int gpio,bool *pIsHigh);
 
 int UEXTI2CInitialise(void);
-int UEXTI2CWrite(uint8_t device,uint8_t reg,uint8_t data);
-int UEXTI2CRead(uint8_t device,uint8_t reg,uint8_t *pData);
+int UEXTI2CReadBlock(uint8_t device, uint8_t *data,size_t size);
+int UEXTI2CWriteBlock(uint8_t device, uint8_t *data,size_t size);
 
 #endif
 

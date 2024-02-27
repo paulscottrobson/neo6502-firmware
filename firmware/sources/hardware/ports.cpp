@@ -69,28 +69,24 @@ int UEXTI2CInitialise(void) {
 
 // ***************************************************************************************
 //
-//                          Write byte to I2C device register 
+//                              Write bytes to I2C device
 //
 // ***************************************************************************************
 
-int UEXTI2CWrite(uint8_t device,uint8_t reg,uint8_t data) {
-    uint8_t packet[2];
-    packet[0] = reg;
-    packet[1] = data;
-    int nWritten = i2c_write_blocking(I2C_DEVICE, device,packet, 2, false);
-    return (nWritten == 2) ? 0 : 1;
+int UEXTI2CWriteBlock(uint8_t device, uint8_t *data,size_t size) {
+    size_t nWritten = i2c_write_blocking(I2C_DEVICE, device,data, size, false);
+    return (nWritten == size) ? 0 : 1;    
 }
 
 // ***************************************************************************************
 //
-//                          Read byte from I2C device register 
+//                              Read bytes from I2C device
 //
 // ***************************************************************************************
 
-int UEXTI2CRead(uint8_t device,uint8_t reg,uint8_t *pData) {
-    i2c_write_blocking(I2C_DEVICE, device, &reg, 1, true);
-    int nRead = i2c_read_blocking(I2C_DEVICE, device, pData, 1, false);
-    return (nRead == 1) ? 0 : 1;
+int UEXTI2CReadBlock(uint8_t device, uint8_t *data,size_t size) {
+    size_t nRead = i2c_read_blocking(I2C_DEVICE, device,data, size, false);
+    return (nRead == size) ? 0 : 1;    
 }
 
 // ***************************************************************************************
