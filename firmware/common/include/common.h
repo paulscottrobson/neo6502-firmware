@@ -30,6 +30,8 @@
 #include "hardware/gpio.h"
 #include "pico/binary_info.h"
 #include "hardware/i2c.h"
+#include "hardware/adc.h"
+#include "hardware/spi.h"
 #endif
 //
 //		PC specific includes
