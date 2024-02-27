@@ -1,9 +1,9 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		gpio.asm
-;		Purpose:	Read GPIO Pins
-;		Created:	20th February 2024
+;		Name:		analog.asm
+;		Purpose:	Read Analog device
+;		Created:	24th February 2024
 ;		Reviewed: 	No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -14,28 +14,31 @@
 
 ; ************************************************************************************************
 ;
-; 										PIN() function
+; 										IREAD() function
 ;
 ; ************************************************************************************************
 
-UnaryPin: ;; [pin(]	
+UnaryAnalog: ;; [analog(]	
 		jsr 	EXPEvalInteger8				; get pin to check
 		pha
 		jsr 	ERRCheckRParen 				
 		pla
 		sta 	ControlParameters
 		.DoSendMessage 						; read it.
-		.byte 	10,3
+		.byte 	10,7
 		.DoWaitMessage
 		lda 	ControlError
 		bne 	_UPRange
-		lda 	ControlParameters  			; return 0 / 1
-		beq 	_UPZero
-		lda 	#1
-_UPZero:		
-		jmp 	EXPUnaryReturnA
+		lda 	ControlParameters  			; return result.
+		sta 	XSNumber0,x
+		lda 	ControlParameters+1
+		sta 	XSNumber1,x
+		stz 	XSNumber2,x
+		stz 	XSNumber3,x
+		stz 	XSControl,x
+		rts
 _UPRange:
-		.error_range
+		.error_range		
 
 		.send code
 

@@ -66,6 +66,8 @@ target_link_libraries(firmware
     pico_multicore
     pico_util
     hardware_i2c
+    hardware_adc
+    hardware_spi
     libdvi
     tinyusb_host
     tinyusb_device

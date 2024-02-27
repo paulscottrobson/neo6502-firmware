@@ -1,26 +1,4 @@
-'
-'	Display the clock time. Requires Olimex MOD-RTC (PCF8563 version)
-'
-hour = iread($51,2) % 10
-iwrite $51,4,hour
+pin 3,analog
 repeat
-	cls:print hour
-	ellipse 60,20 frame ink 3 to 260,220 
-	ellipse 140,100 solid ink 4 to 180,140
-	call DrawHand(90,6,(iread($51,2) & $7F),60)
-	call DrawHand(80,3,(iread($51,3) & $7F),60)
-	call DrawHand(50,2,(iread($51,4) & $3F),12)
-	wait 80
+	print analog(3);" ";
 until false
-'
-'	Draw one hand
-'
-proc DrawHand(size,colour,posbcd,limit)
-	pos = (posbcd >> 4) * 10 + (posbcd & 15)
-	angle = 90-360*pos/limit
-	x = int(160+cos(angle)*size)
-	y = int(120-sin(angle)*size)
-	line 160,120 ink colour to x,y:ellipse x-5,y-5 solid to x+5,y+5
-endproc
-
-

@@ -18,9 +18,17 @@
 //
 // ***************************************************************************************
 
+static bool isADCInitialised = false;
+
 int UEXTSetGPIODirection(int gpio,int pinType) {
 	gpio_init(gpio);
-    gpio_set_dir(gpio, (pinType == UEXT_INPUT) ? GPIO_IN : GPIO_OUT);  		
+    if (pinType == UEXT_ANALOGUE) {
+        if (!isADCInitialised) adc_init();
+        isADCInitialised = true;
+        adc_gpio_init(gpio);
+    } else {
+        gpio_set_dir(gpio, (pinType == UEXT_INPUT) ? GPIO_IN : GPIO_OUT);  		
+    }
     return 0;
 }
 
@@ -44,6 +52,18 @@ int UEXTSetGPIO(int gpio,bool isOn) {
 int UEXTGetGPIO(int gpio,bool *pIsHigh) {
     *pIsHigh = gpio_get(gpio);  												
 	return 0;	
+}
+
+// ***************************************************************************************
+//
+//                                     Read from ADC
+//
+// ***************************************************************************************
+
+int UEXTGetGPIOAnalogue(int gpio,uint16_t *pLevel) {
+    adc_select_input(gpio-26);
+    *pLevel = adc_read();
+    return 0;   
 }
 
 // ***************************************************************************************

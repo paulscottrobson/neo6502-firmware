@@ -52,15 +52,22 @@ _CPCheckResult:
 		bne 	_CPError
 		rts
 		;
-		;		Set to output
+		;		Set to output / analog
 		;
 _CPCheckOutput:
 		iny 								; what follows 	
 		lda 	(codePtr),y
 		dey
+		cmp 	#KWD_ANALOG-$100 			; check analog
+		beq 	_CPAnalogue
 		cmp 	#KWD_OUTPUT-$100
 		bne 	_CPValue 					; if not output then value
 		lda 	#2							; set as output
+		iny
+		iny
+		bra		_CPSetDirection
+_CPAnalogue:		
+		lda 	#3							; set as analogue
 		iny
 		iny
 		bra		_CPSetDirection

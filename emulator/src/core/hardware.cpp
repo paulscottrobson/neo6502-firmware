@@ -497,6 +497,11 @@ int UEXTGetGPIO(int gpio,bool *pIsHigh) {
 	return 0;
 }
 
+int UEXTGetGPIOAnalogue(int gpio,uint16_t *pLevel) {
+	*pLevel = gpio+1000;
+	printf("Read Analogue pin %d, value is (not) %d\n",gpio,*pLevel);
+	return 0;
+}
 
 // ***************************************************************************************
 //

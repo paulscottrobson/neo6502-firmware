@@ -71,6 +71,7 @@ void IOInitialise(void) {
 
 int IOSetDirection(int pinID,int pinType) {
 	int gpio = IOMapPinToGPIO(pinID);  												// Map it
+	if (pinType == UEXT_ANALOGUE && !UEXT_IS_GPIO_ANALOGUE(gpio)) return 1;  		// Only certain GPIO do ADC.
 	if (gpio > 0) {  																// Mapping okay
 		UEXTSetGPIODirection(gpio,pinType);  										// Set direction to whatever
 		IOPINPinDirection[pinID] = pinType;  										// Save direction
@@ -111,6 +112,21 @@ int IORead(int pinID,bool *pIsHigh) {
 		}
 	}
 	return (gpio > 0) ? 0 : 1;  													// 0 if okay,1 if bad
+}
+
+// ***************************************************************************************
+//
+//								Read GPIO pin Analogue
+//
+// ***************************************************************************************
+
+int IOReadAnalogue(int pinID,uint16_t *pLevel) {
+	int gpio = IOMapPinToGPIO(pinID);  												// Map it
+	if (UEXT_IS_GPIO_ANALOGUE(gpio)) {  											// Mapping okay
+		if (IOPINPinDirection[pinID] != UEXT_ANALOGUE) return 2;  					// Not set to analogue input.
+		UEXTGetGPIOAnalogue(gpio,pLevel);  											// Read it.
+	}	
+	return (UEXT_IS_GPIO_ANALOGUE(gpio)) ? 0 : 1;  									// 0 if okay,1 if bad
 }
 
 // ***************************************************************************************
