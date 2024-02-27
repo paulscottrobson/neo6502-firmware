@@ -1,5 +1,5 @@
 '
-'	Display a voltage on pin 3 (0 to 3.3v)
+'	Display a voltage on pin 3 (0 to 3.3vma)
 '
 pin 3,analog
 cls
