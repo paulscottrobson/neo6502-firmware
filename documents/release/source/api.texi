@@ -22,7 +22,7 @@ hello
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=1.0\textwidth]{firmware/common/bootdisplay/logo.png}
+  \includegraphics[width=1.0\textwidth]{../../firmware/common/bootdisplay/logo.png}
   \caption{IMG00CAPTION}
   \label{fig:IMG00ID}
 \end{figure}

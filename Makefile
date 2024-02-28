@@ -16,16 +16,6 @@ else
 include build_env/common.make
 endif
 
-RELEASEFILE = neo6502.zip
-
-DOCDIR = documents$(S)release$(S)
-
-DOCUMENTS = $(DOCDIR)*.odt $(DOCDIR)*.pdf $(DOCDIR)*.txt $(BINDIR)neo6502.inc
-BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf $(ROOTDIR)emulator$(S)cross-compile$(S)neowin.zip $(BINDIR)basic.bin \
-			 $(ROOTDIR)emulator$(S)neolinux.zip
-PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip \
-			 $(BINDIR)nxmit.zip
-
 # ***************************************************************************************
 #
 #						Remake everything to release state
@@ -41,12 +31,6 @@ all:
 	$(MAKE) -B -C emulator release
 	$(MAKE) -B -C examples release
 	$(MAKE) -B -C release
-
-documentation:
-	# generate ODT documentation (requires 'pandoc')
-	pandoc -f latex -t odt -o $(DOCDIR)api.odt documents$(S)api.texi
-	# generate PDF documentation (requires 'texlive-latex')
-	pdflatex -output-directory=$(DOCDIR) documents$(S)api.texi
 
 
 # ***************************************************************************************
