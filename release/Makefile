@@ -45,7 +45,7 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)exec.zip  \
 #
 # ***************************************************************************************
 
-all: 
+all: documentation
 	# Delete release files
 	$(CDEL) $(RELEASEFILE)
 	$(CDEL) $(TMPDIR)$(RELEASEFILE)
@@ -73,3 +73,17 @@ all:
 	# Zip up and copy back
 	cd $(TMPDIR) ; zip -r $(RELEASEFILE) *
 	$(CCOPY) $(TMPDIR)$(RELEASEFILE) .
+
+# ***************************************************************************************
+#
+#								Make the documents
+#
+# ***************************************************************************************
+
+documentation:
+	# generate ODT documentation (requires 'pandoc')
+	pandoc -f latex -t odt -o $(DOCDIR)api.odt $(DOCDIR)source$(S)api.texi
+	# generate PDF documentation (requires 'texlive-latex')
+	pdflatex -output-directory=$(DOCDIR) $(DOCDIR)source$(S)api.texi
+
+
