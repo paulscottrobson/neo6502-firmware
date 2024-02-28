@@ -29,6 +29,13 @@ checklib:
 	$(PYTHON) ..$(S)scripts$(S)gfxtext.py
 	cmp _test.gfx graphics.gfx
 	$(CDEL) _test.gfx
-	
+
+checkc:
+	gcc -Wall -D NEO6502RUNTEST ..$(S)scripts$(S)gfxtext.c -ogfxtext
+	./gfxtext
+	#hexdump -C _cdemo.gfx
+	cmp -b _cdemo.gfx graphics.gfx
+	rm gfxtext
+
 always:
 
