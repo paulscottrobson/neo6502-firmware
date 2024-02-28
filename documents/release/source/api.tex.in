@@ -242,6 +242,8 @@ per the following algorithm:
   \item Setup the command code at \MonoSp{\$FF00}. This triggers the routine;
         so mind that the Function code and Parameters are setup sanely prior.
         On a technical point, both implementations process the message immediately on write.
+% Q2: both implementations of what?
+%     eg: "... both the _?_ and the _?_ implementation process the message immediately ..."
   \item Optionally, wait for completion.
         Most commands (eg: writing to the console) do not require waiting,
         as any subsequent command will wait/queue as per step 1.
@@ -255,6 +257,7 @@ There is a support function \MonoSp{SendMessage},
 which inlines the command and function.
 E.g.: this code from the Kernel:
 
+% Q1: KSendMessage/KWaitMessage or SendMessage/WaitMessage ?
 \begin{verbatim}
 jsr KSendMessage ; send message for command 2,1 (read keyboard)
 .byte 2,1
@@ -316,11 +319,14 @@ Other typical control keys (eg: Home and arrows) are mapped into the 0..31 range
 \textbf{ASCII} & \textbf{CTRL+Key} & \textbf{Key} & \textbf{Output}               \\ \hline
 1              & A                 & Left Arrow   & Cursor Left                   \\ \hline
 4              & D                 & Right Arrow  & Cursor Right                  \\ \hline
+% Q5: Insert,PageDown,End dont work?
 5              & E                 & Insert       & Insertion Mode                \\ \hline
 6              & F                 & Page Down    & Cursor Page Down              \\ \hline
 7              & G                 & End          & Cursor Line End               \\ \hline
 8              & H                 & Backspace    & Delete Character Left         \\ \hline
+% Q7: Backspace behaves only as overwrite mode
 9              & I                 & Tab          & Tab Character                 \\ \hline
+% Q8: Tab behaves only as overwrite mode but does not delete chars
 10             & J                 &              & Line Feed                     \\ \hline
 12             & L                 &              & Clear Screen                  \\ \hline
 13             & M                 & Enter        & Carriage Return (Accept Line) \\ \hline
@@ -330,6 +336,7 @@ Other typical control keys (eg: Home and arrows) are mapped into the 0..31 range
 22             & V                 &              & Cursor Down (8 Lines)         \\ \hline
 23             & W                 & Up           & Cursor Up                     \\ \hline
 24             & X                 &              & Cursor Color Inverse          \\ \hline
+% Q6: Cursor Color Inverse doesnt work as expected?
 26             & Z                 & Delete       & Delete Character Right        \\ \hline
 27             & [                 & Escape       & Exit                          \\ \hline
 \end{tabular}
@@ -420,6 +427,8 @@ So tiles and 16x16 sprites occupy 16x16/2 bytes (128 bytes) each.
 Each 32x32 sprite occupies 32x32/2 bytes (512 bytes).
 Colour 0 is transparent for sprites (colour 9 should be used for a black pixel).
 \newline
+% Q9: just to note: the original api.pfd has:
+% > each tile takes 16x16/2 bytes (64 bytes) as does each sprite16
 
 The release package includes Python scripts for creating graphics files,
 which allow you to design graphics using your preferred editing tools
@@ -542,6 +551,9 @@ The anchor position is the origin of the relative coordinate given.
 That is, coordinates 0,0 of the sprite
 will coincide with one of the positions shown in the table below.
 The default anchor alignment is zero (middle-center).
+% Q20: the above is probably not an accurate description
+%      how is this used? is this for alignment/positioning?
+%      is it a pivot point for rotation?
 
 \begin{table}[h]
 \centering\textbf{Sprite Anchors} \\
@@ -568,12 +580,25 @@ To the right are two examples. Assume this is a 32x32 sprite.
 In the upper example, the anchor point is at 8, the top-center.
 Considering the origin at the bottom-left,
 this sprite is drawn at 16,32, the midpoint of the top of the square.
+% same as Q20: what is "the square"? - is this the bounding box of the sprite?
+%              with respect to the origin,
+%              both diagrams show the image drawn in exactly the same place,
 \newline
 
 In the lower example, the anchor point is at 0;
 and this sprite is drawn at 16,16 (the middle of the square).
 The anchor point should be something like the centre point.
 So for a walking character, this might be anchor point 2 (the bottom-center).
+% same as Q20: it should be the center point ... of what?
+%              Anchor point 8 in the example image is not the center point of the image
+%              nor is it the center point of the diagram.
+%              The diagrams do not demonstrate anything that the table above does not
+%              would this be better described as a "pivot point"?
+%              Maybe the diagram of anchor point 8 should be re-centered about anchor point 8?
+%              Maybe the rocket should be re-centered about anchor point 8?
+%              Or is this the point which corresponds to the coordinates
+%              WRT Function 6,2 "Sprite Set" and/or Function 6,2 "Sprite Get Position"?
+%              Or is this related to collision detection?
 
 
 \pagebreak
