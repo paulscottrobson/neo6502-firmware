@@ -20,8 +20,8 @@ examples/samples.zip
 firmware/build/
 firmware/build.sh
 firmware/common/include/data/
-firmware/firmware.elf
-firmware/firmware.uf2
+*.elf
+*.uf2
 firmware/include/data/basic_binary.h
 firmware/include/data/dispatch_code.h
 firmware/include/data/prompt.h
@@ -33,7 +33,7 @@ kernel/build/kernel.bin
 kernel/build/kernel_binary.h
 kernel/build/kernel.lst
 kernel/build/_vectors.inc
-release/*
+release/*.zip
 scripts/build.count
 build
 .vscode

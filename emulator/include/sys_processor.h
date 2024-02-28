@@ -27,6 +27,7 @@ BYTE8 CPUExecuteInstruction(void);
 BYTE8 CPUWriteKeyboard(BYTE8 pattern);
 BYTE8 CPUReadMemory(WORD16 address);
 BYTE8 *CPUAccessMemory(void);
+int CPUUseDebugKeys(void);
 
 void CPUInterruptMaskable(void);
 

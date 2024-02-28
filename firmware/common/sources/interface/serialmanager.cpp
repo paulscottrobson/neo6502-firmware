@@ -84,7 +84,7 @@ static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size) {
 		case 2: 																// 2 set 6502 memory address
 		case 3: 																// 3 set gfxmemory address
 			currentAddress = startAddress = data[0] + (data[1] << 8);
-			dataPtr = (command == 2) ? cpuMemory+currentAddress:gfxMemory+currentAddress;
+			dataPtr = (command == 2) ? cpuMemory+currentAddress:gfxObjectMemory+currentAddress;
 			break;
 		case 4:  																// 4 set 6502 memory address indirect
 			a = data[0] + (data[1] << 8);  										// Get address from here.

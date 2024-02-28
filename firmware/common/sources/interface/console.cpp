@@ -11,7 +11,9 @@
 // ***************************************************************************************
 
 #include "common.h"
+
 #include "interface/font_5x7.h"
+#include <stdarg.h>
 
 struct GraphicsMode *graphMode;                                         
 
@@ -65,7 +67,7 @@ static void CONDrawCharacter(uint16_t x,uint16_t y,uint16_t ch,uint16_t fcol,uin
 //
 // ***************************************************************************************
 
-static void CONClearScreen(void) {
+void CONClearScreen(void) {
 	graphMode->xCursor = graphMode->yCursor = 0;  								// Home cursor
 	if (graphMode->xGSize != 0) {  												// Graphics present ?
 		if (SPRSpritesInUse()) {  												// Sprites present, only delete that layer
@@ -96,6 +98,22 @@ uint8_t CONSetCursorPosition(uint8_t x,uint8_t y) {
 	return 0;
 }
 
+void CONGetCursorPosition(uint8_t* x, uint8_t* y) {
+	*x = graphMode->xCursor;
+	*y = graphMode->yCursor;
+}
+
+// ***************************************************************************************
+//
+//								  Fetch the screen size
+//
+// ***************************************************************************************
+
+void CONGetScreenSizeChars(uint8_t* width, uint8_t* height) {
+	*width = graphMode->xCSize;
+	*height = graphMode->yCSize;
+}
+
 // ***************************************************************************************
 //
 //								Initialise the console system
@@ -110,29 +128,102 @@ void CONInitialise(struct GraphicsMode *gMode) {
 
 // ***************************************************************************************
 //
-//									Scroll the screen up
+//									Insert and delete lines
 //
 // ***************************************************************************************
 
-void CONScrollUp(void) {
-	memmove(graphMode->consoleMemory,  											// Scroll console up.
-		   graphMode->consoleMemory + MAXCONSOLEWIDTH,  							
-		   (MAXCONSOLEHEIGHT-1) * MAXCONSOLEWIDTH);
+void CONInsertLine(uint8_t y) {
+	if (y >= graphMode->yCSize)
+		return;
 
-	memset(graphMode->consoleMemory + (graphMode->yCSize-1) * MAXCONSOLEWIDTH,	// Blank bottom line.
-																' ',MAXCONSOLEWIDTH);
+	/* Text data */
+
+	uint8_t* tsrc = graphMode->consoleMemory + y*MAXCONSOLEWIDTH;
+	uint8_t* tdest = tsrc + MAXCONSOLEWIDTH;
+	int tlen = (graphMode->yCSize - y - 1)*MAXCONSOLEWIDTH;
+	memmove(tdest, tsrc, tlen);
+	memset(tsrc, ' ', MAXCONSOLEWIDTH);
+
+	/* Line extension data */
+
+	uint8_t* esrc = graphMode->isExtLine + y;
+	uint8_t* edest = esrc + 1;
+	int elen = graphMode->yCSize - y - 1;
+	memmove(edest, esrc, elen);
+	*tsrc = 0;
+
+	/* Graphics data */
+
 	if (graphMode->xGSize != 0) {
-		memmove(graphMode->graphicsMemory,  									// Scroll screen up (graphics)
-			   graphMode->graphicsMemory+320*graphMode->fontHeight,
-			   (graphMode->yCSize-1) * graphMode->fontHeight * 320);
-																				// Clear bottom line.
-		memset(graphMode->graphicsMemory + (graphMode->yCSize-1) * graphMode->fontHeight * 320,
-			   graphMode->backCol, graphMode->fontHeight * 320);		
-	}		
-	for (int y = 0;y < graphMode->yCSize;y++) {  								// Scroll extended line.
-		graphMode->isExtLine[y] = graphMode->isExtLine[y+1];
+		int fh = graphMode->fontHeight * 320;
+		uint8_t* gsrc = graphMode->graphicsMemory + y*fh;
+		uint8_t* gdest = gsrc + fh;
+		int glen = (graphMode->yCSize - y - 1)*fh;
+		memmove(gdest, gsrc, glen);
+		memset(gsrc, graphMode->backCol, fh);
 	}
-	graphMode->isExtLine[graphMode->yCSize-1] = 0;
+}
+
+void CONDeleteLine(uint8_t y) {
+	if (y >= graphMode->yCSize)
+		return;
+
+	/* Text data */
+
+	uint8_t* tdest = graphMode->consoleMemory + y*MAXCONSOLEWIDTH;
+	uint8_t* tsrc = tdest + MAXCONSOLEWIDTH;
+	int tlen = (graphMode->yCSize - y - 1)*MAXCONSOLEWIDTH;
+	memmove(tdest, tsrc, tlen);
+	memset(tdest+tlen, ' ', MAXCONSOLEWIDTH);
+
+	/* Line extension data */
+
+	uint8_t* edest = graphMode->isExtLine + y;
+	uint8_t* esrc = edest + 1;
+	int elen = graphMode->yCSize - y - 1;
+	memmove(edest, esrc, elen);
+	*(edest+elen) = 0;
+
+	/* Graphics data */
+
+	if (graphMode->xGSize != 0) {
+		int fh = graphMode->fontHeight * 320;
+		uint8_t* gdest = graphMode->graphicsMemory + y*fh;
+		uint8_t* gsrc = gdest + fh;
+		int glen = (graphMode->yCSize - y - 1)*fh;
+		memmove(gdest, gsrc, glen);
+		memset(gdest+glen, graphMode->backCol, fh);
+	}
+}
+
+// ***************************************************************************************
+//
+//								Clears an area on the screen
+//
+// ***************************************************************************************
+
+void CONClearArea(int x1, int y1, int x2, int y2) {
+	x1 = std::min(graphMode->xCSize-1, x1);
+	y1 = std::min(graphMode->yCSize-1, y1);
+	x2 = std::min(graphMode->xCSize-1, x2);
+	y2 = std::min(graphMode->yCSize-1, y2);
+	x2 = std::max(x2, x1);
+	y2 = std::max(y2, y1);
+
+	for (int x=x1; x<=x2; x++)
+		for (int y=y1; y<=y2; y++)
+			CONDrawCharacter(x, y, ' ', graphMode->foreCol, graphMode->backCol);
+}
+
+// ***************************************************************************************
+//
+//								Set the text colours
+//
+// ***************************************************************************************
+
+void CONSetForeBackColour(int fg, int bg) {
+	graphMode->foreCol = fg & 0x0f;
+	graphMode->backCol = bg & 0x0f;
 }
 
 // ***************************************************************************************
@@ -141,7 +232,7 @@ void CONScrollUp(void) {
 //
 // ***************************************************************************************
 
-static void CONReverseCursorBlock(void) {
+void CONReverseCursorBlock(void) {
 	for (int y = 0;y < graphMode->fontHeight;y++) {
 		uint8_t *p = graphMode->graphicsMemory + 
 					 (y + graphMode->yCursor * graphMode->fontHeight) * graphMode->xGSize +
@@ -202,7 +293,7 @@ static void CONDeleteCharacter(void) {
 		CONCopy(xNext,yNext,x,y);
 		x = xNext;y = yNext;
 	}
-	CONDrawCharacter(x,y,' ',7,0);	
+	CONDrawCharacter(x,y,' ',graphMode->foreCol,graphMode->backCol);	
 }
 
 // ***************************************************************************************
@@ -221,7 +312,7 @@ static void CONInsertCharacter(void) {
 		CONCopy(xPrev,yPrev,x,y);  											// Copy previous forward.
 		x = xPrev;y = yPrev;
 	}
-	CONDrawCharacter(x,y,' ',7,0);	
+	CONDrawCharacter(x,y,' ',graphMode->foreCol,graphMode->backCol);	
 }
 
 // ***************************************************************************************
@@ -269,7 +360,7 @@ void CONWrite(int c) {
 			graphMode->yCursor++; 												// J/10 down with scrolling.
 			if (graphMode->yCursor == graphMode->yCSize) {
 				graphMode->yCursor--;
-				CONScrollUp();
+				CONDeleteLine(0);
 			}
 			break;
 
@@ -363,7 +454,19 @@ void CONWriteHex(uint16_t h) {
 	}
 }
 
-void CONWriteString(const char *s) {
+void CONWriteString(const char *s, ...) {
+	va_list ap;
+
+	va_start(ap, s);
+	int len = vsnprintf(NULL, 0, s, ap);
+	va_end(ap);
+
+	char buffer[len+1];
+	va_start(ap, s);
+	vsnprintf(buffer, len+1, s, ap);
+	va_end(ap);
+	
+	s = buffer;
 	while (*s != '\0') CONWrite(*s++);
 }
 
@@ -376,5 +479,6 @@ void CONWriteString(const char *s) {
 //		30-01-24 	Fixed clear screen to clear text area only, not sprites too.
 //		31-01-24 	Added functionality to set cursor position.
 //		07-02-24	Added Insert and Delete functionality
+//		26-02-24 	Fixed black background character on insert.
 //
 // ***************************************************************************************

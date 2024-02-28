@@ -14,16 +14,23 @@
 #define _CONSOLE_H
 
 #include "interface/graphics.h"
-
-extern const unsigned char font_5x7[];
+extern const uint8_t font_5x7[];
 
 void CONInitialise(struct GraphicsMode *gMode);
 void CONWrite(int c);
 void CONWriteHex(uint16_t h);	
-void CONWriteString(const char *s);
+void CONWriteString(const char *s, ...);
+void CONClearScreen();
 void CONGetScreenLine(uint16_t addr);
 uint8_t CONUpdateUserFont(uint8_t *data);
 uint8_t CONSetCursorPosition(uint8_t x,uint8_t y);
+void CONGetCursorPosition(uint8_t* x, uint8_t* y);
+void CONGetScreenSizeChars(uint8_t* width, uint8_t* height);
+void CONInsertLine(uint8_t y);
+void CONDeleteLine(uint8_t y);
+void CONClearArea(int x1, int y1, int x2, int y2);
+void CONSetForeBackColour(int fg, int bg);
+void CONReverseCursorBlock();
 
 extern uint8_t userDefinedFont[64*8];
 

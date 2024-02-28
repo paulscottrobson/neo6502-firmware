@@ -40,21 +40,7 @@ all:
 	$(MAKE) -B -C firmware release
 	$(MAKE) -B -C emulator release
 	$(MAKE) -B -C examples release
-	$(MAKE) -B zipfile 
-
-# ***************************************************************************************
-#
-#								Make the release zip
-#
-# ***************************************************************************************
-
-zipfile: crossdev documentation
-	zip -r -j -q release$(S)$(RELEASEFILE) $(DOCUMENTS) $(BINARIES) $(PYTHONAPPS) \
-						examples$(S)samples.zip documents$(S)release$(S)crossdev$(S)crossdev.zip
-	$(CDEL) documents$(S)release$(S)crossdev$(S)crossdev.zip
-
-crossdev:
-	cd documents$(S)release$(S)crossdev ; $(CDEL) crossdev.zip ; zip -r -q crossdev.zip *
+	$(MAKE) -B -C release
 
 documentation:
 	# generate ODT documentation (requires 'pandoc')
@@ -70,16 +56,21 @@ documentation:
 # ***************************************************************************************
 
 windows:
-		$(MAKE) -B -C kernel clean
-		$(MAKE) -B -C basic clean
+		$(CMAKEDIR) bin
+		$(MAKE) -B -C kernel
+		$(MAKE) -B -C basic release
 		$(MAKE) -B -C emulator clean
 		$(MAKE) -B -C emulator ewindows
 
 linux:
-		$(MAKE) -B -C kernel clean
-		$(MAKE) -B -C basic clean
+		$(CMAKEDIR) bin
+		$(MAKE) -B -C kernel
+		$(MAKE) -B -C basic release
 		$(MAKE) -B -C emulator clean
 		$(MAKE) -B -C emulator elinux
+
+macos:
+		make -B -C emulator emacos
 
 
 # ***************************************************************************************

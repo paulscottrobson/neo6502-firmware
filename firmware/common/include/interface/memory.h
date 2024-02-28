@@ -19,7 +19,7 @@
 #define DEFAULT_PORT 0xFF00
 
 extern uint8_t  cpuMemory[];
-extern uint8_t gfxMemory[];
+extern uint8_t gfxObjectMemory[];
 extern uint8_t graphicsMemory[];
 extern uint8_t consoleMemory[];
 

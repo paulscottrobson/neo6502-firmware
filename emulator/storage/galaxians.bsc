@@ -1,0 +1,247 @@
+'
+'	Galaxians : by Paul Robson.
+'
+soundOn = true
+call Initialise()
+score = 0:lives = 3
+call DrawGame()
+level = 1
+repeat
+	call PlayLevel(level)
+	level = level + 1
+until lives = 0
+'
+'		Play a level.
+'
+proc PlayLevel(level)
+	call ResetAttackers()
+	call MoveFormation()
+	aBase = max(100,150-level*5)
+	aRandom = max(100,250-level*5)
+	text "Level "+str$(level) dim 2 ink 3 to 124,130
+	t1 = time()+100:repeat:until time() > t1
+	text "Level "+str$(level) dim 2 ink 0 to 124,130
+	repeat
+		call DrawLives()
+		tBulletMove = 0:tMoveForm = 0:tMoveShip = 0:tMoveDive = 0:tLaunch = time()+100:tPBulletMove = 0
+		launchGap = 100
+		isHit = false
+		repeat
+			if event(tMoveForm,60) then call MoveFormation()
+			if event(tMoveShip,4) then call MoveShip()
+			if event(tBulletMove,10) then if attCount > 0 then call EnemyFire()
+			if event(tPBulletMove,3) then if yMissile >= 0 then call PlayerFire()
+			if event(tMoveDive,6) then if attCount<>0 then call MoveAttackers()
+			if event(tLaunch,launchGap) then launchGap = aBase + rand(aRandom):if remaining > 0 then call LaunchGroup()
+		until remaining = 0 | isHit
+		if isHit then call PlayerHit()
+	until remaining = 0 | lives = 0
+endproc
+'
+'		Initialisation
+'
+proc Initialise()
+	local i
+	maxAttackers = 12
+	gload "galaxians.gfx"
+	dim status(47+4): ' 8 x 6 array of ships. 0 = not present, 1 = in formation, 2 = attacking. top down
+	dim xShip(47),yShip(47),xiShip(47): ' position of ship if attacking
+	dim attackers(maxAttackers): ' active attackers, updated by MoveFormation()
+	dim xMissile(maxAttackers),yMissile(maxAttackers): ' missile for each attacker
+	dim graphics(5):for i = 0 to 5:read graphics(i):next:data $8C,$80,$88,$84,$84,$84	
+	xBase = 160:yBase = 220:xMissile = 0:yMissile = -1
+endproc
+'
+'		Draw Background etc.
+'
+proc DrawGame()
+	local i
+	cls:sprite clear
+	text "1UP" solid ink 1 to 151,1
+	call DrawScore()
+endproc
+'
+'		Update Score
+'
+proc DrawScore()
+	text right$("00000"+str$(score),6) ink 3 solid to 142,9
+endproc
+'
+'		Draw lives
+'
+proc DrawLives()
+	local i
+	rect ink 0 solid 20,224 to 110,239
+	if lives > 1 then for i = 1 to min(lives-1,5):image $87 dim 1 to 10+i*16,224:next
+endproc
+'
+'		Reset attackers.
+'
+proc ResetAttackers()
+	local i
+	for i = 0 to 7:status(i) = 0:next
+	for i = 8 to 47:status(i) = 1:next
+	status(2) = 1:status(5) = 1
+	status(8) = 0:status(9) = 0:status(14) = 0:status(15) = 0
+	status(16) = 0:status(23) = 0
+	xCentre = 160:xCentreStep = 3:attCount = 0:formCount = 0
+	remaining = 0
+	for i = 0 to 47:remaining = remaining+status(i):next
+	call MoveFormation():call MoveShip()
+	for i = 0 to maxAttackers:yMissile(i) = 999:sprite i+65 hide:next
+	call TrackAttackers()
+endproc
+'
+'		Move ship
+'
+proc MoveShip()
+	local fire,dx,dy
+	fire = joypad(dx,dy)
+	if fire <> 0 then if yMissile < 0 then xMissile = xBase:yMissile = yBase-8:if soundOn then sound 0 clear:sfx 0,7
+	xBase = min(312,max(8,xBase + dx * 7))
+	sprite 64 image $83 to xBase,yBase
+endproc
+'
+'		Reposition formation.
+'
+proc MoveFormation()
+	local r,p,x,y,c
+	formCount = formCount + 1
+	xCentre = xCentre + xCentreStep
+	if xCentre <= 100 | xCentre >= 220 then xCentreStep = -xCentreStep
+	for r = 0 to 5
+		p = r * 8:
+		img = graphics(r) + (formCount & 1)
+		x = xCentre - 16 * 7 \ 2
+		y = 88 - (5-r) * 12
+		for c = 0 to 7
+			if status(p) = 1 then sprite p image img to x,y
+			p = p + 1:x = x + 16
+		next
+	next
+endproc
+'
+'		Track attackers
+'
+proc TrackAttackers()
+	local i
+	attcount = 0
+	for i = 0 to 47
+		if status(i) = 2 then if attCount < maxAttackers then attCount = attCount + 1:attackers(attCount) = i
+	next
+endproc
+'
+'		Launch a group
+'
+proc LaunchGroup()
+	local n,x,y
+	repeat n = rand(48):until status(n) <> 0
+	if status(n) = 1 
+		call Launch(n)
+		x = n & 7:y = n >> 3
+		if y < 5
+			if x > 0 & status(n+7) = 1 then call Launch(n+7)
+			if x < 7 & status(n+9) = 1 then call Launch(n+9)
+		endif
+	endif
+	call TrackAttackers()
+endproc
+'
+'		Launch a ship
+'
+proc Launch(n)
+	assert status(n) = 1
+	status(n) = 2
+	xShip(n) = spritex(n)
+	yShip(n) = spritey(n)
+	sprite n image graphics(n\8)+2
+	xiShip(n) = -4
+	if xShip(n) >= 160 then xiShip(n) = abs(xiShip(n)):sprite n flip 1
+endproc
+'
+'		Move attackers.
+'
+proc MoveAttackers()
+	for i = 1 to maxAttackers
+		n = attackers(i)
+		if status(n) = 2 
+			xShip(n) = xShip(n) + xiShip(n)
+			yShip(n) = yShip(n) + 2
+			if xShip(n) < 8 | xShip(n) > 312 then call FlipAttacker(n)
+			sprite n to xShip(n),yShip(n)
+			if yShip(n) >= yBase then status(n) = 1:if abs(xShip(n)-xBase) < 11 then isHit = true
+		endif
+	next	
+endproc
+'
+'		Flip attacker horizontally.
+'
+proc FlipAttacker(n)
+	xiShip(n) = -xiShip(n)
+	if xiShip(n) > 0:sprite n flip 1:else:sprite n flip 0:endif
+endproc
+'
+'		Enemy Firing
+'
+proc EnemyFire()
+	local i
+	for i = 1 to maxAttackers
+		if yMissile(i) > 240 
+			if i <= attCount then if rand(4) = 0 then xMissile(i) = xShip(attackers(i)):yMissile(i) = yShip(attackers(i))+8
+		else
+			yMissile(i) = yMissile(i)+6:sprite i + 65 image $8B to xMissile(i),yMissile(i)
+			if  yMissile(i) >= yShip then if hit(i+65,64,6) then isHit = true
+		endif
+	next
+endproc
+'
+'		Player firing
+'
+proc PlayerFire()
+	yMissile = yMissile - 8
+	sprite 65 image $8B to xMissile,yMissile
+	if yMissile <= 88
+		local x,y
+		x = (xMissile - xCentre + 16*7/2 + 8) \ 16
+		y = (88-yMissile) \ 16
+		if x >= 0 & x < 8 & y <= 5
+			call DestroyAlien(x+(5-y)*8,false)
+		endif
+	else
+		if attCount > 0 
+			for i = 1 to attCount
+				if hit(65,attackers(i),6) then call DestroyAlien(attackers(i),true):yMissile(i) = 240:sprite i+65 hide
+			next
+		endif
+	endif
+endproc
+'
+'		Destroy Alien 
+'
+proc DestroyAlien(n,isAttacking)
+	if status(n) > 0
+		local s:s = n >> 8
+		if s >= 3:s = 30:else:s = 60-s*10:endif
+		if isAttacking <> 0 then s = s*2
+		remaining = remaining - 1:status(n) = 0:sprite n hide
+		score = score + s:call DrawScore():
+		yMissile = -1:sprite 65 hide
+		if soundOn then sound 0 clear:sfx 0,22
+	endif
+endproc
+'
+'		Player Hit
+'
+proc PlayerHit()
+	local i
+	lives = lives - 1:call DrawLives()
+	for i = 1 to maxAttackers:yMissile(i) = 240:sprite i+65 hide:next
+	for i = 0 to 47
+		if status(i) = 2 then status(i) = 1
+	next:call MoveFormation()
+	i = time()+100
+	if soundOn then sfx 0,19
+	repeat	
+		sprite 64 image $8F + (time()-i)\10 % 3
+	until time() > i & notes(0) = 0
+endproc

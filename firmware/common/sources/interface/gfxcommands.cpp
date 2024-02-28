@@ -53,6 +53,28 @@ void GFXSetDefaults(uint8_t *cmd) {
 
 // ***************************************************************************************
 //
+// 								  Set Defaults specifically
+//
+// ***************************************************************************************
+
+void GFXSetDrawColour(uint8_t colour) {
+	pixelAnd = 0;pixelXor = colour;
+}
+
+void GFXSetSolidFlag(uint8_t isSolid) {
+	useSolidFill = (isSolid != 0) ? 0xFF : 0x00;
+}
+
+void GFXSetDrawSize(uint8_t size) {
+	drawSize = size;
+}
+
+void GFXSetFlipBits(uint8_t flip) {
+	flipBits = flip;
+}
+
+// ***************************************************************************************
+//
 //									Accessor for draw size
 //
 // ***************************************************************************************
@@ -187,17 +209,17 @@ void GFXScaledText(struct GraphicsMode *gMode,char *s,int x,int y,int useSolidFi
 int GFXFindImage(int type,int id) {
 	int addr = -1;
 
-	if (id >= gfxMemory[type+1]) return -1;  									// Not a valid graphic element
+	if (id >= gfxObjectMemory[type+1]) return -1;  								// Not a valid graphic element
 
 	switch(type) {
 		case 0:  																// 16x16 tiles
 			addr = 256 + id * (16*16/2);
 			break;
 		case 1:  																// 16x16 sprites
-			addr = 256 + gfxMemory[1]*(16*16/2) + id*(16*16/2);
+			addr = 256 + gfxObjectMemory[1]*(16*16/2) + id*(16*16/2);
 			break;
 		case 2:  																// 32x32 sprites
-			addr = 256 + gfxMemory[1]*(16*16/2) + gfxMemory[2]*(16*16/2) + id*(32*32/2);
+			addr = 256 + gfxObjectMemory[1]*(16*16/2) + gfxObjectMemory[2]*(16*16/2) + id*(32*32/2);
 			break;
 	}
 	return addr;
@@ -211,7 +233,7 @@ int GFXFindImage(int type,int id) {
 // ***************************************************************************************
 
 void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int flip,int solidFill) {
-	if (gfxMemory[0] == 0) return;  											// No graphics installed.
+	if (gfxObjectMemory[0] == 0) return;  										// No graphics installed.
 	int size = 16;  															// Figure out the size in pixels, type (0-2) and id in that type.
 	int type = 0;   															// Sprite records use a different mapping.
 	if (id >= 0x80) {   														// Drawing a sprite 16x16 ($80-$BF) 32x32 ($C0-$FF)
@@ -226,9 +248,9 @@ void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int fl
 
 	for (int xc = 0;xc < size;xc++) {  											// For each pixel
 		for (int yc = 0;yc < size;yc++) {
-			int pixel = gfxMemory[address+xc/2+(yc * size / 2)];   				// Access the pixel pair.
+			int pixel = gfxObjectMemory[address+xc/2+(yc * size / 2)];   		// Access the pixel pair.
 			pixel = (xc & 1) ? pixel & 0x0F : pixel >> 4;						// Extract the half pixel to draw.
-			if (pixel != 0 || type == 0 || solidFill) {  						// If non-zero, or tile, or solid then draw it.
+			if (pixel != 0 || solidFill) {  									// If not transparent or solid then draw it.
 				pixelXor = pixel;
 				pixelAnd = 0;
 				int x1 = x + (xc ^ xFlip) * scale;

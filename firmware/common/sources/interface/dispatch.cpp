@@ -42,6 +42,9 @@ void TIMECRITICAL(DSPHandler)(uint8_t *cBlock, uint8_t *memory)
 	float f1,f2;
 	int i1,i2,r;
 	uint32_t u1;
+	uint8_t u2;
+	uint16_t u3;
+	bool b1;
 	*DERROR = 0;                                                                // Clear error state.
 	#include "data/dispatch_code.h"  
 	*DCOMMAND = 0;					     										// Clear the message indicating completion.
@@ -83,6 +86,7 @@ void DSPReset(void) {
 	STOSynchronise();                                                           // Synchronise storage
 	CONWrite(0x80+2);
 	CFGProcess();                                                               // Process configuration file.
+	IOInitialise(); 															// UEXT Initialise.
 }
 
 // ***************************************************************************************
@@ -104,6 +108,12 @@ char *DSPGetString(uint8_t *command,uint8_t paramOffset) {
 std::string DSPGetStdString(uint8_t *command,uint8_t paramOffset) {
 	uint8_t *mem = cpuMemory+command[paramOffset]+(command[paramOffset+1]<<8);  // From here.
 	return std::string((char*)mem+1, *mem);
+}
+
+void DSPSetStdString(uint8_t *command, uint8_t paramOffset, const std::string& value) {
+	uint8_t *mem = cpuMemory+command[paramOffset]+(command[paramOffset+1]<<8);  // From here.
+	*mem = std::min(*mem, (uint8_t)value.size());
+	memcpy(mem+1, value.data(), *mem);
 }
 
 uint16_t DSPGetInt16(uint8_t *command,uint8_t paramOffset) {

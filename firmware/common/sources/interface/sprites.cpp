@@ -239,7 +239,7 @@ int SPRUpdate(uint8_t *paramData) {
 			p->xSize = p->ySize = (imageSize & 0x40) ? 32:16;   				// Size of image.
 			int img = GFXFindImage((p->xSize == 16) ? 1 : 2,imageSize & 0x3F);	// Address of image (offset in gfx memory)													
 			if (img < 0) return 2;   											// Bad image number
-			p->imageAddress = gfxMemory + img;  								// Physical address
+			p->imageAddress = gfxObjectMemory + img;  							// Physical address
 		}
 
 		if (isTurtle) {  														// If the turtle sprite

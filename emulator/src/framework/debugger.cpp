@@ -77,8 +77,8 @@ int GFXXRender(SDL_Surface *surface) {
 		if (currentKey >= 0) {														// Key depressed ?
 			currentKey = toupper(currentKey);										// Make it capital.
 
-																					// Debugger keys don't work with CTRL pressed.
-			#define CMDKEY(n) (GFXIsKeyPressed(keyMapping[n]) && (!GFXIsKeyPressed(GFXKEY_CONTROL)))
+																					// Debugger keys enabled ?
+			#define CMDKEY(n) (GFXIsKeyPressed(keyMapping[n]) && (CPUUseDebugKeys() == 0))
 
 			if (CMDKEY(DBGKEY_RESET)) {												// Reset processor (F1)
 				DEBUG_RESET();					

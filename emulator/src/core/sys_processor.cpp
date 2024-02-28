@@ -39,6 +39,7 @@ static int argumentCount;
 static char **argumentList;
 static LONG32 cycles;																// Cycle Count.
 static int inFastMode = 0; 															// Fast mode flag (speeds up unit testing)
+static bool useDebuggerKeys = false;  												// Use the debugger keys.
 
 // *******************************************************************************************************************************
 //											 Memory and I/O read and write macros.
@@ -112,7 +113,7 @@ void CPUReset(void) {
 				cpuMemory[0xFFFD] = address >> 8;
 			} else {
 				p = cpuMemory+address;				 								// Load here.	
-				if (address == 0xFFFF) p = gfxMemory;  								// Load to graphics memory
+				if (address == 0xFFFF) p = gfxObjectMemory;  						// Load to graphics memory
 				printf("Load %s to %x\n",command,address);
 				FILE *f = fopen(command,"rb");  									// Read file in and copy to RAM.
 				if (f == NULL) exit(fprintf(stderr,"Bad file %s",command));
@@ -135,9 +136,20 @@ void CPUReset(void) {
 				printf("Warm boot $806\n");
 				cpuMemory[0xFFFC] = 6;cpuMemory[0xFFFD] = 8;
 			}
+			if (strcmp(command,"keys") == 0) { 										// Keys work properly.
+				useDebuggerKeys = true;
+			}
 		}
 	}
 	resetProcessor();																// Reset CPU		
+}
+
+// *******************************************************************************************************************************
+//							When non-zero disables the debugger keys, requiring control
+// *******************************************************************************************************************************
+
+int CPUUseDebugKeys(void) {
+	return useDebuggerKeys ? 1 : 0;
 }
 
 // *******************************************************************************************************************************

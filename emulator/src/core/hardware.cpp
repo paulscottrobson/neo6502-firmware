@@ -21,9 +21,22 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <errno.h>
+#include <fcntl.h>
+#include <filesystem>
 
 static FILE* fileHandles[FIO_NUM_FILES];
 static int frameCount = 0;
+static std::filesystem::path storagePath = "storage";
+static std::filesystem::path currentPath = storagePath;
+
+static std::string getAbspath(const std::string& path) {
+	std::filesystem::path newPath;
+	if (!path.empty() && (path[0] == '/'))
+		newPath = storagePath / path.substr(1);
+	else
+		newPath = currentPath / path;
+	return newPath.string();
+}
 
 // *******************************************************************************************************************************
 //
@@ -32,11 +45,7 @@ static int frameCount = 0;
 // *******************************************************************************************************************************
 
 void HWReset(void) {
-	#ifdef LINUX
-	mkdir("storage",0755);
-	#else
-	mkdir("storage");
-	#endif
+	std::filesystem::create_directories(currentPath);
 }
 
 // *******************************************************************************************************************************
@@ -61,7 +70,7 @@ int  RNDGetFrameCount(void) {
 // *******************************************************************************************************************************
 
 uint32_t TMRRead(void) {
-	return GFXTimer() / 10+104867;
+	return GFXTimer() / 10;
 }
 
 // *******************************************************************************************************************************
@@ -129,82 +138,6 @@ void HWQueueKeyboardEvent(int sdlCode,int isDown) {
 void FDBWrite(uint8_t c) {
 }
 
-// *******************************************************************************************************************************
-//
-//											 Dummy directory listing.
-//
-// *******************************************************************************************************************************
-
-static struct dirent * dirEntry;
-static DIR *directory;
-
-int FISDirectoryOpen(void) {
-    directory = opendir("storage");
-	return (directory == NULL) ? 1 : 0;
-}
-
-int FISDirectoryClose(void) {
-    if (directory != NULL) closedir(directory);
-	return 0;
-}
-
-int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize) {
-	dirEntry = readdir(directory);
-	if (dirEntry != NULL) {
-		strcpy(buffer,dirEntry->d_name);
-		*isDirectory = 0;
-		*fileSize = 42;
-	}
-	return (dirEntry == NULL) ? 1 : 0;
-}   
-
-// ***************************************************************************************
-//
-//									File utils
-//
-// ***************************************************************************************
-
-static std::string getAbspath(std::string filename) {
-	return "storage/" + filename;
-}
-
-// ***************************************************************************************
-//
-//									Read File
-//
-// ***************************************************************************************
-
-uint8_t FISReadFile(const char *fileName,uint16_t loadAddress,uint16_t maxSize) {
-	printf("Reading %s to $%x\n",fileName,loadAddress);
-	FILE *f = fopen(getAbspath(fileName).c_str(), "rb");
-	if (f != NULL) {
-		int b;
-		if (loadAddress == 0xFFFF) {
-			b = fread(gfxMemory,1,maxSize,f);
-		} else {
-			b = fread(CPUAccessMemory()+loadAddress,1,maxSize,f);
-		}
-		fclose(f);
-	}
-	return (f == NULL) ? 1 : 0;
-}
-
-// ***************************************************************************************
-//
-//									Write File
-//
-// ***************************************************************************************
-
-uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
-	printf("Writing %s from $%x size $%x\n",fileName,startAddress,size);
-	FILE *f = fopen(getAbspath(fileName).c_str(), "wb");
-	if (f != NULL) {
-		fwrite(CPUAccessMemory()+startAddress,1,size,f);
-		fclose(f);
-	}
-	return (f == NULL) ? 1 : 0;
-}
-
 // ***************************************************************************************
 //
 //									Rename file
@@ -212,12 +145,164 @@ uint8_t FISWriteFile(const char *fileName,uint16_t startAddress,uint16_t size) {
 // ***************************************************************************************
 
 uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFilename) {
-	printf("Renaming %s to %s: ", oldFilename.c_str(), newFilename.c_str());
-	errno = 0;
-	rename(getAbspath(oldFilename).c_str(), getAbspath(newFilename).c_str());
-	printf("%s\n", strerror(errno));
+	std::string oldAbspath = getAbspath(oldFilename);
+	std::string newAbspath = getAbspath(newFilename);
+	printf("Renaming %s to %s: ", oldAbspath.c_str(), newAbspath.c_str());
+	std::error_code ec;
+	std::filesystem::rename(oldAbspath, newAbspath, ec);
+	if (ec)
+		printf("%s\n", ec.message().c_str());
+	else
+		printf("OK\n");
 
-	return (errno == 0) ? 1 : 0;
+	return !ec ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//									 Copy file 
+//
+// ***************************************************************************************
+
+uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilename) {
+	std::string oldAbspath = getAbspath(oldFilename);
+	std::string newAbspath = getAbspath(newFilename);
+	printf("FISCopyFile('%s', '%s') -> ", oldAbspath.c_str(), newAbspath.c_str());
+	std::error_code ec;
+	std::filesystem::copy(oldAbspath, newAbspath,
+		std::filesystem::copy_options::overwrite_existing, ec);
+	if (ec)
+		printf("%s\n", ec.message().c_str());
+	else
+		printf("OK\n");
+
+	return !ec ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//									Delete file
+//
+// ***************************************************************************************
+
+uint8_t FISDeleteFile(const std::string& filename) {
+	std::string abspath = getAbspath(filename);
+	printf("FISDeleteFile('%s') -> ", abspath.c_str());
+	std::error_code ec;
+	bool removed = std::filesystem::remove(abspath, ec);
+	if (ec || !removed) {
+		printf("%s\n", ec.message().c_str());
+		return 1;
+	} else {
+		printf("OK\n");
+		return 0;
+	}
+}
+
+// ***************************************************************************************
+//
+//									Create directory
+//
+// ***************************************************************************************
+
+uint8_t FISCreateDirectory(const std::string& filename) {
+	std::string abspath = getAbspath(filename);
+	printf("FISCreateDirectory('%s') -> ", abspath.c_str());
+	std::error_code ec;
+	std::filesystem::create_directory(abspath, ec);
+	if (ec)
+		printf("%s\n", ec.message().c_str());
+	else
+		printf("OK\n");
+
+	return !ec ? 1 : 0;
+}
+
+// ***************************************************************************************
+//
+//									Change directory
+//
+// ***************************************************************************************
+
+uint8_t FISChangeDirectory(const std::string& filename) {
+	std::string abspath = getAbspath(filename);
+	printf("FISChangeDirectory('%s') -> ", abspath.c_str());
+
+	std::error_code ec;
+	auto status = std::filesystem::status(abspath, ec);
+
+	if (!ec && (status.type() == std::filesystem::file_type::directory)) {
+		printf("OK\n");
+		currentPath = abspath;
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
+// ***************************************************************************************
+//
+//									   Stat file
+//
+// ***************************************************************************************
+
+uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attribs) {
+	std::string abspath = getAbspath(filename);
+	printf("FISStatFile('%s') -> ", abspath.c_str());
+
+	try {
+		*length = std::filesystem::file_size(abspath);
+		*attribs = std::filesystem::is_directory(abspath) ? FIOATTR_DIR : 0;
+		printf("OK\n");
+		return 0;
+	} catch (const std::filesystem::filesystem_error& e) {
+		printf("%s\n", e.what());
+		return 1;
+	}
+}
+
+// ***************************************************************************************
+//
+//								Directory enumeration
+//
+// ***************************************************************************************
+
+static std::filesystem::directory_iterator readDirIterator;
+
+uint8_t FISOpenDir(const std::string& filename) {
+	std::string abspath = getAbspath(filename);
+	printf("FISOpenDir('%s') -> ", abspath.c_str());
+	errno = 0;
+	try {
+		readDirIterator = std::filesystem::directory_iterator(abspath);
+		printf("OKs\n");
+		return 0;
+	} catch (const std::filesystem::filesystem_error& e) {
+		printf("%s\n", e.what());
+		return 1;
+	}
+}
+
+uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs) {
+	printf("FISReadDir() -> ");
+
+	if (readDirIterator != std::filesystem::directory_iterator()) {
+		const auto& de = *readDirIterator++;
+
+		filename = de.path().filename().string();
+		*attribs = de.is_directory() ? FIOATTR_DIR : 0;
+		*size = de.is_regular_file() ? de.file_size() : 0;
+		printf("OK: '%s'\n", filename.c_str());
+		return 0;
+	} else {
+		printf("Failed\n");
+		return 1;
+	}
+}
+
+uint8_t FISCloseDir() {
+	readDirIterator = std::filesystem::directory_iterator();
+	return 0;
 }
 
 // ***************************************************************************************
@@ -226,8 +311,8 @@ uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFile
 //
 // ***************************************************************************************
 
-uint8_t FISOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
-	fprintf(stderr, "OpenFileHandle(%d, '%s', 0x%02x)\n", fileno, filename, mode);
+uint8_t FISOpenFileHandle(uint8_t fileno, const std::string& filename, uint8_t mode) {
+	std::string abspath = getAbspath(filename);
 
 	if (fileno >= FIO_NUM_FILES)
 		return 1;
@@ -245,9 +330,10 @@ uint8_t FISOpenFileHandle(uint8_t fileno, const char* filename, uint8_t mode) {
 	if (mode >= sizeof(modes)/sizeof(*modes))
 		return 1;
 
+	fprintf(stderr, "FISOpenFileHandle(%d, '%s', 0x%02x) -> ", fileno, abspath.c_str(), mode);
 	errno = 0;
-	fileHandles[fileno] = fopen(getAbspath(filename).c_str(), modes[mode]);
-	fprintf(stderr, "Result: %s\n", strerror(errno));
+	fileHandles[fileno] = fopen(abspath.c_str(), modes[mode]);
+	fprintf(stderr, "%s\n", strerror(errno));
 	return fileHandles[fileno] ? 0 : 1;
 }
 
@@ -258,7 +344,7 @@ static FILE* getF(uint8_t fileno) {
 }
 
 uint8_t FISCloseFileHandle(uint8_t fileno) {
-	fprintf(stderr, "CloseFileHandle(%d)\n", fileno);
+	fprintf(stderr, "FISCloseFileHandle(%d)\n", fileno);
 	if (fileno == 0xff) {
 		for (FILE*& f : fileHandles) {
 			if (f) {
@@ -273,11 +359,13 @@ uint8_t FISCloseFileHandle(uint8_t fileno) {
 			return 1;
 
 		int result = fclose(f);
+		fileHandles[fileno] = NULL;
 		return !result ? 0 : 1;
 	}
 }
 
 uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {
+	printf("FISSeekFileHandle(%d, %u)\n", fileno, offset);
 	FILE* f = getF(fileno);
 	if (!f)
 		return 1;
@@ -300,10 +388,18 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	if (!f)
 		return 1;
 
-	size_t result = fread(cpuMemory+address, *size, 1, f);
+	errno = 0;
+	printf("FISReadFileHandle(%d, @0x%x, %d) -> ", fileno, address, *size);
+	size_t result;
+	if (address != 0xFFFF) {
+		result = fread(cpuMemory+address, 1,*size, f);
+	} else {
+		result = fread(gfxObjectMemory,1,*size,f);
+	}
+	printf("%d: %s\n", (int)result, (result != *size) ? strerror(errno) : "OK");
 	*size = result;
 
-	return (result >= 0) ? 0 : 1;
+	return (result > 0) ? 0 : 1;
 }
 
 uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
@@ -311,10 +407,12 @@ uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	if (!f)
 		return 1;
 
+	printf("FISWriteFileHandle(%d, @0x%x, %d) -> ", fileno, address, *size);
 	size_t result = fwrite(cpuMemory+address, *size, 1, f);
-	*size = result;
+	printf("%d: %s\n", (int)result, (result != 1) ? strerror(errno) : "OK");
+	//*size = result;
 
-	return (result >= 0) ? 0 : 1;
+	return (result > 0) ? 0 : 1;
 }
 
 uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
@@ -322,9 +420,12 @@ uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
 	if (!f)
 		return 1;
 
-	size_t oldpos = fseek(f, SEEK_END, 0);
+	printf("FISGetSizeFileHandle(%d) -> ", fileno);
+	errno = 0;
+	size_t oldpos = fseek(f, 0, SEEK_END);
 	*size = ftell(f);
 	fseek(f, SEEK_SET, oldpos);
+	printf("%d: %s\n", *size, strerror(errno));
 
 	return 0;
 }
@@ -334,8 +435,11 @@ uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size) {
 	if (!f)
 		return 1;
 
+	printf("FISSetSizeFileHandle(%d, %d) -> ", fileno, size);
+	errno = 0;
 	fflush(f);
 	int result = ftruncate(::fileno(f), size);
+	printf("%s\n", strerror(errno));
 
 	return !result ? 0 : 1;
 }
@@ -370,3 +474,89 @@ bool SERIsByteAvailable(void) {
 uint8_t SERReadByte(void) {
 	return 0;
 }
+
+// ***************************************************************************************
+//
+//								Dummy GPIO functions
+//
+// ***************************************************************************************
+
+int UEXTSetGPIODirection(int gpio,int pinType) {
+	printf("Pin %d set direction to %d\n",gpio,pinType);
+	return 0;
+}
+
+int UEXTSetGPIO(int gpio,bool isOn) {
+	printf("Set Pin %d to %d\n",gpio,isOn ? 1 : 0);
+	return 0;
+}
+
+int UEXTGetGPIO(int gpio,bool *pIsHigh) {
+	printf("Read pin %d, value is (not) %d\n",gpio,gpio & 1);
+	*pIsHigh = (gpio & 1) != 0;
+	return 0;
+}
+
+int UEXTGetGPIOAnalogue(int gpio,uint16_t *pLevel) {
+	*pLevel = gpio+1000;
+	printf("Read Analogue pin %d, value is (not) %d\n",gpio,*pLevel);
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//                                     Dummy I2C functions
+//
+// ***************************************************************************************
+
+int UEXTI2CInitialise(void) {
+	printf("I2C Initialise\n");
+    return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Write byte to I2C device register 
+//
+// ***************************************************************************************
+
+int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
+	printf("I2C Write to $%02x\n",device);
+	for (int i = 0;i < size;i++) {
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Read byte from I2C device register 
+//
+// ***************************************************************************************
+
+int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
+	printf("I2C Read from $%02x\n",device);
+	for (int i = 0;i < size;i++) {
+		data[i] = device + 0x12 + i * 3;
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+    return 0;
+}
+
+// ***************************************************************************************
+//
+//                          			Hardware reset
+//
+// ***************************************************************************************
+
+void ResetSystem(void) {
+	printf("Hardware reset.\n");
+}
+// ***************************************************************************************
+//
+//		Date 		Revision
+//		==== 		========
+//
+// ***************************************************************************************

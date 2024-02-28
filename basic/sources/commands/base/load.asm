@@ -19,6 +19,16 @@
 		.section code
 
 Command_Load:	;; [load]
+		jsr 	LoadCode 					; load the program
+		jmp 	WarmStart 					; and warm start.
+
+; ************************************************************************************************
+;
+;							Load file in following BASIC expression
+;
+; ************************************************************************************************
+		
+LoadCode:		
 		ldx 	#0  						; file name
 		jsr 	EXPEvalString
 		;
@@ -31,7 +41,7 @@ Command_Load:	;; [load]
 		sta 	ControlParameters+3
 		jsr 	CLLoad 						; Load BASIC program
 		jsr 	ClearCode
-		jmp 	WarmStart
+		rts
 
 Command_GLoad: ;; [gload]
 		ldx 	#0  						; file name
@@ -62,9 +72,7 @@ CLLoad:
 		lda 	XSNumber1
 		sta 	ControlParameters+1
 
-		DoSendMessage 						; do the load
-		.byte 	3,2
-		DoWaitMessage
+		jsr 	LoadExtended 				; call the extended load code
 		lda 	ControlError  				; error check
 		beq 	_CLExit
 		.error_file
@@ -81,6 +89,7 @@ _CLExit:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		23-02-24 		Made load a seperate routine.
 ;
 ; ************************************************************************************************
 

@@ -22,7 +22,7 @@ CMAKEDIR = md
 APPSTEM = .exe
 S = \\
 SDLDIR = C:\\sdl2
-CXXFLAGS = -I$(SDLDIR)$(S)include$(S)SDL2 -I . -fno-stack-protector -w -Wl,-subsystem,windows -DSDL_MAIN_HANDLED 
+CXXFLAGS = -I$(SDLDIR)$(S)include$(S)SDL2 -I . -fno-stack-protector -w -Wl,-subsystem,windows -DSDL_MAIN_HANDLED -std=c++17
 LDFLAGS = -lmingw32
 SDL_LDFLAGS = -L$(SDLDIR)$(S)lib -lSDL2 -lSDL2main -static-libstdc++ -static-libgcc
 OSNAME = windows
@@ -32,6 +32,14 @@ TOUCH =
 PICO_SDK_PATH=<somewhere, god alone knows>
 PYTHON = c:\Python312\python.exe
 else
+
+UNAME_S := $(shell uname -s)
+
+### LINUX
+
+ifeq ($(UNAME_S),Linux)
+OSNAME = linux
+CXXFLAGS = $(SDL_CFLAGS) -O2 -DLINUX  -fmax-errors=5 -I. -std=c++17
 PYTHON = python3
 CCOPY = cp
 CCOPYREC = cp -r
@@ -39,16 +47,37 @@ CDEL = rm -f
 CDELQ = 
 CMAKEDIR = mkdir -p 
 CMAKE = make
+TOUCH = touch
 APPSTEM =
 S = /
 SDL_CFLAGS = $(shell sdl2-config --cflags)
 SDL_LDFLAGS = $(shell sdl2-config --libs)
-CXXFLAGS = $(SDL_CFLAGS) -O2 -DLINUX  -fmax-errors=5 -I.  
 LDFLAGS = 
-OSNAME = linux
-EXTRAFILES = 
+
+else
+
+### MACOS
+
+OSNAME = macos
+CXXFLAGS = $(SDL_CFLAGS) -O2 -DMACOS -fms-extensions -std=c++17 -I.  
 PYTHON = python3
-TOUCH = touch -c
+CCOPY = cp
+CCOPYREC = cp -r
+CDEL = rm -f
+CDELQ = 
+CMAKEDIR = mkdir -p
+CMAKE = make
+APPSTEM =
+S = /
+SDL_CFLAGS = $(shell sdl2-config --cflags)
+SDL_LDFLAGS = $(shell sdl2-config --libs)
+LDFLAGS = 
+TOUCH = touch
+
+endif
+
+
+
 endif
 #
 #		Directories

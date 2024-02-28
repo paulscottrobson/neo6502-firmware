@@ -22,12 +22,12 @@ target_sources(firmware PRIVATE main.cpp
     ${COMMONSRC}/gfxcommands.cpp  ${COMMONSRC}/ellipse.cpp  ${COMMONSRC}/fileinterface.cpp  
     ${COMMONSRC}/sprites.cpp  ${COMMONSRC}/logo.cpp  ${COMMONSRC}/sprites_xor.cpp  ${COMMONSRC}/tilemap.cpp
     ${COMMONSRC}/sndmanager.cpp  ${COMMONSRC}/sfxmanager.cpp ${COMMONSRC}/tick.cpp ${COMMONSRC}/serialmanager.cpp
-    ${COMMONSRC}/turtle.cpp ${COMMONSRC}/locale.cpp
+    ${COMMONSRC}/turtle.cpp ${COMMONSRC}/locale.cpp ${COMMONSRC}/pininterface.cpp
     #
     #       Hardware sources
     #
     hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp  
-    hardware/fileimplementation.cpp hardware/tick.cpp hardware/serial.cpp
+    hardware/fileimplementation.cpp hardware/tick.cpp hardware/serial.cpp hardware/ports.cpp
     #
     #       CPU type (pretty much permanently PIO now)
     #
@@ -65,6 +65,9 @@ target_link_libraries(firmware
     pico_stdlib
     pico_multicore
     pico_util
+    hardware_i2c
+    hardware_adc
+    hardware_spi
     libdvi
     tinyusb_host
     tinyusb_device

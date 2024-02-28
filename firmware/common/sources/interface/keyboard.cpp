@@ -268,12 +268,10 @@ static void KBDFunctionKey(uint8_t funcNum,uint8_t modifiers) {
 // ***************************************************************************************
 
 void KBDShowFunctionKeys(void) {
-	char szBuffer[16];
 	for (int i = 1;i <= 10;i++) {
 		char *k = FKEYTEXT(i);
 		if (*k != '\0') {
-			sprintf(szBuffer,"F%-2d : \"",i);
-			CONWriteString(szBuffer);
+			CONWriteString("F%-2d : \"", i);
 			while (*k != '\0') {
 				if (*k == 13) {
 					CONWriteString("<Enter>");
@@ -296,12 +294,12 @@ void KBDShowFunctionKeys(void) {
 
 uint8_t KBDKeyboardController(void) {
 	uint8_t ck = 0;
-	if (keyboardState[29]) ck |= 0x01; 											// Z bit 0
-	if (keyboardState[27]) ck |= 0x02; 											// X bit 1
-	if (keyboardState[14]) ck |= 0x04; 											// K bit 2
-	if (keyboardState[16]) ck |= 0x08; 											// M bit 3
-	if (keyboardState[15]) ck |= 0x10; 											// L bit 4
-	if (keyboardState[51]) ck |= 0x20; 											// ; bit 5 (key imm right of L)
+	if (keyboardState[4]|keyboardState[80]) ck |= 0x01; 						// A bit 0
+	if (keyboardState[7]|keyboardState[79]) ck |= 0x02; 						// D bit 1
+	if (keyboardState[26]|keyboardState[82]) ck |= 0x04; 						// W bit 2
+	if (keyboardState[22]|keyboardState[81]) ck |= 0x08; 						// S bit 3
+	if (keyboardState[18]) ck |= 0x10; 											// O bit 4
+	if (keyboardState[19]) ck |= 0x20; 											// P bit 5 
 	return ck;
 }
 
@@ -310,5 +308,6 @@ uint8_t KBDKeyboardController(void) {
 //		Date 		Revision
 //		==== 		========
 //		07-02-24 	Added ability to list function keys
+//		18-02-24	Keys WASDOP now default keys, also cursor keys.
 //
 // ***************************************************************************************

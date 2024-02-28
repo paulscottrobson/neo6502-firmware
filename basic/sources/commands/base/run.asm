@@ -20,6 +20,13 @@
 		.section code
 
 Command_RUN:	;; [run]
+		lda 	(codePtr),y 				; RUN something ?
+		cmp 	#KWD_SYS_END
+		beq 	Command_RUN_Always
+		cmp 	#KWD_COLON
+		beq 	Command_RUN_Always
+		jsr 	LoadCode 					; load the program, then run it.
+Command_RUN_Always:
 		jsr 	ClearCode					; clear everything out.
 		lda 	Program 					; back to the program start, get the count of var pages.
 		clc 								; make an actual address.
@@ -152,6 +159,7 @@ _CS2Fail:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		23-02-24 		Added RUN <x> functionality.
 ;
 ; ************************************************************************************************
 

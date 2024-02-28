@@ -89,6 +89,17 @@ ClearCodeSetMemoryA:
 		;		Reset turtle system
 		;
 		jsr 	TurtleResetSystem
+		;
+		;		Clearer the error handler link
+		;
+		stz		errCode
+		stz 	errCode+1
+		;
+		; 		Reset the I/O system
+		;
+		.DoSendMessage 					
+		.byte 	10,1
+		.DoWaitMessage		
 		ply
 		rts
 
@@ -237,6 +248,7 @@ _CVExit:
 ;		16-01-24		CLEAR was looping (Y was reset to 3 causing it to loop infinitely)
 ;		23-01-24 		CLEAR resets all sprite settings as well.
 ; 		30-01-24 		CLEAR clears the sprite layer to maintain consistency.
+;		22-02-24 		CLEAR initialises UEXT
 ;
 ; ************************************************************************************************
 
