@@ -230,9 +230,13 @@ uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attr
 	printf("FISStatFile('%s') -> ", abspath.c_str());
 
 	try {
+		using std::filesystem::perms;
+		std::filesystem::file_status status = std::filesystem::status(abspath);
+
 		*length = std::filesystem::file_size(abspath);
-		*attribs = std::filesystem::is_directory(abspath) ? FIOATTR_DIR : 0;
-		printf("OK\n");
+		*attribs = ((status.type() == std::filesystem::file_type::directory) ? FIOATTR_DIR : 0) |
+			((status.permissions() & perms::owner_write) == perms::none ? FIOATTR_READONLY : 0);
+		printf("OK; length=0x%04x; permissions=0x%02x\n", *length, *attribs);
 		return 0;
 	} catch (const std::filesystem::filesystem_error& e) {
 		printf("%s\n", e.what());
@@ -254,7 +258,7 @@ uint8_t FISOpenDir(const std::string& filename) {
 	errno = 0;
 	try {
 		readDirIterator = std::filesystem::directory_iterator(abspath);
-		printf("OKs\n");
+		printf("OK\n");
 		return 0;
 	} catch (const std::filesystem::filesystem_error& e) {
 		printf("%s\n", e.what());
