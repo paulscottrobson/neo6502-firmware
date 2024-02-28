@@ -22,6 +22,7 @@ firmware/build.sh
 firmware/common/include/data/
 *.elf
 *.uf2
+*.pdf
 firmware/include/data/basic_binary.h
 firmware/include/data/dispatch_code.h
 firmware/include/data/prompt.h
@@ -43,6 +44,9 @@ firmware/sources/interface/*.o
 *.exe
 *.o
 *.dump
+*.log
+*.aux
+documents/release/api.*
 basic/scripts/__pycache__/tokens.cpython-311.pyc
 firmware/common/include/data/prompt.h
 firmware/common/include/data/neolocale.h
