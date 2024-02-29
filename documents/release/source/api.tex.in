@@ -16,7 +16,9 @@
 \author{Paul Robson}
 \date{@DATE@}
 
-\graphicspath{ {./documents/release/source/img/} {../documents/release/source/img/} }
+\graphicspath{ {./img/}                             % WRT local editor (eg: texworks)
+               {./documents/release/source/img/}    % WRT command line
+               {../documents/release/source/img/} } % WRT Makefile
 \setcounter{tocdepth}{1}
 \hypersetup{hidelinks , linktoc=all}
 
