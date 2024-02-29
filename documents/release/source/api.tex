@@ -317,14 +317,13 @@ Deposit the state of the specified keyboard key into \Param{0}.
 The key which to query is specified in \Param{0}.
 }
 \ApiFnRow{3}{Basic}{
-Execute BASIC (loading currently does not work).
+Loads and allows the execution of BASIC via a indirect jump through address zero.
 }
 \ApiFnRow{4}{Credits}{
 Print the Neo6502 project contributors (stored in flash memory).
 }
 \ApiFnRow{5}{Serial Status}{
 Check the serial port to see if there is a data transmission.
-Group 2 Function 1 "Read Character" does this implicitly.
 }
 \ApiFnRow{6}{Locale}{
 Set the locale code specified in \Param{0,1} as upper-case ASCII letters.
@@ -336,7 +335,8 @@ For example:
 \end{description}
 }
 \ApiFnRow{7}{System Reset}{
-System Reset
+System Reset. This is a full hardware reset. It resets the RP2040 using the Watchdog timer, and
+this also resets the 65C02.
 }
 \end{tabular}
 \end{table}
@@ -361,14 +361,15 @@ If there are no key presses in the queue, \Param{0} will be zero.
 \newline
 
 Note that this Function is best for text input, but not for games.
-Function 7,1 is more optimal for games.
+Function 7,1 is more optimal for games, as this only detects key presses,
+you cannot check whether the key is currently down or not.
 }
 \ApiFnRow{2}{Console Status}{
 Check to see if the keyboard queue is empty.
 If it is, \Param{0} will be \MonoSp{\$FF}, otherwise it will be \MonoSp{\$00}.
 }
 \ApiFnRow{3}{Read Line}{
-Input the current line below the cursor into YX as a length-prefixed string;
+Input the current line below the cursor into \Param{0,1} as a length-prefixed string;
 and move the cursor to the line below. Handles multiple-line input.
 }
 \ApiFnRow{4}{Define Hotkey}{
@@ -377,6 +378,7 @@ length-prefixed string stored at the memory location specified in \Param{2,3}.
 For example, in a block of in-line assembly within a BASIC program,
 the string: \MonoSp{06,12,108,105,115,116,13} would clear the screen (\MonoSp{12}),
 then list the program (\MonoSp{108}='l',\MonoSp{105}='i',\MonoSp{115}='s',\MonoSp{116}='t',\MonoSp{13}='ENTER').
+\newline F11 and F12 cannot currently be defined.
 }
 \ApiFnRow{5}{Define Character}{
 Define a font character specified in \Param{0} within the range of 192..255.
@@ -406,23 +408,22 @@ Move the cursor to the screen character cell \Param{0}\textless-X, \Param{1}\tex
 Display the current function key definitions.
 }
 \ApiFnRow{9}{Screen Size}{
-Fetches the screen size, in chars.
-\newline TODO: explain this function and any parameters
+Fetches the console size, in characters, to \Param{0} and \Param{1}, the height and width respectively.
 }
 \ApiFnRow{10}{Insert Line}{
 Insert Line
-\newline TODO: explain this function and any parameters
+This is a support function which inserts a blank line in the console and should not be used.
 }
 \ApiFnRow{11}{Delete Line}{
 Delete Line
-\newline TODO: explain this function and any parameters
+This is a support function which deletes a line in the console and should not be used.
 }
 \ApiFnRow{12}{Clear Screen}{
 Clears the screen.
 }
 \ApiFnRow{13}{Cursor Position}{
 Get Cursor Position
-\newline TODO: explain this function and any parameters
+\newline Returns the current cursor position in \Param{0} and \Param{1}
 }
 \ApiFnRow{14}{Clear Region}{
 Erase all characters within the rectangular region specified
@@ -430,11 +431,11 @@ in \Param{0,1} (begin X,Y) and \Param{2,3} (end X,Y).
 }
 \ApiFnRow{15}{Set Text Color}{
 Set Text Color
-\newline TODO: explain this function and any parameters
+\newline Sets the foreground colour to \Param{0} and the background colour to \Param{1}
 }
 \ApiFnRow{16}{Cursor Inverse}{
 Toggles the cursor colour between normal and inverse
-(ie: swaps FG and BG colors).
+(ie: swaps FG and BG colors). This should not be used.
 }
 \end{tabular}
 \end{table}
@@ -754,7 +755,8 @@ to the values in \Param{1},\Param{2},\Param{3} (RGB).
 \ApiFnRow{33}{Read Pixel}{
 Read a single pixel at the screen coordinates specified
 in \Param{0,1},\Param{2,3} (X,Y).
-When the routine completes, the result will be in \Param{0}.
+When the routine completes, the result will be in \Param{0}. If sprites are in use, this will be the
+background only (0..15), if sprites are not in use it may return (0..255)
 }
 \ApiFnRow{34}{Reset Palette}{
 Reset the palette to the defaults.
@@ -778,19 +780,19 @@ This is updated at the start of each v-blank period.
 }
 \ApiFnRow{64}{Set Color}{
 Set Color
-\newline TODO: explain this function and any parameters
+\newline Sets the current drawing colour to \Param{0}
 }
 \ApiFnRow{65}{Set Solid Flag}{
 Set Solid Flag
-\newline TODO: explain this function and any parameters
+\newline Sets the solid flag to \Param{0}, which indicates either solid fill (for shapes) or solid background (for images and fonts)
 }
 \ApiFnRow{66}{Set Draw Size}{
 Set Draw Size
-\newline TODO: explain this function and any parameters
+\newline Sets the drawing scale for images and fonts to \Param{0}
 }
 \ApiFnRow{67}{Set Flip Bits}{
 Set Flip Bits
-\newline TODO: explain this function and any parameters
+\newline Sets the flip bits for drawing images. Bit 0 set causes a horizontal flip, bit 1 set causes a vertical flip.
 }
 \end{tabular}
 \end{table}
@@ -819,6 +821,7 @@ Set or update the sprite specified in \Param{0}.
 \newline
 
 \ParamBits{\$FF0A - Flip Axis Flags}{0}{0}{0}{0}{0}{0}{Vertical}{Horizontal}
+\newline values that are \$80 or \$8080 are not updated.
 }
 \ApiFnRow{3}{Sprite Hide}{
 Hide the sprite specified in \Param{0}.
@@ -846,11 +849,13 @@ with the index specified in \Param{0}.
 \textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
 \hline
 \ApiFnRow{1}{Read Controller}{
-Read the state of keyboard, joystick, etc.
-Initially, the Controller is the keyboard.
+This reads the status of the default controller into \Param{0}
+\newline Initially, the Controller is the keyboard.
 This Function interprets key presses and releases as a joystick.
 The system maintains a bit-array of which keys are pressed.
 Currently, the keyboard is the only available Controller.
+\newline   This function will become obsolete shortly as a more extensive API using USB
+controllers becomes available. However, it will maintain backward compatibility.
 \newline
 
 \ParamBits{\$FF04 - Controller Flags}{0}{0}{B}{A}{Down}{Up}{Right}{Left}
@@ -912,7 +917,7 @@ as the turtle graphics system “adopts” one of the sprites.
 The icon is not currently re-definable, and initially the turtle is hidden.
 }
 \ApiFnRow{2}{Turtle Turn}{
-Turn the turtle right by \Param{0}\Param{1} degrees. Show if hidden.
+Turn the turtle right by \Param{0}\Param{1} degrees. Show if hidden. To turn left, turn by a negative amount.
 }
 \ApiFnRow{3}{Turtle Move}{
 Move the turtle forward by \Param{0}\Param{1} degrees, drawing in colour \Param{2},
@@ -935,32 +940,37 @@ Move the turtle to the home position (in the center, pointing upward).
 \textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
 \hline
 \ApiFnRow{1}{UExt Initialise}{
-Initialise the UExt I/O system
-\newline TODO: explain this function and any parameters
+Initialise the UExt I/O system.
+This resets the IO system to its default state, where all UEXT pins are I/O pins,
+inputs and enabled.
 }
 \ApiFnRow{2}{Write GPIO}{
 (P0,P1)
-\newline TODO: explain this function and any parameters
+\newline This copies the value \Param{1} to the output latch for UEXT pin \Param{0}.
+This will only display on the output pin if it is enabled, and its direction is set to output.
 }
 \ApiFnRow{3}{Read GPIO}{
 P0 = GPIO(P0)
-\newline TODO: explain this function and any parameters
+\newline If the pin is set to input, reads the level on pin on UEXT port \Param{0}. If it is set to output
+this reads the output latch for pin on UEXT port \Param{0}
 }
 \ApiFnRow{4}{Set Port Direction}{
 P0 to P1
-\newline TODO: explain this function and any parameters
+\newline Set the port direction for UEXT Port \Param{0} to \Param{1}. This can be 1 (Input)
+2 (Output) or 3 (Analogue)
 }
 \ApiFnRow{5}{Write I2C}{
 (P0,P1,P2)
-\newline TODO: explain this function and any parameters
+\newline Write to I2C Device \Param{0}, Register \Param{1} value \Param{2}. Does not fail if device not present.
 }
 \ApiFnRow{6}{Read I2C}{
 P0 = (P0,P1)
-\newline TODO: explain this function and any parameters
+\newline Read from I2C Device \Param{0}, Register \Param{1}. If the device is not present this will cause an error.
 }
 \ApiFnRow{7}{Read GPIO Analog}{
 P1P0 = GPIOAnalogue(P0)
-\newline TODO: explain this function and any parameters
+\newline Read the analogue value on UEXT Pin \Param{0} ; this has to be set to analogue type to work. Returns a value
+from 0..4095 stored in \Param{0,1}, which represents an input value of 0 to 3.3 volts.
 }
 \end{tabular}
 \end{table}

@@ -1,18 +1,18 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      dispatch.config
+//      Name :      group1_system.inc
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //      Date :      22nd November 2023
 //      Reviewed :  No
-//      Purpose :   Dispatched for commands
+//      Purpose :   System group dispatcher.
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
 // ***************************************************************************************
 //
-// Group 1 (System)
+//                                  Group 1 (System)
 //
 // ***************************************************************************************
 
@@ -38,7 +38,7 @@ GROUP 1 System
     FUNCTION 3 Basic
         MEMLoadBasic();
     DOCUMENTATION
-        Execute BASIC (loading currently does not work).
+        Loads and allows the execution of BASIC via a indirect jump through address zero.
 
     FUNCTION 4 Credits
         CONWriteString((char *)whoList);
@@ -49,7 +49,6 @@ GROUP 1 System
         SERCheckDataAvailable();
     DOCUMENTATION
         Check the serial port to see if there is a data transmission.
-        Group 2 Function 1 "Read Character" does this implicitly.
 
     FUNCTION 6 Locale
         LOCSetLocale(DPARAMS[0],DPARAMS[1]);
@@ -65,8 +64,6 @@ GROUP 1 System
     FUNCTION 7 System Reset
         ResetSystem();
     DOCUMENTATION
-        System Reset
-// Q21: TODO: explain this function and any parameters to disambiguate it from 1,0 "Reset"
-//      and probably rename 1,0 "Reset" to be more specific, eg: "DSP Reset"
-//      is this more like a soft "Reboot"
+        System Reset. This is a full hardware reset. It resets the RP2040 using the Watchdog timer, and
+        this also resets the 65C02.
 

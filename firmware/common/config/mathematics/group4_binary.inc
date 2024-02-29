@@ -3,6 +3,7 @@
 //
 //      Name :      maths_binary.config
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//                  Bill Auger
 //      Date :      1st December 2023
 //      Reviewed :  No
 //      Purpose :   Maths "co-processor" (binary)

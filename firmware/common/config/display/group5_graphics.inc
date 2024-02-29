@@ -1,11 +1,12 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      dispatch.config
+//      Name :      group5_graphics.inc
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//                  Bill Auger
 //      Date :      22nd November 2023
 //      Reviewed :  No
-//      Purpose :   Dispatched for commands
+//      Purpose :   Graphics dispatcher.
 //
 // ***************************************************************************************
 // ***************************************************************************************
@@ -93,8 +94,8 @@ GROUP 5 ,0,5 Graphics
     DOCUMENTATION
         Read a single pixel at the screen coordinates specified
         in \Param{0,1},\Param{2,3} (X,Y).
-        When the routine completes, the result will be in \Param{0}.
-// Q17: these are guesses - the current api.pdf does not document Function 5,33
+        When the routine completes, the result will be in \Param{0}. If sprites are in use, this will be the 
+        background only (0..15), if sprites are not in use it may return (0..255)
 
     FUNCTION 34 Reset Palette
         GFXDefaultPalette();
@@ -128,23 +129,23 @@ GROUP 5 ,0,5 Graphics
         GFXSetDrawColour(DPARAMS[0]);
     DOCUMENTATION
         Set Color
-        \newline TODO: explain this function and any parameters
+        \newline Sets the current drawing colour to \Param{0}
 
     FUNCTION 65 Set Solid Flag
         GFXSetSolidFlag(DPARAMS[0]);
     DOCUMENTATION
         Set Solid Flag
-        \newline TODO: explain this function and any parameters
+        \newline Sets the solid flag to \Param{0}, which indicates either solid fill (for shapes) or solid background (for images and fonts)
 
     FUNCTION 66 Set Draw Size
         GFXSetDrawSize(DPARAMS[0]);
     DOCUMENTATION
         Set Draw Size
-        \newline TODO: explain this function and any parameters
+        \newline Sets the drawing scale for images and fonts to \Param{0}
 
     FUNCTION 67 Set Flip Bits
         GFXSetFlipBits(DPARAMS[0]);
     DOCUMENTATION
         Set Flip Bits
-        \newline TODO: explain this function and any parameters
+        \newline Sets the flip bits for drawing images. Bit 0 set causes a horizontal flip, bit 1 set causes a vertical flip.
 

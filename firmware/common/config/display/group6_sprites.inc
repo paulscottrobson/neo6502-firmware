@@ -1,19 +1,19 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      dispatch.config
+//      Name :      group6_sprites.inc
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//                  Bill Auger
 //      Date :      22nd November 2023
 //      Reviewed :  No
-//      Purpose :   Dispatched for commands
+//      Purpose :   Sprite dispatcher.
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-
 // ***************************************************************************************
 //
-// Group 6 (Sprites)
+//                                    Group 6 (Sprites)
 //
 // ***************************************************************************************
 
@@ -33,6 +33,7 @@ GROUP 6 ,0 Sprites
         \SpriteParamBits{$FF09 - Image Parameters}{0}{32-bit}{Index}
         \newline
         \ParamBits{$FF0A - Flip Axis Flags}{0}{0}{0}{0}{0}{0}{Vertical}{Horizontal}
+        \newline values that are $80 or $8080 are not updated.
 
     FUNCTION 3 Sprite Hide
         SPRHide(DPARAMS);

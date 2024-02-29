@@ -1,19 +1,19 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      dispatch.config
+//      Name :      group9_turtle.inc
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//                  Bill Auger
 //      Date :      22nd November 2023
 //      Reviewed :  No
-//      Purpose :   Dispatched for commands
+//      Purpose :   Turtle graphics dispatcher
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-
 // ***************************************************************************************
 //
-// Group 9 (Turtle Graphics)
+//                          Group 9 (Turtle Graphics)
 //
 // ***************************************************************************************
 
@@ -29,7 +29,7 @@ GROUP 9 ,0 Turtle Graphics
     FUNCTION 2 Turtle Turn
         TTLRotate(DSPGetInt16(DCOMMAND,4));
     DOCUMENTATION
-        Turn the turtle right by \Param{0}\Param{1} degrees. Show if hidden.
+        Turn the turtle right by \Param{0}\Param{1} degrees. Show if hidden. To turn left, turn by a negative amount.
 
     FUNCTION 3 Turtle Move
         TTLMove(DSPGetInt16(DCOMMAND,4),DCOMMAND[6],DCOMMAND[7]);
