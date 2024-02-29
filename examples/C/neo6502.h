@@ -7,9 +7,9 @@
 /* Neo6502 Kernel API control addresses */
 
 uint16_t* ControlPort         = (uint16_t*)0xFF00 ;
-uint16_t* API_COMMAND_ADDR    = ControlPort + 0 ; // function group address
-uint16_t* API_FUNCTION_ADDR   = ControlPort + 1 ; // function address
-uint16_t* API_PARAMETERS_ADDR = ControlPort + 4 ; // function parameters base address (+0..7)
+uint16_t* API_COMMAND_ADDR    = (uint16_t*)0xFF00 ; // function group address
+uint16_t* API_FUNCTION_ADDR   = (uint16_t*)0xFF01 ; // function address
+uint16_t* API_PARAMETERS_ADDR = (uint16_t*)0xFF04 ; // function parameters base address (+0..7)
 
 
 /* Neo6502 Kernel API control codes (see api.pdf) */
