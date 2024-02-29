@@ -16,7 +16,7 @@
 //
 // ***************************************************************************************
 
-GROUP 10 UExt I/O
+GROUP 10 ,0 UExt I/O
     FUNCTION 1 UExt Initialise
         IOInitialise();
     DOCUMENTATION
@@ -59,7 +59,7 @@ GROUP 10 UExt I/O
         P0 = (P0,P1)
         \newline Read from I2C Device \Param{0}, Register \Param{1}. If the device is not present this will cause an error.
 
-    FUNCTION 7 Read GPIO Analog
+    FUNCTION 7 Read Analog
         *DERROR = IOReadAnalogue(DPARAMS[0],&u3);
         DPARAMS[0] = u3 & 0xFF;DPARAMS[1] = (u3 >> 8);
     DOCUMENTATION
