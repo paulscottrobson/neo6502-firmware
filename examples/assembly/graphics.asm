@@ -72,11 +72,11 @@ start:
   sta API_COMMAND
 
 
-  ;-----------------------------------------;
-  ; Draw Elipse - (API Group 5, Function 4) ;
-  ;-----------------------------------------;
+  ;------------------------------------------;
+  ; Draw Ellipse - (API Group 5, Function 4) ;
+  ;------------------------------------------;
 
-  lda API_FN_DRAW_ELIPSE
+  lda API_FN_DRAW_ELLIPSE
   sta API_FUNCTION
   lda #$00               ; Begin X low-byte
   sta API_PARAMETERS + 0
@@ -119,12 +119,12 @@ start:
   sta API_COMMAND
 
 
-  ;-----------------------------------------;
-  ; Draw Elipse - (API Group 5, Function 4) ;
-  ;-----------------------------------------;
+  ;------------------------------------------;
+  ; Draw Ellipse - (API Group 5, Function 4) ;
+  ;------------------------------------------;
 
-  ; a smaller elipse, in masked fill mode
-  lda API_FN_DRAW_ELIPSE
+  ; a smaller ellipse, in masked fill mode
+  lda API_FN_DRAW_ELLIPSE
   sta API_FUNCTION
   lda #$20               ; Begin X low-byte
   sta API_PARAMETERS + 0
@@ -167,12 +167,12 @@ start:
   sta API_COMMAND
 
 
-  ;-----------------------------------------;
-  ; Draw Elipse - (API Group 5, Function 4) ;
-  ;-----------------------------------------;
+  ;------------------------------------------;
+  ; Draw Ellipse - (API Group 5, Function 4) ;
+  ;------------------------------------------;
 
-  ; a yet smaller elipse, in opaque fill mode
-  lda API_FN_DRAW_ELIPSE
+  ; a yet smaller ellipse, in opaque fill mode
+  lda API_FN_DRAW_ELLIPSE
   sta API_FUNCTION
   lda #$40               ; Begin X low-byte
   sta API_PARAMETERS + 0

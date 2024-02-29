@@ -32,7 +32,7 @@
 % \Param presents the given argument as a "Param" in bold, mono-spaced font
 \newcommand{\Param}[1] {\textbf{\texttt{Params[#1]}}}
 
-% \ParamsBits illustrates a bit-field
+% \ParamBits illustrates a bit-field
 \newcommand{\ParamBits}[9] {
   \fontsize{10pt}{10pt}\selectfont
   \textbf{#1}
@@ -153,7 +153,7 @@ and \MonoSp{API\_PARAMETERS\_ADDR}.
 \newline
 
 API Commands/Functions are grouped by functionality.
-For example, Group 1 are the system-related, and Group 2 are console-I/O-related.
+For example, Group 1 are system-related, and Group 2 are console-I/O-related.
 All Groups and their Commands/Functions are shown in the following table.
 \newline
 
@@ -233,7 +233,7 @@ per the following algorithm:
 
 \begin{enumerate}
   \item Wait for any pending command to complete.
-        There is a subroutine WaitMessage which does this for the developer.
+        There is a subroutine \MonoSp{WaitMessage} which does this for the developer.
   \item Setup the Function code at \MonoSp{\$FF01};
         and any Parameters across \MonoSp{\$FF04..\$FF0B}.
         To print a character for example, set \MonoSp{\$FF01} to \MonoSp{\$06}
@@ -257,7 +257,7 @@ per the following algorithm:
 \end{enumerate}
 
 There is a support function \MonoSp{SendMessage},
-which inlines the command and function.
+which in-lines the command and function.
 E.g.: this code from the Kernel:
 
 % Q1: KSendMessage/KWaitMessage or SendMessage/WaitMessage ?
@@ -286,10 +286,10 @@ lda DParameters ; read result (a key-code)
 
 \section{API Functions}\label{api-functions}
 
-The following tables are a comprehansive list of all supported API functions.
+The following tables are a comprehensive list of all supported API functions.
 \newline
 
-For the conveniance of application programmers,
+For the convenience of application programmers,
 the application include files \MonoSp{examples/C/neo6502.h}
 and \MonoSp{examples/assembly/neo6502.asm.inc}
 define macros for these groups, their functions,
@@ -375,8 +375,8 @@ then XOR'ing the result with the value specified in \Param{1}.
 \newline
 
 The value in \Param{2} is a flag which determines the paint fill mode
-for the Draw Rectangle and Draw Elipse commands:
-reset (\MonoSp{1}) for outline, set (\MonoSp{1}) for solid fill.
+for the Draw Rectangle and Draw Ellipse commands:
+reset (\MonoSp{0}) for outline, set (\MonoSp{1}) for solid fill.
 \newline
 
 The value in \Param{3} is the draw extent (window) for the Draw Image command.
@@ -385,14 +385,14 @@ The value in \Param{3} is the draw extent (window) for the Draw Image command.
 The value in \Param{4} is a bit-field of flags for the Draw Image command,
 which determine if the image will be inverted (flipped) horizontally or vertically:
 \MonoSp{bit-0} for horizontal, \MonoSp{bit-1} for vertical,
-reset (\MonoSp{1}) for normal, set (\MonoSp{1}) for inverted.
+reset (\MonoSp{0}) for normal, set (\MonoSp{1}) for inverted.
 \newline
 
 For the "Draw Rectangle" and "Draw Ellipse" commands,
 the given order and position of the coordinates are not significant.
 To be precise, one is "a corner" and the other is "the opposite corner".
-For the "Draw Elipse" command, these corners are referring to the bounding-box.
-The coordinates for an elipse lie outside of the ellipse itself.
+For the "Draw Ellipse" command, these corners are referring to the bounding-box.
+The coordinates for an ellipse will lie outside of the ellipse itself.
 
 
 \pagebreak
@@ -417,7 +417,7 @@ The format is quite simple.
 \end{tabular}
 \end{table}
 
-Sprites graphics data is all of the 16x16 tiles,
+The layout of sprites graphics data is all of the 16x16 tiles,
 followed by all the 16x16 sprites,
 followed by all the 32x32 sprites, all in their respective orders.
 As there is currently only about 20kB of Graphics Memory,
@@ -464,7 +464,7 @@ which demonstrates how to get started importing graphics into the Neo6502.
 \MonoSp{\$8C} & Dark Orange       \\ \hline
 \MonoSp{\$8D} & Brown             \\ \hline
 \MonoSp{\$8E} & Pink              \\ \hline
-\MonoSp{\$8F} & Light grey        \\ \hline
+\MonoSp{\$8F} & Light Grey        \\ \hline
 \end{tabular}
 \end{table}
 
@@ -479,7 +479,7 @@ It is comprised of three meta-data bytes, followed by one byte for each tile,
 which is it's tile number in the graphic file (refer to the following section).
 \newline
 
-\MonoSp{F0-FF} are special reserved tile numbers.
+\MonoSp{F0-FF} are special reserved tile numbers,
 \MonoSp{F0} is a transparent tile;
 and \MonoSp{F1-FF} are a solid tile in the current palette colour.
 The format is very simple.
@@ -489,8 +489,8 @@ The format is very simple.
 \begin{tabular}{ | c | c | l | }                                                \hline
 \textbf{Offset} & \textbf{Data} & \textbf{Description}                       \\ \hline
 0               & 1             & Graphics Data Format ID                    \\ \hline
-1               & Width         & Width of tilemap (number of tiles)         \\ \hline
-2               & Height        & Height of tilemap (number of tiles)        \\ \hline
+1               & Width         & Width of tile-map (number of tiles)        \\ \hline
+2               & Height        & Height of tile-map (number of tiles)       \\ \hline
 3..             & Raw           & Tiles graphics data (width * height bytes) \\ \hline
 \end{tabular}
 \end{table}
@@ -501,7 +501,7 @@ The format is very simple.
 
 \section{Sprites}\label{sprite}
 
-There is one sprite layer (z-plane) in the conventional sense.
+The Neo6502 graphics system has one sprite layer (z-plane) in the conventional sense.
 Technically, there is no "sprite layer", per-se.
 The system uses palette manipulation to create, what is in practice,
 a pair of 4-bit bit-planes.
@@ -511,18 +511,17 @@ It's this top nibble which is read by Function 5,36 "Read Sprite Pixel".
 \newline
 
 Function 6,2 sets or updates a sprite.
-Sprites are assigned to one of 16 depth layers. Layer 0 is transparency.
 These parameters (eg: the X and Y coordinates) cannot be set independently.
 To retain/reuse the current value of a parameter for a subsequent call,
 set each of the associated byte(s) to \MonoSp{\$80}
-(\MonoSp{\$80,\$80,\$80,\$80} for coordinates).
+(eg: \MonoSp{\$80,\$80,\$80,\$80} for coordinates).
 \newline
 
 The 'Sprite' Parameter \Param{0} specifies the index of the sprite in the graphics system.
 Sprite 0 is the turtle sprite.
 \newline
 
-\Param{1,2},\Param{3,4} specifies the X and Y coordinates.
+\Param{1,2},\Param{3,4} specifies the X and Y screen coordinates.
 \newline
 
 Bits 0-5 of the 'Image' Parameter \Param{5} specify
@@ -535,12 +534,13 @@ In practice, the index is the same as the sprite number
 \newline
 
 The value in \Param{6} specifies a bit-field of flags,
-which determine if the graphic will be inverted (flipped) horizontally or vertically:
+which determines if the graphic will be inverted (flipped) horizontally or vertically:
 \MonoSp{bit-0} for horizontal, \MonoSp{bit-1} for vertical,
 reset (\MonoSp{0}) for normal, set (\MonoSp{1}) for inverted.
 \newline
 
 \Param{7} specifies the anchor alignment.
+Refer to Section \#\ref{subsec:sprite-anchors} "Sprite Anchors" for details.
 \newline
 
 
@@ -555,7 +555,8 @@ That is, coordinates 0,0 of the sprite
 will coincide with one of the positions shown in the table below.
 The default anchor alignment is zero (middle-center).
 % Q20: the above is probably not an accurate description
-%      how is this used? is this for alignment/positioning?
+%      how is this used? - eg: what may be different if the anchor was chosen poorly?
+%      is this for alignment/positioning?
 %      is it a pivot point for rotation?
 
 \begin{table}[h]
@@ -585,14 +586,18 @@ Considering the origin at the bottom-left,
 this sprite is drawn at 16,32, the midpoint of the top of the square.
 % same as Q20: what is "the square"? - is this the bounding box of the sprite?
 %              with respect to the origin,
-%              both diagrams show the image drawn in exactly the same place,
+%              both diagrams show the image drawn in exactly the same place
 \newline
 
 In the lower example, the anchor point is at 0;
 and this sprite is drawn at 16,16 (the middle of the square).
 The anchor point should be something like the centre point.
 So for a walking character, this might be anchor point 2 (the bottom-center).
-% same as Q20: it should be the center point ... of what?
+% same as Q20: "something like" is rather vague
+%              rather "The anchor point should be ...":
+%              "... thought of as the center point of" ... but of what? (eg: rotation?)
+%              or:
+%              "... placed near the center point of" ...but of what?
 %              Anchor point 8 in the example image is not the center point of the image
 %              nor is it the center point of the diagram.
 %              The diagrams do not demonstrate anything that the table above does not
@@ -609,12 +614,12 @@ So for a walking character, this might be anchor point 2 (the bottom-center).
 
 \section{Sound}\label{sound}
 
-Function 8,4 queues a sound. Queued sounds are played sequentiually,
+Function 8,4 queues a sound. Queued sounds are played sequentially,
 each after the previous has completed,
 such that sounds within a channel queue will not conflict, interrupt, or overlap.
 \newline
 
-Frequency is in untis of Hertz.
+Frequency is in units of Hertz.
 Duration is in units of 100ths of a second.
 Slide is a gradual linear change in frequency, in units of Hz per 100th of a second.
 Sound source type 0 is the beeper.
