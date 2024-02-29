@@ -20,7 +20,7 @@
 		}
 	DOCUMENTATION
 		Addition
-		\newline TODO: describe the parameters
+		\newline Register1 := Register 1 + Register2
 
 	FUNCTION 1 Subtraction
 		if (MATHIsFloatBinary()) {
@@ -30,7 +30,7 @@
 		}
 	DOCUMENTATION
 		Subtraction
-		\newline TODO: describe the parameters
+		\newline Register1 := Register 1 - Register2
 
 	FUNCTION 2 Multiplication
 		if (MATHIsFloatBinary()) {
@@ -40,7 +40,7 @@
 		}
 	DOCUMENTATION
 		Multiplication
-		\newline TODO: describe the parameters
+		\newline Register1 := Register 1 * Register2
 
 	FUNCTION 3 Decimal Division
 		f2 = MATHReadFloat(MATH_REG2);
@@ -51,7 +51,7 @@
 		}
 	DOCUMENTATION
 		Decimal Division
-		\newline TODO: describe the parameters
+		\newline Register1 := Register 1 / Register2 (floating point)
 
 	FUNCTION 4 Integer Division
 		i1 = MATHReadInt(MATH_REG1);
@@ -63,7 +63,7 @@
 		}
 	DOCUMENTATION
 		Integer Division
-		\newline TODO: describe the parameters
+		\newline Register1 := Register 1 / Register2 (integer result)
 
 	FUNCTION 5 Integer Modulus
 		i1 = MATHReadInt(MATH_REG1);
@@ -75,7 +75,7 @@
 		}
 	DOCUMENTATION
 		Integer Modulus
-		\newline TODO: describe the parameters
+		\newline Register1 := Register 1 mod Register2
 
 	FUNCTION 6 Compare
 		r = 0;
@@ -94,4 +94,5 @@
 		*DPARAMS = r;
 	DOCUMENTATION
 		Compare Numbers
-		\newline TODO: describe the parameters
+		\newline \Param{0} := Register 1 compare Register2 : returns $FF, 0, 1 for less equal and greater
+		\newline Note: float comparison is approximate because of rounding.

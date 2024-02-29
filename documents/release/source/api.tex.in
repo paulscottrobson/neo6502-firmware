@@ -9,11 +9,12 @@
 \usepackage{tabularx}
 \usepackage{wrapfig}
 
+\renewcommand{\familydefault}{\sfdefault}
 
 %% configuration %%
 
 \title{Neo6502 Assembly - Messaging API}
-\author{Paul Robson}
+\author{Paul Robson \\ Bill Auger}
 \date{@DATE@}
 
 \graphicspath{ {./documents/release/source/img/} {../documents/release/source/img/} }
@@ -385,7 +386,7 @@ which determine if the image will be inverted (flipped) horizontally or vertical
 reset (\MonoSp{1}) for normal, set (\MonoSp{1}) for inverted.
 \newline
 
-For the "Draw Rectangle" and "Draw Elipse" commands,
+For the "Draw Rectangle" and "Draw Ellipse" commands,
 the given order and position of the coordinates are not significant.
 To be precise, one is "a corner" and the other is "the opposite corner".
 For the "Draw Elipse" command, these corners are referring to the bounding-box.
