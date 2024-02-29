@@ -3,6 +3,7 @@
 //
 //      Name :      dispatch.config
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//                  Bill Auger
 //      Date :      22nd November 2023
 //      Reviewed :  No
 //      Purpose :   Dispatched for commands

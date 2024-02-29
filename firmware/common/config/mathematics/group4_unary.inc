@@ -3,6 +3,7 @@
 //
 //      Name :      maths_unary.config
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//                  Bill Auger
 //      Date :      1st December 2023
 //      Reviewed :  No
 //      Purpose :   Maths "co-processor" unary ops

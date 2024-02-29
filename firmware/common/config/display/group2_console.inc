@@ -1,11 +1,12 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      dispatch.config
+//      Name :      group2_console.inc
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//                  Bill Auger
 //      Date :      22nd November 2023
 //      Reviewed :  No
-//      Purpose :   Dispatched for commands
+//      Purpose :   Console dispatcher.
 //
 // ***************************************************************************************
 // ***************************************************************************************
@@ -13,7 +14,7 @@
 
 // ***************************************************************************************
 //
-// Group 2 (Console)
+//                                  Group 2 (Console)
 //
 // ***************************************************************************************
 
@@ -31,8 +32,8 @@ GROUP 2 ,0,8 Console
         If there are no key presses in the queue, \Param{0} will be zero.
         \newline
         Note that this Function is best for text input, but not for games.
-        Function 7,1 is more optimal for games.
-// Q14: is this the intention? "Use Function 7,1 for games"
+        Function 7,1 is more optimal for games, as this only detects key presses, 
+        you cannot check whether the key is currently down or not.
 
     FUNCTION 2 Console Status
         *(DPARAMS) = KBDIsKeyAvailable() ? 0xFF: 0;
@@ -43,9 +44,8 @@ GROUP 2 ,0,8 Console
     FUNCTION 3 Read Line
         CONGetScreenLine(DSPGetInt16(DCOMMAND,4));
     DOCUMENTATION
-        Input the current line below the cursor into YX as a length-prefixed string;
+        Input the current line below the cursor into \Param{0,1} as a length-prefixed string;
         and move the cursor to the line below. Handles multiple-line input.
-// Q15: what is YX?
 
     FUNCTION 4 Define Hotkey
         *DERROR = KBDSetFunctionKey(*(DCOMMAND+4),DSPGetString(DCOMMAND,6));
@@ -55,7 +55,7 @@ GROUP 2 ,0,8 Console
         For example, in a block of in-line assembly within a BASIC program,
         the string: \MonoSp{06,12,108,105,115,116,13} would clear the screen (\MonoSp{12}),
         then list the program (\MonoSp{108}='l',\MonoSp{105}='i',\MonoSp{115}='s',\MonoSp{116}='t',\MonoSp{13}='ENTER').
-// Q16: so $01 is F1 key, $0A is F10 key? - why not also F11 and F12?
+        \newline F11 and F12 cannot currently be defined.
 
     FUNCTION 5 Define Character
         *DERROR = CONUpdateUserFont(DPARAMS);
@@ -82,20 +82,20 @@ GROUP 2 ,0,8 Console
     FUNCTION 9 Screen Size
         CONGetScreenSizeChars(&DPARAMS[0],&DPARAMS[1]);
     DOCUMENTATION
-        Fetches the screen size, in chars.
-        \newline TODO: explain this function and any parameters
+        Fetches the console size, in characters, to \Param{0} and \Param{1}, the height and width respectively.
+        \newline 
 
     FUNCTION 10 Insert Line
         CONInsertLine(DPARAMS[0]);
     DOCUMENTATION
         Insert Line
-        \newline TODO: explain this function and any parameters
+        This is a support function which inserts a blank line in the console and should not be used.
 
     FUNCTION 11 Delete Line
         CONDeleteLine(DPARAMS[0]);
     DOCUMENTATION
         Delete Line
-        \newline TODO: explain this function and any parameters
+        This is a support function which deletes a line in the console and should not be used.
 
     FUNCTION 12 Clear Screen
         CONClearScreen();
@@ -106,7 +106,7 @@ GROUP 2 ,0,8 Console
         CONGetCursorPosition(&DPARAMS[0],&DPARAMS[1]);
     DOCUMENTATION
         Get Cursor Position
-        \newline TODO: explain this function and any parameters
+        \newline Returns the current cursor position in \Param{0} and \Param{1}
 
     FUNCTION 14 Clear Region
         CONClearArea(DPARAMS[0],DPARAMS[1],DPARAMS[2],DPARAMS[3]);
@@ -118,11 +118,11 @@ GROUP 2 ,0,8 Console
         CONSetForeBackColour(DPARAMS[0],DPARAMS[1]);
     DOCUMENTATION
         Set Text Color
-        \newline TODO: explain this function and any parameters
+        \newline Sets the foreground colour to \Param{0} and the background colour to \Param{1}
 
     FUNCTION 16 Cursor Inverse
         CONReverseCursorBlock();
     DOCUMENTATION
         Toggles the cursor colour between normal and inverse
-        (ie: swaps FG and BG colors).
+        (ie: swaps FG and BG colors). This should not be used.
 

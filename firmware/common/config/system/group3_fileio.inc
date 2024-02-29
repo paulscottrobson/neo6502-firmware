@@ -1,23 +1,24 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      dispatch.config
-//      Authors :   Paul Robson (paul@robsons.org.uk)
+//      Name :      group3_fileio.inc (paul@robsons.org.uk)
 //      Date :      22nd November 2023
+//   Authors :      Paul Robson (paul@robsons.org.uk)
+//                  Bill Auger
+//                  David Given
 //      Reviewed :  No
-//      Purpose :   Dispatched for commands
+//      Purpose :   File I/O Group dispatcher.
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
 // ***************************************************************************************
 //
-// Group 3 (File I/O)
+//                                  Group 3 (File I/O)
 //
 // ***************************************************************************************
 
 GROUP 3 ,0,9 File I/O
-// Q3: 'File I/O' specifically, or someday generic 'I/O' (eg: physical pins)?
     FUNCTION 1 List Directory
         FIODirectory("");
     DOCUMENTATION
