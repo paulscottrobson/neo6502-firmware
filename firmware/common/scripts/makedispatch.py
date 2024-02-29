@@ -90,6 +90,9 @@ class Group(object):
 		funcs.sort()
 		for f in funcs:
 			self.functions[f].render()
+		print("\t\t\tdefault:")
+		print("\t\t\t\tWARN_GROUP(*DCOMMAND,*DFUNCTION);")
+		print("\t\t\t\tbreak;")
 		print("\t\t}")
 		print("\t\tbreak;")
 
@@ -176,6 +179,9 @@ class DispatchAPI(object):
 		groups.sort()
 		for k in groups:
 			self.groups[k].render()
+		print("\tdefault:")
+		print("\t\tWARN_GROUP(*DCOMMAND,*DFUNCTION);")
+		print("\t\tbreak;")
 		print("}")
 
 	# generate documentation binaries

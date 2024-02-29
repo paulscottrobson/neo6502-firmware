@@ -554,6 +554,17 @@ int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
 void ResetSystem(void) {
 	printf("Hardware reset.\n");
 }
+
+// ***************************************************************************************
+//
+//                          		 Handle dispatch warning.
+//
+// ***************************************************************************************
+
+void DSPWarnHandler(uint8_t group,uint8_t func) {
+	fprintf(stderr,"** WARN ** Execute %d.%d not defined.\n",group,func);
+}
+
 // ***************************************************************************************
 //
 //		Date 		Revision

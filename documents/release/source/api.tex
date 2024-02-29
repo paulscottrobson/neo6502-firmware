@@ -14,11 +14,12 @@
 \usepackage{tabularx}
 \usepackage{wrapfig}
 
+\renewcommand{\familydefault}{\sfdefault}
 
 %% configuration %%
 
 \title{Neo6502 Assembly - Messaging API}
-\author{Paul Robson}
+\author{Paul Robson \\ Bill Auger}
 \date{2024-02-29}
 
 \graphicspath{ {./documents/release/source/img/} {../documents/release/source/img/} }
@@ -567,47 +568,48 @@ stored at the memory location specified in \Param{0,1}.
 \hline
 \ApiFnRow{0}{Addition}{
 Addition
-\newline TODO: describe the parameters
+\newline Register1 := Register 1 + Register2
 }
 \ApiFnRow{1}{Subtraction}{
 Subtraction
-\newline TODO: describe the parameters
+\newline Register1 := Register 1 - Register2
 }
 \ApiFnRow{2}{Multiplication}{
 Multiplication
-\newline TODO: describe the parameters
+\newline Register1 := Register 1 * Register2
 }
 \ApiFnRow{3}{Decimal Division}{
 Decimal Division
-\newline TODO: describe the parameters
+\newline Register1 := Register 1 / Register2 (floating point)
 }
 \ApiFnRow{4}{Integer Division}{
 Integer Division
-\newline TODO: describe the parameters
+\newline Register1 := Register 1 / Register2 (integer result)
 }
 \ApiFnRow{5}{Integer Modulus}{
 Integer Modulus
-\newline TODO: describe the parameters
+\newline Register1 := Register 1 mod Register2
 }
 \ApiFnRow{6}{Compare}{
 Compare Numbers
-\newline TODO: describe the parameters
+\newline \Param{0} := Register 1 compare Register2 : returns \$FF, 0, 1 for less equal and greater
+\newline Note: float comparison is approximate because of rounding.
 }
 \ApiFnRow{16}{Negate}{
 Negate
-\newline TODO: describe the parameters
+\newline Register1 :=  -Register 1
 }
 \ApiFnRow{17}{Floor}{
 Floor
-\newline TODO: describe the parameters
+\newline Register1 := floor(Register 1)
 }
 \ApiFnRow{18}{Square Root}{
 Square Root
-\newline TODO: describe the parameters
+\newline Register1 := square root(Register 1)
 }
 \ApiFnRow{19}{Sine}{
 Sine
-\newline TODO: describe the parameters
+\newline Register1 := sine(Register 1) angles in degrees
 }
 \end{tabular}
 \end{table}
@@ -624,51 +626,51 @@ Sine
 \hline
 \ApiFnRow{20}{Cosine}{
 Cosine
-\newline TODO: describe the parameters
+\newline Register1 := cosine(Register 1) angles in degrees
 }
 \ApiFnRow{21}{Tangent}{
 Tangent
-\newline TODO: describe the parameters
+\newline Register1 := tangent(Register 1) angles in degrees
 }
 \ApiFnRow{22}{Arctangent}{
 Arctangent
-\newline TODO: describe the parameters
+\newline Register1 := arctangent(Register 1) angles in degrees
 }
 \ApiFnRow{23}{Exponent}{
 Exponent
-\newline TODO: describe the parameters
+\newline Register1 :=  e to the power of Register 1
 }
 \ApiFnRow{24}{Logarithm}{
 Logarithm
-\newline TODO: describe the parameters
+\newline Register1 := log(Register 1) natural logarithm
 }
 \ApiFnRow{25}{Absolute Value}{
 Absolute Value
-\newline TODO: describe the parameters
+\newline Register1 := absolute value(Register 1)
 }
 \ApiFnRow{26}{Sign}{
 Sign
-\newline TODO: describe the parameters
+\newline Register1 := sign(Register 1), returns -1 0 or 1
 }
 \ApiFnRow{27}{Random Decimal}{
 Random Decimal
-\newline TODO: describe the parameters
+\newline Register1 := random float from 0-1
 }
 \ApiFnRow{28}{Random Integer}{
 Random Integer
-\newline TODO: describe the parameters
+\newline Register1 := random integer from 0 to (Register 1-1)
 }
 \ApiFnRow{32}{Number to Decimal}{
 Number to Decimal
-\newline TODO: describe the parameters
+\newline Helper function for tokeniser, do not use.
 }
 \ApiFnRow{33}{String to Number}{
 String to Number
-\newline TODO: describe the parameters
+\newline Convert the length prefixed string at \Param{4,5} to a constant in Register1.
 }
 \ApiFnRow{34}{Number to String}{
 Number to String
-\newline TODO: describe the parameters
+\newline TODO: Convert the constant in Register1 to a length prefixed string which is stored at \Param{4,5}
 }
 \end{tabular}
 \end{table}
@@ -1070,7 +1072,7 @@ which determine if the image will be inverted (flipped) horizontally or vertical
 reset (\MonoSp{1}) for normal, set (\MonoSp{1}) for inverted.
 \newline
 
-For the "Draw Rectangle" and "Draw Elipse" commands,
+For the "Draw Rectangle" and "Draw Ellipse" commands,
 the given order and position of the coordinates are not significant.
 To be precise, one is "a corner" and the other is "the opposite corner".
 For the "Draw Elipse" command, these corners are referring to the bounding-box.
