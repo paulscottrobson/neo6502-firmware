@@ -26,6 +26,7 @@ else()
     FetchContent_MakeAvailable(tinyusb)
 endif()
 set(PICO_TINYUSB_PATH ${tinyusb_SOURCE_DIR})
+set(USBKEY_STORAGE ON)
 
 pico_sdk_init()
 
