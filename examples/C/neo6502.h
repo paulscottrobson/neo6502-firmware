@@ -64,7 +64,7 @@ int write(int /* fildes */ , const unsigned char* buf , unsigned count)
     while(*API_COMMAND_ADDR) {}
 
     *API_FUNCTION_ADDR   = API_FN_WRITE_CHAR ;
-    *API_PARAMETERS_ADDR = *buf++            ;
+    *API_PARAMETERS_ADDR = (*buf == 10) ? '\r' : *buf ; ++buf ; // kludge for BUG: #98
     *API_COMMAND_ADDR    = API_GROUP_CONSOLE ;
   }
 
