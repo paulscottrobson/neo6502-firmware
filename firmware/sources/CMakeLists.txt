@@ -86,3 +86,17 @@ target_link_libraries(firmware
 
 target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 pico_add_extra_outputs(firmware)
+
+add_custom_target(upload
+    COMMAND openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program firmware.elf verify reset exit"
+    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    COMMENT "Upload via picoprobe..."
+)
+
+add_custom_target(reset
+    COMMAND openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "init" -c "reset run" -c "exit"
+    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    COMMENT "Reset via picoprobe..."
+)
+
+add_dependencies(upload firmware)
