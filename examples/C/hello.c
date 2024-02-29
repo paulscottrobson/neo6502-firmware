@@ -4,7 +4,7 @@
 |*|
 |*| This is a very basic C program,
 |*| which sounds a beep and displays some text at a precise screen location.
-|*| Refer to documents/release/api.pdf for more API functions.
+|*| Refer to api.pdf for more API functions.
 |*|
 |*| To compile and run:
 |*|   $ export CC65_HOME=/usr/share/cc65
@@ -24,46 +24,7 @@
 #include "neo6502.h"
 
 
-/*\
-|*| Play sound effect - (API Group 8, Function 5)
-\*/
-void SoundEffect(uint8_t sound_ch , uint8_t sound_effect)
-{
-  *API_FUNCTION_ADDR     = API_FN_PLAY_SOUND ;
-  API_PARAMETERS_ADDR[0] = sound_ch          ;
-  API_PARAMETERS_ADDR[1] = sound_effect      ;
-  *API_COMMAND_ADDR      = API_GROUP_SOUND   ;
-}
-
-/*\
-|*| Set cursor position - (API Group 2, Function 7)
-\*/
-void SetCursorPosition(uint8_t x_pos , uint8_t y_pos)
-{
-  *API_FUNCTION_ADDR     = API_FN_CURSOR_POS ;
-  API_PARAMETERS_ADDR[0] = x_pos             ;
-  API_PARAMETERS_ADDR[1] = y_pos             ;
-  *API_COMMAND_ADDR      = API_GROUP_CONSOLE ;
-}
-
-/*\
-|*| Write character to console - (API Group 2, Function 6)
-\*/
-int write(int /* fildes */ , const unsigned char* buf , unsigned count)
-{
-  while (count--)
-  {
-    while(*API_COMMAND_ADDR) {}
-
-    *API_FUNCTION_ADDR   = API_FN_WRITE_CHAR ;
-    *API_PARAMETERS_ADDR = *buf++            ;
-    *API_COMMAND_ADDR    = API_GROUP_CONSOLE ;
-  }
-
-  return 0 ;
-}
-
-int demo_bug()
+void demo_bug()
 {
   unsigned char buf[33] ;
   uint8_t char_n ;
@@ -86,11 +47,11 @@ int demo_bug()
 
 int main()
 {
-  SoundEffect(API_SOUND_CH_00 , API_SOUND_EFFECT_06) ;
+  SoundEffect(API_SOUND_CH_00 , API_SFX_COIN) ;
 
   SetCursorPosition(0 , 22) ;
   puts("                   Hello world!") ;
-  puts("                                                    ") ; // 52 blanks
+  puts("                                                     ") ; // 53 blanks
 
 
   // BUG: https://github.com/paulscottrobson/neo6502-firmware/issues/98
