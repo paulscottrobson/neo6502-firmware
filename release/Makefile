@@ -24,7 +24,8 @@ DOCDIR = $(ROOTDIR)documents$(S)release$(S)
 #
 #		Documentation files included
 #
-DOCUMENTS =  $(DOCDIR)*.pdf $(BINDIR)neo6502.inc
+DOCUMENTS = $(DOCDIR)*.odt $(DOCDIR)*.pdf $(BINDIR)neo6502.inc
+
 #
 #		Binary files included
 #
@@ -81,9 +82,7 @@ all: documentation
 # ***************************************************************************************
 
 documentation:
-	# generate ODT documentation (requires 'pandoc')
-	pandoc -f latex -t odt -o $(DOCDIR)api.odt $(DOCDIR)source$(S)api.texi
-	# generate PDF documentation (requires 'texlive-latex')
-	pdflatex -output-directory=$(DOCDIR) $(DOCDIR)source$(S)api.texi
-
-
+	# generate ODTs (requires 'pandoc')
+	pandoc -f latex -t odt -o $(DOCDIR)api.odt $(DOCDIR)source$(S)api.tex
+	# generate PDFs (requires 'texlive-latex', 'texlive-latexextra', 'texlive-latex-recommended')
+	pdflatex -output-directory=$(DOCDIR)       $(DOCDIR)source$(S)api.tex
