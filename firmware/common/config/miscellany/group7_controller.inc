@@ -26,7 +26,9 @@ GROUP 7 ,0 Controller
         This Function interprets key presses and releases as a joystick.
         The system maintains a bit-array of which keys are pressed.
         Currently, the keyboard is the only available Controller. 
-        \newline   This function will become obsolete shortly as a more extensive API using USB
+        \newline
+
+        This function will become obsolete shortly as a more extensive API using USB
         controllers becomes available. However, it will maintain backward compatibility.
         \newline
         \ParamBits{$FF04 - Controller Flags}{0}{0}{B}{A}{Down}{Up}{Right}{Left}

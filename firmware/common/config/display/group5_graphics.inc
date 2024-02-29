@@ -17,7 +17,7 @@
 //
 // ***************************************************************************************
 
-GROUP 5 ,0,5 Graphics
+GROUP 5 ,0,7,64 Graphics
     FUNCTION 1 Set Defaults
         GFXSetDefaults(DCOMMAND);
     DOCUMENTATION
