@@ -17,20 +17,20 @@
 //
 // ***************************************************************************************
 
-GROUP 7 ,0 Controller
+GROUP 7 Controller
     FUNCTION 1 Read Controller
         *DPARAMS = KBDKeyboardController();
     DOCUMENTATION
-        This reads the status of the default controller into \Param{0}
-        \newline Initially, the Controller is the keyboard.
-        This Function interprets key presses and releases as a joystick.
-        The system maintains a bit-array of which keys are pressed.
-        Currently, the keyboard is the only available Controller. 
+        This reads the status of the default controller into \Param{0}.
         \newline
 
-        This function will become obsolete shortly as a more extensive API using USB
+        Initially, the Controller is the keyboard.
+        This Function interprets key presses and releases as a joystick.
+        The system maintains a bit-array of which keys are pressed.
+        Currently, the keyboard is the only available Controller.
+        \newline
+
+        This function will become obsolete shortly, as a more extensive API using USB
         controllers becomes available. However, it will maintain backward compatibility.
         \newline
         \ParamBits{$FF04 - Controller Flags}{0}{0}{B}{A}{Down}{Up}{Right}{Left}
-
-

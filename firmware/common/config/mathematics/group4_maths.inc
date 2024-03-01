@@ -17,7 +17,7 @@
 //
 // ***************************************************************************************
 
-GROUP 4 ,0,20 Mathematics
+GROUP 4 Mathematics
     include mathematics/group4_binary.inc
     include mathematics/group4_unary.inc
     include mathematics/group4_other.inc

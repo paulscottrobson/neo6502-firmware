@@ -17,7 +17,7 @@
 //
 // ***************************************************************************************
 
-GROUP 8 ,0 Sound
+GROUP 8 Sound
     FUNCTION 1 Reset Sound
         SNDResetAll();
     DOCUMENTATION

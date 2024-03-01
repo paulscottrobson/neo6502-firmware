@@ -85,6 +85,6 @@ documentation:
 	# generate ODTs (requires 'pandoc')
 	pandoc -f latex -t odt -o $(DOCDIR)api.odt $(DOCDIR)source$(S)api.tex
 	# generate PDFs (requires 'texlive-latex', 'texlive-latexextra', 'texlive-latex-recommended')
-	# Yes, twice! Because tables!
+	# Yes, twice! The TOC and tables require two passes
 	pdflatex -output-directory=$(DOCDIR)       $(DOCDIR)source$(S)api.tex
 	pdflatex -output-directory=$(DOCDIR)       $(DOCDIR)source$(S)api.tex
