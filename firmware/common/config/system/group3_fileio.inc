@@ -370,4 +370,4 @@ GROUP 3 ,0,9 File I/O
         \end{itemize}
 
         Files will only be shown if the name contains the search string (via a
-        subtring match).
+        substring match).
