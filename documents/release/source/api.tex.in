@@ -7,6 +7,8 @@
 \usepackage{makecell}
 \usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{caption}
 \usepackage{wrapfig}
 
 \renewcommand{\familydefault}{\sfdefault}
