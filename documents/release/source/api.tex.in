@@ -7,6 +7,8 @@
 \usepackage{makecell}
 \usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{caption}
 \usepackage{wrapfig}
 
 \renewcommand{\familydefault}{\sfdefault}
@@ -629,5 +631,39 @@ Currently, the beeper is the only available sound source.
 \ParamsBytes{Queue Sound Parameters}{Channel}{Freq hi}{Freq lo}{Duration lo}
                                     {Duration hi}{Slide lo}{Slide hi}{Source}
 
+
+
+Function 8,5 plays a sound effect immediately. These will be synthesised to the best
+ability of the available hardware. These are predefined as :
+
+\begin{table}[h]
+\begin{tabular}{ | c | c | }        \hline
+\textbf{Number} & \textbf{Effect}   \\ \hline
+\MonoSp{0} & positive \\ \hline
+\MonoSp{1} & negative \\ \hline
+\MonoSp{2} & error \\ \hline
+\MonoSp{3} & confirm \\ \hline
+\MonoSp{4} & reject \\ \hline
+\MonoSp{5} & sweep \\ \hline
+\MonoSp{6} & coin \\ \hline
+\MonoSp{7} & las70 \\ \hline
+\MonoSp{8} & powerup \\ \hline
+\MonoSp{9} & victory \\ \hline
+\MonoSp{10} & defeat \\ \hline
+\MonoSp{11} & fanfare \\ \hline
+\MonoSp{12} & alarm 1 \\ \hline
+\MonoSp{13} & alarm 2 \\ \hline
+\MonoSp{14} & alarm 3 \\ \hline
+\MonoSp{15} & ringtone 1 \\ \hline
+\MonoSp{16} & ringtone 2 \\ \hline
+\MonoSp{17} & ringtone 3 \\ \hline
+\MonoSp{18} & danger \\ \hline
+\MonoSp{19} & expl100 \\ \hline
+\MonoSp{20} & expl50 \\ \hline
+\MonoSp{21} & expl20 \\ \hline
+\MonoSp{22} & las30 \\ \hline
+\MonoSp{23} & las10 \\ \hline
+\end{tabular}
+\end{table}
 
 \end{document}
