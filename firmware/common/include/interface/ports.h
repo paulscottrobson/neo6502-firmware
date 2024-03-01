@@ -27,6 +27,8 @@ int IOReadAnalogue(int pinID,uint16_t *pLevel);
 
 int IOI2CWriteRegister(uint8_t device,uint8_t reg,uint8_t data);
 int IOI2CReadRegister(uint8_t device,uint8_t reg,uint8_t *pData);
+int IOI2CReadBlock(uint8_t device, uint8_t *data,size_t size);
+int IOI2CWriteBlock(uint8_t device, uint8_t *data,size_t size);
 
 int UEXTSetGPIODirection(int gpio,int pinType);
 int UEXTSetGPIO(int gpio,bool isOn);
