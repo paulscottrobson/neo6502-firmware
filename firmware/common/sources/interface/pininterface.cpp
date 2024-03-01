@@ -171,6 +171,22 @@ int IOI2CReadRegister(uint8_t device,uint8_t reg,uint8_t *pData) {
 
 // ***************************************************************************************
 //
+//								  Read/write mappers
+//
+// ***************************************************************************************
+
+int IOI2CReadBlock(uint8_t device, uint8_t *data,size_t size) {
+	IOI2CInitialise();
+	return UEXTI2CReadBlock(device,data,size);
+}
+
+int IOI2CWriteBlock(uint8_t device, uint8_t *data,size_t size) {
+	IOI2CInitialise();
+	return UEXTI2CWriteBlock(device,data,size);
+}
+
+// ***************************************************************************************
+//
 //		Date 		Revision
 //		==== 		========
 //

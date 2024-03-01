@@ -536,6 +536,7 @@ int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
 // ***************************************************************************************
 
 int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
+	if (device == 0x7F) return 1;
 	printf("I2C Read from $%02x\n",device);
 	for (int i = 0;i < size;i++) {
 		data[i] = device + 0x12 + i * 3;

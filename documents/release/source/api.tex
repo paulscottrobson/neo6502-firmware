@@ -20,7 +20,7 @@
 
 \title{Neo6502 Assembly - Messaging API}
 \author{Paul Robson \\ Bill Auger}
-\date{2024-02-29}
+\date{2024-03-01}
 
 \graphicspath{ {./img/}                             % WRT local editor (eg: texworks)
                {./documents/release/source/img/}    % WRT command line
@@ -996,6 +996,10 @@ P0 = (P0,P1)
 P1P0 = GPIOAnalogue(P0)
 \newline Read the analogue value on UEXT Pin \Param{0} ; this has to be set to analogue type to work. Returns a value
 from 0..4095 stored in \Param{0,1}, which represents an input value of 0 to 3.3 volts.
+}
+\ApiFnRow{8}{Check if can read register}{
+P0 = Scan(P0)
+\newline Try to read from I2C Device \Param{0}. If present then \Param{0} will contain a non-zero value.
 }
 \end{tabular}
 \end{table}

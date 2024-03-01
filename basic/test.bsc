@@ -1,10 +1,25 @@
 '
-'	Display a voltage on pin 3 (0 to 3.3v)
+'	Display the clock time. Requires Olimex MOD-RTC (PCF8563 version)
 '
-pin 3,analog
-cls
 repeat
-	barSize = analog(3) \ 13
-	rect 0,10 solid ink 2 to barSize,100
-	rect barSize,10 solid ink 1 to 319,100
+	cls
+	print idevice($7F),idevice($51)
+	ellipse 60,20 frame ink 3 to 260,220 
+	ellipse 140,100 solid ink 4 to 180,140
+	call DrawHand(90,6,(iread($51,2) & $7F),60)
+	call DrawHand(80,3,(iread($51,3) & $7F),60)
+	call DrawHand(50,2,(iread($51,4) & $3F),12)
+	wait 80
 until false
+'
+'	Draw one hand
+'
+proc DrawHand(size,colour,posbcd,limit)
+	pos = (posbcd >> 4) * 10 + (posbcd & 15)
+	angle = 90-360*pos/limit
+	x = int(160+cos(angle)*size)
+	y = int(120-sin(angle)*size)
+	line 160,120 ink colour to x,y:ellipse x-5,y-5 solid to x+5,y+5
+endproc
+
+

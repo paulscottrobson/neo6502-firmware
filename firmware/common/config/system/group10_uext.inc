@@ -66,3 +66,10 @@ GROUP 10 ,0 UExt I/O
         P1P0 = GPIOAnalogue(P0)
         \newline Read the analogue value on UEXT Pin \Param{0} ; this has to be set to analogue type to work. Returns a value
         from 0..4095 stored in \Param{0,1}, which represents an input value of 0 to 3.3 volts.
+
+    FUNCTION 8 Check if can read register
+        DPARAMS[0] = (IOI2CReadBlock(DPARAMS[0],&u2,1) == 0) ? 1 : 0;
+        
+    DOCUMENTATION
+        P0 = Scan(P0)
+        \newline Try to read from I2C Device \Param{0}. If present then \Param{0} will contain a non-zero value.
