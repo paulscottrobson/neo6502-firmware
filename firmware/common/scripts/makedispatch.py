@@ -186,16 +186,23 @@ class DispatchAPI(object):
 
 	# generate documentation binaries
 	def renderTableHead(self,fn_table_tex,header):
-		fn_table_tex.append('\\begin{table}[h]')
-		fn_table_tex.append('\\centering\\textbf{%s}' % header)
-		fn_table_tex.append('\\begin{tabular}{ | c | l | p{12cm} | }')
+		#fn_table_tex.append('\\centering\\textbf{%s}' % header)
+		fn_table_tex.append('\\begin{longtable*}{ | c | l | p{12cm} | }')
+
+		fn_table_tex.append('\\caption*{%s} \\\\' % header)
 		fn_table_tex.append('\\hline')
 		fn_table_tex.append("\\textbf{Function} & \\textbf{Assembly} & \\textbf{Description} \\\\")
 		fn_table_tex.append('\\hline')
+		fn_table_tex.append('\\endfirsthead')
+
+		fn_table_tex.append('\\caption*{%s (continued)} \\\\' % header)
+		fn_table_tex.append('\\hline')
+		fn_table_tex.append("\\textbf{Function} & \\textbf{Assembly} & \\textbf{Description} \\\\")
+		fn_table_tex.append('\\hline')
+		fn_table_tex.append('\\endhead')
 
 	def renderTableTail(self,fn_table_tex):
-		fn_table_tex.append('\\end{tabular}')
-		fn_table_tex.extend(['\\end{table}' , '' , '' ])
+		fn_table_tex.append('\\end{longtable*}')
 
 	def renderDocs(self):
 		rev_date     = str(date.fromtimestamp(os.stat(CFG_FILE).st_ctime))
@@ -208,16 +215,9 @@ class DispatchAPI(object):
 			fn_ids = sorted([ fn_id for fn_id in group.functions.keys() ])
 
 			for fn_id in fn_ids:
-				# split table across multiple pages, if specified
-				if group.pageBreaks and fn_id >= group.pageBreaks[0]:
-					group.pageBreaks.pop(0)
-					if fn_id != fn_ids[0]:
-						self.renderTableTail(fn_table_tex)
-						if not header.endswith('(continued)'):
-							header = header + " (continued)"
-					fn_table_tex.extend([ '\pagebreak' , '' , '' ])
-					self.renderTableHead(fn_table_tex , header)
-				elif fn_id == fn_ids[0]:
+				if fn_id == fn_ids[0]:
+					if group_id != 1:
+						fn_table_tex.append('\\pagebreak')
 					self.renderTableHead(fn_table_tex , header)
 
 				function = group.functions[fn_id]

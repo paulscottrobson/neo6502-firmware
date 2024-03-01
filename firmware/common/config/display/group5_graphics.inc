@@ -48,7 +48,7 @@ GROUP 5 ,0,7,64 Graphics
         in  \Param{0,1},\Param{2,3} (corner X,Y)
         and \Param{4,5},\Param{6,7} (opposite corner X,Y).
 
-    FUNCTION 4 Draw Elipse
+    FUNCTION 4 Draw Ellipse
         GFXGraphicsCommand(4,DCOMMAND);
     DOCUMENTATION
         Draw an ellipse spanning the screen coordinates specified
