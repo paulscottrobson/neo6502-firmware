@@ -83,16 +83,20 @@ void GFXStart(void) {
 	SDL_CloseAudio();
 }
 
-
 static void _GFXMainLoop(void *arg) {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {													// While events in event queue.
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {		// Exit if ESC pressed.
-			if ((SDL_GetModState() & KMOD_LCTRL) == 0) isRunning = 0;				// Not Ctrl+ESC
+			int ctrl = ((SDL_GetModState() & KMOD_LCTRL) != 0);						// If control pressed
+			if (CPUUseDebugKeys() == 0) ctrl = (ctrl == 0);							// Debugger in use, ESC on its own
+			if (ctrl) isRunning = 0; 												// Exit
 		}
 		if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {					// Handle other keys.
 			_GFXUpdateKeyRecord(event.key.keysym.sym,event.type == SDL_KEYDOWN);
 			HWQueueKeyboardEvent(event.key.keysym.scancode,event.type == SDL_KEYDOWN);
+		}
+		if (event.type == SDL_QUIT) {  												// GUI hardware.
+			isRunning = 0;
 		}
 	}
 	SDL_FillRect(mainSurface, NULL, 												// Draw the background.

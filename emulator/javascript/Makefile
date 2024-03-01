@@ -19,7 +19,7 @@ APPNAME = neo$(APPSTEM)
 FIRMDIR = $(ROOTDIR)firmware$(S)
 IMPSRC = $(COMDIR)sources$(S)interface$(S)
 EMUSRC = $(ROOTDIR)emulator$(S)src$(S)
-FRASRC = $(ROOTDIR)emulator$(S)framework$(S)
+FRASRC = $(ROOTDIR)emulator$(S)src$(S)framework$(S)
 
 SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp $(FRASRC)beeper.cpp \
 			$(EMUSRC)core$(S)sys_processor.cpp  $(EMUSRC)core$(S)sys_debugger.cpp $(EMUSRC)core$(S)hardware.cpp \

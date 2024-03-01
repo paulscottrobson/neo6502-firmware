@@ -44,9 +44,6 @@ start
 	jsr 	KWaitMessage
 	jmp 	(0)								; and start it.
 
-;	jmp 	WozMonStart
-;	.include 	"wozmon.asm"
-
 	.include 	"support.asm"
 
 	* = ControlPort

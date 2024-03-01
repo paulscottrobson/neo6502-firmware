@@ -15,22 +15,27 @@
 
 #define UEXT_INPUT 			(1)
 #define UEXT_OUTPUT 		(2)
+#define UEXT_ANALOGUE 		(3)
+
+#define UEXT_IS_GPIO_ANALOGUE(n) ((n) >= 26 && (n) <= 29)
 
 void IOInitialise(void);
 int IOSetDirection(int pinID,int pinType);
 int IOWrite(int pinID,bool isHigh);
 int IORead(int pinID,bool *pIsHigh);
+int IOReadAnalogue(int pinID,uint16_t *pLevel);
 
-int IOI2CWrite(uint8_t device,uint8_t reg,uint8_t data);
-int IOI2CRead(uint8_t device,uint8_t reg,uint8_t *pData);
+int IOI2CWriteRegister(uint8_t device,uint8_t reg,uint8_t data);
+int IOI2CReadRegister(uint8_t device,uint8_t reg,uint8_t *pData);
 
 int UEXTSetGPIODirection(int gpio,int pinType);
 int UEXTSetGPIO(int gpio,bool isOn);
 int UEXTGetGPIO(int gpio,bool *pIsHigh);
+int UEXTGetGPIOAnalogue(int gpio,uint16_t *pLevel);
 
 int UEXTI2CInitialise(void);
-int UEXTI2CWrite(uint8_t device,uint8_t reg,uint8_t data);
-int UEXTI2CRead(uint8_t device,uint8_t reg,uint8_t *pData);
+int UEXTI2CReadBlock(uint8_t device, uint8_t *data,size_t size);
+int UEXTI2CWriteBlock(uint8_t device, uint8_t *data,size_t size);
 
 #endif
 

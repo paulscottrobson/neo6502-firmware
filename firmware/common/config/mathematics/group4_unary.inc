@@ -3,6 +3,7 @@
 //
 //      Name :      maths_unary.config
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//                  Bill Auger
 //      Date :      1st December 2023
 //      Reviewed :  No
 //      Purpose :   Maths "co-processor" unary ops
@@ -10,60 +11,84 @@
 // ***************************************************************************************
 // ***************************************************************************************
 
-	#define FROMRADIANS(n) 	((n) * 180.0 / M_PI)		
-	#define TORADIANS(n) ((n) * M_PI / 180.0)
 
-
-	function 16  									// Unary negate 
+	FUNCTION 16 Negate
 		if (MATHIsFloatUnary()) {
 			MATHWriteFloat(-MATHReadFloat(MATH_REG1),MATH_REG1);
 		} else {
 			MATHWriteInt(-MATHReadInt(MATH_REG1),MATH_REG1);
 		}
+	DOCUMENTATION
+		Negate
+		\newline Register1 :=  -Register 1
 
-	function 17  									// Integer part
+	FUNCTION 17 Floor
 		if (MATHIsFloatBinary()) {
 			f1 = floor(MATHReadFloat(MATH_REG1));
 			MATHWriteInt((uint32_t)f1,MATH_REG1);
 		}
+	DOCUMENTATION
+		Floor
+		\newline Register1 := floor(Register 1)
 
-	function 18 									// Sqrt
+	FUNCTION 18 Square Root
 		f1 = MATHReadFloat(MATH_REG1);
 		if (f1 >= 0) {
 			MATHWriteFloat(sqrt(f1),MATH_REG1);
 		} else {
 			*DERROR = 1;
 		}
+	DOCUMENTATION
+		Square Root
+		\newline Register1 := square root(Register 1)
 
-	function 19 									// Sine
+	FUNCTION 19 Sine
 		f1 = MATHReadFloat(MATH_REG1);
 		MATHWriteFloat(sin(TORADIANS(f1)),MATH_REG1);
+	DOCUMENTATION
+		Sine
+		\newline Register1 := sine(Register 1) angles in degrees
 
-	function 20 									// Cosine
+	FUNCTION 20 Cosine
 		f1 = MATHReadFloat(MATH_REG1);
 		MATHWriteFloat(cos(TORADIANS(f1)),MATH_REG1);
+	DOCUMENTATION
+		Cosine
+		\newline Register1 := cosine(Register 1) angles in degrees
 
-	function 21 									// Tangent
+	FUNCTION 21 Tangent
 		f1 = MATHReadFloat(MATH_REG1);
 		MATHWriteFloat(tan(TORADIANS(f1)),MATH_REG1);
+	DOCUMENTATION
+		Tangent
+		\newline Register1 := tangent(Register 1) angles in degrees
 
-	function 22 									// Arc Tangent
+	FUNCTION 22 Arctangent
 		f1 = MATHReadFloat(MATH_REG1);
 		MATHWriteFloat(FROMRADIANS(atan(f1)),MATH_REG1);
+	DOCUMENTATION
+		Arctangent
+		\newline Register1 := arctangent(Register 1) angles in degrees
 
-	function 23 									// Exponent
+	FUNCTION 23 Exponent
 		f1 = MATHReadFloat(MATH_REG1);
 		MATHWriteFloat(exp(f1),MATH_REG1);
+	DOCUMENTATION
+		Exponent
+		\newline Register1 :=  e to the power of Register 1 
 
-	function 24 									// Logarithm (e)
+	FUNCTION 24 Logarithm
 		f1 = MATHReadFloat(MATH_REG1);
 		if (f1 >= 0) {
 			MATHWriteFloat(log(f1),MATH_REG1);
 		} else {
 			*DERROR = 1;
 		}
+	DOCUMENTATION
+		Logarithm
+		\newline Register1 := log(Register 1) natural logarithm
 
-	function 25 									// Absolute value
+	FUNCTION 25 Absolute Value
 		if (MATHIsFloatUnary()) {
 			MATHWriteFloat(fabs(MATHReadFloat(MATH_REG1)),MATH_REG1);
 		} else {
@@ -72,8 +97,11 @@
 				MATHWriteInt(-u1,MATH_REG1);
 			}
 		}
+	DOCUMENTATION
+		Absolute Value
+		\newline Register1 := absolute value(Register 1)
 
-	function 26 									// Sign
+	FUNCTION 26 Sign
 		u1 = 0;
 		if (MATHIsFloatUnary()) {
 			f1 = MATHReadFloat(MATH_REG1);
@@ -83,14 +111,22 @@
 			if (i1 != 0) u1 = (i1 < 0) ? -1 : 1;
 		}
 		MATHWriteInt(u1,MATH_REG1);
+	DOCUMENTATION
+		Sign
+		\newline Register1 := sign(Register 1), returns -1 0 or 1
 
-	function 27 									// Random (float)
+	FUNCTION 27 Random Decimal
 		f1 = (rand() % 100000) / 100000.0;
 		MATHWriteFloat(f1,MATH_REG1);
+	DOCUMENTATION
+		Random Decimal
+		\newline Register1 := random float from 0-1
 
-	function 28  									// Random (int, range)
+	FUNCTION 28 Random Integer
 		u1 = MATHReadInt(MATH_REG1);
 		if (u1 > 0) {
 			MATHWriteInt(rand() % u1,MATH_REG1);
 		}
-		
+	DOCUMENTATION
+		Random Integer
+		\newline Register1 := random integer from 0 to (Register 1-1)

@@ -24,7 +24,8 @@ DOCDIR = $(ROOTDIR)documents$(S)release$(S)
 #
 #		Documentation files included
 #
-DOCUMENTS =  $(DOCDIR)*.pdf $(BINDIR)neo6502.inc
+DOCUMENTS = $(DOCDIR)*.odt $(DOCDIR)*.pdf $(BINDIR)neo6502.inc
+
 #
 #		Binary files included
 #
@@ -36,7 +37,7 @@ BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf \
 #		Python applications included.
 #
 PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)exec.zip  \
-			 $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip \
+			 $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip $(BINDIR)cvimg.zip \
 			 $(BINDIR)nxmit.zip
 
 # ***************************************************************************************
@@ -45,7 +46,7 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)exec.zip  \
 #
 # ***************************************************************************************
 
-all: 
+all: documentation
 	# Delete release files
 	$(CDEL) $(RELEASEFILE)
 	$(CDEL) $(TMPDIR)$(RELEASEFILE)
@@ -73,3 +74,15 @@ all:
 	# Zip up and copy back
 	cd $(TMPDIR) ; zip -r $(RELEASEFILE) *
 	$(CCOPY) $(TMPDIR)$(RELEASEFILE) .
+
+# ***************************************************************************************
+#
+#								Make the documents
+#
+# ***************************************************************************************
+
+documentation:
+	# generate ODTs (requires 'pandoc')
+	pandoc -f latex -t odt -o $(DOCDIR)api.odt $(DOCDIR)source$(S)api.tex
+	# generate PDFs (requires 'texlive-latex', 'texlive-latexextra', 'texlive-latex-recommended')
+	pdflatex -output-directory=$(DOCDIR)       $(DOCDIR)source$(S)api.tex

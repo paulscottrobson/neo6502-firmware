@@ -32,6 +32,7 @@ all:
 	$(MAKE) -B -C examples release
 	$(MAKE) -B -C release
 
+
 # ***************************************************************************************
 #
 #							Make windows & linux versions
@@ -68,3 +69,12 @@ clean:
 	$(MAKE) -B -C emulator clean
 	$(MAKE) -B -C firmware clean
 
+# ***************************************************************************************
+#
+#					  Easy testing of API documentation build
+#
+# ***************************************************************************************
+
+testdoc:
+	make -C firmware prelim
+	make -C release documentation

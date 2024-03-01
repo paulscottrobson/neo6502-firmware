@@ -1,0 +1,10 @@
+'
+'	Display a voltage on pin 3 (0 to 3.3vma)
+'
+pin 3,analog
+cls
+repeat
+	barSize = analog(3) \ 13
+	rect 0,10 solid ink 2 to barSize,100
+	rect barSize,10 solid ink 1 to 319,100
+until false

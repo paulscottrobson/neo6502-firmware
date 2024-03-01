@@ -71,6 +71,7 @@ void IOInitialise(void) {
 
 int IOSetDirection(int pinID,int pinType) {
 	int gpio = IOMapPinToGPIO(pinID);  												// Map it
+	if (pinType == UEXT_ANALOGUE && !UEXT_IS_GPIO_ANALOGUE(gpio)) return 1;  		// Only certain GPIO do ADC.
 	if (gpio > 0) {  																// Mapping okay
 		UEXTSetGPIODirection(gpio,pinType);  										// Set direction to whatever
 		IOPINPinDirection[pinID] = pinType;  										// Save direction
@@ -113,6 +114,26 @@ int IORead(int pinID,bool *pIsHigh) {
 	return (gpio > 0) ? 0 : 1;  													// 0 if okay,1 if bad
 }
 
+// ***************************************************************************************
+//
+//								Read GPIO pin Analogue
+//
+// ***************************************************************************************
+
+int IOReadAnalogue(int pinID,uint16_t *pLevel) {
+	int gpio = IOMapPinToGPIO(pinID);  												// Map it
+	if (UEXT_IS_GPIO_ANALOGUE(gpio)) {  											// Mapping okay
+		if (IOPINPinDirection[pinID] != UEXT_ANALOGUE) return 2;  					// Not set to analogue input.
+		UEXTGetGPIOAnalogue(gpio,pLevel);  											// Read it.
+	}	
+	return (UEXT_IS_GPIO_ANALOGUE(gpio)) ? 0 : 1;  									// 0 if okay,1 if bad
+}
+
+// ***************************************************************************************
+//
+//				Initialise I2C system if not already initialised
+//
+// ***************************************************************************************
 
 static void IOI2CInitialise(void) {
 	if (!IOI2CInitialised) {  														// If not initialised
@@ -122,14 +143,30 @@ static void IOI2CInitialise(void) {
 	}
 }
 
-int IOI2CWrite(uint8_t device,uint8_t reg,uint8_t data) {
+// ***************************************************************************************
+//
+//								Write to i2C Register
+//
+// ***************************************************************************************
+
+int IOI2CWriteRegister(uint8_t device,uint8_t reg,uint8_t data) {
+	uint8_t buffer[2];
 	IOI2CInitialise();
-	return UEXTI2CWrite(device,reg,data);
+	buffer[0] = reg;buffer[1] = data;
+	return UEXTI2CWriteBlock(device,buffer,2);
 }
 
-int IOI2CRead(uint8_t device,uint8_t reg,uint8_t *pData) {
+// ***************************************************************************************
+//
+//								Read from i2c Register
+//
+// ***************************************************************************************
+
+int IOI2CReadRegister(uint8_t device,uint8_t reg,uint8_t *pData) {
 	IOI2CInitialise();
-	return UEXTI2CRead(device,reg,pData);
+	int e =UEXTI2CWriteBlock(device,&reg,1);
+	if (e == 0) e = UEXTI2CReadBlock(device,pData,1);
+	return e;
 }
 
 // ***************************************************************************************

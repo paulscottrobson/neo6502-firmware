@@ -163,7 +163,28 @@ uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFile
 	else
 		printf("OK\n");
 
-	return !ec ? 1 : 0;
+	return !ec ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//									 Copy file 
+//
+// ***************************************************************************************
+
+uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilename) {
+	std::string oldAbspath = getAbspath(oldFilename);
+	std::string newAbspath = getAbspath(newFilename);
+	printf("FISCopyFile('%s', '%s') -> ", oldAbspath.c_str(), newAbspath.c_str());
+	std::error_code ec;
+	std::filesystem::copy(oldAbspath, newAbspath,
+		std::filesystem::copy_options::overwrite_existing, ec);
+	if (ec)
+		printf("%s\n", ec.message().c_str());
+	else
+		printf("OK\n");
+
+	return !ec ? 0 : 1;
 }
 
 // ***************************************************************************************
@@ -484,6 +505,11 @@ int UEXTGetGPIO(int gpio,bool *pIsHigh) {
 	return 0;
 }
 
+int UEXTGetGPIOAnalogue(int gpio,uint16_t *pLevel) {
+	*pLevel = gpio+1000;
+	printf("Read Analogue pin %d, value is (not) %d\n",gpio,*pLevel);
+	return 0;
+}
 
 // ***************************************************************************************
 //
@@ -502,8 +528,12 @@ int UEXTI2CInitialise(void) {
 //
 // ***************************************************************************************
 
-int UEXTI2CWrite(uint8_t device,uint8_t reg,uint8_t data) {
-	printf("I2C Write to $%02x:$%02x %3d $%02x\n",device,reg,data,data);
+int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
+	printf("I2C Write to $%02x\n",device);
+	for (int i = 0;i < size;i++) {
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
 	return 0;
 }
 
@@ -513,10 +543,34 @@ int UEXTI2CWrite(uint8_t device,uint8_t reg,uint8_t data) {
 //
 // ***************************************************************************************
 
-int UEXTI2CRead(uint8_t device,uint8_t reg,uint8_t *pData) {
-	*pData = (device + reg) & 0xFF;
-	printf("I2C Read from $%02x:$%02x %3d $%02x\n",device,reg,*pData,*pData);
+int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
+	printf("I2C Read from $%02x\n",device);
+	for (int i = 0;i < size;i++) {
+		data[i] = device + 0x12 + i * 3;
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
     return 0;
+}
+
+// ***************************************************************************************
+//
+//                          			Hardware reset
+//
+// ***************************************************************************************
+
+void ResetSystem(void) {
+	printf("Hardware reset.\n");
+}
+
+// ***************************************************************************************
+//
+//                          		 Handle dispatch warning.
+//
+// ***************************************************************************************
+
+void DSPWarnHandler(uint8_t group,uint8_t func) {
+	fprintf(stderr,"** WARN ** Execute %d.%d not defined.\n",group,func);
 }
 
 // ***************************************************************************************

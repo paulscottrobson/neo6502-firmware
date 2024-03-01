@@ -20,6 +20,8 @@ void LOGDrawLogo(void);
 
 void TICKProcess(void);
 
+void ResetSystem(void);
+
 #endif
 
 // ***************************************************************************************

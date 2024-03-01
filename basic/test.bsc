@@ -1,16 +1,10 @@
-cls
-iwrite $51,4,$11
-repeat
- 	call GetBCD(4,$3F)
- 	a$ = n$
- 	call GetBCD(3,$7F)
- 	a$ = a$+":"+n$
- 	call GetBCD(2,$7F)
- 	a$ = a$+":"+n$
- 	print chr$(20);a$
-until 0
 '
-proc GetBCD(r,mask)
-	b = iread($51,r) & mask
-	n$ = str$(b >> 4)+str$(b & 15) 	
-endproc
+'	Display a voltage on pin 3 (0 to 3.3v)
+'
+pin 3,analog
+cls
+repeat
+	barSize = analog(3) \ 13
+	rect 0,10 solid ink 2 to barSize,100
+	rect barSize,10 solid ink 1 to 319,100
+until false

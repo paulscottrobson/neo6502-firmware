@@ -1,9 +1,9 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		iread.asm
-;		Purpose:	Read I2C Device
-;		Created:	24th February 2024
+;		Name:		gpio.asm
+;		Purpose:	Read GPIO Pins
+;		Created:	20th February 2024
 ;		Reviewed: 	No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
 ;
@@ -14,33 +14,28 @@
 
 ; ************************************************************************************************
 ;
-; 										IREAD() function
+; 										PIN() function
 ;
 ; ************************************************************************************************
 
-UnaryIRead: ;; [iread(]	
-		jsr 	EXPEvalInteger8				; get device to read
-		pha
-		jsr 	ERRCheckComma
-		jsr 	EXPEvalInteger8 			; get register to read
+UnaryPin: ;; [pin(]	
+		jsr 	EXPEvalInteger8				; get pin to check
 		pha
 		jsr 	ERRCheckRParen 				
-
-		pla 								; set up for read
-		sta 	ControlParameters+1
-		pla 	
+		pla
 		sta 	ControlParameters
-
 		.DoSendMessage 						; read it.
-		.byte 	10,6
+		.byte 	10,3
 		.DoWaitMessage
 		lda 	ControlError
-		bne 	_URError
+		bne 	_UPRange
 		lda 	ControlParameters  			; return 0 / 1
+		beq 	_UPZero
+		lda 	#1
+_UPZero:		
 		jmp 	EXPUnaryReturnA
-
-_URError
-		.error_hardware
+_UPRange:
+		.error_range
 
 		.send code
 
