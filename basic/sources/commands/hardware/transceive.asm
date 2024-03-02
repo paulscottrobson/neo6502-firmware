@@ -22,7 +22,7 @@
 command_ireceive: ;; [ireceive]
 		lda 	#9
 		bra 	TransceiveMain
-command_isend: 	;; [isend]
+command_itransmit: 	;; [itransmit]
 		lda 	#10
 		bra 	TransceiveMain
 
@@ -54,6 +54,14 @@ TransceiveMain:
 		lda 	#10
 		sta 	ControlCommand_Check
 		DoWaitMessage
+
+		lda 	ControlError
+		bne 	_RTHardware
+		rts		
+
+_RTHardware:
+		.error_hardware
+
 		rts
 
 
