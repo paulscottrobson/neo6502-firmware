@@ -73,3 +73,17 @@ GROUP 10 ,0 UExt I/O
     DOCUMENTATION
         P0 = Scan(P0)
         \newline Try to read from I2C Device \Param{0}. If present then \Param{0} will contain a non-zero value.
+
+    FUNCTION 9 Read I2C Block into memory
+        *DERROR = IOI2CReadBlock(DPARAMS[0],cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
+
+    DOCUMENTATION
+        Read I2C Block(P0,P2P1,P4P3)
+        \newline Try to read a block of memory from I2C Device \Param{0} into memory at \Param{1,2} length \Param{3,4}
+
+    FUNCTION 10 Write I2C Block from memory
+        *DERROR = IOI2CWriteBlock(DPARAMS[0],cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
+
+    DOCUMENTATION
+        Write I2C Block(P0,P2P1,P4P3)
+        \newline Try to write a block of memory to I2C Device \Param{0} from memory at \Param{1,2} length \Param{3,4}

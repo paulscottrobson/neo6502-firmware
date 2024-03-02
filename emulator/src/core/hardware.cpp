@@ -521,7 +521,7 @@ int UEXTI2CInitialise(void) {
 // ***************************************************************************************
 
 int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
-	printf("I2C Write to $%02x\n",device);
+	printf("I2C Write to $%02x %d bytes\n",device,size);
 	for (int i = 0;i < size;i++) {
 		printf(" $%02x",data[i]);
 	}
@@ -537,7 +537,7 @@ int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
 
 int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
 	if (device == 0x7F) return 1;
-	printf("I2C Read from $%02x\n",device);
+	printf("I2C Read from $%x %d bytes\n",device,size);
 	for (int i = 0;i < size;i++) {
 		data[i] = device + 0x12 + i * 3;
 		printf(" $%02x",data[i]);
