@@ -140,13 +140,13 @@ GROUP 3 ,0,9 File I/O
         \item \Param{0} contains the file channel to operate on;
         \item \Param{1,2} points to the destination in memory, or \MonoSp{$FFFF}
         to write to graphics memory;
-        \item \Param{2,3} contains the amount of data to read.
+        \item \Param{3,4} contains the amount of data to read.
         \end{itemize}
 
         On output:
 
         \begin{itemize}
-        \item \Param{2,3} is updated to contain the amount of data actually read.
+        \item \Param{3,4} is updated to contain the amount of data actually read.
         \end{itemize}
 
         Data is read from the current seek position, which is advanced after the
@@ -164,13 +164,13 @@ GROUP 3 ,0,9 File I/O
         \begin{itemize}
         \item \Param{0} contains the file channel to operate on;
         \item \Param{1,2} points to the data in memory;
-        \item \Param{2,3} contains the amount of data to write.
+        \item \Param{3,4} contains the amount of data to write.
         \end{itemize}
 
         On output:
 
         \begin{itemize}
-        \item \Param{2,3} is updated to contain the amount of data actually written.
+        \item \Param{3,4} is updated to contain the amount of data actually written.
         \end{itemize}
 
         Data is written to the current seek position, which is advanced after the
