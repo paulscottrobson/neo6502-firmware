@@ -271,6 +271,29 @@ uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attr
 
 // ***************************************************************************************
 //
+//									Set file attributes
+//
+// ***************************************************************************************
+
+uint8_t FISSetFileAttributes(const std::string& filename, uint8_t attribs) {
+	std::string abspath = getAbspath(filename);
+	printf("FISSetFileAttributes('%s') -> ", abspath.c_str());
+
+	try {
+		using std::filesystem::perms;
+		std::filesystem::permissions(abspath,
+			(std::filesystem::perms)((attribs & FIOATTR_READONLY) ? 0444 : 0666),
+			std::filesystem::perm_options::replace);
+		printf("OK\n");
+		return 0;
+	} catch (const std::filesystem::filesystem_error& e) {
+		printf("%s\n", e.what());
+		return 1;
+	}
+}
+
+// ***************************************************************************************
+//
 //								Directory enumeration
 //
 // ***************************************************************************************

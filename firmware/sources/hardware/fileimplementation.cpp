@@ -159,6 +159,34 @@ uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attr
 
 // ***************************************************************************************
 //
+//									Set file attributes
+//
+// ***************************************************************************************
+
+uint8_t FISSetFileAttributes(const std::string& filename, uint8_t attribs) {
+	#if FF_USE_CHMOD
+		STOInitialise();
+
+		uint8_t fatattribs = 0;
+		if (attribs & FIOATTR_ARCHIVE)
+			fatattribs |= AM_ARC;
+		if (attribs & FIOATTR_HIDDEN)
+			fatattribs |= AM_HID;
+		if (attribs & FIOATTR_READONLY)
+			fatattribs |= AM_RDO;
+		if (attribs & FIOATTR_SYSTEM)
+			fatattribs |= AM_SYS;
+		
+		FRESULT result = f_chmod(filename.c_str(), fatattribs, 0xff);
+
+		return (result == FR_OK) ? 0 : 1;
+	#else
+		return 1;
+	#endif
+}
+
+// ***************************************************************************************
+//
 //								Directory enumeration
 //
 // ***************************************************************************************

@@ -360,6 +360,18 @@ GROUP 3 ,0,9 File I/O
 
         Only single files may be copied, not directories.
 
+    FUNCTION 21 Set file attributes
+        *DERROR = FIOSetFileAttributes(DSPGetStdString(DPARAMS, 0), DPARAMS[2]);
+    DOCUMENTATION
+        Sets the attributes for a file. On input:
+
+        \begin{itemize}
+        \item \Param{0,1} points to the length-prefixed filename;
+        \item \Param{2} is the attribute bitfield. (See Stat File for details.)
+        \end{itemize}
+
+        The directory bit cannot be changed. Obviously.
+        
     FUNCTION 32 List Filtered
         FIODirectory(DSPGetString(DCOMMAND,4));
     DOCUMENTATION
