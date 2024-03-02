@@ -24,7 +24,7 @@ class GraphicsConvert(object):
 	def toText(self,source,target):
 		hOutput = open(target,"w")  																	# Open file, write header
 		hOutput.write("#\n#\tConversion of \"{0}\"\n#\n".format(source))
-		src = [x for x in open(source,"rb").read(-1)]  													# Read graphics file
+		src = bytearray(open(source,"rb").read(-1))  													# Read graphics file
 		offset1 = 256 + src[1] * 16 * 16 // 2  															# sprite 16 start here
 		offset2 = offset1 + src[2] * 16 * 16 // 2  														# sprite 32 start here
 		self.xlat = ".abcdefghijklmno"

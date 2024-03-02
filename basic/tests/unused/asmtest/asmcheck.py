@@ -13,8 +13,8 @@ import sys
 
 codeAt = 0x6000
 
-memory = [x for x in open("../../memory.dump","rb").read(-1)]
-asbin =  [x for x in open("asmtest.bin","rb").read(-1)]
+memory = bytearray(open("../../memory.dump","rb").read(-1))
+asbin =  bytearray(open("asmtest.bin","rb").read(-1))
 
 count= 0
 for x in range(0,len(asbin)):
