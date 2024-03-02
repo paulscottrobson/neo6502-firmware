@@ -142,6 +142,11 @@ inputPos: 									; tokenising position in input buffer
 inputBuffer: 								; input buffer / token input buffer.
 		.fill 	256
 
+transmitDataBuffer = inputBuffer 			; use input buffer for transmit data
+
+transmitDataSize: 							; data to transmit
+		.fill 	1
+
 tokLineSize: 								; offset to end of line
 		.fill 	1
 tokLineNumber: 								; line number of current life
