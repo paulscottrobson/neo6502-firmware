@@ -19,13 +19,13 @@
 /* _Alignas(MEMORY_SIZE) */ uint8_t cpuMemory[MEMORY_SIZE] = {0};  				// Processor memory, aligned for Pico
 uint8_t gfxObjectMemory[GFX_MEMORY_SIZE] = {0}; 								// Graphics objects memory.
 uint8_t graphicsMemory[MAXGRAPHICSMEMORY] = {0};								// RAM used for graphics and console text.
-uint8_t consoleMemory[MAXCONSOLEMEMORY] = {0};  								// Console RAM
+uint16_t consoleMemory[MAXCONSOLEMEMORY] = {0};  								// Console RAM
 
 #else
 uint8_t cpuMemory[MEMORY_SIZE] = {0};
 uint8_t gfxObjectMemory[GFX_MEMORY_SIZE] = {0};
 uint8_t graphicsMemory[MAXGRAPHICSMEMORY] = {0};
-uint8_t consoleMemory[MAXCONSOLEMEMORY] = {0};  					
+uint16_t consoleMemory[MAXCONSOLEMEMORY] = {0};  					
 #endif
 
 uint16_t controlPort = DEFAULT_PORT;       										// Control point.

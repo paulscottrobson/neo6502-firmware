@@ -1,3 +1,4 @@
+list
 isend $2A,45,1,2,32766;"Hello",0
 end
 '
