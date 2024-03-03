@@ -14,17 +14,18 @@
 #define _GRAPHICS_H
 
 #define MAXCONSOLEWIDTH  	(80) 	 											// Max console size 
-#define MAXCONSOLEHEIGHT  	(31)
+#define MAXCONSOLEHEIGHT  	(30)
 #define MAXGRAPHICSMEMORY 	(320 * 240)  										// Max byte memory , graphics
 #define MAXCONSOLEMEMORY 	(MAXCONSOLEWIDTH * (MAXCONSOLEHEIGHT+1))			// Max byte memory, console text.
 																				// (extra line for scrolling.)
 struct GraphicsMode {
-	uint16_t xCSize,yCSize;														// Size of console (chars)
+	uint16_t xCSize,yCSize;														// Max size of console (chars)
 	uint16_t xGSize,yGSize;														// Size of console (pixels) [0,0 = no graphics]
 	uint8_t  fontWidth,fontHeight;  											// Font size in pixels.
 	uint8_t  xCursor,yCursor;  													// Cursor position
 	uint8_t  foreCol,backCol;  													// Current colours
-	uint8_t *graphicsMemory,*consoleMemory;  									// Graphics & text memory.
+	uint8_t *graphicsMemory;  													// graphics memory
+	uint16_t *consoleMemory;  									  				// console memory.
 	uint8_t  isExtLine[MAXCONSOLEHEIGHT]; 										// True if console is extended line.
 
 	void  (*setPalette)(uint8_t,uint8_t,uint8_t,uint8_t); 						// Set the palette
