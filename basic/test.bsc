@@ -1,28 +1,38 @@
-list
-isend $2A,45,1,2,32766;"Hello",0
-end
 '
-'	Reading RTC using isend and ireceive instead
+'	Neo6502 speed test, written by Paul Robson 24/12/2023
+'	
+'	Emulator is inaccurate because I don't add 1 for the taken branch, speed is approx
+'	on emulation.
 '
-mem = alloc(3): ' this is a work area
-
-repeat
-	'
-	'		Read s/m/h registers the usual way.
-	'
-	cls
-	print "IRead",,,iread($51,2),iread($51,3),iread($51,4)
-	'
-	'		Send 2 (first register to read) to device $61
-	'
-	poke mem,2
-	itransmit $51,mem,1
-	'
-	'		Read three bytes (will be register 2,3,4) into work area.
-	'
-	ireceive $51,mem,3
-	print "ITransmit/IReceive",peek(mem),peek(mem+1),peek(mem+2)
-
-	wait 25
-
-until false
+p = alloc(32)
+'
+'	Basically DEY ; bne Loop ; DEX ; bne Loop ; DEC ; bne Loop
+'
+.clockme
+	dey : bne clockme
+	dex : bne clockme
+	dec : bne clockme
+	rts
+'
+'	Do this many iterations with initial value of A
+'
+count = 2
+a = 50
+'
+'	Do code, measuring time.
+'
+x = 0:y = 0
+start = time()
+for i = 1 to count:print i:sys clockme:next
+tExec = (time()-start) / 100
+'
+'	Time for each iteration of the dex/dey bit
+'
+tExec = tExec / count / a
+print tExec;" secs per inner 2 loops"
+'
+'	Work out speed.
+'
+innerCycles = 1280 * 256
+cps = innerCycles / tExec
+print cps/1000/1000;" Mhz clock"

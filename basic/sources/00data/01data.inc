@@ -60,6 +60,9 @@ XSNumber3:
 ;	
 ;											Zero Page
 ;
+;		If additional allocated then they may need to be saved during system calls. the temp
+;		registers and the stack do not matter.
+;
 ; ************************************************************************************************
 
 		.section zeropage
