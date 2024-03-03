@@ -1,11 +1,16 @@
 add_executable(firmware)
 
-FetchContent_Declare(
-    no-OS-FatFS-SD-SPI-RPi-Pico
-    GIT_REPOSITORY https://github.com/carlk3/no-OS-FatFS-SD-SPI-RPi-Pico.git
-    GIT_TAG        bbccc5d2deea09e128e2576ef35f72b473c5ba5f # just the latest on 30/01/2024
-)
-FetchContent_MakeAvailable(no-OS-FatFS-SD-SPI-RPi-Pico)
+if (DEFINED ENV{PICO_FATFS_PATH})
+    set(no-os-fatfs-sd-spi-rpi-pico_SOURCE_DIR $ENV{PICO_FATFS_PATH})
+    set(no-os-fatfs-sd-spi-rpi-pico_BINARY_DIR "_deps/no-os-fatfs-sd-spi-rpi-pico-build")
+else()
+    FetchContent_Declare(
+        no-OS-FatFS-SD-SPI-RPi-Pico
+        GIT_REPOSITORY https://github.com/carlk3/no-OS-FatFS-SD-SPI-RPi-Pico.git
+        GIT_TAG        bbccc5d2deea09e128e2576ef35f72b473c5ba5f # just the latest on 30/01/2024
+    )
+    FetchContent_MakeAvailable(no-OS-FatFS-SD-SPI-RPi-Pico)
+endif()
 
 pico_generate_pio_header(firmware ${CMAKE_CURRENT_LIST_DIR}/system/sm0_memory_emulation_with_clock.pio)
 
