@@ -41,7 +41,9 @@ static uint8_t getAttributes(const FILINFO* fno) {
 
 uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFilename) {
 	STOInitialise();
+	// CONWriteString("FISRenameFile('%s', '%s') -> ", oldFilename.c_str(), newFilename.c_str());
 	FRESULT result = f_rename(oldFilename.c_str(), newFilename.c_str());
+	// CONWriteString("%d\r", result);
 	return (result == FR_OK) ? 0 : 1;
 }
 
@@ -111,7 +113,9 @@ uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilena
 
 uint8_t FISDeleteFile(const std::string& filename) {
 	STOInitialise();
+	// CONWriteString("FISDeleteFile('%s') ->", filename.c_str());
 	FRESULT result = f_unlink(filename.c_str());
+	// CONWriteString("%d\r", result);
 	return (result == FR_OK) ? 0 : 1;
 }
 
@@ -123,7 +127,9 @@ uint8_t FISDeleteFile(const std::string& filename) {
 
 uint8_t FISCreateDirectory(const std::string& filename) {
 	STOInitialise();
+	// CONWriteString("FISCreateDirectory('%s') ->", filename.c_str());
 	FRESULT result = f_mkdir(filename.c_str());
+	// CONWriteString("%d\r", result);
 	return (result == FR_OK) ? 0 : 1;
 }
 
@@ -135,7 +141,9 @@ uint8_t FISCreateDirectory(const std::string& filename) {
 
 uint8_t FISChangeDirectory(const std::string& filename) {
 	STOInitialise();
+	// CONWriteString("FISChangeDirectory('%s') ->", filename.c_str());
 	FRESULT result = f_chdir(filename.c_str());
+	// CONWriteString("%d\r", result);
 	return (result == FR_OK) ? 0 : 1;
 }
 
@@ -362,11 +370,12 @@ uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size) {
 		return 1;
 
 	uint32_t oldPos = f_tell(f);
+	// CONWriteString("FISSetSizeFileHandle(%d, 0x%08x) -> ", fileno, size);
 	FRESULT result = f_lseek(f, size);
 	if (result == FR_OK)
 		result = f_truncate(f);
+	// CONWriteString("%d\r", result);
 
-	f_lseek(f, oldPos);
 	return (result == FR_OK) ? 0 : 1;
 }
 
