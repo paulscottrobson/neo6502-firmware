@@ -10,6 +10,20 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 
+push16 	.macro
+		lda 	\1
+		pha
+		lda 	1+\1
+		pha
+		.endm
+
+pop16 	.macro
+		pla
+		sta 	1+\1
+		pla
+		sta 	\1
+		.endm
+				
 ; ************************************************************************************************
 ;
 ;										SYS Command
@@ -28,12 +42,18 @@ Command_Sys:	;; [sys]
 		lda 	XSNumber1,x
 		sta 	_SysCall+2
 
+		push16	codePtr 					; save zero page BASIC variables.
+		push16 	basicStack
+
 		lda  	VariableA 					; load in AXY
 		ldx 	VariableX
 		ldy 	VariableY
 		
 _SysCall:
 		jsr 	$FFFF 						; call the code
+
+		pop16 	basicStack 					; restore important zero page BASIC variables
+		pop16 	codePtr
 		ply
 		rts
 
@@ -48,6 +68,7 @@ _SysCall:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		03/03/24 		Amended to push important BASIC variables.
 ;
 ; ************************************************************************************************
 
