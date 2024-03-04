@@ -657,6 +657,14 @@ Copies a file. On input:
 \end{itemize}
 Only single files may be copied, not directories.
 }
+\ApiFnRow{21}{Set file attributes}{
+Sets the attributes for a file. On input:
+\begin{itemize}
+\item \Param{0,1} points to the length-prefixed filename;
+\item \Param{2} is the attribute bitfield. (See Stat File for details.)
+\end{itemize}
+The directory bit cannot be changed. Obviously.
+}
 \ApiFnRow{32}{List Filtered}{
 Prints a filtered file listing of the current directory to the console. On input:
 \begin{itemize}

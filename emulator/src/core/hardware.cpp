@@ -38,6 +38,14 @@ static std::string getAbspath(const std::string& path) {
 	return newPath.string();
 }
 
+static uint8_t getAttributes(const std::string& filename) {
+	using std::filesystem::perms;
+	std::filesystem::file_status status = std::filesystem::status(filename);
+
+	return ((status.type() == std::filesystem::file_type::directory) ? FIOATTR_DIR : 0) |
+		((status.permissions() & perms::owner_write) == perms::none ? FIOATTR_READONLY : 0);
+}
+
 // *******************************************************************************************************************************
 //
 //												Reset Hardware
@@ -252,7 +260,30 @@ uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attr
 
 	try {
 		*length = std::filesystem::file_size(abspath);
-		*attribs = std::filesystem::is_directory(abspath) ? FIOATTR_DIR : 0;
+		*attribs = getAttributes(abspath);
+		printf("OK; length=0x%04x; permissions=0x%02x\n", *length, *attribs);
+		return 0;
+	} catch (const std::filesystem::filesystem_error& e) {
+		printf("%s\n", e.what());
+		return 1;
+	}
+}
+
+// ***************************************************************************************
+//
+//									Set file attributes
+//
+// ***************************************************************************************
+
+uint8_t FISSetFileAttributes(const std::string& filename, uint8_t attribs) {
+	std::string abspath = getAbspath(filename);
+	printf("FISSetFileAttributes('%s') -> ", abspath.c_str());
+
+	try {
+		using std::filesystem::perms;
+		std::filesystem::permissions(abspath,
+			(std::filesystem::perms)((attribs & FIOATTR_READONLY) ? 0444 : 0666),
+			std::filesystem::perm_options::replace);
 		printf("OK\n");
 		return 0;
 	} catch (const std::filesystem::filesystem_error& e) {
@@ -275,7 +306,7 @@ uint8_t FISOpenDir(const std::string& filename) {
 	errno = 0;
 	try {
 		readDirIterator = std::filesystem::directory_iterator(abspath);
-		printf("OKs\n");
+		printf("OK\n");
 		return 0;
 	} catch (const std::filesystem::filesystem_error& e) {
 		printf("%s\n", e.what());
@@ -290,9 +321,9 @@ uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs) {
 		const auto& de = *readDirIterator++;
 
 		filename = de.path().filename().string();
-		*attribs = de.is_directory() ? FIOATTR_DIR : 0;
 		*size = de.is_regular_file() ? de.file_size() : 0;
-		printf("OK: '%s'\n", filename.c_str());
+		*attribs = getAttributes(de.path().string());
+		printf("OK: '%s', length=0x%04x, attribus=0x%02x\n", filename.c_str(), *size, *attribs);
 		return 0;
 	} else {
 		printf("Failed\n");
