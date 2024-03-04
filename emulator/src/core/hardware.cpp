@@ -546,7 +546,7 @@ int UEXTI2CInitialise(void) {
 
 // ***************************************************************************************
 //
-//                          Write byte to I2C device register 
+//                          	Write bytes to I2C device
 //
 // ***************************************************************************************
 
@@ -561,7 +561,7 @@ int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
 
 // ***************************************************************************************
 //
-//                          Read byte from I2C device register 
+//                          	Read bytes from I2C device 
 //
 // ***************************************************************************************
 
@@ -576,6 +576,47 @@ int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
     return 0;
 }
 
+// ***************************************************************************************
+//
+//                                     Dummy SPI functions
+//
+// ***************************************************************************************
+
+int UEXTSPIInitialise(void) {
+	printf("SPI Initialise\n");
+    return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Write bytes to SPI device
+//
+// ***************************************************************************************
+
+int UEXTSPIWriteBlock(uint8_t *data,size_t size) {
+	printf("SPI Write to %d bytes\n",size);
+	for (int i = 0;i < size;i++) {
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Read bytes from I2C device
+//
+// ***************************************************************************************
+
+int UEXTSPIReadBlock(uint8_t *data,size_t size) {
+	printf("SPI Read from %d bytes\n",size);
+	for (int i = 0;i < size;i++) {
+		data[i] = 0x12 + i * 3;
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+    return 0;
+}
 // ***************************************************************************************
 //
 //                          			Hardware reset
