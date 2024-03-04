@@ -35,7 +35,10 @@ GROUP 8 ,0 Sound
         Play the startup beep immediately.
 
     FUNCTION 4 Queue Sound
-        *DERROR = SNDPlay(DPARAMS[0],DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7),DSPGetInt16(DCOMMAND,9),DPARAMS[7]);
+        su.frequency = DSPGetInt16(DCOMMAND,5);
+        su.timeCS = DSPGetInt16(DCOMMAND,7);
+        su.slide = DSPGetInt16(DCOMMAND,9);
+        *DERROR = SNDPlay(DPARAMS[0],&su);
     DOCUMENTATION
         Queue a sound.
         Refer to Section \#\ref{sound} "Sound" for details.
