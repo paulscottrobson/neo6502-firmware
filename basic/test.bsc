@@ -1,3 +1,8 @@
-for i = 0 to 31:print i % 10;:next:print
-print "*";tab(13);"*";tab(29);"*";tab(23);"!"
-print "a","bb","cccc","d"
+a$ = "frogger.neo"
+poke $100,len(a$)
+for i = 1 to len(a$)
+	poke $100+i,asc(mid$(a$,i,1))
+next
+poke $FF04,0
+poke $FF05,1
+sys $FFE2

@@ -137,6 +137,18 @@ _KRLExit:
 
 ; ***************************************************************************************
 ;
+;					Extended load functionality with BASIC Preload
+;			(Note: it is advised the filename is stored in page 0 or page 1)
+;
+; ***************************************************************************************
+
+KChainBasicProgram:
+	jsr 	KSendMessage  					; call "Load BASIC"
+	.byte 	1,3
+	jsr 	KWaitMessage	
+
+; ***************************************************************************************
+;
 ;								Extended load functionality
 ;
 ; ***************************************************************************************
