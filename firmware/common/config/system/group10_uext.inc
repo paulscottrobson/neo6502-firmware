@@ -87,3 +87,17 @@ GROUP 10 ,0 UExt I/O
     DOCUMENTATION
         Write I2C Block(P0,P2P1,P4P3)
         \newline Try to write a block of memory to I2C Device \Param{0} from memory at \Param{1,2} length \Param{3,4}
+
+    FUNCTION 11 Read SPI Block into memory
+        *DERROR = IOSPIReadBlock(cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
+
+    DOCUMENTATION
+        Read SPI Block(P2P1,P4P3)
+        \newline Try to read a block of memory from SPI Device into memory at \Param{1,2} length \Param{3,4}
+
+    FUNCTION 12 Write SPI Block from memory
+        *DERROR = IOSPIWriteBlock(cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
+
+    DOCUMENTATION
+        Write SPI Block(P2P1,P4P3)
+        \newline Try to write a block of memory to SPI Device from memory at \Param{1,2} length \Param{3,4}

@@ -30,6 +30,9 @@ int IOI2CReadRegister(uint8_t device,uint8_t reg,uint8_t *pData);
 int IOI2CReadBlock(uint8_t device, uint8_t *data,size_t size);
 int IOI2CWriteBlock(uint8_t device, uint8_t *data,size_t size);
 
+int IOSPIReadBlock(uint8_t *data,size_t size);
+int IOSPIWriteBlock(uint8_t *data,size_t size);
+
 int UEXTSetGPIODirection(int gpio,int pinType);
 int UEXTSetGPIO(int gpio,bool isOn);
 int UEXTGetGPIO(int gpio,bool *pIsHigh);
@@ -38,6 +41,10 @@ int UEXTGetGPIOAnalogue(int gpio,uint16_t *pLevel);
 int UEXTI2CInitialise(void);
 int UEXTI2CReadBlock(uint8_t device, uint8_t *data,size_t size);
 int UEXTI2CWriteBlock(uint8_t device, uint8_t *data,size_t size);
+
+int UEXTSPIInitialise(void);
+int UEXTSPIReadBlock(uint8_t *data,size_t size);
+int UEXTSPIWriteBlock(uint8_t *data,size_t size);
 
 #endif
 

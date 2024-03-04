@@ -31,6 +31,7 @@ static bool IOPINOutputLatch[IOPIN_MAX+1]; 											// State of output latch
 static int  IOPINPinDirection[IOPIN_MAX+1]; 										// What the pin direction is set to.
 static bool IOPINDisabled[IOPIN_MAX+1];  											// Pin usage disabled
 static bool IOI2CInitialised = false; 												// True if I2C initialised.
+static bool IOSPIInitialised = false; 												// True if SPI initialised.
 
 // ***************************************************************************************
 //
@@ -139,7 +140,7 @@ static void IOI2CInitialise(void) {
 	if (!IOI2CInitialised) {  														// If not initialised
 		IOI2CInitialised = true;  													// Mark initialised
 		UEXTI2CInitialise();  														// Set it up
-		IOPINDisabled[3] = IOPINDisabled[4] = true; 								// Disable SCL/SDA from GPIO usage.
+		IOPINDisabled[5] = IOPINDisabled[6] = true; 								// Disable SCL/SDA from GPIO usage.
 	}
 }
 
@@ -171,7 +172,7 @@ int IOI2CReadRegister(uint8_t device,uint8_t reg,uint8_t *pData) {
 
 // ***************************************************************************************
 //
-//								  Read/write mappers
+//								  Read/write mappers I2C
 //
 // ***************************************************************************************
 
@@ -183,6 +184,37 @@ int IOI2CReadBlock(uint8_t device, uint8_t *data,size_t size) {
 int IOI2CWriteBlock(uint8_t device, uint8_t *data,size_t size) {
 	IOI2CInitialise();
 	return UEXTI2CWriteBlock(device,data,size);
+}
+
+// ***************************************************************************************
+//
+//				Initialise SPI system if not already initialised
+//
+// ***************************************************************************************
+
+static void IOSPIInitialise(void) {
+	if (!IOSPIInitialised) {  														// If not initialised
+		IOSPIInitialised = true;  													// Mark initialised
+		UEXTSPIInitialise();  														// Set it up
+		IOPINDisabled[7] = IOPINDisabled[8] = 										// Disable MOSI/MISO/SCK/CS from GPIO usage.
+				IOPINDisabled[9] = IOPINDisabled[10] = true; 							
+	}
+}
+
+// ***************************************************************************************
+//
+//								  Read/write mappers SPI
+//
+// ***************************************************************************************
+
+int IOSPIReadBlock(uint8_t *data,size_t size) {
+	IOSPIInitialise();
+	return UEXTSPIReadBlock(data,size);
+}
+
+int IOSPIWriteBlock(uint8_t *data,size_t size) {
+	IOSPIInitialise();
+	return UEXTSPIWriteBlock(data,size);
 }
 
 // ***************************************************************************************

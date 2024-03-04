@@ -1,8 +1,8 @@
-a$ = "frogger.neo"
-poke $100,len(a$)
-for i = 1 to len(a$)
-	poke $100+i,asc(mid$(a$,i,1))
+poke $100,1
+poke $101,$2A
+poke $102,$FE
+stransmit $100,3	
+sreceive $110,4
+for i = 0 to 3
+	print i,peek(i+$110)
 next
-poke $FF04,0
-poke $FF05,1
-sys $FFE2
