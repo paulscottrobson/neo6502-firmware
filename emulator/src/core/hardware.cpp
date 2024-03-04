@@ -105,10 +105,9 @@ void SNDInitialise(void) {
 //
 // *******************************************************************************************************************************
 
-void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise) {
-	//printf("%d %d %d\n",channel,frequency,isNoise);
-	if (frequency != 0) {
-		GFXSetFrequency(frequency,1);
+void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
+	if (c->isPlayingNote != 0) {
+		GFXSetFrequency(c->currentFrequency,1);
 	} else {
 		GFXSilence();
 	}

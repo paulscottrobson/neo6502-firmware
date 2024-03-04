@@ -51,7 +51,7 @@ void SNDInitialise(void) {
 	gpio_set_function(SOUND_PIN, GPIO_FUNC_PWM);
 	sliceNumber = pwm_gpio_to_slice_num(SOUND_PIN);
 	channel = pwm_gpio_to_channel(SOUND_PIN);
-	SNDSetFrequency(0,0,false);
+	pwm_set_enabled(sliceNumber,false);
 }
 
 // ***************************************************************************************
@@ -60,10 +60,10 @@ void SNDInitialise(void) {
 //
 // ***************************************************************************************
 
-void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise) {
+void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
 	if (channel < SOUND_CHANNELS) {
-		SNDSetPWMFrequencyDuty(sliceNumber,channel, frequency, 50);
-		pwm_set_enabled(sliceNumber,(frequency != 0));
+		SNDSetPWMFrequencyDuty(sliceNumber,channel, c->currentFrequency, 50);
+		pwm_set_enabled(sliceNumber,c->isPlayingNote);
 	}
 }
 
