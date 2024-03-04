@@ -25,7 +25,6 @@ Command_ISend:	;; [isend]
 
 		jsr 	SendGetDataBuffer 			; get the data to send.
 
-
 		.DoSendMessage 						; write to i2c
 		.byte 	10,10
 		.DoWaitMessage
@@ -33,6 +32,23 @@ Command_ISend:	;; [isend]
 		bne 	_CSHardware
 		rts		
 
+_CSHardware:
+		.error_hardware
+
+; ************************************************************************************************
+;
+;										ssend Command
+;
+; ************************************************************************************************
+
+Command_SSend:	;; [ssend]
+		jsr 	SendGetDataBuffer 			; get the data to send.
+		.DoSendMessage 						; write to spi
+		.byte 	10,12
+		.DoWaitMessage
+		lda 	ControlError
+		bne 	_CSHardware
+		rts		
 _CSHardware:
 		.error_hardware
 
