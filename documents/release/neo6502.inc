@@ -1,4 +1,5 @@
 ControlPort = $ff00
+ChainBasicProgram = $ffe2
 WriteCharacterInline = $ffe5
 LoadExtended = $ffe8
 ReadLine = $ffeb

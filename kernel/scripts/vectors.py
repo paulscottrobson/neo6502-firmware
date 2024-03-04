@@ -13,6 +13,7 @@
 import sys
 
 vectors = [
+		"KChainBasicProgram",	
 		"KWriteCharacterInline",
 		"KLoadExtended",
 		"KReadLine",
