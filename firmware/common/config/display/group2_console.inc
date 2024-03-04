@@ -126,3 +126,12 @@ GROUP 2 ,0,8 Console
         Toggles the cursor colour between normal and inverse
         (ie: swaps FG and BG colors). This should not be used.
 
+
+    FUNCTION 17 Tab() implementation
+        CONGetCursorPosition(&u2,&u4);
+        while (u2 < DPARAMS[0]) {
+            CONWrite(' ');
+            CONGetCursorPosition(&u2,&u4);
+        }
+    DOCUMENTATION
+        Internal helper.

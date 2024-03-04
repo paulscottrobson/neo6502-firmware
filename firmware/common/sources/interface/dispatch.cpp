@@ -42,7 +42,7 @@ void TIMECRITICAL(DSPHandler)(uint8_t *cBlock, uint8_t *memory)
 	float f1,f2;
 	int i1,i2,r;
 	uint32_t u1;
-	uint8_t u2;
+	uint8_t u2,u4;
 	uint16_t u3;
 	SOUND_UPDATE su;
 	bool b1;

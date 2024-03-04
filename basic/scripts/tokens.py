@@ -149,7 +149,7 @@ class TokenSet(object):
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
 			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM 	VBLANKS(
 			ERR 	ERL		PIN( 	IREAD( 	 ANALOG(  !!UN2  !!UN3
-			IDEVICE(
+			IDEVICE( SPC( 	TAB(
 		""")
 		
 if __name__ == "__main__":
