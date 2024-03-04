@@ -1,1 +1,8 @@
-ssend 1,4,32766;"ABC"
+poke $100,1
+poke $101,$2A
+poke $102,$FE
+stransmit $100,3	
+sreceive $110,4
+for i = 0 to 3
+	print i,peek(i+$110)
+next

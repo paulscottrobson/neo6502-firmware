@@ -26,12 +26,25 @@ command_itransmit: 	;; [itransmit]
 		lda 	#10
 		bra 	TransceiveMain
 
+command_sreceive: ;; [sreceive]
+		lda 	#11
+		bra 	TransceiveMainB
+command_stransmit: 	;; [stransmit]
+		lda 	#12
+		bra 	TransceiveMainB
+
+TransceiveMainB:
+		pha
+		ldx 	#1
+		bra 	TransceiveStartLength
+
 TransceiveMain:
 		pha 								; save the function #
 		ldx 	#0 							; device #
 		jsr 	EXPEvalInteger8
 		jsr 	ERRCheckComma
 		inx
+TransceiveStartLength:		
 		jsr 	EXPEvalInteger16 			; start
 		jsr 	ERRCheckComma
 		inx
