@@ -20,11 +20,14 @@
 
 Command_Load:	;; [load]
 		jsr 	LoadCode 					; load the program
+		bcs 	_CLReturn
 		jmp 	WarmStart 					; and warm start.
+_CLReturn:
+		rts
 
 ; ************************************************************************************************
 ;
-;							Load file in following BASIC expression
+;				Load file in following BASIC expression. Returns CC to warm start
 ;
 ; ************************************************************************************************
 		
@@ -41,15 +44,7 @@ LoadCode:
 		sta 	ControlParameters+3
 		jsr 	CLLoad 						; Load BASIC program
 		jsr 	ClearCode
-		rts
-
-Command_GLoad: ;; [gload]
-		ldx 	#0  						; file name
-		jsr 	EXPEvalString
-		lda 	#$FF
-		sta 	ControlParameters+2
-		sta 	ControlParameters+3
-		jsr 	CLLoad
+		clc
 		rts
 
 CLLoadMemory:
@@ -61,6 +56,7 @@ CLLoadMemory:
 		lda 	XSNumber1+1 
 		sta 	ControlParameters+3
 		jsr 	CLLoad
+		sec
 		rts
 
 ;
@@ -78,6 +74,22 @@ CLLoad:
 		.error_file
 _CLExit:
 		rts
+
+; ************************************************************************************************
+;
+;								GLoad Command (load into graphics area)
+;
+; ************************************************************************************************
+
+Command_GLoad: ;; [gload]
+		ldx 	#0  						; file name
+		jsr 	EXPEvalString
+		lda 	#$FF
+		sta 	ControlParameters+2
+		sta 	ControlParameters+3
+		jsr 	CLLoad
+		rts
+
 
 		.send code
 
