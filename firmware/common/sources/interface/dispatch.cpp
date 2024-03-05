@@ -31,6 +31,9 @@
 
 #include "data/neowho.h"
 
+#include "hardware/tinysid/sid.h"
+#include <format>
+
 // ***************************************************************************************
 //
 //							Handle commands sent by message
@@ -84,10 +87,52 @@ void DSPReset(void) {
 	SNDInitialise();                                                            // Initialise sound hardware
 	SNDManager();                                                               // Initialise sound manager
 	CONWrite(0x80+6);
+	// size_t buffer_size = 32;
+	// uint8_t buffer[buffer_size];
+	// while(true)
+	// {
+	// 	//SIDExecute();
+	// 	auto startTime = time_us_64();
+	// 	SIDCalcBuffer(buffer, buffer_size);
+	// 	auto endTime = time_us_64();
+
+	// 	double executionTime = endTime - startTime;
+	// 	CONWriteString(std::format("Time {}\r", executionTime).c_str());
+	// 	// CONWriteHex(((uint16_t*)buffer)[0]);
+	// 	// CONWriteHex(((uint16_t*)buffer)[1]);
+	// 	// CONWriteHex(((uint16_t*)buffer)[2]);
+	// 	// CONWriteHex(((uint16_t*)buffer)[3]);
+	// 	//CONWrite('\r');
+	// }
+	uint16_t freq = 7493; // 440hz
+	while(true)
+	{
+		// set volume
+		sid_write(24, 15);
+		//frequency
+		sid_write(0, freq & 0xFF);
+		sid_write(1, freq >> 8);
+		//freq++;
+		// A & D
+		sid_write(5, 0xAA);
+		// S & R
+		sid_write(6, 0);
+		// gate bit and wf
+		sid_write(4, 17);
+
+		sleep_ms(2000);
+
+		sid_write(4, 16);
+
+		sleep_ms(1000);
+		//CONWriteString("Play...");
+	}
 	STOSynchronise();                                                           // Synchronise storage
 	CONWrite(0x80+2);
 	CFGProcess();                                                               // Process configuration file.
 	IOInitialise(); 															// UEXT Initialise.
+
+
 }
 
 // ***************************************************************************************

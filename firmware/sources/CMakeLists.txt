@@ -36,8 +36,9 @@ target_sources(firmware PRIVATE main.cpp
     #
     #       CPU type (pretty much permanently PIO now)
     #
-    system/processor_pio.cpp
-    #system/processor_bitbang.cpp
+    system/processor_pio.cpp 
+    #system/processor_bitbang.cpp 
+    hardware/tinysid/sid.cpp
 )
 
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
