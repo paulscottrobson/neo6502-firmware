@@ -1,3 +1,11 @@
-print "1"
-load "squash.gfx",$8000
-print "2"
+cls
+n = $8000
+print n,n \ 256,n & 255
+n[1] = $4017
+n[2] = $124A
+n[3] = $ABCD
+print n[2],n[3]
+stop
+for i = 0 to 7
+	print i,n[i]
+next
