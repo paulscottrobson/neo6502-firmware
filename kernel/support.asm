@@ -137,15 +137,48 @@ _KRLExit:
 
 ; ***************************************************************************************
 ;
+;						Load and Run a BASIC program standalone
+;
+; ***************************************************************************************
+
+KChainBasicOnlyProgram:
+		jsr 	KSendMessage  				; call "Load BASIC"
+		.byte 	1,3
+		jsr 	KWaitMessage	
+
+		ldy 	#$20 	 					; read PAGE address (base + 32)
+		lda 	(0),y
+		sta 	$FF06
+		iny
+		lda 	(0),y
+		sta 	$FF07
+		iny
+
+		jsr 	KSendMessage  				; Load BASIC program to PAGE.
+		.byte 	3,2
+		jsr 	KWaitMessage	
+
+		clc 								; point boot address to EXEC (base + 6)
+		lda 	0
+		adc 	#6
+		sta 	0
+		bcc 	_KCONoCarry
+		inc 	1
+_KCONoCarry:
+		jmp 	(0)
+
+; ***************************************************************************************
+;
 ;					Extended load functionality with BASIC Preload
 ;			(Note: it is advised the filename is stored in page 0 or page 1)
+;									this runs NEO programs.
 ;
 ; ***************************************************************************************
 
 KChainBasicProgram:
-	jsr 	KSendMessage  					; call "Load BASIC"
-	.byte 	1,3
-	jsr 	KWaitMessage	
+		jsr 	KSendMessage  				; call "Load BASIC"
+		.byte 	1,3
+		jsr 	KWaitMessage	
 
 ; ***************************************************************************************
 ;
