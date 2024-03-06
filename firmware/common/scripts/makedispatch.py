@@ -84,7 +84,7 @@ class Group(object):
 	def render(self):
 		print("\tcase {0}:".format(self.groupID))
 		if self.groupID == 4:
-			print("\t\tMATHCommon(DPARAMS);")		
+			print("\t\tMATHCommon(DPARAMS);")
 		print("\t\tswitch (*DFUNCTION) {")
 		funcs = [x for x in self.functions.keys()]
 		funcs.sort()
@@ -105,17 +105,17 @@ class Group(object):
 
 class DispatchAPI(object):
 	def __init__(self):
-		self.currentFunction = None 
+		self.currentFunction = None
 		self.currentGroup = None
 		self.groups = {}
 		self.parsingState = 'start'
 		self.globalCodeLines = []
 	#
-	def addGroup(self,group):	
-		assert group.getID() not in self.groups 
+	def addGroup(self,group):
+		assert group.getID() not in self.groups
 		self.currentGroup = group
-		self.groups[group.getID()] = group 
-		self.currentFunction = None 
+		self.groups[group.getID()] = group
+		self.currentFunction = None
 	#
 	def addFunction(self,func):
 		assert self.currentGroup is not None
@@ -126,7 +126,7 @@ class DispatchAPI(object):
 		self.globalCodeLines.append(codeLine)
 	#
 	def addDoc(self,docLine):
-		assert self.currentFunction is not None 
+		assert self.currentFunction is not None
 		self.currentFunction.addDoc(docLine)
 	#
 	def addCode(self,codeLine):

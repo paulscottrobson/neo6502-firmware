@@ -18,26 +18,26 @@ add_definitions(-Wno-error=unused-variable)
 
 set(COMMONSRC "../common/sources/interface")
 
-target_sources(firmware PRIVATE main.cpp  
+target_sources(firmware PRIVATE main.cpp
     #
     #       Common ${COMMONSRC} routines
     #
-    ${COMMONSRC}/graphics.cpp  ${COMMONSRC}/console.cpp  ${COMMONSRC}/keyboard.cpp  ${COMMONSRC}/memory.cpp  
-    ${COMMONSRC}/dispatch.cpp  ${COMMONSRC}/maths.cpp  ${COMMONSRC}/config.cpp  ${COMMONSRC}/efla.cpp 
-    ${COMMONSRC}/gfxcommands.cpp  ${COMMONSRC}/ellipse.cpp  ${COMMONSRC}/fileinterface.cpp  
+    ${COMMONSRC}/graphics.cpp  ${COMMONSRC}/console.cpp  ${COMMONSRC}/keyboard.cpp  ${COMMONSRC}/memory.cpp
+    ${COMMONSRC}/dispatch.cpp  ${COMMONSRC}/maths.cpp  ${COMMONSRC}/config.cpp  ${COMMONSRC}/efla.cpp
+    ${COMMONSRC}/gfxcommands.cpp  ${COMMONSRC}/ellipse.cpp  ${COMMONSRC}/fileinterface.cpp
     ${COMMONSRC}/sprites.cpp  ${COMMONSRC}/logo.cpp  ${COMMONSRC}/sprites_xor.cpp  ${COMMONSRC}/tilemap.cpp
     ${COMMONSRC}/sndmanager.cpp  ${COMMONSRC}/sfxmanager.cpp ${COMMONSRC}/tick.cpp ${COMMONSRC}/serialmanager.cpp
     ${COMMONSRC}/turtle.cpp ${COMMONSRC}/locale.cpp ${COMMONSRC}/pininterface.cpp
     #
     #       Hardware sources
     #
-    hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp  
+    hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp
     hardware/fileimplementation.cpp hardware/tick.cpp hardware/serial.cpp hardware/ports.cpp
     #
     #       CPU type (pretty much permanently PIO now)
     #
-    system/processor_pio.cpp 
-    #system/processor_bitbang.cpp 
+    system/processor_pio.cpp
+    #system/processor_bitbang.cpp
 )
 
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
