@@ -25,7 +25,6 @@ endif
 
 all: firmware-deps emulator-deps-nix emulator-deps-win docs-deps
 	$(CMAKEDIR) bin
-	$(CMAKEDIR) release
 	@echo building firmware
 	$(MAKE) -B -C kernel release
 	$(MAKE) -B -C basic release
