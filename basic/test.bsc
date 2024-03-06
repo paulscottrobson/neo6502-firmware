@@ -1,11 +1,5 @@
-cls
-n = $8000
-print n,n \ 256,n & 255
-n[1] = $4017
-n[2] = $124A
-n[3] = $ABCD
-print n[2],n[3]
-stop
-for i = 0 to 7
-	print i,n[i]
-next
+a$ = "breakout.bas"
+poke $100,len(a$)
+for i = 1 to len(a$):poke $100+i,asc(mid$(a$,i,1)):next
+doke $FF04,$100
+sys $FFDF
