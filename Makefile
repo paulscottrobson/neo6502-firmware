@@ -25,36 +25,70 @@ endif
 all:
 	$(CMAKEDIR) bin
 	$(CMAKEDIR) release
+	@echo building firmware
 	$(MAKE) -B -C kernel release
 	$(MAKE) -B -C basic release
 	$(MAKE) -B -C firmware release
+	@echo building emulators
 	$(MAKE) -B -C emulator release
 	$(MAKE) -B -C examples release
+	@echo building release package
 	$(MAKE) -B -C release
 
 
 # ***************************************************************************************
 #
-#							Make windows & linux versions
+# Make firmware only
+#
+# ***************************************************************************************
+
+firmware:
+	@echo building firmware
+	$(CMAKEDIR) bin
+	$(MAKE) -B -C kernel release
+	$(MAKE) -B -C basic release
+	$(MAKE) -B -C firmware release
+
+
+# ***************************************************************************************
+#
+# Make emulator only
 #
 # ***************************************************************************************
 
 windows:
+		@echo building windows emulator
 		$(CMAKEDIR) bin
 		$(MAKE) -B -C kernel
 		$(MAKE) -B -C basic release
 		$(MAKE) -B -C emulator clean
 		$(MAKE) -B -C emulator ewindows
+		$(MAKE) -B -C examples release
 
 linux:
+		@echo building nix emulator
 		$(CMAKEDIR) bin
 		$(MAKE) -B -C kernel
 		$(MAKE) -B -C basic release
 		$(MAKE) -B -C emulator clean
 		$(MAKE) -B -C emulator elinux
+		$(MAKE) -B -C examples release
 
 macos:
+		@echo building macos emulator
 		make -B -C emulator emacos
+		make -B -C examples release
+
+
+# ***************************************************************************************
+#
+# Make documentation only
+#
+# ***************************************************************************************
+
+docs:
+	@echo building documentation
+	$(MAKE) -B -C release documentation
 
 
 # ***************************************************************************************
