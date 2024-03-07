@@ -25,7 +25,7 @@
 	FUNCTION 17 Floor
 		if (MATHIsFloatBinary()) {
 			f1 = floor(MATHReadFloat(MATH_REG1));
-			MATHWriteInt((uint32_t)f1,MATH_REG1);
+			MATHWriteInt((int32_t)f1,MATH_REG1);
 		}
 	DOCUMENTATION
 		Floor
