@@ -15,7 +15,7 @@ from gfxtext import *
 if len(sys.argv) != 3:
 	print("python cvimg.zip <graphics file> <text file>")
 	print("python cvimg.zip <text file> <graphics file> ")
-	sys.exit(1)
+	sys.exit(0)
 
 if sys.argv[1].endswith(".gfx"):
 	GraphicsConvert().toText(sys.argv[1],sys.argv[2])
