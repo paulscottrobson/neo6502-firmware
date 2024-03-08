@@ -42,6 +42,9 @@ Command_Sys:	;; [sys]
 		lda 	XSNumber1,x
 		sta 	_SysCall+2
 
+		ora 	_SysCall+1
+		beq 	_CSZero
+
 		push16	codePtr 					; save zero page BASIC variables.
 		push16 	basicStack
 
@@ -57,6 +60,8 @@ _SysCall:
 		ply
 		rts
 
+_CSZero:
+		.error_range
 	
 		.send code
 						
@@ -69,6 +74,7 @@ _SysCall:
 ;		Date			Notes
 ;		==== 			=====
 ;		03/03/24 		Amended to push important BASIC variables.
+;		08/03/24 		Stops SYS 0
 ;
 ; ************************************************************************************************
 
