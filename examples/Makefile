@@ -21,7 +21,7 @@ all: basicdemos
 	$(CDEL) samples.zip
 	zip -r samples.zip basic-examples C assembly
 
-release: 
+release:
 	make -B all
 
 # ***************************************************************************************
@@ -50,7 +50,7 @@ clear$(BASDIR):
 %.bas : %.bsc
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
 	$(CCOPY) $@ $< $(BASDIR)
-	
+
 
 # ***************************************************************************************
 #
@@ -59,7 +59,7 @@ clear$(BASDIR):
 # ***************************************************************************************
 
 checkasm:
-	$(ASSEMBLER) -Wno-error=implied-reg code$(S)checkasm.tass -L build/checkasm.lst -o build/asmtest.bin	
+	$(ASSEMBLER) -Wno-error=implied-reg code$(S)checkasm.tass -L build/checkasm.lst -o build/asmtest.bin
 	cmp -b $(BASDIR)/asmtest.inline build/asmtest.bin
 
 # ***************************************************************************************
@@ -69,7 +69,7 @@ checkasm:
 # ***************************************************************************************
 
 basemachine:
-	$(EMULATOR) 
+	$(EMULATOR)
 
 # ***************************************************************************************
 #
@@ -92,4 +92,3 @@ clean:
 	$(CDEL) _include.inc
 	$(CDEL) test.bas
 	$(CDEL) memory.dump
-	

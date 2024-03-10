@@ -1,11 +1,16 @@
 add_executable(firmware)
 
-FetchContent_Declare(
-    no-OS-FatFS-SD-SPI-RPi-Pico
-    GIT_REPOSITORY https://github.com/carlk3/no-OS-FatFS-SD-SPI-RPi-Pico.git
-    GIT_TAG        bbccc5d2deea09e128e2576ef35f72b473c5ba5f # just the latest on 30/01/2024
-)
-FetchContent_MakeAvailable(no-OS-FatFS-SD-SPI-RPi-Pico)
+if (DEFINED ENV{PICO_FATFS_PATH})
+    set(no-os-fatfs-sd-spi-rpi-pico_SOURCE_DIR $ENV{PICO_FATFS_PATH})
+    set(no-os-fatfs-sd-spi-rpi-pico_BINARY_DIR "_deps/no-os-fatfs-sd-spi-rpi-pico-build")
+else()
+    FetchContent_Declare(
+        no-OS-FatFS-SD-SPI-RPi-Pico
+        GIT_REPOSITORY https://github.com/carlk3/no-OS-FatFS-SD-SPI-RPi-Pico.git
+        GIT_TAG        bbccc5d2deea09e128e2576ef35f72b473c5ba5f # just the latest on 30/01/2024
+    )
+    FetchContent_MakeAvailable(no-OS-FatFS-SD-SPI-RPi-Pico)
+endif()
 
 pico_generate_pio_header(firmware ${CMAKE_CURRENT_LIST_DIR}/system/sm0_memory_emulation_with_clock.pio)
 
@@ -13,26 +18,26 @@ add_definitions(-Wno-error=unused-variable)
 
 set(COMMONSRC "../common/sources/interface")
 
-target_sources(firmware PRIVATE main.cpp  
+target_sources(firmware PRIVATE main.cpp
     #
     #       Common ${COMMONSRC} routines
     #
-    ${COMMONSRC}/graphics.cpp  ${COMMONSRC}/console.cpp  ${COMMONSRC}/keyboard.cpp  ${COMMONSRC}/memory.cpp  
-    ${COMMONSRC}/dispatch.cpp  ${COMMONSRC}/maths.cpp  ${COMMONSRC}/config.cpp  ${COMMONSRC}/efla.cpp 
-    ${COMMONSRC}/gfxcommands.cpp  ${COMMONSRC}/ellipse.cpp  ${COMMONSRC}/fileinterface.cpp  
+    ${COMMONSRC}/graphics.cpp  ${COMMONSRC}/console.cpp  ${COMMONSRC}/keyboard.cpp  ${COMMONSRC}/memory.cpp
+    ${COMMONSRC}/dispatch.cpp  ${COMMONSRC}/maths.cpp  ${COMMONSRC}/config.cpp  ${COMMONSRC}/efla.cpp
+    ${COMMONSRC}/gfxcommands.cpp  ${COMMONSRC}/ellipse.cpp  ${COMMONSRC}/fileinterface.cpp
     ${COMMONSRC}/sprites.cpp  ${COMMONSRC}/logo.cpp  ${COMMONSRC}/sprites_xor.cpp  ${COMMONSRC}/tilemap.cpp
     ${COMMONSRC}/sndmanager.cpp  ${COMMONSRC}/sfxmanager.cpp ${COMMONSRC}/tick.cpp ${COMMONSRC}/serialmanager.cpp
     ${COMMONSRC}/turtle.cpp ${COMMONSRC}/locale.cpp ${COMMONSRC}/pininterface.cpp
     #
     #       Hardware sources
     #
-    hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp  
+    hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp
     hardware/fileimplementation.cpp hardware/tick.cpp hardware/serial.cpp hardware/ports.cpp
     #
     #       CPU type (pretty much permanently PIO now)
     #
-    system/processor_pio.cpp 
-    #system/processor_bitbang.cpp 
+    system/processor_pio.cpp
+    #system/processor_bitbang.cpp
 )
 
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")

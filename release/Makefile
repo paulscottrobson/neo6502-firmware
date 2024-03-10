@@ -30,7 +30,7 @@ DOCUMENTS = $(DOCDIR)*.odt $(DOCDIR)*.pdf $(BINDIR)neo6502.inc
 #		Binary files included
 #
 BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf \
-			 $(ROOTDIR)emulator$(S)cross-compile$(S)neo.exe $(ROOTDIR)emulator$(S)cross-compile$(S)neo.exe \
+			 $(ROOTDIR)emulator$(S)cross-compile$(S)neo.exe \
 			 $(BINDIR)basic.bin \
 			 $(ROOTDIR)emulator$(S)neo
 #

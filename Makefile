@@ -1,11 +1,11 @@
 # ***************************************************************************************
 # ***************************************************************************************
 #
-#		Name : 		Makefile
-#		Author :	Paul Robson (paul@robsons.org.uk)
-#		Date : 		20th November 2023
-#		Reviewed :	No
-#		Purpose :	Main firmware makefile, most of the work is done by CMake.
+# Name     : Makefile
+# Author   : Paul Robson (paul@robsons.org.uk)
+# Date     : 20th November 2023
+# Reviewed : No
+# Purpose  : Main firmware makefile, most of the work is done by CMake.
 #
 # ***************************************************************************************
 # ***************************************************************************************
@@ -16,50 +16,116 @@ else
 include build_env/common.make
 endif
 
+
 # ***************************************************************************************
 #
-#						Remake everything to release state
+# Remake everything to release state
 #
 # ***************************************************************************************
 
-all:
+all: firmware-deps emulator-deps-nix emulator-deps-win docs-deps
 	$(CMAKEDIR) bin
-	$(CMAKEDIR) release
+	@echo building firmware
 	$(MAKE) -B -C kernel release
 	$(MAKE) -B -C basic release
 	$(MAKE) -B -C firmware release
+	@echo building emulators
 	$(MAKE) -B -C emulator release
 	$(MAKE) -B -C examples release
+	@echo building release package
 	$(MAKE) -B -C release
 
 
 # ***************************************************************************************
 #
-#							Make windows & linux versions
+# Make firmware only
 #
 # ***************************************************************************************
 
-windows:
-		$(CMAKEDIR) bin
-		$(MAKE) -B -C kernel
-		$(MAKE) -B -C basic release
-		$(MAKE) -B -C emulator clean
-		$(MAKE) -B -C emulator ewindows
-
-linux:
-		$(CMAKEDIR) bin
-		$(MAKE) -B -C kernel
-		$(MAKE) -B -C basic release
-		$(MAKE) -B -C emulator clean
-		$(MAKE) -B -C emulator elinux
-
-macos:
-		make -B -C emulator emacos
+firmware: firmware-deps
+	@echo building firmware
+	$(CMAKEDIR) bin
+	$(MAKE) -B -C kernel release
+	$(MAKE) -B -C basic release
+	$(MAKE) -B -C firmware release
 
 
 # ***************************************************************************************
 #
-#								Clean everything
+# Make emulator only
+#
+# ***************************************************************************************
+
+windows: emulator-deps-nix emulator-deps-win
+	@echo building windows emulator
+	$(CMAKEDIR) bin
+	$(MAKE) -B -C kernel
+	$(MAKE) -B -C basic release
+	$(MAKE) -B -C emulator clean
+	$(MAKE) -B -C emulator ewindows
+	$(MAKE) -B -C examples release
+
+linux: emulator-deps-nix
+	@echo building nix emulator
+	$(CMAKEDIR) bin
+	$(MAKE) -B -C kernel
+	$(MAKE) -B -C basic release
+	$(MAKE) -B -C emulator clean
+	$(MAKE) -B -C emulator elinux
+	$(MAKE) -B -C examples release
+
+macos: emulator-deps-nix
+	@echo building macos emulator
+	make -B -C emulator emacos
+	make -B -C examples release
+
+
+# ***************************************************************************************
+#
+# Make documentation only
+#
+# ***************************************************************************************
+
+docs: docs-deps
+	@echo building documentation
+	$(MAKE) -B -C release documentation
+
+
+# ***************************************************************************************
+#
+# Verify that dependencies are installed
+#
+# ***************************************************************************************
+
+firmware-deps:
+	@echo checking for firmware dependencies:
+	@cmake             --version
+	@g++               --version
+	@arm-none-eabi-g++ --version
+	@# NOTE: this is not accounting for 'arm-none-eabi-newlib'
+
+emulator-deps-win:
+	@x86_64-w64-mingw32-g++ --version
+
+emulator-deps-nix:
+	@echo checking for emulator dependencies:
+	@g++         --version
+	@64tass      --version
+	@sdl2-config --version
+	@zip         --version
+	@python3     --version
+	@python -c 'from importlib.metadata import version ; pkg="gitpython" ; print("python-%s: %s" % (pkg , version(pkg)))'
+	@python -c 'from importlib.metadata import version ; pkg="pillow"    ; print("python-%s: %s" % (pkg , version(pkg)))'
+
+docs-deps:
+	@pandoc   --version
+	@pdflatex --version
+	@# NOTE: this is not accounting for the needed latex plugins
+
+
+# ***************************************************************************************
+#
+# Clean everything
 #
 # ***************************************************************************************
 
@@ -69,9 +135,10 @@ clean:
 	$(MAKE) -B -C emulator clean
 	$(MAKE) -B -C firmware clean
 
+
 # ***************************************************************************************
 #
-#					  Easy testing of API documentation build
+# Easy testing of API documentation build
 #
 # ***************************************************************************************
 
