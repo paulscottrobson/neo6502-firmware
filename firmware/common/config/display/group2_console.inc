@@ -18,11 +18,11 @@
 //
 // ***************************************************************************************
 
-GROUP 2 ,0,8 Console
+GROUP 2 Console
     FUNCTION 0 Write Character
         CONWrite(*DPARAMS);
     DOCUMENTATION
-      Function 0 is console out (duplicate of Function 6 for backward compatibility).
+        Console out (duplicate of Function 6 for backward compatibility).
 
     FUNCTION 1 Read Character
         *(DPARAMS) = KBDGetKey();
@@ -32,7 +32,7 @@ GROUP 2 ,0,8 Console
         If there are no key presses in the queue, \Param{0} will be zero.
         \newline
         Note that this Function is best for text input, but not for games.
-        Function 7,1 is more optimal for games, as this only detects key presses, 
+        Function 7,1 is more optimal for games, as this only detects key presses,
         you cannot check whether the key is currently down or not.
 
     FUNCTION 2 Console Status
@@ -72,7 +72,7 @@ GROUP 2 ,0,8 Console
     FUNCTION 7 Set Cursor Pos
         *DERROR = CONSetCursorPosition(DPARAMS[0],DPARAMS[1]);
     DOCUMENTATION
-        Move the cursor to the screen character cell \Param{0}\textless-X, \Param{1}\textless-Y.
+        Move the cursor to the screen character cell \Param{0} (X), \Param{1} (Y).
 
     FUNCTION 8 List Hotkeys
         KBDShowFunctionKeys();
@@ -82,19 +82,16 @@ GROUP 2 ,0,8 Console
     FUNCTION 9 Screen Size
         CONGetScreenSizeChars(&DPARAMS[0],&DPARAMS[1]);
     DOCUMENTATION
-        Fetches the console size, in characters, to \Param{0} and \Param{1}, the height and width respectively.
-        \newline 
+        Returns the console size in characters, in \Param{0} (height) and \Param{1} (width).
 
     FUNCTION 10 Insert Line
         CONInsertLine(DPARAMS[0]);
     DOCUMENTATION
-        Insert Line
         This is a support function which inserts a blank line in the console and should not be used.
 
     FUNCTION 11 Delete Line
         CONDeleteLine(DPARAMS[0]);
     DOCUMENTATION
-        Delete Line
         This is a support function which deletes a line in the console and should not be used.
 
     FUNCTION 12 Clear Screen
@@ -105,8 +102,8 @@ GROUP 2 ,0,8 Console
     FUNCTION 13 Cursor Position
         CONGetCursorPosition(&DPARAMS[0],&DPARAMS[1]);
     DOCUMENTATION
-        Get Cursor Position
-        \newline Returns the current cursor position in \Param{0} and \Param{1}
+        Returns the current screen character cell of the cursor
+        in \Param{0} (X), \Param{1} (Y).
 
     FUNCTION 14 Clear Region
         CONClearArea(DPARAMS[0],DPARAMS[1],DPARAMS[2],DPARAMS[3]);
@@ -117,15 +114,13 @@ GROUP 2 ,0,8 Console
     FUNCTION 15 Set Text Color
         CONSetForeBackColour(DPARAMS[0],DPARAMS[1]);
     DOCUMENTATION
-        Set Text Color
-        \newline Sets the foreground colour to \Param{0} and the background colour to \Param{1}
+        Sets the foreground colour to \Param{0} and the background colour to \Param{1}.
 
     FUNCTION 16 Cursor Inverse
         CONReverseCursorBlock();
     DOCUMENTATION
         Toggles the cursor colour between normal and inverse
         (ie: swaps FG and BG colors). This should not be used.
-
 
     FUNCTION 17 Tab() implementation
         CONGetCursorPosition(&u2,&u4);

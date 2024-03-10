@@ -1,17 +1,17 @@
 %% meta-data %%
 
 \documentclass[12pt]{article}
+\usepackage{caption}
 \usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{longtable}
 \usepackage{makecell}
 \usepackage{multirow}
+\usepackage{paralist}
 \usepackage{tabularx}
-\usepackage{longtable}
-\usepackage{caption}
 \usepackage{wrapfig}
 
-\renewcommand{\familydefault}{\sfdefault}
 
 %% configuration %%
 
@@ -19,6 +19,7 @@
 \author{Paul Robson \\ Bill Auger}
 \date{@DATE@}
 
+\renewcommand{\familydefault}{\sfdefault}
 \graphicspath{ {./img/}                             % WRT local editor (eg: texworks)
                {./documents/release/source/img/}    % WRT command line
                {../documents/release/source/img/} } % WRT Makefile
@@ -30,6 +31,9 @@
 
 % \MonoSp presents the given argument as a smaller mono-spaced font
 \newcommand{\MonoSp}[1] {\fontsize{10pt}{10pt}\selectfont\texttt{#1}\normalsize}
+
+% \HeaderCenter forces a header of a left-justified column to be centered
+\newcommand{\HeaderCenter}[1] {\makecell[tc]{\textbf{#1}}}
 
 % \Param presents the given argument as a "Param" in bold, mono-spaced font
 \newcommand{\Param}[1] {\textbf{\texttt{Params[#1]}}}
@@ -189,8 +193,7 @@ Consequently, strings must be 256 bytes or less (not counting the length header)
                                >{\centering\arraybackslash}m{0.075\textwidth}|
                                >{\arraybackslash}m{0.594\textwidth}|}
   \hline
-  \textbf{Meta} & \AddressCol{Address} & \textbf{Contents}
-  \\ \hline
+  \textbf{Meta} & \multicolumn{2}{c|}{\textbf{Address}} & \HeaderCenter{Contents} \\ \hline
   Group & \AddressCol{\MonoSp{\$FF00}} &
   Group selector and status.
   Writing a non-zero value to this location triggers the routine specified in \MonoSp{\$FF01}.
@@ -321,7 +324,7 @@ Other typical control keys (eg: Home and arrows) are mapped into the 0..31 range
 \begin{table}[h]
 \centering\textbf{Console Key Codes - Non-Printable}                              \\
 \begin{tabular}{ | c | c | c | l | }                                                 \hline
-\textbf{ASCII} & \textbf{CTRL+Key} & \textbf{Key} & \textbf{Output}               \\ \hline
+\textbf{ASCII} & \textbf{CTRL+Key} & \textbf{Key} & \HeaderCenter{Output}         \\ \hline
 1              & A                 & Left Arrow   & Cursor Left                   \\ \hline
 4              & D                 & Right Arrow  & Cursor Right                  \\ \hline
 % Q5: Insert,PageDown,End dont work?
@@ -349,8 +352,8 @@ Other typical control keys (eg: Home and arrows) are mapped into the 0..31 range
 
 \begin{table}[h]
 \centering\textbf{Console Key Codes - Printable}        \\
-\begin{tabular}{ | c | c | c | l | }                       \hline
-\textbf{Hex} & \textbf{Key} & \textbf{Output}           \\ \hline
+\begin{tabular}{ | c | c | l | }                           \hline
+\textbf{Hex} & \textbf{Key} & \HeaderCenter{Output}     \\ \hline
 20-7F        & ASCII Set    & Standard ASCII Characters \\ \hline
 80-8F        &              & Set Foreground Color      \\ \hline
 90-9F        &              & Set Background Color      \\ \hline
@@ -409,7 +412,7 @@ The format is quite simple.
 \begin{table}[h]
 \centering\textbf{Graphics Data Format}                           \\
 \begin{tabular}{ | c | c | l | }                                     \hline
-\textbf{Offset} & \textbf{Data}  & \textbf{Description}           \\ \hline
+\textbf{Offset} & \textbf{Data}  & \HeaderCenter{Description}     \\ \hline
 0               & 1              & Graphics Data Format ID        \\ \hline
 1               & Count          & Number of 16x16 tiles in use   \\ \hline
 2               & Count          & Number of 16x16 sprites in use \\ \hline
@@ -489,7 +492,7 @@ The format is very simple.
 \begin{table}[h]
 \centering\textbf{Tile Maps Format} \\
 \begin{tabular}{ | c | c | l | }                                                \hline
-\textbf{Offset} & \textbf{Data} & \textbf{Description}                       \\ \hline
+\textbf{Offset} & \textbf{Data} & \HeaderCenter{Description}                 \\ \hline
 0               & 1             & Graphics Data Format ID                    \\ \hline
 1               & Width         & Width of tile-map (number of tiles)        \\ \hline
 2               & Height        & Height of tile-map (number of tiles)       \\ \hline
@@ -626,43 +629,43 @@ Duration is in units of 100ths of a second.
 Slide is a gradual linear change in frequency, in units of Hz per 100th of a second.
 Sound target type 0 is the beeper.
 Currently, the beeper is the only available sound target.
-\newline
 
+\begin{center}
 \ParamsBytes{Queue Sound Parameters}{Channel}{Freq hi}{Freq lo}{Duration lo}
                                     {Duration hi}{Slide lo}{Slide hi}{Target}
-
-
+\end{center}
 
 Function 8,5 plays a sound effect immediately. These will be synthesised to the best
-ability of the available hardware. These are predefined as :
+ability of the available hardware. These are predefined as:
 
 \begin{table}[h]
-\begin{tabular}{ | c | c | }        \hline
-\textbf{Number} & \textbf{Effect}   \\ \hline
-\MonoSp{0} & positive \\ \hline
-\MonoSp{1} & negative \\ \hline
-\MonoSp{2} & error \\ \hline
-\MonoSp{3} & confirm \\ \hline
-\MonoSp{4} & reject \\ \hline
-\MonoSp{5} & sweep \\ \hline
-\MonoSp{6} & coin \\ \hline
-\MonoSp{7} & las70 \\ \hline
-\MonoSp{8} & powerup \\ \hline
-\MonoSp{9} & victory \\ \hline
-\MonoSp{10} & defeat \\ \hline
-\MonoSp{11} & fanfare \\ \hline
-\MonoSp{12} & alarm 1 \\ \hline
-\MonoSp{13} & alarm 2 \\ \hline
-\MonoSp{14} & alarm 3 \\ \hline
-\MonoSp{15} & ringtone 1 \\ \hline
-\MonoSp{16} & ringtone 2 \\ \hline
-\MonoSp{17} & ringtone 3 \\ \hline
-\MonoSp{18} & danger \\ \hline
-\MonoSp{19} & expl100 \\ \hline
-\MonoSp{20} & expl50 \\ \hline
-\MonoSp{21} & expl20 \\ \hline
-\MonoSp{22} & las30 \\ \hline
-\MonoSp{23} & las10 \\ \hline
+\centering\textbf{Sound Effects}  \\
+\begin{tabular}{ | c | c | }         \hline
+\textbf{Number} & \textbf{Effect} \\ \hline
+\MonoSp{0}      & positive        \\ \hline
+\MonoSp{1}      & negative        \\ \hline
+\MonoSp{2}      & error           \\ \hline
+\MonoSp{3}      & confirm         \\ \hline
+\MonoSp{4}      & reject          \\ \hline
+\MonoSp{5}      & sweep           \\ \hline
+\MonoSp{6}      & coin            \\ \hline
+\MonoSp{7}      & las70           \\ \hline
+\MonoSp{8}      & powerup         \\ \hline
+\MonoSp{9}      & victory         \\ \hline
+\MonoSp{10}     & defeat          \\ \hline
+\MonoSp{11}     & fanfare         \\ \hline
+\MonoSp{12}     & alarm 1         \\ \hline
+\MonoSp{13}     & alarm 2         \\ \hline
+\MonoSp{14}     & alarm 3         \\ \hline
+\MonoSp{15}     & ringtone 1      \\ \hline
+\MonoSp{16}     & ringtone 2      \\ \hline
+\MonoSp{17}     & ringtone 3      \\ \hline
+\MonoSp{18}     & danger          \\ \hline
+\MonoSp{19}     & expl100         \\ \hline
+\MonoSp{20}     & expl50          \\ \hline
+\MonoSp{21}     & expl20          \\ \hline
+\MonoSp{22}     & las30           \\ \hline
+\MonoSp{23}     & las10           \\ \hline
 \end{tabular}
 \end{table}
 

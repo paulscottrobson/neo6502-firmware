@@ -17,7 +17,7 @@
 //
 // ***************************************************************************************
 
-GROUP 6 ,0 Sprites
+GROUP 6 Sprites
     FUNCTION 1 Sprite Reset
         SPRReset();
     DOCUMENTATION

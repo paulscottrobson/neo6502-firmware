@@ -17,7 +17,7 @@
 //
 // ***************************************************************************************
 
-GROUP 9 ,0 Turtle Graphics
+GROUP 9 Turtle Graphics
     FUNCTION 1 Turtle Initialise
         TTLInitialise(DPARAMS[0]);
     DOCUMENTATION

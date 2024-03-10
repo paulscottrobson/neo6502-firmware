@@ -17,7 +17,7 @@
 // ***************************************************************************************
 
 GROUP 1 System
-    FUNCTION 0 Reset
+    FUNCTION 0 DSP Reset
         DSPReset();
     DOCUMENTATION
         Resets the messaging system and component systems.
@@ -56,9 +56,9 @@ GROUP 1 System
         Set the locale code specified in \Param{0,1} as upper-case ASCII letters.
         \Param{0} takes the first letter and \Param{1} takes the second letter.
         For example:
-        \begin{description}
+        \begin{description}\itemsep0pt
         \item English:\MonoSp{~\Param{0}\textless-$45} ('E') and \MonoSp{\Param{1}\textless-$4E} ('N')
-        \item French:\MonoSp{~~\Param{0}\textless-$46} ('F') and \MonoSp{\Param{1}\textless-$52} ('R')
+        \item French:\MonoSp{~\Param{0}\textless-$46} ('F') and \MonoSp{\Param{1}\textless-$52} ('R')
         \end{description}
 
     FUNCTION 7 System Reset
