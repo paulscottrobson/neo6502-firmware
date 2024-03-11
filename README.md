@@ -9,7 +9,7 @@ Firmware and emulators for the Neo6502 retro-computer
 
 ## Releases
 
-The release tarballs contain pre-build firmware, emulators for windows and *nixes,
+The release tarballs contain pre-built firmware, emulators for windows and *nixes,
 documentation, and examples/demos of BASIC, C, and assembly programs.
 - https://github.com/paulscottrobson/neo6502-firmware/releases
 
