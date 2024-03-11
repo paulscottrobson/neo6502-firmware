@@ -28,8 +28,6 @@
 
 //static uint sliceNumber,channel;
 
-const size_t buffer_size = 8;
-uint8_t buffer[buffer_size];
 
 /*
  * PWM Interrupt Handler which outputs PWM level and advances the 
@@ -39,13 +37,13 @@ uint8_t buffer[buffer_size];
  * adjust by factor of 8   (this is what bitshifting <<3 is doing)
  * 
  */
-uint8_t counter = 0;
 
 void pwm_interrupt_handler() {
     pwm_clear_irq(pwm_gpio_to_slice_num(SOUND_PIN));
 	// SIDExecute();
 	//sid_write(18, 0xFF, 0, false);
-    SIDCalcBuffer(buffer, 2);
+	  uint16_t buffer;
+    SIDCalcBuffer((uint8_t*)&buffer, 2);
 	// CONWriteHex(((uint16_t*)buffer)[0]);
 	// CONWriteHex(((uint16_t*)buffer)[1]);
 	// CONWriteHex(((uint16_t*)buffer)[2]);
@@ -56,7 +54,7 @@ void pwm_interrupt_handler() {
     //     CONWrite('\r');
     // }
 	//pwm_set_gpio_level(SOUND_PIN, buffer[0]);
-    pwm_set_gpio_level(SOUND_PIN, *(uint16_t*)buffer);
+    pwm_set_gpio_level(SOUND_PIN, buffer);
 }
 
 // ***************************************************************************************
@@ -112,7 +110,7 @@ void SNDInitialise(void) {
      *  4.0f for 22 KHz
      *  2.0f for 44 KHz etc
      */
-    pwm_config_set_clkdiv(&config, 22.0f); 
+    pwm_config_set_clkdiv(&config, 23.0f); 
     pwm_config_set_wrap(&config, 250); 
     pwm_init(audio_pin_slice, &config, true);
 
