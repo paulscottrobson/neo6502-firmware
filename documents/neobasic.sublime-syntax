@@ -1,6 +1,8 @@
 %YAML 1.2
 ---
 # See http://www.sublimetext.com/docs/syntax.html
+# I go in the Preferences/Package folder (from the menu) in the 'User' subdirectory.
+#
 file_extensions:
   - bsc
 scope: source.basic
@@ -22,10 +24,10 @@ contexts:
     # strings in YAML. When using single quoted strings, only single quotes
     # need to be escaped: this is done by using two single quotes next to each
     # other.
-    - match: '\b(while|if|repeat|for|proc|wend|endif|then|until|next|endproc|abs|asc|chr|alloc|frac|len|left|mid|right|rnd|sgn|int|spc|str|val|isval|true|false|not|random|timer|event|joyx|joyy|joyb|min|max|hit|cls|data|dim|let|goto|gosub|return|print|rem|else|to|downto|call|read|local|line|sprite|rect|text|circle|here|color|colour|by|solid|outline|gfx|clear|image|from|plot|on|off|end|new|list|run|stop|restore|assert|assemble|bitmap|sprites)\b'
+    - match: '\b(abs|alloc|analog|analog|anchor|asc|assert|atan|by|call|case|cat|chr$|clear|cls|cos|cursor|data|deek|defchr|delete|dim|do|doke|downto|draw|editor|ellipse|else|end|endcase|endif|endproc|erl|err|error|event|exit|exp|false|fast|fkey|flip|for|forward|frame|from|gload|gosub|goto|hide|himem|hit|home|idevice|if|image|ink|inkey$|input|int|iread|ireceive|isend|isval|itransmit|iwrite|joypad|key|left|left$|len|let|line|list|load|local|locale|log|loop|max|mid$|min|mon|move|new|next|notes|old|on|output|page|palette|peek|pendown|penup|pin|pin|plot|point|poke|print|proc|rand|read|rect|ref|renumber|repeat|restore|return|right|right$|rnd|run|save|sfx|sgn|sin|solid|sound|spc|spoint|sprite|spritex|spritey|sqr|sreceive|ssend|stop|str$|stransmit|sweet|sys|tab|tan|text|then|tiledraw|tilemap|time|to|true|turtle|until|val|vblanks|wait|wend|when|while|who|)\b'
       scope: punctuation.definition
 
-    - match: '\b(adc|and|asl|bcc|bcs|beq|bit|bmi|bne|bpl|bra|brk|bvc|bvs|clc|cld|cli|clv|cmp|cpx|cpy|dec|dex|dey|eor|inc|inx|iny|jmp|jsr|lda|ldx|ldy|lsr|nop|ora|pha|php|phx|phy|pla|plp|plx|ply|rol|ror|rti|rts|sbc|sec|sed|sei|sta|stx|sty|stz|tax|tay|trb|tsb|tsx|txa|txs|tya|stp)\b'
+    - match: '\b(adc|and|asl|bcc|bcs|beq|bit|bmi|bne|bpl|bra|brk|bvc|bvs|clc|cld|cli|clv|cmp|cpx|cpy|dec|dex|dey|eor|inc|inx|iny|jmp|jsr|lda|ldx|ldy|lsr|nop|ora|pha|php|phx|phy|pla|plp|plx|ply|rol|ror|rti|rts|sbc|sec|sed|sei|sta|stx|sty|stz|tax|tay|trb|tsb|tsx|txa|txs|tya|stp|add|bc|bk|bm|bm1|bnc|bnm1|bnz|bp|br|bs|bz|cpr|dcr|inr|ld|ldd|pop|popd|rs|rtn|set|st|std|stp|sub)\b'
       scope: keyword.control.example-c
 
     # Numbers
