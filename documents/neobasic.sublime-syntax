@@ -1,0 +1,58 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/syntax.html
+file_extensions:
+  - bsc
+scope: source.basic
+contexts:
+  main:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character
+    - match: '"'
+      scope: punctuation.definition.string.begin.example-c
+      push: double_quoted_string
+
+    # Comments begin with a '//' and finish at the end of the line
+    - match: "'"
+      scope: punctuation.definition.comment.example-c
+      push: line_comment
+
+    # Keywords are if, else for and while.
+    # Note that blackslashes don't need to be escaped within single quoted
+    # strings in YAML. When using single quoted strings, only single quotes
+    # need to be escaped: this is done by using two single quotes next to each
+    # other.
+    - match: '\b(while|if|repeat|for|proc|wend|endif|then|until|next|endproc|abs|asc|chr|alloc|frac|len|left|mid|right|rnd|sgn|int|spc|str|val|isval|true|false|not|random|timer|event|joyx|joyy|joyb|min|max|hit|cls|data|dim|let|goto|gosub|return|print|rem|else|to|downto|call|read|local|line|sprite|rect|text|circle|here|color|colour|by|solid|outline|gfx|clear|image|from|plot|on|off|end|new|list|run|stop|restore|assert|assemble|bitmap|sprites)\b'
+      scope: punctuation.definition
+
+    - match: '\b(adc|and|asl|bcc|bcs|beq|bit|bmi|bne|bpl|bra|brk|bvc|bvs|clc|cld|cli|clv|cmp|cpx|cpy|dec|dex|dey|eor|inc|inx|iny|jmp|jsr|lda|ldx|ldy|lsr|nop|ora|pha|php|phx|phy|pla|plp|plx|ply|rol|ror|rti|rts|sbc|sec|sed|sei|sta|stx|sty|stz|tax|tay|trb|tsb|tsx|txa|txs|tya|stp)\b'
+      scope: keyword.control.example-c
+
+    # Numbers
+    - match: '\b[0-9]+'
+      scope: markup.list.numbered.bullet
+
+    # Hex
+    - match: '\$[0-9A-Fa-f]+'
+      scope: constant.numeric
+
+    # Identifiers
+    - match: '[0-9a-zA-Z_.]+'
+      scope: entity.name
+
+    # Everything else
+    - match: '.*?'
+      scope: constant.language
+
+  double_quoted_string:
+    - meta_scope: string.quoted.double.example-c
+    - match: '\\.'
+      scope: constant.character.escape.example-c
+    - match: '"'
+      scope: punctuation.definition.string.end.example-c
+      pop: true
+
+  line_comment:
+    - meta_scope: punctuation.section
+    - match: $
+      pop: true
