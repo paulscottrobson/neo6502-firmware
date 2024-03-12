@@ -20,7 +20,7 @@
 typedef struct _sound_queue_item {
 	uint16_t frequency;
 	uint16_t timeCS;
-	uint16_t slide;
+	int16_t slide;
 	uint8_t  soundType;
 } SOUND_QUEUE_ELEMENT;
 

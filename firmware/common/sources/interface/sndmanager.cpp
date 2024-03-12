@@ -83,6 +83,7 @@ void SNDPlayNextNote(int channelID) {
 	SOUND_QUEUE_ELEMENT *qe = &(c->queue[0]); 									// Head of the queue.
 	c->currentFrequency = qe->frequency;
 	c->currentSlide = qe->slide;
+
 	c->isPlayingNote = true;  													// Set up the channel data
 	c->tick50Remaining = qe->timeCS / 2;  
 	SNDUpdateSoundChannel(channelID,c);  										// Update it
@@ -103,8 +104,8 @@ uint8_t SNDPlay(int channelID,SOUND_UPDATE *u) {
 	SOUND_CHANNEL *c = &channel[channelID];
 	if (c->queueCount != SOUND_QUEUE_SIZE) {  									// If queue not full
 		SOUND_QUEUE_ELEMENT *qe = &(c->queue[c->queueCount]);  					// Add to queue.
-		qe->frequency = u->frequency;
-		qe->slide = u->slide/2;  												// Adjust to 50Hz tick rate
+		qe->frequency = u->frequency;		
+		qe->slide = (u->slide & 0x8000) ? u->slide/2-0x8000:u->slide/2;  		// Adjust to 50Hz tick rate
 		if (u->slide != 0 && qe->slide == 0) { 									// Rounded to zero.
 			qe->slide = (u->slide & 0x8000)?-1:1;
 		}
@@ -135,6 +136,7 @@ void SNDManager(void) {
 			if (c->tick50Remaining == 0) {  									// End of note ?
 				c->isPlayingNote = false;  										// Now not playing note.
 				if (c->queueCount == 0) { 										// Queue is empty ?
+					if (c->currentFrequency > 4000) c->currentFrequency = 0;
 					SNDUpdateSoundChannel(channelID,c);							// Silence the channel.
 				} else {
 					SNDPlayNextNote(channelID); 								// Queue has data, play next note ?
@@ -145,6 +147,7 @@ void SNDManager(void) {
 					c->currentFrequency += c->currentSlide;
 					if (c->currentFrequency < 200) c->currentFrequency += 1000;
 					if (c->currentFrequency > 1200) c->currentFrequency -= 1000;
+					if (c->currentFrequency > 4000) c->currentFrequency = 0;
 					SNDUpdateSoundChannel(channelID,c);
 				}
 			}
