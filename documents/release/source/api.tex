@@ -6,24 +6,25 @@
 %% meta-data %%
 
 \documentclass[12pt]{article}
+\usepackage{caption}
 \usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{longtable}
 \usepackage{makecell}
 \usepackage{multirow}
+\usepackage{paralist}
 \usepackage{tabularx}
-\usepackage{longtable}
-\usepackage{caption}
 \usepackage{wrapfig}
 
-\renewcommand{\familydefault}{\sfdefault}
 
 %% configuration %%
 
 \title{Neo6502 Assembly - Messaging API}
 \author{Paul Robson \\ Bill Auger}
-\date{2024-03-06}
+\date{2024-03-10}
 
+\renewcommand{\familydefault}{\sfdefault}
 \graphicspath{ {./img/}                             % WRT local editor (eg: texworks)
                {./documents/release/source/img/}    % WRT command line
                {../documents/release/source/img/} } % WRT Makefile
@@ -35,6 +36,9 @@
 
 % \MonoSp presents the given argument as a smaller mono-spaced font
 \newcommand{\MonoSp}[1] {\fontsize{10pt}{10pt}\selectfont\texttt{#1}\normalsize}
+
+% \HeaderCenter forces a header of a left-justified column to be centered
+\newcommand{\HeaderCenter}[1] {\makecell[tc]{\textbf{#1}}}
 
 % \Param presents the given argument as a "Param" in bold, mono-spaced font
 \newcommand{\Param}[1] {\textbf{\texttt{Params[#1]}}}
@@ -194,8 +198,7 @@ Consequently, strings must be 256 bytes or less (not counting the length header)
                                >{\centering\arraybackslash}m{0.075\textwidth}|
                                >{\arraybackslash}m{0.594\textwidth}|}
   \hline
-  \textbf{Meta} & \AddressCol{Address} & \textbf{Contents}
-  \\ \hline
+  \textbf{Meta} & \multicolumn{2}{c|}{\textbf{Address}} & \HeaderCenter{Contents} \\ \hline
   Group & \AddressCol{\MonoSp{\$FF00}} &
   Group selector and status.
   Writing a non-zero value to this location triggers the routine specified in \MonoSp{\$FF01}.
@@ -307,15 +310,15 @@ and common parameters (colors, musical notes, etc).
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 1 - System Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 1 - System Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
-\ApiFnRow{0}{Reset}{
+\ApiFnRow{0}{DSP Reset}{
 Resets the messaging system and component systems.
 Normally, should not be used.
 }
@@ -339,9 +342,9 @@ Check the serial port to see if there is a data transmission.
 Set the locale code specified in \Param{0,1} as upper-case ASCII letters.
 \Param{0} takes the first letter and \Param{1} takes the second letter.
 For example:
-\begin{description}
+\begin{description}\itemsep0pt
 \item English:\MonoSp{~\Param{0}\textless-\$45} ('E') and \MonoSp{\Param{1}\textless-\$4E} ('N')
-\item French:\MonoSp{~~\Param{0}\textless-\$46} ('F') and \MonoSp{\Param{1}\textless-\$52} ('R')
+\item French:\MonoSp{~\Param{0}\textless-\$46} ('F') and \MonoSp{\Param{1}\textless-\$52} ('R')
 \end{description}
 }
 \ApiFnRow{7}{System Reset}{
@@ -353,16 +356,16 @@ this also resets the 65C02.
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 2 - Console Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 2 - Console Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
 \ApiFnRow{0}{Write Character}{
-Function 0 is console out (duplicate of Function 6 for backward compatibility).
+Console out (duplicate of Function 6 for backward compatibility).
 }
 \ApiFnRow{1}{Read Character}{
 Read and remove a key press from the keyboard queue into \Param{0}.
@@ -399,36 +402,33 @@ Write the character specified in \Param{0} to the console at the cursor position
 Refer to Section \#\ref{console-codes} "Console Codes" for details.
 }
 \ApiFnRow{7}{Set Cursor Pos}{
-Move the cursor to the screen character cell \Param{0}\textless-X, \Param{1}\textless-Y.
+Move the cursor to the screen character cell \Param{0} (X), \Param{1} (Y).
 }
 \ApiFnRow{8}{List Hotkeys}{
 Display the current function key definitions.
 }
 \ApiFnRow{9}{Screen Size}{
-Fetches the console size, in characters, to \Param{0} and \Param{1}, the height and width respectively.
+Returns the console size in characters, in \Param{0} (height) and \Param{1} (width).
 }
 \ApiFnRow{10}{Insert Line}{
-Insert Line
 This is a support function which inserts a blank line in the console and should not be used.
 }
 \ApiFnRow{11}{Delete Line}{
-Delete Line
 This is a support function which deletes a line in the console and should not be used.
 }
 \ApiFnRow{12}{Clear Screen}{
 Clears the screen.
 }
 \ApiFnRow{13}{Cursor Position}{
-Get Cursor Position
-\newline Returns the current cursor position in \Param{0} and \Param{1}
+Returns the current screen character cell of the cursor
+in \Param{0} (X), \Param{1} (Y).
 }
 \ApiFnRow{14}{Clear Region}{
 Erase all characters within the rectangular region specified
 in \Param{0,1} (begin X,Y) and \Param{2,3} (end X,Y).
 }
 \ApiFnRow{15}{Set Text Color}{
-Set Text Color
-\newline Sets the foreground colour to \Param{0} and the background colour to \Param{1}
+Sets the foreground colour to \Param{0} and the background colour to \Param{1}.
 }
 \ApiFnRow{16}{Cursor Inverse}{
 Toggles the cursor colour between normal and inverse
@@ -442,12 +442,12 @@ Internal helper.
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 3 - File I/O Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 3 - File I/O Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
 \ApiFnRow{1}{List Directory}{
@@ -455,225 +455,215 @@ Display the file listing of the present directory.
 }
 \ApiFnRow{2}{Load File}{
 Load a file by name into memory. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed filename string;
 \item \Param{2,3} contains the location to write the data to. If the
 address is \MonoSp{\$FFFF}, the file will instead be loaded into the
 graphics working memory, used for sprites, tiles, images.
-\end{itemize}
+\end{compactitem}
 On output:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0} contains an error/status code.
-\end{itemize}
+\end{compactitem}
 }
 \ApiFnRow{3}{Store File}{
 Saves data in memory to a file. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed filename string;
 \item \Param{2,3} contains the location to read data from;
-\item \Param{4,5} specified the number of bytes to styore.
-\end{itemize}
+\item \Param{4,5} specified the number of bytes to store.
+\end{compactitem}
 On output:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0} contains an error/status code.
-\end{itemize}
+\end{compactitem}
 }
 \ApiFnRow{4}{File Open}{
 Opens a file into a specific channel. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0} contains the file channel to open;
-\item \Param{1,2} contains the length-prefixed filename;
+\item \Param{1,2} points to the length-prefixed filename string;
 \item \Param{3} contains the open mode. See below.
-\end{itemize}
+\end{compactitem}
 Valid open modes are:
-\begin{itemize}
+\begin{compactitem}
 \item 0 opens the file for read-only access;
 \item 1 opens the file for write-only access;
 \item 2 opens the file for read-write access;
 \item 3 creates the file if it doesn't already exist, truncates it if it
 does, and opens the file for read-write access.
-\end{itemize}
+\end{compactitem}
 Modes 0 to 2 will fail if the file does not already exist. If the
 channel is already open, the call fails. Opening the same file more than
-once on different channels has undefined behaviour and is not
+once on different channels has undefined behaviour, and is not
 recommended.
 }
 \ApiFnRow{5}{File Close}{
 Closes a particular channel. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0} contains the file channel to close.
-\end{itemize}
+\end{compactitem}
 }
 \ApiFnRow{6}{File Seek}{
 Seeks the file opened on a particular channel to a location. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0} contains the file channel to operate on;
 \item \Param{1,2,3,4} contains the file location.
-\end{itemize}
-You can seek beyond the end of a file to extend the file. Whether the
-file size changes when the seek happens or when you perform the write is
-undefined.
+\end{compactitem}
+You can seek beyond the end of a file to extend the file.
+However, whether the file size changes when the seek happens,
+or when you perform the write is undefined behavior.
 }
 \ApiFnRow{7}{File Tell}{
 Returns the current seek location for the file opened on a particular channel. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0} contains the file channel to operate on.
-\end{itemize}
+\end{compactitem}
 On output:
-\begin{itemize}
-\item \Param{1,2,3,4} contains the file location.
-\end{itemize}
+\begin{compactitem}
+\item \Param{1,2,3,4} contains the seek location within the file.
+\end{compactitem}
 }
 \ApiFnRow{8}{File Read}{
 Reads data from an opened file. On input:
-\begin{itemize}
-\item \Param{0} contains the file channel to operate on;
-\item \Param{1,2} points to the destination in memory, or \MonoSp{\$FFFF}
-to write to graphics memory;
-\item \Param{3,4} contains the amount of data to read.
-\end{itemize}
+\begin{compactitem}
+\item \Param{0} contains the file channel to operate on.
+\item \Param{1,2} points to the destination in memory,
+or \MonoSp{\$FFFF} to read into graphics memory.
+\item \Param{2,3} contains the amount of data to read.
+\end{compactitem}
 On output:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{3,4} is updated to contain the amount of data actually read.
-\end{itemize}
-Data is read from the current seek position, which is advanced after the
-read.
+\end{compactitem}
+Data is read from the current seek position, which is advanced after the read.
 }
 \ApiFnRow{9}{File Write}{
 Writes data to an opened file. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0} contains the file channel to operate on;
 \item \Param{1,2} points to the data in memory;
 \item \Param{3,4} contains the amount of data to write.
-\end{itemize}
+\end{compactitem}
 On output:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{3,4} is updated to contain the amount of data actually written.
-\end{itemize}
-Data is written to the current seek position, which is advanced after the
-write.
+\end{compactitem}
+Data is written to the current seek position, which is advanced after the write.
 }
 \ApiFnRow{10}{File Size}{
 Returns the current size of an opened file. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0} contains the file channel to operate on.
-\end{itemize}
+\end{compactitem}
 On output:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{1,2,3,4} contains the size of the file.
-\end{itemize}
-This call should be used on open files and takes into account any
-buffered data which has not yet been written to disk. As a result it may
-return a different size to the stat API call described below.
+\end{compactitem}
+This call should be used on open files,
+and takes into account any buffered data which has not yet been written to disk.
+Consequently, this may return a different size than Function 3,16 "File Stat".
 }
 \ApiFnRow{11}{File Set Size}{
 Extends or truncates an opened file to a particular size. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0} contains the file channel to operate on;
 \item \Param{1,2,3,4} contains the new size of the file.
-\end{itemize}
+\end{compactitem}
 }
 \ApiFnRow{12}{File Rename}{
 Renames a file. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed string for the old name;
 \item \Param{2,3} points to the length-prefixed string for the new name.
-\end{itemize}
+\end{compactitem}
 Files may be renamed across directories.
 }
-\ApiFnRow{13}{Delete File}{
+\ApiFnRow{13}{File Delete}{
 Deletes a file or directory. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed filename string.
-\end{itemize}
+\end{compactitem}
 Deleting a file which is open has undefined behaviour. Directories may
 only be deleted if they are empty.
 }
 \ApiFnRow{14}{Create Directory}{
 Creates a new directory. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed filename string.
-\end{itemize}
+\end{compactitem}
 }
 \ApiFnRow{15}{Change Directory}{
 Changes the current working directory. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed path string.
-\end{itemize}
+\end{compactitem}
 }
-\ApiFnRow{16}{Stat File}{
+\ApiFnRow{16}{File Stat}{
 Retrieves information about a file by name. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed filename string.
-\end{itemize}
+\end{compactitem}
 On output:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1,2,3} contains the length of the file;
-\item \Param{4} contains the attribute bitfield of the file.
-\end{itemize}
+\item \Param{4} contains the attributes bit-field of the file.
+\end{compactitem}
 If the file is open for writing, this may not return the correct size
 due to buffered data not having been flushed to disk.
 File attributes are a bitfield as follows:
 \newline
 
-\ParamBits{File attributes}
-{0}
-{0}
-{0}
-{Hidden}
-{Read only}
-{Archive}
-{System}
-{Directory}
+\ParamBits{File attributes}{0}{0}{0}{Hidden}{Read only}{Archive}{System}{Directory}
 }
 \ApiFnRow{17}{Open Directory}{
 Opens a directory for enumeration. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed filename string.
-\end{itemize}
+\end{compactitem}
 Only one directory at a time may be opened. If a directory is already
-open when this call is made, it is automatically closed; however, an
-open directory may make it impossible to delete the directory, so
+open when this call is made, it is automatically closed. However, an
+open directory may make it impossible to delete the directory; so
 closing the directory after use is good practice.
 }
 \ApiFnRow{18}{Read Directory}{
 Reads an item from the currently open directory. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to a length-prefixed buffer for returning the filename.
-\end{itemize}
-\begin{itemize}
+\end{compactitem}
+\begin{compactitem}
 \item \Param{0,1} is unchanged, but the buffer is updated to contain the
 length-prefixed filename (without any leading path);
 \item \Param{2,3,4,5} contains the length of the file;
-\item \Param{6} contains the file attributes, as described by the Stat File call.
-\end{itemize}
-This call fails if there are no more items to read.
+\item \Param{6} contains the file attributes, as described by Function 3,16 "File Stat".
+\end{compactitem}
+If there are no more items to read, this call fails and an error is flagged.
 }
 \ApiFnRow{19}{Close Directory}{
-Closes any directory opened by Open Directory.
+Closes any directory opened previously by Function 3,17 "Open Directory".
 }
 \ApiFnRow{20}{Copy File}{
 Copies a file. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed old filename;
 \item \Param{2,3} points to the length-prefixed new filename.
-\end{itemize}
+\end{compactitem}
 Only single files may be copied, not directories.
 }
 \ApiFnRow{21}{Set file attributes}{
 Sets the attributes for a file. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the length-prefixed filename;
 \item \Param{2} is the attribute bitfield. (See Stat File for details.)
-\end{itemize}
+\end{compactitem}
 The directory bit cannot be changed. Obviously.
 }
 \ApiFnRow{32}{List Filtered}{
 Prints a filtered file listing of the current directory to the console. On input:
-\begin{itemize}
+\begin{compactitem}
 \item \Param{0,1} points to the filename search string.
-\end{itemize}
-Files will only be shown if the name contains the search string (via a
+\end{compactitem}
+Files will only be shown if the name contains the search string (ie: a
 substring match).
 }
 \end{longtable*}
@@ -681,118 +671,97 @@ substring match).
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 4 - Mathematics Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 4 - Mathematics Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
 \ApiFnRow{0}{Addition}{
-Addition
-\newline Register1 := Register 1 + Register2
+Register1 := Register 1 + Register2
 }
 \ApiFnRow{1}{Subtraction}{
-Subtraction
-\newline Register1 := Register 1 - Register2
+Register1 := Register 1 - Register2
 }
 \ApiFnRow{2}{Multiplication}{
-Multiplication
-\newline Register1 := Register 1 * Register2
+Register1 := Register 1 * Register2
 }
 \ApiFnRow{3}{Decimal Division}{
-Decimal Division
-\newline Register1 := Register 1 / Register2 (floating point)
+Register1 := Register 1 / Register2 (floating point)
 }
 \ApiFnRow{4}{Integer Division}{
-Integer Division
-\newline Register1 := Register 1 / Register2 (integer result)
+Register1 := Register 1 / Register2 (integer result)
 }
 \ApiFnRow{5}{Integer Modulus}{
-Integer Modulus
-\newline Register1 := Register 1 mod Register2
+Register1 := Register 1 mod Register2
 }
 \ApiFnRow{6}{Compare}{
-Compare Numbers
-\newline \Param{0} := Register 1 compare Register2 : returns \$FF, 0, 1 for less equal and greater
-\newline Note: float comparison is approximate because of rounding.
+\Param{0} := Register 1 compare Register2 : returns \$FF, 0, 1 for less equal and greater.
+\newline
+
+Note: float comparison is approximate because of rounding.
 }
 \ApiFnRow{16}{Negate}{
-Negate
 \newline Register1 :=  -Register 1
 }
 \ApiFnRow{17}{Floor}{
-Floor
-\newline Register1 := floor(Register 1)
+Register1 := floor(Register 1)
 }
 \ApiFnRow{18}{Square Root}{
-Square Root
-\newline Register1 := square root(Register 1)
+Register1 := square root(Register 1)
 }
 \ApiFnRow{19}{Sine}{
-Sine
-\newline Register1 := sine(Register 1) angles in degrees
+Register1 := sine(Register 1) angles in degrees
 }
 \ApiFnRow{20}{Cosine}{
-Cosine
-\newline Register1 := cosine(Register 1) angles in degrees
+Register1 := cosine(Register 1) angles in degrees
 }
 \ApiFnRow{21}{Tangent}{
-Tangent
-\newline Register1 := tangent(Register 1) angles in degrees
+Register1 := tangent(Register 1) angles in degrees
 }
 \ApiFnRow{22}{Arctangent}{
-Arctangent
-\newline Register1 := arctangent(Register 1) angles in degrees
+Register1 := arctangent(Register 1) angles in degrees
 }
 \ApiFnRow{23}{Exponent}{
-Exponent
-\newline Register1 :=  e to the power of Register 1
+Register1 :=  e to the power of Register 1
 }
 \ApiFnRow{24}{Logarithm}{
-Logarithm
-\newline Register1 := log(Register 1) natural logarithm
+Register1 := log(Register 1) natural logarithm
 }
 \ApiFnRow{25}{Absolute Value}{
-Absolute Value
-\newline Register1 := absolute value(Register 1)
+Register1 := absolute value(Register 1)
 }
 \ApiFnRow{26}{Sign}{
-Sign
-\newline Register1 := sign(Register 1), returns -1 0 or 1
+Register1 := sign(Register 1), returns -1 0 or 1
 }
 \ApiFnRow{27}{Random Decimal}{
-Random Decimal
-\newline Register1 := random float from 0-1
+Register1 := random float from 0-1
 }
 \ApiFnRow{28}{Random Integer}{
-Random Integer
-\newline Register1 := random integer from 0 to (Register 1-1)
+Register1 := random integer from 0 to (Register 1-1)
 }
 \ApiFnRow{32}{Number to Decimal}{
-Number to Decimal
-\newline Helper function for tokeniser, do not use.
+Helper function for tokeniser, do not use.
 }
 \ApiFnRow{33}{String to Number}{
-String to Number
-\newline Convert the length prefixed string at \Param{4,5} to a constant in Register1.
+Convert the length prefixed string at \Param{4,5} to a constant in Register1.
 }
 \ApiFnRow{34}{Number to String}{
-Number to String
-\newline TODO: Convert the constant in Register1 to a length prefixed string which is stored at \Param{4,5}
+Convert the constant in Register1 to a length prefixed string which is stored at \Param{4,5}
 }
 \end{longtable*}
 \pagebreak
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 5 - Graphics Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 5 - Graphics Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
 \ApiFnRow{1}{Set Defaults}{
@@ -898,12 +867,12 @@ Set Flip Bits
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 6 - Sprites Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 6 - Sprites Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
 \ApiFnRow{1}{Sprite Reset}{
@@ -939,23 +908,25 @@ with the index specified in \Param{0}.
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 7 - Controller Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 7 - Controller Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
 \ApiFnRow{1}{Read Controller}{
-This reads the status of the default controller into \Param{0}
-\newline Initially, the Controller is the keyboard.
+This reads the status of the default controller into \Param{0}.
+\newline
+
+Initially, the Controller is the keyboard.
 This Function interprets key presses and releases as a joystick.
 The system maintains a bit-array of which keys are pressed.
 Currently, the keyboard is the only available Controller.
 \newline
 
-This function will become obsolete shortly as a more extensive API using USB
+This function will become obsolete shortly, as a more extensive API using USB
 controllers becomes available. However, it will maintain backward compatibility.
 \newline
 
@@ -966,12 +937,12 @@ controllers becomes available. However, it will maintain backward compatibility.
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 8 - Sound Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 8 - Sound Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
 \ApiFnRow{1}{Reset Sound}{
@@ -1006,12 +977,12 @@ including the current playing sound, if any.
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 9 - Turtle Graphics Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 9 - Turtle Graphics Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
 \ApiFnRow{1}{Turtle Initialise}{
@@ -1038,12 +1009,12 @@ Move the turtle to the home position (in the center, pointing upward).
 \begin{longtable*}{ | c | l | p{12cm} | }
 \caption*{Group 10 - UExt I/O Functions} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endfirsthead
 \caption*{Group 10 - UExt I/O Functions (continued)} \\
 \hline
-\textbf{Function} & \textbf{Assembly} & \textbf{Description} \\
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
 \ApiFnRow{1}{UExt Initialise}{
@@ -1052,52 +1023,54 @@ This resets the IO system to its default state, where all UEXT pins are I/O pins
 inputs and enabled.
 }
 \ApiFnRow{2}{Write GPIO}{
-(P0,P1)
-\newline This copies the value \Param{1} to the output latch for UEXT pin \Param{0}.
-This will only display on the output pin if it is enabled, and its direction is set to output.
+This copies the value \Param{1} to the output latch for UEXT pin \Param{0}.
+This will only display on the output pin if it is enabled,
+and its direction is set to "Output" direction.
 }
 \ApiFnRow{3}{Read GPIO}{
-P0 = GPIO(P0)
-\newline If the pin is set to input, reads the level on pin on UEXT port \Param{0}. If it is set to output
-this reads the output latch for pin on UEXT port \Param{0}
+If the pin is set to "Input" direction, reads the level on pin on UEXT port \Param{0}.
+If it is set to "Output" direction, reads the output latch for pin on UEXT port \Param{0}.
+If the read is successful, the result will be in \Param{0}.
 }
 \ApiFnRow{4}{Set Port Direction}{
-P0 to P1
-\newline Set the port direction for UEXT Port \Param{0} to \Param{1}. This can be 1 (Input)
-2 (Output) or 3 (Analogue)
+Set the port direction for UEXT Port \Param{0} to the value in \Param{1}.
+This can be \$01 (Input), \$02 (Output), or \$03 (Analogue Input).
 }
 \ApiFnRow{5}{Write I2C}{
-(P0,P1,P2)
-\newline Write to I2C Device \Param{0}, Register \Param{1} value \Param{2}. Does not fail if device not present.
+Write to I2C Device \Param{0}, Register \Param{1}, value \Param{2}.
+No error is flagged if the device is not present.
 }
 \ApiFnRow{6}{Read I2C}{
-P0 = (P0,P1)
-\newline Read from I2C Device \Param{0}, Register \Param{1}. If the device is not present this will cause an error.
+Read from I2C Device \Param{0}, Register \Param{1}.
+If the read is successful, the result will be in \Param{0}.
+If the device is not present, this will flag an error.
+Use FUNCTION 10,2 first, to check for its presence.
 }
 \ApiFnRow{7}{Read Analog}{
-P1P0 = GPIOAnalogue(P0)
-\newline Read the analogue value on UEXT Pin \Param{0} ; this has to be set to analogue type to work. Returns a value
-from 0..4095 stored in \Param{0,1}, which represents an input value of 0 to 3.3 volts.
+Read the analogue value on UEXT Pin \Param{0}.
+This has to be set to analogue type to work.
+Returns a value from 0..4095 stored in \Param{0,1},
+which represents an input value of 0 to 3.3 volts.
 }
-\ApiFnRow{8}{Check if can read register}{
-P0 = Scan(P0)
-\newline Try to read from I2C Device \Param{0}. If present then \Param{0} will contain a non-zero value.
+\ApiFnRow{8}{I2C Status}{
+Try to read from I2C Device \Param{0}.
+If present, then \Param{0} will contain a non-zero value.
 }
-\ApiFnRow{9}{Read I2C Block into memory}{
-Read I2C Block(P0,P2P1,P4P3)
-\newline Try to read a block of memory from I2C Device \Param{0} into memory at \Param{1,2} length \Param{3,4}
+\ApiFnRow{9}{Read I2C}{
+Try to read a block of memory from I2C Device \Param{0} into memory
+at \Param{1,2}, length \Param{3,4}.
 }
-\ApiFnRow{10}{Write I2C Block from memory}{
-Write I2C Block(P0,P2P1,P4P3)
-\newline Try to write a block of memory to I2C Device \Param{0} from memory at \Param{1,2} length \Param{3,4}
+\ApiFnRow{10}{Write I2C}{
+Try to write a block of memory to I2C Device \Param{0} from memory
+at \Param{1,2}, length \Param{3,4}.
 }
-\ApiFnRow{11}{Read SPI Block into memory}{
-Read SPI Block(P2P1,P4P3)
-\newline Try to read a block of memory from SPI Device into memory at \Param{1,2} length \Param{3,4}
+\ApiFnRow{11}{Read SPI}{
+Try to read a block of memory from SPI Device into memory
+at \Param{1,2}, length \Param{3,4}.
 }
-\ApiFnRow{12}{Write SPI Block from memory}{
-Write SPI Block(P2P1,P4P3)
-\newline Try to write a block of memory to SPI Device from memory at \Param{1,2} length \Param{3,4}
+\ApiFnRow{12}{Write SPI}{
+Try to write a block of memory to SPI Device from memory
+at \Param{1,2}, length \Param{3,4}.
 }
 \end{longtable*}
 
@@ -1125,7 +1098,7 @@ Other typical control keys (eg: Home and arrows) are mapped into the 0..31 range
 \begin{table}[h]
 \centering\textbf{Console Key Codes - Non-Printable}                              \\
 \begin{tabular}{ | c | c | c | l | }                                                 \hline
-\textbf{ASCII} & \textbf{CTRL+Key} & \textbf{Key} & \textbf{Output}               \\ \hline
+\textbf{ASCII} & \textbf{CTRL+Key} & \textbf{Key} & \HeaderCenter{Output}         \\ \hline
 1              & A                 & Left Arrow   & Cursor Left                   \\ \hline
 4              & D                 & Right Arrow  & Cursor Right                  \\ \hline
 % Q5: Insert,PageDown,End dont work?
@@ -1153,8 +1126,8 @@ Other typical control keys (eg: Home and arrows) are mapped into the 0..31 range
 
 \begin{table}[h]
 \centering\textbf{Console Key Codes - Printable}        \\
-\begin{tabular}{ | c | c | c | l | }                       \hline
-\textbf{Hex} & \textbf{Key} & \textbf{Output}           \\ \hline
+\begin{tabular}{ | c | c | l | }                           \hline
+\textbf{Hex} & \textbf{Key} & \HeaderCenter{Output}     \\ \hline
 20-7F        & ASCII Set    & Standard ASCII Characters \\ \hline
 80-8F        &              & Set Foreground Color      \\ \hline
 90-9F        &              & Set Background Color      \\ \hline
@@ -1213,7 +1186,7 @@ The format is quite simple.
 \begin{table}[h]
 \centering\textbf{Graphics Data Format}                           \\
 \begin{tabular}{ | c | c | l | }                                     \hline
-\textbf{Offset} & \textbf{Data}  & \textbf{Description}           \\ \hline
+\textbf{Offset} & \textbf{Data}  & \HeaderCenter{Description}     \\ \hline
 0               & 1              & Graphics Data Format ID        \\ \hline
 1               & Count          & Number of 16x16 tiles in use   \\ \hline
 2               & Count          & Number of 16x16 sprites in use \\ \hline
@@ -1293,7 +1266,7 @@ The format is very simple.
 \begin{table}[h]
 \centering\textbf{Tile Maps Format} \\
 \begin{tabular}{ | c | c | l | }                                                \hline
-\textbf{Offset} & \textbf{Data} & \textbf{Description}                       \\ \hline
+\textbf{Offset} & \textbf{Data} & \HeaderCenter{Description}                 \\ \hline
 0               & 1             & Graphics Data Format ID                    \\ \hline
 1               & Width         & Width of tile-map (number of tiles)        \\ \hline
 2               & Height        & Height of tile-map (number of tiles)       \\ \hline
@@ -1430,43 +1403,43 @@ Duration is in units of 100ths of a second.
 Slide is a gradual linear change in frequency, in units of Hz per 100th of a second.
 Sound target type 0 is the beeper.
 Currently, the beeper is the only available sound target.
-\newline
 
+\begin{center}
 \ParamsBytes{Queue Sound Parameters}{Channel}{Freq hi}{Freq lo}{Duration lo}
                                     {Duration hi}{Slide lo}{Slide hi}{Target}
-
-
+\end{center}
 
 Function 8,5 plays a sound effect immediately. These will be synthesised to the best
-ability of the available hardware. These are predefined as :
+ability of the available hardware. These are predefined as:
 
 \begin{table}[h]
-\begin{tabular}{ | c | c | }        \hline
-\textbf{Number} & \textbf{Effect}   \\ \hline
-\MonoSp{0} & positive \\ \hline
-\MonoSp{1} & negative \\ \hline
-\MonoSp{2} & error \\ \hline
-\MonoSp{3} & confirm \\ \hline
-\MonoSp{4} & reject \\ \hline
-\MonoSp{5} & sweep \\ \hline
-\MonoSp{6} & coin \\ \hline
-\MonoSp{7} & las70 \\ \hline
-\MonoSp{8} & powerup \\ \hline
-\MonoSp{9} & victory \\ \hline
-\MonoSp{10} & defeat \\ \hline
-\MonoSp{11} & fanfare \\ \hline
-\MonoSp{12} & alarm 1 \\ \hline
-\MonoSp{13} & alarm 2 \\ \hline
-\MonoSp{14} & alarm 3 \\ \hline
-\MonoSp{15} & ringtone 1 \\ \hline
-\MonoSp{16} & ringtone 2 \\ \hline
-\MonoSp{17} & ringtone 3 \\ \hline
-\MonoSp{18} & danger \\ \hline
-\MonoSp{19} & expl100 \\ \hline
-\MonoSp{20} & expl50 \\ \hline
-\MonoSp{21} & expl20 \\ \hline
-\MonoSp{22} & las30 \\ \hline
-\MonoSp{23} & las10 \\ \hline
+\centering\textbf{Sound Effects}  \\
+\begin{tabular}{ | c | c | }         \hline
+\textbf{Number} & \textbf{Effect} \\ \hline
+\MonoSp{0}      & positive        \\ \hline
+\MonoSp{1}      & negative        \\ \hline
+\MonoSp{2}      & error           \\ \hline
+\MonoSp{3}      & confirm         \\ \hline
+\MonoSp{4}      & reject          \\ \hline
+\MonoSp{5}      & sweep           \\ \hline
+\MonoSp{6}      & coin            \\ \hline
+\MonoSp{7}      & las70           \\ \hline
+\MonoSp{8}      & powerup         \\ \hline
+\MonoSp{9}      & victory         \\ \hline
+\MonoSp{10}     & defeat          \\ \hline
+\MonoSp{11}     & fanfare         \\ \hline
+\MonoSp{12}     & alarm 1         \\ \hline
+\MonoSp{13}     & alarm 2         \\ \hline
+\MonoSp{14}     & alarm 3         \\ \hline
+\MonoSp{15}     & ringtone 1      \\ \hline
+\MonoSp{16}     & ringtone 2      \\ \hline
+\MonoSp{17}     & ringtone 3      \\ \hline
+\MonoSp{18}     & danger          \\ \hline
+\MonoSp{19}     & expl100         \\ \hline
+\MonoSp{20}     & expl50          \\ \hline
+\MonoSp{21}     & expl20          \\ \hline
+\MonoSp{22}     & las30           \\ \hline
+\MonoSp{23}     & las10           \\ \hline
 \end{tabular}
 \end{table}
 
