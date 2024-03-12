@@ -61,3 +61,9 @@ GROUP 8 Sound
         in the queue of the channel specified in \Param{0},
         including the current playing sound, if any.
 
+    FUNCTION 7 SID
+        sid_write(DPARAMS[0], DPARAMS[1]);
+    DOCUMENTATION
+        Deposit in \Param{0} the offset of the SID memory location you want to write
+        the value in \Param{1} to.
+
