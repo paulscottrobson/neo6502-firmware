@@ -1,3 +1,2 @@
-hello = 42
-hello.world = 64
-print hello,hello.world
+
+sound 0,800,8,-32
