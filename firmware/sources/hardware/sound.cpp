@@ -42,7 +42,7 @@ void pwm_interrupt_handler() {
     pwm_clear_irq(pwm_gpio_to_slice_num(SOUND_PIN));
 	// SIDExecute();
 	//sid_write(18, 0xFF, 0, false);
-	  uint16_t buffer;
+    uint16_t buffer;
     SIDCalcBuffer((uint8_t*)&buffer, 2);
 	// CONWriteHex(((uint16_t*)buffer)[0]);
 	// CONWriteHex(((uint16_t*)buffer)[1]);

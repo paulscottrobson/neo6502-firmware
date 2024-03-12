@@ -104,35 +104,33 @@ void DSPReset(void) {
 	// 	// CONWriteHex(((uint16_t*)buffer)[3]);
 	// 	//CONWrite('\r');
 	// }
-	uint16_t freq = 7454; // 440hz
-	while(true)
-	{
-		// set volume
-		sid_write(24, 1);
-		//frequency
-		sid_write(0, freq & 0xFF);
-		sid_write(1, freq >> 8);
-		//freq++;
-		// A & D
-		sid_write(5, 0x11);
-		// S & R
-		sid_write(6, 0xF0);
-		// gate bit and wf
-		sid_write(4, 17);
+	// uint16_t freq = 7454; // 440hz
+	// while(true)
+	// {
+	// 	// set volume
+	// 	sid_write(24, 1);
+	// 	//frequency
+	// 	sid_write(0, freq & 0xFF);
+	// 	sid_write(1, freq >> 8);
+	// 	//freq++;
+	// 	// A & D
+	// 	sid_write(5, 0x11);
+	// 	// S & R
+	// 	sid_write(6, 0xF0);
+	// 	// gate bit and wf
+	// 	sid_write(4, 17);
 
-		sleep_ms(30000);
+	// 	sleep_ms(30000);
 
-		sid_write(4, 16);
+	// 	sid_write(4, 16);
 
-		sleep_ms(1000);
-		//CONWriteString("Play...");
-	}
+	// 	sleep_ms(1000);
+	// 	//CONWriteString("Play...");
+	// }
 	STOSynchronise();                                                           // Synchronise storage
 	CONWrite(0x80+2);
 	CFGProcess();                                                               // Process configuration file.
 	IOInitialise(); 															// UEXT Initialise.
-
-
 }
 
 // ***************************************************************************************
