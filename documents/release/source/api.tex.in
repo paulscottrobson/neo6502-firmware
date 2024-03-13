@@ -289,6 +289,39 @@ lda DParameters ; read result (a key-code)
 \pagebreak
 
 
+\subsection{Mathematical Interface}\label{subsec:api-protocol-maths}
+
+The mathematical interface of the API functions largely as a helper system for the BASIC interpreted, but it is
+open to any developer who wishes to avail themselves of the functionality. It is strongly advised that function 32 
+of Group 4 (NumberToDecimal) is not used as this is extremely specific and as such is not documented.
+\newline
+
+The interface is used in a stack environment, but is designed so it could be used in either a stack environment or a
+fixed location environment. The Neo6502 BASIC stack is also 'split', so elements are not consecutive, though they
+can be.
+\newline
+
+Parameter 0 and 1 specify the address of the registers 1 and 2. Register 1 starts at this address, Register 2 starts at the
+next address. Parameter 2 specifies the step to the next register. Therefore they are interleaved by default at present.
+\newline
+
+So if Parameters 0 and 1 are 8100 and Parameter 2 is 4, the 5 byte registers are
+
+\begin{verbatim}
+Register 1: 8100,8104,8108,810C,8110
+Register 2: 8101,8105,8109,810D,8111
+\end{verbatim}
+
+Bytes 1-4 of the 'register' are the number, which can be either an integer (32 bit signed) or a standard 'C' float (e.g. the
+IEEE Single Precision Float format). Bit 0 is the type byte, and the relevant bit is bit 6, which is set to indicate bytes 1-4
+are a float value, and is set on return.
+\newline
+
+Binary functions that use int and float combined (one is int and one is float) normally return a float.
+
+\pagebreak
+
+
 \section{API Functions}\label{api-functions}
 
 The following tables are a comprehensive list of all supported API functions.
