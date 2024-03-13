@@ -25,6 +25,8 @@ import serial,time
 #		3 ll hh 				Point to graphics address hhll
 #		4 ll hh 				Point to the address at memory address hhll#
 #		5 c  					Insert character in keyboard buffer
+#		6 ll hh ll hh 			Set start and size for save.
+# 		7 len name 				Save file.
 #
 # ***************************************************************************************
 
@@ -96,6 +98,29 @@ class SerialInterface(object):
 	#
 	def endTransmit(self):
 		self.transmit([0]);
+	#
+	#		Copy a file.
+	#
+	def copyFile(self,fileName):
+		h = open(fileName,"rb")
+		size = len(bytearray(h.read(-1)))
+		h.close()
+		loadAddress = 0xE000-size
+		print("{0} {1}".format(loadAddress,size))
+		self.transmit6502File(fileName,loadAddress)
+		self.setSaveAddress(loadAddress,size)
+		self.saveFile(fileName.split(os.sep)[-1].lower())
+	#
+	#		Set the start and length 
+	#
+	def setSaveAddress(self,startAddr,length): 										# 6 sets start and length
+		self.transmit([6,startAddr & 0xFF,startAddr >> 8,length & 0xFF,length >> 8])
+	#
+	#		Save a file
+	#
+	def saveFile(self,fileName):
+		print(len(fileName))		
+		self.transmit([7,len(fileName)]+[ord(x) for x in fileName])
 
 # ***************************************************************************************
 #
@@ -109,9 +134,10 @@ if __name__ == "__main__":
 		print("\t<port> is COM1 or /dev/ttyUSB0 or similar.")
 		print("\tCommands supported are :")
 		print("\t\tb:<file>\t\tloads <file> as BASIC")
-		print("\t\tg:<file>\t\tloads <file> into Graphic Memory")
 		print("\t\tf:<file>@<hex>\tLoads <file> into CPU Memory at address <hex>")
+		print("\t\tg:<file>\t\tloads <file> into Graphic Memory")
 		print("\t\tk:<text>\t\tPush text into keyboard buffer. Use ! for return")
+		print("\t\ts:<file>\t\tSave <file> on hardware external storage")
 		sys.exit(1)
 
 	serial = SerialInterface(sys.argv[1])
@@ -125,6 +151,8 @@ if __name__ == "__main__":
 			serial.transmit6502File(cmd[0],int(cmd[1],16),False)
 		elif cmd.startswith("k:"):
 			serial.transmitString(cmd[2:])
+		elif cmd.startswith("s:"):
+			serial.copyFile(cmd[2:])
 		else:
 			print("Unknown command "+cmd)
 			sys.exit(1)
