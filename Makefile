@@ -114,8 +114,8 @@ emulator-deps-nix:
 	@sdl2-config --version
 	@zip         --version
 	@python3     --version
-	@python -c 'from importlib.metadata import version ; pkg="gitpython" ; print("python-%s: %s" % (pkg , version(pkg)))'
-	@python -c 'from importlib.metadata import version ; pkg="pillow"    ; print("python-%s: %s" % (pkg , version(pkg)))'
+	@python3 -c 'from importlib.metadata import version ; pkg="gitpython" ; print("python-%s: %s" % (pkg , version(pkg)))'
+	@python3 -c 'from importlib.metadata import version ; pkg="pillow" ; print("python-%s: %s" % (pkg , version(pkg)))'
 
 docs-deps:
 	@pandoc   --version
