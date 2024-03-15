@@ -1,0 +1,18 @@
+Libraries
+=========
+
+Library code all have the line number 0. This cannot be typed in, it has to be done using cross development.
+
+It also means you cannot use GOTO or GOSUB
+
+Libraries should use . notation e.g. rtc.initialise() rtc.get.hour() and so on.
+
+Todo
+----
+Disable 0 as a line number (if not already the case)
+LIST defaults to 1 as the lower value (LIST 0 still works)
+RENUMBER ignores preceding zero lines
+NEW leaves zero numbered lines. This involves a "cold new"
+OLD is unchanged
+The editor should ignore zero lines.
+Zero line numbers should print the index into the library on error (e.g. LINE 0:12)
