@@ -16,3 +16,4 @@ NEW leaves zero numbered lines. This involves a "cold new"
 OLD is unchanged
 The editor should ignore zero lines.
 Zero line numbers should print the index into the library on error (e.g. LINE 0:12)
+Function LIBRARY which works like LIST - zeros if range provided, else does RENUM.
