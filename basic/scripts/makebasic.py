@@ -32,13 +32,18 @@ class Program(object):
 		self.store.add("Y")
 		self.ts = TokenSet()
 		self.tw = Tokeniser(self.store)
+		self.identifiers = {}
 	#
 	#		Add the contents of the file, stripping // comments
 	#
 	def addFile(self,fileName):
 		for s in open(fileName).readlines():
 			s = s if s.find("//") < 0 else s[:s.find("//")]
+			if s.startswith("#"):
+				self.command(s[1:])
+				s = ""
 			s = s.strip()
+			s = self.processIdentifiers(s)
 			if s != "":
 				number = None 
 				if s[0] >= "0" and s[0] <= "9":
@@ -46,6 +51,26 @@ class Program(object):
 					number = int(m.group(1))
 					s = m.group(2)
 				self.addLine(number,s)
+	#
+	#		Handle #commands.
+	#
+	def command(self,c):
+		if c.startswith("define"):
+			c = c[6:].strip()
+			n = c.find(" ")
+			self.identifiers[c[:n]] = c[n+1:].strip()
+		else:
+			assert False,"Bad #command #"+c
+
+	#
+	#		Process identifiers, making define substitutions.
+	#				
+	def processIdentifiers(self,s):
+		src = re.split("([A-Za-z][A-Za-z0-9\\._]*)",s)
+		for i in range(0,len(src)):
+			if src[i] in self.identifiers:
+				src[i] = self.identifiers[src[i]]				
+		return "".join(src)
 	#
 	#		Add a line with an optional line number
 	#
