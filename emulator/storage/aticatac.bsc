@@ -1,0 +1,250 @@
+'
+'	*** Atic Atac ***
+'
+call initialise.game()
+call draw.room()
+tMove = 0:tMissile = 0
+repeat
+	if event(tMove,3) then call move.player()
+	if event(tMissile,2) then if tMissileEnd >= 0 then call move.missile()
+until false
+end
+'
+'		initialise game
+'
+proc initialise.game()
+gload "aticatac.gfx"
+	' initialise level and dimensions, power of 2, and put in the middle.
+	level = 1:room.mask = 15:x.start = (room.mask+1) >> 1:y.start = x.start
+	' door records, created when room entered.
+	dim doors(3): ' $00 = wall,$C0-$C3 (cave) $C8-$CB (door) open/red/yellow/cyan 
+	dim door.open(3): ' true if door is open, false if shut/wall.
+	dim door.period(3): ' if 0 normal door, else period timer open/close
+	dim door.timer(3): ' timer for door opening/closing
+	' initialise player
+	lives = 3:score = 0:x.room = x.start:y.room = y.start
+	x.player = 128:y.player = 120:xi.player = 0:yi.player = 0:x.flip = 0
+	dim key.count(3): ' key counts 1-3
+endproc
+'
+'		Move Player.
+'
+proc move.player()
+	local fire 
+	fire = joypad(xi.player,yi.player)
+	if xi.player|yi.player
+		x.player = x.player + (xi.player << 1)
+		if x.player then x.flip = (1-xi.player)>>1
+		y.player = y.player + (yi.player << 1)
+		sprite 0 image $D6 + (((x.player+y.player) >> 3) & 1) flip x.flip to x.player,y.player
+		if abs(x.player-128) > 56 | abs(y.player-120) > 56 then call hit.wall()
+	endif
+	if fire <> 0 
+		if tMissileEnd < 0
+			tMissileEnd = time()+150
+			x.missile = x.player:y.missile = y.player
+			xi.missile = xi.player*3:yi.missile = yi.player*3
+			while (xi.missile|yi.missile) = 0
+				xi.missile = (rand(3)-1)*3:yi.missile = (rand(3)-1)*3
+			wend			
+		endif
+	endif
+endproc
+'
+'		Move missile
+proc move.missile()
+	sprite 1 image $D8 to x.missile,y.missile
+	x.missile = x.missile + xi.missile
+	y.missile = y.missile + yi.missile
+	if abs(x.missile-128) > 58 then xi.missile = -xi.missile
+	if abs(y.missile-120) > 58 then yi.missile = -yi.missile
+	if time() > tMissileEnd then sprite 1 hide:tMissileEnd = -1
+endproc
+'
+'
+'		Hit Wall
+'
+proc hit.wall()
+	local d,moved:moved = false
+	x.player = max(128-56,min(x.player,128+56))
+	y.player = max(120-56,min(y.player,120+56))
+	if abs(x.player-128) >= 56 & abs(y.player-120) < 10
+		d = -1 if x.player > 128 then d = 1
+		if door.open(d & 3) then x.room = (x.room + d) & room.mask:x.player = 256-x.player:moved = true
+	endif
+	if abs(y.player-120) >= 56 & abs(x.player-128) < 10
+		d = 0 if y.player > 128 then d = 2
+		if door.open(d & 3) then y.room = (y.room + d - 1) & room.mask:y.player = 240-y.player:moved = true
+	endif
+	if moved then call draw.room()
+endproc
+'
+'		Draw room
+'
+proc draw.room()
+	local i,n,g
+	cls:sprite clear
+	ink 3:print chr$(20);x.room;",";y.room
+	if level = 1:call draw.room.outline(2):else:call draw.room.outline(1):endif
+	' First is right, second is down
+	call random.seed.room(x.room,y.room-1,level):call make.door(0):call make.door(0)
+	call random.seed.room(x.room,y.room,level):call make.door(1):call make.door(2)
+	call random.seed.room(x.room-1,y.room,level):call make.door(3)
+	contents = 0: ' $D4 pit, $D5 ladder
+	if x.room <> x.start | y.room <> y.start
+		if (seed & 800) = 0 
+			contents = $D4:if level > 1 & (seed & $800) then contents = $D5
+		endif
+	endif
+	for i = 0 to 3
+		'print i;" ";doors(i);" ";door.open(i);" ";door.period(i)
+		if doors(i) then call draw.wall.element(i,0,doors(i),4)
+		call random.next()
+		if (seed & $E0) = 0 & level = 1 
+			n = 32:if (seed & 2) then n = -n
+			call draw.wall.element(i,n,$D0 + (seed & 1),2)	
+		endif
+	next
+	if contents <> 0 then image contents to 128-16,120-16
+	text "1 Up" dim 1 ink 3 to 277,4
+	call draw.score():call draw.keys():call draw.energy()
+	if lives > 0
+		for n = 1 to lives
+			image $D6 to (n-1)*16+258,54
+		next
+	endif
+	sprite 0 image $D6 to x.player,y.player
+	tMissileEnd = -1
+endproc
+'
+'		create doors in given direction using preset random seed.
+'
+proc make.door(d)
+	local i,base:base = $C0:if level = 1 then base = $C8
+	doors(d) = 0:door.open(d) = false:door.period(d) = 0:door.timer(d) = -1
+	call random.next()
+	if seed & $100
+		doors(d) = base:door.open(d) = true 
+		if (seed & $C0) 
+			doors(d) = base + 1 + seed % 3:door.open(d) = false
+			if (seed & $10)
+				door.period(d) = 500
+				door.timer(d) = rand(door.period(d))+time()
+			endif
+		endif
+	endif
+	if level = 1
+		if x.room = x.start & y.room = y.start
+			for i = 0 to 3:call open.door(i):next
+		endif
+		if x.room = x.start & y.room = y.start-1 then call open.door(2)
+		if x.room = x.start+1 & y.room = y.start then call open.door(3)
+		if x.room = x.start & y.room = y.start+1 then call open.door(0)
+		if x.room = x.start-1 & y.room = y.start then call open.door(1)
+	endif
+	door.open(d) = true
+endproc
+'
+'		set door to default open
+'
+proc open.door(d)
+	doors(d) = $C0:if level = 1 then doors(d) = $C8
+	door.open(d) = true:door.period(d) = 0:door.timer(d) = -1
+endproc	
+'
+'		draw offset element
+'
+proc draw.wall.element(d,offset,g,rot)
+	local x,y,f
+	x = 128 + offset - 16:y = 120-64::f = 0
+	if d = 2 then f = 2:y = 272-y
+	if d = 1 | d = 3 
+		g = g + rot:x = 128-64-32:f = d >> 1:y = 120+16+offset
+		if d = 1 then x = 128+64
+	endif
+	image g,f to x,y-32 
+endproc
+'
+'		draw the energy bar
+'
+proc draw.energy()
+	local w,y:y = 38:w = 63
+	rect 256,y ink 1 solid to 256+w,y+12
+	rect 256,y ink 7 frame to 319,y+12
+endproc
+'
+'		draw the score
+'
+proc draw.score()
+	text right$("00000"+str$(score),5) ink 6 dim 2 solid to 260,16
+endproc
+'
+'		draw the keys
+'
+proc draw.keys()
+	local i,x,y:y = 80
+	rect 256,y+6 ink 0 to 319,y+40
+	for i = 1 to 3:
+		x = 256 + (i-1) * 21 - 5
+		image $D9+i dim 1 frame to x,y
+		text "00" to x+11,y + 24
+	next
+endproc
+'
+'		draw outline room type 1 (cave) type 2 (room)
+'
+proc draw.room.outline(type)
+	cx = -1
+	plot ink 7 to 128,129
+	if type = 1
+		call line.draw(0,50)
+		call line.draw(12,56):call line.draw(24,49):call line.draw(40,57)
+		call line.draw(52,52):call line.draw(47,35):call line.draw(55,15)
+		call line.draw(50,0)
+	else
+		call line.draw(0,50)
+		call line.draw(45,58)
+		call line.draw(58,45)
+		call line.draw(50,0)
+	endif
+	rect 64,56 solid ink 0 to 192,184
+	rect 64,56 frame ink 7 to 192,184
+endproc
+'
+'		line.draw drawer, support routine for room draw, draws in four quadrants
+'
+proc line.draw(x,y)
+	local x1,y1:x1 = x*2+128:y1 = y*2+120
+	if cx >= 0
+		if y <> 0
+			line 128,120 to x1,y1:line 128,120 to 256-x1,y1
+			line  128,239-120 to x1,239-y1:line 128,239-120 to 256-x1,239-y1
+		endif
+		line cx,cy to x1,y1
+		line 256-cx,cy to 256-x1,y1
+		line cx,239-cy to x1,239-y1
+		line 256-cx,239-cy to 256-x1,239-y1
+	endif
+	cx = x1:cy = y1
+endproc
+'
+'		random functions
+'
+proc random.seed(n)
+	seed = n 
+endproc
+'
+proc random.seed.room(x,y,l)
+	x = x & room.mask:y = y & room.mask
+	seed = x * 37 + level * 1234567 + y * 617
+endproc
+'
+proc random.next()
+	local i,bit0
+	if seed = 0 then seed = $12345678
+	for i = 1 to 4
+		bit0 = seed & 1
+		seed = seed >> 1
+		if bit0 then seed = seed ^ $B400
+	next
+endproc
