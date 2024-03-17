@@ -1,1 +1,4 @@
-print "Hello, world"
+repeat
+	f = joypad(x,y)
+	print chr$(20),f,x,y,
+until 0
