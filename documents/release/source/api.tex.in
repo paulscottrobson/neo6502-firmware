@@ -78,7 +78,7 @@
 % but is mainly relevant for the API Functions table
 \newcommand{\ApiFnRow}[3] {
   \makecell[tc]{#1 \\ #2}                                      &
-  \makecell[tl]{\MonoSp{LDA \#\$0#1} \\ \MonoSp{STA \#\$FF01}} &
+  \makecell[tl]{\MonoSp{LDA \#\$0#1} \\ \MonoSp{STA \$FF01}} &
   #3                                                           \\ \hline
 }
 
