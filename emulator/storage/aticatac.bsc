@@ -2,29 +2,43 @@
 '	*** Atic Atac ***
 '
 call initialise.game()
-call draw.room()
-tMove = 0:tMissile = 0
 repeat
-	if event(tMove,3) then call move.player()
-	if event(tMissile,2) then if tMissileEnd >= 0 then call move.missile()
-until false
+	energy = 100
+	call draw.room()
+	repeat
+		if event(tMove,3) then call move.player()
+		if event(tMissile,2) then if tMissileEnd >= 0 then call move.missile()
+		if event(tCheck,25) then call check.open.close.wake()
+		if mon.timer(curr.monster) >= 0 then call move.monster(curr.monster)
+		curr.monster = (curr.monster+1) & 3
+	until energy < 0
+	lives = lives - 1
+until lives = 0
 end
 '
 '		initialise game
 '
 proc initialise.game()
-gload "aticatac.gfx"
-	' initialise level and dimensions, power of 2, and put in the middle.
-	level = 1:room.mask = 15:x.start = (room.mask+1) >> 1:y.start = x.start
+	gload "aticatac.gfx"
+	game.data = alloc(2048):load "aticatac.dat",game.data
+	' initialise level and dimensions, put at start
+	size = 12:max.depth = 5
+	level = 0:x.start = 4:y.start = 4
 	' door records, created when room entered.
-	dim doors(3): ' $00 = wall,$C0-$C3 (cave) $C8-$CB (door) open/red/yellow/cyan 
+	dim doors(3): ' Values 0-7 see map.py
 	dim door.open(3): ' true if door is open, false if shut/wall.
-	dim door.period(3): ' if 0 normal door, else period timer open/close
 	dim door.timer(3): ' timer for door opening/closing
+	' monster records
+	dim mon.graphic(4): ' monster graphic (when alive)
+	dim mon.xi(4),mon.yi(4):' movement use sprite.x functions etc.
+	dim mon.timer(4),mon.speed(4):' event variables for movement. timer -1 means not inuse.
+	dim mon.iq(4): ' intelligence ; probability out of 100 of redirection / move. If this is 100 then invulnerable.
+	dim mon.alive(4): ' flag indicating alive e.g. not in wakeup mode.
 	' initialise player
 	lives = 3:score = 0:x.room = x.start:y.room = y.start
 	x.player = 128:y.player = 120:xi.player = 0:yi.player = 0:x.flip = 0
 	dim key.count(3): ' key counts 1-3
+	for i = 1 to 3:key.count(i) = 0:next
 endproc
 '
 '		Move Player.
@@ -38,6 +52,16 @@ proc move.player()
 		y.player = y.player + (yi.player << 1)
 		sprite 0 image $D6 + (((x.player+y.player) >> 3) & 1) flip x.flip to x.player,y.player
 		if abs(x.player-128) > 56 | abs(y.player-120) > 56 then call hit.wall()
+		if floor.centre <> 0
+			if abs(x.player-128) < 16 & abs(y.player-120) < 16 
+				if floor.centre = $D5
+					level = level - 1:call animate.up():call draw.room()
+				else
+					level = level + 1:call animate.down():call draw.room()
+				endif
+			endif
+		endif
+		if hit(0,2,10) then call collect.object()
 	endif
 	if fire <> 0 
 		if tMissileEnd < 0
@@ -47,11 +71,29 @@ proc move.player()
 			while (xi.missile|yi.missile) = 0
 				xi.missile = (rand(3)-1)*3:yi.missile = (rand(3)-1)*3
 			wend			
+			sfx 0,23
 		endif
 	endif
 endproc
 '
+'		Collect object
+'
+proc collect.object()
+	sprite 2 hide
+	call remove.object(level,x.room,y.room)
+	if contents >= $EC 
+		energy = min(100,energy + (contents-$EC)*10+15)
+		call draw.energy()
+		sfx 0,6
+	else
+		key.count(contents-$D9) = key.count(contents-$D9)+1
+		call draw.keys()
+		sfx 0,8
+	endif
+endproc
+'
 '		Move missile
+'
 proc move.missile()
 	sprite 1 image $D8 to x.missile,y.missile
 	x.missile = x.missile + xi.missile
@@ -70,13 +112,33 @@ proc hit.wall()
 	y.player = max(120-56,min(y.player,120+56))
 	if abs(x.player-128) >= 56 & abs(y.player-120) < 10
 		d = -1 if x.player > 128 then d = 1
-		if door.open(d & 3) then x.room = (x.room + d) & room.mask:x.player = 256-x.player:moved = true
+		call check.unlock(d & 3)
+		if door.open(d & 3) then x.room = (x.room + d):x.player = 256-x.player:moved = true
 	endif
 	if abs(y.player-120) >= 56 & abs(x.player-128) < 10
 		d = 0 if y.player > 128 then d = 2
-		if door.open(d & 3) then y.room = (y.room + d - 1) & room.mask:y.player = 240-y.player:moved = true
-	endif
+		call check.unlock(d & 3)
+		if door.open(d & 3) then y.room = (y.room + d - 1) y.player = 240-y.player:moved = true
+		endif
 	if moved then call draw.room()
+endproc
+'
+'		Check unlocked in direction d
+'
+proc check.unlock(d)
+	if (doors(d) & 3) <> 0 & door.open(d) = 0
+		if key.count(doors(d) & 3) > 0 
+			key.count(doors(d) & 3) = key.count(doors(d) & 3)-1
+			doors(d) = 4:door.open(d) = true:door.timer(d) = -1
+			local a:a = game.data + x.room + y.room*size + level*size*size
+			if d = 0 then poke a-size,(peek(a-size) & $C7) + $20
+			if d = 1 then poke a,(peek(a) & $F8) + $04
+			if d = 2 then poke a,(peek(a) & $C7) + $20
+			if d = 3 then poke a-1,(peek(a-1) & $F8) + $04
+			call add.score(20)
+			sfx 0,9
+		endif
+	endif
 endproc
 '
 '		Draw room
@@ -84,73 +146,196 @@ endproc
 proc draw.room()
 	local i,n,g
 	cls:sprite clear
-	ink 3:print chr$(20);x.room;",";y.room
-	if level = 1:call draw.room.outline(2):else:call draw.room.outline(1):endif
+	call random.seed.room(x.room,y.room,level)
+	if level = 0:call draw.room.outline(2):else:call draw.room.outline(1):endif
+	ink 3:print chr$(20);"L";level+1;" ";x.room;",";y.room
 	' First is right, second is down
-	call random.seed.room(x.room,y.room-1,level):call make.door(0):call make.door(0)
-	call random.seed.room(x.room,y.room,level):call make.door(1):call make.door(2)
-	call random.seed.room(x.room-1,y.room,level):call make.door(3)
-	contents = 0: ' $D4 pit, $D5 ladder
-	if x.room <> x.start | y.room <> y.start
-		if (seed & 800) = 0 
-			contents = $D4:if level > 1 & (seed & $800) then contents = $D5
-		endif
+	call read.map(n,level,x.room,y.room-1):call make.door(0,n >> 3)
+	call read.map(n,level,x.room-1,y.room):call make.door(3,n)
+	call read.map(n,level,x.room,y.room):call make.door(1,n):call make.door(2,n >> 3)
+	' What's in the middle on the floor
+	floor.centre = 0: ' $D4 pit, $D5 ladder
+	if n & $40
+		floor.centre = $D4+rand(2)
+		if level = 0 then floor.centre = $D4
+		if level = max.depth-1 then floor.centre = $D5
 	endif
+	' Anything to pick up $DA-$DC keys 1-3 $EC-$EE energy.
+	contents = 0
+	if (n & $80) <> 0
+		call random.next():x.contents = (seed % 128)+64
+		call random.next():y.contents = (seed % 112)+120-28
+		call random.next():contents = seed % 6
+		if contents >= 3:contents = contnts + $EC:else:contents = contents+$DA:endif
+	endif
+	' Wall decoration
 	for i = 0 to 3
-		'print i;" ";doors(i);" ";door.open(i);" ";door.period(i)
-		if doors(i) then call draw.wall.element(i,0,doors(i),4)
 		call random.next()
-		if (seed & $E0) = 0 & level = 1 
-			n = 32:if (seed & 2) then n = -n
-			call draw.wall.element(i,n,$D0 + (seed & 1),2)	
+		if (seed & $E0) = 0 & level = 0
+			g = 32:if (seed & 2) then g = -g
+			call draw.wall.element(i,g,$D0 + (seed & 1),2)	
 		endif
 	next
-	if contents <> 0 then image contents to 128-16,120-16
+	for i = 0 to 4:mon.timer(i) = -1:next 
+	if floor.centre <> 0 then image floor.centre to 128-16,120-16
+	if contents <> 0 then sprite 2 image contents to x.contents,y.contents
 	text "1 Up" dim 1 ink 3 to 277,4
 	call draw.score():call draw.keys():call draw.energy()
 	if lives > 0
 		for n = 1 to lives
-			image $D6 to (n-1)*16+258,54
+			image $D6 dim 1 to (n-1)*16+258,54
 		next
 	endif
 	sprite 0 image $D6 to x.player,y.player
 	tMissileEnd = -1
+	tMove = 0:tMissile = 0:tCheck = 0:curr.monster = 0
+endproc
+'
+'		read map
+'
+proc read.map(ref n,level,x,y)
+	n = peek(game.data + x + y*size + level*size*size)	
+endproc
+'
+'		remove object
+'
+proc remove.object(level,x,y)
+	local a:a = game.data + x + y*size + level*size*size
+	poke a,peek(a) & $7F
+endproc
+'
+'		check open/close in current room
+'
+proc check.open.close.wake()
+	local i,n
+	for i = 0 to 3
+		if door.timer(i) > 0 & time() > door.timer(i)
+			n = 150:if door.open(i) then n = 400
+			door.timer(i) = time()+n
+			door.open(i) = door.open(i) = 0
+			call draw.door(i)
+			sound 0 clear 50,2
+		endif
+	next
+	for i = 0 to 3
+		if mon.timer(i) < 0 & rand(20) = 0 then call create.monster(i)
+	next
+endproc
+'
+'		Create monster
+'
+proc create.monster(n)
+	' DD pumpkin, E0 jelly E3 spider thing  E6 spikey thing E9 = ghost
+	local i,s:i = rand(5)
+
+	if i = 0 then mon.iq(n) = 80::mon.speed(n) = 14
+	if i = 1 then mon.iq(n) = 0:mon.speed(n) = 4
+	if i = 2 then mon.iq(n) = 3:mon.speed(n) = 8
+	if i = 3 then mon.iq(n) = 10:mon.speed(n) = 10
+	if i = 4 then mon.iq(n) = 100:mon.speed(n) = 30
+
+	mon.graphic(n) = $DD+i*3+rand(3)
+	mon.xi(n) = rand(2)*2-1:mon.yi(n) = rand(2)*2-1
+	mon.timer(n) = time() + 100
+	mon.alive(n) = false
+
+	s = 1 + level/2.5
+	mon.speed(n) = max(3,int(mon.speed(n)/s))
+	sprite n+10 image $D8 to rand(128)+64,rand(120)+64
+endproc
+'
+'		Move monster
+'
+proc move.monster(n)
+	if mon.alive(n) 
+		if event(mon.timer(n),mon.speed(n))
+			local x,y
+			x = spritex(n+10)+mon.xi(n):y = spritey(n+10)+mon.yi(n)
+			sprite n+10 to x,y
+			if abs(x-128) > 56 then mon.xi(n) = -mon.xi(n)
+			if abs(y-120) > 56 then mon.yi(n) = -mon.yi(n)
+			if rand(100) < mon.iq(n) then call redirect.monster(n)
+			if hit(0,n+10,12) then call hit.player(n)
+			if hit(1,n+10,12) then call hit.monster(n)
+		endif
+	else
+		sprite n+10 image ((time() >> 3) & 1)+$D8 flip rand(4)
+		if time() > mon.timer(n)
+			mon.timer(n) = 0:mon.alive(n) = true
+			sprite n+10 image mon.graphic(n) flip 0
+		endif
+	endif
+endproc
+'
+'		redirect a monster
+'
+proc redirect.monster(n)
+	mon.xi(n) = sgn(x.player-spritex(n+10))
+	mon.yi(n) = sgn(y.player-spritey(n+10))
+endproc
+'
+'		monster hit player
+'
+proc hit.player(n)
+	if mon.iq(n) < 100
+		energy = energy - 10 - rand(5)
+	else
+		energy = energy - 2
+	endif
+	sound 0 clear 200,5,-99
+	call draw.energy()
+	call kill.monster(n)
+endproc
+'
+'		missile hit monster
+'
+proc hit.monster(n)
+	if mon.iq(n) < 100
+		call kill.monster(n)
+		tMissileEnd = time()
+		call add.score(50)
+	endif
+	sfx 0,21
+endproc
+'
+'		bump score
+'
+proc add.score(n)
+	score = score + n
+	call draw.score()
+endproc
+'
+'		kill monster if not invulnerable
+'
+proc kill.monster(n)
+	if mon.iq(n) < 100
+		sprite n+10 hide
+		mon.timer(n) = -1
+		mon.alive(n) = false
+	endif
 endproc
 '
 '		create doors in given direction using preset random seed.
 '
-proc make.door(d)
-	local i,base:base = $C0:if level = 1 then base = $C8
-	doors(d) = 0:door.open(d) = false:door.period(d) = 0:door.timer(d) = -1
-	call random.next()
-	if seed & $100
-		doors(d) = base:door.open(d) = true 
-		if (seed & $C0) 
-			doors(d) = base + 1 + seed % 3:door.open(d) = false
-			if (seed & $10)
-				door.period(d) = 500
-				door.timer(d) = rand(door.period(d))+time()
-			endif
-		endif
-	endif
-	if level = 1
-		if x.room = x.start & y.room = y.start
-			for i = 0 to 3:call open.door(i):next
-		endif
-		if x.room = x.start & y.room = y.start-1 then call open.door(2)
-		if x.room = x.start+1 & y.room = y.start then call open.door(3)
-		if x.room = x.start & y.room = y.start+1 then call open.door(0)
-		if x.room = x.start-1 & y.room = y.start then call open.door(1)
-	endif
-	door.open(d) = true
+proc make.door(d,n)
+	n = n & 7
+	doors(d) = n:door.open(d) = false:door.timer(d) = -1
+	if n = 4 then door.open(d) = true
+	if n > 4 then door.timer(d) = rand(400)+100
+	if n > 0 then call draw.door(d)			
+	'door.open(d) = true
+	'print d,doors(d),door.open(d),door.timer(d)
 endproc
 '
-'		set door to default open
+'		draw door
 '
-proc open.door(d)
-	doors(d) = $C0:if level = 1 then doors(d) = $C8
-	door.open(d) = true:door.period(d) = 0:door.timer(d) = -1
-endproc	
+proc draw.door(d)
+	local img:img = $C8:if level > 0 then img = $C0
+	if d <> 4 
+		if door.open(d) = false then img = img + (doors(d) & 3)
+	endif
+	call draw.wall.element(d,0,img,4)
+endproc
 '
 '		draw offset element
 '
@@ -162,13 +347,16 @@ proc draw.wall.element(d,offset,g,rot)
 		g = g + rot:x = 128-64-32:f = d >> 1:y = 120+16+offset
 		if d = 1 then x = 128+64
 	endif
+	rect x,y-31 solid ink 0 by 30,30
 	image g,f to x,y-32 
 endproc
 '
 '		draw the energy bar
 '
 proc draw.energy()
-	local w,y:y = 38:w = 63
+	local w,y:y = 38
+	w = int(energy*63/100):if w < 0 then w = 0
+	rect 256,y ink 0 solid to 319,y+12
 	rect 256,y ink 1 solid to 256+w,y+12
 	rect 256,y ink 7 frame to 319,y+12
 endproc
@@ -176,20 +364,46 @@ endproc
 '		draw the score
 '
 proc draw.score()
-	text right$("00000"+str$(score),5) ink 6 dim 2 solid to 260,16
+	text right$("00000"+str$(score),5) ink 6 dim 2 solid to 260,16 dim 1
 endproc
 '
 '		draw the keys
 '
 proc draw.keys()
 	local i,x,y:y = 80
-	rect 256,y+6 ink 0 to 319,y+40
+	rect 256,y+6 ink 0 solid to 319,y+40
 	for i = 1 to 3:
 		x = 256 + (i-1) * 21 - 5
 		image $D9+i dim 1 frame to x,y
-		text "00" to x+11,y + 24
+		text right$("00"+str$(key.count(i)),2) to x+11,y + 24
 	next
 endproc
+'
+'		animate up ladder
+'
+proc animate.up()
+	local y:sprite clear
+	for y = -16 to 16
+		sprite 0 image $D6+((y >> 2) & 1) to 128,y+120
+		wait 10
+	next
+	y.player = 120+32:x.player = 128
+endproc
+'
+'		animate down pit
+'
+proc animate.down()
+	local i,j,w:cls:sprite clear
+	for i = 1 to 5
+		for j = 0 to 10
+			w = j*10
+			rect frame 128-w,120-w ink 7 to 128+w,120+w
+			wait 2
+			rect frame 128-w,120-w ink 0 to 128+w,120+w
+		next
+	next
+endproc
+
 '
 '		draw outline room type 1 (cave) type 2 (room)
 '
@@ -235,7 +449,6 @@ proc random.seed(n)
 endproc
 '
 proc random.seed.room(x,y,l)
-	x = x & room.mask:y = y & room.mask
 	seed = x * 37 + level * 1234567 + y * 617
 endproc
 '
