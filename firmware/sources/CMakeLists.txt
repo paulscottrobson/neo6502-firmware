@@ -1,5 +1,7 @@
 add_executable(firmware)
 
+set(STORAGE_TYPE "USB" CACHE STRING "Sets your storage type. Can be USB or SDCARD.")
+
 if (DEFINED ENV{PICO_FATFS_PATH})
     set(no-os-fatfs-sd-spi-rpi-pico_SOURCE_DIR $ENV{PICO_FATFS_PATH})
     set(no-os-fatfs-sd-spi-rpi-pico_BINARY_DIR "_deps/no-os-fatfs-sd-spi-rpi-pico-build")
@@ -40,15 +42,17 @@ target_sources(firmware PRIVATE main.cpp
     #system/processor_bitbang.cpp
 )
 
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
-
-if(USBKEY_STORAGE)
-    add_definitions(-DUSBKEY_STORAGE=1)
+if(STORAGE_TYPE STREQUAL "USB")
+    message("Building for USB Storage")
     target_sources(firmware PRIVATE hardware/storage/usb_storage.cpp )
-endif()
-if(SDCARD_STORAGE)
-    add_definitions(-DSDCARD_STORAGE=1)
+    target_link_libraries(firmware fatfs)
+elseif(STORAGE_TYPE STREQUAL "SDCARD")
+    message("Building for SDCARD Storage")
     target_sources(firmware PRIVATE hardware/storage/sdcard_storage.cpp )
+    target_link_libraries(firmware FatFs_SPI)
+    add_subdirectory(${no-os-fatfs-sd-spi-rpi-pico_SOURCE_DIR}/FatFs_SPI ${no-os-fatfs-sd-spi-rpi-pico_BINARY_DIR})
+else()
+    message(FATAL_ERROR "You need to set STORAGE_TYPE!")
 endif()
 
 target_compile_definitions(firmware
@@ -78,14 +82,6 @@ target_link_libraries(firmware
     tinyusb_device
     tinyusb_board
 )
-
-if(USBKEY_STORAGE)
-    target_link_libraries(firmware fatfs)
-endif()
-if(SDCARD_STORAGE)
-    target_link_libraries(firmware FatFs_SPI)
-    add_subdirectory(${no-os-fatfs-sd-spi-rpi-pico_SOURCE_DIR}/FatFs_SPI ${no-os-fatfs-sd-spi-rpi-pico_BINARY_DIR})
-endif()
 
 target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 pico_add_extra_outputs(firmware)
