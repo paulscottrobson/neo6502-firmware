@@ -20,7 +20,8 @@
 
 Command_LIST:	;; [list]
 		stz 	CLIndent 					; reset indent
-		stz 	CLFrom 						; default from 
+		lda 	#1
+		sta 	CLFrom 						; default from is now 1
 		stz 	CLFrom+1
 
 		lda 	(codePtr),y 				; is there a to line (e.g. LIST ,xxx)
@@ -245,6 +246,7 @@ _CLExit:
 ;		Date			Notes
 ;		==== 			=====
 ;		07-02-24 		Extracted code to be re-used in DELETE.
+; 		18-03-24 		Default LIST is now from 1 not 0
 ;
 ; ************************************************************************************************
 

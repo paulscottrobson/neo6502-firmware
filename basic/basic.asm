@@ -34,6 +34,7 @@ BColdStart:
 		jsr 	CPPrintYA 
 
 		.if 	BASICBUILD==0
+		jsr 	NewColdStart 				; complete wipe
 		jsr 	NewProgram
 		jmp 	WarmStart
 		.endif
@@ -43,6 +44,7 @@ BColdStart:
 		.endif		
 
 		.if 	BASICBUILD==2
+		jsr 	NewColdStart
 		jsr 	NewProgram
 		jmp 	TestTokenising  
 		.endif

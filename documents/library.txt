@@ -9,12 +9,28 @@ Libraries should use . notation e.g. rtc.initialise() rtc.get.hour() and so on.
 
 Todo
 ----
+
+Function LIBRARY which works like LIST - zeros if range provided, else does RENUM.
+
+Explain what it does.
+
+Done
+----
 Disable 0 as a line number (if not already the case)
 LIST defaults to 1 as the lower value (LIST 0 still works)
-RENUMBER ignores preceding zero lines
-NEW leaves zero numbered lines. This involves a "cold new"
-OLD is unchanged
-The editor should ignore zero lines.
-Zero line numbers should print the index into the library on error (e.g. LINE 0:12)
-Function LIBRARY which works like LIST - zeros if range provided, else does RENUM.
 RUN skips over line zeroes.
+OLD is unchanged
+NEW leaves zero numbered lines. This involves a "cold new"
+	- we have to leaved the variable table unchanged.
+	- if there is no extended code zero the table as normally.
+	- Full reset is Ctrl-Alt-Alt
+RENUMBER ignores preceding zero lines
+
+
+
+Later
+-----
+The editor should ignore zero lines.
+Zero line numbers should print the index into the library on error or similar. (e.g. LINE 0:12) 
+
+
