@@ -1,7 +1,14 @@
-cls:gload "graphics.gfx":sprite clear
-
-sprite 0 image $C1 to 10,10
-sprite 1 image $C1 to 20,20
-sprite 1 hide
-print hit(0,1,22)
-
+'
+'	Printing a '*' to the console using the API
+'
+cls
+' Wait for any previous command to complete
+while peek($FF00) <> 0:wend
+' The character to write, ASCII 42 to parameter slot #0
+poke $FF04,42
+' Console group (2) function 6
+poke $FF01,6
+' Write the group last because this indicates the message is ready.
+poke $FF00,2
+' Wait for this command to complete (not necessary here)
+while peek($FF00) <> 0:wend
