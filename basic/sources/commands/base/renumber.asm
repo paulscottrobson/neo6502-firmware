@@ -52,7 +52,7 @@ _CRError:
 RenumberProgram:
 		php 								; save renumber do flag on stack
 
-		lda 	XSNumber0  					; start line to zTemp0
+		lda 	XSNumber0  					; start line to codePtr
 		sta 	zTemp0
 		lda 	XSNumber1
 		sta 	zTemp0+1
@@ -62,6 +62,8 @@ RenumberProgram:
 		adc 	Program
 		sta 	codePtr+1
 		stz 	codePtr
+
+		jsr 	SkipZeroCode 				; don't renumber library code.
 
 _RenumLoop:
 		lda 	(codePtr) 					; end of program
@@ -111,6 +113,7 @@ _RenumExit:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		18-03-24 		Don't renumber library code
 ;
 ; ************************************************************************************************
 
