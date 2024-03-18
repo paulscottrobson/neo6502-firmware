@@ -1,4 +1,8 @@
 0 	print "0 : 1",x
 0 	print "0 : 2",y
+0 	print "0 : 3",y
+0 	print "0 : 4",x
+0 	print "0 : 5",y:stop
 1   list
 100 print "100",z
+110 goto 0
