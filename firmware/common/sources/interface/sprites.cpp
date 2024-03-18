@@ -277,6 +277,8 @@ uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance)
 		*error = 1;
 		return 0;
 	}
+	if ((!sprites[s1].isVisible) || (!sprites[s2].isVisible)) return false;  	// check both visible.
+
 	SPRITE_INTERNAL *p1 = &sprites[s1],*p2 = &sprites[s2]; 						// Structure pointers.
 	int sdist = (p1->xc-p2->xc)*(p1->xc-p2->xc)+(p1->yc-p2->yc)*(p1->yc-p2->yc);// Square of distance
 	return sdist <= distance*distance;
@@ -292,5 +294,6 @@ uint8_t SPRCollisionCheck(uint8_t *error,uint8_t s1,uint8_t s2,uint8_t distance)
 //		16/01/24 	Added SpriteVisibleCount functionality.
 //		23/01/24 	Rationalised SPRITE_ACTION initialisation code.
 //					Added turtle rendering on demand code.
+//		18/03/24 	Sprite collision requires visible sprites.
 //
 // ***************************************************************************************
