@@ -34,7 +34,6 @@ Command_RUN_Always:
 		adc 	#(Program >> 8)
 		sta 	codePtr+1
 		stz 	codePtr
-		jsr 	SkipZeroCode
 		bra 	RUNNewLine
 
 		; ----------------------------------------------------------------------------------------

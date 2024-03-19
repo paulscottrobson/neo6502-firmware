@@ -1,8 +1,11 @@
+0 print "Initialising."
+0 if false
 0 	print "0 : 1",x
 0 	print "0 : 2",y
 0 	print "0 : 3",y
 0 	print "0 : 4",x
 0 	print "0 : 5",y:stop
-1   list
+0 proc hithere(ref n):n = 42:endproc
+0 endif
 100 print "100",z
-110 goto 0
+110 call hithere(a):print a
