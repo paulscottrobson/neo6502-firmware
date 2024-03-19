@@ -1,0 +1,23 @@
+Device Types
+============
+
+Libraries Exist
+===============
+	MOD-RTC  					I2C Realtime clock chip (PCF8563)
+
+Have Hardware 
+=============
+	MOD-RTC2  					I2C Realtime clock chip (DS3231)
+	MOD-BME280  				I2C Humidity Sensor (3.3v)
+	MOD-IO  					I2C I/O Board
+	MOD-WII-UEXT & Nunchunk 	I2C Nunchuck controller
+
+	RGB8x8 						Serial LED interface, own protocol.
+
+	SSD1306 LCD Display			SPI 128x64 Colour LCD Display
+	MOD-LCD3310  				SPI Nokia 3310 84x48 LCD Display
+	MOD-SDMMC  					SPI SDCard interface (not implemented as seperate library)
+	MOD-GPS 					Serial GPS Device. 9600/8/N/1 Requires API for serial port.
+	MOD-MP3-X-LITE 				Serial ? SPI ? MP3 player 9600/8/N/1
+	MOD-WIFI-ESP8266  			Serial Wifi Display 115200/8/N/1
+
