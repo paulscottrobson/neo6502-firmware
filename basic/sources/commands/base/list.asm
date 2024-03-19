@@ -19,10 +19,6 @@
 		.section code
 
 Command_LIST:	;; [list]
-		stz 	CLIndent 					; reset indent
-		lda 	#1
-		sta 	CLFrom 						; default from is now 1
-		stz 	CLFrom+1
 
 		lda 	(codePtr),y 				; is there a to line (e.g. LIST ,xxx)
 		cmp 	#$20 						; is it an identifier
@@ -197,6 +193,11 @@ _CLASExit:
 ; ************************************************************************************************
 
 LISTGetLinesToFrom:
+		stz 	CLIndent 					; reset indent
+		lda 	#1
+		sta 	CLFrom 						; default from is now 1
+		stz 	CLFrom+1
+
 		lda 	(codePtr),y
 		cmp 	#KWD_COMMA
 		beq 	_CLToLine
