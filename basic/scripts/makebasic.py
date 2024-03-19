@@ -33,12 +33,14 @@ class Program(object):
 		self.ts = TokenSet()
 		self.tw = Tokeniser(self.store)
 		self.identifiers = {}
+		self.libraryMode = False
 	#
 	#		Add the contents of the file, stripping // comments
 	#
 	def addFile(self,fileName):
 		for s in open(fileName).readlines():
 			s = s if s.find("//") < 0 else s[:s.find("//")]
+			s = s.strip()
 			if s.startswith("#"):
 				self.command(s[1:])
 				s = ""
@@ -59,8 +61,13 @@ class Program(object):
 			c = c[6:].strip()
 			n = c.find(" ")
 			self.identifiers[c[:n]] = c[n+1:].strip()
+		elif c == "library":
+			self.libraryMode = True
+		elif c == "nolibrary":
+			self.libraryMode = False
+			self.nextLine = 1000
 		else:
-			assert False,"Bad #command #"+c
+			assert False,"Bad #command '#"+c+"'"
 
 	#
 	#		Process identifiers, making define substitutions.
@@ -78,8 +85,8 @@ class Program(object):
 		if text.strip() != "":
 			if number is not None:
 				self.nextLine = number
-
-			line = [0,self.nextLine & 0xFF,self.nextLine >> 8]
+			lineNo = 0 if self.libraryMode else self.nextLine
+			line = [0,lineNo & 0xFF,lineNo >> 8]
 			line += self.tw.tokenise(text)
 			line.append(self.ts.getByName("!!end").getID())
 			line[0] = len(line)

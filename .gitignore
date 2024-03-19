@@ -4,6 +4,7 @@ basic/build/basic.lst
 basic/build/tokenised.dat
 basic/sources/generated/
 basic/scripts/__pycache__/tokens.cpython-310.pyc
+basic/libraries.zip
 bin
 emulator/framework/debugger.o
 emulator/framework/gfx.o
