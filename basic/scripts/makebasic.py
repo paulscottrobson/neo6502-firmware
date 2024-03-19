@@ -89,6 +89,15 @@ class Program(object):
 
 		return self
 	#
+	#		Make program a library
+	#
+	def makelibrary(self):
+		p = 0
+		while p != len(self.code):
+			self.code[p+1] = 0
+			self.code[p+2] = 0
+			p += self.code[p]
+	#
 	#		Save the resulting tokenised code.
 	#
 	def render(self,fileName):
@@ -101,6 +110,8 @@ prog = Program()
 for f in sys.argv[1:]:
 	if f.startswith("-o"):
 		output = f[2:]
+	elif f == "library":
+		prog.makelibrary()
 	else:
 		prog.addFile(f)
 prog.render(output)

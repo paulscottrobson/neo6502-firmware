@@ -44,6 +44,30 @@ _CRError:
 
 ; ************************************************************************************************
 ;
+;						Forcibly renumbers everything including library code
+;
+; ************************************************************************************************
+
+RenumberForce:
+		clc 								; Push CC on the stack,
+		php 
+
+		lda 	#Program >> 8 				; start of program to codePtr
+		clc
+		adc 	Program
+		sta 	codePtr+1
+		stz 	codePtr
+
+		lda 	#1000 & $FF 				; set up for Renumber
+		sta 	zTemp0
+		lda 	#1000 >> 8
+		sta 	zTemp0+1
+		ldx 	#10
+
+		bra 	RenumberHelper		
+
+; ************************************************************************************************
+;
 ;					Renumber code. CC actually renumbers. CS overflow error on exit
 ;										XSNumber0/1 start line, X step
 ;
@@ -64,6 +88,8 @@ RenumberProgram:
 		stz 	codePtr
 
 		jsr 	SkipZeroCode 				; don't renumber library code.
+
+RenumberHelper:
 
 _RenumLoop:
 		lda 	(codePtr) 					; end of program
