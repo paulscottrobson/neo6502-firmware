@@ -49,7 +49,8 @@ clearbuild:
 
 basic/games/asteroids.bas : basic/games/asteroids.bsc basic/games/asteroid_asm.lib
 	$(PYTHON) $(BINDIR)makebasic.zip $< -obasic/games/asteroids.bas
-
+	$(CCOPY) basic/games/asteroid*.bsc $(BASDIR)
+	
 %.bas : %.bsc
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
 	$(CCOPY) $@ $< $(BASDIR)
