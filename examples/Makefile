@@ -26,26 +26,29 @@ release:
 
 # ***************************************************************************************
 #
-#										BASIC demos
+	#										BASIC demos
 #
 # ***************************************************************************************
 
 DEMOSRC = $(shell find basic -name '*.bsc')
 DEMOBAS = $(subst bsc,bas,$(DEMOSRC))
 DEMOGFX = $(shell find basic -name '*.gfx')
+DEMOLIB = $(shell find basic -name '*.lib')
 
 BASDIR = basic-examples
 
-basicdemos: clear$(BASDIR) $(DEMOBAS)
-	$(CCOPY) $(DEMOGFX) $(BASDIR)
+basicdemos: clearbuild $(DEMOBAS)
+	$(CCOPY) -R $(DEMOGFX) $(DEMOLIB) $(BASDIR)
 	$(CCOPY) $(ROOTDIR)basic$(S)images$(S)graphics.gfx $(BASDIR)
 	$(CCOPY) $(ROOTDIR)basic$(S)images$(S)test$(S)test.gfx $(BASDIR)
-	$(CCOPY) $(ROOTDIR)basic$(S)storage$(S)*.* $(BASDIR)
 
-clear$(BASDIR):
+clearbuild:
 	$(CMAKEDIR) build
 	$(CMAKEDIR) $(BASDIR)
 	$(CDEL) $(BASDIR)$(S)*.*
+
+basic/games/asteroids.bas : basic/games/asteroids.bsc basic/games/asteroid_asm.lib
+	$(PYTHON) $(BINDIR)makebasic.zip $< -obasic/games/asteroids.bas
 
 %.bas : %.bsc
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
