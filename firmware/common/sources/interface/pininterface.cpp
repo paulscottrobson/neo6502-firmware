@@ -219,6 +219,20 @@ int IOSPIWriteBlock(uint8_t *data,size_t size) {
 
 // ***************************************************************************************
 //
+//								  Read/write mappers UART
+//
+// ***************************************************************************************
+
+int IOUARTReadBlock(uint8_t *data,size_t size) {
+	return 0;
+}
+
+int IOUARTWriteBlock(uint8_t *data,size_t size) {
+	return 0;
+}
+
+// ***************************************************************************************
+//
 //		Date 		Revision
 //		==== 		========
 //

@@ -32,7 +32,8 @@ void SERCheckDataAvailable(void) {
 	    }
 	    while (SERIsByteAvailable()) SERReadByte();  								// Clear anything already incoming.
 	}
-
+	SERSetSerialFormat(SERIAL_TRANSFER_BAUD_RATE,SERIAL_PROTOCOL_8N1); 				// Set transceive format.
+	
 	bool completed = false;
 	CONWriteString("Serial link enabled.\r");
 	while (!completed) {
