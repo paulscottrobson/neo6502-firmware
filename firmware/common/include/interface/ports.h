@@ -33,6 +33,7 @@ int IOI2CWriteBlock(uint8_t device, uint8_t *data,size_t size);
 int IOSPIReadBlock(uint8_t *data,size_t size);
 int IOSPIWriteBlock(uint8_t *data,size_t size);
 
+void IOUARTInitialise(uint32_t baudRate,uint32_t protocol);
 int IOUARTReadBlock(uint8_t *data,size_t size);
 int IOUARTWriteBlock(uint8_t *data,size_t size);
 
