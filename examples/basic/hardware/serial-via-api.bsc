@@ -1,0 +1,27 @@
+'
+'		Serial I/O via API.
+'
+doke $FF04,9600
+poke $FF06,0
+call send.message(10,15)
+repeat
+	if event(t1,50) then n = (n + 1) & $3F:call write.uart(n+32)
+	call send.message(10,18):isByte = peek($FF04)
+	if isByte 
+		call send.message(10,17):ch = peek($FF04)
+		print "Received ",ch
+	endif
+until false
+next
+end
+
+proc send.message(g,f)
+	while peek($FF00):wend
+	poke $FF01,f:poke $FF00,g
+	while peek($FF00):wend
+endproc	
+
+proc write.uart(c)
+	poke $FF04,c
+	call send.message(10,16)
+endproc

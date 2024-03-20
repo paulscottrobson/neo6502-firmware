@@ -235,10 +235,20 @@ int IOSPIWriteBlock(uint8_t *data,size_t size) {
 // ***************************************************************************************
 
 int IOUARTReadBlock(uint8_t *data,size_t size) {
+	while (size-- != 0) {
+		uint32_t timeOut = TMRRead()+500;  											// Time out after 5s.
+		while (SERIsByteAvailable() == 0) {
+			if (TMRRead() > timeOut) return 1;
+		}
+		*data++ = SERReadByte();
+	}
 	return 0;
 }
 
 int IOUARTWriteBlock(uint8_t *data,size_t size) {
+	while (size-- != 0) {
+		SERWriteByte(*data++);
+	}
 	return 0;
 }
 
