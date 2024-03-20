@@ -128,6 +128,7 @@ class TokenSet(object):
 			HOME 	LOCALE 	CURSOR 	RENUMBER DELETE EDITOR  MON     OLD
 			ON 		ERROR 	PIN 	OUTPUT	WAIT 	IWRITE 	ANALOG  ISEND
 			SSEND 	IRECEIVE SRECEIVE ITRANSMIT STRANSMIT NEAL LIBRARY
+			USEND 	URECEIVE UTRANSMIT UCONFIG
 			""")
 		#
 		#		Keyword tokens (assembler)
@@ -149,7 +150,7 @@ class TokenSet(object):
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
 			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM 	VBLANKS(
 			ERR 	ERL		PIN( 	IREAD( 	 ANALOG(  !!UN2  !!UN3
-			IDEVICE( SPC( 	TAB(
+			IDEVICE( SPC( 	TAB( 	UHASDATA(
 		""")
 		
 if __name__ == "__main__":
