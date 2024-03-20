@@ -2,7 +2,7 @@
 ; ************************************************************************************************
 ;
 ;		Name:		transceive.asm
-;		Purpose:	Transmit and Receive memory blocks to I2C/SPI
+;		Purpose:	Transmit and Receive memory blocks to I2C/SPI/UART
 ;		Created:	2nd March 2024
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
@@ -31,6 +31,13 @@ command_sreceive: ;; [sreceive]
 		bra 	TransceiveMainB
 command_stransmit: 	;; [stransmit]
 		lda 	#12
+		bra 	TransceiveMainB
+
+command_ureceive: ;; [ureceive]
+		lda 	#13
+		bra 	TransceiveMainB
+command_utransmit: 	;; [utransmit]
+		lda 	#14
 		bra 	TransceiveMainB
 
 TransceiveMainB:

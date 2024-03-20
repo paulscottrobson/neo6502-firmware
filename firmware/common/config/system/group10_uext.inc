@@ -103,7 +103,7 @@ GROUP 10 UExt I/O
         *DERROR = IOUARTReadBlock(cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
     DOCUMENTATION
         Try to read a block of memory from UART into memory
-        at \Param{1,2}, length \Param{3,4}.
+        at \Param{1,2}, length \Param{3,4}. This can fail with a timeout.
 
     FUNCTION 14 Write UART Block
         *DERROR = IOUARTWriteBlock(cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
