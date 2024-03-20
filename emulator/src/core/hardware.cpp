@@ -505,6 +505,14 @@ uint8_t SERReadByte(void) {
 	return 0;
 }
 
+void SERWriteByte(uint8_t b) {
+	printf("Serial write %d\n",b);
+}
+
+void SERSetSerialFormat(uint32_t baudRate,uint32_t protocol) {
+	printf("Setting Serial to %d baud protocol %d.\n",baudRate,protocol);
+}
+
 // ***************************************************************************************
 //
 //								Dummy GPIO functions

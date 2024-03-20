@@ -1089,21 +1089,39 @@ which represents an input value of 0 to 3.3 volts.
 Try to read from I2C Device \Param{0}.
 If present, then \Param{0} will contain a non-zero value.
 }
-\ApiFnRow{9}{Read I2C}{
+\ApiFnRow{9}{Read I2C Block}{
 Try to read a block of memory from I2C Device \Param{0} into memory
 at \Param{1,2}, length \Param{3,4}.
 }
-\ApiFnRow{10}{Write I2C}{
+\ApiFnRow{10}{Write I2C Block}{
 Try to write a block of memory to I2C Device \Param{0} from memory
 at \Param{1,2}, length \Param{3,4}.
 }
-\ApiFnRow{11}{Read SPI}{
+\ApiFnRow{11}{Read SPI Block}{
 Try to read a block of memory from SPI Device into memory
 at \Param{1,2}, length \Param{3,4}.
 }
-\ApiFnRow{12}{Write SPI}{
+\ApiFnRow{12}{Write SPI Block}{
 Try to write a block of memory to SPI Device from memory
 at \Param{1,2}, length \Param{3,4}.
+}
+\ApiFnRow{13}{Read UART Block}{
+Try to read a block of memory from UART into memory
+at \Param{1,2}, length \Param{3,4}.
+}
+\ApiFnRow{14}{Write UART Block}{
+Try to write a block of memory to UART from memory
+at \Param{1,2}, length \Param{3,4}.
+}
+\ApiFnRow{15}{Set UART Speed and Protocol}{
+Set the Baud Rate and Serial Protocol for the UART interface. The baud rate is in \Param{0,1}
+and the protocol number is \Param{2}. Currently only 8N1 is supported, this is protocol 0.
+}
+\ApiFnRow{16}{Write byte to UART}{
+Write byte \Param{0} to the UART
+}
+\ApiFnRow{17}{Read byte from UART}{
+Read a byte from the UART. It is returned in \Param{0}
 }
 \end{longtable*}
 

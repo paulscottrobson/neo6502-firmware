@@ -75,26 +75,58 @@ GROUP 10 UExt I/O
         Try to read from I2C Device \Param{0}.
         If present, then \Param{0} will contain a non-zero value.
 
-    FUNCTION 9 Read I2C
+    FUNCTION 9 Read I2C Block
         *DERROR = IOI2CReadBlock(DPARAMS[0],cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
     DOCUMENTATION
         Try to read a block of memory from I2C Device \Param{0} into memory
         at \Param{1,2}, length \Param{3,4}.
 
-    FUNCTION 10 Write I2C
+    FUNCTION 10 Write I2C Block
         *DERROR = IOI2CWriteBlock(DPARAMS[0],cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
     DOCUMENTATION
         Try to write a block of memory to I2C Device \Param{0} from memory
         at \Param{1,2}, length \Param{3,4}.
 
-    FUNCTION 11 Read SPI
+    FUNCTION 11 Read SPI Block
         *DERROR = IOSPIReadBlock(cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
     DOCUMENTATION
         Try to read a block of memory from SPI Device into memory
         at \Param{1,2}, length \Param{3,4}.
 
-    FUNCTION 12 Write SPI
+    FUNCTION 12 Write SPI Block
         *DERROR = IOSPIWriteBlock(cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
     DOCUMENTATION
         Try to write a block of memory to SPI Device from memory
         at \Param{1,2}, length \Param{3,4}.
+
+    FUNCTION 13 Read UART Block
+        *DERROR = IOUARTReadBlock(cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
+    DOCUMENTATION
+        Try to read a block of memory from UART into memory
+        at \Param{1,2}, length \Param{3,4}.
+
+    FUNCTION 14 Write UART Block
+        *DERROR = IOUARTWriteBlock(cpuMemory+DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
+    DOCUMENTATION
+        Try to write a block of memory to UART from memory
+        at \Param{1,2}, length \Param{3,4}.
+
+    FUNCTION 15 Set UART Speed and Protocol
+        *DERROR = 0;SERSetSerialFormat(DSPGetInt16(DCOMMAND,4),DPARAMS[2]);
+    DOCUMENTATION
+        Set the Baud Rate and Serial Protocol for the UART interface. The baud rate is in \Param{0,1}
+        and the protocol number is \Param{2}. Currently only 8N1 is supported, this is protocol 0.
+
+    FUNCTION 16 Write byte to UART
+        *DERROR = 0;SERWriteByte(DPARAMS[0]);
+    DOCUMENTATION
+        Write byte \Param{0} to the UART
+
+    FUNCTION 17 Read byte from UART
+        if (SERIsByteAvailable()) {
+            *DERROR = 0;DPARAMS[0] = SERReadByte();
+        } else {
+            *DERROR = 1;
+        }
+    DOCUMENTATION
+        Read a byte from the UART. It is returned in \Param{0}
