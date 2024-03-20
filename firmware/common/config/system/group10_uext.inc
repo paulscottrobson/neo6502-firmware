@@ -112,10 +112,10 @@ GROUP 10 UExt I/O
         at \Param{1,2}, length \Param{3,4}.
 
     FUNCTION 15 Set UART Speed and Protocol
-        *DERROR = 0;IOUARTInitialise(DSPGetInt16(DCOMMAND,4),DPARAMS[2]);
+        *DERROR = 0;IOUARTInitialise(DSPGetInt16(DCOMMAND,4)+(DSPGetInt16(DCOMMAND,6) << 16),DPARAMS[4]);
     DOCUMENTATION
-        Set the Baud Rate and Serial Protocol for the UART interface. The baud rate is in \Param{0,1}
-        and the protocol number is \Param{2}. Currently only 8N1 is supported, this is protocol 0.
+        Set the Baud Rate and Serial Protocol for the UART interface. The baud rate is in \Param{0,1,2,3}
+        and the protocol number is \Param{4}. Currently only 8N1 is supported, this is protocol 0.
 
     FUNCTION 16 Write byte to UART
         *DERROR = 0;SERWriteByte(DPARAMS[0]);
