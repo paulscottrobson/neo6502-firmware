@@ -20,12 +20,16 @@
 
 Command_UCONFIG:	;; [uconfig]
 		ldx 	#0
-		jsr 	EXPEvalInteger16 			; baud rate
+		jsr 	EXPEvalInteger 				; baud rate
 		lda 	XSNumber0
 		sta 	ControlParameters+0
 		lda 	XSNumber1
 		sta 	ControlParameters+1
-		stz 	ControlParameters+2		
+		lda 	XSNumber2
+		sta 	ControlParameters+2
+		lda 	XSNumber3
+		sta 	ControlParameters+3
+		stz 	ControlParameters+4
 		.DoSendMessage 						; configure UART
 		.byte 	10,15
 		rts		
