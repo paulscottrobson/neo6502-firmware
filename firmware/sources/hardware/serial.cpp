@@ -29,11 +29,7 @@
 // ***************************************************************************************
 
 bool SERInitialise(void) {
-	uart_init(UART_ID, 9600);
-	gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
-	gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
-	uart_set_hw_flow(UART_ID, false, false);
-	uart_set_fifo_enabled(UART_ID, true);
+	SERSetSerialFormat(9600,0);
 	return true;
 }
 
@@ -44,6 +40,11 @@ bool SERInitialise(void) {
 // ***************************************************************************************
 
 void SERSetSerialFormat(uint32_t baudRate,uint32_t protocol) {
+	uart_init(UART_ID, baudRate);
+	gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
+	gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
+	uart_set_hw_flow(UART_ID, false, false);
+	uart_set_fifo_enabled(UART_ID, true);
 	uart_set_baudrate(UART_ID,baudRate);
 	uart_set_format(UART_ID, DATA_BITS, STOP_BITS, PARITY);
 }

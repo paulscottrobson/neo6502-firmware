@@ -150,6 +150,17 @@ static void IOI2CInitialise(void) {
 //
 // ***************************************************************************************
 
+void IOUARTInitialise(uint32_t baudRate,uint32_t protocol) {
+	IOPINDisabled[3] = IOPINDisabled[4] = true;  									// Can't use serial for I/O
+	SERSetSerialFormat(baudRate,protocol);  										// Set Baud Rate and Protocol.
+}
+
+// ***************************************************************************************
+//
+//								Write to i2C Register
+//
+// ***************************************************************************************
+
 int IOI2CWriteRegister(uint8_t device,uint8_t reg,uint8_t data) {
 	uint8_t buffer[2];
 	IOI2CInitialise();

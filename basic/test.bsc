@@ -1,49 +1,27 @@
-#library
-' -------------------------------------------------------------------------
 '
-'	PCF 8563 UEXT Library
+'		Serial I/O via API.
 '
-' -------------------------------------------------------------------------
-if false
-'  Read Hours/Mins/Secs
-proc rtc.readtime(ref h,ref m,ref s)
-	call rtc.read(h,iread($51,4) & $3F)
-	call rtc.read(m,iread($51,3) & $7F)
-	call rtc.read(s,iread($51,2) & $7F)
-endproc
-' Read Year/Month/Day
-proc rtc.readdate(ref y,ref m,ref d)
-	call rtc.read(y,iread($51,8) & $7F)
-	call rtc.read(m,iread($51,7) & $1F)
-	call rtc.read(d,iread($51,5) & $3F)
-	y = y + 2000
-endproc
-' 	Write Hours/Mins/Secs
-proc rtc.writetime(h,m,s)
-	call rtc.write(4,h):call rtc.write(3,m):call rtc.write(2,s)
-endproc
-' 	Write Year/Month/Day
-proc rtc.writedate(y,m,d)
-	call rtc.write(8,y % 100):call rtc.write(7,m):call rtc.write(5,d)
-endproc
-'
-proc rtc.read(ref n,r)
-	n = (r >> 4)*10+(r & 15)
-endproc
-'
-proc rtc.write(r,v)
-	v = (v % 10) + ((v \ 10) << 4):iwrite $51,r,v
-endproc
-endif
-#nolibrary
-'
-' 	Demo code: NEW to remove this
-'
-call rtc.writedate(2024,3,19)
-call rtc.writetime(17,57,0)
+doke $FF04,9600
+poke $FF06,0
+call send.message(10,15)
 repeat
-	cls
-	call rtc.readdate(year,month,day):print year,month,day
-	call rtc.readtime(hours,mins,secs):print hours,mins,secs
-	wait 50
+	if event(t1,50) then n = (n + 1) & $3F:call write.uart(n+32)
+	call send.message(10,18):isByte = peek($FF04)
+	if isByte 
+		call send.message(10,17):ch = peek($FF04)
+		print "Received ",ch
+	endif
 until false
+next
+end
+
+proc send.message(g,f)
+	while peek($FF00):wend
+	poke $FF01,f:poke $FF00,g
+	while peek($FF00):wend
+endproc	
+
+proc write.uart(c)
+	poke $FF04,c
+	call send.message(10,16)
+endproc

@@ -112,7 +112,7 @@ GROUP 10 UExt I/O
         at \Param{1,2}, length \Param{3,4}.
 
     FUNCTION 15 Set UART Speed and Protocol
-        *DERROR = 0;SERSetSerialFormat(DSPGetInt16(DCOMMAND,4),DPARAMS[2]);
+        *DERROR = 0;IOUARTInitialise(DSPGetInt16(DCOMMAND,4),DPARAMS[2]);
     DOCUMENTATION
         Set the Baud Rate and Serial Protocol for the UART interface. The baud rate is in \Param{0,1}
         and the protocol number is \Param{2}. Currently only 8N1 is supported, this is protocol 0.
@@ -124,9 +124,15 @@ GROUP 10 UExt I/O
 
     FUNCTION 17 Read byte from UART
         if (SERIsByteAvailable()) {
-            *DERROR = 0;DPARAMS[0] = SERReadByte();
+            *DERROR = 0;
+            DPARAMS[0] = SERReadByte();
         } else {
             *DERROR = 1;
         }
     DOCUMENTATION
         Read a byte from the UART. It is returned in \Param{0}
+
+    FUNCTION 18 Check if Byte Available
+        DPARAMS[0] = SERIsByteAvailable() ? 1 : 0;
+    DOCUMENTATION
+        See if a byte is available in the UART input buffer. If available \Param{0} is non zero.
