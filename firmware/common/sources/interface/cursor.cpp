@@ -24,7 +24,7 @@ static bool isCursorVisible; 													// True if visible
 
 void CURInitialise(void) {
 	xCursor = yCursor = -1;isCursorVisible = false;
-	xCursor = 32;yCursor = 48;isCursorVisible = true; 
+	//xCursor = 32;yCursor = 48;isCursorVisible = true; 
 }
 
 // ***************************************************************************************
