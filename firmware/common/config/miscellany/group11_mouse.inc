@@ -18,7 +18,7 @@
 
 GROUP 11 Mouse
     FUNCTION 1 Move display cursor
-        CURSetPosition(DSPGetInt16(DCOMMAND,4),DSPGetInt16(DCOMMAND,6));
+        CURSetPosition(DSPGetInt16(DCOMMAND,4),DSPGetInt16(DCOMMAND,6));    
     DOCUMENTATION
         Positions the display cursor at \Param{0,1},\Param{2,3}        
 
