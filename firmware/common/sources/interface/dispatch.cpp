@@ -71,6 +71,7 @@ void TIMECRITICAL(DSPSync)(void)
 void DSPReset(void) {
 	const char bootString[] = PROMPT;
 	MEMInitialiseMemory();                                                      // Set up memory, load kernel ROM
+	CURInitialise();  															// Cursor first, before starting graphics.
 	GFXSetMode(0);                                                              // Initialise graphics
 	SPRReset();                                                                 // Reset sprites.
 	LOGDrawLogo();                                                              // Draw logo
