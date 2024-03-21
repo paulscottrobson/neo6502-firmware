@@ -1,16 +1,9 @@
-'
-'		Serial I/O via BASIC.
-'
-buffer = alloc(2)
-uconfig 115200
-repeat
-	if event(t1,50) then n = (n + 1) & $3F:usend n+32
-	if uhasdata()
-		ureceive buffer,1
-		print "Received ",peek(buffer)
-	endif
-until false
-next
+n = 42:z = 44:q = 46
+print n,z,q
+call procedure(z,q)
+print n,z,q
 end
 
-
+proc procedure(ref z,q)
+	local n:n = 32.7:z = 33.2:q = 12.4
+endproc
