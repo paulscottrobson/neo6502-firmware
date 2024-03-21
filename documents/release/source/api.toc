@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Neo6502 Messaging API}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}API Interfacing Protocol}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Mathematical Interface}{5}{subsection.1.2}%
+\contentsline {section}{\numberline {2}API Functions}{6}{section.2}%
+\contentsline {section}{\numberline {3}Console Codes}{23}{section.3}%
+\contentsline {section}{\numberline {4}Graphics}{24}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Graphics Settings}{24}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Graphics Data}{25}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Pixel Colors}{26}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Tile Maps}{27}{section.5}%
+\contentsline {section}{\numberline {6}Sprites}{28}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Sprite Anchors}{29}{subsection.6.1}%
+\contentsline {section}{\numberline {7}Sound}{30}{section.7}%

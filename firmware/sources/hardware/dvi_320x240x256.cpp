@@ -48,6 +48,10 @@ uint16_t frameCounter = 0,lineCounter = 0;                              		// Tra
 
 bool  isInitialised = false;                                      				// Only start core once.
 
+const uint8_t *cursorImage = NULL; 												// Cursor status
+uint16_t xCursor,yCursor,wCursor,hCursor;
+bool cursorEnabled = false;
+
 // ***************************************************************************************
 //
 //          Called every scanline to update display
@@ -55,7 +59,7 @@ bool  isInitialised = false;                                      				// Only st
 // ***************************************************************************************
 
 static void __not_in_flash_func(_scanline_callback)(void) {
-	uint16_t *scanline;
+	uint16_t *scanline,*cursline;
 	while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline));           	// Remove unused buffers from queue
 	if (lineCounter >= 0) {         	                                  		// Which buffer to send ?
 		scanline = (lineCounter & 1) ? buffer1 : buffer2;
@@ -66,11 +70,27 @@ static void __not_in_flash_func(_scanline_callback)(void) {
 	if (lineCounter == FRAME_HEIGHT) {
 		frameCounter++;
 		lineCounter = 0;
+		cursorEnabled = CURGetCursorDrawInformation(&cursorImage, 				// Get cursor info this frame.
+															&xCursor,&yCursor);
+		if (cursorEnabled) {  													// If enabled work out physical drawing height.
+				wCursor = hCursor = 16;  										// Could be partially drawn.
+				if (xCursor + 16 >= 320) wCursor = 320-xCursor;
+				if (yCursor + 16 >= 240) hCursor = 240-yCursor;	
+		}
 	}
-	scanline = (lineCounter & 1) ? buffer1 : buffer2;                       	// Buffer to create (e.g. the other one)
+	cursline = scanline = (lineCounter & 1) ? buffer1 : buffer2;               	// Buffer to create (e.g. the other one)
 	uint8_t *screenPos = screenMemory + lineCounter * FRAME_WIDTH;          	// Data to use in screen memory.
 	for (int i = 0;i < FRAME_WIDTH;i++) {                             			// For each pixel
 		*scanline++ = palette[*screenPos++];                              		// convert using palette => buffer.
+	}
+	if (cursorEnabled && lineCounter>=yCursor && lineCounter<yCursor+hCursor) { // Cursor drawing on this line.
+		const uint8_t *cursorData = cursorImage + (lineCounter-yCursor) * 16;
+		cursline += xCursor;  													// Position on this line.
+		for (uint16_t i = 0;i < wCursor;i++) { 									// Each pixel.
+			uint8_t pixel = *cursorData++;
+			if (pixel != 0xFF) *cursline = palette[pixel];  					// Check for transparency
+			cursline++;
+		}
 	}
 }
 

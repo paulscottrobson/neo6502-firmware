@@ -22,7 +22,7 @@
 
 \title{Neo6502 Assembly - Messaging API}
 \author{Paul Robson \\ Bill Auger}
-\date{2024-03-12}
+\date{2024-03-21}
 
 \renewcommand{\familydefault}{\sfdefault}
 \graphicspath{ {./img/}                             % WRT local editor (eg: texworks)
@@ -737,7 +737,7 @@ Register1 := Register 1 mod Register2
 Note: float comparison is approximate because of rounding.
 }
 \ApiFnRow{16}{Negate}{
-\newline Register1 :=  -Register 1
+Register1 :=  -Register 1
 }
 \ApiFnRow{17}{Floor}{
 Register1 := floor(Register 1)
@@ -1125,6 +1125,25 @@ Read a byte from the UART. It is returned in \Param{0}
 }
 \ApiFnRow{18}{Check if Byte Available}{
 See if a byte is available in the UART input buffer. If available \Param{0} is non zero.
+}
+\end{longtable*}
+\pagebreak
+\begin{longtable*}{ | c | l | p{12cm} | }
+\caption*{Group 11 - Mouse Functions} \\
+\hline
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
+\hline
+\endfirsthead
+\caption*{Group 11 - Mouse Functions (continued)} \\
+\hline
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
+\hline
+\endhead
+\ApiFnRow{1}{Move display cursor}{
+Positions the display cursor at \Param{0,1},\Param{2,3}
+}
+\ApiFnRow{2}{Set mouse display cursor on/off}{
+Shows or hides the mouse cursor depending on the \Param{0}
 }
 \end{longtable*}
 
