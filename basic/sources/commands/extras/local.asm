@@ -52,12 +52,12 @@ LocaliseTermX:
 		;		Push number onto BASIC stack.
 		;
 		phy
-		ldy 	#0 							; push 0 to 3 inclusive, the number values, on the stack
+		ldy 	#0 							; push 0 to 3 inclusive, the number values and type, on the stack
 _LNTPushNumLoop:
 		lda		(zTemp0),y
 		jsr 	StackPushByte
 		iny
-		cpy 	#4			
+		cpy 	#5			
 		bne 	_LNTPushNumLoop
 		;
 		lda 	#STK_LOCALN 				; push local-number marker.
@@ -130,7 +130,7 @@ LocalPopValue:
 		jsr 	StackPopByte
 		sta 	zTemp0
 		phy
-		ldy 	#3 							; copy back
+		ldy 	#4 							; copy back
 _LPVNumberCopy:
 		jsr 	StackPopByte
 		sta 	(zTemp0),y
@@ -191,5 +191,6 @@ _LPVStringCopied:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		21/03/24 		Stack now transfers the type information and data.
 ;
 ; ************************************************************************************************
