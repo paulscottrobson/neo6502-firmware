@@ -19,10 +19,10 @@ endif
 
 BINARY = firmware
 #
-#		Can be SDCARD or USBKEY currently. If you change this use make switch to
+#		Can be SDCARD or USB currently. If you change this use make switch to
 #		rebuild as it cmake clean doesn't clean things up enough (probably me)
 #
-STORAGE = USBKEY
+STORAGE = USB
 
 all: build
 
@@ -68,7 +68,7 @@ prelim: kernel
 # ***************************************************************************************
 
 build: prelim always
-	cmake --fresh -B build -D$(STORAGE)_STORAGE=1
+	cmake --fresh -B build -DSTORAGE_TYPE=$(STORAGE)
 	$(MAKE) -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .
@@ -80,7 +80,7 @@ build: prelim always
 # ***************************************************************************************
 
 clean: always
-	cmake --fresh -B build -D$(STORAGE)_STORAGE=1
+	cmake --fresh -B build -DSTORAGE_TYPE=$(STORAGE)
 	cmake --build build --target clean
 
 # ***************************************************************************************
