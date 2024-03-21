@@ -19,7 +19,7 @@
 			MATHWriteInt(-MATHReadInt(MATH_REG1),MATH_REG1);
 		}
 	DOCUMENTATION
-		\newline Register1 :=  -Register 1
+		Register1 :=  -Register 1
 
 	FUNCTION 17 Floor
 		if (MATHIsFloatBinary()) {

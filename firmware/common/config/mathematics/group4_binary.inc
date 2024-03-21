@@ -89,5 +89,4 @@
 	DOCUMENTATION
 		\Param{0} := Register 1 compare Register2 : returns $FF, 0, 1 for less equal and greater.
 		\newline
-
 		Note: float comparison is approximate because of rounding.
