@@ -1,11 +1,15 @@
 '
-'	API Mouse cursor manipulation
+'		Serial I/O via BASIC.
 '
-poke $FF04,1:call send.message(11,2)
-doke $FF04,128:doke $FF06,64:call send.message(11,1)
+buffer = alloc(2)
+uconfig 115200
+print "Waiting...."
+repeat
+	if event(t1,50) then n = (n + 1) & $3F:usend n+32
+	if uhasdata()
+		ureceive buffer,1
+		if peek(buffer) >= 32:print chr$(peek(buffer));:else:print:endif
+	endif
+until false
+next
 end
-proc send.message(g,f)
-	while peek($FF00):wend
-	poke $FF01,f:poke $FF00,g
-	while peek($FF00):wend
-endproc	

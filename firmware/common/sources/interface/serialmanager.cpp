@@ -100,7 +100,7 @@ static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size) {
 		case 6:  																// 6 Set save address
 			saveAddress = data[0]+(data[1] << 8);
 			saveSize = data[2]+(data[3] << 8);
-			CONWriteString("%d %d\r",saveAddress,saveSize);
+			//CONWriteString("%d %d\r",saveAddress,saveSize);
 			break;
 		case 7:  																// 7 Save file.			
 			for (int i = 0;i < data[0];i++) fileName[i] = data[i+1];  			// Make C String
