@@ -36,7 +36,7 @@ class SerialInterface(object):
 	#
 	def __init__(self,port):
 		self.port = serial.Serial(port)
-		self.port.baudrate = 460800
+		self.port.baudrate = 230400
 		self.breakTranmission = 0 													# 0 checksum, 1 insufficient data
 	#
 	#		Transmit a command

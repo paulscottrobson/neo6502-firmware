@@ -11,7 +11,8 @@
 // ***************************************************************************************
 
 #include "common.h"
-//#include "hardware/uart.h"
+#include "hardware/uart.h"
+#include "hardware/irq.h"
 
 #define UART_ID uart0
 
@@ -21,6 +22,28 @@
 
 #define UART_TX_PIN 28
 #define UART_RX_PIN 29
+
+#define UART_RX_BUFFER_SIZE 	(2048)
+
+static uint8_t rxBuffer[UART_RX_BUFFER_SIZE];
+static volatile uint16_t writeAddress;
+static volatile uint16_t readAddress;
+
+// ***************************************************************************************
+//
+//								Serial Port Receive
+//
+// ***************************************************************************************
+
+void SERReceiveInterrupt() {
+	while (uart_is_readable(UART_ID)) {
+		rxBuffer[writeAddress] = uart_getc(UART_ID);
+		writeAddress = (writeAddress + 1) & (UART_RX_BUFFER_SIZE-1);
+		if (writeAddress == readAddress) {
+			CONWriteString("Warning: Serial RX Buffer Overflow\r");
+		}
+	}
+}
 
 // ***************************************************************************************
 //
@@ -40,13 +63,22 @@ bool SERInitialise(void) {
 // ***************************************************************************************
 
 void SERSetSerialFormat(uint32_t baudRate,uint32_t protocol) {
+    int UART_IRQ = UART_ID == uart0 ? UART0_IRQ : UART1_IRQ;
+    irq_set_enabled(UART_IRQ, false);
+
 	uart_init(UART_ID, baudRate);
 	gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
 	gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
 	uart_set_hw_flow(UART_ID, false, false);
-	uart_set_fifo_enabled(UART_ID, true);
+	uart_set_fifo_enabled(UART_ID, false);
 	uart_set_baudrate(UART_ID,baudRate);
 	uart_set_format(UART_ID, DATA_BITS, STOP_BITS, PARITY);
+
+	readAddress = writeAddress = 0;
+
+    irq_set_exclusive_handler(UART_IRQ, SERReceiveInterrupt);
+    irq_set_enabled(UART_IRQ, true);
+    uart_set_irq_enables(UART_ID, true, false);
 }
 
 // ***************************************************************************************
@@ -56,7 +88,8 @@ void SERSetSerialFormat(uint32_t baudRate,uint32_t protocol) {
 // ***************************************************************************************
 
 bool SERIsByteAvailable(void) {
-	return uart_is_readable_within_us(UART_ID,0);
+	//if (readAddress != writeAddress) CONWriteString("Avail: %d %d\r",readAddress,writeAddress);
+	return readAddress != writeAddress;
 }
 
 // ***************************************************************************************
@@ -66,7 +99,12 @@ bool SERIsByteAvailable(void) {
 // ***************************************************************************************
 
 uint8_t SERReadByte(void) {
-	return uart_getc(UART_ID);
+	//CONWriteString("Read: %d %d %d\r",readAddress,writeAddress,readAddress == writeAddress);
+	while (readAddress == writeAddress) {}		
+	//CONWriteString("Read2: %d %d\r",readAddress,writeAddress);
+	uint8_t b = rxBuffer[readAddress];
+	readAddress = (readAddress+1) & (UART_RX_BUFFER_SIZE-1);
+	return b;
 }
 
 // ***************************************************************************************
@@ -84,5 +122,6 @@ void SERWriteByte(uint8_t b) {
 //		Date 		Revision
 //		==== 		========
 //		29-01-24 	Added timeout to readbyte.
+//		22-03-24 	Interrupt driven Receive buffer.
 //
 // ***************************************************************************************
