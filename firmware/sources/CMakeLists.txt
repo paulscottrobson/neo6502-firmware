@@ -44,6 +44,7 @@ target_sources(firmware PRIVATE main.cpp
 
 if(STORAGE_TYPE STREQUAL "USB")
     message("Building for USB Storage")
+    add_definitions(-DUSBKEY_STORAGE=1)
     target_sources(firmware PRIVATE hardware/storage/usb_storage.cpp )
     target_link_libraries(firmware fatfs)
 elseif(STORAGE_TYPE STREQUAL "SDCARD")
