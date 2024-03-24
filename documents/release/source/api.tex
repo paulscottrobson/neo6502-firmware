@@ -22,7 +22,7 @@
 
 \title{Neo6502 Assembly - Messaging API}
 \author{Paul Robson \\ Bill Auger}
-\date{2024-03-21}
+\date{2024-03-24}
 
 \renewcommand{\familydefault}{\sfdefault}
 \graphicspath{ {./img/}                             % WRT local editor (eg: texworks)
@@ -1144,6 +1144,26 @@ Positions the display cursor at \Param{0,1},\Param{2,3}
 }
 \ApiFnRow{2}{Set mouse display cursor on/off}{
 Shows or hides the mouse cursor depending on the \Param{0}
+}
+\end{longtable*}
+\pagebreak
+\begin{longtable*}{ | c | l | p{12cm} | }
+\caption*{Group 12 - Blitter Functions} \\
+\hline
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
+\hline
+\endfirsthead
+\caption*{Group 12 - Blitter Functions (continued)} \\
+\hline
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
+\hline
+\endhead
+\ApiFnRow{1}{Blitter Busy}{
+Returns a non zero value in \Param{1} if the blitter/DMA system is currently transferring data.
+}
+\ApiFnRow{2}{Simple Blit Copy}{
+Copy \Param{6,7} bytes of internal memory from \Param{0}:\Param{1,2} to \Param{3}:\Param{4,5}. Sets error flag if the transfer is not
+possible (e.g. illegal write addresses). The upper 8 bits of the address are : 6502 RAM (00) VideoRAM (80,81) Graphics RAM(90)
 }
 \end{longtable*}
 
