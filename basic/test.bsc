@@ -1,15 +1,13 @@
-'
-'		Serial I/O via BASIC.
-'
-buffer = alloc(2)
-uconfig 115200
-print "Waiting...."
-repeat
-	if event(t1,50) then n = (n + 1) & $3F:usend n+32
-	if uhasdata()
-		ureceive buffer,1
-		if peek(buffer) >= 32:print chr$(peek(buffer));:else:print:endif
-	endif
-until false
-next
+call test("ABCDE","ABCDE")
+call test("ABCDE","AB")
+call test("ABCDE","ABD")
+call test("ABCDE","C")
+call test("ABCDE","CDE")
+call test("ABCDE","CE")
+call test("ABCDE","E")
+call test("A","AB")
 end
+
+proc test(a$,b$)
+	print a$,b$,instr(a$,b$)
+endproc

@@ -96,7 +96,7 @@ class TokenSet(object):
 		self.add(0x80,"""
 			!!STR 	$ 		(		RAND(	RND(	JOYPAD(	INT(	TIME(	EVENT(	
 			INKEY$(	ASC(	CHR$(	POINT( 	LEN(  	ABS(  	SGN( 	HIT(	SPOINT(
-			MID$(	LEFT$( 	RIGHT$(	TRUE	FALSE	!!UN4	!!UN5	!!UN6	!!UN7
+			MID$(	LEFT$( 	RIGHT$(	TRUE	FALSE	INSTR(	!!UN5	!!UN6	!!UN7
 			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	
 			""",48)
 		#
