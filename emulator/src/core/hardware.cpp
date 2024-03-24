@@ -520,7 +520,7 @@ void SERSetSerialFormat(uint32_t baudRate,uint32_t protocol) {
 // ***************************************************************************************
 
 int UEXTSetGPIODirection(int gpio,int pinType) {
-	printf("Pin %d set direction to %d\n",gpio,pinType);
+	//printf("Pin %d set direction to %d\n",gpio,pinType);
 	return 0;
 }
 
