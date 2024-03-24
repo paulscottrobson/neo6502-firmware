@@ -33,7 +33,8 @@ GROUP 1 System
         *DPARAMS = (i1 < KBD_MAX_KEYCODE) ? KBDGetStateArray()[i1] : 0;
         DPARAMS[1] = KBDGetModifiers();
     DOCUMENTATION
-        Deposit the state of the specified keyboard key into \Param{0}.
+        Deposits the state of the specified keyboard key into \Param{0}.
+        State of keyboard modifiers (Shift/Ctrl/Alt/Meta) is returned in \Param{1}.
         The key which to query is specified in \Param{0}.
 
     FUNCTION 3 Basic
