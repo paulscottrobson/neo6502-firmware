@@ -74,7 +74,8 @@ void SERSetSerialFormat(uint32_t baudRate,uint32_t protocol) {
 	uart_set_baudrate(UART_ID,baudRate);
 	uart_set_format(UART_ID, DATA_BITS, STOP_BITS, PARITY);
 
-	readAddress = writeAddress = 0;
+	readAddress = 0;
+	writeAddress = 0;
 
     irq_set_exclusive_handler(UART_IRQ, SERReceiveInterrupt);
     irq_set_enabled(UART_IRQ, true);
