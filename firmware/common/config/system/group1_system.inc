@@ -31,6 +31,7 @@ GROUP 1 System
     FUNCTION 2 Key Status
         i1 = *DPARAMS;
         *DPARAMS = (i1 < KBD_MAX_KEYCODE) ? KBDGetStateArray()[i1] : 0;
+        DPARAMS[1] = KBDGetModifiers();
     DOCUMENTATION
         Deposit the state of the specified keyboard key into \Param{0}.
         The key which to query is specified in \Param{0}.
