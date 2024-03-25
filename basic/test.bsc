@@ -1,0 +1,4 @@
+repeat
+	btn = joypad(dx,dy)
+	cls:print btn,dx,dy
+until false
