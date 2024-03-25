@@ -59,8 +59,8 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 
 	if (keyCode != 0 && keyCode < KBD_MAX_KEYCODE) { 							// Legitimate keycode.
 		if (isDown) {
-			keyboardState[keyCode] = 0xFF; 		
-			keyboardModifiers = modifiers;								// Set down flag.
+			keyboardState[keyCode] = 0xFF; 										// Set down flag.
+			keyboardModifiers = modifiers;										// Copy modifiers
 			uint8_t ascii = KBDMapToASCII(keyCode,modifiers);  					// What key ?
 			if (ascii != 0) {
 				currentASCII = ascii;  											// Remember code and time.
@@ -70,7 +70,7 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 			}
 		} else {
 			keyboardState[keyCode] = 0x00; 										// Clear flag
-			keyboardModifiers = 0x00;								// Set down flag.
+			keyboardModifiers = 0x00;											// Clear Modifiers
 			if (keyCode == currentKeyCode) currentASCII = 0; 					// Autorepeat off, key released.
 		}
 	}

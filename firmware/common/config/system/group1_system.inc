@@ -29,8 +29,8 @@ GROUP 1 System
         Deposit the value (32-bits) of the 100Hz system timer into \Param{0..3}.
 
     FUNCTION 2 Key Status
-        i1 = *DPARAMS;
-        *DPARAMS = (i1 < KBD_MAX_KEYCODE) ? KBDGetStateArray()[i1] : 0;
+        i1 = DPARAMS[0];
+        DPARAMS[0] = (i1 < KBD_MAX_KEYCODE) ? KBDGetStateArray()[i1] : 0;
         DPARAMS[1] = KBDGetModifiers();
     DOCUMENTATION
         Deposits the state of the specified keyboard key into \Param{0}.
