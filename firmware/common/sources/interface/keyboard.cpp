@@ -307,6 +307,7 @@ uint8_t KBDKeyboardController(void) {
 	if (keyboardState[22]|keyboardState[81]) ck |= 0x08; 						// S/Down bit 3
 	if (keyboardState[18]|keyboardState[29]) ck |= 0x10; 						// O/Z bit 4
 	if (keyboardState[19]|keyboardState[27]) ck |= 0x20; 						// P/X bit 5 
+	
 	return ck;
 }
 
