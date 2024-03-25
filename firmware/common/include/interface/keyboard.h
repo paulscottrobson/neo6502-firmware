@@ -19,6 +19,7 @@ void KBDSync(void);
 void KBDCheckTimer(void);
 void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers);
 uint8_t *KBDGetStateArray(void);
+uint8_t KBDGetModifiers(void);
 bool KBDIsKeyAvailable(void);
 uint8_t KBDGetKey(void);
 void KBDSetLocale(char c1,char c2);
