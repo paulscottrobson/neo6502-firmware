@@ -1,3 +1,5 @@
+// 	Inline comment
+"// quote" // comment
 repeat
 	btn = joypad(dx,dy)
 	cls:print btn,dx,dy
