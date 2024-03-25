@@ -39,7 +39,6 @@ class Program(object):
 	#
 	def addFile(self,fileName):
 		for s in open(fileName).readlines():
-			s = s if s.find("//") < 0 else s[:s.find("//")]
 			s = s.strip()
 			if s.startswith("#"):
 				self.command(s[1:])

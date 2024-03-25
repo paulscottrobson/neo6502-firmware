@@ -83,7 +83,7 @@ class Tokeniser(object):
 	def tokenise(self,s):
 		s = s.strip()
 		self.code = []
-		while s != "":
+		while s != "" and not s.startswith("//"):
 			s = self.tokeniseOne(s).strip()
 		return self.code
 	#
