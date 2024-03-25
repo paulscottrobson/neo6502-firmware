@@ -359,7 +359,8 @@ Normally, should not be used.
 Deposit the value (32-bits) of the 100Hz system timer into \Param{0..3}.
 }
 \ApiFnRow{2}{Key Status}{
-Deposit the state of the specified keyboard key into \Param{0}.
+Deposits the state of the specified keyboard key into \Param{0}.
+State of keyboard modifiers (Shift/Ctrl/Alt/Meta) is returned in \Param{1}.
 The key which to query is specified in \Param{0}.
 }
 \ApiFnRow{3}{Basic}{
@@ -949,21 +950,15 @@ with the index specified in \Param{0}.
 \textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
 \hline
 \endhead
-\ApiFnRow{1}{Read Controller}{
+\ApiFnRow{1}{Read Default Controller}{
 This reads the status of the default controller into \Param{0}.
 \newline
 
-Initially, the Controller is the keyboard.
-This Function interprets key presses and releases as a joystick.
-The system maintains a bit-array of which keys are pressed.
-Currently, the keyboard is the only available Controller.
+The default controller is the keyboard if no gamepad is inserted. Keys used
+are WASD+OPKL or Arrow Keys+ZXCV
 \newline
 
-This function will become obsolete shortly, as a more extensive API using USB
-controllers becomes available. However, it will maintain backward compatibility.
-\newline
-
-\ParamBits{\$FF04 - Controller Flags}{0}{0}{B}{A}{Down}{Up}{Right}{Left}
+\ParamBits{\$FF04 - Controller Flags}{Y}{X}{B}{A}{Down}{Up}{Right}{Left}
 }
 \end{longtable*}
 \pagebreak
@@ -1159,7 +1154,8 @@ Shows or hides the mouse cursor depending on the \Param{0}
 \hline
 \endhead
 \ApiFnRow{1}{Blitter Busy}{
-Returns a non zero value in \Param{1} if the blitter/DMA system is currently transferring data.
+Returns a non zero value in \Param{1} if the blitter/DMA system is currently transferring data, used to check availability
+and transfer completion.
 }
 \ApiFnRow{2}{Simple Blit Copy}{
 Copy \Param{6,7} bytes of internal memory from \Param{0}:\Param{1,2} to \Param{3}:\Param{4,5}. Sets error flag if the transfer is not

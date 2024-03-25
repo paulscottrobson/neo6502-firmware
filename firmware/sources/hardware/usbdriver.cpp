@@ -4,6 +4,7 @@
 //      Name :      usbdriver.cpp
 //      Authors :   Tsvetan Usunov (Olimex)
 //                  Paul Robson (paul@robsons.org.uk)
+//       				  	Sascha Schneider
 //      Date :      20th November 2023
 //      Reviewed :  No
 //      Purpose :   USB interface and HID->Event mapper.
@@ -18,8 +19,6 @@
 #include "GamepadController.h"
 
 #include <cstdint>
-
-extern uint8_t gamepadState;
 
 // ***************************************************************************************
 //
@@ -65,7 +64,7 @@ static void usbProcessReport(uint8_t const *report) {
 //
 // ***************************************************************************************
 
-GamepadController gamepad_controller;
+static GamepadController gamepad_controller;
 
 void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* desc_report, uint16_t desc_len) {
 	uint16_t vid, pid;
@@ -101,7 +100,6 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
 
 	case HID_ITF_PROTOCOL_NONE:
 		gamepad_controller.update(dev_addr, instance, report, len);
-		gamepadState = gamepad_controller.getState();
 	break;
   }
 	tuh_hid_receive_report(dev_addr, instance);
@@ -117,6 +115,20 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
 void KBDInitialise(void) {
 	for (int i = 0;i < KBD_MAX_KEYCODE;i++) lastReport[i] = 0;                  // No keys currently known
 	tusb_init();
+}
+
+// ***************************************************************************************
+//
+//                            Gamepad Controller information
+//
+// ***************************************************************************************
+
+uint8_t GMPGetControllerCount(void) {
+	return gamepad_controller.getCount();
+}
+
+uint32_t GMPReadDigitalController(uint8_t index) {
+	return gamepad_controller.readDigital(index);
 }
 
 // ***************************************************************************************

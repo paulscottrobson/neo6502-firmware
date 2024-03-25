@@ -53,9 +53,9 @@ void LOGDrawLogo(void) {
 	gMode.setPalette(5,255,0,255);
 	gMode.setPalette(6,0,255,255);
 	gMode.setPalette(1,255,0,0);
-	_LOGDraw(graphic_logo,5,32);
-	_LOGDraw(graphic_text,6,100);
-	_LOGDraw(graphic_olimex,1,140);
+	_LOGDraw(graphic_logo,5,32-24);
+	_LOGDraw(graphic_text,6,100-24);
+	_LOGDraw(graphic_olimex,1,140-24);
 }
 
 // ***************************************************************************************

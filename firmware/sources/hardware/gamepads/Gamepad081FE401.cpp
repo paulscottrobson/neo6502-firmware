@@ -1,12 +1,32 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      Gamepad081FE401.cpp
+//      Authors :   Sascha Schneider
+//      Date :      25th March 2024
+//      Reviewed :  No
+//      Purpose :   Gamepad interface (Olimex SNES Style Gamepad and similar)
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 #include "Gamepad081FE401.h"
 
 #include "interface/console.h"
 
-uint8_t Gamepad081FE401::getState() {
-	 uint8_t state = 0;
+// ***************************************************************************************
+//
+//				Calculate gamepad bit settings from controller state
+//
+// ***************************************************************************************
+
+uint32_t Gamepad081FE401::getState() {
+	 uint32_t state = 0;
 
 	if (m_a) state |= 0x10;
 	if (m_b) state |= 0x20;
+	if (m_x) state |= 0x40;
+	if (m_y) state |= 0x80;
 
 	if (m_dpad_left) state |= 0x1;
 	if (m_dpad_right) state |= 0x2;
@@ -16,6 +36,12 @@ uint8_t Gamepad081FE401::getState() {
 
 	return state;
 }
+
+// ***************************************************************************************
+//
+//				Process USB HID Report converting data to button presses
+//
+// ***************************************************************************************
 
 void Gamepad081FE401::update(uint8_t dev_addr, uint8_t instance, uint8_t const *report, uint16_t len) {
 	if (len != 8) {

@@ -13,7 +13,9 @@
 #ifndef _GAMEPAD_H
 #define _GAMEPAD_H
 
-uint8_t GMPGamepadController(void);
+uint8_t GMPGetControllerCount(void);
+uint32_t GMPReadDigitalController(uint8_t index);
+
 #endif
 
 // ***************************************************************************************

@@ -21,11 +21,24 @@ static volatile bool msc_volume_busy[CFG_TUH_DEVICE_MAX];
 static scsi_inquiry_resp_t msc_inquiry_resp;
 bool msc_inquiry_complete = false;
 
+// ***************************************************************************************
+//
+//                                  Storage initialise
+//
+// ***************************************************************************************
+
 void STOInitialise(void) {
 }
 
+// ***************************************************************************************
+//
+//    Wait for USB to 'settle' ; not quite sure why this is required, time to process 
+//    USB Messages ?
+//
+// ***************************************************************************************
+
 void STOSynchronise(void) {
-    CONWriteString("USB Storage\rWaiting for USB Key\r");
+    CONWriteString("USB Storage\r");
     uint16_t timeOut = 2000;
     while (!msc_inquiry_complete && timeOut > 0) {
         KBDSync();
@@ -34,20 +47,21 @@ void STOSynchronise(void) {
     }
 }
 
+// ***************************************************************************************
+//
+//                              USB Key found, initialised.
+//
+// ***************************************************************************************
+
 bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_data) {
     if (cb_data->csw->status != 0) {
         //CONWriteString("MSC SCSI inquiry failed\r\n");
         return false;
     }
 
-//  uint32_t block_count = tuh_msc_get_block_count(dev_addr, cb_data->cbw->lun);
-//  uint32_t block_size = tuh_msc_get_block_size(dev_addr, cb_data->cbw->lun);
-//  uint32_t size = block_count / ((1024 * 1024) / block_size);
-
-    // char szBuffer[64];
-    // sprintf(szBuffer,"MSC %luMB %.8s %.16s rev %.4s\r\n", size, msc_inquiry_resp.vendor_id, msc_inquiry_resp.product_id,
-    //        msc_inquiry_resp.product_rev);
-    // CONWriteString(szBuffer);
+    uint16_t vid, pid;
+    tuh_vid_pid_get(dev_addr, &vid, &pid);
+    CONWriteString("USB Key found %04x %04x\r",vid,pid);
 
     char drive_path[3] = "0:";
     drive_path[0] += dev_addr;
@@ -68,6 +82,12 @@ bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_dat
     return true;
 }
 
+// ***************************************************************************************
+//
+//                              Mount and unmount devices
+//
+// ***************************************************************************************
+
 void tuh_msc_mount_cb(uint8_t dev_addr) {
     uint8_t const lun = 0;
     //CONWriteString("MSC mounted, inquiring\r\n");
@@ -79,6 +99,12 @@ void tuh_msc_umount_cb(uint8_t dev_addr) {
     drive_path[0] += dev_addr;
     f_unmount(drive_path);
 }
+
+// ***************************************************************************************
+//
+//                                  sInterface to FATFS
+//
+// ***************************************************************************************
 
 static void wait_for_disk_io(BYTE pdrv) {
     while (msc_volume_busy[pdrv]) {
