@@ -1,0 +1,2 @@
+a$ = inkey$()
+print a$
