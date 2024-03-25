@@ -359,7 +359,8 @@ Normally, should not be used.
 Deposit the value (32-bits) of the 100Hz system timer into \Param{0..3}.
 }
 \ApiFnRow{2}{Key Status}{
-Deposit the state of the specified keyboard key into \Param{0}.
+Deposits the state of the specified keyboard key into \Param{0}.
+State of keyboard modifiers (Shift/Ctrl/Alt/Meta) is returned in \Param{1}.
 The key which to query is specified in \Param{0}.
 }
 \ApiFnRow{3}{Basic}{
@@ -1159,7 +1160,8 @@ Shows or hides the mouse cursor depending on the \Param{0}
 \hline
 \endhead
 \ApiFnRow{1}{Blitter Busy}{
-Returns a non zero value in \Param{1} if the blitter/DMA system is currently transferring data.
+Returns a non zero value in \Param{1} if the blitter/DMA system is currently transferring data, used to check availability
+and transfer completion.
 }
 \ApiFnRow{2}{Simple Blit Copy}{
 Copy \Param{6,7} bytes of internal memory from \Param{0}:\Param{1,2} to \Param{3}:\Param{4,5}. Sets error flag if the transfer is not

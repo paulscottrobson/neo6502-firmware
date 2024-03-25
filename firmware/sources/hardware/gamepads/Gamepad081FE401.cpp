@@ -1,9 +1,21 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      Gamepad081FE401.cpp
+//      Authors :   Sascha Schneider
+//      Date :      25th March 2024
+//      Reviewed :  No
+//      Purpose :   Gamepad interface (Olimex SNES Style Gamepad and similar)
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 #include "Gamepad081FE401.h"
 
 #include "interface/console.h"
 
-uint8_t Gamepad081FE401::getState() {
-	 uint8_t state = 0;
+uint32_t Gamepad081FE401::getState() {
+	 uint32_t state = 0;
 
 	if (m_a) state |= 0x10;
 	if (m_b) state |= 0x20;

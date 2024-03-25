@@ -1,7 +1,19 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      Gamepad054C0CDA.cpp
+//      Authors :   Sascha Schneider
+//      Date :      25th March 2024
+//      Reviewed :  No
+//      Purpose :   Gamepad interface for 054C:0CDA (Playstation classic controller)
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 #include "Gamepad054C0CDA.h"
 
-uint8_t Gamepad054C0CDA::getState() {
-	uint8_t state = 0;
+uint32_t Gamepad054C0CDA::getState() {
+	uint32_t state = 0;
 
 	if (m_circle) state |= 0x10;
 	if (m_cross) state |= 0x20;

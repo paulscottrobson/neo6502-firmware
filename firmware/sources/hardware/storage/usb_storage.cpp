@@ -25,7 +25,7 @@ void STOInitialise(void) {
 }
 
 void STOSynchronise(void) {
-    CONWriteString("USB Storage\rWaiting for USB Key\r");
+    CONWriteString("USB Storage\r");
     uint16_t timeOut = 2000;
     while (!msc_inquiry_complete && timeOut > 0) {
         KBDSync();
@@ -40,14 +40,9 @@ bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_dat
         return false;
     }
 
-//  uint32_t block_count = tuh_msc_get_block_count(dev_addr, cb_data->cbw->lun);
-//  uint32_t block_size = tuh_msc_get_block_size(dev_addr, cb_data->cbw->lun);
-//  uint32_t size = block_count / ((1024 * 1024) / block_size);
-
-    // char szBuffer[64];
-    // sprintf(szBuffer,"MSC %luMB %.8s %.16s rev %.4s\r\n", size, msc_inquiry_resp.vendor_id, msc_inquiry_resp.product_id,
-    //        msc_inquiry_resp.product_rev);
-    // CONWriteString(szBuffer);
+    uint16_t vid, pid;
+    tuh_vid_pid_get(dev_addr, &vid, &pid);
+    CONWriteString("USB Key found %04x %04x\r",vid,pid);
 
     char drive_path[3] = "0:";
     drive_path[0] += dev_addr;

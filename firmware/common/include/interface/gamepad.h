@@ -13,7 +13,7 @@
 #ifndef _GAMEPAD_H
 #define _GAMEPAD_H
 
-uint8_t GMPGamepadController(void);
+uint32_t GMPGamepadController(void);
 #endif
 
 // ***************************************************************************************

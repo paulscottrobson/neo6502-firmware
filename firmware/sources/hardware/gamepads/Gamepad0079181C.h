@@ -1,11 +1,21 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      Gamepad00798181.h
+//      Authors :   Sascha Schneider
+//      Date :      25th March 2024
+//      Reviewed :  No
+//      Purpose :   Gamepad header (Olimex wireless playstation gamepad)
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 #pragma once
 #include "Gamepad.h"
 
-// Olimex wireless playstation style gamepad
-
 class Gamepad0079181C : public Gamepad {
 public:
-	uint8_t getState() override;
+	uint32_t getState() override;
 	void update(uint8_t dev_addr, uint8_t instance, uint8_t const* report, uint16_t len) override;
 
 private:

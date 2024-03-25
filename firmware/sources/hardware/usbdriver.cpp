@@ -4,6 +4,7 @@
 //      Name :      usbdriver.cpp
 //      Authors :   Tsvetan Usunov (Olimex)
 //                  Paul Robson (paul@robsons.org.uk)
+//       				  	Sascha Schneider
 //      Date :      20th November 2023
 //      Reviewed :  No
 //      Purpose :   USB interface and HID->Event mapper.

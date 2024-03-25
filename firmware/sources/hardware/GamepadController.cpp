@@ -1,3 +1,15 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      GamepadController.cpp
+//      Authors :   Sascha Schneider
+//      Date :      25th March 2024
+//      Reviewed :  No
+//      Purpose :   Gamepad controller class
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 #include "GamepadController.h"
 
 #include "gamepads/Gamepad054C0CDA.h"
@@ -11,6 +23,7 @@ inline static uint16_t key(uint8_t dev_addr, uint8_t instance) {
 }
 
 bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_t instance, uint8_t const *desc_report, uint16_t desc_len) {
+	bool driverFound = true;
 	switch (vid)
 	{
 	case 0x054C:
@@ -29,13 +42,13 @@ bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_
 		}
 		break;
 	default:
-		CONWriteString("No gamepad driver found for");
-		CONWriteHex(vid);
-		CONWriteHex(pid);
-		CONWrite('\r');
+		driverFound = false;
 		break;
 	}
-
+	CONWriteString(driverFound ? "Gamepad driver found":"No driver found for");
+	CONWriteHex(vid);
+	CONWriteHex(pid);
+	CONWrite('\r');
 	return true;
 }
 
@@ -52,8 +65,8 @@ bool GamepadController::update(uint8_t dev_addr, uint8_t instance, uint8_t const
 	return false;
 }
 
-uint8_t GamepadController::getState() {
-	uint8_t state = 0;
+uint32_t GamepadController::getState() {
+	uint32_t state = 0;
 	for (const auto& [key, gamepad] : m_gamepads) {
 		state |= gamepad->getState();
 	}

@@ -1,11 +1,22 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      Gamepad054C0CDA.h
+//      Authors :   Sascha Schneider
+//      Date :      25th March 2024
+//      Reviewed :  No
+//      Purpose :   Gamepad header (Playstation classic controller)
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 #pragma once
 #include "Gamepad.h"
 
-// Sony Playstation Classic Controller
-
 class Gamepad054C0CDA : public Gamepad {
+	
 public:
-	uint8_t getState() override;
+	uint32_t getState() override;
 	void update(uint8_t dev_addr, uint8_t instance, uint8_t const* report, uint16_t len) override;
 
 private:

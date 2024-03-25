@@ -1,7 +1,19 @@
+// ***************************************************************************************
+// ***************************************************************************************
+//
+//      Name :      gamepad.cpp
+//      Authors :   Sascha Schneider
+//      Date :      25th March 2024
+//      Reviewed :  No
+//      Purpose :   Gamepad API interface
+//
+// ***************************************************************************************
+// ***************************************************************************************
+
 #include <cstdint>
 
-uint8_t gamepadState = 0;
+uint32_t gamepadState = 0;
 
-uint8_t GMPGamepadController(void) {
+uint32_t GMPGamepadController(void) {
     return gamepadState;
 }
