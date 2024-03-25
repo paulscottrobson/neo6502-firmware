@@ -21,8 +21,21 @@ static volatile bool msc_volume_busy[CFG_TUH_DEVICE_MAX];
 static scsi_inquiry_resp_t msc_inquiry_resp;
 bool msc_inquiry_complete = false;
 
+// ***************************************************************************************
+//
+//                                  Storage initialise
+//
+// ***************************************************************************************
+
 void STOInitialise(void) {
 }
+
+// ***************************************************************************************
+//
+//    Wait for USB to 'settle' ; not quite sure why this is required, time to process 
+//    USB Messages ?
+//
+// ***************************************************************************************
 
 void STOSynchronise(void) {
     CONWriteString("USB Storage\r");
@@ -33,6 +46,12 @@ void STOSynchronise(void) {
         timeOut--;
     }
 }
+
+// ***************************************************************************************
+//
+//                              USB Key found, initialised.
+//
+// ***************************************************************************************
 
 bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_data) {
     if (cb_data->csw->status != 0) {
@@ -63,6 +82,12 @@ bool inquiry_complete_cb(uint8_t dev_addr, tuh_msc_complete_data_t const *cb_dat
     return true;
 }
 
+// ***************************************************************************************
+//
+//                              Mount and unmount devices
+//
+// ***************************************************************************************
+
 void tuh_msc_mount_cb(uint8_t dev_addr) {
     uint8_t const lun = 0;
     //CONWriteString("MSC mounted, inquiring\r\n");
@@ -74,6 +99,12 @@ void tuh_msc_umount_cb(uint8_t dev_addr) {
     drive_path[0] += dev_addr;
     f_unmount(drive_path);
 }
+
+// ***************************************************************************************
+//
+//                                  sInterface to FATFS
+//
+// ***************************************************************************************
 
 static void wait_for_disk_io(BYTE pdrv) {
     while (msc_volume_busy[pdrv]) {

@@ -12,11 +12,19 @@
 
 #include "Gamepad054C0CDA.h"
 
+// ***************************************************************************************
+//
+//				Calculate gamepad bit settings from controller state
+//
+// ***************************************************************************************
+
 uint32_t Gamepad054C0CDA::getState() {
 	uint32_t state = 0;
 
 	if (m_circle) state |= 0x10;
 	if (m_cross) state |= 0x20;
+	if (m_triangle) state |= 0x40;
+	if (m_square) state |= 0x80;
 
 	if (m_dpad_left) state |= 0x1;
 	if (m_dpad_right) state |= 0x2;
@@ -26,6 +34,12 @@ uint32_t Gamepad054C0CDA::getState() {
 
 	return state;
 }
+
+// ***************************************************************************************
+//
+//				Process USB HID Report converting data to button presses
+//
+// ***************************************************************************************
 
 void Gamepad054C0CDA::update(uint8_t dev_addr, uint8_t instance, uint8_t const *report, uint16_t len) {
 	if (len != 2) {
