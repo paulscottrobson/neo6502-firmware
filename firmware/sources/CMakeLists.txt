@@ -30,7 +30,6 @@ target_sources(firmware PRIVATE main.cpp
     ${COMMONSRC}/sprites.cpp  ${COMMONSRC}/logo.cpp  ${COMMONSRC}/sprites_xor.cpp  ${COMMONSRC}/tilemap.cpp
     ${COMMONSRC}/sndmanager.cpp  ${COMMONSRC}/sfxmanager.cpp ${COMMONSRC}/tick.cpp ${COMMONSRC}/serialmanager.cpp
     ${COMMONSRC}/turtle.cpp ${COMMONSRC}/locale.cpp ${COMMONSRC}/pininterface.cpp ${COMMONSRC}/cursor.cpp
-    ${COMMONSRC}/gamepad.cpp
     #
     #       Hardware sources
     #

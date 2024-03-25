@@ -18,9 +18,21 @@
 
 #include "interface/console.h"
 
+// ***************************************************************************************
+//
+//				Map device information to key for controller dictionary
+//
+// ***************************************************************************************
+
 inline static uint16_t key(uint8_t dev_addr, uint8_t instance) {
 	 return dev_addr + ((uint16_t)instance << 8);
 }
+
+// ***************************************************************************************
+//
+//		  Add (possibly) a new controller device. All unknown USBs register here
+//
+// ***************************************************************************************
 
 bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_t instance, uint8_t const *desc_report, uint16_t desc_len) {
 	bool driverFound = true;
@@ -46,16 +58,26 @@ bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_
 		break;
 	}
 	CONWriteString(driverFound ? "Gamepad driver found":"No driver found for");
-	CONWriteHex(vid);
-	CONWriteHex(pid);
-	CONWrite('\r');
+	CONWriteHex(vid);CONWriteHex(pid);CONWrite('\r');
 	return true;
 }
+
+// ***************************************************************************************
+//
+//						Controller (or other USB device) removed
+//
+// ***************************************************************************************
 
 bool GamepadController::remove(uint8_t dev_addr, uint8_t instance) {
 	m_gamepads.erase(key(dev_addr, instance));
 	return true;
 }
+
+// ***************************************************************************************
+//
+//							Update the status of device
+//
+// ***************************************************************************************
 
 bool GamepadController::update(uint8_t dev_addr, uint8_t instance, uint8_t const *report, uint16_t len) {
 	if (auto search = m_gamepads.find(key(dev_addr, instance)); search != m_gamepads.end()) {
@@ -65,10 +87,28 @@ bool GamepadController::update(uint8_t dev_addr, uint8_t instance, uint8_t const
 	return false;
 }
 
-uint32_t GamepadController::getState() {
+// ***************************************************************************************
+//
+//								Return the number of controllers
+//
+// ***************************************************************************************
+
+uint8_t GamepadController::getCount() {
+	return m_gamepads.size();
+}
+
+// ***************************************************************************************
+//
+//		Return the status of digital controller buttons, or analogue sticks mapped to
+//		digital directions.
+//
+// ***************************************************************************************
+
+uint32_t GamepadController::readDigital(uint8_t index) {
 	uint32_t state = 0;
 	for (const auto& [key, gamepad] : m_gamepads) {
-		state |= gamepad->getState();
+		if (index == 0) return gamepad->getState();
+		index--;
 	}
-	return state;
+	return 0;
 }
