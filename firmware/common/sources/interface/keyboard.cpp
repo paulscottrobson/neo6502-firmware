@@ -305,8 +305,10 @@ uint8_t KBDKeyboardController(void) {
 	if (keyboardState[7]|keyboardState[79]) ck |= 0x02; 						// D/Right bit 1
 	if (keyboardState[26]|keyboardState[82]) ck |= 0x04; 						// W/Up bit 2
 	if (keyboardState[22]|keyboardState[81]) ck |= 0x08; 						// S/Down bit 3
-	if (keyboardState[18]|keyboardState[29]) ck |= 0x10; 						// O/Z bit 4
-	if (keyboardState[19]|keyboardState[27]) ck |= 0x20; 						// P/X bit 5 
+	if (keyboardState[18]|keyboardState[29]) ck |= 0x10; 						// O/Z bit 4 [A]
+	if (keyboardState[19]|keyboardState[27]) ck |= 0x20; 						// P/X bit 5 [B]
+	if (keyboardState[14]|keyboardState[6]) ck |= 0x40; 						// K/C bit 6 [X]
+	if (keyboardState[15]|keyboardState[25]) ck |= 0x80; 						// L/V bit 7 [Y]
 	
 	return ck;
 }
@@ -318,5 +320,6 @@ uint8_t KBDKeyboardController(void) {
 //		07-02-24 	Added ability to list function keys
 //		18-02-24	Keys WASDOP now default keys, also cursor keys.
 //		17-03-24 	Added ZX control keys.
+//		25-03-24 	Extended to support ABXY in the basic API structure.
 //	
 // ***************************************************************************************

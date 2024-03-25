@@ -18,19 +18,20 @@
 // ***************************************************************************************
 
 GROUP 7 Controller
-    FUNCTION 1 Read Controller
-        *DPARAMS = KBDKeyboardController();
+
+    FUNCTION 1 Read Default Controller
+        if (GMPGetControllerCount() == 0) {
+            *DPARAMS = KBDKeyboardController();
+        } else {
+            *DPARAMS = GMPReadDigitalController(0) & 0xFF;
+        }
+
     DOCUMENTATION
         This reads the status of the default controller into \Param{0}.
         \newline
 
-        Initially, the Controller is the keyboard.
-        This Function interprets key presses and releases as a joystick.
-        The system maintains a bit-array of which keys are pressed.
-        Currently, the keyboard is the only available Controller.
-        \newline
+        The default controller is the keyboard if no gamepad is inserted. Keys used
+        are WASD+OPKL or Arrow Keys+ZXCV
 
-        This function will become obsolete shortly, as a more extensive API using USB
-        controllers becomes available. However, it will maintain backward compatibility.
         \newline
-        \ParamBits{$FF04 - Controller Flags}{0}{0}{B}{A}{Down}{Up}{Right}{Left}
+        \ParamBits{$FF04 - Controller Flags}{Y}{X}{B}{A}{Down}{Up}{Right}{Left}
