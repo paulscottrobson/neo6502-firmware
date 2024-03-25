@@ -15,6 +15,7 @@
 #include "gamepads/Gamepad054C0CDA.h"
 #include "gamepads/Gamepad081FE401.h"
 #include "gamepads/Gamepad0079181C.h"
+#include "gamepads/Gamepad007918D2.h"
 
 #include "interface/console.h"
 
@@ -50,8 +51,13 @@ bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_
 		break;
 	case 0x0079:
 		switch (pid) {
-		case 0x181C: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad0079181C>()}); break;
-		}
+			case 0x181C:
+				m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad0079181C>()});
+				break;
+			case 0x18D2:
+				m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad007918D2>()});
+				break;
+			}
 		break;
 	default:
 		driverFound = false;
