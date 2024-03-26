@@ -70,7 +70,7 @@ uint8_t MOSExecute(uint8_t *command) {
 	//		*. <mask> *cat <mask> list directory
 	//
 	if (strcmp(cmd,".") == 0 || strcmp(cmd,"cat") == 0) {  				
-		FIODirectory(paramCount > 1 ? params[1]+1 : "");
+		FIODirectory(paramCount > 1 ? (const char *)(params[1]+1) : "");
 		error = 0;
 	}
 	//
