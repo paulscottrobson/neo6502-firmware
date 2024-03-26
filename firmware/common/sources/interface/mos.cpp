@@ -5,7 +5,7 @@
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //      Date :      26th March 2024
 //      Reviewed :  No
-//      Purpose :   MOS code
+//      Purpose :   MOS OSCLI type interface code
 //
 // ***************************************************************************************
 // ***************************************************************************************
