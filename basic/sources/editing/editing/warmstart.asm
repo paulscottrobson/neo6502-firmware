@@ -30,11 +30,14 @@ WarmStart:
 ;		jsr 	InputLine 					; input string to buffer direct typing (ignores YX)
 
 		lda 	inputBuffer 				; entered something ?
-		beq 	_WSNotSerialLink
+		beq 	_WSNotSerialLinkMos
 		lda 	inputBuffer+1 				; if first character is / start the serial link.
 		cmp 	#'/'
-		beq 	_WSSerialLink
-_WSNotSerialLink:		
+		beq 	_WSSerialLink		
+		cmp 	#'*' 						; if first character is * MOS command
+		beq 	_WSMosCommand
+
+_WSNotSerialLinkMos:		
 		stz 	ControlStatus 				; clear break flag.
 		jsr 	TOKTokenise 				; tokenise it.
 		lda 	tokLineNumber 				; any line number ? if not, execute it.
@@ -55,6 +58,16 @@ _WSExecute:
 		sta 	codePtr
 
 		jmp 	RUNNewLine 					; go to run it.
+
+_WSMosCommand:
+		lda 	#inputBuffer & $FF 			; address of command
+		sta 	ControlParameters+0
+		lda 	#inputBuffer >> 8
+		sta 	ControlParameters+1
+		.DoSendMessage 					 	; MOS Command
+		.byte 	1,8
+		.DoWaitMessage		
+		jmp 	WarmStart
 
 _WSSerialLink:
 		.DoSendMessage 					 	; and reset it.
