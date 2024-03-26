@@ -1,7 +1,7 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      Gamepad07382217C.h
+//      Name :      Gamepad07382217.h
 //      Authors :   Sascha Schneider
 //      Date :      25th March 2024
 //      Reviewed :  No
@@ -13,7 +13,7 @@
 #pragma once
 #include "Gamepad.h"
 
-class Gamepad07382217C : public Gamepad {
+class Gamepad07382217 : public Gamepad {
 public:
 	uint32_t getState() override;
 	void update(uint8_t dev_addr, uint8_t instance, uint8_t const* report, uint16_t len) override;
