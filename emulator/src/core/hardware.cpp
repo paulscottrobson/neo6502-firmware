@@ -222,7 +222,7 @@ uint8_t FISCreateDirectory(const std::string& filename) {
 	else
 		printf("OK\n");
 
-	return !ec ? 1 : 0;
+	return ec ? 1 : 0;
 }
 
 // ***************************************************************************************
