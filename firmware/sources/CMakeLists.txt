@@ -35,8 +35,9 @@ target_sources(firmware PRIVATE main.cpp
     #
     hardware/dvi_320x240x256.cpp  hardware/usbdriver.cpp  hardware/timer.cpp  hardware/sound.cpp
     hardware/fileimplementation.cpp hardware/tick.cpp hardware/serial.cpp hardware/ports.cpp
-    hardware/GamepadController.cpp hardware/gamepads/Gamepad054C0CDA.cpp
-    hardware/gamepads/Gamepad081FE401.cpp hardware/gamepads/Gamepad0079181C.cpp hardware/gamepads/Gamepad07382217C.cpp 
+    hardware/GamepadController.cpp hardware/gamepads/Gamepad054C0CDA.cpp hardware/gamepads/Gamepad081FE401.cpp
+    hardware/gamepads/Gamepad0079181C.cpp hardware/gamepads/Gamepad007918D2.cpp hardware/gamepads/Gamepad07382217C.cpp 
+
     #
     #       CPU type (pretty much permanently PIO now)
     #

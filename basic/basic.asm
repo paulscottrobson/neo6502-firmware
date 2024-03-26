@@ -35,8 +35,10 @@ BColdStart:
 
 		.if 	BASICBUILD==0
 		jsr 	NewColdStart 				; complete wipe
-		jsr 	NewProgram
-		jmp 	WarmStart
+		jsr 	NewProgram   				; new after wipe, because of library.
+		jsr 	AutoStartCheck  			; check autostart.bas
+		jmp 	WarmStart	 				; warm start.
+
 		.endif
 		
 		.if 	BASICBUILD==1
