@@ -55,7 +55,6 @@
 #include "interface/maths.h"
 #include "interface/fdebug.h"
 #include "interface/filesystem.h"
-#include "interface/config.h"
 #include "interface/miscellany.h"
 #include "interface/sprites.h"
 #include "interface/tilemap.h"
