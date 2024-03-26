@@ -64,7 +64,7 @@ uint8_t MOSExecute(uint8_t *command) {
 	_MOSUnpackParameters(command);  											// Process parameters
 	for (int i = 0;i < paramCount;i++) printf("%d %d [%s]\n",i,*params[i],params[i]+1);
 	if (paramCount == 0) return 0;  											// Nothing to do.
-	uint8_t *cmd = params[0]+1;  												// Command
+	const char *cmd = (const char *)(params[0]+1); 								// Command
 	uint8_t error = 1;
 	//
 	//		*. <mask> *cat <mask> list directory
