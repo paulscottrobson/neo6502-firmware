@@ -58,7 +58,7 @@ static void _MOSUnpackParameters(uint8_t *cmd) {
 
 uint8_t MOSExecute(uint8_t *command) {
 	_MOSUnpackParameters(command);
-	for (int i = 0;i < paramCount;i++) printf("%d %d [%s]\n",i,*params[i],params[i]+1);
+	//for (int i = 0;i < paramCount;i++) printf("%d %d [%s]\n",i,*params[i],params[i]+1);
 	return 0;
 }
 
