@@ -1,5 +1,14 @@
-mos "hello world"
-mos "*hello world"
-mos "*cmd 'a quoted command' "+chr$(34)+"another command"+chr$(34)+" finally"
-mos "*"
-mos ""
+mos "cat"
+mos "copy aticatac.bas at2.bas"
+mos "copy aticatac.bas at3.bas"
+print
+mos "cat 'at'"
+mos "del at2.bas"
+print
+mos "cat 'at'"
+print
+mos "ren at3.bas at3.newname"
+mos "cat 'at'"
+print
+mos "md test1"
+mos "md test2"
