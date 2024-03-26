@@ -69,3 +69,7 @@ GROUP 1 System
         System Reset. This is a full hardware reset. It resets the RP2040 using the Watchdog timer, and
         this also resets the 65C02.
 
+    FUNCTION 8 MOS
+        *DERROR = MOSExecute(cpuMemory+DSPGetInt16(DCOMMAND,4));
+    DOCUMENTATION
+        Do a MOS command (a '* command') these are specified in the Wiki as they will be steadily expanded.

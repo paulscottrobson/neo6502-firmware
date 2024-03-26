@@ -1,0 +1,5 @@
+mos "hello world"
+mos "*hello world"
+mos "*cmd 'a quoted command' "+chr$(34)+"another command"+chr$(34)+" finally"
+mos "*"
+mos ""

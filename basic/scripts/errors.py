@@ -34,6 +34,7 @@ errors = """
 	label : 	label has changed value
 	array : 	array not declared
 	hardware : 	hardware error
+	mos : 		mos command error
 """
 
 err = []
