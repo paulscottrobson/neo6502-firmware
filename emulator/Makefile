@@ -23,7 +23,7 @@ SOURCES = 	src$(S)core$(S)sys_processor.o src$(S)core$(S)hardware.o src$(S)frame
 			 src$(S)framework$(S)main.o src$(S)framework$(S)gfx.o src$(S)framework$(S)debugger.o \
 			src$(S)core$(S)sys_debugger.o  \
   			$(IMPSRC)memory.o $(IMPSRC)graphics.o $(IMPSRC)console.o $(IMPSRC)keyboard.o $(IMPSRC)dispatch.o \
-  			$(IMPSRC)maths.o  $(IMPSRC)gfxcommands.o $(IMPSRC)efla.o $(IMPSRC)ellipse.o \
+  			$(IMPSRC)maths.o  $(IMPSRC)gfxcommands.o $(IMPSRC)efla.o $(IMPSRC)ellipse.o $(IMPSRC)mos.o \
   			$(IMPSRC)fileinterface.o $(IMPSRC)sprites.o $(IMPSRC)logo.o $(IMPSRC)sprites_xor.o $(IMPSRC)blitter.o \
   			$(IMPSRC)sndmanager.o $(IMPSRC)sfxmanager.o $(IMPSRC)tick.o $(IMPSRC)tilemap.o $(IMPSRC)cursor.o \
   			$(IMPSRC)serialmanager.o $(IMPSRC)turtle.o $(IMPSRC)locale.o $(IMPSRC)pininterface.o

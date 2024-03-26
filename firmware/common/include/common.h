@@ -56,6 +56,7 @@
 #include "interface/fdebug.h"
 #include "interface/filesystem.h"
 #include "interface/miscellany.h"
+#include "interface/mos.h"
 #include "interface/sprites.h"
 #include "interface/tilemap.h"
 #include "interface/serial.h"
