@@ -1,14 +1,7 @@
-mos "cat"
-mos "copy aticatac.bas at2.bas"
-mos "copy aticatac.bas at3.bas"
-print
-mos "cat 'at'"
-mos "del at2.bas"
-print
-mos "cat 'at'"
-print
-mos "ren at3.bas at3.newname"
-mos "cat 'at'"
-print
-mos "md test1"
-mos "md test2"
+print mos("cd /test1")
+print mos("cd /test2")
+print mos("cd /test9")
+print mos("cd /")
+print mos("xxx")
+print mos("file squash.bas")
+print mos("file squash.basx")

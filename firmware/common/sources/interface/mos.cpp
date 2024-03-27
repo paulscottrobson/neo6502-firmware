@@ -65,7 +65,7 @@ uint8_t MOSExecute(uint8_t *command) {
 	for (int i = 0;i < paramCount;i++) printf("%d %d [%s]\n",i,*params[i],params[i]+1);
 	if (paramCount == 0) return 0;  											// Nothing to do.
 	const char *cmd = (const char *)(params[0]+1); 								// Command
-	uint8_t error = 1;
+	uint8_t error = 255;
 	//
 	//		*. <mask> *cat <mask> list directory
 	//
@@ -79,6 +79,15 @@ uint8_t MOSExecute(uint8_t *command) {
 	if (strcmp(cmd,"del") == 0) {
 		if (paramCount == 2) {
 			error = FIODeleteFile(CPPPARAM(1));
+		}
+	}
+	//
+	//		*file <file> file exists, error if can't open.
+	//
+	if (strcmp(cmd,"file") == 0) {
+		if (paramCount == 2) {
+			error = FIOOpenFileHandle(0,CPPPARAM(1),0);
+			if (error == 0) FIOCloseFileHandle(0);
 		}
 	}
 	//
