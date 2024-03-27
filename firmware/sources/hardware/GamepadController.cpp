@@ -15,7 +15,7 @@
 #include "gamepads/Gamepad054C0CDA.h"
 #include "gamepads/Gamepad081FE401.h"
 #include "gamepads/Gamepad0079181C.h"
-#include "gamepads/Gamepad07382217C.h"
+#include "gamepads/Gamepad07382217.h"
 #include "gamepads/Gamepad007918D2.h"
 
 #include "interface/console.h"
@@ -37,7 +37,8 @@ inline static uint16_t key(uint8_t dev_addr, uint8_t instance) {
 // ***************************************************************************************
 
 bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_t instance, uint8_t const *desc_report, uint16_t desc_len) {
-	bool driverFound = true;
+	auto old_gamepad_count = m_gamepads.size();
+
 	switch (vid)
 	{
 	case 0x054C:
@@ -53,24 +54,20 @@ bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_
 	case 0x0079:
 		switch (pid) {
 			case 0x181C:
-				m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad0079181C>()});
-				break;
+				m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad0079181C>()}); break;
 			case 0x18D2:
-				m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad007918D2>()});
-				break;
+				m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad007918D2>()}); break;
 			}
 		break;
 	case 0x0738:
 		switch (pid) {
-		case 0x2217: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad07382217C>()}); break;
+		case 0x2217: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad07382217>()}); break;
 		}
 		break;
-
-	default:
-		driverFound = false;
-		break;
 	}
-	CONWriteString(driverFound ? "Gamepad driver found":"No driver found for");
+
+	auto driver_found = old_gamepad_count < m_gamepads.size();
+	CONWriteString(driver_found ? "Gamepad driver found":"No driver found for");
 	CONWriteHex(vid);CONWriteHex(pid);CONWrite('\r');
 	return true;
 }
