@@ -35,3 +35,29 @@ GROUP 7 Controller
 
         \newline
         \ParamBits{$FF04 - Controller Flags}{Y}{X}{B}{A}{Down}{Up}{Right}{Left}
+
+    FUNCTION 2 Read Controller Count
+        *DPARAMS = GMPGetControllerCount();
+
+    DOCUMENTATION
+        This returns the number of game controllers plugged in to the USB System into \Param{0}. This does not include the
+        keyboard based controller, only physical controller hardware.
+
+    FUNCTION 3 Read Controller
+        if (DPARAMS[0] == 0) {
+            *((uint32_t *)DPARAMS) = KBDKeyboardController();
+        } 
+        if (DPARAMS[0] >= 1 && DPARAMS[0] <= GMPGetControllerCount()) {
+            *((uint32_t *)DPARAMS) = GMPReadDigitalController(DPARAMS[0]-1);
+        }
+        *DERROR = DPARAMS[0] > GMPGetControllerCount();
+
+    DOCUMENTATION
+        This returns a specific controller status. Controller 0 is the keyboard controller, Controllers 1 upwards are
+        those physical USB devices.
+
+        This returns a 32 bit value in \Param{0..3} which currently is compatible with function 1, but allows for expansion.
+
+        \newline
+        \ParamBits{$FF04 - Controller Flags}{Y}{X}{B}{A}{Down}{Up}{Right}{Left}
+
