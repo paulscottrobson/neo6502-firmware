@@ -21,8 +21,8 @@ GROUP 7 Controller
 
     FUNCTION 1 Read Default Controller
         *DPARAMS = KBDKeyboardController();
-        if (GMPGetControllerCount() != 0) {
-            *DPARAMS |= GMPReadDigitalController(0) & 0xFF;
+        for (int n = 0;n < GMPGetControllerCount();n++) {
+            *DPARAMS |= GMPReadDigitalController(n) & 0xFF;
         }
 
     DOCUMENTATION
