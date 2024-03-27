@@ -1,7 +1,4 @@
-print mos("cd /test1")
-print mos("cd /test2")
-print mos("cd /test9")
-print mos("cd /")
-print mos("xxx")
-print mos("file squash.bas")
-print mos("file squash.basx")
+repeat
+	fire = joypad(dx,dy)
+	cls:print fire,dx,dy
+until 0
