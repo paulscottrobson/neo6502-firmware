@@ -12,36 +12,59 @@
 
 ; ************************************************************************************************
 ;
-;			JOYPAD(dx,dy) : returns A (bit 0) B (bit 1) and -1,0,1 in dx,dy variables
+;		JOYPAD(dx,dy) : returns A (bit 0) B (bit 1) X(bit 2) Y(bit 3) and -1,0,1 in dx,dy variables
+;		JOYPAD(index,dx,dy) : same for specific joypad
 ;
 ; ************************************************************************************************
 
 		.section code	
 
 EXPUnaryJoypad: ;; [joypad(]
+		jsr 	EvaluateTerm 					; first parameter.
+		jsr 	ERRCheckComma
+		inx
+		jsr 	EvaluateTerm 					; second parameter.
+		dex
+		lda 	(codePtr),y 					; , follows ?
+		cmp 	#","  							; we have three parameters
+		beq 	_EUJIndividual
+		jsr 	ERRCheckRParen 					; check closing )
+		;
+		;		General interrogation function, old API.
+		;
 		.DoSendMessage 							; read the joypad
 		.byte 	7,1
 		.DoWaitMessage
-		lda 	ControlParameters 				; save result on stack twice
-		pha
-		pha
-		jsr 	EUJCopyToVariable 				; copy left/right to variable
-		jsr 	ERRCheckComma
-		pla 									; get up/down bits
-		lsr 	a
-		lsr 	a
-		jsr 	EUJCopyToVariable 				; copy to variable
-		jsr 	ERRCheckRParen 					; )
-		pla 									; get second joypad status
+
+		jsr 	EUJCopyDirectionData 			; copy the UDLR data
+		lda 	ControlParameters 				; get the bits.
 		lsr 	a 								; drop the lower 4 bits and shift AB into place
 		lsr 	a
 		lsr 	a
 		lsr 	a
 		jmp 	EXPUnaryReturnA
+		;
+		;		Handle specific interrogation of a joypad new API
+		;
+_EUJIndividual:
+		.byte 	3
+
+		;
+		;		Copy directional data at ControlParameters to stack, stack+1
+		;
+EUJCopyDirectionData:
+		lda 	ControlParameters 				; copy left/right to variable
+		jsr 	EUJCopyToVariable 				
+		lda 	ControlParameters 				; copy up/down to variable
+		inx
+		lsr 	a
+		lsr 	a
+		jsr 	EUJCopyToVariable 				
+		dex
+		rts
 
 EUJCopyToVariable:
 		pha 									; save status.
-		jsr 	EvaluateTerm
 		lda 	XSControl,x						; check integer variable
 		and 	#(XS_TYPEBIT|XS_ISVARIABLE)
 		cmp 	#XS_ISVARIABLE
