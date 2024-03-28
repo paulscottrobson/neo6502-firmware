@@ -46,10 +46,29 @@ ErrorHandler:
 		ldx 	#$FF 						; 6502 stack reset.
 		txs
 		jmp 	RUNNewCommand 				; and go do that.
+
 		;
-		;		Display error message
+		;		Build & Display error message
 		;
-_EHDisplayMessage:		
+
+_EHDisplayMessage:
+		jsr 	EHBuildErrorMessage 		; create the error message.
+
+
+		lda 	#errorBuffer & $FF 			; print it out.
+		ldy 	#errorBuffer >> 8
+		jsr 	CPPrintYA 
+		lda 	#13 						; CR
+		jsr 	WriteCharacter
+		jmp 	WarmStart
+
+; ************************************************************************************************
+;
+;								Build error message, error ID in X
+;
+; ************************************************************************************************
+
+EHBuildErrorMessage:
 		lda 	#ErrorMessageText & $FF		
 		sta 	zTemp0
 		lda 	#ErrorMessageText >> 8
@@ -66,44 +85,57 @@ _EHNoCarry:
 		cmp 	#0
 		bne 	_EHSkip
 		bra 	_EHFindMessage
+
 _EHFoundMessage: 							; print the message
-		ldy 	#0
-_EHMPrint:		
-		lda 	(zTemp0),y
-		jsr 	CPPrintA
-		iny
-		lda 	(zTemp0),y
-		bne 	_EHMPrint
+		stz 	errorBuffer 				; start building the temp buffer
+		jsr 	_EHMPrint 					; output error message text
 		;
 		lda 	ERRLine 					; check for line #
 		ora 	ERRLine+1		
-		beq 	_EHWarmStart
-		ldy 	#_EHAtMsg >> 8
+		beq 	_EHEndMessage
+
+		lda 	#_EHAtMsg >> 8 				; output " at line "
+		sta 	zTemp0+1
 		lda 	#_EHAtMsg & $FF
-		jsr 	CPPrintYA 
-		lda 	ERRLine 					; print line #
-		ldx 	ERRLine+1
-		jsr 	PrintNumberXA
+		sta 	zTemp0
+		jsr 	_EHMPrint
 
-_EHWarmStart:
-		lda 	#13 						; CR
-		jsr 	WriteCharacter
-		jmp 	WarmStart
-
-_EHAtMsg:
-		.text 	9," at line "
-
-PrintNumberXA:
-		phy
-		stx 	XSNumber1
+		lda 	errLineNumber+1 			; convert line# to string
+		sta 	XSNumber1
+		lda 	errLineNumber
 		sta 	XSNumber0
-		ldx 	#0 							; print line number.
 		stz 	XSNumber2
 		stz 	XSNumber3
 		stz 	XSControl
+		ldx 	#0
 		jsr 	CPNumberToString		
-		jsr 	CPPrintYA 
-		ply
+		sty 	zTemp0+1  					; write to error buffer
+		sta 	zTemp0
+		ldy 	#0
+_EHDisplayLineNumber:
+		iny
+		lda 	(zTemp0),y
+		inc 	errorBuffer
+		ldx 	errorBuffer
+		sta 	errorBuffer,x
+		tya
+		cmp 	(zTemp0)
+		bne 	_EHDisplayLineNumber
+_EHEndMessage:
+		rts
+_EHAtMsg:
+		.text 	" at line ",0
+
+_EHMPrint: 									; output string at zTemp0		
+		ldy 	#0
+_EHMPrintLoop:		
+		lda 	(zTemp0),y
+		inc 	errorBuffer
+		ldx 	errorBuffer
+		sta 	errorBuffer,x
+		iny
+		lda 	(zTemp0),y
+		bne 	_EHMPrintLoop
 		rts
 
 		.send code
@@ -116,6 +148,7 @@ PrintNumberXA:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		28/03/24 		Code to put error message in a buffer.
 ;
 ; ************************************************************************************************
 

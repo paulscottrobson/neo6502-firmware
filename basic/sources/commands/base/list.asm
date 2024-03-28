@@ -136,10 +136,16 @@ ListCurrentLine:
 		jsr 	DTKColour
 		ldy 	#2 							; print line #
 		lda 	(codePtr),y
-		tax
+		sta 	XSNumber1
 		dey
 		lda 	(codePtr),y
-		jsr 	PrintNumberXA
+		sta 	XSNumber0
+		ldx 	#0 							; print line number.
+		stz 	XSNumber2
+		stz 	XSNumber3
+		stz 	XSControl
+		jsr 	CPNumberToString		
+		jsr 	CPPrintYA
 		;
 		;		Get the indent, save it and add now if negative.
 		;

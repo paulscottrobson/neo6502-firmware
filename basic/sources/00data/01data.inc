@@ -110,6 +110,8 @@ basicStackEnd: 								; bottom limit of stack.
 		.fill 	1
 tempBuffer: 								; generic buffer.
 		.fill 	32
+errorBuffer: 								; error message buffer
+		.fill 	32		
 dataPtr: 									; Data equivalent of CodePtr
 		.fill 	2		
 dataPos: 									; Data position of Y
