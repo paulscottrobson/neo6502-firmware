@@ -15,6 +15,7 @@
 #include "common.h"
 #include "tusb.h"
 #include "interface/kbdcodes.h"
+#include "interface/mouse.h"
 
 #include "GamepadController.h"
 
@@ -58,6 +59,15 @@ static void usbProcessReport(uint8_t const *report) {
     }
 }
 
+static void usbProcessMouseReport(uint8_t const *report, uint16_t len) {
+    if(len < 3) return;
+    MSEOffsetPosition(report[1], report[2]);
+    MSEUpdateButtonState(report[0]);
+
+    if(len < 4) return;
+    MSEUpdateScrollWheel(report[3]);
+}
+
 // ***************************************************************************************
 //
 //                              USB Callback functions
@@ -72,14 +82,14 @@ void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* desc_re
 
     switch(tuh_hid_interface_protocol(dev_addr, instance)) {
 
-        case HID_ITF_PROTOCOL_KEYBOARD:
+    case HID_ITF_PROTOCOL_KEYBOARD:
         break;
 
-        case HID_ITF_PROTOCOL_MOUSE:
+    case HID_ITF_PROTOCOL_MOUSE:
         break;
 
-        case HID_ITF_PROTOCOL_NONE:
-            gamepad_controller.add(vid, pid, dev_addr, instance, desc_report, desc_len);
+    case HID_ITF_PROTOCOL_NONE:
+        gamepad_controller.add(vid, pid, dev_addr, instance, desc_report, desc_len);
         break;
     }
     tuh_hid_receive_report(dev_addr, instance);
@@ -90,18 +100,19 @@ void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance) {
 
 void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* report, uint16_t len) {
 
-  switch(tuh_hid_interface_protocol(dev_addr, instance)) {
+    switch(tuh_hid_interface_protocol(dev_addr, instance)) {
     case HID_ITF_PROTOCOL_KEYBOARD:
-      usbProcessReport(report);
-    break;
+        usbProcessReport(report);
+        break;
 
     case HID_ITF_PROTOCOL_MOUSE:
-    break;
+        usbProcessMouseReport(report, len);
+        break;
 
     case HID_ITF_PROTOCOL_NONE:
         gamepad_controller.update(dev_addr, instance, report, len);
-    break;
-  }
+        break;
+    }
     tuh_hid_receive_report(dev_addr, instance);
 }
 

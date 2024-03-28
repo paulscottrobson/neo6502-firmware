@@ -70,7 +70,7 @@ static void __not_in_flash_func(_scanline_callback)(void) {
 	if (lineCounter == FRAME_HEIGHT) {
 		frameCounter++;
 		lineCounter = 0;
-		cursorEnabled = CURGetCursorDrawInformation(&cursorImage, 				// Get cursor info this frame.
+		cursorEnabled = MSEGetCursorDrawInformation(&cursorImage, 				// Get cursor info this frame.
 															&xCursor,&yCursor);
 		if (cursorEnabled) {  													// If enabled work out physical drawing height.
 				wCursor = hCursor = 16;  										// Could be partially drawn.
