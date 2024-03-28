@@ -44,14 +44,15 @@ GROUP 7 Controller
         keyboard based controller, only physical controller hardware.
 
     FUNCTION 3 Read Controller
-        if (DPARAMS[0] == 0) {
-            *((uint32_t *)DPARAMS) = KBDKeyboardController();
-        } 
-        if (DPARAMS[0] >= 1 && DPARAMS[0] <= GMPGetControllerCount()) {
-            *((uint32_t *)DPARAMS) = GMPReadDigitalController(DPARAMS[0]-1);
-        }
         *DERROR = DPARAMS[0] > GMPGetControllerCount();
-
+        if (*DERROR == 0) {
+            if (DPARAMS[0] == 0) {
+                *((uint32_t *)DPARAMS) = KBDKeyboardController();
+            } else {
+                *((uint32_t *)DPARAMS) = GMPReadDigitalController(DPARAMS[0]-1);
+            }
+        }
+        
     DOCUMENTATION
         This returns a specific controller status. Controller 0 is the keyboard controller, Controllers 1 upwards are
         those physical USB devices.

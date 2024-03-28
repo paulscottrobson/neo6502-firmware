@@ -1,4 +1,10 @@
 repeat
+	cls
 	fire = joypad(dx,dy)
-	cls:print fire,dx,dy
+	print fire,dx,dy,joycount()
+	fire = joypad(0,dx,dy)
+	print fire,dx,dy,joycount()
+	fire = joypad(1,dx,dy)
+	print fire,dx,dy,joycount()
+	wait 10
 until 0
