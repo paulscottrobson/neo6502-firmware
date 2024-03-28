@@ -964,6 +964,18 @@ gamepad controller buttons. Either works.
 
 \ParamBits{\$FF04 - Controller Flags}{Y}{X}{B}{A}{Down}{Up}{Right}{Left}
 }
+\ApiFnRow{2}{Read Controller Count}{
+This returns the number of game controllers plugged in to the USB System into \Param{0}. This does not include the
+keyboard based controller, only physical controller hardware.
+}
+\ApiFnRow{3}{Read Controller}{
+This returns a specific controller status. Controller 0 is the keyboard controller, Controllers 1 upwards are
+those physical USB devices.
+This returns a 32 bit value in \Param{0..3} which currently is compatible with function 1, but allows for expansion.
+\newline
+
+\ParamBits{\$FF04 - Controller Flags}{Y}{X}{B}{A}{Down}{Up}{Right}{Left}
+}
 \end{longtable*}
 \pagebreak
 \begin{longtable*}{ | c | l | p{12cm} | }

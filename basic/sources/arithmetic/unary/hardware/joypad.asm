@@ -85,6 +85,20 @@ _EUCTVRLoop:
 _EUCTJError:
 		.error_type
 
+; ************************************************************************************************
+;
+;								JOYCOUNT() : returns attached joypads count
+;
+; ************************************************************************************************
+
+EXPUnaryJoycount: ;; [joycount(]
+		jsr 	ERRCheckRParen 					; )
+		.DoSendMessage 							; read the joypad count
+		.byte 	7,2
+		.DoWaitMessage
+		lda 	ControlParameters 				; read the controller count & return it.
+		jmp 	EXPUnaryReturnA
+
 		.send code
 
 				
