@@ -26,7 +26,7 @@ EXPUnaryJoypad: ;; [joypad(]
 		jsr 	EvaluateTerm 					; second parameter.
 		dex
 		lda 	(codePtr),y 					; , follows ?
-		cmp 	#","  							; we have three parameters
+		cmp 	#KWD_COMMA  					; we have three parameters
 		beq 	_EUJIndividual
 		jsr 	ERRCheckRParen 					; check closing )
 		;
@@ -37,6 +37,8 @@ EXPUnaryJoypad: ;; [joypad(]
 		.DoWaitMessage
 
 		jsr 	EUJCopyDirectionData 			; copy the UDLR data
+
+_EUJReturnButtons:		
 		lda 	ControlParameters 				; get the bits.
 		lsr 	a 								; drop the lower 4 bits and shift AB into place
 		lsr 	a
@@ -47,8 +49,44 @@ EXPUnaryJoypad: ;; [joypad(]
 		;		Handle specific interrogation of a joypad new API
 		;
 _EUJIndividual:
-		.byte 	3
+		iny 									; skip comma
+		inx  									; get the third parameter
+		inx 
+		jsr 	EvaluateTerm 					; second parameter.
+		dex
+		dex
+		jsr 	ERRCheckRParen 					; check )		
+		;
+		jsr 	DereferenceTOS					; dereference the joypad #
+		bit 	XSControl,x	 					; fail if string
+		bmi 	_EUJRange
+		lda 	XSNumber1,x 					; check it's 8 bit
+		ora 	XSNumber2,x
+		ora 	XSNumber3,x
+		bne 	_EUJRange
 
+		.DoSendMessage 							; read the joypad count
+		.byte 	7,2
+		.DoWaitMessage
+		
+		lda 	XSNumber0,x 					; joypad # required
+		cmp 	ControlParameters 				; fail if > the count
+		beq 	_EUJIndexOkay
+		bcc 	_EUJIndexOkay
+_EUJRange:		
+		.error_range
+		;
+_EUJIndexOkay:
+		lda 	XSNumber0,x 					; joypad to read.
+		sta 	ControlParameters
+		.DoSendMessage 							; read the specific joypad
+		.byte 	7,3
+		.DoWaitMessage
+		;
+		inx  									; copy the direction data out. 	
+		jsr 	EUJCopyDirectionData
+		dex
+		bra 	_EUJReturnButtons 				; return the buttons, currently 8 bit.
 		;
 		;		Copy directional data at ControlParameters to stack, stack+1
 		;
