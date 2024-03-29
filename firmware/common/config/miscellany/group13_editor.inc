@@ -1,28 +1,29 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      editor.cpp
+//      Name :      group13_editor.inc
 //      Authors :   Paul Robson (paul@robsons.org.uk)
 //      Date :      29th March 2024
 //      Reviewed :  No
-//      Purpose :   System Editor Code.
+//      Purpose :   Dispatcher for editor functions
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-#include "common.h"
-
-void EDITInitialise(void) {
-}
-
-uint8_t EDITContinue(void) {
-	return EX_EXIT;
-
-}
-
 // ***************************************************************************************
 //
-//		Date 		Revision
-//		==== 		========
+//                                  Group 13 (Editor)
 //
 // ***************************************************************************************
+
+GROUP 13 Editor
+    FUNCTION 1 Initialise Editor
+        EDITInitialise();
+    DOCUMENTATION
+        Initialises the editor
+
+    FUNCTION 2 Reenter the Editor
+        DCOMMAND[0] = EDITContinue();
+    DOCUMENTATION
+        Re-enters the system editor. Returns the function required for call out, the editors
+        sort of 'call backs' - see editor specification.

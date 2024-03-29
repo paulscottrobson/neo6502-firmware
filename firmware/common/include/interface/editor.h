@@ -22,8 +22,15 @@
 #define ES_UPDATE 			(3) 					// Update state, call out updates changed lines, 
 #define ES_DISPATCH			(4) 					// Performs required code needed driven by reason for leaving edit state.
 #define ES_EXIT 			(5) 					// Exit state
+//
+//		Call out functions.
+//
+#define EX_INITIALISE 		(0) 	 				// Initialise, count lines.
+#define EX_EXIT 			(1)  					// End edit
+#define EX_GETLINE			(2)  					// Get required line into memory in ASCII format detokenising
+#define EX_PUTLINE 			(3)  					// Write line into memory in tokenised form, provided in ASCII
 
-void EDITInitialise(uint16_t handler);
+void EDITInitialise(void);
 uint8_t EDITContinue(void);
 
 #endif
