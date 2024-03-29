@@ -1,30 +1,105 @@
 #library
 ' -------------------------------------------------------------------------
 '
-'	PCF 8563 UEXT Library
+'   I2C Real Time Click Library
+'   supports:
+'	$51 - PCF 8563 UEXT
+'   $68 - DS3231(m) (Olimex UEXT module) / DS1307 clock + RAM only ( note: PCF8623 uses this same address but with different register layout)
+'   $69 - MAX31341
+'   $6F - MCP7940N
 '
 ' -------------------------------------------------------------------------
 if false
+rtc.model = 0
+'  Detect RTC clock - c returns > 0 if a RTC is detected. Could be a capability bitmap in future 
+proc rtc.detect(ref c)
+	if idevice($51) then rtc.model = $51 : c = $01
+	if idevice($68) then rtc.model = $68 : c = $01
+	if idevice($69) then rtc.model = $69 : c = $01
+	if idevice($6f) then rtc.model = $6f : c = $01
+endproc
+
 '  Read Hours/Mins/Secs
 proc rtc.readtime(ref h,ref m,ref s)
-	call rtc.read(h,iread($51,4) & $3F)
-	call rtc.read(m,iread($51,3) & $7F)
-	call rtc.read(s,iread($51,2) & $7F)
+	if rtc.model = $51
+		call rtc.read(h,iread(rtc.model,$04) & $3F)
+		call rtc.read(m,iread(rtc.model,$03) & $7F)
+		call rtc.read(s,iread(rtc.model,$02) & $7F)
+	else
+	if (rtc.model = $68) | (rtc.model = $6F)
+		call rtc.read(h,iread(rtc.model,$02) & $3F)
+		call rtc.read(m,iread(rtc.model,$01) & $7F)
+		call rtc.read(s,iread(rtc.model,$00) & $7F)
+	else if rtc.model = $69
+		call rtc.read(h,iread(rtc.model,$08) & $3F)
+		call rtc.read(m,iread(rtc.model,$07) & $7F)
+		call rtc.read(s,iread(rtc.model,$06) & $7F)
+	endif
+	endif
+	endif
 endproc
 ' Read Year/Month/Day
 proc rtc.readdate(ref y,ref m,ref d)
-	call rtc.read(y,iread($51,8) & $7F)
-	call rtc.read(m,iread($51,7) & $1F)
-	call rtc.read(d,iread($51,5) & $3F)
-	y = y + 2000
+	if rtc.model = $51
+		call rtc.read(y,iread(rtc.model,$08) & $7F)
+		call rtc.read(m,iread(rtc.model,$07) & $1F)
+		call rtc.read(d,iread(rtc.model,$05) & $3F)
+		y = y + 2000
+	else
+	if (rtc.model = $68) | (rtc.model = $6F)
+		call rtc.read(y,iread(rtc.model,$06) & $7F)
+		call rtc.read(m,iread(rtc.model,$05) & $1F)
+		call rtc.read(d,iread(rtc.model,$04) & $3F)
+		y = y + 2000
+	else 
+	if rtc.model = $69
+		call rtc.read(y,iread(rtc.model,$0C) & $3F)
+		call rtc.read(m,iread(rtc.model,$0B) & $7F)
+		call rtc.read(d,iread(rtc.model,$0A) & $7F)
+		y = y + 2000
+	endif
+	endif
+	endif
 endproc
 ' 	Write Hours/Mins/Secs
 proc rtc.writetime(h,m,s)
-	call rtc.write(4,h):call rtc.write(3,m):call rtc.write(2,s)
+	if rtc.model = $51
+		call rtc.write($04,h)
+		call rtc.write($03,m)
+		call rtc.write($02,s)
+	else
+	if (rtc.model = $68) | (rtc.model = $6F)
+		call rtc.write($02,h)
+		call rtc.write($01,m)
+		call rtc.write($00,s)
+	else
+	if rtc.model = $69
+		call rtc.write($08,h)
+		call rtc.write($07,m)
+		call rtc.write($06,s)
+	endif
+	endif
+	endif
 endproc
 ' 	Write Year/Month/Day
 proc rtc.writedate(y,m,d)
-	call rtc.write(8,y % 100):call rtc.write(7,m):call rtc.write(5,d)
+	if rtc.model = $51
+		call rtc.write($08,y % 100)
+		call rtc.write($07,m)
+		call rtc.write($05,d)
+	else
+	if (rtc.model = $68) | (rtc.model = $6F)
+		call rtc.write($06,y % 100)
+		call rtc.write($05,m)
+		call rtc.write($04,d)
+	else
+	if rtc.model = $69
+		call rtc.write($0C,y % 100)
+		call rtc.write($0B,m)
+		call rtc.write($0A,d)
+	endif
+	endif
+	endif
 endproc
 '
 proc rtc.read(ref n,r)
@@ -32,13 +107,16 @@ proc rtc.read(ref n,r)
 endproc
 '
 proc rtc.write(r,v)
-	v = (v % 10) + ((v \ 10) << 4):iwrite $51,r,v
+	v = (v % 10) + ((v \ 10) << 4):iwrite rtc.model,r,v
 endproc
 endif
 #nolibrary
 '
 ' 	Demo code: NEW to remove this
 '
+c = 0
+call rtc.detect(c)
+if c > 0
 call rtc.writedate(2024,3,19)
 call rtc.writetime(17,57,0)
 repeat
@@ -47,3 +125,4 @@ repeat
 	call rtc.readtime(hours,mins,secs):print hours,mins,secs
 	wait 50
 until false
+endif
