@@ -22,7 +22,7 @@
 
 \title{Neo6502 Assembly - Messaging API}
 \author{Paul Robson \\ Bill Auger}
-\date{2024-03-24}
+\date{2024-03-29}
 
 \renewcommand{\familydefault}{\sfdefault}
 \graphicspath{ {./img/}                             % WRT local editor (eg: texworks)
@@ -1176,6 +1176,26 @@ and transfer completion.
 \ApiFnRow{2}{Simple Blit Copy}{
 Copy \Param{6,7} bytes of internal memory from \Param{0}:\Param{1,2} to \Param{3}:\Param{4,5}. Sets error flag if the transfer is not
 possible (e.g. illegal write addresses). The upper 8 bits of the address are : 6502 RAM (00) VideoRAM (80,81) Graphics RAM(90)
+}
+\end{longtable*}
+\pagebreak
+\begin{longtable*}{ | c | l | p{12cm} | }
+\caption*{Group 13 - Editor Functions} \\
+\hline
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
+\hline
+\endfirsthead
+\caption*{Group 13 - Editor Functions (continued)} \\
+\hline
+\textbf{Function} & \textbf{Assembly} & \HeaderCenter{Description} \\
+\hline
+\endhead
+\ApiFnRow{1}{Initialise Editor}{
+Initialises the editor
+}
+\ApiFnRow{2}{Reenter the Editor}{
+Re-enters the system editor. Returns the function required for call out, the editors
+sort of 'call backs' - see editor specification.
 }
 \end{longtable*}
 
