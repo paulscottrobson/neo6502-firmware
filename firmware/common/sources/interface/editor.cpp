@@ -17,6 +17,7 @@ void EDITInitialise(void) {
 
 uint8_t EDITContinue(void) {
 	return EX_EXIT;
+
 }
 
 // ***************************************************************************************
