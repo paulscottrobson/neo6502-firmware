@@ -85,6 +85,7 @@ class Program(object):
 			if number is not None:
 				self.nextLine = number
 			lineNo = 0 if self.libraryMode else self.nextLine
+			print(lineNo,text)
 			line = [0,lineNo & 0xFF,lineNo >> 8]
 			line += self.tw.tokenise(text)
 			line.append(self.ts.getByName("!!end").getID())

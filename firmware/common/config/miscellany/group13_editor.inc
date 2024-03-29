@@ -18,12 +18,12 @@
 
 GROUP 13 Editor
     FUNCTION 1 Initialise Editor
-        EDITInitialise();
+        DCOMMAND[4] = EDITInitialise();
     DOCUMENTATION
         Initialises the editor
 
     FUNCTION 2 Reenter the Editor
-        DCOMMAND[0] = EDITContinue();
+        DCOMMAND[4] = EDITContinue();
     DOCUMENTATION
         Re-enters the system editor. Returns the function required for call out, the editors
         sort of 'call backs' - see editor specification.
