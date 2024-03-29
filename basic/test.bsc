@@ -1,3 +1,10 @@
+0 ' blank 
+0 ' blank #2
+' first line
+' second line
+edit
+end
+
 repeat
 	cls
 	fire = joypad(dx,dy)
