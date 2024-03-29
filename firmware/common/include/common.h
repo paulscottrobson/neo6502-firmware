@@ -65,6 +65,7 @@
 #include "interface/ports.h"
 #include "interface/blitter.h"
 #include "interface/gamepad.h"
+#include "interface/editor.h"
 
 #endif
 
