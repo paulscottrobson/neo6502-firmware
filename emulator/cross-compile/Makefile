@@ -21,13 +21,11 @@ IMPSRC = $(COMDIR)sources$(S)interface$(S)
 EMUSRC = $(ROOTDIR)emulator$(S)src$(S)
 FRASRC = $(ROOTDIR)emulator$(S)src$(S)framework$(S)
 
+COMMONSOURCES = $(wildcard $(IMPSRC)*.cpp)
+
 SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp $(FRASRC)beeper.cpp \
 			$(EMUSRC)core$(S)sys_processor.cpp  $(EMUSRC)core$(S)sys_debugger.cpp $(EMUSRC)core$(S)hardware.cpp \
-  			$(IMPSRC)memory.cpp $(IMPSRC)graphics.cpp $(IMPSRC)console.cpp $(IMPSRC)keyboard.cpp $(IMPSRC)dispatch.cpp \
-  			$(IMPSRC)maths.cpp $(IMPSRC)gfxcommands.cpp $(IMPSRC)efla.cpp $(IMPSRC)ellipse.cpp $(IMPSRC)mos.cpp \
-  			$(IMPSRC)fileinterface.cpp $(IMPSRC)sprites.cpp $(IMPSRC)logo.cpp $(IMPSRC)sprites_xor.cpp $(IMPSRC)cursor.cpp \
-  			$(IMPSRC)sndmanager.cpp $(IMPSRC)sfxmanager.cpp $(IMPSRC)tick.cpp $(IMPSRC)tilemap.cpp $(IMPSRC)blitter.cpp \
-  			$(IMPSRC)serialmanager.cpp $(IMPSRC)turtle.cpp $(IMPSRC)locale.cpp $(IMPSRC)pininterface.cpp
+			$(COMMONSOURCES)
   			
 INCLUDES= -I ../include -I ../framework -I .. -I $(COMDIR)include
 
