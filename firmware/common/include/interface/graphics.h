@@ -29,12 +29,14 @@ struct GraphicsMode {
 	uint8_t  isExtLine[MAXCONSOLEHEIGHT]; 										// True if console is extended line.
 
 	void  (*setPalette)(uint8_t,uint8_t,uint8_t,uint8_t); 						// Set the palette
+	uint16_t  (*getPalette)(uint8_t); 												// Get the palette
 	void  (*startMode)(struct GraphicsMode *); 									// Start up the mode.
 };
 
 extern struct GraphicsMode gMode;
 
 void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b); 				// Implementation specific.
+uint16_t RNDGetPalette(uint8_t colour);
 void RNDStartMode0(struct GraphicsMode *gMode);
 int  RNDGetFrameCount(void);
 
