@@ -125,6 +125,15 @@ GROUP 5 Graphics
         the number of v-blanks (full screen redraws) which have occurred since power-on.
         This is updated at the start of each v-blank period.
 
+    FUNCTION 38 Get Palette
+        u3 = gMode.getPalette(DPARAMS[0]);
+        DPARAMS[1] = (u3 >> 4) & 0xF0;
+        DPARAMS[2] = u3 & 0xF0;
+        DPARAMS[3] = (u3 << 4) & 0xF0; 
+    DOCUMENTATION
+        Get the palette colour at the index spcified in \Param{0}.
+        Values are returned in \Param{1},\Param{2},\Param{3} (RGB).
+
     FUNCTION 64 Set Color
         GFXSetDrawColour(DPARAMS[0]);
     DOCUMENTATION

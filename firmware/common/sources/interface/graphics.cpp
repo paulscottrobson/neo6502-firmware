@@ -30,6 +30,7 @@ static void GFXInitialise320x240x256(void) {
 	gMode.consoleMemory = consoleMemory;
 	gMode.startMode = RNDStartMode0;  											// Set up support functions.
 	gMode.setPalette = RNDSetPalette;
+	gMode.getPalette = RNDGetPalette;
 }
 
 // ***************************************************************************************
