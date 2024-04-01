@@ -49,8 +49,8 @@ if(DEFINED ENV{PICO_DVI_PATH})
 else()
     FetchContent_Declare(
         PicoDVI
-        GIT_REPOSITORY https://github.com/Wren6991/PicoDVI
-        GIT_TAG        a248d72b8cc95a08b43ef4307cd954eb801272b2 # just the latest on 11/12/2023
+        GIT_REPOSITORY https://github.com/paulscottrobson/PicoDVI
+        #GIT_TAG        a248d72b8cc95a08b43ef4307cd954eb801272b2 # just the latest on 11/12/2023
     )
     FetchContent_MakeAvailable(PicoDVI)
 endif()
