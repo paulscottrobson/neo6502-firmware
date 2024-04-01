@@ -29,6 +29,17 @@ static int frameCount = 0;
 static std::filesystem::path storagePath = "storage";
 static std::filesystem::path currentPath = storagePath;
 
+// *******************************************************************************************************************************
+//
+//												Storage path management
+//
+// *******************************************************************************************************************************
+
+void HWSetDefaultPath(const char *defaultPath) {
+	storagePath = defaultPath;
+	currentPath = defaultPath;
+}
+
 static std::string getAbspath(const std::string& path) {
 	std::filesystem::path newPath;
 	if (!path.empty() && (path[0] == '/'))

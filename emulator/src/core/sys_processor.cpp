@@ -93,7 +93,6 @@ void CPUSaveArguments(int argc,char *argv[]) {
 
 void CPUReset(void) {
 	char command[128];
-	HWReset();																		// Reset Hardware
 	for (int i = 1;i < argumentCount;i++) { 										// Look for loads.
 		strcpy(command,argumentList[i]);  											// Copy command
 		char *pos = strchr(command,'@'); 											// Look for splitting @
@@ -139,8 +138,12 @@ void CPUReset(void) {
 			if (strcmp(command,"keys") == 0) { 										// Keys work properly.
 				useDebuggerKeys = true;
 			}
+			if (strncmp(command,"path:",5) == 0) {  								// Set storage path
+				HWSetDefaultPath(command+5);
+			}
 		}
 	}
+	HWReset();																		// Reset Hardware
 	resetProcessor();																// Reset CPU		
 }
 
