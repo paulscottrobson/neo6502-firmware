@@ -84,7 +84,7 @@ GROUP 5 Graphics
         using current graphics settings.
 
     FUNCTION 32 Set Palette
-        gMode.setPalette(DPARAMS[0],DPARAMS[1],DPARAMS[2],DPARAMS[3]);
+        GFXSetPalette(DPARAMS[0],DPARAMS[1],DPARAMS[2],DPARAMS[3]);
     DOCUMENTATION
         Set the palette colour at the index spcified in \Param{0}
         to the values in \Param{1},\Param{2},\Param{3} (RGB).
@@ -126,10 +126,7 @@ GROUP 5 Graphics
         This is updated at the start of each v-blank period.
 
     FUNCTION 38 Get Palette
-        u3 = gMode.getPalette(DPARAMS[0]);
-        DPARAMS[1] = (u3 >> 4) & 0xF0;
-        DPARAMS[2] = u3 & 0xF0;
-        DPARAMS[3] = (u3 << 4) & 0xF0; 
+        GFXGetPalette(DPARAMS[0],&DPARAMS[1],&DPARAMS[2],&DPARAMS[3]);
     DOCUMENTATION
         Get the palette colour at the index spcified in \Param{0}.
         Values are returned in \Param{1},\Param{2},\Param{3} (RGB).
