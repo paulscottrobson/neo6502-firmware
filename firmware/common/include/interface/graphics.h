@@ -27,24 +27,21 @@ struct GraphicsMode {
 	uint8_t *graphicsMemory;  													// graphics memory
 	uint16_t *consoleMemory;  									  				// console memory.
 	uint8_t  isExtLine[MAXCONSOLEHEIGHT]; 										// True if console is extended line.
-
-	void  (*setPalette)(uint8_t,uint8_t,uint8_t,uint8_t); 						// Set the palette
-	uint16_t  (*getPalette)(uint8_t); 												// Get the palette
-	void  (*startMode)(struct GraphicsMode *); 									// Start up the mode.
 };
 
 extern struct GraphicsMode gMode;
 
 void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b); 				// Implementation specific.
-uint16_t RNDGetPalette(uint8_t colour);
-void RNDStartMode0(struct GraphicsMode *gMode);
 int  RNDGetFrameCount(void);
+void RNDStartMode0(struct GraphicsMode *gMode);
 
-void GFXSetMode(int Mode);
+void GFXSetMode(int Mode);  													// General.g
 void GFXDefaultPalette(void);
 void GFXResetDefaults(void);
 void GFXSetDefaults(uint8_t *cmd);
 void GFXSetColour(uint8_t colour);
+void GFXSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b); 
+void GFXGetPalette(uint8_t colour,uint8_t *r,uint8_t *g,uint8_t *b);
 void GFXGraphicsCommand(uint8_t cmd,uint8_t *data);
 void GFXFastLine(struct GraphicsMode *gMode,int x, int y, int x2, int y2);
 void GFXPlotPixel(struct GraphicsMode *gMode,int x,int y);
