@@ -19,6 +19,7 @@
 		.section code
 
 Command_Edit: ;; [edit]
+		phy
 		DoSendMessage 						; call initialise editor
 		.byte 	13,1
 		DoWaitMessage
@@ -26,6 +27,7 @@ Command_Edit: ;; [edit]
 _CELoop:		
 		lda 	ControlParameters 			; was EXIT returned (code 0)
 		beq 	_CEExit 					; if so, we are done.
+
 		asl 	a 							; index into jump table.
 		tax 								; get the function code.
 		jsr  	_CECallback 				; call whatever we want.
@@ -36,7 +38,7 @@ _CELoop:
 		bra 	_CELoop
 
 _CEExit:
-		jmp 	WarmStart
+		ply
 _CEReturn		
 		rts
 		
@@ -45,7 +47,7 @@ _CECallback:
 _CECallbackVectors:		
 		.word	_CEReturn 					; function 0 shouldn't be called
 		.word 	EDInitialise 				; function 1 initialises.
-		.word 	EDGetLine 					; function 2 get line.
+		.word 	_CEReturn 					; function 2 get line.
 		.send code
 				
 ; ************************************************************************************************

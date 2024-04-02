@@ -133,9 +133,7 @@ _CLIsNegative:
 
 ListCurrentLine:
 		lda 	#6 							; colour line #
-		lda 	TOK_Colour_Scheme+6
-		ora 	#$80
-		jsr 	WriteCharacter
+		jsr 	DTKColour
 		ldy 	#2 							; print line #
 		lda 	(codePtr),y
 		sta 	XSNumber1
@@ -169,14 +167,6 @@ _CLSpacing:
 		lda 	CLIndent
 		jsr 	_CLASpaces 					; do the indent
 		jsr 	TOKDetokenise 				; output the line text.
-		ldx 	#0 							; output text
-_CLPrint:
-		lda 	inputBuffer,x
-		beq 	_CLPrintEnd
-		jsr 	WriteCharacter
-		inx
-		bra 	_CLPrint
-_CLPrintEnd:				
 		lda 	#13	 						; next line
 		jsr 	WriteCharacter
 
