@@ -1,3 +1,7 @@
+0 ' library line
+0 ' another library line
+edit
+end
 palette 2,222,122,99
 rect 10,10 solid ink 2 to 100,100
 while peek($FF00):wend
