@@ -28,7 +28,9 @@ _CELoop:
 		lda 	ControlParameters 			; was EXIT returned (code 0)
 		beq 	_CEExit 					; if so, we are done.
 
-		.byte 	3
+		asl 	a 							; index into jump table.
+		tax 								; get the function code.
+		jsr  	_CECallback 				; call whatever we want.
 
 		DoSendMessage 						; call next editor functionality
 		.byte 	13,2
@@ -37,8 +39,15 @@ _CELoop:
 
 _CEExit:
 		ply
+_CEReturn		
 		rts
 		
+_CECallback:
+		jmp 	(_CECallbackVectors,x)
+_CECallbackVectors:		
+		.word	_CEReturn 					; function 0 shouldn't be called
+		.word 	EDInitialise 				; function 1 initialises.
+		.word 	_CEReturn 					; function 2 get line.
 		.send code
 				
 ; ************************************************************************************************
