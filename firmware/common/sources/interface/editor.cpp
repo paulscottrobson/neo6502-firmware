@@ -88,18 +88,17 @@ static uint8_t _EDITStateRepaint(void) {
 		edState = ES_EDIT;  													
 		return EX_NOCALLBACK; 
 	}
-
 	int line = edRepaintY+edTopLine;  												// Index of line to repaint.
 	if (line <= edLineCount) {  													// In program space
 		EPRINTF("ED:Repaint:Repainting line %d to Y %d\n",line,edRepaintY);
-		CPARAMS[0] = line & 0xFF;  													// Line to get to display on callback.
-		CPARAMS[1] = line >> 8;
+		CPARAMS[1] = line & 0xFF;  													// Line to get to display on callback.
+		CPARAMS[2] = line >> 8;
 		edState = ES_PAINTER;  														// Switch to painter state
 		return EX_GETLINE;  														// Retrieve on callback
 	} else {
+		EPRINTF("ED:Repaint:Blank %d\n",edRepaintY);
 		CONSetCursorPosition(edWindowLeft,edRepaintY);  							// Erase that line.
 		for (int i = 0;i <= edWindowRight-edWindowLeft;i++) CONWrite(' ');
-		EPRINTF("ED:Repaint:Blank %d\n",edRepaintY);
 		edRepaintY++;
 		return EX_NOCALLBACK;  														// Keep going.
 	}
@@ -153,8 +152,7 @@ uint8_t EDITContinue(void) {
 //
 // ***************************************************************************************
 
-// TODO: Detokenising code to access buffer
-// TODO: Display that code , coloured ?
+// TODO: Display that code , coloured, extract tokenising colours / copy to buffer for editing.
 // TODO: Editing
 // TODO: Exit commands (e.g. up down CR initially)
 // TODO: Write back
