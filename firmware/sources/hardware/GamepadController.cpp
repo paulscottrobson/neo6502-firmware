@@ -18,6 +18,7 @@
 #include "gamepads/Gamepad07382217.h"
 #include "gamepads/Gamepad007918D2.h"
 #include "gamepads/Gamepad04284001.h"
+#include "gamepads/Gamepad1c59002X.h"
 
 #include "interface/console.h"
 
@@ -71,6 +72,15 @@ bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_
 		case 0x4001: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad04284001>()}); break;
 		}
 		break;
+
+	case 0x1c59:
+		switch (pid) {
+		case 0x0024: // THEC64 Joystick
+		case 0x0026: // THECXSTICK, THEPAD
+		    m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad1c590026>()}); break;
+		}
+		break;
+
 
 	}
 
