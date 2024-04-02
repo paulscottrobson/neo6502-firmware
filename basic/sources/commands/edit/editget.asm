@@ -1,8 +1,8 @@
 ; ************************************************************************************************
 ; ************************************************************************************************
 ;
-;		Name:		edit.asm
-;		Purpose:	Editor
+;		Name:		editget.asm
+;		Purpose:	Editor - Get line by number.
 ;		Created:	29th March 2024
 ;		Reviewed:   No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
@@ -12,42 +12,28 @@
 
 ; ************************************************************************************************
 ;
-;											Run Editor
+;									Get line # ControlParameters
 ;
 ; ************************************************************************************************
 
 		.section code
 
-Command_Edit: ;; [edit]
-		DoSendMessage 						; call initialise editor
-		.byte 	13,1
-		DoWaitMessage
-
-_CELoop:		
-		lda 	ControlParameters 			; was EXIT returned (code 0)
-		beq 	_CEExit 					; if so, we are done.
-		asl 	a 							; index into jump table.
-		tax 								; get the function code.
-		jsr  	_CECallback 				; call whatever we want.
-
-		DoSendMessage 						; call next editor functionality
-		.byte 	13,2
-		DoWaitMessage
-		bra 	_CELoop
-
-_CEExit:
-		jmp 	WarmStart
-_CEReturn		
+EDGetLine:
+		jsr 	EDUFindStart 				; find the start to zTemp0
+		jsr 	EDUFindLine 				; find line according to param[0],param[1]
+		lda 	zTemp0 						; set up to detokenise
+		sta 	codePtr
+		lda 	zTemp0+1
+		sta 	codePtr+1
+		jsr 	TOKDetokenise 				; detokenise it.
+		lda		#inputPos & $FF  			; save link to the result.
+		sta 	ControlParameters+0
+		lda 	#inputPos >> 8
+		sta 	ControlParameters+1
 		rts
-		
-_CECallback:
-		jmp 	(_CECallbackVectors,x)
-_CECallbackVectors:		
-		.word	_CEReturn 					; function 0 shouldn't be called
-		.word 	EDInitialise 				; function 1 initialises.
-		.word 	EDGetLine 					; function 2 get line.
 
 		.send code
+
 				
 ; ************************************************************************************************
 ;

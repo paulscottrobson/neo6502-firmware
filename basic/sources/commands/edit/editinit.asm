@@ -20,24 +20,28 @@
 
 EDInitialise:
 		jsr 	EDUFindStart 				; find the start to zTemp0
-		stz 	ControlParameters 			; scan forward and renumber
-		stz 	ControlParameters+1
+		stz 	zTemp1			 			; scan forward and renumber
+		stz 	zTemp1+1
 _EDRNLoop:
 		lda 	(zTemp0) 					; end of code
 		beq 	_EDRNExit 					; completed		
-		inc 	ControlParameters 			; pre-increment, not only line# but line count.
+		inc 	zTemp1			 			; pre-increment, not only line# but line count.
 		bne 	_EDRNNoCarry
-		inc 	ControlParameters+1
+		inc 	zTemp1+1
 _EDRNNoCarry:		
 		ldy 	#1 							; forcibly renumber
-		lda 	ControlParameters
+		lda 	zTemp1
 		sta 	(zTemp0),y
-		lda 	ControlParameters+1
+		lda 	zTemp1+1
 		iny
 		sta 	(zTemp0),y
 		jsr 	EDUNext 					; advance to next
 		bra 	_EDRNLoop
 _EDRNExit:
+		lda 	zTemp1 						; save line count in control parameters.
+		sta 	ControlParameters+0
+		lda 	zTemp1+1
+		sta 	ControlParameters+1
 		rts
 
 ; ************************************************************************************************
@@ -68,6 +72,27 @@ _EDUFSExit:
 
 ; ************************************************************************************************
 ;
+;									Advance zTemp0 to the paramth line
+;
+; ************************************************************************************************
+
+EDUFindLine:
+		lda 	ControlParameters+1 		; decrement counter
+		bne 	_EDUNoBorrow		
+		dec 	ControlParameters+2
+_EDUNoBorrow:
+		dec 	ControlParameters+1
+
+		lda 	ControlParameters+1 		; completed ?
+		ora 	ControlParameters+2
+		beq 	_EDUFExit
+		jsr 	EDUNext 					; forward one
+		bra 	EDUFindLine		
+_EDUFExit:
+		rts
+
+; ************************************************************************************************
+;
 ;									Advance zTemp0 to the next line
 ;
 ; ************************************************************************************************
@@ -81,6 +106,7 @@ EDUNext:
 		inc 	zTemp0+1
 _EDUNExit:	
 		rts						
+
 		.send code
 				
 ; ************************************************************************************************
