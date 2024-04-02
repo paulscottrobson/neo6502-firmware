@@ -46,6 +46,7 @@ _CECallbackVectors:
 		.word	_CEReturn 					; function 0 shouldn't be called
 		.word 	EDInitialise 				; function 1 initialises.
 		.word 	EDGetLine 					; function 2 get line.
+
 		.send code
 				
 ; ************************************************************************************************

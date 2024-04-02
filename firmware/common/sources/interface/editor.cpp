@@ -153,6 +153,6 @@ uint8_t EDITContinue(void) {
 // ***************************************************************************************
 
 // TODO: Display that code , coloured, extract tokenising colours / copy to buffer for editing.
-// TODO: Editing
+// TODO: Editing left right insert etc.
 // TODO: Exit commands (e.g. up down CR initially)
 // TODO: Write back
