@@ -32,6 +32,7 @@ uint8_t  	edPendingAction;  														// Action waiting to be performed.
 uint16_t  	edRepaintY,edRepaintYLast;  											// Repainting tracker.
 uint8_t  	edCurrentIndent; 														// Current line indent
 uint8_t  	edCurrentLine[256],edCurrentSize;  										// Current line text
+uint16_t 	edLineBufferAddress;  													// 65C02 address of input buffeer.
 bool  		edCursorShown;  														// Cursor visible
 bool  		edLineChanged;  														// True when current line changed
 
@@ -172,7 +173,8 @@ static uint8_t _EDITStatePainter(void) {
 // ***************************************************************************************
 
 static uint8_t _EDITStateLoadLine(void) {
-	uint8_t *s = cpuMemory+CPARAMS[0]+(CPARAMS[1]<<8);  							// Line to read.
+	edLineBufferAddress = CPARAMS[0]+(CPARAMS[1]<<8);  								// Preserve where buffer is
+	uint8_t *s = cpuMemory+edLineBufferAddress;  									// Line to read
 	edCurrentSize = 0;
 	for (uint8_t i = 0;i < *s;i++) {
 		uint8_t c = s[i+1];
@@ -193,10 +195,44 @@ static uint8_t _EDITStateLoadLine(void) {
 
 static bool _EDITBasicKeyHandler(uint8_t c) {
 	bool isProcessed = true;
-	switch(c) {  																	// Deal with left, right, tab, delete, backspace.
-		default:
-			isProcessed = false;break;
+	int16_t pos;
+	if (c == CC_BACKSPACE && edXPos > 0) { 											// Convert backspace to delete.
+		c = CC_DELETE;edXPos--;
 	}
+	uint8_t width = edWindowRight-edWindowLeft+1;
+	switch(c) {  																	// Deal with left, right, tab, delete/backspace.
+		case CC_LEFT:
+			edXPos--;break;
+		case CC_RIGHT:
+			edXPos++;break;
+		case CC_TAB:
+			edXPos = (edXPos+8) & 0xF8;break;
+		case CC_DELETE:
+			if (edCurrentSize > 0) {  												// Delete at current.
+				for (pos = edXPos;pos < edCurrentSize;pos++) {
+					edCurrentLine[pos] = edCurrentLine[pos+1];
+				}
+				edCurrentSize--;
+				edLineChanged = true;  			
+			}
+			break;
+		default:
+			isProcessed = (edCurrentSize < 250 && c >= ' ' && c < 0x7F); 			// Processed if can do insert.
+			if (isProcessed) {
+				for (pos = edCurrentSize;pos > edXPos;pos--) {
+					edCurrentLine[pos] = edCurrentLine[pos-1];
+				}
+				edCurrentLine[edXPos] = c; 
+				edLineChanged = true;  			
+				edCurrentSize++;
+				edXPos++;
+			}
+			break;
+	}
+	if (edXPos == 0xFF) edXPos = 0;  												// Force into range.
+	if (edXPos > edCurrentSize) edXPos = edCurrentSize;
+	if (edXPos-edCurrentIndent >= width) edCurrentIndent = edXPos-width+1;  		// Scrolling in line.
+	if (edXPos < edCurrentIndent) edCurrentIndent = edXPos;
 	return isProcessed;
 }
 
@@ -209,7 +245,7 @@ static bool _EDITBasicKeyHandler(uint8_t c) {
 static uint8_t _EDITStateEdit(void) {
 	if (CPARAMS[0] == 0) {  														// No key yet ?
 		if (!edCursorShown) { 
-			CONSetCursorPosition(edWindowLeft+edXPos,edWindowTop+edYPos);
+			CONSetCursorPosition(edWindowLeft+edXPos-edCurrentIndent,edWindowTop+edYPos);
 			CONWrite(CC_REVERSE);
 			edCursorShown = true;
 		}
@@ -217,7 +253,7 @@ static uint8_t _EDITStateEdit(void) {
 	}
 	uint8_t key = CPARAMS[0];  														// Key received
 	if (edCursorShown) {    														// Hide cursor
-		CONSetCursorPosition(edWindowLeft+edXPos,edWindowTop+edYPos);
+		CONSetCursorPosition(edWindowLeft+edXPos-edCurrentIndent,edWindowTop+edYPos);
 		CONWrite(CC_REVERSE);
 		edCursorShown = false;
 	}
@@ -225,9 +261,24 @@ static uint8_t _EDITStateEdit(void) {
 		_EDITRepaintEditLine(edYPos);  												// Repaint the edit line.
 		return EX_GETKEY;  															// Get the next key
 	}
-	// TODO: Leaving the line.
-	// TODO: Write back if changed, otherwise switch to execute command, saving pending command.
-	return EX_EXIT;
+
+	edPendingAction = key;    														// Pending action, update line if required.
+	edState = ES_DISPATCH;   														// Next state handles that action.
+	if (edLineChanged) {
+		for (uint8_t i = 0;i < edCurrentSize;i++) {  								// Copy line back to make a length prefixed string.
+			cpuMemory[edLineBufferAddress+i+1] = edCurrentLine[i];			
+		}
+		cpuMemory[edLineBufferAddress] = edCurrentSize;
+		int line = edTopLine + edYPos;  											// Line number to write
+		CPARAMS[1] = line & 0xFF;  													// Store in parameters
+		CPARAMS[2] = line >> 8;
+		CPARAMS[3] = edLineBufferAddress & 0xFF;  									// Tell about the line buffer address
+		CPARAMS[4] = edLineBufferAddress >> 8;
+		EPRINTF("ED:Edit:Saving line %d at $%04x\n",line,edLineBufferAddress);
+		return EX_PUTLINE;
+	} else {
+		return EX_EXIT;
+	}
 }
 
 // ***************************************************************************************
@@ -266,6 +317,5 @@ uint8_t EDITContinue(void) {
 //
 // ***************************************************************************************
 
-// TODO: Editing left right insert etc.
 // TODO: Exit commands (e.g. up down CR initially)
 // TODO: Write back

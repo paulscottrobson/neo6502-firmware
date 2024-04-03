@@ -21,7 +21,6 @@
 #define ES_PAINTER  		('P')  					// Do the actual repaint.
 #define ES_LOADLINE  		('L')  					// Start editing new line.
 #define ES_EDIT 			('E') 					// Editing state ; left when needs updating, line change etc.
-#define ES_UPDATE 			('U') 					// Update state, call out updates changed lines, 
 #define ES_DISPATCH			('D') 					// Performs required code needed driven by reason for leaving edit state.
 #define ES_EXIT 			('X') 					// Exit state
 
