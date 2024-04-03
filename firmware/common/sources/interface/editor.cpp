@@ -32,6 +32,8 @@ uint8_t  	edPendingAction;  														// Action waiting to be performed.
 uint16_t  	edRepaintY,edRepaintYLast;  											// Repainting tracker.
 uint8_t  	edCurrentIndent; 														// Current line indent
 uint8_t  	edCurrentLine[256],edCurrentSize;  										// Current line text
+bool  		edCursorShown;  														// Cursor visible
+bool  		edLineChanged;  														// True when current line changed
 
 // ***************************************************************************************
 //
@@ -141,11 +143,12 @@ static void _EDITRepaintEditLine(uint16_t y) {
 	uint8_t p = edCurrentIndent;  													// Start from here.
 	uint8_t count = edCurrentSize-p;  												// Max to output
  	CONSetCursorPosition(edWindowLeft,y+edWindowTop);  								// Set cursor position	
- 	CONWrite(0x87);  																// Line editing colour
+ 	CONWrite(0x85);  																// Line editing colour
 	while (x > 0 && count > 0) {
 		CONWrite(edCurrentLine[p++]);count--;x--;
 	}
 	while (x-- > 0) CONWrite(' '); 													// Blank rest of line.
+	edCursorShown = false;  														// Cursor not displayed.
 }	
 
 
@@ -176,9 +179,55 @@ static uint8_t _EDITStateLoadLine(void) {
 		if (ISDISPLAYABLE(c)) edCurrentLine[edCurrentSize++] = c; 					// Read in printables only.
 	}
 	EPRINTF("ED:LoadLine %d size %d\n",edTopLine+edYPos,edCurrentSize);
+	edLineChanged = false;  														// Line not changed.
 	_EDITRepaintEditLine(edYPos);  													// Repaint current line.
 	edState = ES_EDIT;																// Switch to edit state requesting keyboard.
 	return EX_GETKEY;
+}
+
+// ***************************************************************************************
+//
+//								Handle basic keystrokes
+//
+// ***************************************************************************************
+
+static bool _EDITBasicKeyHandler(uint8_t c) {
+	bool isProcessed = true;
+	switch(c) {  																	// Deal with left, right, tab, delete, backspace.
+		default:
+			isProcessed = false;break;
+	}
+	return isProcessed;
+}
+
+// ***************************************************************************************
+//
+//						Get key, process basic functionality
+//
+// ***************************************************************************************
+
+static uint8_t _EDITStateEdit(void) {
+	if (CPARAMS[0] == 0) {  														// No key yet ?
+		if (!edCursorShown) { 
+			CONSetCursorPosition(edWindowLeft+edXPos,edWindowTop+edYPos);
+			CONWrite(CC_REVERSE);
+			edCursorShown = true;
+		}
+		return EX_GETKEY;
+	}
+	uint8_t key = CPARAMS[0];  														// Key received
+	if (edCursorShown) {    														// Hide cursor
+		CONSetCursorPosition(edWindowLeft+edXPos,edWindowTop+edYPos);
+		CONWrite(CC_REVERSE);
+		edCursorShown = false;
+	}
+	if (_EDITBasicKeyHandler(key)) {  												// Basic actions in this line.
+		_EDITRepaintEditLine(edYPos);  												// Repaint the edit line.
+		return EX_GETKEY;  															// Get the next key
+	}
+	// TODO: Leaving the line.
+	// TODO: Write back if changed, otherwise switch to execute command, saving pending command.
+	return EX_EXIT;
 }
 
 // ***************************************************************************************
@@ -203,6 +252,7 @@ uint8_t EDITContinue(void) {
 				func = _EDITStateLoadLine();break;
 				break;
 			case ES_EDIT:
+				func = _EDITStateEdit();break;
 				break;
 		}
 	} while (func == EX_NOCALLBACK);
@@ -216,7 +266,6 @@ uint8_t EDITContinue(void) {
 //
 // ***************************************************************************************
 
-// TODO: Getkey and cursor.
 // TODO: Editing left right insert etc.
 // TODO: Exit commands (e.g. up down CR initially)
 // TODO: Write back
