@@ -19,6 +19,7 @@
 		.section code
 
 Command_CAT:	;; [cat]
+		ldx 	#0
 		lda 	(codePtr),y
 		cmp 	#KWD_SYS_END
 		beq 	_CATDefault
@@ -52,6 +53,7 @@ _CATDefault:
 ;		Date			Notes
 ;		==== 			=====
 ;		10-02-24 		Modifications to support wildcard
+;		23-02-24 		X not initialised.
 ;
 ; ************************************************************************************************
 

@@ -56,10 +56,8 @@ DereferenceTOS:
 
 _DRTWordRef:
 		stz 	XSControl,x 				; clear type
-		lda 	#0  						; clear 2 upper bytes
-		sta 	(zTemp0),y
-		iny
-		sta 	(zTemp0),y
+		stz 	XSNumber2,x  				; clear upper 2 bytes read.
+		stz 	XSNumber3,x
 		ply
 		bra 	_DRTExit
 
@@ -102,5 +100,6 @@ _DRTNullStringAddr:
 ;		Date			Notes
 ;		==== 			=====
 ;		12/02/24 		Dereferences 16 bit references successfully (for [])
+;		06/03/24 		Fixed [] zeroing bug.
 ;
 ; ************************************************************************************************

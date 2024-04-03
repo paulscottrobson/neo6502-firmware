@@ -42,6 +42,9 @@ void TIMECRITICAL(DSPHandler)(uint8_t *cBlock, uint8_t *memory)
 	float f1,f2;
 	int i1,i2,r;
 	uint32_t u1;
+	uint8_t u2,u4;
+	uint16_t u3;
+	SOUND_UPDATE su;
 	bool b1;
 	*DERROR = 0;                                                                // Clear error state.
 	#include "data/dispatch_code.h"  
@@ -68,11 +71,12 @@ void TIMECRITICAL(DSPSync)(void)
 void DSPReset(void) {
 	const char bootString[] = PROMPT;
 	MEMInitialiseMemory();                                                      // Set up memory, load kernel ROM
+	CURInitialise();  															// Cursor first, before starting graphics.
 	GFXSetMode(0);                                                              // Initialise graphics
 	SPRReset();                                                                 // Reset sprites.
 	LOGDrawLogo();                                                              // Draw logo
 	CONWrite(0x80+3);                                                           // Yellow text
-	for (int i = 0;i < 22;i++) CONWrite(19); 
+	for (int i = 0;i < 19;i++) CONWrite(19); 
 	const char *c = bootString;
 	while (*c != '\0') CONWrite(*c++);	
 	
@@ -83,7 +87,6 @@ void DSPReset(void) {
 	CONWrite(0x80+6);
 	STOSynchronise();                                                           // Synchronise storage
 	CONWrite(0x80+2);
-	CFGProcess();                                                               // Process configuration file.
 	IOInitialise(); 															// UEXT Initialise.
 }
 

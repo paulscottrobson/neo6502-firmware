@@ -1,0 +1,25 @@
+'
+'	Matt Heffernan's BASIC benchmark
+'
+'	9.66s ; 6.29Mhz 65C02
+'
+cls
+start = time()
+for py= 0 to 21
+	 for rx= 0 to 31
+		 px = 31 - rx
+		 xz = px*3.5/32-2.5
+		 yz = py*2/22-1
+		 x = 0
+		 y = 0 
+		 i = 0
+		 while i <= 14 & x*x+y*y <= 4
+			 xt = x*x - y*y + xz
+			 y = 2*x*y + yz
+			 x = xt
+			 i = i + 1
+		wend
+		rect px*8,py*8 ink i-1 solid to px*8+7,py*8+7
+	next 
+next 
+print (time()-start)/100

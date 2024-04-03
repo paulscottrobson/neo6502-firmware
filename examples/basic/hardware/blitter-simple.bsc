@@ -1,0 +1,33 @@
+'
+'		Blitter demo
+'
+gload "graphics.gfx"
+memory = alloc(16)
+
+print "Wait for blitter to be free"
+repeat
+	call send.message(12,1)
+until peek($FF04) = 0
+
+print "Set up for copy"
+poke $FF04,$90:doke $FF05,0: ' From 90:0000
+poke $FF07,$00:doke $FF08,memory: ' To memory allocated
+doke $FF0A,16: ' Transfer 16 bytes
+call send.message(12,2)
+
+print "Wait for blitter to complete transfer"
+repeat
+	call send.message(12,1)
+until peek($FF04) = 0
+
+for i = 0 to 15:
+	print i,peek(memory+i)
+next
+end
+
+proc send.message(g,f)
+	while peek($FF00):wend
+	poke $FF01,f:poke $FF00,g
+	while peek($FF00):wend
+endproc	
+

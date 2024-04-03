@@ -31,7 +31,8 @@ release:
 		$(MAKE) -B -C images
 		$(MAKE) -B convert
 		$(MAKE) -B build
-		
+		$(MAKE) -B libraries
+
 # ***************************************************************************************
 #
 #						Build the Python Text->BASIC converters
@@ -214,6 +215,22 @@ checkasm:
 
 basemachine:
 	$(EMULATOR) 
+
+# ***************************************************************************************
+#
+#										Libraries build
+#
+# ***************************************************************************************
+
+LIBSRC = $(shell find libraries -name '*.bsc')
+LIBBAS = $(subst bsc,bas,$(LIBSRC))
+
+%.bas : %.bsc
+	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
+
+libraries: $(LIBBAS)
+		$(CDEL) libraries.zip
+		zip libraries.zip libraries$(S)*.b*
 
 # ***************************************************************************************
 #

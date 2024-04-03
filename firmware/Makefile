@@ -19,10 +19,10 @@ endif
 
 BINARY = firmware
 #
-#		Can be SDCARD or USBKEY currently. If you change this use make switch to
+#		Can be SDCARD or USB currently. If you change this use make switch to
 #		rebuild as it cmake clean doesn't clean things up enough (probably me)
 #
-STORAGE = USBKEY
+STORAGE = USB
 
 all: build
 
@@ -68,7 +68,7 @@ prelim: kernel
 # ***************************************************************************************
 
 build: prelim always
-	cmake --fresh -B build -D$(STORAGE)_STORAGE=1
+	cmake --fresh -B build -DSTORAGE_TYPE=$(STORAGE)
 	$(MAKE) -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf .
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 .
@@ -80,7 +80,7 @@ build: prelim always
 # ***************************************************************************************
 
 clean: always
-	cmake --fresh -B build -D$(STORAGE)_STORAGE=1
+	cmake --fresh -B build -DSTORAGE_TYPE=$(STORAGE)
 	cmake --build build --target clean
 
 # ***************************************************************************************
@@ -89,10 +89,19 @@ clean: always
 #
 # ***************************************************************************************
 
-run: upload
+run: build upload
 
-upload: build
+upload: 
 	$(UPLOADER) $(UPCONFIG) $(UPCOMMANDS)
+
+# ***************************************************************************************
+#
+#				Send last BASIC program translated over the serial port.
+#
+# ***************************************************************************************
+
+checkserial:
+	$(PYTHON) $(BINDIR)nxmit.zip /dev/ttyUSB0 b:$(ROOTDIR)basic$(S)build$(S)tokenised.dat
 
 # ***************************************************************************************
 #
@@ -112,13 +121,13 @@ reset:
 dual: prelim always pythonapps
 	$(CDEL)   firmware.elf firmware.uf2
 
-	cmake --fresh -B build -DSDCARD_STORAGE=1
+	cmake -B build -DSTORAGE_TYPE=SDCARD
 	cmake --build build --target clean
 	$(MAKE) -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_sd.elf
 	$(CCOPY) build$(S)sources$(S)$(BINARY).uf2 $(BINDIR)$(BINARY)_sd.uf2
 
-	cmake --fresh -B build -DUSBKEY_STORAGE=1
+	cmake -B build -DSTORAGE_TYPE=USB
 	cmake --build build --target clean
 	$(MAKE) -C build
 	$(CCOPY) build$(S)sources$(S)$(BINARY).elf $(BINDIR)$(BINARY)_usb.elf

@@ -19,15 +19,13 @@ APPNAME = neo$(APPSTEM)
 FIRMDIR = $(ROOTDIR)firmware$(S)
 IMPSRC = $(COMDIR)sources$(S)interface$(S)
 EMUSRC = $(ROOTDIR)emulator$(S)src$(S)
-FRASRC = $(ROOTDIR)emulator$(S)framework$(S)
+FRASRC = $(ROOTDIR)emulator$(S)src$(S)framework$(S)
+
+COMMONSOURCES = $(wildcard $(IMPSRC)*.cpp)
 
 SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp $(FRASRC)beeper.cpp \
 			$(EMUSRC)core$(S)sys_processor.cpp  $(EMUSRC)core$(S)sys_debugger.cpp $(EMUSRC)core$(S)hardware.cpp \
-  			$(IMPSRC)memory.cpp $(IMPSRC)graphics.cpp $(IMPSRC)console.cpp $(IMPSRC)keyboard.cpp $(IMPSRC)dispatch.cpp \
-  			$(IMPSRC)maths.cpp  $(IMPSRC)config.cpp $(IMPSRC)gfxcommands.cpp $(IMPSRC)efla.cpp $(IMPSRC)ellipse.cpp \
-  			$(IMPSRC)fileinterface.cpp $(IMPSRC)sprites.cpp $(IMPSRC)logo.cpp $(IMPSRC)sprites_xor.cpp \
-  			$(IMPSRC)sndmanager.cpp $(IMPSRC)sfxmanager.cpp $(IMPSRC)tick.cpp $(IMPSRC)tilemap.cpp \
-  			$(IMPSRC)serialmanager.cpp $(IMPSRC)turtle.cpp $(IMPSRC)locale.cpp $(IMPSRC)pininterface.cpp
+			$(COMMONSOURCES)
   			
 INCLUDES= -I ../include -I ../framework -I .. -I $(COMDIR)include
 

@@ -31,6 +31,10 @@
 #define KEY_ALT  		(_KEY_LEFT_ALT)
 #define KEY_ALTGR 		(_KEY_RIGHT_ALT)
 //
+//		Key sequence to Reboot.
+//
+#define REBOOT_KEYS 	(_KEY_MOD_LCTRL|_KEY_LEFT_ALT|_KEY_RIGHT_ALT)
+//
 //		Keys A-Z are in order
 //
 #define KEY_A 0x04 		    

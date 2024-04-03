@@ -31,14 +31,16 @@ Command_CALL:	;; [call]
 		lda 	(codePtr),y
 		pha
 		iny
-;
-;		Evaluate parameters onto stack.
-;
+		;
+		;		Evaluate parameters onto stack.
+		;
 		stz 	paramCount
 		lda 	(codePtr),y 				; check if parameters
 		cmp 	#KWD_RPAREN
 		beq 	_CCEndCall
-
+		;
+		;		Next parameter
+		;
 _CCParamLoop		
 		inc 	paramCount 					; one more parameter
 		ldx 	paramCount 					; put in that slot, e.g. param#1 => slot #1
@@ -52,11 +54,15 @@ _CCParamLoop
 		beq 	_CCParamLoop
 _CCSyntax:
 		.error_syntax 						
-
+		;
+		;		Parameters now evaluated onto the stack.
+		;
 _CCEndCall:		
 		iny 								; consume closing parameters
 		jsr 	STKSaveCodePosition	 		; save return address onto stack
-
+		;
+		;		Get address of parameter, check it is a parameter.
+		;
 		pla 								; get address of line.
 		sta 	zTemp0
 		pla
@@ -73,8 +79,14 @@ _CCEndCall:
 		ldy 	#1
 		lda 	(zTemp0),y
 		sta 	codePtr+1
+		;
+		;		Now we start localising the parameters and copying the values in.
+		;
 		ldy 	#6 							; after the identifier
 		ldx 	#0  						; now start localising & copying parameters
+		;
+		;		Next parameter
+		;
 _CCUpdateParamLoop:		
 		cpx 	paramCount 					; done all the parameters ?
 		beq 	_CCDoneParameters
@@ -85,20 +97,45 @@ _CCUpdateParamLoop:
 		bne 	_CCNotReference1
 		iny
 _CCNotReference1:
-
+		;
+		; 		Now evaluate the target, which itself must be a reference.
+		;
 		jsr 	EvaluateTerm 				; evaluate the term (the target variable)
+
 		lda 	XSControl,x 				; check it is a reference
 		and 	#XS_ISVARIABLE
 		beq 	_CCSyntax
-
-		jsr 	LocaliseTermX 				; localise that term.
-
-		pla    								; get REF perhaps
+		;
+		;		If the ref parameter and the parameter are the same, don't localise. Without this
+		;		after assigning the REF back, it will overwrite it with the restored value.
+		;
+		pla 								; check for reference.		
+		pha
 		cmp 	#KWD_REF
 		bne 	_CCNotReference2
-		jsr 	CCCreateRestore 			; create code to copy the result.
-_CCNotReference2:		
+		;
+		lda 	XSNumber0,x  				; are the addresses the same
+		cmp 	XSNumber0+1,x
+		bne 	_CCNotReference2
+		lda 	XSNumber1,x
+		cmp 	XSNumber1+1,x
+		bne 	_CCNotReference2
+		bra 	_CCNoLocalise  				; if not, skip localise.
 
+_CCNotReference2:
+		jsr 	LocaliseTermX 				; localise that term, e.g. push its value on the stack.
+_CCNoLocalise:
+		;
+		;		If it is a reference create the code to copy the result back afterwards.
+		;
+		pla    								; get REF perhaps
+		cmp 	#KWD_REF
+		bne 	_CCNotReference3
+		jsr 	CCCreateRestore 			; create code to copy the result.
+_CCNotReference3:		
+		;
+		;		Now dereference the parameter passed in, if it is a reference, and assign it.
+		;
 		inx  								; dereference the parameter value 
 		jsr 	DereferenceTOS 				
 		dex
@@ -222,5 +259,6 @@ _CEContinue:
 ;		==== 			=====
 ;		08-02-24 		Add reference parameter code
 ;		09-02-24 		Add string reference code.
+;		25-02-24 		Fixed self-reference.
 ;
 ; ************************************************************************************************

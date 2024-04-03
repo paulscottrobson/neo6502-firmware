@@ -19,15 +19,13 @@ APPNAME = neo$(APPSTEM)
 FIRMDIR = $(ROOTDIR)firmware$(S)
 IMPSRC = $(COMDIR)sources$(S)interface$(S)
 EMUSRC = $(ROOTDIR)emulator$(S)src$(S)
-FRASRC = $(ROOTDIR)emulator$(S)framework$(S)
+FRASRC = $(ROOTDIR)emulator$(S)src$(S)framework$(S)
+
+COMMONSOURCES = $(wildcard $(IMPSRC)*.cpp)
 
 SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp $(FRASRC)beeper.cpp \
 			$(EMUSRC)core$(S)sys_processor.cpp  $(EMUSRC)core$(S)sys_debugger.cpp $(EMUSRC)core$(S)hardware.cpp \
-  			$(IMPSRC)memory.cpp $(IMPSRC)graphics.cpp $(IMPSRC)console.cpp $(IMPSRC)keyboard.cpp $(IMPSRC)dispatch.cpp \
-  			$(IMPSRC)maths.cpp  $(IMPSRC)config.cpp $(IMPSRC)gfxcommands.cpp $(IMPSRC)efla.cpp $(IMPSRC)ellipse.cpp \
-  			$(IMPSRC)fileinterface.cpp $(IMPSRC)sprites.cpp $(IMPSRC)logo.cpp $(IMPSRC)sprites_xor.cpp \
-  			$(IMPSRC)sndmanager.cpp $(IMPSRC)sfxmanager.cpp $(IMPSRC)tick.cpp $(IMPSRC)tilemap.cpp \
-  			$(IMPSRC)serialmanager.cpp $(IMPSRC)turtle.cpp $(IMPSRC)locale.cpp $(IMPSRC)pininterface.cpp
+			$(COMMONSOURCES)
 
 FLAGS = -DINCLUDE_OS_SUPPORT -DIBMPC -I.. -I ../framework -I ../cpu -I ../bin -I ../include -I $(COMDIR)/include -I 6502 -O1 \
 		-s USE_SDL=2 -s WASM=1 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file storage \
@@ -38,7 +36,7 @@ all: app
 app:
 	$(CMAKEDIR) storage
 	$(MAKE) -B -C $(ROOTDIR)basic release
-	$(CCOPY) $(ROOTDIR)basic$(S)storage$(S)* storage
+	$(CCOPY) -r $(ROOTDIR)basic$(S)storage$(S)* storage
 	emcc  -D EMSCRIPTEN -D LINUX -D INCLUDE_DEBUGGING_SUPPORT $(FLAGS) $(SOURCES) -o neo.html
 
 upload:app

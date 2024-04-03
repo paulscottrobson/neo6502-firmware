@@ -21,7 +21,7 @@
 extern uint8_t  cpuMemory[];
 extern uint8_t gfxObjectMemory[];
 extern uint8_t graphicsMemory[];
-extern uint8_t consoleMemory[];
+extern uint16_t consoleMemory[];
 
 extern uint16_t controlPort;
 //

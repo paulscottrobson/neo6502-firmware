@@ -100,8 +100,15 @@ _CPNumber:
 		;		Comma, Semicolon, Tab come here.
 		;
 _CPTab:	
-		lda 	#9 							; print TAB
+		lda 	#' ' 						; print Space until on TAB stop
 		jsr 	CPPrintA
+		.DoSendMessage 						; get cursor position.
+		.byte 	2,13
+		.DoWaitMessage		
+		lda 	ControlParameters+0
+		and 	#7
+		bne 	_CPTab
+
 _CPContinueWithSameLine:		
 		sec 								; loop round with carry set, which
 		bra 	_CPLoop 					; will inhibit final CR

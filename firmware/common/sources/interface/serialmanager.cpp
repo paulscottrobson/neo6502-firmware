@@ -32,7 +32,8 @@ void SERCheckDataAvailable(void) {
 	    }
 	    while (SERIsByteAvailable()) SERReadByte();  								// Clear anything already incoming.
 	}
-
+	SERSetSerialFormat(SERIAL_TRANSFER_BAUD_RATE,SERIAL_PROTOCOL_8N1); 				// Set transceive format.
+	
 	bool completed = false;
 	CONWriteString("Serial link enabled.\r");
 	while (!completed) {
@@ -67,6 +68,8 @@ void SERCheckDataAvailable(void) {
 
 static uint8_t *dataPtr = NULL;  												// Where we write stuff
 static uint16_t startAddress,currentAddress;  									// Start and current address accessing.
+static uint16_t saveAddress,saveSize;  											// For writing.
+static char fileName[32]; 														// File name
 
 static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size) {
 	uint16_t a;
@@ -93,6 +96,17 @@ static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size) {
 			break;
 		case 5:
 			KBDInsertQueue(data[0]);  											// 5 Insert key in keyboard queue
+			break;
+		case 6:  																// 6 Set save address
+			saveAddress = data[0]+(data[1] << 8);
+			saveSize = data[2]+(data[3] << 8);
+			//CONWriteString("%d %d\r",saveAddress,saveSize);
+			break;
+		case 7:  																// 7 Save file.			
+			for (int i = 0;i < data[0];i++) fileName[i] = data[i+1];  			// Make C String
+			fileName[data[0]] = '\0';
+			FIOWriteFile(fileName,saveAddress,saveSize);   						// Save it
+			CONWriteString("Saved '%s' (%d bytes)\r",fileName,saveSize); 		// Announce it.
 			break;
 	}
 	return (command == 0);

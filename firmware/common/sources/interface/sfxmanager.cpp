@@ -26,7 +26,9 @@ uint8_t SFXPlay(int channelID,int effect) {
 	if (effect >= SFX_COUNT) return 2;
 	const uint16_t *notes = sfxData[effect];  									// List to queue
 	while (*notes != 0xFFFF) {   												// Queue them
-		SNDPlay(channelID,notes[0],notes[1],0,false);
+		SOUND_UPDATE u;
+		u.frequency = notes[0];u.timeCS = notes[1];u.slide = 0;
+		SNDPlay(channelID,&u);
 		notes += 2;
 	}
 	return 0;

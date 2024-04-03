@@ -28,6 +28,10 @@
 #include "pico/stdlib.h"
 #include "pico/stdio.h"
 #include "hardware/gpio.h"
+#include "pico/binary_info.h"
+#include "hardware/i2c.h"
+#include "hardware/adc.h"
+#include "hardware/spi.h"
 #endif
 //
 //		PC specific includes
@@ -43,6 +47,7 @@
 #include "interface/keyboard.h"
 #include "interface/graphics.h"
 #include "interface/console.h"
+#include "interface/cursor.h"
 #include "interface/timer.h"
 #include "interface/sound.h"
 #include "interface/memory.h"
@@ -50,14 +55,17 @@
 #include "interface/maths.h"
 #include "interface/fdebug.h"
 #include "interface/filesystem.h"
-#include "interface/config.h"
 #include "interface/miscellany.h"
+#include "interface/mos.h"
 #include "interface/sprites.h"
 #include "interface/tilemap.h"
 #include "interface/serial.h"
 #include "interface/turtle.h"
 #include "interface/locale.h"
 #include "interface/ports.h"
+#include "interface/blitter.h"
+#include "interface/gamepad.h"
+#include "interface/editor.h"
 
 #endif
 

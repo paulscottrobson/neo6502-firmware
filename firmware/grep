@@ -1,0 +1,17 @@
+[0mDefaulting PICO_SDK_FETCH_FROM_GIT[0m
+[0mDownloading Raspberry Pi Pico SDK[0m
+[0mPICO_SDK_PATH is /home/paulr/Projects/neo6502-firmware/firmware/build/_deps/pico_sdk-src[0m
+[0mDefaulting PICO_PLATFORM to rp2040 since not specified.[0m
+[0mDefaulting PICO platform compiler to pico_arm_gcc since not specified.[0m
+[0mPICO compiler is pico_arm_gcc[0m
+[0mBuild type is Release[0m
+[0mDefaulting PICO target board to pico since not specified.[0m
+[0mUsing board configuration from /home/paulr/Projects/neo6502-firmware/firmware/build/_deps/pico_sdk-src/src/boards/include/boards/pico.h[0m
+[0mTinyUSB available at /home/paulr/Projects/neo6502-firmware/firmware/build/_deps/tinyusb-src/src/portable/raspberrypi/rp2040; enabling build support for USB.[0m
+[0mBTstack available at /home/paulr/Projects/neo6502-firmware/firmware/build/_deps/pico_sdk-src/lib/btstack[0m
+[0mcyw43-driver available at /home/paulr/Projects/neo6502-firmware/firmware/build/_deps/pico_sdk-src/lib/cyw43-driver[0m
+[0mPico W Bluetooth build support available.[0m
+[0mlwIP available at /home/paulr/Projects/neo6502-firmware/firmware/build/_deps/pico_sdk-src/lib/lwip[0m
+[0mmbedtls available at /home/paulr/Projects/neo6502-firmware/firmware/build/_deps/pico_sdk-src/lib/mbedtls[0m
+[0mBuilding for USB Storage[0m
+make: *** No rule to make target 'dvi'.  Stop.

@@ -29,6 +29,17 @@ static int frameCount = 0;
 static std::filesystem::path storagePath = "storage";
 static std::filesystem::path currentPath = storagePath;
 
+// *******************************************************************************************************************************
+//
+//												Storage path management
+//
+// *******************************************************************************************************************************
+
+void HWSetDefaultPath(const char *defaultPath) {
+	storagePath = defaultPath;
+	currentPath = defaultPath;
+}
+
 static std::string getAbspath(const std::string& path) {
 	std::filesystem::path newPath;
 	if (!path.empty() && (path[0] == '/'))
@@ -36,6 +47,14 @@ static std::string getAbspath(const std::string& path) {
 	else
 		newPath = currentPath / path;
 	return newPath.string();
+}
+
+static uint8_t getAttributes(const std::string& filename) {
+	using std::filesystem::perms;
+	std::filesystem::file_status status = std::filesystem::status(filename);
+
+	return ((status.type() == std::filesystem::file_type::directory) ? FIOATTR_DIR : 0) |
+		((status.permissions() & perms::owner_write) == perms::none ? FIOATTR_READONLY : 0);
 }
 
 // *******************************************************************************************************************************
@@ -97,10 +116,9 @@ void SNDInitialise(void) {
 //
 // *******************************************************************************************************************************
 
-void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise) {
-	//printf("%d %d %d\n",channel,frequency,isNoise);
-	if (frequency != 0) {
-		GFXSetFrequency(frequency,1);
+void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
+	if (c->isPlayingNote != 0) {
+		GFXSetFrequency(c->currentFrequency,1);
 	} else {
 		GFXSilence();
 	}
@@ -155,7 +173,28 @@ uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFile
 	else
 		printf("OK\n");
 
-	return !ec ? 1 : 0;
+	return !ec ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//									 Copy file 
+//
+// ***************************************************************************************
+
+uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilename) {
+	std::string oldAbspath = getAbspath(oldFilename);
+	std::string newAbspath = getAbspath(newFilename);
+	printf("FISCopyFile('%s', '%s') -> ", oldAbspath.c_str(), newAbspath.c_str());
+	std::error_code ec;
+	std::filesystem::copy(oldAbspath, newAbspath,
+		std::filesystem::copy_options::overwrite_existing, ec);
+	if (ec)
+		printf("%s\n", ec.message().c_str());
+	else
+		printf("OK\n");
+
+	return !ec ? 0 : 1;
 }
 
 // ***************************************************************************************
@@ -194,7 +233,7 @@ uint8_t FISCreateDirectory(const std::string& filename) {
 	else
 		printf("OK\n");
 
-	return !ec ? 1 : 0;
+	return ec ? 1 : 0;
 }
 
 // ***************************************************************************************
@@ -231,7 +270,30 @@ uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attr
 
 	try {
 		*length = std::filesystem::file_size(abspath);
-		*attribs = std::filesystem::is_directory(abspath) ? FIOATTR_DIR : 0;
+		*attribs = getAttributes(abspath);
+		printf("OK; length=0x%04x; permissions=0x%02x\n", *length, *attribs);
+		return 0;
+	} catch (const std::filesystem::filesystem_error& e) {
+		printf("%s\n", e.what());
+		return 1;
+	}
+}
+
+// ***************************************************************************************
+//
+//									Set file attributes
+//
+// ***************************************************************************************
+
+uint8_t FISSetFileAttributes(const std::string& filename, uint8_t attribs) {
+	std::string abspath = getAbspath(filename);
+	printf("FISSetFileAttributes('%s') -> ", abspath.c_str());
+
+	try {
+		using std::filesystem::perms;
+		std::filesystem::permissions(abspath,
+			(std::filesystem::perms)((attribs & FIOATTR_READONLY) ? 0444 : 0666),
+			std::filesystem::perm_options::replace);
 		printf("OK\n");
 		return 0;
 	} catch (const std::filesystem::filesystem_error& e) {
@@ -254,7 +316,7 @@ uint8_t FISOpenDir(const std::string& filename) {
 	errno = 0;
 	try {
 		readDirIterator = std::filesystem::directory_iterator(abspath);
-		printf("OKs\n");
+		printf("OK\n");
 		return 0;
 	} catch (const std::filesystem::filesystem_error& e) {
 		printf("%s\n", e.what());
@@ -269,9 +331,9 @@ uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs) {
 		const auto& de = *readDirIterator++;
 
 		filename = de.path().filename().string();
-		*attribs = de.is_directory() ? FIOATTR_DIR : 0;
 		*size = de.is_regular_file() ? de.file_size() : 0;
-		printf("OK: '%s'\n", filename.c_str());
+		*attribs = getAttributes(de.path().string());
+		printf("OK: '%s', length=0x%04x, attribus=0x%02x\n", filename.c_str(), *size, *attribs);
 		return 0;
 	} else {
 		printf("Failed\n");
@@ -454,6 +516,14 @@ uint8_t SERReadByte(void) {
 	return 0;
 }
 
+void SERWriteByte(uint8_t b) {
+	printf("Serial write %d\n",b);
+}
+
+void SERSetSerialFormat(uint32_t baudRate,uint32_t protocol) {
+	printf("Setting Serial to %d baud protocol %d.\n",baudRate,protocol);
+}
+
 // ***************************************************************************************
 //
 //								Dummy GPIO functions
@@ -461,7 +531,7 @@ uint8_t SERReadByte(void) {
 // ***************************************************************************************
 
 int UEXTSetGPIODirection(int gpio,int pinType) {
-	printf("Pin %d set direction to %d\n",gpio,pinType);
+	//printf("Pin %d set direction to %d\n",gpio,pinType);
 	return 0;
 }
 
@@ -474,6 +544,130 @@ int UEXTGetGPIO(int gpio,bool *pIsHigh) {
 	printf("Read pin %d, value is (not) %d\n",gpio,gpio & 1);
 	*pIsHigh = (gpio & 1) != 0;
 	return 0;
+}
+
+int UEXTGetGPIOAnalogue(int gpio,uint16_t *pLevel) {
+	*pLevel = gpio+1000;
+	printf("Read Analogue pin %d, value is (not) %d\n",gpio,*pLevel);
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//                                     Dummy I2C functions
+//
+// ***************************************************************************************
+
+int UEXTI2CInitialise(void) {
+	printf("I2C Initialise\n");
+    return 0;
+}
+
+// ***************************************************************************************
+//
+//                          	Write bytes to I2C device
+//
+// ***************************************************************************************
+
+int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
+	printf("I2C Write to $%02x %d bytes\n",device,size);
+	for (int i = 0;i < size;i++) {
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//                          	Read bytes from I2C device 
+//
+// ***************************************************************************************
+
+int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
+	if (device == 0x7F) return 1;
+	printf("I2C Read from $%x %d bytes\n",device,size);
+	for (int i = 0;i < size;i++) {
+		data[i] = device + 0x12 + i * 3;
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+    return 0;
+}
+
+// ***************************************************************************************
+//
+//                                     Dummy SPI functions
+//
+// ***************************************************************************************
+
+int UEXTSPIInitialise(void) {
+	printf("SPI Initialise\n");
+    return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Write bytes to SPI device
+//
+// ***************************************************************************************
+
+int UEXTSPIWriteBlock(uint8_t *data,size_t size) {
+	printf("SPI Write to %d bytes\n",size);
+	for (int i = 0;i < size;i++) {
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Read bytes from I2C device
+//
+// ***************************************************************************************
+
+int UEXTSPIReadBlock(uint8_t *data,size_t size) {
+	printf("SPI Read from %d bytes\n",size);
+	for (int i = 0;i < size;i++) {
+		data[i] = 0x12 + i * 3;
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+    return 0;
+}
+// ***************************************************************************************
+//
+//                          			Hardware reset
+//
+// ***************************************************************************************
+
+void ResetSystem(void) {
+	printf("Hardware reset.\n");
+}
+
+// ***************************************************************************************
+//
+//                          			Dummy Gamepad
+//
+// ***************************************************************************************
+
+uint8_t GMPGetControllerCount(void) {
+	return 0;
+}
+
+uint32_t GMPReadDigitalController(uint8_t index) {
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//                          		 Handle dispatch warning.
+//
+// ***************************************************************************************
+
+void DSPWarnHandler(uint8_t group,uint8_t func) {
+	fprintf(stderr,"** WARN ** Execute %d.%d not defined.\n",group,func);
 }
 
 // ***************************************************************************************

@@ -139,12 +139,28 @@ void DBGXRender(int *address,int showDisplay) {
 					rc2.x += xs;
 				}
 			}
+			const uint8_t *cursorImage;
+			uint16_t cursorX,cursorY;
+			if (CURGetCursorDrawInformation(&cursorImage,&cursorX,&cursorY)) {
+				uint8_t w = 16,h = 16;
+				if (cursorX + 16 >= 320) w = 320-cursorX;
+				if (cursorY + 16 >= 240) h = 240-cursorY;
+				rc2.w = xs;rc2.h = ys;
+				for (int x = 0;x < w;x++) {
+					for (int y = 0;y < h;y++) {
+						rc2.x = r.x + (x+cursorX)*xs;
+						rc2.y = r.y + (y+cursorY)*ys;
+						uint8_t pixel = cursorImage[x+y*16];
+						if (pixel != 0xFF) GFXRectangle(&rc2,palette[pixel]);
+					}
+				}
+			}
 			for (int y; y < 240/8;y++) {
 				rc2.x = r.x + r.w + 4;
 				rc2.y = r.y + y * ys * 8 + 2;
 				rc2.w = xs * 2;rc2.h = ys * 8 - 4;
 				GFXRectangle(&rc2,isExtArray[y] ? 0x0F0 : 0xF00);
 			}
-		}		
+		}	
 	}
 }

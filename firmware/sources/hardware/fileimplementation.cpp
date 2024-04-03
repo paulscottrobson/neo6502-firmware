@@ -13,6 +13,10 @@
 #include "common.h"
 #include <inttypes.h>
 #include "ff.h"
+#include <memory>
+#include <functional>
+
+static constexpr int COPY_BUFFER_SIZE = 1024;
 
 static FIL fileHandles[FIO_NUM_FILES];
 
@@ -37,9 +41,69 @@ static uint8_t getAttributes(const FILINFO* fno) {
 
 uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFilename) {
 	STOInitialise();
+	// CONWriteString("FISRenameFile('%s', '%s') -> ", oldFilename.c_str(), newFilename.c_str());
 	FRESULT result = f_rename(oldFilename.c_str(), newFilename.c_str());
+	// CONWriteString("%d\r", result);
 	return (result == FR_OK) ? 0 : 1;
 }
+
+// ***************************************************************************************
+//
+//									Copy File
+//
+// ***************************************************************************************
+
+uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilename) {
+	STOInitialise();
+
+	// Our stack is quite small and there's a lot of buffer here, so
+	// allocate them from the heap. The unique_ptr<> causes them to be
+	// cleaned up automatically when the function ends.
+	std::unique_ptr<FIL> oldFile(new (std::nothrow) FIL);
+	std::unique_ptr<FIL> newFile(new (std::nothrow) FIL);
+	std::unique_ptr<uint8_t[]> buffer(new (std::nothrow) uint8_t[COPY_BUFFER_SIZE]);
+	if (!oldFile || !newFile || !buffer) {
+		// Out of memory.
+		// CONWriteString("Out of memory\r");
+		return 1;
+	}
+
+	FRESULT result = f_open(&*oldFile, oldFilename.c_str(), FA_READ);
+	// CONWriteString("Opened '%s' for read -> %d\r", oldFilename.c_str(), result);
+	if (result == FR_OK)
+	{
+		result = f_open(&*newFile, newFilename.c_str(), FA_WRITE|FA_CREATE_ALWAYS);
+		// CONWriteString("Opened '%s' for write -> %d\r", newFilename.c_str(), result);
+		if (result == FR_OK)
+		{
+			for (;;) {
+				UINT bytesRead;
+				result = f_read(&*oldFile, buffer.get(), COPY_BUFFER_SIZE, &bytesRead);
+				if (result != FR_OK)
+					break;
+				if (bytesRead == 0)
+					break;
+				
+				UINT bytesWritten;
+				result = f_write(&*newFile, buffer.get(), bytesRead, &bytesWritten);
+				if (result != FR_OK)
+					break;
+				if (bytesWritten != bytesRead) {
+					// Disk full.
+					result = FR_DISK_ERR;
+					break;
+				}
+			}
+
+			f_close(&*newFile);
+		}
+
+		f_close(&*oldFile);
+	}
+
+	return (result == FR_OK) ? 0 : 1;
+}
+
 
 // ***************************************************************************************
 //
@@ -49,7 +113,9 @@ uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFile
 
 uint8_t FISDeleteFile(const std::string& filename) {
 	STOInitialise();
+	// CONWriteString("FISDeleteFile('%s') ->", filename.c_str());
 	FRESULT result = f_unlink(filename.c_str());
+	// CONWriteString("%d\r", result);
 	return (result == FR_OK) ? 0 : 1;
 }
 
@@ -61,7 +127,9 @@ uint8_t FISDeleteFile(const std::string& filename) {
 
 uint8_t FISCreateDirectory(const std::string& filename) {
 	STOInitialise();
+	// CONWriteString("FISCreateDirectory('%s') ->", filename.c_str());
 	FRESULT result = f_mkdir(filename.c_str());
+	// CONWriteString("%d\r", result);
 	return (result == FR_OK) ? 0 : 1;
 }
 
@@ -73,7 +141,9 @@ uint8_t FISCreateDirectory(const std::string& filename) {
 
 uint8_t FISChangeDirectory(const std::string& filename) {
 	STOInitialise();
+	// CONWriteString("FISChangeDirectory('%s') ->", filename.c_str());
 	FRESULT result = f_chdir(filename.c_str());
+	// CONWriteString("%d\r", result);
 	return (result == FR_OK) ? 0 : 1;
 }
 
@@ -93,6 +163,34 @@ uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attr
 	*attribs = getAttributes(&fno);
 
 	return (result == FR_OK) ? 0 : 1;
+}
+
+// ***************************************************************************************
+//
+//									Set file attributes
+//
+// ***************************************************************************************
+
+uint8_t FISSetFileAttributes(const std::string& filename, uint8_t attribs) {
+	#if FF_USE_CHMOD
+		STOInitialise();
+
+		uint8_t fatattribs = 0;
+		if (attribs & FIOATTR_ARCHIVE)
+			fatattribs |= AM_ARC;
+		if (attribs & FIOATTR_HIDDEN)
+			fatattribs |= AM_HID;
+		if (attribs & FIOATTR_READONLY)
+			fatattribs |= AM_RDO;
+		if (attribs & FIOATTR_SYSTEM)
+			fatattribs |= AM_SYS;
+		
+		FRESULT result = f_chmod(filename.c_str(), fatattribs, 0xff);
+
+		return (result == FR_OK) ? 0 : 1;
+	#else
+		return 1;
+	#endif
 }
 
 // ***************************************************************************************
@@ -272,11 +370,12 @@ uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size) {
 		return 1;
 
 	uint32_t oldPos = f_tell(f);
+	// CONWriteString("FISSetSizeFileHandle(%d, 0x%08x) -> ", fileno, size);
 	FRESULT result = f_lseek(f, size);
 	if (result == FR_OK)
 		result = f_truncate(f);
+	// CONWriteString("%d\r", result);
 
-	f_lseek(f, oldPos);
 	return (result == FR_OK) ? 0 : 1;
 }
 

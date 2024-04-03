@@ -24,7 +24,7 @@ BASICBUILD = 0 								; 0: Installable 1: Testmode 2: Tokenise test.
 
 boot:   jmp     BColdStart 					; $800 cold start
 		jmp     BWarmStart 					; $803 warm start
-		jmp 	Command_RUN 				; $806 run program
+		jmp 	Command_RUN_Always 			; $806 run program
 		* = boot + $20
 		.byte 	Program & $FF,Program>>8 	; $820 address of Program base (var table)
 		
@@ -34,15 +34,19 @@ BColdStart:
 		jsr 	CPPrintYA 
 
 		.if 	BASICBUILD==0
-		jsr 	NewProgram
-		jmp 	WarmStart
+		jsr 	NewColdStart 				; complete wipe
+		jsr 	NewProgram   				; new after wipe, because of library.
+		jsr 	AutoStartCheck  			; check autostart.bas
+		jmp 	WarmStart	 				; warm start.
+
 		.endif
 		
 		.if 	BASICBUILD==1
-		jsr 	Command_RUN
+		jsr 	Command_RUN_Always
 		.endif		
 
 		.if 	BASICBUILD==2
+		jsr 	NewColdStart
 		jsr 	NewProgram
 		jmp 	TestTokenising  
 		.endif

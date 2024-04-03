@@ -19,13 +19,13 @@
 /* _Alignas(MEMORY_SIZE) */ uint8_t cpuMemory[MEMORY_SIZE] = {0};  				// Processor memory, aligned for Pico
 uint8_t gfxObjectMemory[GFX_MEMORY_SIZE] = {0}; 								// Graphics objects memory.
 uint8_t graphicsMemory[MAXGRAPHICSMEMORY] = {0};								// RAM used for graphics and console text.
-uint8_t consoleMemory[MAXCONSOLEMEMORY] = {0};  								// Console RAM
+uint16_t consoleMemory[MAXCONSOLEMEMORY] = {0};  								// Console RAM
 
 #else
 uint8_t cpuMemory[MEMORY_SIZE] = {0};
 uint8_t gfxObjectMemory[GFX_MEMORY_SIZE] = {0};
 uint8_t graphicsMemory[MAXGRAPHICSMEMORY] = {0};
-uint8_t consoleMemory[MAXCONSOLEMEMORY] = {0};  					
+uint16_t consoleMemory[MAXCONSOLEMEMORY] = {0};  					
 #endif
 
 uint16_t controlPort = DEFAULT_PORT;       										// Control point.
@@ -37,7 +37,12 @@ uint16_t controlPort = DEFAULT_PORT;       										// Control point.
 // ***************************************************************************************
 
 static void loadROM(const uint8_t *vROM, uint16_t startAddress, uint16_t romSize) {
-	memcpy(cpuMemory+startAddress,vROM,romSize);
+	for (int i = 0;i < romSize;i++) {
+		cpuMemory[i+startAddress] = vROM[i];
+		#ifdef PICO
+		if ((i & 0xFF) == 0) sleep_ms(2);  										// Why ?
+		#endif
+	}
 }
 
 // ***************************************************************************************
@@ -59,7 +64,7 @@ void MEMInitialiseMemory(void) {
 // ***************************************************************************************
 
 void MEMLoadBasic(void) {
-//	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  									// Copy ROM image into memory crashes
+	loadROM(basic_bin,BASIC_LOAD,BASIC_SIZE);  									// Copy ROM image into memory crashes
 	cpuMemory[0x0] = BASIC_LOAD & 0xFF;  										// Start with jmp (0)
 	cpuMemory[0x1] = BASIC_LOAD >> 8;
 }

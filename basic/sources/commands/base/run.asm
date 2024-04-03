@@ -20,6 +20,14 @@
 		.section code
 
 Command_RUN:	;; [run]
+		lda 	(codePtr),y 				; RUN something ?
+		cmp 	#KWD_SYS_END
+		beq 	Command_RUN_Always
+		cmp 	#KWD_COLON
+		beq 	Command_RUN_Always
+		jsr 	LoadCode 					; load the program, then run it.
+
+Command_RUN_Always:
 		jsr 	ClearCode					; clear everything out.
 		lda 	Program 					; back to the program start, get the count of var pages.
 		clc 								; make an actual address.
@@ -140,7 +148,30 @@ Command_Shift2_Handler: ;; [!!sh2]
 		jmp 	(AssemblerVectorTable,x) 	; and go there.
 _CS2Fail:
 		.error_syntax
-		
+
+; ************************************************************************************************
+;
+;						Advance the pointer (codePtr) over zero numbered lines.
+;
+; ************************************************************************************************
+
+SkipZeroCode:
+		lda 	(codePtr) 					; reached program end
+		beq 	_SZCExit
+		ldy 	#1 							; line number zero ?
+		lda 	(codePtr),y
+		iny
+		ora 	(codePtr),y
+		bne 	_SZCExit 					; if not, exit
+		clc  								; next line.
+		lda 	(codePtr)
+		adc 	codePtr
+		sta 	codePtr
+		bcc 	SkipZeroCode
+		inc 	codePtr+1
+		bra 	SkipZeroCode
+_SZCExit:
+		rts		
 		.send code
 
 
@@ -152,6 +183,7 @@ _CS2Fail:
 ;
 ;		Date			Notes
 ;		==== 			=====
+;		23-02-24 		Added RUN <x> functionality.
 ;
 ; ************************************************************************************************
 

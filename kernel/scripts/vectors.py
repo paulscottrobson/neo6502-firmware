@@ -13,6 +13,8 @@
 import sys
 
 vectors = [
+		"KChainBasicOnlyProgram",
+		"KChainBasicProgram",	
 		"KWriteCharacterInline",
 		"KLoadExtended",
 		"KReadLine",
@@ -42,6 +44,7 @@ for v in vectors:
 h.close()
 
 s = open(sys.argv[1]).readlines()
+s = [x if x.find(";") < 0 else x[:x.find(";")] for x in s]
 s = [x for x in s if x.find("DEFAULT_PORT") > 0][0]
 n = int(s[(s.find("DEFAULT_PORT")+12):].strip()[2:],16)
 

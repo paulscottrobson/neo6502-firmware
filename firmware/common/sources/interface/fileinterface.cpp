@@ -185,6 +185,16 @@ uint8_t FIORenameFile(const std::string& oldFilename, const std::string& newFile
 
 // ***************************************************************************************
 //
+//									 Copy file 
+//
+// ***************************************************************************************
+
+uint8_t FIOCopyFile(const std::string& oldFilename, const std::string& newFilename) {
+	return FISCopyFile(oldFilename, newFilename);
+}
+
+// ***************************************************************************************
+//
 //									Delete File
 //
 // ***************************************************************************************
@@ -239,6 +249,16 @@ uint8_t FIOReadDir(std::string& result, uint32_t* size, uint8_t* attribs) {
 
 uint8_t FIOCloseDir() {
 	return FISCloseDir();
+}
+
+// ***************************************************************************************
+//
+//								    Set file attributes
+//
+// ***************************************************************************************
+
+uint8_t FIOSetFileAttributes(const std::string& filename, uint8_t attribs) {
+	return FISSetFileAttributes(filename, attribs);
 }
 
 // ***************************************************************************************

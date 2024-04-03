@@ -20,7 +20,7 @@ import re,sys
 
 class ProgramLister(object):
 	def __init__(self,fileName):
-		self.bin = [x for x in open(fileName,"rb").read(-1)]
+		self.bin = bytearray(open(fileName,"rb").read(-1))
 		self.ts = TokenSet()
 
 	def list(self):

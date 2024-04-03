@@ -30,6 +30,8 @@ static int GPIOMapping[11] = {
 static bool IOPINOutputLatch[IOPIN_MAX+1]; 											// State of output latch
 static int  IOPINPinDirection[IOPIN_MAX+1]; 										// What the pin direction is set to.
 static bool IOPINDisabled[IOPIN_MAX+1];  											// Pin usage disabled
+static bool IOI2CInitialised = false; 												// True if I2C initialised.
+static bool IOSPIInitialised = false; 												// True if SPI initialised.
 
 // ***************************************************************************************
 //
@@ -59,6 +61,7 @@ void IOInitialise(void) {
 			UEXTSetGPIODirection(GPIOMapping[i],UEXT_INPUT); 						// Set port to input. 
 		}
 	}
+	IOI2CInitialised = false;
 }
 
 // ***************************************************************************************
@@ -69,6 +72,7 @@ void IOInitialise(void) {
 
 int IOSetDirection(int pinID,int pinType) {
 	int gpio = IOMapPinToGPIO(pinID);  												// Map it
+	if (pinType == UEXT_ANALOGUE && !UEXT_IS_GPIO_ANALOGUE(gpio)) return 1;  		// Only certain GPIO do ADC.
 	if (gpio > 0) {  																// Mapping okay
 		UEXTSetGPIODirection(gpio,pinType);  										// Set direction to whatever
 		IOPINPinDirection[pinID] = pinType;  										// Save direction
@@ -95,6 +99,7 @@ int IOWrite(int pinID,bool isHigh) {
 
 // ***************************************************************************************
 //
+//											Read GPIO pin
 //
 // ***************************************************************************************
 
@@ -108,6 +113,143 @@ int IORead(int pinID,bool *pIsHigh) {
 		}
 	}
 	return (gpio > 0) ? 0 : 1;  													// 0 if okay,1 if bad
+}
+
+// ***************************************************************************************
+//
+//								Read GPIO pin Analogue
+//
+// ***************************************************************************************
+
+int IOReadAnalogue(int pinID,uint16_t *pLevel) {
+	int gpio = IOMapPinToGPIO(pinID);  												// Map it
+	if (UEXT_IS_GPIO_ANALOGUE(gpio)) {  											// Mapping okay
+		if (IOPINPinDirection[pinID] != UEXT_ANALOGUE) return 2;  					// Not set to analogue input.
+		UEXTGetGPIOAnalogue(gpio,pLevel);  											// Read it.
+	}	
+	return (UEXT_IS_GPIO_ANALOGUE(gpio)) ? 0 : 1;  									// 0 if okay,1 if bad
+}
+
+// ***************************************************************************************
+//
+//				Initialise I2C system if not already initialised
+//
+// ***************************************************************************************
+
+static void IOI2CInitialise(void) {
+	if (!IOI2CInitialised) {  														// If not initialised
+		IOI2CInitialised = true;  													// Mark initialised
+		UEXTI2CInitialise();  														// Set it up
+		IOPINDisabled[5] = IOPINDisabled[6] = true; 								// Disable SCL/SDA from GPIO usage.
+	}
+}
+
+// ***************************************************************************************
+//
+//								Write to i2C Register
+//
+// ***************************************************************************************
+
+void IOUARTInitialise(uint32_t baudRate,uint32_t protocol) {
+	IOPINDisabled[3] = IOPINDisabled[4] = true;  									// Can't use serial for I/O
+	SERSetSerialFormat(baudRate,protocol);  										// Set Baud Rate and Protocol.
+}
+
+// ***************************************************************************************
+//
+//								Write to i2C Register
+//
+// ***************************************************************************************
+
+int IOI2CWriteRegister(uint8_t device,uint8_t reg,uint8_t data) {
+	uint8_t buffer[2];
+	IOI2CInitialise();
+	buffer[0] = reg;buffer[1] = data;
+	return UEXTI2CWriteBlock(device,buffer,2);
+}
+
+// ***************************************************************************************
+//
+//								Read from i2c Register
+//
+// ***************************************************************************************
+
+int IOI2CReadRegister(uint8_t device,uint8_t reg,uint8_t *pData) {
+	IOI2CInitialise();
+	int e =UEXTI2CWriteBlock(device,&reg,1);
+	if (e == 0) e = UEXTI2CReadBlock(device,pData,1);
+	return e;
+}
+
+// ***************************************************************************************
+//
+//								  Read/write mappers I2C
+//
+// ***************************************************************************************
+
+int IOI2CReadBlock(uint8_t device, uint8_t *data,size_t size) {
+	IOI2CInitialise();
+	return UEXTI2CReadBlock(device,data,size);
+}
+
+int IOI2CWriteBlock(uint8_t device, uint8_t *data,size_t size) {
+	IOI2CInitialise();
+	return UEXTI2CWriteBlock(device,data,size);
+}
+
+// ***************************************************************************************
+//
+//				Initialise SPI system if not already initialised
+//
+// ***************************************************************************************
+
+static void IOSPIInitialise(void) {
+	if (!IOSPIInitialised) {  														// If not initialised
+		IOSPIInitialised = true;  													// Mark initialised
+		UEXTSPIInitialise();  														// Set it up
+		IOPINDisabled[7] = IOPINDisabled[8] = 										// Disable MOSI/MISO/SCK/CS from GPIO usage.
+				IOPINDisabled[9] = IOPINDisabled[10] = true; 							
+	}
+}
+
+// ***************************************************************************************
+//
+//								  Read/write mappers SPI
+//
+// ***************************************************************************************
+
+int IOSPIReadBlock(uint8_t *data,size_t size) {
+	IOSPIInitialise();
+	return UEXTSPIReadBlock(data,size);
+}
+
+int IOSPIWriteBlock(uint8_t *data,size_t size) {
+	IOSPIInitialise();
+	return UEXTSPIWriteBlock(data,size);
+}
+
+// ***************************************************************************************
+//
+//								  Read/write mappers UART
+//
+// ***************************************************************************************
+
+int IOUARTReadBlock(uint8_t *data,size_t size) {
+	while (size-- != 0) {
+		uint32_t timeOut = TMRRead()+500;  											// Time out after 5s.
+		while (SERIsByteAvailable() == 0) {
+			if (TMRRead() > timeOut) return 1;
+		}
+		*data++ = SERReadByte();
+	}
+	return 0;
+}
+
+int IOUARTWriteBlock(uint8_t *data,size_t size) {
+	while (size-- != 0) {
+		SERWriteByte(*data++);
+	}
+	return 0;
 }
 
 // ***************************************************************************************

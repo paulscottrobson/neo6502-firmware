@@ -22,6 +22,7 @@
 //		keycode 8 is byte 1 bit 0 etc.
 //
 static uint8_t keyboardState[KBD_MAX_KEYCODE+1];
+static uint8_t keyboardModifiers;
 //
 //		Queue of ASCII keycode presses.
 //
@@ -59,6 +60,7 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 	if (keyCode != 0 && keyCode < KBD_MAX_KEYCODE) { 							// Legitimate keycode.
 		if (isDown) {
 			keyboardState[keyCode] = 0xFF; 										// Set down flag.
+			keyboardModifiers = modifiers;										// Copy modifiers
 			uint8_t ascii = KBDMapToASCII(keyCode,modifiers);  					// What key ?
 			if (ascii != 0) {
 				currentASCII = ascii;  											// Remember code and time.
@@ -68,6 +70,7 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 			}
 		} else {
 			keyboardState[keyCode] = 0x00; 										// Clear flag
+			keyboardModifiers = 0x00;											// Clear Modifiers
 			if (keyCode == currentKeyCode) currentASCII = 0; 					// Autorepeat off, key released.
 		}
 	}
@@ -102,6 +105,10 @@ void KBDCheckTimer(void) {
 uint8_t *KBDGetStateArray(void) {
 	return keyboardState;
 }
+
+uint8_t KBDGetModifiers(void) {
+	return keyboardModifiers;
+};
 
 // ***************************************************************************************
 //
@@ -294,12 +301,15 @@ void KBDShowFunctionKeys(void) {
 
 uint8_t KBDKeyboardController(void) {
 	uint8_t ck = 0;
-	if (keyboardState[4]|keyboardState[80]) ck |= 0x01; 						// A bit 0
-	if (keyboardState[7]|keyboardState[79]) ck |= 0x02; 						// D bit 1
-	if (keyboardState[26]|keyboardState[82]) ck |= 0x04; 						// W bit 2
-	if (keyboardState[22]|keyboardState[81]) ck |= 0x08; 						// S bit 3
-	if (keyboardState[18]) ck |= 0x10; 											// O bit 4
-	if (keyboardState[19]) ck |= 0x20; 											// P bit 5 
+	if (keyboardState[4]|keyboardState[80]) ck |= 0x01; 						// A/Left bit 0
+	if (keyboardState[7]|keyboardState[79]) ck |= 0x02; 						// D/Right bit 1
+	if (keyboardState[26]|keyboardState[82]) ck |= 0x04; 						// W/Up bit 2
+	if (keyboardState[22]|keyboardState[81]) ck |= 0x08; 						// S/Down bit 3
+	if (keyboardState[18]|keyboardState[29]) ck |= 0x10; 						// O/Z bit 4 [A]
+	if (keyboardState[19]|keyboardState[27]) ck |= 0x20; 						// P/X bit 5 [B]
+	if (keyboardState[14]|keyboardState[6]) ck |= 0x40; 						// K/C bit 6 [X]
+	if (keyboardState[15]|keyboardState[25]) ck |= 0x80; 						// L/V bit 7 [Y]
+	
 	return ck;
 }
 
@@ -309,5 +319,7 @@ uint8_t KBDKeyboardController(void) {
 //		==== 		========
 //		07-02-24 	Added ability to list function keys
 //		18-02-24	Keys WASDOP now default keys, also cursor keys.
-//
+//		17-03-24 	Added ZX control keys.
+//		25-03-24 	Extended to support ABXY in the basic API structure.
+//	
 // ***************************************************************************************

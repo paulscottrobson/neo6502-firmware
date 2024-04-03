@@ -60,6 +60,9 @@ XSNumber3:
 ;	
 ;											Zero Page
 ;
+;		If additional allocated then they may need to be saved during system calls. the temp
+;		registers and the stack do not matter.
+;
 ; ************************************************************************************************
 
 		.section zeropage
@@ -107,6 +110,8 @@ basicStackEnd: 								; bottom limit of stack.
 		.fill 	1
 tempBuffer: 								; generic buffer.
 		.fill 	32
+errorBuffer: 								; error message buffer
+		.fill 	32		
 dataPtr: 									; Data equivalent of CodePtr
 		.fill 	2		
 dataPos: 									; Data position of Y
@@ -141,6 +146,11 @@ inputPos: 									; tokenising position in input buffer
 		.fill 	1
 inputBuffer: 								; input buffer / token input buffer.
 		.fill 	256
+
+transmitDataBuffer = inputBuffer 			; use input buffer for transmit data
+
+transmitDataSize: 							; data to transmit
+		.fill 	1
 
 tokLineSize: 								; offset to end of line
 		.fill 	1

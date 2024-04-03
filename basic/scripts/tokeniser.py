@@ -83,7 +83,7 @@ class Tokeniser(object):
 	def tokenise(self,s):
 		s = s.strip()
 		self.code = []
-		while s != "":
+		while s != "" and not s.startswith("//"):
 			s = self.tokeniseOne(s).strip()
 		return self.code
 	#
@@ -95,8 +95,8 @@ class Tokeniser(object):
 			m = re.match("(\\d+)\\s*(.*)$",s)
 			self.renderConstant(int(m.group(1)))
 			s = m.group(2)
-			if s.startswith("."):
-				m = re.match('\\.(\\d+)\\s*(.*)',s)
+			m = re.match('\\.(\\d+)\\s*(.*)',s)
+			if m is not None:
 				digits = ([int(x) for x in m.group(1)] + [0xF])
 				digits = digits if len(digits) % 2 == 0 else digits + [0xF]
 				self.code.append(self.getTokenID("!!dec"))

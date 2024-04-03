@@ -19,9 +19,6 @@
 		.section code
 
 Command_LIST:	;; [list]
-		stz 	CLIndent 					; reset indent
-		stz 	CLFrom 						; default from 
-		stz 	CLFrom+1
 
 		lda 	(codePtr),y 				; is there a to line (e.g. LIST ,xxx)
 		cmp 	#$20 						; is it an identifier
@@ -136,13 +133,21 @@ _CLIsNegative:
 
 ListCurrentLine:
 		lda 	#6 							; colour line #
-		jsr 	DTKColour
+		lda 	TOK_Colour_Scheme+6
+		ora 	#$80
+		jsr 	WriteCharacter
 		ldy 	#2 							; print line #
 		lda 	(codePtr),y
-		tax
+		sta 	XSNumber1
 		dey
 		lda 	(codePtr),y
-		jsr 	PrintNumberXA
+		sta 	XSNumber0
+		ldx 	#0 							; print line number.
+		stz 	XSNumber2
+		stz 	XSNumber3
+		stz 	XSControl
+		jsr 	CPNumberToString		
+		jsr 	CPPrintYA
 		;
 		;		Get the indent, save it and add now if negative.
 		;
@@ -164,6 +169,14 @@ _CLSpacing:
 		lda 	CLIndent
 		jsr 	_CLASpaces 					; do the indent
 		jsr 	TOKDetokenise 				; output the line text.
+		ldx 	#0 							; output text
+_CLPrint:
+		lda 	inputBuffer,x
+		beq 	_CLPrintEnd
+		jsr 	WriteCharacter
+		inx
+		bra 	_CLPrint
+_CLPrintEnd:				
 		lda 	#13	 						; next line
 		jsr 	WriteCharacter
 
@@ -196,6 +209,11 @@ _CLASExit:
 ; ************************************************************************************************
 
 LISTGetLinesToFrom:
+		stz 	CLIndent 					; reset indent
+		lda 	#1
+		sta 	CLFrom 						; default from is now 1
+		stz 	CLFrom+1
+
 		lda 	(codePtr),y
 		cmp 	#KWD_COMMA
 		beq 	_CLToLine
@@ -234,6 +252,7 @@ _CLDefaultTo: 								; to the end.
 		sta 	CLTo+1
 _CLExit:
 		rts
+
 		.send code
 					
 ; ************************************************************************************************
@@ -245,6 +264,7 @@ _CLExit:
 ;		Date			Notes
 ;		==== 			=====
 ;		07-02-24 		Extracted code to be re-used in DELETE.
+; 		18-03-24 		Default LIST is now from 1 not 0
 ;
 ; ************************************************************************************************
 

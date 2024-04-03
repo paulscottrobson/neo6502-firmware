@@ -28,6 +28,7 @@ TOKDetokenise:
 		lda 	#3 							; start position.
 		sta 	TOKOffset
 		stz		TOKLastCharacter 			; clear last character
+		stz 	inputPos 					; write position.
 		;
 		;		Main detokenising loop
 		;
@@ -108,13 +109,18 @@ TOKDGet:phy
 
 ; ************************************************************************************************
 ;
-;						Output one character to whatever handler is set up
+;							Output one character to the output buffer
 ;
 ; ************************************************************************************************
 
 TOKDOutput:
 		sta 	TOKLastCharacter 			; save last character
-		jsr 	WriteCharacter
+		phx
+		ldx 	inputPos
+		inc 	inputPos
+		sta 	inputBuffer,x
+		stz 	inputBuffer+1,x
+		plx
 		rts
 
 ; ************************************************************************************************
@@ -146,7 +152,7 @@ DTKColour:
 		tax
 		lda 	TOK_Colour_Scheme,x
 		ora 	#$80
-		jsr 	WriteCharacter
+		jsr 	TOKDOutput
 		plx
 		rts
 
@@ -160,6 +166,7 @@ TOK_Colour_Scheme:
 		.byte 	COL_RED 					; +6 line number
 		
 		.send code
+
 		
 ; ************************************************************************************************
 ;

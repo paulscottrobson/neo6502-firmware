@@ -39,6 +39,7 @@ static int argumentCount;
 static char **argumentList;
 static LONG32 cycles;																// Cycle Count.
 static int inFastMode = 0; 															// Fast mode flag (speeds up unit testing)
+static bool useDebuggerKeys = false;  												// Use the debugger keys.
 
 // *******************************************************************************************************************************
 //											 Memory and I/O read and write macros.
@@ -92,7 +93,6 @@ void CPUSaveArguments(int argc,char *argv[]) {
 
 void CPUReset(void) {
 	char command[128];
-	HWReset();																		// Reset Hardware
 	for (int i = 1;i < argumentCount;i++) { 										// Look for loads.
 		strcpy(command,argumentList[i]);  											// Copy command
 		char *pos = strchr(command,'@'); 											// Look for splitting @
@@ -135,9 +135,24 @@ void CPUReset(void) {
 				printf("Warm boot $806\n");
 				cpuMemory[0xFFFC] = 6;cpuMemory[0xFFFD] = 8;
 			}
+			if (strcmp(command,"keys") == 0) { 										// Keys work properly.
+				useDebuggerKeys = true;
+			}
+			if (strncmp(command,"path:",5) == 0) {  								// Set storage path
+				HWSetDefaultPath(command+5);
+			}
 		}
 	}
+	HWReset();																		// Reset Hardware
 	resetProcessor();																// Reset CPU		
+}
+
+// *******************************************************************************************************************************
+//							When non-zero disables the debugger keys, requiring control
+// *******************************************************************************************************************************
+
+int CPUUseDebugKeys(void) {
+	return useDebuggerKeys ? 1 : 0;
 }
 
 // *******************************************************************************************************************************

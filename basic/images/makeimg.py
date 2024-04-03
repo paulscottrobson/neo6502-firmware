@@ -20,14 +20,15 @@ from PIL import Image
 #
 # *******************************************************************************************
 
-def importSheet(coll,isTile,size,rows):
+def importSheet(coll,isTile,size):
+	fName = "{0}_{1}.png".format("tile" if isTile else "sprite",size)  			# access the file
+	im = Image.open(fName)  	
 	yPaletteSpace = 16 															# Top of screen palette size
+	rows = int((im.size[1]-yPaletteSpace) / (size + 8))
 	tileCount = 8 if size == 32 else 16  										# tiles per row
 	width = 8 + (size + 8) * tileCount  										# width of image
 	height = yPaletteSpace + 8 + (size + 8) * rows
 
-	fName = "{0}_{1}.png".format("tile" if isTile else "sprite",size)  			# access the file
-	im = Image.open(fName)  	
 	xt = ImageExtractor(im,not isTile,(255,0,255))   							# create an extractor.
 	count = 0
 
@@ -42,8 +43,8 @@ def importSheet(coll,isTile,size,rows):
 
 print("Image Set Creator")
 collection = ImageCollection()
-importSheet(collection,True,16,8)
-importSheet(collection,False,16,8)
-importSheet(collection,False,32,4)	
+importSheet(collection,True,16)
+importSheet(collection,False,16)
+importSheet(collection,False,32)	
 collection.render("graphics.gfx")
 print("Done.")
