@@ -22,7 +22,7 @@
 
 \title{Neo6502 Assembly - Messaging API}
 \author{Paul Robson \\ Bill Auger}
-\date{2024-03-30}
+\date{2024-03-29}
 
 \renewcommand{\familydefault}{\sfdefault}
 \graphicspath{ {./img/}                             % WRT local editor (eg: texworks)
@@ -778,6 +778,12 @@ Register1 := random float from 0-1
 }
 \ApiFnRow{28}{Random Integer}{
 Register1 := random integer from 0 to (Register 1-1)
+}
+\ApiFnRow{29}{SineRad}{
+Register1 := sine(Register 1) angles in radians
+}
+\ApiFnRow{30}{CosineRad}{
+Register1 := cosine(Register 1) angles in radians
 }
 \ApiFnRow{32}{Number to Decimal}{
 Helper function for tokeniser, do not use.

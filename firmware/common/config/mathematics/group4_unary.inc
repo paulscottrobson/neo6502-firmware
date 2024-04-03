@@ -117,3 +117,27 @@
 		}
 	DOCUMENTATION
 		Register1 := random integer from 0 to (Register 1-1)
+
+	FUNCTION 29 SineRad
+		f1 = MATHReadFloat(MATH_REG1);
+		MATHWriteFloat(sin(f1),MATH_REG1);
+	DOCUMENTATION
+		Register1 := sine(Register 1) angles in radians
+
+	FUNCTION 30 CosineRad
+		f1 = MATHReadFloat(MATH_REG1);
+		MATHWriteFloat(cos(f1),MATH_REG1);
+	DOCUMENTATION
+		Register1 := cosine(Register 1) angles in radians
+
+	FUNCTION 31 TangentRad
+		f1 = MATHReadFloat(MATH_REG1);
+		MATHWriteFloat(tan(f1),MATH_REG1);
+	DOCUMENTATION
+		Register1 := tangent(Register 1) angles in radians
+
+	FUNCTION 32 ArctangentRad
+		f1 = MATHReadFloat(MATH_REG1);
+		MATHWriteFloat(atan(f1),MATH_REG1);
+	DOCUMENTATION
+		Register1 := arctangent(Register 1) angles in radians		
