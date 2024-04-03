@@ -74,6 +74,7 @@ static uint8_t _EDITStateInitialise(void) {
 	edWindowBottom = gMode.yCSize-2;
 	edXPos = 0;edYPos = 0;  														// Cursor position
 	edTopLine = -1;   																// Illegal top line, forces repaint.
+	edCurrentIndent = 0;
 	_EDITScrollTopLine(1);  														// Scroll screen to fit.
 	edState = ES_REPAINT; 															// And go to repaint state
 	return EX_NOCALLBACK;
@@ -104,7 +105,7 @@ static uint8_t _EDITStateRepaint(void) {
 	} else {
 		EPRINTF("ED:Repaint:Blank %d\n",edRepaintY);
 		CONSetCursorPosition(edWindowLeft,edRepaintY+edWindowTop); 					// Erase that line.
-		for (int i = 0;i <= edWindowRight-edWindowLeft;i++) CONWrite('=');
+		for (int i = 0;i <= edWindowRight-edWindowLeft;i++) CONWrite(' ');
 		edRepaintY++;
 		return EX_NOCALLBACK;  														// Keep going.
 	}
@@ -112,28 +113,41 @@ static uint8_t _EDITStateRepaint(void) {
 
 // ***************************************************************************************
 //
-//							Repaint a line with an indent
+//						Repaint a coloured line without an indent
 //
 // ***************************************************************************************
 
-static void _EDITRepaintLine(uint16_t y,uint8_t indent) {
+static void _EDITRepaintLine(uint16_t y) {
 	uint8_t x = edWindowRight-edWindowLeft+1;  										// Characters to output.
 	uint8_t *s = cpuMemory+CPARAMS[0]+(CPARAMS[1] << 8);
  	CONSetCursorPosition(edWindowLeft,y+edWindowTop);  								// Set cursor position	
 	for (uint8_t p = 0;p < *s && x > 0;p++) {
 		uint8_t c = s[p+1];
-		if (ISDISPLAYABLE(c)) {  													// Displayable character
-			if (indent == 0) {
-				CONWrite(c);x--;
-			} else {  
-				indent--;
-			}
-		} else {  																	// Colour change character
-			CONWrite(c);
-		}
+		CONWrite(c);
+		if (ISDISPLAYABLE(c)) x--;
 	}
 	while (x-- > 0) CONWrite(' '); 													// Blank rest of line.
 }
+
+// ***************************************************************************************
+//
+//						Repaint a plain line with an indent
+//
+// ***************************************************************************************
+
+static void _EDITRepaintEditLine(uint16_t y) {
+	uint8_t x = edWindowRight-edWindowLeft+1;  										// Characters to output.
+	if (edCurrentSize < edWindowRight-edWindowLeft+1) edCurrentIndent = 0;  		// Current indent forced zero.
+	uint8_t p = edCurrentIndent;  													// Start from here.
+	uint8_t count = edCurrentSize-p;  												// Max to output
+ 	CONSetCursorPosition(edWindowLeft,y+edWindowTop);  								// Set cursor position	
+ 	CONWrite(0x87);  																// Line editing colour
+	while (x > 0 && count > 0) {
+		CONWrite(edCurrentLine[p++]);count--;x--;
+	}
+	while (x-- > 0) CONWrite(' '); 													// Blank rest of line.
+}	
+
 
 // ***************************************************************************************
 //
@@ -142,7 +156,7 @@ static void _EDITRepaintLine(uint16_t y,uint8_t indent) {
 // ***************************************************************************************
 
 static uint8_t _EDITStatePainter(void) {
-	_EDITRepaintLine(edRepaintY,0);
+	_EDITRepaintLine(edRepaintY);
 	edRepaintY++;   																// Next line
 	edState = ES_REPAINT;  															// Go back to repaint state
 	return EX_NOCALLBACK;
@@ -162,6 +176,7 @@ static uint8_t _EDITStateLoadLine(void) {
 		if (ISDISPLAYABLE(c)) edCurrentLine[edCurrentSize++] = c; 					// Read in printables only.
 	}
 	EPRINTF("ED:LoadLine %d size %d\n",edTopLine+edYPos,edCurrentSize);
+	_EDITRepaintEditLine(edYPos);  													// Repaint current line.
 	edState = ES_EDIT;																// Switch to edit state requesting keyboard.
 	return EX_GETKEY;
 }
@@ -201,7 +216,7 @@ uint8_t EDITContinue(void) {
 //
 // ***************************************************************************************
 
-// TODO: Line repainting when in edit mode.
+// TODO: Getkey and cursor.
 // TODO: Editing left right insert etc.
 // TODO: Exit commands (e.g. up down CR initially)
 // TODO: Write back
