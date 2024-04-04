@@ -34,13 +34,6 @@
 #define EX_PUTLINE 			(4)  					// Write line into memory in tokenised form, provided in ASCII
 #define EX_NOCALLBACK		(0xFF)
 
-extern uint8_t 		edState; 	
-extern uint16_t 	edLineCount;
-extern uint8_t  	edWindowTop,edWindowBottom,edWindowLeft,edWindowRight; 				
-extern uint8_t 		edXPos,edYPos;  				
-extern uint16_t  	edTopLine;  					
-extern uint8_t  	edPendingAction;
-
 uint8_t EDITInitialise(void);
 uint8_t EDITContinue(void);
 

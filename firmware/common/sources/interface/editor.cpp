@@ -24,12 +24,12 @@
 // ***************************************************************************************
 
 uint8_t 	edState; 																// Current state
-uint16_t 	edLineCount; 															// Total number of lines in the edited object
+int16_t 	edLineCount; 															// Total number of lines in the edited object
 uint8_t  	edWindowTop,edWindowBottom,edWindowLeft,edWindowRight; 					// Editor window
-uint8_t 	edXPos,edYPos;  														// Cursor position on screen
-uint16_t  	edTopLine;  															// Line# of top line on screen (starting at 1)
+int16_t 	edXPos,edYPos;  														// Cursor position on screen
+int16_t  	edTopLine;  															// Line# of top line on screen (starting at 1)
 uint8_t  	edPendingAction;  														// Action waiting to be performed.
-uint16_t  	edRepaintY,edRepaintYLast;  											// Repainting tracker.
+int16_t  	edRepaintY,edRepaintYLast;  											// Repainting tracker.
 uint8_t  	edCurrentIndent; 														// Current line indent
 uint8_t  	edCurrentLine[256],edCurrentSize;  										// Current line text
 uint16_t 	edLineBufferAddress;  													// 65C02 address of input buffeer.
@@ -60,7 +60,7 @@ static void _EDITScrollTopLine(uint16_t newTop) {
 		edTopLine = newTop;  														// New top line
 		edRepaintY = 0; 															// Repaint from here.
 		edRepaintYLast = edWindowBottom-edWindowTop; 								// To here.
-		EPRINTF("ED:repaint from %d-%d\n", edRepaintY,edRepaintYLast);
+		EPRINTF("ED:repaint from %d-%d topline %d\n", edRepaintY,edRepaintYLast,edTopLine);
 	}
 }
 
@@ -73,6 +73,7 @@ static void _EDITScrollTopLine(uint16_t newTop) {
 static uint8_t _EDITStateInitialise(void) {
 	edLineCount = CPARAMS[0]+(CPARAMS[1] << 8);  									// Number of lines.
 	EPRINTF("ED:Init:has %d lines\n",edLineCount);
+	if (edLineCount == 0) return EX_EXIT;  											// Cannot (currently) be empty program.
 	edWindowTop = 1;edWindowLeft = 0;edWindowRight = gMode.xCSize-1;  				// Work out edit window.
 	edWindowBottom = gMode.yCSize-2;
 	edXPos = 0;edYPos = 0;  														// Cursor position
@@ -145,7 +146,7 @@ static void _EDITRepaintEditLine(uint16_t y) {
 	uint8_t p = edCurrentIndent;  													// Start from here.
 	uint8_t count = edCurrentSize-p;  												// Max to output
  	CONSetCursorPosition(edWindowLeft,y+edWindowTop);  								// Set cursor position	
- 	CONWrite(0x86);CONWrite(0x94);													// Line editing colour
+ 	CONWrite(0x82);CONWrite(0x94);													// Line editing colour
 	while (x > 0 && count > 0) {
 		CONWrite(edCurrentLine[p++]);count--;x--;
 	}
@@ -226,6 +227,10 @@ static bool _EDITBasicKeyHandler(uint8_t c) {
 			edXPos++;break;
 		case CC_TAB:
 			edXPos = (edXPos+8) & 0xF8;break;
+		case CC_HOME:
+			edXPos = 0;break;
+		case CC_END:
+			edXPos = edCurrentSize;break;
 		case CC_DELETE:
 			if (edCurrentSize > 0) {  												// Delete at current.
 				for (pos = edXPos;pos < edCurrentSize;pos++) {
@@ -324,6 +329,25 @@ static uint8_t _EDITStateDispatch(void) {
 		case CC_PAGEDOWN:
 			edYPos += (edWindowBottom-edWindowTop) / 3+1;break;
 	}
+	bool bRepaintAll = false;
+	if (edYPos < 0) {  																// Off the top.
+		if (edTopLine == 1) {  														// At the top already.
+			edYPos = 0;
+		} else {   																	// Need to scroll.
+			edTopLine = edTopLine + edYPos; 
+			if (edTopLine < 1) edTopLine = 1;
+			edYPos = 0;
+			_EDITScrollTopLine(edTopLine);
+		}
+	}
+	if (edYPos > edWindowBottom-edWindowTop) {  									// Off the bottom.
+		edTopLine += edYPos - (edWindowBottom-edWindowTop); 						// New scroll point.
+		_EDITScrollTopLine(edTopLine);  											// Scroll to it.
+		edYPos--;
+	}
+	if (edTopLine + edYPos > edLineCount) {  										// Off the bottom.
+		edYPos = edLineCount - edTopLine;
+	}
 	return EX_NOCALLBACK;
 }
 
@@ -365,7 +389,5 @@ uint8_t EDITContinue(void) {
 //
 // ***************************************************************************************
 
-// TODO: Limit position & scrolling.
-// TODO: Page up & Page down
-// TODO: Home & End
 // TODO: Write back
+// TODO: Report error messages.

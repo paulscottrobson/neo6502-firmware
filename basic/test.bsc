@@ -3,7 +3,7 @@
 0 ' library #3
 edit
 
-while peek($FF00):wend
+while peek($FF00):wend:while peek($FF00):wend:while peek($FF00):wend:while peek($FF00):wend:
 poke $FF04,0
 poke $FF01,35
 poke $FF00,4
