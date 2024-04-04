@@ -47,6 +47,7 @@ _CECallbackVectors:
 		.word 	EDInitialise 				; function 1 initialises.
 		.word 	EDGetLine 					; function 2 get line.
 		.word 	EDGetKey 					; function 3 yield/check key.
+		.word	_CEReturn 					; function 4 put line.
 		
 		.send code
 				

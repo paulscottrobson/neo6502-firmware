@@ -1,3 +1,19 @@
+0 ' library #1
+0 ' library #2
+0 ' library #3
+edit
+
+while peek($FF00):wend:while peek($FF00):wend:while peek($FF00):wend:while peek($FF00):wend:
+poke $FF04,0
+poke $FF01,35
+poke $FF00,4
+while peek($FF00):wend
+
+a = 3.1415/4
+s = sin(a)
+t = tan(a)
+print a;" ";s;" ";t;" ";atan(t)
+print
 
 while peek($FF00):wend
 poke $FF04,0
@@ -12,13 +28,14 @@ print a;" ";s;" ";t;" ";atan(t)
 print
 
 while peek($FF00):wend
-poke $FF04,1
+poke $FF04,0
 poke $FF01,35
 poke $FF00,4
 while peek($FF00):wend
 
-a = 45
+a = 3.1415/4
 s = sin(a)
 t = tan(a)
 print a;" ";s;" ";t;" ";atan(t)
+print
 
