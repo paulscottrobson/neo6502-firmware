@@ -2,14 +2,18 @@
 0 ' another library line
 rect 10,10 solid ink 2 to 100,100 to 110,120 to 130,440 to 140,500
 edit
+cls
+for i = 0 to 100
+for j = 0 to 100
+	doke $FF04,i:doke $FF06,j:poke $FF08,c
+	call send.message(5,39)
+	c = (c + 1) & $FF
+next
+next
 end
-palette 2,222,122,99
-rect 10,10 solid ink 2 to 100,100
-while peek($FF00):wend
-	poke $FF04,2
-	poke $FF01,38
-	poke $FF00,5
-while peek($FF00):wend
-dim c(3)
-for i = 0 to 3:c(i) = peek($FF04+i):next
-for i = 0 to 3:print c(I):next
+
+proc send.message(g,f)
+	while peek($FF00):wend
+	poke $FF01,f:poke $FF00,g
+	while peek($FF00):wend
+endproc	

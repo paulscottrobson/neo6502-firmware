@@ -131,6 +131,12 @@ GROUP 5 Graphics
         Get the palette colour at the index spcified in \Param{0}.
         Values are returned in \Param{1},\Param{2},\Param{3} (RGB).
 
+    FUNCTION 39 Write Pixel
+        GFXSetDrawColour(DPARAMS[4]);GFXGraphicsCommand(5,DCOMMAND);
+    DOCUMENTATION
+        Write Pixel index \Param{4} to the screen coordinate specified in 
+        \Param{0,1},\Param{2,3} (X,Y).
+
     FUNCTION 64 Set Color
         GFXSetDrawColour(DPARAMS[0]);
     DOCUMENTATION
