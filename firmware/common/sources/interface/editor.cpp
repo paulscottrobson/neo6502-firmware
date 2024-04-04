@@ -78,6 +78,7 @@ static uint8_t _EDITStateInitialise(void) {
 	edXPos = 0;edYPos = 0;  														// Cursor position
 	edTopLine = -1;   																// Illegal top line, forces repaint.
 	edCurrentIndent = 0;
+	edWindowTop++;  																// Make space for banner.
 	_EDITScrollTopLine(1);  														// Scroll screen to fit.
 	edState = ES_REPAINT; 															// And go to repaint state
 	return EX_NOCALLBACK;
@@ -144,11 +145,12 @@ static void _EDITRepaintEditLine(uint16_t y) {
 	uint8_t p = edCurrentIndent;  													// Start from here.
 	uint8_t count = edCurrentSize-p;  												// Max to output
  	CONSetCursorPosition(edWindowLeft,y+edWindowTop);  								// Set cursor position	
- 	CONWrite(0x85);  																// Line editing colour
+ 	CONWrite(0x86);CONWrite(0x94);													// Line editing colour
 	while (x > 0 && count > 0) {
 		CONWrite(edCurrentLine[p++]);count--;x--;
 	}
 	while (x-- > 0) CONWrite(' '); 													// Blank rest of line.
+	CONWrite(0x90);
 	edCursorShown = false;  														// Cursor not displayed.
 }	
 
@@ -168,6 +170,21 @@ static uint8_t _EDITStatePainter(void) {
 
 // ***************************************************************************************
 //
+//								Repaint the status bar
+//
+// ***************************************************************************************
+
+static void _EDITRepaintStatusBar(void) {
+	CONSetCursorPosition(edWindowLeft,edWindowTop-1); 								// Display status bar
+	CONWrite(0x83);CONWrite(0x91);
+	for (uint8_t i = edWindowLeft;i < edWindowRight+1;i++) CONWrite(' ');
+	CONSetCursorPosition(edWindowRight-10,edWindowTop-1);
+	CONWriteString("%d / %d",edYPos+edTopLine,edLineCount);
+	CONWrite(0x90);
+}
+
+// ***************************************************************************************
+//
 //								Load line into buffer
 //
 // ***************************************************************************************
@@ -182,8 +199,10 @@ static uint8_t _EDITStateLoadLine(void) {
 	}
 	EPRINTF("ED:LoadLine %d size %d\n",edTopLine+edYPos,edCurrentSize);
 	edLineChanged = false;  														// Line not changed.
+	_EDITRepaintStatusBar();  														// Repaint status bar.
 	_EDITRepaintEditLine(edYPos);  													// Repaint current line.
-	edState = ES_EDIT;																// Switch to edit state requesting keyboard.
+	edState = ES_EDIT;																// Switch to edit state requesting keyboard.	
+
 	return EX_GETKEY;
 }
 
@@ -252,6 +271,7 @@ static uint8_t _EDITStateEdit(void) {
 		return EX_GETKEY;
 	}
 	uint8_t key = CPARAMS[0];  														// Key received
+	EPRINTF("ED:Edit:key %d\n",key);
 	if (edCursorShown) {    														// Hide cursor
 		CONSetCursorPosition(edWindowLeft+edXPos-edCurrentIndent,edWindowTop+edYPos);
 		CONWrite(CC_REVERSE);
@@ -277,8 +297,34 @@ static uint8_t _EDITStateEdit(void) {
 		EPRINTF("ED:Edit:Saving line %d at $%04x\n",line,edLineBufferAddress);
 		return EX_PUTLINE;
 	} else {
-		return EX_EXIT;
+		return EX_NOCALLBACK;
 	}
+}
+
+// ***************************************************************************************
+//
+//							Handle post-writeback actions
+//
+// ***************************************************************************************
+
+static uint8_t _EDITStateDispatch(void) {
+	EPRINTF("ED:Dispatch: %d\n",edPendingAction);
+	if (edPendingAction == CC_ESC) return EX_EXIT;  								// Exit.
+	edRepaintY = edRepaintYLast = edYPos;  											// Default action is to repaint the current line
+	edState = ES_REPAINT; 															// And go to repaint state
+	switch(edPendingAction) {  														// Decide what to do.
+		case CC_UP:
+			edYPos--;break;
+		case CC_DOWN:
+			edYPos++;break;
+		case CC_ENTER:			
+			edXPos = 0;edYPos++;break;
+		case CC_PAGEUP:
+			edYPos -= (edWindowBottom-edWindowTop) / 3+1;break;
+		case CC_PAGEDOWN:
+			edYPos += (edWindowBottom-edWindowTop) / 3+1;break;
+	}
+	return EX_NOCALLBACK;
 }
 
 // ***************************************************************************************
@@ -291,7 +337,7 @@ uint8_t EDITContinue(void) {
 	uint8_t func;
 	do {
 		func = EX_EXIT;
-		EPRINTF("ED:Reenter state %c\n",edState); 
+		if (edState != ES_EDIT) EPRINTF("ED:Reenter state %c\n",edState); 
 		switch(edState) {
 			case ES_INITIALISE:
 				func = _EDITStateInitialise();break;
@@ -301,9 +347,11 @@ uint8_t EDITContinue(void) {
 				func = _EDITStatePainter();break;
 			case ES_LOADLINE:
 				func = _EDITStateLoadLine();break;
-				break;
 			case ES_EDIT:
 				func = _EDITStateEdit();break;
+				break;
+			case ES_DISPATCH:
+				func = _EDITStateDispatch();break;
 				break;
 		}
 	} while (func == EX_NOCALLBACK);
@@ -317,5 +365,7 @@ uint8_t EDITContinue(void) {
 //
 // ***************************************************************************************
 
-// TODO: Exit commands (e.g. up down CR initially)
+// TODO: Limit position & scrolling.
+// TODO: Page up & Page down
+// TODO: Home & End
 // TODO: Write back
