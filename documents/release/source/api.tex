@@ -22,7 +22,7 @@
 
 \title{Neo6502 Assembly - Messaging API}
 \author{Paul Robson \\ Bill Auger}
-\date{2024-04-03}
+\date{2024-04-04}
 
 \renewcommand{\familydefault}{\sfdefault}
 \graphicspath{ {./img/}                             % WRT local editor (eg: texworks)
@@ -750,16 +750,16 @@ Register1 := floor(Register 1)
 Register1 := square root(Register 1)
 }
 \ApiFnRow{19}{Sine}{
-Register1 := sine(Register 1) angles in degrees
+Register1 := sine(Register 1) angles in degrees/radians
 }
 \ApiFnRow{20}{Cosine}{
-Register1 := cosine(Register 1) angles in degrees
+Register1 := cosine(Register 1) angles in degrees/radians
 }
 \ApiFnRow{21}{Tangent}{
-Register1 := tangent(Register 1) angles in degrees
+Register1 := tangent(Register 1) angles in degrees/radians
 }
 \ApiFnRow{22}{Arctangent}{
-Register1 := arctangent(Register 1) angles in degrees
+Register1 := arctangent(Register 1) angles in degrees/radians
 }
 \ApiFnRow{23}{Exponent}{
 Register1 :=  e to the power of Register 1
@@ -787,6 +787,9 @@ Convert the length prefixed string at \Param{4,5} to a constant in Register1.
 }
 \ApiFnRow{34}{Number to String}{
 Convert the constant in Register1 to a length prefixed string which is stored at \Param{4,5}
+}
+\ApiFnRow{35}{Set Degree/Radian Mode}{
+Sets the use of degrees (the default) when non zero, radians when zero.
 }
 \end{longtable*}
 \pagebreak

@@ -41,27 +41,27 @@
 
 	FUNCTION 19 Sine
 		f1 = MATHReadFloat(MATH_REG1);
-		MATHWriteFloat(sin(TORADIANS(f1)),MATH_REG1);
+		MATHWriteFloat(sin(MATHConvertAngleToDefault(f1)),MATH_REG1);
 	DOCUMENTATION
-		Register1 := sine(Register 1) angles in degrees
+		Register1 := sine(Register 1) angles in degrees/radians
 
 	FUNCTION 20 Cosine
 		f1 = MATHReadFloat(MATH_REG1);
-		MATHWriteFloat(cos(TORADIANS(f1)),MATH_REG1);
+		MATHWriteFloat(cos(MATHConvertAngleToDefault(f1)),MATH_REG1);
 	DOCUMENTATION
-		Register1 := cosine(Register 1) angles in degrees
+		Register1 := cosine(Register 1) angles in degrees/radians
 
 	FUNCTION 21 Tangent
 		f1 = MATHReadFloat(MATH_REG1);
-		MATHWriteFloat(tan(TORADIANS(f1)),MATH_REG1);
+		MATHWriteFloat(tan(MATHConvertAngleToDefault(f1)),MATH_REG1);
 	DOCUMENTATION
-		Register1 := tangent(Register 1) angles in degrees
+		Register1 := tangent(Register 1) angles in degrees/radians
 
 	FUNCTION 22 Arctangent
 		f1 = MATHReadFloat(MATH_REG1);
-		MATHWriteFloat(FROMRADIANS(atan(f1)),MATH_REG1);
+		MATHWriteFloat(MATHConvertAngleFromDefault(atan(f1)),MATH_REG1);
 	DOCUMENTATION
-		Register1 := arctangent(Register 1) angles in degrees
+		Register1 := arctangent(Register 1) angles in degrees/radians
 
 	FUNCTION 23 Exponent
 		f1 = MATHReadFloat(MATH_REG1);

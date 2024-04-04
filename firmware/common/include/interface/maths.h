@@ -28,6 +28,10 @@ void MATHProcessDecimal(uint8_t *command);
 void MATHConvertStringToNumber(uint8_t *command);
 void MATHConvertNumberToString(uint8_t *command);
 
+float MATHConvertAngleToDefault(float angle);
+float MATHConvertAngleFromDefault(float angle);
+void MATHSetAngleMeasure(bool bDegrees);
+
 #endif
 
 // ***************************************************************************************
