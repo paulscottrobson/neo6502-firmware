@@ -100,6 +100,14 @@ ClearCodeSetMemoryA:
 		.DoSendMessage 					
 		.byte 	10,1
 		.DoWaitMessage		
+		;
+		; 		Reset to Degrees
+		;
+		lda 	#1
+		sta 	ControlParameters+0
+		.DoSendMessage 					
+		.byte 	4,35
+		.DoWaitMessage		
 		ply
 		rts
 

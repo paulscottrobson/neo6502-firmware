@@ -33,9 +33,32 @@ static union _regConvert {
 } sc;
 
 //
+//		Degrees / Radians flag.
+//
+static bool bUseDegrees = true;
+
+//
 //		Map offset to actual register start address (Placeholder)
 //
 #define REGADDR(ofst) (regAddress+(ofst))
+
+// ***************************************************************************************
+//
+//								Handle degrees and radians
+//
+// ***************************************************************************************
+
+float MATHConvertAngleToDefault(float angle) {
+	return bUseDegrees ? angle * M_PI / 180.0 : angle;
+}
+
+float MATHConvertAngleFromDefault(float angle) {
+	return bUseDegrees ? angle * 180.0 / M_PI : angle;
+}
+
+void MATHSetAngleMeasure(bool bDegrees) {
+	bUseDegrees = bDegrees;
+}
 
 // ***************************************************************************************
 //

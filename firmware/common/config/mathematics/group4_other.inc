@@ -26,3 +26,9 @@
 		MATHConvertNumberToString(DCOMMAND);
 	DOCUMENTATION
 		Convert the constant in Register1 to a length prefixed string which is stored at \Param{4,5}
+
+	FUNCTION 35 Set Degree/Radian Mode
+		MATHSetAngleMeasure(DPARAMS[0] != 0);
+	DOCUMENTATION
+		Sets the use of degrees (the default) when non zero, radians when zero.
+
