@@ -36,6 +36,9 @@ _TTGetLine:
 		bne 	_TTGetLine		
 		jsr 	TOKTokenise
 		jsr 	PGMDeleteLine
+		lda 	tokLineSize 
+		cmp 	#4
+		beq 	_TTLoop
 		jsr 	PGMInsertLine
 		bra 	_TTLoop		
 _TTExit:
