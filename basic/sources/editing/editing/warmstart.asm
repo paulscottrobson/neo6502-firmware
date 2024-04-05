@@ -26,7 +26,6 @@ WarmStart:
 		ldx 	#inputBuffer & $FF
 
 		jsr 	ReadLine 					; read using screen editor
-
 ;		jsr 	InputLine 					; input string to buffer direct typing (ignores YX)
 
 		lda 	inputBuffer 				; entered something ?
@@ -44,7 +43,13 @@ _WSNotSerialLinkMos:
 		ora 	tokLineNumber+1
 		beq 	_WSExecute
 		jsr 	PGMDeleteLine 				; delete line specified
+
+		lda 	tokLineSize 				; if the line is empty, don't insert it
+		cmp 	#4
+		beq 	_WSLineBlank
+
 		jsr 	PGMInsertLine 				; insert it if not blank
+_WSLineBlank:		
 		jsr 	ClearCode 					; clear program memory
 		bra 	WarmStart 					; get another command
 

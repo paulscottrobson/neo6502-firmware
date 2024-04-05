@@ -297,8 +297,6 @@ static uint8_t _EDITStateEdit(void) {
 		int line = edTopLine + edYPos;  											// Line number to write
 		CPARAMS[1] = line & 0xFF;  													// Store in parameters
 		CPARAMS[2] = line >> 8;
-		CPARAMS[3] = edLineBufferAddress & 0xFF;  									// Tell about the line buffer address
-		CPARAMS[4] = edLineBufferAddress >> 8;
 		EPRINTF("ED:Edit:Saving line %d at $%04x\n",line,edLineBufferAddress);
 		return EX_PUTLINE;
 	} else {
@@ -314,7 +312,10 @@ static uint8_t _EDITStateEdit(void) {
 
 static uint8_t _EDITStateDispatch(void) {
 	EPRINTF("ED:Dispatch: %d\n",edPendingAction);
-	if (edPendingAction == CC_ESC) return EX_EXIT;  								// Exit.
+	if (edPendingAction == CC_ESC) {				  								// Exit.
+		CONWrite(CC_CLS);
+		return EX_EXIT;
+	}
 	edRepaintY = edRepaintYLast = edYPos;  											// Default action is to repaint the current line
 	edState = ES_REPAINT; 															// And go to repaint state
 	switch(edPendingAction) {  														// Decide what to do.
@@ -345,8 +346,8 @@ static uint8_t _EDITStateDispatch(void) {
 		_EDITScrollTopLine(edTopLine);  											// Scroll to it.
 		edYPos--;
 	}
-	if (edTopLine + edYPos > edLineCount) {  										// Off the bottom.
-		edYPos = edLineCount - edTopLine;
+	if (edTopLine + edYPos > edLineCount + 1) {  									// Off the bottom.
+		edYPos = edLineCount - edTopLine + 1;
 	}
 	return EX_NOCALLBACK;
 }
@@ -389,5 +390,5 @@ uint8_t EDITContinue(void) {
 //
 // ***************************************************************************************
 
-// TODO: Write back
 // TODO: Report error messages.
+// TODO: Insert/Delete line.
