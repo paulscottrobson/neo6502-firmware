@@ -171,10 +171,11 @@ _CLSpacing:
 		jsr 	TOKDetokenise 				; output the line text.
 		ldx 	#0 							; output text
 _CLPrint:
-		lda 	inputBuffer,x
+		cpx 	inputBuffer
 		beq 	_CLPrintEnd
-		jsr 	WriteCharacter
 		inx
+		lda 	inputBuffer,x
+		jsr 	WriteCharacter
 		bra 	_CLPrint
 _CLPrintEnd:				
 		lda 	#13	 						; next line

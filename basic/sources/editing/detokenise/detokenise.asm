@@ -28,7 +28,7 @@ TOKDetokenise:
 		lda 	#3 							; start position.
 		sta 	TOKOffset
 		stz		TOKLastCharacter 			; clear last character
-		stz 	inputPos 					; write position.
+		stz 	inputBuffer 				; write position.
 		;
 		;		Main detokenising loop
 		;
@@ -116,10 +116,10 @@ TOKDGet:phy
 TOKDOutput:
 		sta 	TOKLastCharacter 			; save last character
 		phx
-		ldx 	inputPos
-		inc 	inputPos
-		sta 	inputBuffer,x
-		stz 	inputBuffer+1,x
+		ldx 	inputBuffer
+		inc 	inputBuffer
+		sta 	inputBuffer+1,x
+		stz 	inputBuffer+2,x
 		plx
 		rts
 

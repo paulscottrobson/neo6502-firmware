@@ -19,10 +19,6 @@
 ; ************************************************************************************************
 
 PGMInsertLine:
-		lda 	tokLineSize 				; if the line is empty, don't insert it
-		cmp 	#4
-		beq 	_PGMIExit
-
 		jsr 	ClearResetFreeMemory 		; end of program into zTemp0
 		;
 		lda 	zTemp0+1 					; end of memory
