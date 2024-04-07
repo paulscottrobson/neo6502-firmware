@@ -28,7 +28,7 @@ SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp $(FRASRC)bee
 			$(COMMONSOURCES)
 
 FLAGS = -DINCLUDE_OS_SUPPORT -DIBMPC -I.. -I ../framework -I ../cpu -I ../bin -I ../include -I $(COMDIR)/include -I 6502 -O1 \
-		-s USE_SDL=2 -s WASM=1 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file storage \
+		-s USE_SDL=2 -s WASM=1 -s USE_SDL_MIXER=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file storage \
 		 -D INCLUDE_DEBUGGING_SUPPORT -s LINKABLE=1 -s EXPORT_ALL=1 -fpermissive
 
 all: app

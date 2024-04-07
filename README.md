@@ -46,6 +46,7 @@ $ export PICO_FATFS_PATH=/path/to/picofatfs_sources
 - '64tass' (6502 assembler)
 - 'cmake'
 - 'libsdl2-dev', 'sdl2', or equivalent (SDL2 development libraries)
+- 'libsdl2-mixer-dev','sdl2_mixer', or equivalent (SDL2 development libraries)
 - 'python3'
     - 'pillow'
     - 'gitpython'
