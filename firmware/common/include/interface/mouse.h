@@ -13,10 +13,14 @@
 #ifndef _CURSOR_H
 #define _CURSOR_H
 
-void CURInitialise(void);
-void CURSetPosition(uint16_t x,uint16_t y);
-bool CURGetCursorDrawInformation(const uint8_t **pData,uint16_t *pX,uint16_t *pY);
-void CURSetVisible(bool isVisible);
+void MSEInitialise(void);
+void MSESetPosition(uint16_t x, uint16_t y);
+void MSEOffsetPosition(int8_t dx, int8_t dy);
+void MSEUpdateScrollWheel(int8_t ds);
+void MSEUpdateButtonState(uint8_t buttonState);
+void MSEGetState(uint16_t *pX, uint16_t *pY, uint8_t *pButtonState, uint8_t *pScrollWheelState);
+bool MSEGetCursorDrawInformation(const uint8_t **pData, uint16_t *pX, uint16_t *pY);
+void MSESetVisible(bool isVisible);
 
 #endif
 
