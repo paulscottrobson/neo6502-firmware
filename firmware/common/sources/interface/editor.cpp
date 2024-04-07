@@ -73,7 +73,6 @@ static void _EDITScrollTopLine(uint16_t newTop) {
 static uint8_t _EDITStateInitialise(void) {
 	edLineCount = CPARAMS[0]+(CPARAMS[1] << 8);  									// Number of lines.
 	EPRINTF("ED:Init:has %d lines\n",edLineCount);
-	if (edLineCount == 0) return EX_EXIT;  											// Cannot (currently) be empty program.
 	edWindowTop = 1;edWindowLeft = 0;edWindowRight = gMode.xCSize-1;  				// Work out edit window.
 	edWindowBottom = gMode.yCSize-2;
 	edXPos = 0;edYPos = 0;  														// Cursor position
@@ -102,7 +101,7 @@ static uint8_t _EDITStateRepaint(void) {
 	}
 	line = edRepaintY+edTopLine;  													// Index of line to repaint.
 	if (line <= edLineCount) {  													// In program space
-		EPRINTF("ED:Repaint:Repainting line %d to Y %d\n",line,edRepaintY);
+		//EPRINTF("ED:Repaint:Repainting line %d to Y %d\n",line,edRepaintY);
 		CPARAMS[1] = line & 0xFF;  													// Line to get to display on callback.
 		CPARAMS[2] = line >> 8;
 		edState = ES_PAINTER;  														// Switch to painter state
@@ -342,9 +341,10 @@ static uint8_t _EDITStateDispatch(void) {
 		}
 	}
 	if (edYPos > edWindowBottom-edWindowTop) {  									// Off the bottom.
-		edTopLine += edYPos - (edWindowBottom-edWindowTop); 						// New scroll point.
+		uint16_t offset = edYPos - (edWindowBottom-edWindowTop);
+		edTopLine += offset; 														// New scroll point.
 		_EDITScrollTopLine(edTopLine);  											// Scroll to it.
-		edYPos--;
+		edYPos-= offset;
 	}
 	if (edTopLine + edYPos > edLineCount + 1) {  									// Off the bottom.
 		edYPos = edLineCount - edTopLine + 1;
@@ -362,7 +362,7 @@ uint8_t EDITContinue(void) {
 	uint8_t func;
 	do {
 		func = EX_EXIT;
-		if (edState != ES_EDIT) EPRINTF("ED:Reenter state %c\n",edState); 
+		//if (edState != ES_EDIT) EPRINTF("ED:Reenter state %c\n",edState); 
 		switch(edState) {
 			case ES_INITIALISE:
 				func = _EDITStateInitialise();break;

@@ -93,7 +93,7 @@ tbuild: prelim
 	$(CCOPY) build$(S)basic.bin $(BINDIR)
 
 trun:tbuild	
-	$(RUNCMD) exec
+	$(RUNCMD) build$(S)tokenised.dat@page exec
 
 tneo: tbuild
 	$(MAKE) -C ..$(S)firmware run 
