@@ -91,7 +91,7 @@ windows: clearobj $(APPNAME)
 # ***************************************************************************************
 
 $(APPNAME): $(SOURCES)
-	$(CC) $(SOURCES) $(LDFLAGS) $(SDL_LDFLAGS) -lSDL2_mixer  -D_REENTRANT -o $@
+	$(CC) $(SOURCES) $(LDFLAGS) $(SDL_LDFLAGS) -o $@
 
 %.o:%.cpp
 	$(CC) $(CADDRESSES) $(CXXFLAGS) -fpermissive -D IBMPC -D INCLUDE_DEBUGGING_SUPPORT -I cpu -I src$(S)framework -I include -I $(COMDIR)include -c -o $@ $<
