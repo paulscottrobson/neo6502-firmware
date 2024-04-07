@@ -3,9 +3,8 @@
 //
 //		Name:		beeper.cpp
 //		Purpose:	SoundSupport library for SDL.
-//		Created:	12th February 2024.
-//		Author:		qxxxb (https://github.com/qxxxb/sdl2-beeper)
-//					Paul Robson (paul@robsons.org.uk)
+//		Created:	7th April 2024
+//		Author:		Paul Robson (paul@robsons.org.uk)
 //
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************
@@ -38,39 +37,46 @@
 
 const int sample_rate = 44100;
 const int wave_freq = 440;
-const int wave_length = sample_rate / wave_freq;
 const int channel = 1;
-std::vector<int16_t> wave_samples;
+int16_t wave_samples[44100];
+
 Mix_Chunk wave_chunk{};
+bool channelPlaying;
+
+void SetWaveFrequency(uint16_t frequency) {
+	int wave_length = sample_rate / frequency;
+	for (int i = 0; i < wave_length; ++i)
+	{
+		wave_samples[i] = (i < wave_length / 2 ? -32768:32767);
+	}
+	wave_chunk.abuf = (std::uint8_t*) wave_samples;
+	wave_chunk.alen = 2 * wave_length;
+}	
 
 void Beeper::open() {
 	printf("[Beeper] Open\n");
 	Mix_OpenAudio(sample_rate, AUDIO_S16SYS, 1, 4096);
-	
-	for (int i = 0; i < wave_length; ++i)
-	{
-		wave_samples.push_back(i < wave_length / 2 ? std::numeric_limits<std::int16_t>::max() : std::numeric_limits<std::int16_t>::min());
-	}
-	wave_chunk.abuf = (std::uint8_t*) wave_samples.data();
-	wave_chunk.alen = 2 * wave_samples.size();
-	wave_chunk.volume = MIX_MAX_VOLUME;
-	const int channel = 1;
-	Mix_PlayChannel(channel, &wave_chunk, -1);
+	channelPlaying = false;
 }
 
 void Beeper::close() {
-	Mix_HaltChannel(channel);
+	if (channelPlaying) Mix_HaltChannel(channel);
 	Mix_CloseAudio();
 	Mix_Quit();
 	printf("[Beeper] Close\n");
 }
 
 void Beeper::setFrequency(double frequency) {
+	if (channelPlaying) Mix_HaltChannel(channel);
 	printf("[Beeper] Freq %f\n",frequency);
+	SetWaveFrequency(frequency);
+	Mix_PlayChannel(channel, &wave_chunk, -1);
+	channelPlaying = true;
 }
 
 void Beeper::setVolume(double volume) {
 	printf("[Beeper] Vol %f\n",volume);
+	wave_chunk.volume = (volume > 0.5) ? MIX_MAX_VOLUME:0;
 }
 
 void Beeper::play() {
@@ -80,4 +86,3 @@ void Beeper::play() {
 void Beeper::stop() {
 	printf("[Beeper] Stop\n");
 }
-
