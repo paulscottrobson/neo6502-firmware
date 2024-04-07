@@ -19,6 +19,7 @@
 #include "gamepads/Gamepad007918D2.h"
 #include "gamepads/Gamepad04284001.h"
 #include "gamepads/Gamepad1c59002X.h"
+#include "gamepads/Gamepad05832060.h"
 
 #include "interface/console.h"
 
@@ -43,33 +44,42 @@ bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_
 
 	switch (vid)
 	{
-	case 0x054C:
-		switch (pid) {
-		case 0x0CDA: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad054C0CDA>()}); break;
-		}
-		break;
-	case 0x081F:
-		switch (pid) {
-		case 0xE401: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad081FE401>()}); break;
-		}
-		break;
 	case 0x0079:
 		switch (pid) {
-			case 0x181C:
+		case 0x181C:
 				m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad0079181C>()}); break;
-			case 0x18D2:
+		case 0x18D2:
 				m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad007918D2>()}); break;
-			}
-		break;
-	case 0x0738:
-		switch (pid) {
-		case 0x2217: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad07382217>()}); break;
 		}
 		break;
 
 	case 0x0428:
 		switch (pid) {
 		case 0x4001: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad04284001>()}); break;
+		}
+		break;
+
+	case 0x054C:
+		switch (pid) {
+		case 0x0CDA: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad054C0CDA>()}); break;
+		}
+		break;
+
+	case 0x0583:
+		switch (pid) {
+		case 0x2060: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad05832060>()}); break;
+		}
+		break;
+
+	case 0x0738:
+		switch (pid) {
+		case 0x2217: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad07382217>()}); break;
+		}
+		break;
+
+	case 0x081F:
+		switch (pid) {
+		case 0xE401: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad081FE401>()}); break;
 		}
 		break;
 
@@ -80,7 +90,6 @@ bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_
 		    m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad1c590026>()}); break;
 		}
 		break;
-
 
 	}
 
