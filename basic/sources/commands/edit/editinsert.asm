@@ -19,6 +19,16 @@
 		.section code
 
 EDInsertLine:
+		lda 	#4 							; 4 bytes in line (it's blank)
+		sta 	tokLineSize
+		lda 	ControlParameters+1 		; copy line #
+		sta 	TOKLineNumber
+		lda 	ControlParameters+2
+		sta		TOKLineNumber+1
+		lda 	#KWD_SYS_END 				; blank line.
+		sta 	tokBuffer
+		jsr 	PGMInsertLine 				; and delete the line.
+		jsr 	EDInitialise 				; renumber it. 
 		rts
 
 		.send code

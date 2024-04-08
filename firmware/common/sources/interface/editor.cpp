@@ -336,12 +336,18 @@ static uint8_t _EDITStateDispatch(void) {
 		case CC_INSLINE:  															// Insert Line (Ctrl+P) Delete Line (Ctrol+Q)
 		case CC_DELLINE:
 			EPRINTF("Insert/Delete %c\n",edPendingAction+64);
-			callback = (edPendingAction==CC_INSLINE) ? EX_INSERTLINE:EX_DELETELINE;	// What we do on call back.
-			edPendingAction = 0;  													// Disable pending action, forces repaint.
-			edState = ES_DISPATCH;  												// And come back here.
 			line = edTopLine + edYPos;  											// Line number to write
 			CPARAMS[1] = line & 0xFF;  												// Store in parameters
 			CPARAMS[2] = line >> 8;
+			if (edPendingAction == CC_INSLINE) {
+				callback = EX_INSERTLINE;
+				edLineCount++;
+			} else {
+				callback = EX_DELETELINE;
+				if (line < edLineCount-1) edLineCount--;
+			}
+			edPendingAction = 0;  													// Disable pending action, forces repaint.
+			edState = ES_DISPATCH;  												// And come back here.
 			break;
 		case 0:
 			EPRINTF("ED:Dispatch:Repaint\n");
