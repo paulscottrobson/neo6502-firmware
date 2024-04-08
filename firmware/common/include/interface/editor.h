@@ -32,6 +32,9 @@
 #define EX_GETLINE			(2)  					// Get required line into memory in ASCII format detokenising
 #define EX_GETKEY  			(3)   					// Get keystroke
 #define EX_PUTLINE 			(4)  					// Write line into memory in tokenised form, provided in ASCII
+#define EX_INSERTLINE  		(5)  					// Insert a blank line
+#define EX_DELETELINE   	(6)  					// Delete current line.
+
 #define EX_NOCALLBACK		(0xFF)
 
 uint8_t EDITInitialise(void);

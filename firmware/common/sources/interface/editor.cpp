@@ -28,7 +28,7 @@ int16_t 	edLineCount; 															// Total number of lines in the edited obje
 uint8_t  	edWindowTop,edWindowBottom,edWindowLeft,edWindowRight; 					// Editor window
 int16_t 	edXPos,edYPos;  														// Cursor position on screen
 int16_t  	edTopLine;  															// Line# of top line on screen (starting at 1)
-uint8_t  	edPendingAction;  														// Action waiting to be performed.
+int16_t  	edPendingAction;  														// Action waiting to be performed.
 int16_t  	edRepaintY,edRepaintYLast;  											// Repainting tracker.
 uint8_t  	edCurrentIndent; 														// Current line indent
 uint8_t  	edCurrentLine[256],edCurrentSize;  										// Current line text
@@ -239,6 +239,7 @@ static bool _EDITBasicKeyHandler(uint8_t c) {
 				edLineChanged = true;  			
 			}
 			break;
+
 		default:
 			isProcessed = (edCurrentSize < 250 && c >= ' ' && c < 0x7F); 			// Processed if can do insert.
 			if (isProcessed) {
@@ -310,6 +311,10 @@ static uint8_t _EDITStateEdit(void) {
 // ***************************************************************************************
 
 static uint8_t _EDITStateDispatch(void) {
+	bool bRepaintAll = false;
+	uint8_t callback = EX_NOCALLBACK;
+	int line;
+
 	EPRINTF("ED:Dispatch: %d\n",edPendingAction);
 	if (edPendingAction == CC_ESC) {				  								// Exit.
 		CONWrite(CC_CLS);
@@ -328,8 +333,21 @@ static uint8_t _EDITStateDispatch(void) {
 			edYPos -= (edWindowBottom-edWindowTop) / 3+1;break;
 		case CC_PAGEDOWN:
 			edYPos += (edWindowBottom-edWindowTop) / 3+1;break;
+		case CC_INSLINE:  															// Insert Line (Ctrl+P) Delete Line (Ctrol+Q)
+		case CC_DELLINE:
+			EPRINTF("Insert/Delete %c\n",edPendingAction+64);
+			callback = (edPendingAction==CC_INSLINE) ? EX_INSERTLINE:EX_DELETELINE;	// What we do on call back.
+			edPendingAction = -1;  													// Disable pending action, forces repaint.
+			edState = ES_DISPATCH;  												// And come back here.
+			line = edTopLine + edYPos;  											// Line number to write
+			CPARAMS[1] = line & 0xFF;  												// Store in parameters
+			CPARAMS[2] = line >> 8;
+			break;
+		case -1:
+			EPRINTF("ED:Dispatch:Repaint\n");
+			bRepaintAll = true;break;  												// Forces repaint.
+
 	}
-	bool bRepaintAll = false;
 	if (edYPos < 0) {  																// Off the top.
 		if (edTopLine == 1) {  														// At the top already.
 			edYPos = 0;
@@ -349,7 +367,7 @@ static uint8_t _EDITStateDispatch(void) {
 	if (edTopLine + edYPos > edLineCount + 1) {  									// Off the bottom.
 		edYPos = edLineCount - edTopLine + 1;
 	}
-	return EX_NOCALLBACK;
+	return callback;
 }
 
 // ***************************************************************************************
