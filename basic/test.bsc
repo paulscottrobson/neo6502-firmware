@@ -3,6 +3,7 @@
 edit
 dim j0w(1,1)
 dim w7u$(2)
+print "This line"
 dim a7h$(5,4)
 dim f9$(1)
 dim j(7)

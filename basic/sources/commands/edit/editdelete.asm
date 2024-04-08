@@ -19,6 +19,12 @@
 		.section code
 
 EDDeleteLine:
+		lda 	ControlParameters+1 		; copy line #
+		sta 	TOKLineNumber
+		lda 	ControlParameters+2
+		sta		TOKLineNumber+1
+		jsr 	PGMDeleteLine 				; and delete the line.
+		jsr 	EDInitialise 				; renumber it. 
 		rts
 
 		.send code
