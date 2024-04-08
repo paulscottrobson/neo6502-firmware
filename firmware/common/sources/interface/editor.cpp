@@ -337,13 +337,13 @@ static uint8_t _EDITStateDispatch(void) {
 		case CC_DELLINE:
 			EPRINTF("Insert/Delete %c\n",edPendingAction+64);
 			callback = (edPendingAction==CC_INSLINE) ? EX_INSERTLINE:EX_DELETELINE;	// What we do on call back.
-			edPendingAction = -1;  													// Disable pending action, forces repaint.
+			edPendingAction = 0;  													// Disable pending action, forces repaint.
 			edState = ES_DISPATCH;  												// And come back here.
 			line = edTopLine + edYPos;  											// Line number to write
 			CPARAMS[1] = line & 0xFF;  												// Store in parameters
 			CPARAMS[2] = line >> 8;
 			break;
-		case -1:
+		case 0:
 			EPRINTF("ED:Dispatch:Repaint\n");
 			bRepaintAll = true;break;  												// Forces repaint.
 
@@ -355,17 +355,20 @@ static uint8_t _EDITStateDispatch(void) {
 			edTopLine = edTopLine + edYPos; 
 			if (edTopLine < 1) edTopLine = 1;
 			edYPos = 0;
-			_EDITScrollTopLine(edTopLine);
+			bRepaintAll = true;
 		}
 	}
 	if (edYPos > edWindowBottom-edWindowTop) {  									// Off the bottom.
 		uint16_t offset = edYPos - (edWindowBottom-edWindowTop);
 		edTopLine += offset; 														// New scroll point.
-		_EDITScrollTopLine(edTopLine);  											// Scroll to it.
+		bRepaintAll = true;
 		edYPos-= offset;
 	}
 	if (edTopLine + edYPos > edLineCount + 1) {  									// Off the bottom.
 		edYPos = edLineCount - edTopLine + 1;
+	}
+	if (bRepaintAll) {    															// Repaint the whole lot.
+		_EDITScrollTopLine(edTopLine);  											// Scroll to it.	
 	}
 	return callback;
 }
