@@ -60,7 +60,7 @@ _EHDisplayMessage:
 		jsr 	CPPrintYA 
 		lda 	#13 						; CR
 		jsr 	WriteCharacter
-		jmp 	WarmStart
+		jmp 	WarmStartNoClear
 
 ; ************************************************************************************************
 ;

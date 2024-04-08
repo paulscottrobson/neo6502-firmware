@@ -19,6 +19,11 @@
 		.section code
 
 Command_Edit: ;; [edit]
+		lda 	#errorBuffer & $FF 			; address of error buffer
+		sta 	ControlParameters+0
+		lda 	#errorBuffer >> 8
+		sta 	ControlParameters+1
+		
 		DoSendMessage 						; call initialise editor
 		.byte 	13,1
 		DoWaitMessage

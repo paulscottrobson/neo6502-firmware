@@ -33,6 +33,8 @@ int16_t  	edRepaintY,edRepaintYLast;  											// Repainting tracker.
 uint8_t  	edCurrentIndent; 														// Current line indent
 uint8_t  	edCurrentLine[256],edCurrentSize;  										// Current line text
 uint16_t 	edLineBufferAddress;  													// 65C02 address of input buffeer.
+uint16_t   	edErrorBuffer;  														// Address of status buffer text.
+
 bool  		edCursorShown;  														// Cursor visible
 bool  		edLineChanged;  														// True when current line changed
 
@@ -42,8 +44,9 @@ bool  		edLineChanged;  														// True when current line changed
 //
 // ***************************************************************************************
 
-uint8_t EDITInitialise(void) {
+uint8_t EDITInitialise(void) {	
 	EPRINTF("ED:Initialise\n");
+	edErrorBuffer = CPARAMS[0]+(CPARAMS[1] << 8);  									// Address of error buffer
 	edState = ES_INITIALISE;   														// State will be initialise after call-out.
 	return EX_INITIALISE;   														// Go away and get initialised information.
 }
@@ -73,7 +76,7 @@ static void _EDITScrollTopLine(uint16_t newTop) {
 static uint8_t _EDITStateInitialise(void) {
 	edLineCount = CPARAMS[0]+(CPARAMS[1] << 8);  									// Number of lines.
 	EPRINTF("ED:Init:has %d lines\n",edLineCount);
-	edWindowTop = 1;edWindowLeft = 0;edWindowRight = gMode.xCSize-1;  				// Work out edit window.
+	edWindowTop = 0;edWindowLeft = 0;edWindowRight = gMode.xCSize-1;  				// Work out edit window.
 	edWindowBottom = gMode.yCSize-2;
 	edXPos = 0;edYPos = 0;  														// Cursor position
 	edTopLine = -1;   																// Illegal top line, forces repaint.
@@ -180,6 +183,13 @@ static void _EDITRepaintStatusBar(void) {
 	for (uint8_t i = edWindowLeft;i < edWindowRight+1;i++) CONWrite(' ');
 	CONSetCursorPosition(edWindowRight-10,edWindowTop-1);
 	CONWriteString("%d / %d",edYPos+edTopLine,edLineCount);
+	if (edErrorBuffer != 0) {  														// Display edit buffer/status line.
+		CONSetCursorPosition(1,edWindowTop-1);
+		for (uint8_t i = 0;i < cpuMemory[edErrorBuffer];i++) {
+			CONWrite(cpuMemory[edErrorBuffer+i+1]);
+		}
+	}
+	CONSetCursorPosition(edWindowRight-10,edWindowTop-1);
 	CONWrite(0x90);
 }
 

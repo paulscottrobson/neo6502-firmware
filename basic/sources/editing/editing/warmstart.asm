@@ -19,6 +19,8 @@
 ; ************************************************************************************************
 
 WarmStart:
+		stz 	errorBuffer 				; clear the error buffer.
+WarmStartNoClear:
 		lda 	#COL_GREEN+$80 				; set display colour.
 		jsr 	WriteCharacter
 
