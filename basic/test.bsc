@@ -1,16 +1,13 @@
 '
-'	BASIC Mouse cursor manipulation
+'	Assembler pair test
 '
-mouse show
-mouse to 260,180
-repeat
-	b = mouse(x,y,s)
-	print chr$(20);x;" ";y;" ";b;" ";s;" "
-until false
-end
-'
-proc send.message(g,f)
-	while peek($FF00):wend
-	poke $FF01,f:poke $FF00,g
-	while peek($FF00):wend
-endproc	
+mem = alloc(512)
+for pass = 0 to 1
+	p = mem
+	o = pass * 3
+
+	nop
+	rs
+	rtn
+	nop
+next
