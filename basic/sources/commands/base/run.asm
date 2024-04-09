@@ -140,7 +140,7 @@ Command_Shift1_Handler: ;; [!!sh1]
 
 Command_Shift2_Handler: ;; [!!sh2]
 		lda 	(codePtr),y 				; get token shifted
-		cmp 	#$D0 						; D0 up are unary functions
+		cmp 	#$E0 						; E0 up are unary functions
 		bcs 	_CS2Fail
 		iny
 		asl 	a 							; double into X

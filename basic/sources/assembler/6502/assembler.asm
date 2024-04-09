@@ -109,8 +109,11 @@ AssembleGroup3:
 
 		jsr 	AccessParameters 			; get and output opcode
 		jsr 	AssemblerWriteByte
-		jsr 	CalculateOperand 			; get a 16 bit operand
-		;
+		jsr 	CalculateOperand 			; get a 16 bit operand	
+;
+;		Assemble a relative branch.
+;
+AssembleRelativeBranch:
 		lda 	XSNumber0 					; calculate the offset
 		sec
 		sbc 	VariableP

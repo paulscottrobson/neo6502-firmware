@@ -51,7 +51,7 @@ _ETKeyword:
 _ETShiftUnary:
 		iny 								; get the shifted value
 		lda 	(codePtr),y		
-		cmp 	#$D0 						; not a unary function
+		cmp 	#$E0 						; not a unary function
 		bcc 	_ETSyntax
 		phx
 		asl 	a 							; access address to jump
