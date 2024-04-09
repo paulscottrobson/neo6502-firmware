@@ -155,12 +155,12 @@ void DBGXRender(int *address,int showDisplay) {
 					}
 				}
 			}
-			// for (int y; y < 240/8;y++) {
-			// 	rc2.x = r.x + r.w + 4;
-			// 	rc2.y = r.y + y * ys * 8 + 2;
-			// 	rc2.w = xs * 2;rc2.h = ys * 8 - 4;
-			// 	GFXRectangle(&rc2,isExtArray[y] ? 0x0F0 : 0xF00);
-			// }
+			for (int y = 0; y < 240/8;y++) {
+			 	rc2.x = r.x + r.w + 4;
+			 	rc2.y = r.y + y * ys * 8 + 2;
+			 	rc2.w = xs * 2;rc2.h = ys * 8 - 4;
+			 	GFXRectangle(&rc2,isExtArray[y] ? 0x0F0 : 0xF00);
+			}
 		}	
 	}
 }
