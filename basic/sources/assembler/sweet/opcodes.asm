@@ -2,7 +2,7 @@
 ; ************************************************************************************************
 ;
 ;		Name:		opcodes.asm
-;		Purpose:	Opcode handling code code
+;		Purpose:	Opcode handling code
 ;		Created:	9th April 2024
 ;		Reviewed: 	No
 ;		Author:		Paul Robson (paul@robsons.org.uk)
@@ -18,7 +18,13 @@
 ;
 ; ************************************************************************************************
 
+;
+;		Single register operand
+;
 sweetreg .macro
+	jsr 	SweetAsmGetRegister
+	ora 	#\1
+	jsr 	AssemblerWriteByte
 	.endm
 ;
 ;		Single byte opcodes.
@@ -29,6 +35,7 @@ sweetopc .macro
 	.endm
 
 sweetbra .macro
+	; TODO: Use 65C02 code.
 	.endm
 ;
 ;		Check @ follows. May soften ?
@@ -49,8 +56,14 @@ checkat .macro
 ; ************************************************************************************************
 
 SweetAsm_SET: ;; [SET]
-	.sweetreg $10
-	; TODO comma,<value>
+	.sweetreg $10 							; $10+x
+	jsr 	ERRCheckComma
+	ldx 	#0
+	jsr 	EXPEvalInteger16 				; operand
+	lda 	XSNumber0,x  					; output it
+	jsr 	AssemblerWriteByte
+	lda 	XSNumber1,x
+	jsr 	AssemblerWriteByte
 	rts
 
 ; ************************************************************************************************
@@ -58,13 +71,17 @@ SweetAsm_SET: ;; [SET]
 ; ************************************************************************************************
 
 SweetAsm_LD: ;; [LD]
-	.sweetreg $20
-	; TODO check for @, bumps opcode by $20
+	jsr 	SweetAsmGetAltRegister
+	clc
+	adc 	#$20
+	jsr 	AssemblerWriteByte
 	rts
 
 SweetAsm_ST: ;; [ST]
-	.sweetreg $30
-	; TODO check for @, bumps opcode by $20
+	jsr 	SweetAsmGetAltRegister
+	clc
+	adc 	#$30
+	jsr 	AssemblerWriteByte
 	rts
 
 SweetAsm_LDD: ;; [LDD]
@@ -139,33 +156,43 @@ SweetAsm_BS: ;; [BS]
 
 SweetAsm_BR: ;; [BR]
 	.sweetbra $01
+	rts
 
 SweetAsm_BNC: ;; [BNC]
 	.sweetbra $02
+	rts
 
 SweetAsm_BC: ;; [BC]
 	.sweetbra $03
+	rts
 
 SweetAsm_BP: ;; [BP]
 	.sweetbra $04
+	rts
 
 SweetAsm_BM: ;; [BM]
 	.sweetbra $05
+	rts
 
 SweetAsm_BZ: ;; [BZ]
 	.sweetbra $06
+	rts
 
 SweetAsm_BNZ: ;; [BNZ]
 	.sweetbra $07
+	rts
 
 SweetAsm_BM1: ;; [BM1]
 	.sweetbra $08
+	rts
 
 SweetAsm_BNM1: ;; [BNM1]
 	.sweetbra $09
+	rts
 
 SweetAsm_BK: ;; [BK]
 	.sweetbra $0A
+	rts
 
 
 
