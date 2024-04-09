@@ -26,5 +26,15 @@ for pass = 0 to 1
 	inr 8
 	dcr 9
 
+	br 	p1
+	bnc p1
+.p1	
+	bc 	p1
+	bp 	p1
+	bm 	p1
+	bz 	p1
+	bnz	p1
+	bm1 	p1
+	bnm1 	p1
 
 next

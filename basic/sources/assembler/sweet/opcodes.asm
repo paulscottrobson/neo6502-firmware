@@ -33,9 +33,12 @@ sweetopc .macro
 	lda 	#\1
 	jsr 	AssemblerWriteByte
 	.endm
-
+;
+;		Short branch like 65C02
+;
 sweetbra .macro
-	; TODO: Use 65C02 code.
+	lda 	#\1
+	bra 	ShortBranchCommon
 	.endm
 ;
 ;		Check @ follows. May soften ?
@@ -141,14 +144,6 @@ SweetAsm_RS: ;; [RS]
 	.sweetopc $0B
 	rts
 
-; ************************************************************************************************
-;							16 bit relative subroutine call (added)
-; ************************************************************************************************
-
-SweetAsm_BS: ;; [BS]
-	.sweetreg $0D
-	; TODO 16 bit operand, relative to PC
-	rts
 
 ; ************************************************************************************************
 ;									8 bit relative branch
@@ -156,45 +151,51 @@ SweetAsm_BS: ;; [BS]
 
 SweetAsm_BR: ;; [BR]
 	.sweetbra $01
-	rts
 
 SweetAsm_BNC: ;; [BNC]
 	.sweetbra $02
-	rts
 
 SweetAsm_BC: ;; [BC]
 	.sweetbra $03
-	rts
 
 SweetAsm_BP: ;; [BP]
 	.sweetbra $04
-	rts
 
 SweetAsm_BM: ;; [BM]
 	.sweetbra $05
-	rts
 
 SweetAsm_BZ: ;; [BZ]
 	.sweetbra $06
-	rts
 
 SweetAsm_BNZ: ;; [BNZ]
 	.sweetbra $07
-	rts
 
 SweetAsm_BM1: ;; [BM1]
 	.sweetbra $08
-	rts
 
 SweetAsm_BNM1: ;; [BNM1]
 	.sweetbra $09
-	rts
 
 SweetAsm_BK: ;; [BK]
 	.sweetbra $0A
+;
+;		Branch common
+;
+ShortBranchCommon:
+	jsr 	AssemblerWriteByte 				; output opcode
+	ldx 	#0  							; target address
+	jsr 	EXPEvalInteger16  			
+	jsr 	AssembleRelativeBranch 			; use 65C02 code.
 	rts
 
+; ************************************************************************************************
+;							16 bit relative subroutine call (added)
+; ************************************************************************************************
 
+SweetAsm_BS: ;; [BS]
+	.sweetopc $0D 							; subroutine call
+	.byte 	3
+	rts
 
 		.send 	code
 
