@@ -1,10 +1,14 @@
 '
 '	Assembler pair test
 '
+'	Test of sweet 16 assembler, with a little 65C02
+'
 mem = alloc(512)
 for pass = 0 to 1
 	p = mem
 	o = pass * 3
+
+	nop
 
 	rs
 	rtn
@@ -39,4 +43,5 @@ for pass = 0 to 1
 	bs 	p1
 	bs 	p2
 .p2	
+	nop
 next

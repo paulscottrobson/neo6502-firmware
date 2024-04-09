@@ -194,7 +194,28 @@ ShortBranchCommon:
 
 SweetAsm_BS: ;; [BS]
 	.sweetopc $0D 							; subroutine call
-	.byte 	3
+
+	ldx 	#0  							; target address
+	jsr 	EXPEvalInteger16  			
+
+	sec 									; calculate target - P 
+	lda 	XSNumber0
+	sbc 	VariableP
+	pha
+	lda 	XSNumber1
+	sbc 	VariableP+1
+	tax
+	pla 									; in X:A
+
+	sec  									; sub 2, 2 further back to allow for operand.
+	sbc 	#2
+	php
+	jsr 	AssemblerWriteByte 				; low offset
+	plp
+	txa
+	sbc 	#0
+	jsr 	AssemblerWriteByte 				; high offset
+
 	rts
 
 		.send 	code
