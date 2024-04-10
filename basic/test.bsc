@@ -2,19 +2,18 @@
 '	Sweet 16 test program.
 '
 mem = alloc(512):reg = alloc(32):stack = alloc(16)
+count = 100
 print mem
 for pass = 0 to 1
-	p = mem
-	o = pass * 3
-
-	set 2,4
-	bsl  subr
+	o = pass*2:p = mem
+	set 1,$2345
+	set 7,$5678
 	rtn
-
-.subr	
-	dcr 2
-	rs
 next
 
 reg[15] = mem:reg[12] = stack
+
 sweet reg
+
+print mem
+for i = 0 to 15:print i,reg[i]:next

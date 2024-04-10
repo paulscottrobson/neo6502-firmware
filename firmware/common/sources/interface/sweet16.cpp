@@ -12,8 +12,7 @@
 
 #include "common.h"
 
-static uint16_t *registers;
-static uint16_t *pctr,*r14;
+static uint16_t sweet_reg[16];
 
 // ***************************************************************************************
 //
@@ -21,9 +20,9 @@ static uint16_t *pctr,*r14;
 //
 // ***************************************************************************************
 
-#define R(r)		registers[r]
+#define R(r)		sweet_reg[r]
 
-#define FETCH8() 	(cpuMemory[(*pctr)++])
+#define FETCH8() 	cpuMemory[sweet_reg[15]++]
 #define FETCH16() 	_SWFetch16();
 
 #define READ8(a)  	cpuMemory[a]
@@ -32,10 +31,10 @@ static uint16_t *pctr,*r14;
 #define WRITE8(a,d) cpuMemory[a] = (d) &0xFF
 #define WRITE16(a,d) { WRITE8(a,d);WRITE8((a)+1,(d) >> 8); }
 
-#define SETCOMP(r) 	*r14 = (*r14 & 0x00FF) | (r << 8)
-#define CLEARCARRY() *r14 &= 0xFFFE
-#define CARRY()   	((*r14) & 0x1)
-#define TESTVALUE()  registers[(*r14) >> 8]
+#define SETCOMP(r) 	sweet_reg[14] = (sweet_reg[14] & 0x00FF) | (r << 8)
+#define CLEARCARRY() sweet_reg[14] &= 0xFFFE
+#define CARRY()   	(sweet_reg[14] & 0x1)
+#define TESTVALUE()  sweet_reg[(sweet_reg[14] >> 8) & 0x0F]
 
 #define BRANCHIF(t) _SW16ConditionalBranch(t)
 
@@ -49,9 +48,9 @@ static inline uint16_t _SWFetch16(void) {
 static inline uint16_t _SWAdd16(uint16_t a,uint16_t b,uint16_t c) {
 	uint32_t result = a + b + c;
 	if (result & 0x10000) {
-		*r14 |= 0x0001;
+		sweet_reg[14] |= 0x0001;
 	} else {
-		*r14 &= 0xFFFE;
+		sweet_reg[14] &= 0xFFFE;
 	}
 	return result & 0xFFFF;
 }
@@ -60,9 +59,9 @@ static inline void _SW16ConditionalBranch(bool test) {
 	if (test != 0) {
 		uint16_t offset = FETCH8();
 		if (offset & 0x80) offset |= 0xFF00;
-		*pctr = (*pctr) + offset;
+		sweet_reg[15] += offset;
 	} else {
-		(*pctr)++;
+		sweet_reg[15]++;
 	}
 }
 
@@ -73,10 +72,11 @@ static inline void _SW16ConditionalBranch(bool test) {
 // ***************************************************************************************
 
 static void _SW16Status() {
-	for (int i = 0;i < 16;i++) {
-		if (registers[i] != 0) printf("R%-2d: $%04x (%d) $%02x\n",i,registers[i],registers[i],cpuMemory[registers[i]]);
-	}
-	printf("\n");
+ 	for (int i = 0;i < 16;i++) {
+ 		if (sweet_reg[i] != 0) {
+ 			CONWriteString("R%-2d: $%04x (%d) $%02x\r",i,sweet_reg[i],sweet_reg[i],cpuMemory[sweet_reg[i]]);
+ 		}
+ 	}
 }
 
 // ***************************************************************************************
@@ -85,20 +85,23 @@ static void _SW16Status() {
 //
 // ***************************************************************************************
 
-bool SW16Execute(uint16_t *reg) {
+bool SW16Execute(uint16_t reg) {
 	bool bQuitSweet = false;
 	bool bYieldSweet = false;
 	uint16_t temp;
-	registers = reg;
-	pctr = &reg[15];
-	r14 = &reg[14];
-	_SW16Status();
-
-	while (!bQuitSweet &&  !bYieldSweet) {
-		switch(FETCH8()) {
-			#include "data/sweet_opcodes.h"
-		}
-		_SW16Status();
+	for (int i = 0;i < 16;i++) {
+		sweet_reg[i] = cpuMemory[reg+i*2]+(cpuMemory[reg+i*2+1] << 8);
+	}
+//	_SW16Status();
+ 	while (!bQuitSweet && !bYieldSweet) {
+ 		switch(FETCH8()) {
+ 			#include "data/sweet_opcodes.h"
+ 		}
+//	_SW16Status();
+ 	}
+	for (int i = 0;i < 16;i++) {
+		cpuMemory[reg+i*2] = sweet_reg[i] & 0xFF;
+		cpuMemory[reg+i*2+1] = sweet_reg[i] >> 8;
 	}
 	return true;
 }
