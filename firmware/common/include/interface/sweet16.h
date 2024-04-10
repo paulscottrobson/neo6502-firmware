@@ -13,7 +13,7 @@
 #ifndef _SWEET16_H
 #define _SWEET16_H
 
-bool SW16Execute(uint16_t *reg);
+bool SW16Execute(uint16_t reg);
 
 #endif
 
