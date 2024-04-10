@@ -2,10 +2,14 @@
 '	Sweet 16 test program.
 '
 mem = alloc(512):reg = alloc(32)
+print mem
 for pass = 0 to 1
 	p = mem
 	o = pass * 3
-	rs
+	set 5,$FEDC
+	bs mem
+	bsl mem
+	rtn
 next
-reg[0] = $1234:reg[5] = $ABCD
+reg[0] = $1234:reg[5] = $ABCD:reg[15] = mem
 sweet reg

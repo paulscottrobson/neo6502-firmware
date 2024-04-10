@@ -141,7 +141,7 @@ class TokenSet(object):
 			TAX	TAY	TRB	TSB	TSX	TXA	TXS	TYA 
 
 			SET LD 	ST 	LDD STD POP STP ADD SUB POPD CPR INR DCR 
-			RTN BR BNC BC BP BM BZ BNZ BM1 BNM1 BK RS BS
+			RTN BR BNC BC BP BM BZ BNZ BM1 BNM1 BK RS BS BSL
 		""",0x60)
 		#
 		#		Additional Unary functions, less popular
