@@ -178,6 +178,10 @@ SweetAsm_BNM1: ;; [BNM1]
 
 SweetAsm_BK: ;; [BK]
 	.sweetbra $0A
+
+SweetAsm_BS: ;; [BS]
+	.sweetbra $0C
+
 ;
 ;		Branch common
 ;
@@ -192,7 +196,7 @@ ShortBranchCommon:
 ;							16 bit relative subroutine call (added)
 ; ************************************************************************************************
 
-SweetAsm_BS: ;; [BS]
+SweetAsm_BSL: ;; [BSL]
 	.sweetopc $0D 							; subroutine call
 
 	ldx 	#0  							; target address
