@@ -22,13 +22,33 @@ static uint16_t *pctr,*r14;
 // ***************************************************************************************
 
 #define R(r)		registers[r]
+
 #define FETCH8() 	(cpuMemory[(*pctr)++])
 #define FETCH16() 	_SWFetch16();
-#define SETCOMP(r) 	*r14 = (*r14 & 0xF0) | (r << 8)
+
+#define READ8(a)  	cpuMemory[a]
+#define READ16(a)  	(READ8(a) | (READ8((a)+1) << 8))
+
+#define WRITE8(a,d) cpuMemory[a] = (d) &0xFF
+#define WRITE16(a,d) { WRITE8(a,d);WRITE8((a)+1,(d) >> 8); }
+
+#define SETCOMP(r) 	*r14 = (*r14 & 0x00FF) | (r << 8)
+
+#define ADD16(a,b,c) _SWAdd16(a,b,c)
 
 static inline uint16_t _SWFetch16(void) {
 	uint8_t v = FETCH8();
 	return v | (FETCH8() << 8);
+}
+
+static inline uint16_t _SWAdd16(uint16_t a,uint16_t b,uint16_t c) {
+	uint32_t result = a + b + c;
+	if (result & 0x10000) {
+		*r14 |= 0x0001;
+	} else {
+		*r14 &= 0xFFFE;
+	}
+	return result & 0xFFFF;
 }
 
 // ***************************************************************************************
@@ -53,6 +73,7 @@ static void _SW16Status() {
 bool SW16Execute(uint16_t *reg) {
 	bool bQuitSweet = false;
 	bool bYieldSweet = false;
+	uint16_t temp;
 	registers = reg;
 	pctr = &reg[15];
 	r14 = &reg[14];
