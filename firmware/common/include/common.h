@@ -66,6 +66,7 @@
 #include "interface/blitter.h"
 #include "interface/gamepad.h"
 #include "interface/editor.h"
+#include "interface/sweet16.h"
 
 #endif
 
