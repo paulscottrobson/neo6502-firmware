@@ -33,6 +33,11 @@ static uint16_t *pctr,*r14;
 #define WRITE16(a,d) { WRITE8(a,d);WRITE8((a)+1,(d) >> 8); }
 
 #define SETCOMP(r) 	*r14 = (*r14 & 0x00FF) | (r << 8)
+#define CLEARCARRY() *r14 &= 0xFFFE
+#define CARRY()   	((*r14) & 0x1)
+#define TESTVALUE()  registers[(*r14) >> 8]
+
+#define BRANCHIF(t) _SW16ConditionalBranch(t)
 
 #define ADD16(a,b,c) _SWAdd16(a,b,c)
 
@@ -51,6 +56,16 @@ static inline uint16_t _SWAdd16(uint16_t a,uint16_t b,uint16_t c) {
 	return result & 0xFFFF;
 }
 
+static inline void _SW16ConditionalBranch(bool test) {
+	if (test != 0) {
+		uint16_t offset = FETCH8();
+		if (offset & 0x80) offset |= 0xFF00;
+		*pctr = (*pctr) + offset;
+	} else {
+		(*pctr)++;
+	}
+}
+
 // ***************************************************************************************
 //
 //							Dump Registers (if not zero)
@@ -59,7 +74,7 @@ static inline uint16_t _SWAdd16(uint16_t a,uint16_t b,uint16_t c) {
 
 static void _SW16Status() {
 	for (int i = 0;i < 16;i++) {
-		if (registers[i] != 0) printf("R%-2d: $%04x %d\n",i,registers[i],registers[i]);
+		if (registers[i] != 0) printf("R%-2d: $%04x (%d) $%02x\n",i,registers[i],registers[i],cpuMemory[registers[i]]);
 	}
 	printf("\n");
 }
