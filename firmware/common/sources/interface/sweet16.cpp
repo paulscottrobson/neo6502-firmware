@@ -12,6 +12,12 @@
 
 #include "common.h"
 
+static void _SW16Status(uint16_t *reg) {
+	for (int i = 0;i < 16;i++) {
+		if (reg[i] != 0) printf("R%-2d: $%04x %d\n",i,reg[i],reg[i]);
+	}
+}
+
 // ***************************************************************************************
 //
 //		Execute sweet 16 code. Returns true to exit, false to yield (for Windows)
@@ -19,6 +25,7 @@
 // ***************************************************************************************
 
 bool SW16Execute(uint16_t *reg) {
+	_SW16Status(reg);
 	return true;
 }
 

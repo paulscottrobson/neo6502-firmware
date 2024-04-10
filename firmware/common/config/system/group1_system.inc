@@ -75,7 +75,7 @@ GROUP 1 System
         Do a MOS command (a '* command') these are specified in the Wiki as they will be steadily expanded.
 
     FUNCTION 9 Sweet 16 Virtual Machine
-        *DERROR = SW16Execute((uint16_t *)(cpuMemory+DSPGetInt16(DCOMMAND,6))) ? 1 : 0;
+        *DERROR = SW16Execute((uint16_t *)(cpuMemory+DSPGetInt16(DCOMMAND,4))) ? 1 : 0;
     DOCUMENTATION
         Execute Sweet 16 VM Code with the register set provided. The error return value is actually a re-entrant
         call for Windows emulation ; if it returns non-zero it means the VM has been executed, if it returns zero
