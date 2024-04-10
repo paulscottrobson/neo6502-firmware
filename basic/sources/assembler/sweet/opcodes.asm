@@ -89,7 +89,7 @@ SweetAsm_ST: ;; [ST]
 
 SweetAsm_LDD: ;; [LDD]
 	.checkat
-	.sweetreg $50
+	.sweetreg $60
 	rts
 
 SweetAsm_STD: ;; [STD]

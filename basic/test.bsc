@@ -6,10 +6,13 @@ print mem
 for pass = 0 to 1
 	p = mem
 	o = pass * 3
-	set 5,$FEDC
-	bs mem
-	bsl mem
+
+	set 0,$1234
+	set 7,$2802
+	inr 0
+	dcr	7
+
 	rtn
 next
-reg[0] = $1234:reg[5] = $ABCD:reg[15] = mem
+reg[15] = mem
 sweet reg

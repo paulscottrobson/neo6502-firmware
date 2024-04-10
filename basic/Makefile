@@ -249,6 +249,7 @@ vlc:
 
 sweet:
 		make -C ..$(S)firmware prelim
+		touch ..$(S)firmware$(S)common$(S)sources$(S)interface$(S)sweet16.cpp
 		make emulator trun
 
 # ***************************************************************************************

@@ -13,7 +13,7 @@
 import sys,os,re
 
 def process(s,n):
-	s = s.replace("@R",str(n & 0x0F))
+	s = s.replace("$R",str(n & 0x0F))
 	return s 
 
 mnemonics = [ None ] * 256
@@ -23,8 +23,8 @@ currentLast = None
 
 for f in sys.argv[1:]:
 	for s in [x.rstrip() for x in open(f).readlines() if not x.startswith("#") and x.strip() != ""]:
-		if s[0] >= '0' and s[0] <= '9':
-			m = re.match('^([0-9A-Fa-f\\?]+)\\s*\\"(.*)\\"\\s*$',s)
+		if (s[0] >= '0' and s[0] <= '9') or (s[0] >= 'A' and s[0] <= 'Z'):
+			m = re.match('^([0-9A-F\\?]+)\\s*\\"(.*)\\"\\s*$',s)
 			assert m is not None,"Bad line "+s
 			opcode = m.group(1)
 			if opcode[1] == '?':
