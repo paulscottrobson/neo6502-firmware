@@ -1,42 +1,11 @@
 '
-'	Assembler pair test
+'	Sweet 16 test program.
 '
-mem = alloc(512)
+mem = alloc(512):reg = alloc(32)
 for pass = 0 to 1
 	p = mem
 	o = pass * 3
-
 	rs
-	rtn
-
-	set 5,32767
-	ld 	11
-	st  12
-	ld 	@13
-	st  @14
-
-	ldd @1
-	std @2
-	pop @3
-	stp @4
-	add 5
-	sub 6
-	popd @10
-	cpr 7
-	inr 8
-	dcr 9
-
-	br 	p1
-	bnc p1
-.p1	
-	bc 	p1
-	bp 	p1
-	bm 	p1
-	bz 	p1
-	bnz	p1
-	bm1 	p1
-	bnm1 	p1
-	bs 	p1
-	bs 	p2
-.p2	
 next
+reg[0] = $1234:reg[5] = $ABCD
+sweet reg
