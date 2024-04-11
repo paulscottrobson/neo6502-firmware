@@ -41,7 +41,13 @@ _CSWExecute:
 		rts
 
 _CSWEnter:
-		.error_unimp
+		.byte 	$F3 						; this is right. It's an unused 1 byte 65c02 opcode
+		nop  								; and it signals to the emulator to frame synchronise
+		nop  								; the NOPs are for safety. On real hardware does nothing.
+
+		plx  								; restore XA
+		pla 
+		bra 	_CSWExecute 				; and restart.
 
 		.send code
 
