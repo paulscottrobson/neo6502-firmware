@@ -34,7 +34,7 @@ static uint16_t sweet_reg[16];
 #define READ8(a)  	cpuMemory[a]
 #define READ16(a)  	(READ8(a) | (READ8((a)+1) << 8))
 
-#define WRITE8(a,d)  _SWWrite8(a,d & 0xFF)
+#define WRITE8(a,d)  _SWWrite8(a,(d) & 0xFF)
 #define WRITE16(a,d) { WRITE8(a,d);WRITE8((a)+1,(d) >> 8); }
 
 #define SETCOMP(r) 	sweet_reg[14] = (sweet_reg[14] & 0x00FF) | (r << 8)
