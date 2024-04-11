@@ -1,39 +1,17 @@
 '
-'	Sweet 16 program showing calling API very simply.
+'	BASIC Mouse cursor manipulation
 '
-mem = alloc(512):reg = alloc(32):stack = alloc(16)
-count = 50
-print mem
-for pass = 0 to 1
-	o = pass*2:p = mem
+mouse show
+mouse to 260,180
+repeat
+	b = mouse(x,y,s)
+	print chr$(20);x;" ";y;" ";b;" ";s;" "
+until false
+end
+'
+proc send.message(g,f)
+	while peek($FF00):wend
+	poke $FF01,f:poke $FF00,g
+	while peek($FF00):wend
+endproc	
 
-	set 2,42
-	bs  printchar
-	set 2,65
-	bs  printchar
-	rtn
-
-.printchar
-	bs  waitfree
-	set 1,$FF04
-	ld  2
-	st 	@1
-	set 1,$FF02
-	set 0,6
-	stp @1	
-	set 0,2
-	stp @1
-	bs  waitfree
-	rs
-
-.waitfree
-	set 1,$FF00
-	ld  @1
-	add 0
-	bnz waitfree
-	rs
-next
-
-reg[15] = mem:reg[12] = stack
-
-sweet reg

@@ -32,7 +32,9 @@ static BYTE8 *isExtArray = NULL;
 static uint16_t palette[256]; 														// Palette
 
 // *******************************************************************************************************************************
+//
 //											Handle palette changes
+//
 // *******************************************************************************************************************************
 
 void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b) {
@@ -40,7 +42,9 @@ void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b) {
 }
 
 // *******************************************************************************************************************************
+//
 //											Handle mode start
+//
 // *******************************************************************************************************************************
 
 void RNDStartMode0(struct GraphicsMode *gMode) {
@@ -49,7 +53,22 @@ void RNDStartMode0(struct GraphicsMode *gMode) {
 }
 
 // *******************************************************************************************************************************
+//
+//								Get information about the active part of the display
+//
+// *******************************************************************************************************************************
+
+void DGBXGetActiveDisplayInfo(SDL_Rect *r,int *pxs,int *pys,int *pxc,int *pyc) {
+		*pxs = 3;*pys = 3;
+		*pxc = 320;*pyc = 240;
+		r->w = (*pxs) * (*pxc);r->h = (*pys) * (*pyc);
+		r->x = WIN_WIDTH/2-r->w/2;r->y = WIN_HEIGHT/2-r->h/2;
+}
+
+// *******************************************************************************************************************************
+//
 //											This renders the debug screen
+//
 // *******************************************************************************************************************************
 
 static const char *labels[] = { "A","X","Y","PC","SP","SR","CY","N","V","B","D","I","Z","C", NULL };
@@ -119,11 +138,9 @@ void DBGXRender(int *address,int showDisplay) {
 	}
 	renderCount++;
 	if (showDisplay != 0) {
-		int xc = 320;int yc = 240;
-		int xs = 3;int ys = 3;
 		SDL_Rect r;
-		r.w = xs*xc;r.h = ys*yc;
-		r.x = WIN_WIDTH/2-r.w/2;r.y = WIN_HEIGHT/2-r.h/2;
+		int xc,yc,xs,ys;
+		DGBXGetActiveDisplayInfo(&r,&xs,&ys,&xc,&yc);
 		SDL_Rect rc2;rc2 = r;
 		rc2.w += 8;rc2.h += 8;rc2.x -=4;rc2.y -= 4;
 		GFXRectangle(&rc2,0);
