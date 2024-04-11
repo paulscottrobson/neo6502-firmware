@@ -75,6 +75,8 @@ int GFXXRender(SDL_Surface *surface);
 void GFXSetFrequency(int freq,int channel);
 
 int GFXReadJoystick0(void);
+int GFXControllerCount(void);
+unsigned int GFXReadController(int id);
 
 class Beeper
 {
