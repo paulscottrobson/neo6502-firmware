@@ -43,6 +43,7 @@
 #define DEBUG_KEYMAP(k,r)	k
 
 void DBGXRender(int *address,int isRunMode);										// Render the debugger screen.
+void DGBXGetActiveDisplayInfo(SDL_Rect *r,int *pxs,int *pys,int *pxc,int *pyc);
 BYTE8 DRVGFXHandler(BYTE8 key,BYTE8 isRunMode);
 BYTE8 *DBGXGetVideoRAM(void);
 

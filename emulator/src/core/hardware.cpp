@@ -9,9 +9,10 @@
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************
 
-#include "sys_processor.h"
-#include "hardware.h"
 #include "gfx.h"
+#include "sys_processor.h"
+#include "sys_debug_system.h"
+#include "hardware.h"
 #include <stdio.h>
 #include "common.h"
 #include "interface/kbdcodes.h"
@@ -668,6 +669,32 @@ uint32_t GMPReadDigitalController(uint8_t index) {
 
 void DSPWarnHandler(uint8_t group,uint8_t func) {
 	fprintf(stderr,"** WARN ** Execute %d.%d not defined.\n",group,func);
+}
+
+// ***************************************************************************************
+//
+//                          Update mouse state - move or buttons
+//
+// ***************************************************************************************
+
+void HWUpdateMouse(void) {
+	int x,y;
+	SDL_Rect r;
+	int xScale,yScale,xWidth,yWidth;
+
+	Uint32 sbut = SDL_GetMouseState(&x,&y);
+	DGBXGetActiveDisplayInfo(&r,&xScale,&yScale,&xWidth,&yWidth);
+
+	if (x >= r.x && y >= r.y && x < r.x+r.w && y < r.y+r.h) {
+		x = (x - r.x) / xScale;y = (y - r.y) / yScale;
+		int buttons = 0;
+		if (sbut & SDL_BUTTON(1)) buttons |= 0x1;
+		if (sbut & SDL_BUTTON(3)) buttons |= 0x2;
+		if (sbut & SDL_BUTTON(2)) buttons |= 0x4;
+		// printf("%x %x %x\n",buttons,x,y);
+		MSESetPosition(x & 0xFFFF,y & 0xFFFF);
+		MSEUpdateButtonState(buttons & 0xFF);
+	}
 }
 
 // ***************************************************************************************

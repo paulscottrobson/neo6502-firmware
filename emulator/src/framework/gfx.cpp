@@ -95,6 +95,9 @@ static void _GFXMainLoop(void *arg) {
 			_GFXUpdateKeyRecord(event.key.keysym.sym,event.type == SDL_KEYDOWN);
 			HWQueueKeyboardEvent(event.key.keysym.scancode,event.type == SDL_KEYDOWN);
 		}
+		if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP) {
+			HWUpdateMouse();
+		}
 		if (event.type == SDL_QUIT) {  												// GUI hardware.
 			isRunning = 0;
 		}
