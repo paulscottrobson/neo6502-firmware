@@ -168,6 +168,8 @@ void CPUInterruptMaskable(void) {
 // *******************************************************************************************************************************
 
 BYTE8 CPUExecuteInstruction(void) {
+	BYTE8 forceSync = 0;
+
 	if (pc == 0xFFFF) {
 		printf("Hit CPU $FFFF - exiting emulator\n");
 		CPUExit();
@@ -176,9 +178,12 @@ BYTE8 CPUExecuteInstruction(void) {
 	BYTE8 opcode = Fetch();															// Fetch opcode.
 	switch(opcode) {																// Execute it.
 		#include "6502/__6502opcodes.h"
+
+		case 0xF3: 	 																// $F3 forces sync in emulator. Not needed in real hardware.
+			forceSync = 1;break;
 	}
 	int cycleMax = inFastMode ? CYCLES_PER_FRAME*10:CYCLES_PER_FRAME; 		
-	if (cycles < cycleMax) return 0;												// Not completed a frame.
+	if (cycles < cycleMax && forceSync == 0) return 0;								// Not completed a frame.
 	cycles = 0;																		// Reset cycle counter.
 	HWSync();																		// Update any hardware
 	return FRAME_RATE;																// Return frame rate.

@@ -42,13 +42,16 @@ void TIMECRITICAL(DSPHandler)(uint8_t *cBlock, uint8_t *memory)
 	float f1,f2;
 	int i1,i2,r;
 	uint32_t u1;
-	uint8_t u2,u4;
+	uint8_t u2,u4,cmd;
 	uint16_t u3;
 	SOUND_UPDATE su;
 	bool b1;
 	*DERROR = 0;                                                                // Clear error state.
-	#include "data/dispatch_code.h"  
+	cmd = *DCOMMAND; 															// Get the command.
 	*DCOMMAND = 0;					     										// Clear the message indicating completion.
+																				// Sweet 16 needs this to call routines. Doesn't matter because
+																				// it isn't actually synchronous.
+	#include "data/dispatch_code.h"  
 }
 
 // ***************************************************************************************
