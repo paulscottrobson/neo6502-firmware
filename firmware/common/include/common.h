@@ -48,6 +48,7 @@
 #include "interface/graphics.h"
 #include "interface/console.h"
 #include "interface/mouse.h"
+#include "interface/cursor.h"
 #include "interface/timer.h"
 #include "interface/sound.h"
 #include "interface/memory.h"

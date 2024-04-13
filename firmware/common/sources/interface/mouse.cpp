@@ -91,8 +91,7 @@ void MSESetVisible(bool isVisible) {
 //
 // ***************************************************************************************
 
-bool MSEGetCursorDrawInformation(const uint8_t **pData, uint16_t *pX, uint16_t *pY) {
-    *pData = default_cursor_data;                                               // Just one cursor
+bool MSEGetCursorDrawInformation(uint16_t *pX, uint16_t *pY) {
     *pX = xCursor; *pY = yCursor;                                               // This is top left - so crosshairs will need adjusting for example.
     return isCursorVisible && xCursor < gMode.xGSize && yCursor < gMode.yGSize; // On and on screen.
 }

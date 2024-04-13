@@ -158,7 +158,10 @@ void DBGXRender(int *address,int showDisplay) {
 			}
 			const uint8_t *cursorImage;
 			uint16_t cursorX,cursorY;
-			if (MSEGetCursorDrawInformation(&cursorImage,&cursorX,&cursorY)) {
+			uint8_t xHit,yHit;
+			if (MSEGetCursorDrawInformation(&cursorX,&cursorY)) {
+				cursorImage = CURGetCurrent(&xHit,&yHit);				
+				cursorX -= xHit;cursorY -= yHit;
 				uint8_t w = 16,h = 16;
 				if (cursorX + 16 >= 320) w = 320-cursorX;
 				if (cursorY + 16 >= 240) h = 240-cursorY;
