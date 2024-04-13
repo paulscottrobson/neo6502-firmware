@@ -86,6 +86,7 @@ void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const* desc_re
         break;
 
     case HID_ITF_PROTOCOL_MOUSE:
+        MSEEnableMouse();
         break;
 
     case HID_ITF_PROTOCOL_NONE:

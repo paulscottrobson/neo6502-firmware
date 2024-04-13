@@ -21,6 +21,8 @@ void MSEUpdateButtonState(uint8_t buttonState);
 void MSEGetState(uint16_t *pX, uint16_t *pY, uint8_t *pButtonState, uint8_t *pScrollWheelState);
 bool MSEGetCursorDrawInformation(const uint8_t **pData, uint16_t *pX, uint16_t *pY);
 void MSESetVisible(bool isVisible);
+void MSEEnableMouse(void);
+bool MSEMousePresent(void);
 
 #endif
 

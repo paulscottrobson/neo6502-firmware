@@ -150,7 +150,7 @@ class TokenSet(object):
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
 			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM 	VBLANKS(
 			ERR 	ERL		PIN( 	IREAD( 	 ANALOG(  JOYCOUNT(  !!UN3
-			IDEVICE( SPC( 	TAB( 	UHASDATA( MOS( 	
+			IDEVICE( SPC( 	TAB( 	UHASDATA( MOS( 	HAVEMOUSE(
 		""")
 		
 if __name__ == "__main__":

@@ -33,3 +33,9 @@ GROUP 11 Mouse
         Returns the mouse position (screen pixel, unsigned) in x \Param{0,1} and y \Param{2,3},
         buttonstate in \Param{4} (button 1 is 0x1, button 2 0x2 etc., set when pressed),
         scrollwheelstate in \Param{5} as uint8 which changes according to scrolls.
+
+    FUNCTION 4 Test mouse present
+        *DPARAMS = MSEMousePresent() ? 1 : 0;
+    DOCUMENTATION
+        Returns non zero if a mouse is plugged in.
+                
