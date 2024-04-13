@@ -75,6 +75,7 @@ void DSPReset(void) {
 	const char bootString[] = PROMPT;
 	MEMInitialiseMemory();                                                      // Set up memory, load kernel ROM
 	MSEInitialise();  															// Mouse first, before starting graphics.
+	CURInitialise();
 	GFXSetMode(0);                                                              // Initialise graphics
 	SPRReset();                                                                 // Reset sprites.
 	LOGDrawLogo();                                                              // Draw logo

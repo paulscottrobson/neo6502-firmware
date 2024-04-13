@@ -70,8 +70,11 @@ static void __not_in_flash_func(_scanline_callback)(void) {
 	if (lineCounter == FRAME_HEIGHT) {
 		frameCounter++;
 		lineCounter = 0;
-		cursorEnabled = MSEGetCursorDrawInformation(&cursorImage, 				// Get cursor info this frame.
-															&xCursor,&yCursor);
+		uint8_t xHit,yHit;
+		cursorEnabled = MSEGetCursorDrawInformation(&xCursor,&yCursor); 		// Get cursor info this frame.
+		cursorImage = CURGetCurrent(&xHit,&yHit);
+		xCursor -= xHit;yCursor -= yHit;
+															
 		if (cursorEnabled) {  													// If enabled work out physical drawing height.
 				wCursor = hCursor = 16;  										// Could be partially drawn.
 				if (xCursor + 16 >= 320) wCursor = 320-xCursor;
@@ -84,12 +87,14 @@ static void __not_in_flash_func(_scanline_callback)(void) {
 		*scanline++ = palette[*screenPos++];                              		// convert using palette => buffer.
 	}
 	if (cursorEnabled && lineCounter>=yCursor && lineCounter<yCursor+hCursor) { // Cursor drawing on this line.
-		const uint8_t *cursorData = cursorImage + (lineCounter-yCursor) * 16;
-		cursline += xCursor;  													// Position on this line.
-		for (uint16_t i = 0;i < wCursor;i++) { 									// Each pixel.
-			uint8_t pixel = *cursorData++;
-			if (pixel != 0xFF) *cursline = palette[pixel];  					// Check for transparency
-			cursline++;
+		if (xCursor >= 0 && xCursor < 320-16) {  								// On Screen ?
+			const uint8_t *cursorData = cursorImage + (lineCounter-yCursor) * 16;
+			cursline += xCursor;  												// Position on this line.
+			for (uint16_t i = 0;i < wCursor;i++) { 								// Each pixel.
+				uint8_t pixel = *cursorData++;
+				if (pixel != 0xFF) *cursline = palette[pixel];  				// Check for transparency
+				cursline++;
+			}
 		}
 	}
 }

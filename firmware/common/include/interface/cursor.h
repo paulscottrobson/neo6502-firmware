@@ -3,26 +3,20 @@
 //
 //      Name :      cursor.h
 //      Authors :   Paul Robson (paul@robsons.org.uk)
-//      Date :      21st March 2024
+//      Date :      13th April 2024
 //      Reviewed :  No
-//      Purpose :   Mouse Cursor functionality
+//      Purpose :   Cursor header
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
-#ifndef _MOUSE_H
-#define _MOUSE_H
+#ifndef _CURSOR_H
+#define _CURSOR_H
 
-void MSEInitialise(void);
-void MSESetPosition(uint16_t x, uint16_t y);
-void MSEOffsetPosition(int8_t dx, int8_t dy);
-void MSEUpdateScrollWheel(int8_t ds);
-void MSEUpdateButtonState(uint8_t buttonState);
-void MSEGetState(uint16_t *pX, uint16_t *pY, uint8_t *pButtonState, uint8_t *pScrollWheelState);
-bool MSEGetCursorDrawInformation(uint16_t *pX, uint16_t *pY);
-void MSESetVisible(bool isVisible);
-void MSEEnableMouse(void);
-bool MSEMousePresent(void);
+void CURInitialise(void);
+const uint8_t *CURGetCurrent(uint8_t *xHit,uint8_t *yHit);
+bool CURSetCurrent(uint8_t cursorID);
+
 
 #endif
 
