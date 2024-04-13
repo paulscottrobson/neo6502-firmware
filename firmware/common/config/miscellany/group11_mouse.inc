@@ -37,5 +37,10 @@ GROUP 11 Mouse
     FUNCTION 4 Test mouse present
         *DPARAMS = MSEMousePresent() ? 1 : 0;
     DOCUMENTATION
-        Returns non zero if a mouse is plugged in.
+        Returns non zero if a mouse is plugged in in \Param{0}
                 
+    FUNCTION 5 Select mouse Cursor
+        *DERROR = CURSetCurrent(DPARAMS[0]);                
+    DOCUMENTATION
+        Select a mouse cursor in \Param{0} ; returns error status.
+        

@@ -25,7 +25,7 @@ Command_Mouse:	;; [mouse]
 		;
 		;		MOUSE SHOW|HIDE
 		;
-		cmp 	#KWD_SYS_SH1 				; check for SHOW and HIDE, shifted
+		cmp 	#KWD_SYS_SH1 				; check for CURSOR SHOW and HIDE, shifted
 		bne 	_MOError
 		iny
 		lda 	(codePtr),y 				; check SHOW/HIDE
@@ -34,8 +34,23 @@ Command_Mouse:	;; [mouse]
 		beq		_MOControl
 		cmp 	#KWD_HIDE-$100
 		beq		_MOControl
+		cmp 	#KWD_CURSOR-$100  			; check cursor
+		beq 	_MOCursor
 _MOError:
 		.error_syntax		 	
+
+_MOCursor:
+		ldx 	#0 							; get cursor number
+		jsr 	EXPEvalInteger8
+		sta 	ControlParameters+0
+		.DoSendMessage  					; set mouse cursor
+		.byte 	11,5
+		.DoWaitMessage
+		lda 	ControlError
+		bne 	_MORange
+		rts
+_MORange:
+		.error_range		
 
 _MOControl:
 		eor 	#KWD_HIDE-$100 				; 0 HIDE <>0 SHOW
