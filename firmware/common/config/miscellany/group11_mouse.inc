@@ -42,5 +42,5 @@ GROUP 11 Mouse
     FUNCTION 5 Select mouse Cursor
         *DERROR = CURSetCurrent(DPARAMS[0]);                
     DOCUMENTATION
-        Select a mouse cursor in \Param{0} ; returns error status.
+        Select a mouse cursor in \Param{0} ; returns error status if the cursor is not available.
         

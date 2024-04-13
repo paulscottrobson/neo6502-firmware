@@ -2,7 +2,7 @@
 '	BASIC Mouse cursor manipulation
 '
 mouse show
-mouse cursor 1
+mouse cursor 2
 cls:line 0,0 ink 3 to 100,100
 mouse to 260,180
 repeat

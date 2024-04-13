@@ -58,7 +58,6 @@ _MOControl:
 		.DoSendMessage  					; set mouse visibility
 		.byte 	11,2
 		.DoWaitMessage
-
 		rts
 
 		;
@@ -84,7 +83,6 @@ _MOTo:
 		.DoSendMessage  					; set mouse position.
 		.byte 	11,1
 		.DoWaitMessage
-
 		rts
 
 		.send code
