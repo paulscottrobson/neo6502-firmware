@@ -18,6 +18,7 @@ static uint16_t xCursor, yCursor;                                               
 static bool isCursorVisible;                                                     // True if visible
 static uint8_t buttonState;
 static uint8_t scrollWheelState;
+static bool hasMouse = false;
 
 // ***************************************************************************************
 //
@@ -30,6 +31,21 @@ void MSEInitialise(void) {
     buttonState = 0;
     scrollWheelState = 0;
     isCursorVisible = false;
+    hasMouse = false;
+}
+
+// ***************************************************************************************
+//
+//                              Set mouse presence flag
+//
+// ***************************************************************************************
+
+void MSEEnableMouse(void) {
+    hasMouse = true;
+}
+
+bool MSEMousePresent(void) {
+    return hasMouse;
 }
 
 // ***************************************************************************************
@@ -108,10 +124,14 @@ void MSEUpdateButtonState(uint8_t bs) {
 // ***************************************************************************************
 
 void MSEGetState(uint16_t *pX, uint16_t *pY, uint8_t *pButtonState, uint8_t *pScrollWheelState) {
-    *pX = xCursor;
-    *pY = yCursor;
-    *pButtonState = buttonState;
-    *pScrollWheelState = scrollWheelState;
+    if (hasMouse) {
+        *pX = xCursor;
+        *pY = yCursor;
+        *pButtonState = buttonState;
+        *pScrollWheelState = scrollWheelState;
+    } else {
+        *pX = *pY = *pButtonState = *pScrollWheelState = 0;
+    }
 }
 
 // ***************************************************************************************

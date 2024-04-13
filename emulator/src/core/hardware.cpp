@@ -66,6 +66,7 @@ static uint8_t getAttributes(const std::string& filename) {
 
 void HWReset(void) {
 	std::filesystem::create_directories(currentPath);
+	MSEEnableMouse();
 }
 
 // *******************************************************************************************************************************
