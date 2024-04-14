@@ -109,8 +109,8 @@ static void _SW16Status() {
 
 bool SW16Execute(uint16_t reg) {
 	bool bQuitSweet = false;  													// Set by RTN.
-	int32_t yieldCounter = 6000000/50;  										// 6 MIPS , 50 frames per second.	
-	uint16_t temp;
+	int32_t yieldCounter = 6000000/60;  										// 6 MIPS , 60 frames per second 
+	uint16_t temp; 																// (set by the emulator)
 
 	for (int i = 0;i < 16;i++) {  												// Copy cpu memory to working registers
 		sweet_reg[i] = cpuMemory[reg+i*2]+(cpuMemory[reg+i*2+1] << 8);
