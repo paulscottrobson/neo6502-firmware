@@ -40,6 +40,13 @@ for i in range(0,cursorCount):
 		hp = [4,0]
 	if i == 4 or i == 9:
 		hp = [4,4]
+	if i == 12 or i == 13 or i == 17 or i == 19:
+		hp = [0,15]
+	if i == 15:
+		hp = [0,0]
+	if i == 16:
+		hp = [12,4]
+
 	hitPoint += hp
 print("const uint8_t cursor_hitPoint[] = {")
 print(",".join([str(x) for x in hitPoint]))
