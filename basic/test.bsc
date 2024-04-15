@@ -1,18 +1,3 @@
-'
-'	BASIC Mouse cursor manipulation
-'
-mouse show
-mouse cursor 2
-cls:line 0,0 ink 3 to 100,100
-mouse to 260,180
-repeat
-	b = mouse(x,y,s)
-	print chr$(20);x;" ";y;" ";b;" ";s;" "
-until false
-end
-'
-proc send.message(g,f)
-	while peek($FF00):wend
-	poke $FF01,f:poke $FF00,g
-	while peek($FF00):wend
-endproc	
+a$ = "Hello world"
+print "[";upper$(a$);"]"
+print "[";lower$(a$);"]"
