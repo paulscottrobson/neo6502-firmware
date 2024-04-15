@@ -149,8 +149,8 @@ class TokenSet(object):
 		self.add(0x2E0,"""
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
 			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM 	VBLANKS(
-			ERR 	ERL		PIN( 	IREAD( 	 ANALOG(  JOYCOUNT(  !!UN3
-			IDEVICE( SPC( 	TAB( 	UHASDATA( MOS( 	HAVEMOUSE(
+			ERR 	ERL		PIN( 	IREAD( 	 ANALOG(  JOYCOUNT(  UPPER$(
+			IDEVICE( SPC( 	TAB( 	UHASDATA( MOS( 	HAVEMOUSE( LOWER$(
 		""")
 		
 if __name__ == "__main__":
