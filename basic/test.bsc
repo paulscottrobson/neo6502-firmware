@@ -1,3 +1,15 @@
-a$ = "Hello world"
-print "[";upper$(a$);"]"
-print "[";lower$(a$);"]"
+cls
+pics = alloc(256)
+for i = 0 to 255:poke pics+i,i & 15:next
+print pics
+
+for i = 0 to 15
+	addr = i*320+3210+i
+	while peek($FF00) <> 0:wend
+	poke $FF04,0:doke $FF05,pics
+	poke $FF07,128:doke $FF08,addr
+	doke $FF0A,256
+	poke $FF01,2
+	poke $FF00,12
+next
+print "Done"	

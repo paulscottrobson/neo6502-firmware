@@ -43,16 +43,15 @@ static uint8_t *_BLTGetRealAddress(uint8_t page,uint16_t address) {
 // ***************************************************************************************
 
 uint8_t BLTSimpleCopy(uint8_t pageFrom,uint16_t addressFrom, uint8_t pageTo, uint16_t addressTo, uint16_t transferSize) {	
-	printf("Blit: %02x:%04x to %02x:%04x bytes %04x\n",pageFrom,pageTo,addressFrom,addressTo,transferSize);
-	while (transferSize != 0) {  													// Still copying
-		transferSize--;  															// One fewer byte
-		uint8_t *src = _BLTGetRealAddress(pageFrom,addressFrom);  					// Copy from here
-		uint8_t *dst = _BLTGetRealAddress(pageTo,addressTo);  						// To here.
-		if (src == NULL || dst == NULL) return 1;  									// Both legitimate addresses
-		*dst = *src;  																// Byte copy
-		if (++addressFrom == 0) pageFrom++;  										// Bump addresses.
-		if (++addressTo == 0) pageTo++;
-	}
+	printf("Blit: %02x:%04x to %02x:%04x bytes %04x\n",pageFrom,addressFrom,pageTo,addressTo,transferSize);
+	if (transferSize == 0) return 0;
+	uint8_t *src = _BLTGetRealAddress(pageFrom,addressFrom);  						// Copy from here
+	uint8_t *dst = _BLTGetRealAddress(pageTo,addressTo);  							// To here.
+	if (src == NULL || dst == NULL) return 1;  										// Start both legitimate addresses
+	if (_BLTGetRealAddress(pageFrom,addressFrom+transferSize-1) == NULL) return 1; 	// Check end both legitimate addresses
+	if (_BLTGetRealAddress(pageTo,addressTo+transferSize-1) == NULL) return 1;
+	memmove(dst,src,transferSize); 													// Copy it.
+
 	return 0;
 }
 
