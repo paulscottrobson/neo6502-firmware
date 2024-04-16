@@ -38,11 +38,11 @@ for i in range(0,cursorCount):
 	hp = [8,8]
 	if i == 0:
 		hp = [4,0]
-	if i == 4 or i == 9:
+	if i in [4,9]:
 		hp = [4,4]
-	if i == 12 or i == 13 or i == 17 or i == 19:
+	if i in [12,13,17,19]:
 		hp = [0,15]
-	if i == 15:
+	if i in [15,20,21,22,23]:
 		hp = [0,0]
 	if i == 16:
 		hp = [12,4]
