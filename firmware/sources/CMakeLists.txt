@@ -75,6 +75,7 @@ target_link_libraries(firmware
     pico_stdlib
     pico_multicore
     pico_util
+    pico_mem_ops
     hardware_i2c
     hardware_adc
     hardware_spi
