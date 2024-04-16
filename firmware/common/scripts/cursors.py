@@ -42,7 +42,7 @@ for i in range(0,cursorCount):
 		hp = [4,4]
 	if i in [12,13,17,19]:
 		hp = [0,15]
-	if i in [15,20,21,22,23]:
+	if i in [15,20,21,22,23,24,25]:
 		hp = [0,0]
 	if i == 16:
 		hp = [12,4]
