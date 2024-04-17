@@ -36,16 +36,16 @@ print("};\n")
 hitPoint = []
 for i in range(0,cursorCount):
 	hp = [8,8]
-	if i == 0:
-		hp = [4,0]
+	if i in [0,15,20,21,22,23,24,25]:
+		hp = [0,0]
 	if i in [4,9]:
 		hp = [4,4]
 	if i in [12,13,17,19]:
 		hp = [0,15]
-	if i in [15,20,21,22,23,24,25]:
-		hp = [0,0]
 	if i == 16:
 		hp = [12,4]
+	if i == 26:
+		hp = [4,0]
 
 	hitPoint += hp
 print("const uint8_t cursor_hitPoint[] = {")
