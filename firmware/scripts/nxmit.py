@@ -49,7 +49,7 @@ class SerialInterface(object):
 			data = data[0]
 		self.port.write(bytes(header))   											# Write header
 		self.port.write(bytes(data))  												# Write data block
-		#time.sleep(0)
+		time.sleep(0.01) 															# Required for Macs.
 	#
 	#		Transmit a single block of data to whatever the current write address has been set to
 	#
