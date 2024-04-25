@@ -20,12 +20,12 @@
 	FUNCTION 33 String to Number
 		MATHConvertStringToNumber(DCOMMAND);
 	DOCUMENTATION
-		Convert the length prefixed string at \Param{4,5} to a constant in Register1.
+		Convert the length prefixed string at Parameters:4,5 to a constant in Register1.
 
 	FUNCTION 34 Number to String
 		MATHConvertNumberToString(DCOMMAND);
 	DOCUMENTATION
-		Convert the constant in Register1 to a length prefixed string which is stored at \Param{4,5}
+		Convert the constant in Register1 to a length prefixed string which is stored at Parameters:4,5
 
 	FUNCTION 35 Set Degree/Radian Mode
 		MATHSetAngleMeasure(DPARAMS[0] != 0);
