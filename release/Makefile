@@ -24,7 +24,7 @@ DOCDIR = $(ROOTDIR)documents$(S)release$(S)
 #
 #		Documentation files included
 #
-DOCUMENTS = $(DOCDIR)*.odt $(DOCDIR)*.pdf $(BINDIR)neo6502.inc
+DOCUMENTS = $(DOCDIR)*.pdf $(BINDIR)neo6502.inc
 
 #
 #		Binary files included
@@ -88,3 +88,5 @@ documentation:
 	# Yes, twice! The TOC and tables require two passes
 	pdflatex -output-directory=$(DOCDIR)       $(DOCDIR)source$(S)api.tex
 	pdflatex -output-directory=$(DOCDIR)       $(DOCDIR)source$(S)api.tex
+	# generate BASIC PDF (requires 'pandoc')
+	pandoc $(DOCDIR)basic.md -o $(DOCDIR)basic.pdf
