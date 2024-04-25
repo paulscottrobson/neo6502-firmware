@@ -1,5 +1,4 @@
 ---
-fontfamily: merriweather  
 fontfamilyoptions: sfdefault
 fontsize: 12pt
 ---
