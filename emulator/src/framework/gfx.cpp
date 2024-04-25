@@ -68,6 +68,8 @@ void GFXOpenWindow(const char *title,int width,int height,int colour) {
 	Beeper::open();
 	Beeper::setVolume(0.0);
 	Beeper::play();
+
+	SDL_ShowCursor(SDL_DISABLE);                                                    // Hide mouse cursor
 }
 
 // *******************************************************************************************************************************
