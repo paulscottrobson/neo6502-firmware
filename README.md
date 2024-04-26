@@ -70,7 +70,7 @@ Most distros have the dependencies packaged.
     ```
   * Documentation only:
     ```
-    $ sudo pacman -S pandoc texlive-latex texlive-latexextra texlive-latexrecommended
+    $ sudo pacman -S pandoc 
     ```
   * Everything (firmware, all emulators, documentation, examples, demos, etc):
     ```
