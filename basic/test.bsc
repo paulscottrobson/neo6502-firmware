@@ -1,3 +1,6 @@
 cls
 mouse show
-mouse cursor 38
+repeat
+	b = mouse(x,y,w)
+	print chr$(20);x,y,w;"    "
+until false

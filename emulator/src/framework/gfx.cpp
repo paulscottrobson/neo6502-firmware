@@ -18,6 +18,7 @@
 #include <cmath>
 #include "sys_processor.h"
 #include <hardware.h>
+#include <common.h>
 
 #ifdef EMSCRIPTEN
 #include "emscripten.h"
@@ -106,8 +107,14 @@ static void _GFXMainLoop(void *arg) {
 			_GFXUpdateKeyRecord(event.key.keysym.sym,event.type == SDL_KEYDOWN);
 			HWQueueKeyboardEvent(event.key.keysym.scancode,event.type == SDL_KEYDOWN);
 		}
-		if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP) {
+		if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN 		// Mouse button/position  update
+														|| event.type == SDL_MOUSEBUTTONUP) {
 			HWUpdateMouse();
+		}
+		if (event.type == SDL_MOUSEWHEEL) {  									// Handle scroll wheel events.
+			int dy = event.wheel.y;
+			if (event.wheel.type == SDL_MOUSEWHEEL_FLIPPED) dy = -dy;
+			MSEUpdateScrollWheel(dy);
 		}
 		if (event.type == SDL_QUIT) {  												// GUI hardware.
 			isRunning = 0;
