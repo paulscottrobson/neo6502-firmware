@@ -73,6 +73,65 @@ void DGBXGetActiveDisplayInfo(SDL_Rect *r,int *pxs,int *pys,int *pxc,int *pyc) {
 
 static const char *labels[] = { "A","X","Y","PC","SP","SR","CY","N","V","B","D","I","Z","C", NULL };
 
+// Disassemble the instruction at addr, writing it into buffer.
+// Returns address of next instruction.
+int DBGXDasm(int addr, char* buffer) {
+	int p = addr;
+	int opc = CPUReadMemory(p);p = (p + 1) & 0xFFFF;							// Read opcode.
+	strcpy(buffer,_mnemonics[opc]);												// Work out the opcode.
+	char *at = strchr(buffer,'@');												// Look for '@'
+	if (at != NULL) {															// Operand ?
+		char hex[6],temp[32];	
+		if (at[1] == '1') {
+			sprintf(hex,"%02x",CPUReadMemory(p));
+			p = (p+1) & 0xFFFF;
+		}
+		if (at[1] == '2') {
+			sprintf(hex,"%02x%02x",CPUReadMemory(p+1),CPUReadMemory(p));
+			p = (p+2) & 0xFFFF;
+		}
+		if (at[1] == 'r') {
+			int addr = CPUReadMemory(p);
+			p = (p+1) & 0xFFFF;
+			if ((addr & 0x80) != 0) addr = addr-256;
+			sprintf(hex,"%04x",addr+p);
+		}
+		strcpy(temp,buffer);
+		strcpy(temp+(at-buffer),hex);
+		strcat(temp,at+2);
+		strcpy(buffer,temp);
+	}
+	return p;
+}
+
+// Return the number of bytes (1, 2 or 3) occupied by the instruction at addr.
+int DBGXInstructionSize(int addr) {
+	int opcode = CPUReadMemory(addr);
+	const char *at = strchr(_mnemonics[opcode],'@');
+	if (at != NULL) {
+		switch(at[1]) {
+			case '1': return 2;
+			case 'r': return 2;
+			case '2': return 3;
+			default: break; // shouldn't happen...
+		}
+	}
+	return 1;   // It's a bare opcode.
+}
+
+// Dump out nbytes of memory to a string buffer.
+// Buffer must have room for at least 3 bytes per memory location,
+// plus an extra byte for null-termination.
+// e.g for nbytes=3: "XX XX XX \0"
+void DBGXDumpMem(int addr, int nbytes, char* buffer) {
+	char* p = buffer;
+	for (int i = 0; i < nbytes; ++i) {
+		int b = CPUReadMemory((addr + i) & 0xFFFF);
+		p += sprintf(p, "%02x ", b);
+	}
+}
+
+
 void DBGXRender(int *address,int showDisplay) {
 	int n = 0;
 	char buffer[32];
@@ -101,37 +160,13 @@ void DBGXRender(int *address,int showDisplay) {
 		}
 
 		int p = address[0];																// Dump program code. 
-		int opc;
 
 		for (int row = 0;row < 14;row++) {
 			int isPC = (p == ((s->pc) & 0xFFFF));										// Tests.
 			int isBrk = (p == address[3]);
 			GFXNumber(GRID(0,row),p,16,4,GRIDSIZE,isPC ? DBGC_HIGHLIGHT:DBGC_ADDRESS,	// Display address / highlight / breakpoint
 																		isBrk ? 0xF00 : -1);
-			opc = CPUReadMemory(p);p = (p + 1) & 0xFFFF;								// Read opcode.
-			strcpy(buffer,_mnemonics[opc]);												// Work out the opcode.
-			char *at = strchr(buffer,'@');												// Look for '@'
-			if (at != NULL) {															// Operand ?
-				char hex[6],temp[32];	
-				if (at[1] == '1') {
-					sprintf(hex,"%02x",CPUReadMemory(p));
-					p = (p+1) & 0xFFFF;
-				}
-				if (at[1] == '2') {
-					sprintf(hex,"%02x%02x",CPUReadMemory(p+1),CPUReadMemory(p));
-					p = (p+2) & 0xFFFF;
-				}
-				if (at[1] == 'r') {
-					int addr = CPUReadMemory(p);
-					p = (p+1) & 0xFFFF;
-					if ((addr & 0x80) != 0) addr = addr-256;
-					sprintf(hex,"%04x",addr+p);
-				}
-				strcpy(temp,buffer);
-				strcpy(temp+(at-buffer),hex);
-				strcat(temp,at+2);
-				strcpy(buffer,temp);
-			}
+            p = DBGXDasm(p, buffer);
 			GFXString(GRID(5,row),buffer,GRIDSIZE,isPC ? DBGC_HIGHLIGHT:DBGC_DATA,-1);	// Print the mnemonic
 		}
 		

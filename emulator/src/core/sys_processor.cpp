@@ -40,6 +40,7 @@ static char **argumentList;
 static LONG32 cycles;																// Cycle Count.
 static int inFastMode = 0; 															// Fast mode flag (speeds up unit testing)
 static bool useDebuggerKeys = false;  												// Use the debugger keys.
+static bool traceMode = false;														// Dump each CPU instruction to stdout.
 
 // *******************************************************************************************************************************
 //											 Memory and I/O read and write macros.
@@ -141,6 +142,9 @@ void CPUReset(void) {
 			if (strncmp(command,"path:",5) == 0) {  								// Set storage path
 				HWSetDefaultPath(command+5);
 			}
+			if (strcmp(command,"trace") == 0) { 									// Dump every CPU instruction to stdout.
+				traceMode = true;
+			}
 		}
 	}
 	HWReset();																		// Reset Hardware
@@ -175,6 +179,15 @@ BYTE8 CPUExecuteInstruction(void) {
 		CPUExit();
 		return FRAME_RATE;
 	}
+
+    if (traceMode) {
+		char mem[10]; // "XX XX XX \0"
+		char dasm[32];
+		DBGXDumpMem(pc, DBGXInstructionSize(pc), mem);
+		DBGXDasm(pc, dasm);
+		printf("%04x  %-10s %s\n", pc, mem, dasm);
+	}
+
 	BYTE8 opcode = Fetch();															// Fetch opcode.
 	switch(opcode) {																// Execute it.
 		#include "6502/__6502opcodes.h"
