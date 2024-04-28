@@ -1,0 +1,293 @@
+.MSFIRST
+.WORDADDRS
+
+/* 1n */
+SET R0,*      10 3 SWAP 1
+SET R1,*      11 3 SWAP 1
+SET R2,*      12 3 SWAP 1
+SET R3,*      13 3 SWAP 1
+SET R4,*      14 3 SWAP 1
+SET R5,*      15 3 SWAP 1
+SET R6,*      16 3 SWAP 1
+SET R7,*      17 3 SWAP 1
+SET R8,*      18 3 SWAP 1
+SET R9,*      19 3 SWAP 1
+SET R10,*     1A 3 SWAP 1
+SET R11,*     1B 3 SWAP 1
+SET R12,*     1C 3 SWAP 1
+SET R13,*     1D 3 SWAP 1
+SET R14,*     1E 3 SWAP 1
+SET R15,*     1F 3 SWAP 1
+
+/* 2n */
+LD R0      20 1 NOP 1
+LD R1      21 1 NOP 1
+LD R2      22 1 NOP 1
+LD R3      23 1 NOP 1
+LD R4      24 1 NOP 1
+LD R5      25 1 NOP 1
+LD R6      26 1 NOP 1
+LD R7      27 1 NOP 1
+LD R8      28 1 NOP 1
+LD R9      29 1 NOP 1
+LD R10     2A 1 NOP 1
+LD R11     2B 1 NOP 1
+LD R12     2C 1 NOP 1
+LD R13     2D 1 NOP 1
+LD R14     2E 1 NOP 1
+LD R15     2F 1 NOP 1
+
+/* 3n */
+ST R0      30 1 NOP 1
+ST R1      31 1 NOP 1
+ST R2      32 1 NOP 1
+ST R3      33 1 NOP 1
+ST R4      34 1 NOP 1
+ST R5      35 1 NOP 1
+ST R6      36 1 NOP 1
+ST R7      37 1 NOP 1
+ST R8      38 1 NOP 1
+ST R9      39 1 NOP 1
+ST R10     3A 1 NOP 1
+ST R11     3B 1 NOP 1
+ST R12     3C 1 NOP 1
+ST R13     3D 1 NOP 1
+ST R14     3E 1 NOP 1
+ST R15     3F 1 NOP 1
+
+/* 4n */
+LD @R0     40 1 NOP 1
+LD @R1     41 1 NOP 1
+LD @R2     42 1 NOP 1
+LD @R3     43 1 NOP 1
+LD @R4     44 1 NOP 1
+LD @R5     45 1 NOP 1
+LD @R6     46 1 NOP 1
+LD @R7     47 1 NOP 1
+LD @R8     48 1 NOP 1
+LD @R9     49 1 NOP 1
+LD @R10    4A 1 NOP 1
+LD @R11    4B 1 NOP 1
+LD @R12    4C 1 NOP 1
+LD @R13    4D 1 NOP 1
+LD @R14    4E 1 NOP 1
+LD @R15    4F 1 NOP 1
+
+/* 5n */
+ST @R0 	   50 1 NOP 1
+ST @R1     51 1 NOP 1
+ST @R2     52 1 NOP 1
+ST @R3     53 1 NOP 1
+ST @R4     54 1 NOP 1
+ST @R5     55 1 NOP 1
+ST @R6     56 1 NOP 1
+ST @R7     57 1 NOP 1
+ST @R8     58 1 NOP 1
+ST @R9     59 1 NOP 1
+ST @R10    5A 1 NOP 1
+ST @R11    5B 1 NOP 1
+ST @R12    5C 1 NOP 1
+ST @R13    5D 1 NOP 1
+ST @R14    5E 1 NOP 1
+ST @R15    5F 1 NOP 1
+
+/* 6n */
+LDD @R0        60 1 NOP 1
+LDD @R1        61 1 NOP 1
+LDD @R2        62 1 NOP 1
+LDD @R3        63 1 NOP 1
+LDD @R4        64 1 NOP 1
+LDD @R5        65 1 NOP 1
+LDD @R6        66 1 NOP 1
+LDD @R7        67 1 NOP 1
+LDD @R8        68 1 NOP 1
+LDD @R9        69 1 NOP 1
+LDD @R10       6A 1 NOP 1
+LDD @R11       6B 1 NOP 1
+LDD @R12       6C 1 NOP 1
+LDD @R13       6D 1 NOP 1
+LDD @R14       6E 1 NOP 1
+LDD @R15       6F 1 NOP 1
+
+/* 7n */
+STD @R0       70 1 NOP 1
+STD @R1       71 1 NOP 1
+STD @R2       72 1 NOP 1
+STD @R3       73 1 NOP 1
+STD @R4       74 1 NOP 1
+STD @R5       75 1 NOP 1
+STD @R6       76 1 NOP 1
+STD @R7       77 1 NOP 1
+STD @R8       78 1 NOP 1
+STD @R9       79 1 NOP 1
+STD @R10      7A 1 NOP 1
+STD @R11      7B 1 NOP 1
+STD @R12      7C 1 NOP 1
+STD @R13      7D 1 NOP 1
+STD @R14      7E 1 NOP 1
+STD @R15      7F 1 NOP 1
+
+/* 8n */
+POP @R0       80 1 NOP 1
+POP @R1       81 1 NOP 1
+POP @R2       82 1 NOP 1
+POP @R3       83 1 NOP 1
+POP @R4       84 1 NOP 1
+POP @R5       85 1 NOP 1
+POP @R6       86 1 NOP 1
+POP @R7       87 1 NOP 1
+POP @R8       88 1 NOP 1
+POP @R9       89 1 NOP 1
+POP @R10      8A 1 NOP 1
+POP @R11      8B 1 NOP 1
+POP @R12      8C 1 NOP 1
+POP @R13      8D 1 NOP 1
+POP @R14      8E 1 NOP 1
+POP @R15      8F 1 NOP 1
+
+/* 9n */
+STP @R0        90 1 NOP 1
+STP @R1        91 1 NOP 1
+STP @R2        92 1 NOP 1
+STP @R3        93 1 NOP 1
+STP @R4        94 1 NOP 1
+STP @R5        95 1 NOP 1
+STP @R6        96 1 NOP 1
+STP @R7        97 1 NOP 1
+STP @R8        98 1 NOP 1
+STP @R9        99 1 NOP 1
+STP @R10       9A 1 NOP 1
+STP @R11       9B 1 NOP 1
+STP @R12       9C 1 NOP 1
+STP @R13       9D 1 NOP 1
+STP @R14       9E 1 NOP 1
+STP @R15       9F 1 NOP 1
+
+/* An */
+ADD R0        A0 1 NOP 1
+ADD R1        A1 1 NOP 1
+ADD R2        A2 1 NOP 1
+ADD R3        A3 1 NOP 1
+ADD R4        A4 1 NOP 1
+ADD R5        A5 1 NOP 1
+ADD R6        A6 1 NOP 1
+ADD R7        A7 1 NOP 1
+ADD R8        A8 1 NOP 1
+ADD R9        A9 1 NOP 1
+ADD R10       AA 1 NOP 1
+ADD R11       AB 1 NOP 1
+ADD R12       AC 1 NOP 1
+ADD R13       AD 1 NOP 1
+ADD R14       AE 1 NOP 1
+ADD R15       AF 1 NOP 1
+
+/* Bn */
+SUB R0        B0 1 NOP 1
+SUB R1        B1 1 NOP 1
+SUB R2        B2 1 NOP 1
+SUB R3        B3 1 NOP 1
+SUB R4        B4 1 NOP 1
+SUB R5        B5 1 NOP 1
+SUB R6        B6 1 NOP 1
+SUB R7        B7 1 NOP 1
+SUB R8        B8 1 NOP 1
+SUB R9        B9 1 NOP 1
+SUB R10       BA 1 NOP 1
+SUB R11       BB 1 NOP 1
+SUB R12       BC 1 NOP 1
+SUB R13       BD 1 NOP 1
+SUB R14       BE 1 NOP 1
+SUB R15       BF 1 NOP 1
+
+/* Cn */
+POPD @R0        C0 1 NOP 1
+POPD @R1        C1 1 NOP 1
+POPD @R2        C2 1 NOP 1
+POPD @R3        C3 1 NOP 1
+POPD @R4        C4 1 NOP 1
+POPD @R5        C5 1 NOP 1
+POPD @R6        C6 1 NOP 1
+POPD @R7        C7 1 NOP 1
+POPD @R8        C8 1 NOP 1
+POPD @R9        C9 1 NOP 1
+POPD @R10       CA 1 NOP 1
+POPD @R11       CB 1 NOP 1
+POPD @R12       CC 1 NOP 1
+POPD @R13       CD 1 NOP 1
+POPD @R14       CE 1 NOP 1
+POPD @R15       CF 1 NOP 1
+
+/* Dn */
+CPR R0        D0 1 NOP 1
+CPR R1        D1 1 NOP 1
+CPR R2        D2 1 NOP 1
+CPR R3        D3 1 NOP 1
+CPR R4        D4 1 NOP 1
+CPR R5        D5 1 NOP 1
+CPR R6        D6 1 NOP 1
+CPR R7        D7 1 NOP 1
+CPR R8        D8 1 NOP 1
+CPR R9        D9 1 NOP 1
+CPR R10       DA 1 NOP 1
+CPR R11       DB 1 NOP 1
+CPR R12       DC 1 NOP 1
+CPR R13       DD 1 NOP 1
+DCR R14       DE 1 NOP 1
+CPR R15       DF 1 NOP 1
+
+/* En */
+INR R0        E0 1 NOP 1
+INR R1        E1 1 NOP 1
+INR R2        E2 1 NOP 1
+INR R3        E3 1 NOP 1
+INR R4        E4 1 NOP 1
+INR R5        E5 1 NOP 1
+INR R6        E6 1 NOP 1
+INR R7        E7 1 NOP 1
+INR R8        E8 1 NOP 1
+INR R9        E9 1 NOP 1
+INR R10       EA 1 NOP 1
+INR R11       EB 1 NOP 1
+INR R12       EC 1 NOP 1
+INR R13       ED 1 NOP 1
+INR R14       EE 1 NOP 1
+INR R15       EF 1 NOP 1
+
+/* Fn */
+DCR R0        F0 1 NOP 1
+DCR R1        F1 1 NOP 1
+DCR R2        F2 1 NOP 1
+DCR R3        F3 1 NOP 1
+DCR R4        F4 1 NOP 1
+DCR R5        F5 1 NOP 1
+DCR R6        F6 1 NOP 1
+DCR R7        F7 1 NOP 1
+DCR R8        F8 1 NOP 1
+DCR R9        F9 1 NOP 1
+DCR R10       FA 1 NOP 1
+DCR R11       FB 1 NOP 1
+DCR R12       FC 1 NOP 1
+DCR R13       FD 1 NOP 1
+DCR R14       FE 1 NOP 1
+DCR R15       FF 1 NOP 1
+
+/* 0n */
+
+RTN "" 			00 1 NOP 1
+
+BRA *         	01 2 R1 1
+BNC *         	02 2 R1 1
+BC *         	03 2 R1 1
+BP *         	04 2 R1 1
+BM *         	05 2 R1 1
+BZ *         	06 2 R1 1
+BNZ *         	07 2 R1 1
+BM1 *         	08 2 R1 1
+BNM1 *         	09 2 R1 1
+
+BK "" 			0A 1 NOP 1
+RS "" 			0B 1 NOP 1
+
+BS *         	0C 2 R1 1
+BSL *         	0D 3 R2 1
+
