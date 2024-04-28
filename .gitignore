@@ -16,6 +16,7 @@ emulator/neo
 emulator/src/core/hardware.o
 emulator/src/core/sys_debugger.o
 emulator/src/core/sys_processor.o
+emulator/src/core/processors/*.o
 examples/basic-examples
 examples/samples.zip
 firmware/build/

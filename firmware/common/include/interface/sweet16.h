@@ -14,6 +14,7 @@
 #define _SWEET16_H
 
 bool SW16Execute(uint16_t reg);
+bool SW16ExecuteOne(uint16_t reg);
 
 #endif
 
