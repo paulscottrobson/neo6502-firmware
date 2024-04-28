@@ -104,7 +104,12 @@ int DBGXDasm(int addr, char* buffer) {
 	return p;
 }
 
-// Return the number of bytes (1, 2 or 3) occupied by the instruction at addr.
+// *******************************************************************************************************************************
+//
+// 							Return the number of bytes (1, 2 or 3) occupied by the instruction at addr.
+//
+// *******************************************************************************************************************************
+
 int DBGXInstructionSize(int addr) {
 	int opcode = CPUReadMemory(addr);
 	const char *at = strchr(_mnemonics[opcode],'@');
@@ -119,7 +124,12 @@ int DBGXInstructionSize(int addr) {
 	return 1;   // It's a bare opcode.
 }
 
-// Dump out nbytes of memory to a string buffer.
+// *******************************************************************************************************************************
+//
+// 									Dump out nbytes of memory to a string buffer.
+//
+// *******************************************************************************************************************************
+
 // Buffer must have room for at least 3 bytes per memory location,
 // plus an extra byte for null-termination.
 // e.g for nbytes=3: "XX XX XX \0"
@@ -132,10 +142,16 @@ void DBGXDumpMem(int addr, int nbytes, char* buffer) {
 }
 
 
+// *******************************************************************************************************************************
+//
+// 									Render debug information and/or display
+//
+// *******************************************************************************************************************************
+
 void DBGXRender(int *address,int showDisplay) {
 	int n = 0;
 	char buffer[32];
-	CPUSTATUS *s = CPUGetStatus();
+	CPUSTATUS65 *s = CPUGetStatus65();
 
 	if (showDisplay == 0) {
 		GFXSetCharacterSize(36,24);

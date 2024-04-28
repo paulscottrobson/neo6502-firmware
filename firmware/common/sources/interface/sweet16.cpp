@@ -115,12 +115,34 @@ bool SW16Execute(uint16_t reg) {
 	for (int i = 0;i < 16;i++) {  												// Copy cpu memory to working registers
 		sweet_reg[i] = cpuMemory[reg+i*2]+(cpuMemory[reg+i*2+1] << 8);
 	}
-//	_SW16Status();
  	while (!bQuitSweet && yieldCounter-- > 0) {  								// Keep executing till quit or yield time.
  		switch(FETCH8()) {
  			#include "data/sweet_opcodes.h"
  		}
-//	_SW16Status();
+ 	}
+	for (int i = 0;i < 16;i++) {  												// Copy working registers to CPU memory
+		cpuMemory[reg+i*2] = sweet_reg[i] & 0xFF;
+		cpuMemory[reg+i*2+1] = sweet_reg[i] >> 8;
+	}
+	return bQuitSweet;
+}
+
+// ***************************************************************************************
+//
+//						Same code as above, does only one command
+//
+// ***************************************************************************************
+
+bool SW16ExecuteOne(uint16_t reg) {
+	bool bQuitSweet = false;  													// Set by RTN.
+	uint16_t temp; 																// (set by the emulator)
+
+	for (int i = 0;i < 16;i++) {  												// Copy cpu memory to working registers
+		sweet_reg[i] = cpuMemory[reg+i*2]+(cpuMemory[reg+i*2+1] << 8);
+	}
+
+	switch(FETCH8()) {
+		#include "data/sweet_opcodes.h"
  	}
 	for (int i = 0;i < 16;i++) {  												// Copy working registers to CPU memory
 		cpuMemory[reg+i*2] = sweet_reg[i] & 0xFF;
