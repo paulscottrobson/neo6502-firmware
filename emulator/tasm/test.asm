@@ -1,7 +1,13 @@
+;
+;		No direct addresses ¬!
+;
 
-.org $0000
+		.org $0
 
+		set r1,32767
+		bk
 		set r0,42
+		bk
 		ld r1
 		st r2
 		ld @r3

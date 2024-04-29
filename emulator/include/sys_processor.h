@@ -84,4 +84,15 @@ CPUSTATUS65 *CPUGetStatus65(void);
 WORD16 CPUGetPC65(void);
 int CPUGetStep65(BYTE8 opcode);
 
+// *******************************************************************************************************************************
+//
+//													  Sweet 16 Prototypes
+//
+// *******************************************************************************************************************************
+
+BYTE8 CPUExecute16(void);
+void CPUReset16(void);
+WORD16 CPUGetPC16(void);
+int CPUGetStep16(BYTE8 opcode);
+
 #endif

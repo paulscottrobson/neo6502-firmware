@@ -24,7 +24,7 @@ COMMONOBJECTS = $(subst .cpp,.o,$(COMMONSOURCES))
 SOURCES = 	src$(S)core$(S)sys_processor.o src$(S)core$(S)hardware.o src$(S)framework$(S)beeper.o \
 			src$(S)framework$(S)main.o src$(S)framework$(S)gfx.o src$(S)framework$(S)debugger.o \
 			src$(S)core$(S)sys_debugger.o  \
-			src$(S)core$(S)processors$(S)6502.o \
+			src$(S)core$(S)processors$(S)sweet16.o src$(S)core$(S)processors$(S)6502.o \
 			$(COMMONOBJECTS)
 
 CC = g++
@@ -43,6 +43,15 @@ always:
 	
 run: always emulator
 	$(EMULATOR)
+
+# ***************************************************************************************
+#
+#									Run sweet16 tester
+#
+# ***************************************************************************************
+	
+srun: always emulator
+	$(EMULATOR) sweet tasm/test.bin@C000 run@C000
 
 # ***************************************************************************************
 #
