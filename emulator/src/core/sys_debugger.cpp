@@ -75,7 +75,7 @@ static const char *labels[] = { "A","X","Y","PC","SP","SR","CY","N","V","B","D",
 
 // Disassemble the instruction at addr, writing it into buffer.
 // Returns address of next instruction.
-int DBGXDasm(int addr, char* buffer) {
+int DBGXDasm65(int addr, char* buffer) {
 	int p = addr;
 	int opc = CPUReadMemory(p);p = (p + 1) & 0xFFFF;							// Read opcode.
 	strcpy(buffer,_mnemonics[opc]);												// Work out the opcode.
@@ -104,13 +104,43 @@ int DBGXDasm(int addr, char* buffer) {
 	return p;
 }
 
+#define SW16_MNEMONICS
+#include "data/sweet_opcodes.h"
+
+int DBGXDasm16(int addr, char* buffer) {
+	int p = addr;
+	int operand;
+	int opc = CPUReadMemory(p);p = (p + 1) & 0xFFFF;							// Read opcode.
+	strcpy(buffer,sw16Mnemonics[opc]);											// Work out the opcode.
+	char *at = strchr(buffer,'$');												// Look for '$'
+	if (at != NULL) {															// Operand ?
+		char hex[6],temp[32];	
+		if (at[1] == '1') {
+			operand = CPUReadMemory(p);
+			sprintf(hex,"%02x",operand);
+			p = (p+1) & 0xFFFF;
+		}
+		if (at[1] == '2') {
+			operand = CPUReadMemory(p) + CPUReadMemory(p+1)*256;
+			if (opc == 0x0D) operand = (operand + 2 + p) & 0xFFFF;
+			sprintf(hex,"%04x",operand);
+			p = (p+2) & 0xFFFF;
+		}
+		strcpy(temp,buffer);
+		strcpy(temp+(at-buffer),hex);
+		strcat(temp,at+2);
+		strcpy(buffer,temp);	
+	}
+	return p;
+}
+
 // *******************************************************************************************************************************
 //
 // 							Return the number of bytes (1, 2 or 3) occupied by the instruction at addr.
 //
 // *******************************************************************************************************************************
 
-int DBGXInstructionSize(int addr) {
+int DBGXInstructionSize65(int addr) {
 	int opcode = CPUReadMemory(addr);
 	const char *at = strchr(_mnemonics[opcode],'@');
 	if (at != NULL) {
@@ -123,6 +153,7 @@ int DBGXInstructionSize(int addr) {
 	}
 	return 1;   // It's a bare opcode.
 }
+
 
 // *******************************************************************************************************************************
 //
@@ -148,6 +179,8 @@ void DBGXDumpMem(int addr, int nbytes, char* buffer) {
 //
 // *******************************************************************************************************************************
 
+#define REG(n) 	(CPUReadMemory((n)*2)+CPUReadMemory((n)*2+1) * 256)
+
 void DBGXRender(int *address,int showDisplay) {
 	int n = 0;
 	char buffer[32];
@@ -155,13 +188,27 @@ void DBGXRender(int *address,int showDisplay) {
 
 	if (showDisplay == 0) {
 		GFXSetCharacterSize(36,24);
-		DBGVerticalLabel(21,0,labels,DBGC_ADDRESS,-1);									// Draw the labels for the register
+		if (CPUGetID() == 65) {
+			DBGVerticalLabel(21,0,labels,DBGC_ADDRESS,-1);								// Draw the labels for the register
 
-		#define DN(v,w) GFXNumber(GRID(24,n++),v,16,w,GRIDSIZE,DBGC_DATA,-1)			// Helper macro
+			#define DN(v,w) GFXNumber(GRID(24,n++),v,16,w,GRIDSIZE,DBGC_DATA,-1)		// Helper macro
 
-		DN(s->a,2);DN(s->x,2);DN(s->y,2);DN(s->pc,4);DN(s->sp+0x100,4);DN(s->status,2);DN(s->cycles,4);
-		DN(s->sign,1);DN(s->overflow,1);DN(s->brk,1);DN(s->decimal,1);DN(s->interruptDisable,1);DN(s->zero,1);DN(s->carry,1);
+			DN(s->a,2);DN(s->x,2);DN(s->y,2);DN(s->pc,4);DN(s->sp+0x100,4);DN(s->status,2);DN(s->cycles,4);
+			DN(s->sign,1);DN(s->overflow,1);DN(s->brk,1);DN(s->decimal,1);DN(s->interruptDisable,1);DN(s->zero,1);DN(s->carry,1);
 
+		} else {
+			for (int i = 0;i < 16;i++) {
+				bool isTest = ((REG(14) >> 8) & 0x0F) == i;
+				sprintf(buffer,"R%d:",i);
+				GFXString(GRID(21,i),buffer,GRIDSIZE, DBGC_ADDRESS,-1);
+				sprintf(buffer,"%04X",REG(i));
+				GFXString(GRID(26,i),buffer,GRIDSIZE, isTest ? DBGC_DATA:DBGC_HIGHLIGHT,-1);
+				GFXString(GRID(32,0),"ACC",GRIDSIZE,DBGC_ADDRESS,-1);
+				GFXString(GRID(32,13),"CMP",GRIDSIZE,DBGC_ADDRESS,-1);
+				GFXString(GRID(32,14),"SP",GRIDSIZE,DBGC_ADDRESS,-1);
+				GFXString(GRID(32,15),"PCTR",GRIDSIZE,DBGC_ADDRESS,-1);
+			}
+		}
 		n = 0;
 		int a = address[1];																// Dump Memory.
 		for (int row = 17;row < 24;row++) {
@@ -182,7 +229,11 @@ void DBGXRender(int *address,int showDisplay) {
 			int isBrk = (p == address[3]);
 			GFXNumber(GRID(0,row),p,16,4,GRIDSIZE,isPC ? DBGC_HIGHLIGHT:DBGC_ADDRESS,	// Display address / highlight / breakpoint
 																		isBrk ? 0xF00 : -1);
-            p = DBGXDasm(p, buffer);
+			if (CPUGetID() == 65) {
+            	p = DBGXDasm65(p, buffer);
+            } else {
+            	p = DBGXDasm16(p, buffer);           	
+            }
 			GFXString(GRID(5,row),buffer,GRIDSIZE,isPC ? DBGC_HIGHLIGHT:DBGC_DATA,-1);	// Print the mnemonic
 		}
 		

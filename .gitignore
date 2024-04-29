@@ -22,6 +22,8 @@ examples/samples.zip
 firmware/build/
 firmware/build.sh
 firmware/common/include/data/
+storage
+storage/*
 *.elf
 *.uf2
 *.pdf

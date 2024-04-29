@@ -107,6 +107,8 @@ static inline void _SW16ConditionalBranch(bool test) {
 //
 // ***************************************************************************************
 
+#define SW16_OPCODES
+
 bool SW16Execute(uint16_t reg) {
 	bool bQuitSweet = false;  													// Set by RTN.
 	int32_t yieldCounter = 6000000/60;  										// 6 MIPS , 60 frames per second 

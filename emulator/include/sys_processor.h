@@ -65,6 +65,7 @@ void CPUEndRun(void);
 void CPULoadBinary(char *fileName);
 void CPUExit(void);
 void CPUSaveArguments(int argc,char *argv[]);
+BYTE8 CPUGetID(void);
 
 // *******************************************************************************************************************************
 //
