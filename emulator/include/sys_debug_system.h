@@ -19,7 +19,7 @@
 
 #define WIN_TITLE 		"Neo6502 Emulator"											// Initial Window stuff
 #define WIN_WIDTH		(42*8*3)
-#define WIN_HEIGHT		(32*8*3)
+#define WIN_HEIGHT		(35*8*3)
 #define WIN_BACKCOLOUR	0x004
 
 // *******************************************************************************************************************************

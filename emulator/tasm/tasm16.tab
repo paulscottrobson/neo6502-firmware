@@ -1,23 +1,21 @@
-.MSFIRST
-.WORDADDRS
 
 /* 1n */
-SET R0,*      10 3 SWAP 1
-SET R1,*      11 3 SWAP 1
-SET R2,*      12 3 SWAP 1
-SET R3,*      13 3 SWAP 1
-SET R4,*      14 3 SWAP 1
-SET R5,*      15 3 SWAP 1
-SET R6,*      16 3 SWAP 1
-SET R7,*      17 3 SWAP 1
-SET R8,*      18 3 SWAP 1
-SET R9,*      19 3 SWAP 1
-SET R10,*     1A 3 SWAP 1
-SET R11,*     1B 3 SWAP 1
-SET R12,*     1C 3 SWAP 1
-SET R13,*     1D 3 SWAP 1
-SET R14,*     1E 3 SWAP 1
-SET R15,*     1F 3 SWAP 1
+SET R0,*      10 3 NOP 1
+SET R1,*      11 3 NOP 1
+SET R2,*      12 3 NOP 1
+SET R3,*      13 3 NOP 1
+SET R4,*      14 3 NOP 1
+SET R5,*      15 3 NOP 1
+SET R6,*      16 3 NOP 1
+SET R7,*      17 3 NOP 1
+SET R8,*      18 3 NOP 1
+SET R9,*      19 3 NOP 1
+SET R10,*     1A 3 NOP 1
+SET R11,*     1B 3 NOP 1
+SET R12,*     1C 3 NOP 1
+SET R13,*     1D 3 NOP 1
+SET R14,*     1E 3 NOP 1
+SET R15,*     1F 3 NOP 1
 
 /* 2n */
 LD R0      20 1 NOP 1

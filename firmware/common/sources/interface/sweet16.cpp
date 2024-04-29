@@ -93,13 +93,13 @@ static inline void _SW16ConditionalBranch(bool test) {
 //
 // ***************************************************************************************
 
-static void _SW16Status() {
- 	for (int i = 0;i < 16;i++) {
- 		if (sweet_reg[i] != 0) {
- 			CONWriteString("R%-2d: $%04x (%d) $%02x\r",i,sweet_reg[i],sweet_reg[i],cpuMemory[sweet_reg[i]]);
- 		}
- 	}
-}
+// static void _SW16Status() {
+//  	for (int i = 0;i < 16;i++) {
+//  		if (sweet_reg[i] != 0) {
+//  			CONWriteString("R%-2d: $%04x (%d) $%02x\r",i,sweet_reg[i],sweet_reg[i],cpuMemory[sweet_reg[i]]);
+//  		}
+//  	}
+// }
 
 // ***************************************************************************************
 //

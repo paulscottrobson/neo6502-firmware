@@ -164,7 +164,7 @@ void DBGXRender(int *address,int showDisplay) {
 
 		n = 0;
 		int a = address[1];																// Dump Memory.
-		for (int row = 15;row < 24;row++) {
+		for (int row = 17;row < 24;row++) {
 			GFXNumber(GRID(0,row),a,16,4,GRIDSIZE,DBGC_ADDRESS,-1);
 			for (int col = 0;col < 8;col++) {
 				int c = CPUReadMemory(a);
@@ -177,7 +177,7 @@ void DBGXRender(int *address,int showDisplay) {
 
 		int p = address[0];																// Dump program code. 
 
-		for (int row = 0;row < 14;row++) {
+		for (int row = 0;row < 16;row++) {
 			int isPC = (p == ((s->pc) & 0xFFFF));										// Tests.
 			int isBrk = (p == address[3]);
 			GFXNumber(GRID(0,row),p,16,4,GRIDSIZE,isPC ? DBGC_HIGHLIGHT:DBGC_ADDRESS,	// Display address / highlight / breakpoint
