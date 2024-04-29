@@ -36,6 +36,10 @@ WORD16 CPUGetPC(void) {
 	return use6502 ? CPUGetPC65():CPUGetPC16();
 }
 
+BYTE8 CPUGetID(void) {
+	return use6502 ? 65:16;
+}
+
 // *******************************************************************************************************************************
 //
 //											   	Read and Write Functions
@@ -172,11 +176,11 @@ BYTE8 CPUExecuteInstruction(void) {
 		return FRAME_RATE;
 	}
 
-    if (traceMode) {
+    if (traceMode && use6502) {
 		char mem[10]; // "XX XX XX \0"
 		char dasm[32];
-		DBGXDumpMem(CPUGetPC(), DBGXInstructionSize(CPUGetPC()), mem);
-		DBGXDasm(CPUGetPC(), dasm);
+		DBGXDumpMem(CPUGetPC(), DBGXInstructionSize65(CPUGetPC()), mem);
+		DBGXDasm65(CPUGetPC(), dasm);
 		printf("%04x  %-10s %s\n", CPUGetPC(), mem, dasm);
 	}
 
@@ -222,7 +226,6 @@ BYTE8 CPUExecute(WORD16 breakPoint1,WORD16 breakPoint2) {
 		BYTE8 r = CPUExecuteInstruction();											// Execute an instruction
 		if (r != 0) return r; 														// Frame out.
 		next = CPUReadMemory(CPUGetPC());
-		printf("%x %x\n",next,brk);
 	} while (CPUGetPC() != breakPoint1 && CPUGetPC() != breakPoint2 && next!=brk);	// Stop on breakpoint or UNOP, which is now break debugger
 	return 0; 
 }

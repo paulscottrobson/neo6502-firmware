@@ -1,10 +1,6 @@
 TODO List
 ---------
 
-- detection of CPU type function
-- display registers
-- disassemble the Sweet16 code on the left.
-- check it all works correctly.
 - write the new assembler as tasm is unusable almost
 
 

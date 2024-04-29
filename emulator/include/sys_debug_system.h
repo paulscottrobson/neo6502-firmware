@@ -50,8 +50,8 @@ void DGBXGetActiveDisplayInfo(SDL_Rect *r,int *pxs,int *pys,int *pxc,int *pyc);
 BYTE8 DRVGFXHandler(BYTE8 key,BYTE8 isRunMode);
 BYTE8 *DBGXGetVideoRAM(void);
 
-int DBGXDasm(int addr, char* buffer);												// Disassemble the instruction at addr, writing into buffer.
-int DBGXInstructionSize(int addr);													// Calc size (1,2 or 3) of instruction found at at addr.
+int DBGXDasm65(int addr, char* buffer);												// Disassemble the instruction at addr, writing into buffer.
+int DBGXInstructionSize65(int addr);												// Calc size (1,2 or 3) of instruction found at at addr.
 void DBGXDumpMem(int addr, int nbytes, char* buffer);								// Dump hex bytes out into a string.
 
 #endif

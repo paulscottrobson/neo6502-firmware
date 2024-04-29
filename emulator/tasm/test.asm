@@ -7,6 +7,9 @@
 		set r1,32767
 		bk
 		set r0,42
+		bs 3
+		bsl 3
+		bra 3
 		bk
 		ld r1
 		st r2
