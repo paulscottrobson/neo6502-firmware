@@ -204,8 +204,9 @@ void DBGXRender(int *address,int showDisplay) {
 				sprintf(buffer,"%04X",REG(i));
 				GFXString(GRID(26,i),buffer,GRIDSIZE, isTest ? DBGC_DATA:DBGC_HIGHLIGHT,-1);
 				GFXString(GRID(32,0),"ACC",GRIDSIZE,DBGC_ADDRESS,-1);
+				GFXString(GRID(32,12),"SP",GRIDSIZE,DBGC_ADDRESS,-1);
 				GFXString(GRID(32,13),"CMP",GRIDSIZE,DBGC_ADDRESS,-1);
-				GFXString(GRID(32,14),"SP",GRIDSIZE,DBGC_ADDRESS,-1);
+				GFXString(GRID(32,14),"STAT",GRIDSIZE,DBGC_ADDRESS,-1);
 				GFXString(GRID(32,15),"PCTR",GRIDSIZE,DBGC_ADDRESS,-1);
 			}
 		}
