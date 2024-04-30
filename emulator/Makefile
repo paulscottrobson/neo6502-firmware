@@ -51,7 +51,7 @@ run: always emulator
 # ***************************************************************************************
 	
 srun: always emulator
-	$(EMULATOR) sweet tasm/test.bin@C000 run@C000
+	$(EMULATOR) sweet sweet-asm/out.bin@C000 run@C000
 
 # ***************************************************************************************
 #
@@ -134,6 +134,13 @@ prebuild:
 	$(MAKE) -C processor
 	$(PYTHON) scripts$(S)mapper.py >include$(S)hid2sdl.h
 	$(CCOPY) $(BINDIR)*_binary.h include
+
+	$(CMAKEDIR) build
+	$(CCOPY) scripts$(S)*.py build
+	$(CCOPY) build$(S)swasm.py build$(S)__main__.py
+	$(CDEL) $(BINDIR)swasm.zip
+	zip -j $(BINDIR)swasm.zip build$(S)__main__.py
+	$(CDEL) build$(S)*.py
 
 # ***************************************************************************************
 #

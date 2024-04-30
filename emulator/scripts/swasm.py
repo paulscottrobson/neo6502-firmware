@@ -102,7 +102,7 @@ class Assembler(object):
 			"cpr":0xD0,"inr":0xE0,"dcr":0xF0
 		}
 		self.group2 = {
-			"br":0x01,"bnc":0x02,"bc":0x03,"bp":0x04,"bm":0x05,"bz":0x06,
+			"bra":0x01,"bnc":0x02,"bc":0x03,"bp":0x04,"bm":0x05,"bz":0x06,
 			"bnz":0x07,"bm1":0x08,"bnm1":0x09,"bs":0x0C
 		}
 		
@@ -144,16 +144,20 @@ class Assembler(object):
 				self.relativeBranch(0x0D,operand,2)
 			else:
 				self.pseudoOperation(s)
-			if listing is not None:
+			if listing is not None and self.apass == 2:
 				b = " ".join(["{0:02x}".format(n) for n in self.current])
 				listing.write("{0:04x} : {1:20} : {3}{2}\n".format(self.pc,b[:20],s,"" if s.endswith(":") else "  "))
-			if len(self.current) > 0:
+			if len(self.current) > 0 and self.apass == 2:
 				self.memory.writeList(self.pc,self.current)
-				self.pc += len(self.current)
+			self.pc += len(self.current)
 
 	def relativeBranch(self,opcode,addr,size):
 		self.current.append(opcode)
-		offset = self.evaluate(addr) - (self.pc + size + 1) 
+		offset = self.evaluate(addr)
+		if offset is not None:
+			offset = offset - (self.pc + size + 1) 
+		else:
+			offset = 0
 		offset = 0 if self.apass == 1 else offset
 		if size == 1:
 			if offset < -128 or offset > 127:
@@ -161,6 +165,7 @@ class Assembler(object):
 			self.current.append(offset & 0xFF)
 		else:
 			self.current += [offset & 0xFF,(offset >> 8) & 0xFF]
+
 	def checkInCode(self):
 		if self.pc is None:
 			raise AssemblerError("No code origin set")
@@ -206,26 +211,23 @@ class Assembler(object):
 			raise AssemblerError("Bad register "+e)
 		return reg
 
+	def assembleFile(self,file,l):
+		AssemblerError.__FILE__ = file
+		AssemblerError.__LINE__ = 0
+		for s in open(file,"r").readlines():
+			AssemblerError.__LINE__ += 1
+			self.assemble(s,l)
+
 if __name__ == "__main__":
 	m = Memory()
 	asm = Assembler(m,Evaluator())
+	h = open("out.lst","w")
 	for p in range(1,3):
 		asm.newPass(p)
-		asm.assemble("; comment")
-		asm.assemble("")
-		asm.assemble(" org $C000")
-		asm.assemble("start:")
-		asm.assemble(" byte 42,$2B")
-		asm.assemble(" word 32767,-2,start")
-		asm.assemble(" text 'Hello',\"World\"")
-		asm.assemble(" rs")
-		asm.assemble(" popd @r3")
-		asm.assemble(" dcr re")
-		asm.assemble(" set r5,1027")
-		asm.assemble(" bs start")
-		asm.assemble(" bsl start")
+		for f in sys.argv[1:]:
+			asm.assembleFile(f,h)
+	h.close()
 	m.writeMemory("out.bin")
-
 
 #
 #		Wrapping
