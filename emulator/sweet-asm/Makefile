@@ -16,5 +16,5 @@ include ../../build_env/common.make
 endif
 
 all:
-	WINEDEBUG=-all wine tasm -s -b -t16 test.asm test.bin
+	$(PYTHON) $(BINDIR)swasm.zip test.asm
  

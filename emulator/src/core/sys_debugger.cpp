@@ -117,7 +117,7 @@ int DBGXDasm16(int addr, char* buffer) {
 		char hex[6],temp[32];	
 		if (at[1] == '1') {
 			operand = CPUReadMemory(p);
-			sprintf(hex,"%02x",operand);
+			sprintf(hex,"%04x",(operand+p+1) & 0xFFFF);
 			p = (p+1) & 0xFFFF;
 		}
 		if (at[1] == '2') {
@@ -204,8 +204,9 @@ void DBGXRender(int *address,int showDisplay) {
 				sprintf(buffer,"%04X",REG(i));
 				GFXString(GRID(26,i),buffer,GRIDSIZE, isTest ? DBGC_DATA:DBGC_HIGHLIGHT,-1);
 				GFXString(GRID(32,0),"ACC",GRIDSIZE,DBGC_ADDRESS,-1);
+				GFXString(GRID(32,12),"SP",GRIDSIZE,DBGC_ADDRESS,-1);
 				GFXString(GRID(32,13),"CMP",GRIDSIZE,DBGC_ADDRESS,-1);
-				GFXString(GRID(32,14),"SP",GRIDSIZE,DBGC_ADDRESS,-1);
+				GFXString(GRID(32,14),"STAT",GRIDSIZE,DBGC_ADDRESS,-1);
 				GFXString(GRID(32,15),"PCTR",GRIDSIZE,DBGC_ADDRESS,-1);
 			}
 		}
