@@ -1,34 +1,34 @@
 '
-'	Sweet 16 test program ; about 6.7 MIPS.
+' 	New Blitter
 '
-mem = alloc(512):reg = alloc(32):stack = alloc(16)
-count = 50
-print mem
-for pass = 0 to 1
-	o = pass*2:p = mem
-	set 1,count
-	set 2,0
-	set 5,0
-.l1
-	add 3
-	dcr 2
-	bnz l1
-	inr 5
-	dcr 1
-	bnz l1	
-	rtn
-next
+f = alloc(16)
+t = alloc(16)
 
-reg[15] = mem:reg[12] = stack
+cls:sprite clear:cursor 0,20
+dat = alloc(256)
+for i = 0 to 255:poke dat+i,(i >> 4)+5:next
 
+call setup(f,0,dat,64,64,1)
+call setup(t,$80,0,8,320,8)
 t1 = time()
-sweet reg
-elapsed = time()-t1
-print reg[5],reg[15]
-if elapsed <> 0
-	print elapsed
-	elapsed = elapsed / 100 / 3 / 65535 / count
-	ips = 1 / elapsed
-	mips = ips / 1000000
-	print mips
-endif
+for x = 0 to 39
+	for y = 0 to 23
+		while peek($FF00):wend
+		doke t,x*8+y*320*8
+		poke $FF04,0
+		doke $FF05,f
+		doke $FF07,t
+		poke $FF01,3
+		poke $FF00,12
+	next
+next
+print time()-t1
+end
+
+proc setup(a,p,addr,size,offset,count)
+	doke a+0,addr
+	poke a+2,p
+	doke a+4,size:doke a+6,0
+	doke a+8,offset:doke a+10,0
+	doke a+12,count:doke a+14,0
+endproc
