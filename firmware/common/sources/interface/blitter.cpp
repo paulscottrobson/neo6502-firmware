@@ -99,11 +99,11 @@ uint8_t BLTComplexCopy(uint8_t action,uint16_t aSource,uint16_t aTarget) {
 	bool complete = source.stepCount == 0;  										// Completed if already zero.
 
 	while (!complete) {  															// Until done every source step, e.g. the whole thing has been copied.
-		printf("SRC:%02x:%04x %d %d %d [%d]\n",source.page,(int)source.address,(int)source.stepCount,(int)source.stepSize,(int)source.stepOffset,(int)srcCount);
-		printf("TGT:%02x:%04x %d %d %d [%d]\n",target.page,(int)target.address,(int)target.stepCount,(int)target.stepSize,(int)target.stepOffset,(int)tgtCount);
+		//printf("SRC:%02x:%04x %d %d %d [%d]\n",source.page,(int)source.address,(int)source.stepCount,(int)source.stepSize,(int)source.stepOffset,(int)srcCount);
+		//printf("TGT:%02x:%04x %d %d %d [%d]\n",target.page,(int)target.address,(int)target.stepCount,(int)target.stepSize,(int)target.stepOffset,(int)tgtCount);
 
 		uint32_t transferSize = (srcCount < tgtCount) ? srcCount:tgtCount; 			// The amount to transfer this next time.
-
+		//printf("%d transfer.\n",(int)transferSize);
 		if (transferSize != 0) {
 			uint8_t *src = _BLTGetRealAddress(source.page,source.address); 			// Workout addresses
 			uint8_t *tgt = _BLTGetRealAddress(target.page,target.address);
@@ -124,12 +124,10 @@ uint8_t BLTComplexCopy(uint8_t action,uint16_t aSource,uint16_t aTarget) {
 
 		if (tgtCount == 0) {      													// Reached step on target
 			target.stepCount--;  													// Done one fewer
-			srcCount = target.stepSize;  						 					// Rest to copy count.
+			tgtCount = target.stepSize;  						 					// Rest to copy count.
 			_BLTAddAddress(&target,target.stepOffset-target.stepSize); 				// Adjust the address to the next line.
 			if (target.stepCount == 0) complete = true; 							// Nowhere else to go. If zero initially goes till completed.
 		}
-
-		complete = true;
 	}
 	return 0;
 }
