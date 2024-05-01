@@ -48,7 +48,7 @@ GROUP 12 Blitter
                 4-7     Step size (e.g. if copying 32 pixels, this would be 32)
                 8-11    Step offset (e.g. when doing screen lines this would be 320, the number of pixels per line)     
                 12-15   Steps to copy.
-                
+                    
             Activity halts when one of the steps to copy value is decremented to zero. To ignore the steps to copy in receive,
             set it to zero.
 
