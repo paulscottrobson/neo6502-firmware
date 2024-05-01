@@ -57,6 +57,16 @@ uint8_t BLTSimpleCopy(uint8_t pageFrom,uint16_t addressFrom, uint8_t pageTo, uin
 
 // ***************************************************************************************
 //
+//								More Complex Blitter Copy
+//
+// ***************************************************************************************
+
+uint8_t BLTComplexCopy(uint8_t action,struct BlitterArea *source,struct BlitterArea *target) {
+	return 0;
+}
+
+// ***************************************************************************************
+//
 //		Date 		Revision
 //		==== 		========
 //
