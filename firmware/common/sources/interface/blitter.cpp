@@ -69,44 +69,64 @@ void _BLTAddAddress(struct BlitterArea *ba,uint32_t add) {
 
 // ***************************************************************************************
 //
+//							 Load a blitter object structure
+//
+// ***************************************************************************************
+
+void _BLTLoadBlitterAreaObject(uint16_t addr,struct BlitterArea *b) {
+	b->address = cpuMemory[addr]+(cpuMemory[addr+1] << 8);
+	b->page = cpuMemory[addr+2];
+	b->stepSize = cpuMemory[addr+4]+(cpuMemory[addr+5] << 8)+(cpuMemory[addr+6] << 16);
+	b->stepOffset = cpuMemory[addr+8]+(cpuMemory[addr+9] << 8)+(cpuMemory[addr+10] << 16);
+	b->stepCount = cpuMemory[addr+12]+(cpuMemory[addr+13] << 8)+(cpuMemory[addr+14] << 16);
+}
+
+// ***************************************************************************************
+//
 //								More Complex Blitter Copy
 //
 // ***************************************************************************************
 
-uint8_t BLTComplexCopy(uint8_t action,struct BlitterArea *source,struct BlitterArea *target) {
-	uint32_t srcCount = source->stepSize;  											// Bytes to copy to/from till next step.
-	uint32_t tgtCount = source->stepSize;
-	bool complete = source->stepCount == 0;  										// Completed if already zero.
+uint8_t BLTComplexCopy(uint8_t action,uint16_t aSource,uint16_t aTarget) {
+	struct BlitterArea source,target;
+
+	_BLTLoadBlitterAreaObject(aSource,&source);
+	_BLTLoadBlitterAreaObject(aTarget,&target);
+
+	uint32_t srcCount = source.stepSize;  											// Bytes to copy to/from till next step.
+	uint32_t tgtCount = target.stepSize;
+
+	bool complete = source.stepCount == 0;  										// Completed if already zero.
 
 	while (!complete) {  															// Until done every source step, e.g. the whole thing has been copied.
-		printf("SRC:%02x:%04x %d %d %d [%d]\n",source->page,(int)source->address,(int)source->stepCount,(int)source->stepSize,(int)source->stepOffset,(int)srcCount);
-		printf("TGT:%02x:%04x %d %d %d [%d]\n",target->page,(int)target->address,(int)target->stepCount,(int)target->stepSize,(int)target->stepOffset,(int)tgtCount);
+		printf("SRC:%02x:%04x %d %d %d [%d]\n",source.page,(int)source.address,(int)source.stepCount,(int)source.stepSize,(int)source.stepOffset,(int)srcCount);
+		printf("TGT:%02x:%04x %d %d %d [%d]\n",target.page,(int)target.address,(int)target.stepCount,(int)target.stepSize,(int)target.stepOffset,(int)tgtCount);
 
 		uint32_t transferSize = (srcCount < tgtCount) ? srcCount:tgtCount; 			// The amount to transfer this next time.
 
 		if (transferSize != 0) {
-			uint8_t *src = _BLTGetRealAddress(source->page,source->address); 		// Workout addresses
-			uint8_t *tgt = _BLTGetRealAddress(target->page,target->address);
+			uint8_t *src = _BLTGetRealAddress(source.page,source.address); 			// Workout addresses
+			uint8_t *tgt = _BLTGetRealAddress(target.page,target.address);
 			if (src == NULL || tgt == NULL) return 1; 								// Bad addresses.
 			memmove(tgt,src,transferSize);  										// Do the copy
 			srcCount -= transferSize;  												// Adjust for the 'to next step'
 			tgtCount -= transferSize;
-			_BLTAddAddress(source,transferSize);  									// Adjust addresses.
-			_BLTAddAddress(target,transferSize);
+			_BLTAddAddress(&source,transferSize);  									// Adjust addresses.
+			_BLTAddAddress(&target,transferSize);
 		}
 
 		if (srcCount == 0) {      													// Reached step on source.
-			source->stepCount--;  													// Done one fewer
-			srcCount = source->stepSize;  						 					// Rest to copy count.
-			_BLTAddAddress(source,source->stepOffset-source->stepSize); 			// Adjust the address to the next line.
-			if (source->stepCount == 0) complete = true; 							// Transferred all the data.
+			source.stepCount--;  													// Done one fewer
+			srcCount = source.stepSize;  						 					// Rest to copy count.
+			_BLTAddAddress(&source,source.stepOffset-source.stepSize); 				// Adjust the address to the next line.
+			if (source.stepCount == 0) complete = true; 							// Transferred all the data.
 		}
 
 		if (tgtCount == 0) {      													// Reached step on target
-			target->stepCount--;  													// Done one fewer
-			srcCount = target->stepSize;  						 					// Rest to copy count.
-			_BLTAddAddress(target,target->stepOffset-target->stepSize); 			// Adjust the address to the next line.
-			if (target->stepCount == 0) complete = true; 							// Nowhere else to go. If zero initially goes till completed.
+			target.stepCount--;  													// Done one fewer
+			srcCount = target.stepSize;  						 					// Rest to copy count.
+			_BLTAddAddress(&target,target.stepOffset-target.stepSize); 				// Adjust the address to the next line.
+			if (target.stepCount == 0) complete = true; 							// Nowhere else to go. If zero initially goes till completed.
 		}
 
 		complete = true;
