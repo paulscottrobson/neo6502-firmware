@@ -238,9 +238,9 @@ BYTE8 CPUExecute(WORD16 breakPoint1,WORD16 breakPoint2) {
 
 WORD16 CPUGetStepOverBreakpoint(void) {
 	BYTE8 opcode = CPUReadMemory(CPUGetPC());										// Current opcode.
-	int offset = CPUGetStep65(opcode);
-	if (offset != 0) return (CPUGetPC()+3) & 0xFFFF;								// Step over Subroutines
-	return 0;																		// Do a normal single step
+	int offset = use6502 ? CPUGetStep65(opcode) : CPUGetStep16(opcode);  			// Get offset
+	if (offset != 0) offset = (CPUGetPC()+offset) & 0xFFFF;							// Step over Subroutines
+	return offset;																	// Do a normal single step
 }
 
 // *******************************************************************************************************************************make //

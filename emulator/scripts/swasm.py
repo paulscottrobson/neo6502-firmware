@@ -117,13 +117,12 @@ class Assembler(object):
 		if self.apass == 2 and listing is None:
 			listing = sys.stdout
 		s = l if l.find(";") < 0 else l[:l.find(";")]
-		s = s.strip()
+		s = s.replace("\t"," ").strip()
 		if s != "":
 			m = re.match('^([a-z1]+\\s?\\@?)(.*)$',s)
 			opcode = s.split(" ")[0].lower().strip()
 			opcode = "" if m is None else m.group(1).replace(" ","")
 			operand = "" if m is None else m.group(2).strip()
-
 			if s.endswith(":"):
 				self.checkInCode()
 				self.evaluator.define(s[:-1],self.pc)

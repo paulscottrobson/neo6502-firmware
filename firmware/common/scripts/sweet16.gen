@@ -221,4 +221,14 @@ F? 		"DCR R$R"
 		CLEARCARRY();
 		SETCOMP(0);
 
+# ***************************************************************************************
+#		   0E nr : Extended function on register Rn, function n. Comparison is n
+# ***************************************************************************************
+
+0E 		"EXT $x"
+		temp = FETCH8();
+		SW16ExtendedRegister(temp >> 4,temp & 15);
+		CLEARCARRY();
+		SETCOMP(temp & 15);
+
 
