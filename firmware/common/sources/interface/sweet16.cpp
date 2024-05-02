@@ -168,8 +168,10 @@ void SW16ExtendedRegister(uint8_t func,uint8_t reg) {
 			R(0) = R(0) & R(reg);break;
 		case 3:  																// 3 or by Rn
 			R(0) = R(0) | R(reg);break;
-		case 4:  																// 4 xor by Rn
+		case 4:  																// 4 xor by Rn		
 			R(0) = R(0) ^ R(reg);break;
+		case 5:  																// 5 Shift Right Rn
+			R(reg) = R(reg) >> 1;break;
 	}
 }
 
