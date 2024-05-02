@@ -117,6 +117,7 @@ int DBGXDasm16(int addr, char* buffer) {
 		char hex[6],temp[32];	
 		if (at[1] == '1') {
 			operand = CPUReadMemory(p);
+			if (operand & 0x80) operand = operand - 0x100;
 			sprintf(hex,"%04x",(operand+p+1) & 0xFFFF);
 			p = (p+1) & 0xFFFF;
 		}
