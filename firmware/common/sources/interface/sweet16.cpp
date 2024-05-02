@@ -159,6 +159,20 @@ bool SW16ExecuteOne(uint16_t reg) {
 
 void SW16ExtendedRegister(uint8_t func,uint8_t reg) {
 	printf("Ext func %d on R%d\n",func,reg);
+	switch (func) {
+		case 0:  																// 0 multiply by Rn
+			R(0) = R(0) * R(reg);break;
+		case 1:  																// 1 divide by Rn
+			R(0) = (R(reg) == 0) ? 0 :R(0) / R(reg);break;
+		case 2:  																// 2 and by Rn
+			R(0) = R(0) & R(reg);break;
+		case 3:  																// 3 or by Rn
+			R(0) = R(0) | R(reg);break;
+		case 4:  																// 4 xor by Rn		
+			R(0) = R(0) ^ R(reg);break;
+		case 5:  																// 5 Shift Right Rn
+			R(reg) = R(reg) >> 1;break;
+	}
 }
 
 
