@@ -114,7 +114,7 @@ int DBGXDasm16(int addr, char* buffer) {
 	strcpy(buffer,sw16Mnemonics[opc]);											// Work out the opcode.
 	char *at = strchr(buffer,'$');												// Look for '$'
 	if (at != NULL) {															// Operand ?
-		char hex[6],temp[32];	
+		char hex[16],temp[32];	
 		if (at[1] == '1') {
 			operand = CPUReadMemory(p);
 			if (operand & 0x80) operand = operand - 0x100;
@@ -126,6 +126,11 @@ int DBGXDasm16(int addr, char* buffer) {
 			if (opc == 0x0D) operand = (operand + 2 + p) & 0xFFFF;
 			sprintf(hex,"%04x",operand);
 			p = (p+2) & 0xFFFF;
+		}
+		if (at[1] == 'x') {
+			int f = CPUReadMemory(p);
+			sprintf(hex,"r%d,fn:%d",f & 15,f >> 4);
+			p = (p+1) & 0xFFFF;
 		}
 		strcpy(temp,buffer);
 		strcpy(temp+(at-buffer),hex);

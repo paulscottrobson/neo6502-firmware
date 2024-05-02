@@ -15,6 +15,7 @@
 
 bool SW16Execute(uint16_t reg);
 bool SW16ExecuteOne(uint16_t reg);
+void SW16ExtendedRegister(uint8_t func,uint8_t reg);
 
 #endif
 
