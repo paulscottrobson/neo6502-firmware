@@ -18,7 +18,9 @@
 //
 // ***************************************************************************************
 
-static uint16_t sweet_reg[16];
+static uint16_t default_sweet_registers[16];
+
+static uint16_t *sweet_reg = default_sweet_registers;
 
 // ***************************************************************************************
 //
@@ -113,7 +115,7 @@ bool SW16Execute(uint16_t reg) {
 	bool bQuitSweet = false;  													// Set by RTN.
 	int32_t yieldCounter = 6000000/60;  										// 6 MIPS , 60 frames per second 
 	uint16_t temp; 																// (set by the emulator)
-
+	sweet_reg = default_sweet_registers;  										// Execute using the memory allocated.
 	for (int i = 0;i < 16;i++) {  												// Copy cpu memory to working registers
 		sweet_reg[i] = cpuMemory[reg+i*2]+(cpuMemory[reg+i*2+1] << 8);
 	}
@@ -126,6 +128,7 @@ bool SW16Execute(uint16_t reg) {
 		cpuMemory[reg+i*2] = sweet_reg[i] & 0xFF;
 		cpuMemory[reg+i*2+1] = sweet_reg[i] >> 8;
 	}
+	TMRSweet16Sync();  															// Sweet 16 Frame Sync
 	return bQuitSweet;
 }
 
@@ -138,18 +141,11 @@ bool SW16Execute(uint16_t reg) {
 bool SW16ExecuteOne(uint16_t reg) {
 	bool bQuitSweet = false;  													// Set by RTN.
 	uint16_t temp; 																// (set by the emulator)
-
-	for (int i = 0;i < 16;i++) {  												// Copy cpu memory to working registers
-		sweet_reg[i] = cpuMemory[reg+i*2]+(cpuMemory[reg+i*2+1] << 8);
-	}
-
+	sweet_reg = (uint16_t *)(cpuMemory+reg);  									// This is non RISC so we can access directly.
 	switch(FETCH8()) {
 		#include "data/sweet_opcodes.h"
  	}
-	for (int i = 0;i < 16;i++) {  												// Copy working registers to CPU memory
-		cpuMemory[reg+i*2] = sweet_reg[i] & 0xFF;
-		cpuMemory[reg+i*2+1] = sweet_reg[i] >> 8;
-	}
+	sweet_reg = default_sweet_registers;  										// Execute using the memory allocated.
 	return bQuitSweet;
 }
 
@@ -158,7 +154,6 @@ bool SW16ExecuteOne(uint16_t reg) {
 // ***************************************************************************************
 
 void SW16ExtendedRegister(uint8_t func,uint8_t reg) {
-	printf("Ext func %d on R%d\n",func,reg);
 	switch (func) {
 		case 0:  																// 0 multiply by Rn
 			R(0) = R(0) * R(reg);break;
