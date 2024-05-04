@@ -1,0 +1,308 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"cycl",
+				"CYCLES_PER_FRAME"
+			],
+			[
+				"def",
+				"default_sweet_registers"
+			],
+			[
+				"for",
+				"forAddress"
+			],
+			[
+				"co",
+				"codeDictionary"
+			],
+			[
+				"comp",
+				"compileWord"
+			],
+			[
+				"cd",
+				"codeGen"
+			],
+			[
+				"cod",
+				"codeGen"
+			],
+			[
+				"ui",
+				"uint16_t"
+			],
+			[
+				"uint",
+				"uint32_t"
+			],
+			[
+				"tar",
+				"target"
+			],
+			[
+				"step",
+				"stepSize"
+			],
+			[
+				"uin",
+				"uint32_t"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "p",
+			"settings":
+			{
+				"buffer_size": 1,
+				"line_ending": "Unix",
+				"name": "p"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"insert",
+					{
+						"characters": "p"
+					},
+					"AQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/paulr/Projects/neo6502-firmware"
+	],
+	"file_history":
+	[
+		"/home/paulr/Projects/easy-game-creator/compiler/Makefile",
+		"/home/paulr/Projects/easy-game-creator/compiler/cfc.py",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/config/system/group1_system.inc",
+		"/home/paulr/Projects/neo6502-firmware/emulator/Makefile",
+		"/home/paulr/Projects/neo6502-firmware/emulator/src/core/sys_processor.cpp",
+		"/home/paulr/Projects/neo6502-firmware/emulator/src/core/processors/sweet16.cpp",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/sources/interface/sweet16.cpp",
+		"/home/paulr/Projects/easy-game-creator/compiler/codegen16.py",
+		"/home/paulr/Projects/easy-game-creator/.gitignore",
+		"/home/paulr/Projects/easy-game-creator/compiler/neoheader.asm",
+		"/home/paulr/Projects/easy-game-creator/compiler/neoheader.lst",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/scripts/sweet16.gen",
+		"/home/paulr/Projects/neo6502-firmware/emulator/src/core/sys_debugger.cpp",
+		"/home/paulr/Projects/easy-game-creator/documents/cf-okad2.txt",
+		"/home/paulr/Projects/easy-game-creator/Makefile",
+		"/home/paulr/Projects/easy-game-creator/compiler/m9c.py",
+		"/home/paulr/Projects/neo6502-firmware/emulator/sweet-asm/test.asm",
+		"/home/paulr/Projects/neo6502-firmware/emulator/src/core/sys_debugger.",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/Makefile",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/include/interface/sweet16.h",
+		"/home/paulr/Projects/neo6502-firmware/emulator/scripts/swasm.py",
+		"/home/paulr/Projects/neo6502-firmware/firmware/Makefile",
+		"/home/paulr/Projects/neo6502-firmware/basic/scripts/makebuild.py",
+		"/home/paulr/Projects/easy-game-creator/build_env/common.make",
+		"/home/paulr/Projects/neo6502-firmware/firmware/sources/CMakeLists.txt",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/sources/interface/pininterface.cpp",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/config/system/group10_uext.inc",
+		"/home/paulr/Projects/neo6502-firmware/firmware/sources/hardware/ports.cpp",
+		"/home/paulr/Projects/neo6502-firmware/basic/test.bsc",
+		"/home/paulr/Projects/neo6502-firmware/basic/sources/commands/base/clear.asm",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/config/system/group12_blitter.inc",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/sources/interface/blitter.cpp",
+		"/home/paulr/Projects/neo6502-firmware/firmware/common/include/interface/blitter.h",
+		"/home/paulr/Documents/Fucking Password Crap.txt"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"auto_name": "p",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "nf.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Projects/easy-game-creator/egc.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 280.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

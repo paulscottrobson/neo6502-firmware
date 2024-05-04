@@ -190,7 +190,7 @@ BYTE8 CPUExecuteInstruction(void) {
 		forceSync = CPUExecute16();
 	}
 
-	int cycleMax = CYCLES_PER_FRAME; 		
+	int cycleMax = CYCLES_PER_FRAME; 	
 	if (cycles < cycleMax && forceSync == 0) return 0;								// Not completed a frame.
 	cycles = 0;																		// Reset cycle counter.
 	HWSync();																		// Update any hardware
@@ -212,6 +212,16 @@ void CPUWriteMemory(WORD16 address,BYTE8 data) {
 }
 
 #include "gfx.h"
+
+// ***************************************************************************************
+//
+//								Handle Sweet16 Sync
+//
+// ***************************************************************************************
+
+void TMRSweet16Sync(void) {	
+	cycles = CYCLES_PER_FRAME; 														// If yields running via API do frame.
+}
 
 // *******************************************************************************************************************************
 //
