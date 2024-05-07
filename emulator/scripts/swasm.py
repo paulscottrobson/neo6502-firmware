@@ -38,7 +38,7 @@ class Evaluator(object):
 		except NameError:
 			if pass2:
 				raise AssemblerError("Unknown identifier in "+expr)
-			v = None
+			v = 0
 		except SyntaxError:
 			raise AssemblerError("Bad expression "+expr)
 		return v
@@ -102,7 +102,7 @@ class Assembler(object):
 			"cpr":0xD0,"inr":0xE0,"dcr":0xF0
 		}
 		self.group2 = {
-			"bra":0x01,"bnc":0x02,"bc":0x03,"bp":0x04,"bm":0x05,"bz":0x06,
+			"br":0x01,"bnc":0x02,"bc":0x03,"bp":0x04,"bm":0x05,"bz":0x06,
 			"bnz":0x07,"bm1":0x08,"bnm1":0x09,"bs":0x0C
 		}
 		
@@ -119,7 +119,7 @@ class Assembler(object):
 		s = l if l.find(";") < 0 else l[:l.find(";")]
 		s = s.replace("\t"," ").strip()
 		if s != "":
-			m = re.match('^([a-z1]+\\s?\\@?)(.*)$',s)
+			m = re.match('^([a-z1]+\\s*\\@?)(.*)$',s)
 			opcode = s.split(" ")[0].lower().strip()
 			opcode = "" if m is None else m.group(1).replace(" ","")
 			operand = "" if m is None else m.group(2).strip()
@@ -215,7 +215,13 @@ class Assembler(object):
 		AssemblerError.__LINE__ = 0
 		for s in open(file,"r").readlines():
 			AssemblerError.__LINE__ += 1
-			self.assemble(s,l)
+			#print(AssemblerError.__LINE__,s)
+			try:
+				self.assemble(s.replace("\t"," "),l)
+			except AssemblerError as x:
+				print("Error '{0}' {1}:{2}".format(str(x),AssemblerError.__FILE__,AssemblerError.__LINE__))
+				sys.exit(1)
+
 
 if __name__ == "__main__":
 	m = Memory()
@@ -227,9 +233,4 @@ if __name__ == "__main__":
 			asm.assembleFile(f,h)
 	h.close()
 	m.writeMemory("out.bin")
-
-#
-#		Wrapping
-#		Branch long
-#
-#		
+	sys.exit(0)
