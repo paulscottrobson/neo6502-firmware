@@ -55,28 +55,6 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "p",
-			"settings":
-			{
-				"buffer_size": 1,
-				"line_ending": "Unix",
-				"name": "p"
-			},
-			"undo_stack":
-			[
-				[
-					1,
-					1,
-					"insert",
-					{
-						"characters": "p"
-					},
-					"AQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA",
-					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
-				]
-			]
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -114,8 +92,9 @@
 	],
 	"file_history":
 	[
-		"/home/paulr/Projects/easy-game-creator/compiler/Makefile",
 		"/home/paulr/Projects/easy-game-creator/compiler/cfc.py",
+		"/home/paulr/Projects/easy-game-creator/build_env/common.make",
+		"/home/paulr/Projects/easy-game-creator/compiler/Makefile",
 		"/home/paulr/Projects/neo6502-firmware/firmware/common/config/system/group1_system.inc",
 		"/home/paulr/Projects/neo6502-firmware/emulator/Makefile",
 		"/home/paulr/Projects/neo6502-firmware/emulator/src/core/sys_processor.cpp",
@@ -137,7 +116,6 @@
 		"/home/paulr/Projects/neo6502-firmware/emulator/scripts/swasm.py",
 		"/home/paulr/Projects/neo6502-firmware/firmware/Makefile",
 		"/home/paulr/Projects/neo6502-firmware/basic/scripts/makebuild.py",
-		"/home/paulr/Projects/easy-game-creator/build_env/common.make",
 		"/home/paulr/Projects/neo6502-firmware/firmware/sources/CMakeLists.txt",
 		"/home/paulr/Projects/neo6502-firmware/firmware/common/sources/interface/pininterface.cpp",
 		"/home/paulr/Projects/neo6502-firmware/firmware/common/config/system/group10_uext.inc",
@@ -186,36 +164,6 @@
 		{
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"selected": true,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1,
-								1
-							]
-						],
-						"settings":
-						{
-							"auto_name": "p",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"stack_multiselect": false,
-					"type": "text"
-				}
 			]
 		}
 	],
