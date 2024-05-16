@@ -5,6 +5,19 @@ fontsize: 12pt
 
 # Basic Reference
 
+This is a reference for Neo6502's BASIC interpreter.
+
+There are many example programs available which are designed to show and explain the features of the Neo6502
+and its hardware and firmware in the examples directory of the release.
+
+For example if.bsc/if.bas so the options available for the 'if' statement, graphics.bsc/graphics.bas show the
+drawing commands, and joypad.bsc/joypad.bas show how to access the joypad (or the keyboard backup if none is
+plugged in)
+
+Many of these are helpful for understanding specific API functions, as many BASIC commands are just wrappers 
+for those functions.
+
+
 ## Binary Operators
 
 +------------+----------+--------------------------------------------+
