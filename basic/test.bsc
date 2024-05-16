@@ -1,34 +1,68 @@
 '
-' 	New Blitter
+'	***	Tile map demonstration program ***
 '
-f = alloc(16)
-t = alloc(16)
+cls:sprite clear:gload "graphics.gfx"
+rect 0,0 solid ink 4 to 319,239 
 
-cls:sprite clear:cursor 0,20
-dat = alloc(256)
-for i = 0 to 255:poke dat+i,(i >> 4)+5:next
-
-call setup(f,0,dat,64,64,1)
-call setup(t,$80,0,8,320,8)
-t1 = time()
-for x = 0 to 39
-	for y = 0 to 23
-		while peek($FF00):wend
-		doke t,x*8+y*320*8
-		poke $FF04,0
-		doke $FF05,f
-		doke $FF07,t
-		poke $FF01,3
-		poke $FF00,12
-	next
-next
-print time()-t1
+call CreateTileMap()
+xPos = 0:yPos = 0
+call DrawTileMap(xPos,yPos)
+repeat
+	if event(t1,2)
+		fire = joypad(dx,dy)
+		xPos = max(xPos+dx,0):yPos = max(yPos+dy,0)
+		call DrawTileMap(xPos,yPos)
+	endif
+until false
 end
+'
+'		This draws the tilemap offset by x,y
+'
+proc DrawTileMap(xo,yo)
+	ink 7:print chr$(20);"At offset ";xo;" ";yo;"  "
+	' Sets the tilemap data to draw with and the offset in pixels.
+	tilemap map,xo,yo
+	' Draw the tilemap in a window
+	tiledraw 10,20 to 240,210
+	' Draw a small second one using the same data
+	tiledraw 250,20 to 310,80
+endproc
+'
+'		This creates a single tile map in memory. See api.pdf	
+'
+proc CreateTileMap()
+	width = 30:height = 20
+	' an array of memory with a small header : type, width and height.
+	map = alloc(width*height+3)
+	poke map,1: poke map+1, width: poke map+2, height
+	' Fill the map with $F2 which is a solid green block.
+	for i = 0 to width*height-1:poke map+3+i,$F2:next
+	' Draw a frame around the whole screen
+	call DrawRect(0,0,width,height,$F3,-1)
+	' Draw some things on the tilemap
+	call DrawRect(3,2,8,5,6,0)
+	call DrawRect(17,6,10,7,6,3)
+	call DrawRect(5,10,10,7,6,5)
+endproc
 
-proc setup(a,p,addr,size,offset,count)
-	doke a+0,addr
-	poke a+2,p
-	doke a+4,size:doke a+6,0
-	doke a+8,offset:doke a+10,0
-	doke a+12,count:doke a+14,0
+'
+'		Draw a rectangle on the tile map at (x,y) size (w,h) with frame edgeColour
+' 		and fill with fillColour (if >= 0)
+'
+proc DrawRect(x,y,w,h,edgeColour,fillColour)
+	if fillColour >= 0
+		for i = x to x+w-1
+			for j = y to y+h-1
+				call set(i,j,fillColour)
+			next
+		next
+	endif
+	for i = x to x+w-1:call set(i,y,edgeColour):call set(i,y+h-1,edgeColour):next
+	for i = y to y+h-1:call set(x,i,edgeColour):call set(x+w-1,i,edgeColour):next
+endproc
+'
+'		Set tilemap tile to x,y
+'
+proc set(x,y,t)
+	poke map+x+3+y*width,t
 endproc
