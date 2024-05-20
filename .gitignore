@@ -54,6 +54,7 @@ firmware/sources/interface/*.o
 *.dump
 *.log
 *.aux
+*.pyc
 documents/release/basic.pdf
 basic/scripts/__pycache__/tokens.cpython-311.pyc
 firmware/common/include/data/prompt.h
