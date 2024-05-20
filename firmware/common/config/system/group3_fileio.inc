@@ -35,7 +35,7 @@ GROUP 3 File I/O
         graphics working memory, used for sprites, tiles, images.
         
         On output:
-        Parameter:0 contains an error/status code.
+        Error location contains an error/status code.
         
 
     FUNCTION 3 Store File
@@ -48,7 +48,7 @@ GROUP 3 File I/O
         Parameters:4,5 specified the number of bytes to store.
 
         On output:    
-        Parameter:0 contains an error/status code.
+        Error location contains an error/status code.
         
 
     FUNCTION 4 File Open

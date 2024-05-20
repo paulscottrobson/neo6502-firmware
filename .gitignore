@@ -71,3 +71,4 @@ basic/test.bsc
 basic/tests/__pycache__/testutils.cpython-311.pyc
 .cache
 documents/release/source/api.tex
+*.sublime-*
