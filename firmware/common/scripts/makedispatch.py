@@ -216,7 +216,7 @@ class DispatchAPI(object):
 		 		fn_name  = function.funcName
 		 		fn_table_tex.append("## Function {0} : {1}".format(fn_id,fn_name))
 		 		docLines = function.docLines if function.docLines[-1] else function.docLines[0:-2]
-		 		desc = " ".join(docLines)
+		 		desc = "\n".join(docLines)
 		 		fn_table_tex.append(desc)
 			fn_table_tex.append("\\newpage")
 

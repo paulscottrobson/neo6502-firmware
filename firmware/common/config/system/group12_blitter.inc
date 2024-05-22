@@ -12,7 +12,7 @@
 
 // ***************************************************************************************
 //
-//                                  Group 10 (UExt)
+//                                  Group 12 (Blitter)
 //
 // ***************************************************************************************
 
@@ -36,17 +36,76 @@ GROUP 12 Blitter
         *DERROR = BLTComplexCopy(DPARAMS[0],DSPGetInt16(DCOMMAND,5),DSPGetInt16(DCOMMAND,7));
 
     DOCUMENTATION
-        Copy a rectangular area to a rectangular area (can be contiguous by size = amount of data, offset = 0, copy steps = 1)
-            Parameter  (0) is zero.
-            Parameters (1,2) point to the source rectangle data.
-            Parameters (3,4) point to the target rectangle data.
+        Copy a source rectangular area to a destination rectangular area.
+        It's oriented toward copying graphics data, but can be used as a more general-purpose memory mover.
+        The source and target areas may be different formats, and the copy will convert the data on the fly.
+        For example, you can expand 4bpp source graphics (two pixels per byte) into the 1 pixel per byte framebuffer.
+        However, the blitting is byte-oriented. So the source width is always rounded down to the nearest full byte.
 
-            These are as follows
-                0-3     24 bit address to copy from/to (address is address:page:0)
-                4-7     Step size (e.g. if copying 32 pixels, this would be 32)
-                8-11    Step offset (e.g. when doing screen lines this would be 320, the number of pixels per line)     
-                12-15   Steps to copy.
+            Parameter  (0) is the blit action:
 
-            Activity halts when one of the steps to copy value is decremented to zero. To ignore the steps to copy in receive,
-            set it to zero.
+                           0 = copy
+                           1 = copymasked - copy, but only where src is not the transparent value.
+                           2 = solidmasked - set target to constant solid value, but only where src is not the transparent value.
+                           See below for transparent/solid values.
+
+            Parameters (1,2) address of the source rectangle data.
+
+            Parameters (3,4) address of the target rectangle data.
+
+            The source and target rectangle data is laid out in memory as follows:
+
+                0-2     24 bit address to copy from/to (address is address:page:0)
+
+                3       pad byte (must be zero)
+
+                4-5     Stride, in bytes. This is the value to add to the address to get from one line to the next.
+                        Used for both source and target.
+                        For example:
+                        - if blitting to the screen, a stride of screen width (320) would get to the next line.
+                        - a zero source stride would repeat a single line for the whole copy.
+                        - A negative target stride would draw from the bottom upward.
+
+                6       data format
+                        0: bytes. Supported for both source and target.
+                        1: pairs of 4-bit values (nibbles). Source only.
+                        2: 8 single-bit values. Source only.
+                        3: high nibble. Target only.
+                        4: low nibble. Target only.
+
+                7       A constant to use as the "transparent" value for BLTACT_MASK and BLTACT_SOLID. Source only. Not used in target.
+
+                8       A constant to use as the "solid" value for BLTACT_SOLID. Source only. Not used in target.
+
+                9       Height. The number of lines to copy.
+                        Source only. Not used in target.
+                        The copy is driven by the source height.
+
+                10-11   Width. The number of values to copy for each line.
+                        Source only. Not used in target.
+                        The copy is driven by the source width.
+
+    FUNCTION 4 Blit Image
+        *DERROR = BLTImage(DPARAMS[0], (DPARAMS[1] | DPARAMS[2] << 8),(DPARAMS[3] | DPARAMS[4] << 8), (DPARAMS[5] | DPARAMS[6] << 8), DPARAMS[7]);
+
+    DOCUMENTATION
+        Blits an image from memory onto the screen. The image will be clipped,
+        so it's safe to blit partly (or fully) offscreen-images.
+
+            Parameter  (0) is the blit action (see function 3, Complex Blit):
+
+            Parameters (1,2) address of the source rectangle data.
+
+            Parameters (3,4) x pixel coordinate on screen (signed 16 bit)
+
+            Parameters (5,6) y pixel coordinate on screen (signed 16 bit)
+
+            Parameter  (7) destination format, determines how framebuffer will be written:
+                        0: write to whole byte.
+                        1: unsupported
+                        2: unsupported
+                        3: write to high nibble only.
+                        4: write to low nibble only.
+
+        NOTE: clipping operates at byte resolution on the source data. So, for example, if you blit a 1-bit image (format 2) to an x-position of -2, then the whole first byte will be skipped leaving 6 empty pixels on the left. Same happens on the right - either the whole source byte is used, or it'll be skipped.
 
