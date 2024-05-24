@@ -14,6 +14,27 @@
 
 static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size);
 
+static bool isInitialised = false;
+
+// ***************************************************************************************
+//
+//								Attempt to initialise Serial I/O
+//
+// ***************************************************************************************
+
+bool SERSetup(void) {
+	if (!isInitialised) {  															// Try to initialise it.
+	    isInitialised = SERInitialise();                                         	// Initialise serial port.
+	    if (!isInitialised) {
+	    	CONWriteString("Serial not functioning.\r");  							// Failed to initialise.
+	    	return false; 												
+	    }
+	    while (SERIsByteAvailable()) SERReadByte();  								// Clear anything already incoming.
+	}
+	SERSetSerialFormat(SERIAL_TRANSFER_BAUD_RATE,SERIAL_PROTOCOL_8N1); 				// Set transceive format.
+	return true;
+}
+
 // ***************************************************************************************
 //
 //									Input and process buffer.
@@ -21,19 +42,10 @@ static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size);
 // ***************************************************************************************
 
 static uint8_t sBuffer[256];  														// Input buffer.
-static bool isInitialised = false;
 
 void SERCheckDataAvailable(void) {
-	if (!isInitialised) {  															// Try to initialise it.
-	    isInitialised = SERInitialise();                                         	// Initialise serial port.
-	    if (!isInitialised) {
-	    	CONWriteString("Serial not functioning.\r");  							// Failed to initialise.
-	    	return; 												
-	    }
-	    while (SERIsByteAvailable()) SERReadByte();  								// Clear anything already incoming.
-	}
-	SERSetSerialFormat(SERIAL_TRANSFER_BAUD_RATE,SERIAL_PROTOCOL_8N1); 				// Set transceive format.
-	
+
+	if (!SERSetup()) return; 														// Initialise serial I/O if not done
 	bool completed = false;
 	CONWriteString("Serial link enabled.\r");
 	while (!completed) {
