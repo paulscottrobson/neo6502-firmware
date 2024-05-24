@@ -23,6 +23,7 @@ bool SERIsByteAvailable(void);
 uint8_t SERReadByte(void);
 void SERWriteByte(uint8_t b);
 void SERCheckDataAvailable(void);
+bool SERSetup(void);
 
 #endif
 

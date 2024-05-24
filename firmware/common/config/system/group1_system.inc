@@ -78,3 +78,9 @@ GROUP 1 System
         call for Windows emulation ; if it returns non-zero it means the VM has been executed, if it returns zero
         then the emulation can update as at the end of a normal frame.
         
+    FUNCTION 10 Write character to debug
+        FDBWrite(DPARAMS[0]);
+    DOCUMENTATION
+        Writes a single character to the debug port (the UART on the Pico, or stderr on the emulator). This allows
+        maximum flexibility.
+        
