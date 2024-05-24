@@ -1,20 +1,16 @@
 ---
-
 ---
 
 # Basic Reference
 
 This is a reference for Neo6502's BASIC interpreter.
 
-There are many example programs available which are designed to show and explain the features of the Neo6502
-and its hardware and firmware in the examples directory of the release.
+There are many example programs available which are designed to show and explain the features of the Neo6502 and its hardware and firmware in the examples directory of the release.
 
-For example if.bsc/if.bas so the options available for the 'if' statement, graphics.bsc/graphics.bas show the
-drawing commands, and joypad.bsc/joypad.bas show how to access the joypad (or the keyboard backup if none is
+For example if.bsc/if.bas so the options available for the 'if' statement, graphics.bsc/graphics.bas show the drawing commands, and joypad.bsc/joypad.bas show how to access the joypad (or the keyboard backup if none is
 plugged in)
 
-Many of these are helpful for understanding specific API functions, as many BASIC commands are just wrappers 
-for those functions.
+Many of these are helpful for understanding specific API functions, as many BASIC commands are just wrappers for those functions.
 
 
 ## Binary Operators
@@ -23,7 +19,7 @@ for those functions.
 | ---------- | -------- | -------------------------------------------------------- |
 | 4          | \*       |                                                          |
 | 4          | /        | Forward slash is floating point divide. 22/7 is 3.142857 |
-| 4          | \\       | Backward slash is integer divide, 22/7 is  3             |
+| 4          | \\       | Backward slash is integer divide, 22\7 is  3             |
 | 4          | \%       | Modulus of integer division ignoring signs               |
 | 4          | \>\>     | Logical shift right, highest bit zero                    |
 | 4          | \<\<     | Logical shift left                                       |
@@ -35,9 +31,9 @@ for those functions.
 | 2          | \>=      | Return -1 for true,0 for false                           |
 | 2          | \<\>     | Return -1 for true,0 for false                           |
 | 2          | =        | Return -1 for true,0 for false                           |
-| 1          | &        | Binary operator on integers                              |
-| 1          |          |                                                          |
-| 1          | \^       | Binary operator on integers                              |
+| 1          | &        | Binary AND operator on integers                          |
+| 1          | \|       | Binary OR operator on integers                           |
+| 1          | ^        | Binary XOR operator on integers                          |
 
 \newpage
 
@@ -45,7 +41,7 @@ for those functions.
 
 | Operator                | Notes                                                        |
 | ----------------------- | ------------------------------------------------------------ |
-| alloc(n)                | Allocate n bytes of 65C02 memory, return address             |
+| alloc(n)                | Allocate n bytes of memory, return address                   |
 | analog(n)               | Read voltage level on pin n -- returns a value from 0 to 4095 |
 | asc(s\$)                | Return ASCII value of first character or zero for empty string |
 | atan(n)                 | Arctangent of n in degrees                                   |
@@ -54,7 +50,7 @@ for those functions.
 | deek(a)                 | Read word value at a                                         |
 | err                     | Current error number                                         |
 | erl                     | Current error line number                                    |
-| event(v,r)              | event takes an integer variable and a fire rate (r) in 1/100s, and uses the integer variable to return -1 at that rate. If the value in 'v' is zero, it resets (if you pause say), if the value in v is -1 the timer will not fire -- to unfreeze, set it to zero and it will resynchronise. |
+| event(v,r)              | event takes an integer variable and a fire rate (r) in 1/100 s, and uses the integer variable to return -1 at that rate. If the value in 'v' is zero, it resets (if you pause say), if the value in v is -1 the timer will not fire -- to unfreeze, set it to zero and it will resynchronise. |
 | exp(n)                  | e to the power n                                             |
 | false                   | Return constant 0, improves boolean readability              |
 | havemouse()             | Return non zero if a mouse is connected.                     |
@@ -187,16 +183,11 @@ for those functions.
 
 ## The Inline Assembler
 
-The inline assembler works in a very similar way to that of the BBC
-Micro, except that it does not use the square brackets \[ and \] to
-delimit assembler code. Assembler code is in normal BASIC programs.
+The inline assembler works in a very similar way to that of the BBC Micro, except that it does not use the square brackets \[ and \] to delimit assembler code. Assembler code is in normal BASIC programs.
 
 A simple example shown below (in the samples directory). It prints a row of 10 asterisks.
 
-
-Most standard 65C02 syntax is supported, except currently you cannot use
-lsr a ; it has to be just lsr (and similarly for rol, asl, ror,inc and
-dec).
+Most standard 65C02 syntax is supported, except currently you cannot use lsr a ; it has to be just lsr (and similarly for rol, asl, ror,inc and dec).
 
 You can also pass A X Y as variables. So you could delete line 150 and run it with X = 12: sys start which would print 12 asterisks.
 
@@ -221,50 +212,29 @@ You can also pass A X Y as variables. So you could delete line 150 and run it wi
 
 ### \[ \] Operator
 
-The \[\] operator is used like an array, but it is actually a syntactic
-equivalent of deek and doke, e.g. reading and writing 16 bytes. mem\[x\]
-means the 16 bit value in mem + x \* 2, so if mem = 813 then mem\[2\] =
--1 writes a 16 bit word to 817 and 818, and print mem\[2\] reads it. The
-index can only be from 0..127
+The \[\] operator is used like an array, but it is actually a syntactic equivalent of deek and doke, e.g. reading and writing 16 bytes. mem\[x\] means the 16 bit value in mem + x \* 2, so if mem = 813 then mem\[2\] = -1 writes a 16 bit word to 817 and 818, and print mem\[2\] reads it. The index can only be from 0..127
 
-The purpose of this is to provide a clean readable interface to data in
-65C02, Sweet16 and other programs running under assembly language ;
-often accessing elements in the 'array' as a structure.
+The purpose of this is to provide a clean readable interface to data in 65C02, Sweet16 and other programs running under assembly language ; often accessing elements in the 'array' as a structure.
 
 ### Zero Page Usage
 
-Neo6502 is a clean machine, rather like the Sharp machines in the 1980s.
-When BASIC is not running it has no effect on anything, nor does the
-firmware. It is not like a Commodore 64 (for example) where changing
-some zero page locations can cause crashes.
+Neo6502 is a clean machine, rather like the Sharp machines in the 1980s. When BASIC is not running it has no effect on anything, nor does the firmware. It is not like a Commodore 64 (for example) where changing some zero page locations can cause crashes.
 
-However, BASIC does make use of zero page. At the time of writing this
-is memory locations \$10-\$41.
+However, BASIC does make use of zero page. At the time of writing this is memory locations \$10-\$41.
 
-These can however be used in machine code programs called via SYS. Only
-4 bytes of that usage is system critical (the line pointer and the stack
-pointer), those are saved on the stack by SYS, so even if you overwrite
-them it does not matter.
+These can however be used in machine code programs called via SYS. Only 4 bytes of that usage is system critical (the line pointer and the stack pointer), those are saved on the stack by SYS, so even if you overwrite them it does not matter.
 
-However, you can't use this range to store intermediate values *between*
-sys calls. It is advised that you work usage backwards from \$FF (as
-BASIC is developed forwards from \$10). It is very unlikely that these
-will meet in the middle.
+However, you can't use this range to store intermediate values *between* sys calls. It is advised that you work usage backwards from \$FF (as BASIC is developed forwards from \$10). It is very unlikely that these will meet in the middle.
 
-\$00 and \$01 are used on BASIC boot (and maybe other languages later)
-but this should not affect anything.
+\$00 and \$01 are used on BASIC boot (and maybe other languages later) but this should not affect anything.
 
 \newpage
 
 ## Basic Commands (Graphics)
 
-The graphics commands are MOVE, PLOT (draws a pixel), LINE (draws a
-line) RECT (draws a rectangle) ELLIPSE (draws a circle or ellipse) IMAGE
-(draws a sprite or tile), TILEDRAW (draws a tilemap) and TEXT (draws
-text)
+The graphics commands are MOVE, PLOT (draws a pixel), LINE (draws a line) RECT (draws a rectangle) ELLIPSE (draws a circle or ellipse) IMAGE (draws a sprite or tile), TILEDRAW (draws a tilemap) and TEXT (draws text)
 
-The keywords are followed by a sequence of modifiers and commands which
-do various things as listed below
+The keywords are followed by a sequence of modifiers and commands which do various things as listed below
 
 | Keyword  | Notes                                                        |
 | -------- | ------------------------------------------------------------ |
@@ -279,30 +249,23 @@ do various things as listed below
 | dim n    | Set the scaling to n (for TEXT, IMAGE, TILEMAP only), so **text "Hello" dim 2 to 10,10 to 10,100** will draw it twice double size. Tiles can only be 1 or 2 (when 2, tiles are drawn double size giving a 32x32 tile map) |
 
 
-These can be arbitrarily chained together so you can do (say) LINE 0,0
-TO 100,10 TO 120,120 TO 0,0 to draw an outline triangle. You can also
-switch drawing type in mid command, though I probably wouldn't recommend
-it for clarity.
+These can be arbitrarily chained together so you can do (say) LINE 0,0 TO 100,10 TO 120,120 TO 0,0 to draw an outline triangle. You can also switch drawing type in mid command, though I probably wouldn't recommend it for clarity.
 
-State is remember until you clear the screen so if you do INK 2 in a
-graphics command things will be done in colour 2 (green) until finished.
+State is remember until you clear the screen so if you do INK 2 in a graphics command things will be done in colour 2 (green) until finished.
 
-TEXT is followed by one parameter, which is the text to be printed,
-these too can be repeated e,g, TEXT "Hello" TO 10,10 TEXT "Goodbye" DIM
-2 fTO 100,10
+TEXT is followed by one parameter, which is the text to be printed, these too can be repeated 
 
-IMAGE is followed by two parameters, one specifies the image, the second
-the 'flip'. These can be repeated as for TEXT.
+`TEXT "Hello" TO 10,10 TEXT "Goodbye" DIM 2 TO 100,10`
 
-The image parameter is 0-127 for the first 128 tiles, 128-191 for the
-first 64 16x16 sprites and 192-255 for the first 64 32x32 sprites. The
-flip parameter, which is optional, is 0 (no flip) 1 (horizontal flip) 2
-(vertical flip) 3 (both).
+IMAGE is followed by two parameters, one specifies the image, the second the 'flip'. These can be repeated as for TEXT.
 
-An example would be image 4 dim 2 to 10,10 image 192,3 dim 1 to 200,10
+The image parameter is 0-127 for the first 128 tiles, 128-191 for the first 64 16x16 sprites and 192-255 for the first 64 32x32 sprites. The flip parameter, which is optional, is 0 (no flip) 1 (horizontal flip) 2 (vertical flip) 3 (both).
 
-Note that images are \*not\* sprites or tiles, they use the image to
-draw on the screen in the same way that LINE etc. do.
+An example would be 
+
+`image 4 dim 2 to 10,10 image 192,3 dim 1 to 200,10`
+
+Note that images are \*not\* sprites or tiles, they use the image to draw on the screen in the same way that LINE etc. do.
 
 \newpage
 
@@ -310,88 +273,59 @@ draw on the screen in the same way that LINE etc. do.
 
 Sprite commands closely resemble the graphics commands.
 
-They begin with SPRITE \<n\> which sets the working sprite. Options
-include IMAGE \<n\> which sets the image, TO \<x\>,\<y\> which sets the
-position, FLIP \<n\> which sets the flip to a number (bit 0 is
-horizontal flip, bit 1 is vertical flip), ANCHOR \<n\> which sets the
-anchor point and BY \<x\>,\<y\> which sets the position by offset.
+They begin with SPRITE \<n\> which sets the working sprite. Options include IMAGE \<n\> which sets the image, TO \<x\>,\<y\> which sets the position, FLIP \<n\> which sets the flip to a number (bit 0 is horizontal flip, bit 1 is vertical flip), ANCHOR \<n\> which sets the anchor point and BY \<x\>,\<y\> which sets the position by offset.
 
-With respect to the latter, this is the position from the TO and is used
-to do attached sprites e.g. you might write.
+With respect to the latter, this is the position from the TO and is used to do attached sprites e.g. you might write.
 
-SPRITE 1 IMAGE 2 TO 200,200 SPRITE 2 IMAGE 3 BY 10,10
+`SPRITE 1 IMAGE 2 TO 200,200 SPRITE 2 IMAGE 3 BY 10,10`
 
-Which will draw Sprite 1 and 200,200 and sprite 2 offset at 210,210. It
-does not offset a sprite from its current position.
+Which will draw Sprite 1 and 200,200 and sprite 2 offset at 210,210. It does not offset a sprite from its current position.
 
-As with Graphics these are not all required. It only changes what you
-specify not all elements are required each time *SPRITE 1 IMAGE 3* is
-fine.
+As with Graphics these are not all required. It only changes what you specify not all elements are required each time *SPRITE 1 IMAGE 3* is fine.
 
-SPRITE can also take the single command CLEAR ; this resets all sprites
-and removes them from the display
+SPRITE can also take the single command CLEAR ; this resets all sprites and removes them from the display
 
-Sprite 0 is used for the turtle sprite, so if the turtle is turned on,
-then it will adjust its graphic, size to reflect the turtle position. If
-turtle graphics are not used, it can be used like any other.
+Sprite 0 is used for the turtle sprite, so if the turtle is turned on, then it will adjust its graphic, size to reflect the turtle position. If turtle graphics are not used, it can be used like any other.
 
 ### Implementation notes
 
-Up to 128 sprites are supported. However, sprite drawing is done by the
-Pico and is not hardware, so more sprites means the system will run
-slower.
+Up to 128 sprites are supported. However, sprite drawing is done by the Pico and is not hardware, so more sprites means the system will run slower.
 
-Additionally, the sprites are currently done with XOR drawing, which
-causes effects when they overlap. This should not be relied on (it may
-be replaced by a clear/invalidate system at some point), but the actual
-implementation should not change.
+Additionally, the sprites are currently done with XOR drawing, which causes effects when they overlap. This should not be relied on (it may be replaced by a clear/invalidate system at some point), but the actual implementation should not change.
 
 This is an initial sprite implementation and is quite limited.
 
-(The plan is to add a feature like the animation languages on STOS and
-AMOS which effectively run a background script on a sprite)
+(The plan is to add a feature like the animation languages on STOS and AMOS which effectively run a background script on a sprite)
 
 ## Sprite Support
 
 ### =spritex(n) =spritey(n)
 
-These return the x and y coordinates of the sprites draw position
-(currently the centre) respectively.
+These return the x and y coordinates of the sprites draw position (currently the centre) respectively.
 
-### = hit(sprite1,sprite2,distance)
+### = hit(sprite#1,sprite#2,distance)
 
-The hit function is designed to do sprite collision. It returns true if
-the pixel distance between the centre of sprite 1 and the centre of
-sprite 2 is less than or equal to the distance.
+The hit function is designed to do sprite collision. It returns true if the pixel distance between the centre of sprite 1 and the centre of sprite 2 is less than or equal to the distance.
 
-So if you wanted to move a sprite until it collided with another sprite,
-assuming both are 32x32, the collision distance would be 32 (the
-distance from the centre to the edge of both sprites added together), so
-you could write something like :
+So if you wanted to move a sprite until it collided with another sprite, assuming both are 32x32, the collision distance would be 32 (the distance from the centre to the edge of both sprites added together), so you could write something like :
 
-x = 0
+`x = 0`
 
-repeat
+`repeat`
 
-x = x + 1: sprite 1 to x,40
+`x = x + 1: sprite 1 to x,40`
 
-until hit(1,2,32)
+`until hit(1,2,32)`
 
-In my experience of this the distance needs to be checked
-experimentally, as it affects the 'feel' of the game ; sometimes you
-want near exact collision, sometimes it's about getting the correct
-feel. It also depends on the shape and size of the sprites, and how they
-move.
+In my experience of this the distance needs to be checked experimentally, as it affects the 'feel' of the game ; sometimes you want near exact collision, sometimes it's about getting the correct feel. It also depends on the shape and size of the sprites, and how they move.
 
-I think it's better than a simple box collision test, and more practical
-than a pixel based collision test which is very processor heavy.
+I think it's better than a simple box collision test, and more practical than a pixel based collision test which is very processor heavy.
 
 \newpage
 
 ## Sound Commands
 
-The Neo6502 has one sound channel by default, which is a beeper. This is
-channel 0.
+The Neo6502 has one sound channel by default, which is a beeper. This is channel 0.
 
 ### Sound
 
@@ -399,8 +333,7 @@ The main sound command is called "sound" and has the following forms.
 
 #### Sound clear
 
-Resets the entire sound system, silences all channels, empties all
-queues
+Resets the entire sound system, silences all channels, empties all queues
 
 #### Sound \<channel\> clear
 
@@ -408,18 +341,13 @@ Resets a single channel ; silences it, and empties its queue
 
 #### Sound \<channel\>,\<frequency\>,\<time\>\[,\<slide\>\]
 
-Queues a note on the given channel of the given frequency (in Hz) and
-time (in centiseconds). These will be played in the background as other
-notes finish so you can 'queue up' an entire phrase and let it play by
-itself. The slide value adds that much to the frequency every
-centisecond allowing some additional effects (note, done in 50Hz ticks)
+Queues a note on the given channel of the given frequency (in Hz) and time (in centiseconds). These will be played in the background as other notes finish so you can 'queue up' an entire phrase and let it play by itself. The slide value adds that much to the frequency every centisecond allowing some additional effects (note, done in 50Hz ticks)
 
 A mixture of the two syntaxes SOUND 0 CLEAR 440,200 is now supported.
 
 ### Sfx
 
-Sfx plays sound effects. Sound effects are played immediately as they
-are usually in response to an event.
+Sfx plays sound effects. Sound effects are played immediately as they are usually in response to an event.
 
 It's format is ***sfx** **\<channel\>,\<effect***\> .
 
@@ -427,20 +355,13 @@ It's format is ***sfx** **\<channel\>,\<effect***\> .
 
 ## Screen Editor
 
-The ***edit*** command starts the screen editor. This currently supports
-left, right, home, end, backspace and delete on the current line, enter,
-up, down, page up and page down to change lines.
+The ***edit*** command starts the screen editor. This currently supports left, right, home, end, backspace and delete on the current line, enter, up, down, page up and page down to change lines.
 
-Esc exits the editor, and Ctrl+P and Ctrl+Q insert and delete a whole
-line.
+Esc exits the editor, and Ctrl+P and Ctrl+Q insert and delete a whole line.
 
-Note the editor is slightly eccentric ; it is not a text editor, what it
-is doing is editing the underlying program on the fly -- much the same
-as if you were typing lines in.
+Note the editor is slightly eccentric ; it is not a text editor, what it is doing is editing the underlying program on the fly -- much the same as if you were typing lines in.
 
-The editor uses line numbers, so is *not* compatible with their use in
-programs. Any program will be renumbered from 1 upwards in steps of 1
-(except library routines).
+The editor uses line numbers, so is *not* compatible with their use in programs. Any program will be renumbered from 1 upwards in steps of 1 (except library routines).
 
 You shouldn't be using line numbers anyway !
 
@@ -448,12 +369,9 @@ You shouldn't be using line numbers anyway !
 
 ## Graphic Data
 
-The graphic date for a game is stored in what is named by default
-"graphics.gfx". This contains up to 256 graphics objects, in one of
-three types. One can have multiple graphics files.
+The graphic date for a game is stored in what is named by default "graphics.gfx". This contains up to 256 graphics objects, in one of three types. One can have multiple graphics files.
 
-Each has 15 colours (for sprites, one is allocated to transparency)
-which are the same as the standard palette.
+Each has 15 colours (for sprites, one is allocated to transparency) which are the same as the standard palette.
 
 #### 16x16 tiles (0-127, \$00-\$7F)
 
@@ -461,83 +379,57 @@ These are 128 16x16 pixel solid tiles which can be horizontally flipped
 
 #### 16x16 sprites (128-191, \$80-\$BF)
 
-These are 64 16x16 sprites which can be horizontally and/or vertically
-flipped
+These are 64 16x16 sprites which can be horizontally and/or vertically flipped
 
 #### 32x32 sprites (192-255, \$C0-\$FF)
 
-These are 64 32x32 sprites which can be horizontally and/or vertically
-flipped
+These are 64 32x32 sprites which can be horizontally and/or vertically flipped
 
-These are created using two scripts, which are written in Python and
-require the installation of the Python Imaging Library, also known as
-PIL or Pillow.
+These are created using two scripts, which are written in Python and require the installation of the Python Imaging Library, also known as PIL or Pillow.
 
 ### Empty graphics files
 
-The script "createblanks.zip" creates three files, tile_16.png,
-sprite_16.png and sprite_32.png
-which are used for the three types of graphic.
+The script "createblanks.zip" creates three files, tile_16.png, sprite_16.png and sprite_32.png which are used for the three types of graphic.
 
-The sprite and tile files all look very similar. The
-palette is shown at the top (in later versions this will be configurable
-at this point), and some sample sprites are shown. Each box represents a
-16x16 sprite. 32X32 sprite looks the same except the boxes are twice the
-size and there are half as many per row.
+The sprite and tile files all look very similar. The palette is shown at the top (in later versions this will be configurable at this point), and some sample sprites are shown. Each box represents a 16x16 sprite. 32X32 sprite looks the same except the boxes are twice the size and there are half as many per row.
 
-Tiles are almost identical ; in this the background is black. The solid
-magenta (RGB 255,0,255) is used for transparency, this colour is not in
-the palette.
+Tiles are almost identical ; in this the background is black. The solid magenta (RGB 255,0,255) is used for transparency, this colour is not in the palette.
 
-Running createblanks.zip creates these three empty files. To protect
-against accidents it will not overwrite currently existing files, so if
-you want to start again then you have to delete the current ones.
+Running createblanks.zip creates these three empty files. To protect against accidents it will not overwrite currently existing files, so if you want to start again then you have to delete the current ones.
 
 ### Compiling graphics files
 
-There is a second script "makeimg.zip". This converts these three files
-into a file "graphics.gfx" which contains all the graphic data.
+There is a second script "makeimg.zip". This converts these three files into a file "graphics.gfx" which contains all the graphic data.
 
-This can be loaded into graphics image memory using the gload command,
-and the address 65535 e,g, ***gload "graphics.gfx"***
+This can be loaded into graphics image memory using the gload command, and the address 65535 e,g, ***gload "graphics.gfx"***
 
-There is an example of this process in the repository under basic/images
-which is used to create graphic for the sprite demonstation program
+There is an example of this process in the repository under basic/images which is used to create graphic for the sprite demonstation program
 
 \newpage
 
 ## Libraries
 
-Libraries are part of the BASIC program, placed at the start. However,
-their line numbers are all set to zero. (So you cannot use GOTO or GOSUB
-in libraries, but you should only use them for porting old code).
+Libraries are part of the BASIC program, placed at the start. However, their line numbers are all set to zero. (So you cannot use GOTO or GOSUB in libraries, but you should only use them for porting old code).
 
-NEW will not remove them, LIST does not show them (except LIST 0), You
-cannot edit them using the line editors.
+NEW will not remove them, LIST does not show them (except LIST 0), You cannot edit them using the line editors.
 
-However RUN does not skip them. This is so you can have initaialisation
-code e.g.
+However RUN does not skip them. This is so you can have initialisation code e.g.
 
-\<do initialisation code\>
+<do initialisation code\>
 
-if false
+`if false`
 
-proc myhw.dosomething(p1) ....
+`proc myhw.dosomething(p1) ....`
 
-proc myhw.panic()
+`proc myhw.panic()`
 
-endif
+`endif`
 
-To support this, there is a LIBRARY command. LIBRARY on its own undoes
-the library functionality. It renumbers the whole program from the
-start, starting from line number 1000.
+To support this, there is a LIBRARY command. LIBRARY on its own undoes the library functionality. It renumbers the whole program from the start, starting from line number 1000.
 
-Otherwise LIBRARY works like LIST. You can do LIBRARY \<line\> or
-LIBRARY \<from\>,\<to\> and similar. Instead of listing this code, it
-causes them to "vanish" by setting their line numbers to zero.
+Otherwise LIBRARY works like LIST. You can do LIBRARY \<line\> or LIBRARY \<from\>,\<to\> and similar. Instead of listing this code, it causes them to "vanish" by setting their line numbers to zero.
 
-They are also supported in the makebasic script. Adding the command
-library makes all code so far library code.
+They are also supported in the makebasic script. Adding the command library makes all code so far library code.
 
 e.g.
 
@@ -547,8 +439,7 @@ python makebasic.zip mylib.bsc library mainprogram.bsc
 
 ## Turtle Graphics
 
-The Neo6502 has a built in turtle graphics system. This uses sprite \$7F
-as the turtle, which it will take over :)
+The Neo6502 has a built in turtle graphics system. This uses sprite \$7F as the turtle, which it will take over, so it cannot be used for other purposes.
 
 The following commands are supported.
 
@@ -564,15 +455,13 @@ The following commands are supported.
 | turtle fast            | The turtle is deliberately slowed to give it an animated feel so you can see the drawing, this is because it's primary purpose is educational. This makes it go full speed. |
 
 
-There is an example in the crossdev folder which gives some idea on how
-to get started.
+There is an example in the crossdev folder which gives some idea on how to get started.
 
 \newpage
 
 ## Load file format
 
-There is an extended file format which allows the loading of multiple
-files and optional execution. This is as follows
+There is an extended file format which allows the loading of multiple files and optional execution. This is as follows
 
 | Offset | Contents  | Notes                                                        |
 | ------ | --------- | ------------------------------------------------------------ |
@@ -592,9 +481,7 @@ files and optional execution. This is as follows
 The block then repeats from 'Control' as many times as required.
 
 
-The Python application 'exec.zip' both constructs executable files, or
-displays them. This has the same execution format as the emulator, as
-listed below.
+The Python application 'exec.zip' both constructs executable files, or displays them. This has the same execution format as the emulator, as listed below.
 
 python exec.zip -d\<file\> dumps a file
 
@@ -610,13 +497,9 @@ for example, you can build a frogger executable with:
 
 python exec.zip <frogger.bas@page> <frogger.gfx@ffff> exec -ofrogger.neo
 
-Loading a file can be done by calling the kernel function LoadExtended
-(which does the autorun for you) or using the normal messaging system.
+Loading a file can be done by calling the kernel function LoadExtended (which does the autorun for you) or using the normal messaging system.
 
-If you handle it yourself bear in mind that on return, it is always
-possible that the code you write to call the execution routine may
-already have been overwritten by the loaded file.
-
+If you handle it yourself bear in mind that on return, it is always possible that the code you write to call the execution routine may already have been overwritten by the loaded file.
 
 \newpage
 
