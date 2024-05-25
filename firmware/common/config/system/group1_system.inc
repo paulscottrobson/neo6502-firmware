@@ -71,13 +71,6 @@ GROUP 1 System
     DOCUMENTATION
         Do a MOS command (a '* command') these are specified in the Wiki as they will be steadily expanded.
 
-    FUNCTION 9 Sweet 16 Virtual Machine
-        *DERROR = SW16Execute(DSPGetInt16(DCOMMAND,4)) ? 1 : 0;
-    DOCUMENTATION
-        Execute Sweet 16 VM Code with the register set provided. The error return value is actually a re-entrant
-        call for Windows emulation ; if it returns non-zero it means the VM has been executed, if it returns zero
-        then the emulation can update as at the end of a normal frame.
-        
     FUNCTION 10 Write character to debug
         FDBWrite(DPARAMS[0]);
     DOCUMENTATION

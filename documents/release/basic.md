@@ -166,7 +166,6 @@ Many of these are helpful for understanding specific API functions, as many BASI
 | stransmit \<a\>,\<s\>                    |                                                              |
 | ssend \<data\>                           | Send data to SPI device ; this is comma seperated data, numbers or strings. If a semicolon is used as a seperator e.g. 4137; then the constant is sent as a 16 bit value. |
 | stop                                     | Halt program with error                                      |
-| sweet \<address\>                        | Run Sweet 16 code using the registers at the given address ; the registers are a 32 byte block of memory, and can be accessed easily using the \[\] operators. |
 | sys \<address\>                          | Call 65C02 machine code at given address. Passes contents of variables A,X,Y in those registers. |
 | tilemap addr,x,y                         | Define a tilemap. The tilemap data format is in the API. The tilemap is stored in memory at addr, and the offset into the |
 | uconfig \<baud\>\[,\<prt\>\]             | Set the baud rate and protocol for the UART. Currently only 8N1 is supported. |
@@ -214,7 +213,7 @@ You can also pass A X Y as variables. So you could delete line 150 and run it wi
 
 The \[\] operator is used like an array, but it is actually a syntactic equivalent of deek and doke, e.g. reading and writing 16 bytes. mem\[x\] means the 16 bit value in mem + x \* 2, so if mem = 813 then mem\[2\] = -1 writes a 16 bit word to 817 and 818, and print mem\[2\] reads it. The index can only be from 0..127
 
-The purpose of this is to provide a clean readable interface to data in 65C02, Sweet16 and other programs running under assembly language ; often accessing elements in the 'array' as a structure.
+The purpose of this is to provide a clean readable interface to data in 65C02 and other programs running under assembly language ; often accessing elements in the 'array' as a structure.
 
 ### Zero Page Usage
 
