@@ -30,14 +30,9 @@ static int argumentCount;
 static char **argumentList;
 static bool useDebuggerKeys = false;  												// Use the debugger keys.
 static bool traceMode = false;														// Dump each CPU instruction to stdout.
-static bool use6502 = true;  														// CPU Selector
 
 WORD16 CPUGetPC(void) {
-	return use6502 ? CPUGetPC65():CPUGetPC16();
-}
-
-BYTE8 CPUGetID(void) {
-	return use6502 ? 65:16;
+	return CPUGetPC65();
 }
 
 // *******************************************************************************************************************************
@@ -82,7 +77,6 @@ void CPUSaveArguments(int argc,char *argv[]) {
 
 void CPUReset(void) {
 	char command[128];
-	use6502 = true; 																// By default, run 6502
 
 	for (int i = 1;i < argumentCount;i++) { 										// Look for loads.
 		strcpy(command,argumentList[i]);  											// Copy command
@@ -102,8 +96,6 @@ void CPUReset(void) {
 				printf("Run machine code from $%x\n",address);
 				cpuMemory[0xFFFC] = address & 0xFF;  								// 6502 run.
 				cpuMemory[0xFFFD] = address >> 8;
-				cpuMemory[30] = address & 0xFF; 									// Sweet 16 run.
-				cpuMemory[31] = address >> 8;
 			} else {
 				p = cpuMemory+address;				 								// Load here.	
 				if (address == 0xFFFF) p = gfxObjectMemory;  						// Load to graphics memory
@@ -138,17 +130,10 @@ void CPUReset(void) {
 			if (strcmp(command,"trace") == 0) { 									// Dump every CPU instruction to stdout.
 				traceMode = true;
 			}
-			if (strcmp(command,"sweet") == 0) { 									// Use Sweet 16 rather than 65C02
-				use6502 = false;
-			}
 		}
 	}
 	HWReset();																		// Reset Hardware
-	if (use6502) {  																// Reset whichever Processor
-		CPUReset6502();
-	} else {
-		CPUReset16();
-	}
+	CPUReset6502();
 }
 
 // *******************************************************************************************************************************
@@ -176,7 +161,7 @@ BYTE8 CPUExecuteInstruction(void) {
 		return FRAME_RATE;
 	}
 
-    if (traceMode && use6502) {
+    if (traceMode) {
 		char mem[10]; // "XX XX XX \0"
 		char dasm[32];
 		DBGXDumpMem(CPUGetPC(), DBGXInstructionSize65(CPUGetPC()), mem);
@@ -184,11 +169,7 @@ BYTE8 CPUExecuteInstruction(void) {
 		printf("%04x  %-10s %s\n", CPUGetPC(), mem, dasm);
 	}
 
-	if (use6502) {
-		forceSync = CPUExecute6502();
-	} else {
-		forceSync = CPUExecute16();
-	}
+	forceSync = CPUExecute6502();
 
 	int cycleMax = CYCLES_PER_FRAME; 	
 	if (cycles < cycleMax && forceSync == 0) return 0;								// Not completed a frame.
@@ -213,16 +194,6 @@ void CPUWriteMemory(WORD16 address,BYTE8 data) {
 
 #include "gfx.h"
 
-// ***************************************************************************************
-//
-//								Handle Sweet16 Sync
-//
-// ***************************************************************************************
-
-void TMRSweet16Sync(void) {	
-	cycles = CYCLES_PER_FRAME; 														// If yields running via API do frame.
-}
-
 // *******************************************************************************************************************************
 //
 //		Execute chunk of code, to either of two break points or frame-out, return non-zero frame rate on frame, breakpoint 0
@@ -231,7 +202,7 @@ void TMRSweet16Sync(void) {
 
 BYTE8 CPUExecute(WORD16 breakPoint1,WORD16 breakPoint2) { 
 	BYTE8 next;
-	BYTE8 brk = use6502 ? 0x03: 0x0A;
+	BYTE8 brk = 0x03;
 	do {
 		BYTE8 r = CPUExecuteInstruction();											// Execute an instruction
 		if (r != 0) return r; 														// Frame out.
@@ -248,7 +219,7 @@ BYTE8 CPUExecute(WORD16 breakPoint1,WORD16 breakPoint2) {
 
 WORD16 CPUGetStepOverBreakpoint(void) {
 	BYTE8 opcode = CPUReadMemory(CPUGetPC());										// Current opcode.
-	int offset = use6502 ? CPUGetStep65(opcode) : CPUGetStep16(opcode);  			// Get offset
+	int offset = CPUGetStep65(opcode); 									 			// Get offset
 	if (offset != 0) offset = (CPUGetPC()+offset) & 0xFFFF;							// Step over Subroutines
 	return offset;																	// Do a normal single step
 }
