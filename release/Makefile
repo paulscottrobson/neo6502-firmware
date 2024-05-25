@@ -38,7 +38,7 @@ BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf \
 #
 PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)exec.zip  \
 			 $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip $(BINDIR)cvimg.zip \
-			 $(BINDIR)nxmit.zip $(BINDIR)swasm.zip
+			 $(BINDIR)nxmit.zip 
 
 # ***************************************************************************************
 #
