@@ -82,6 +82,8 @@ all: documentation
 # ***************************************************************************************
 
 documentation:
+	# generate Welcome PDF (requires 'pandoc')
+	cd $(DOCDIR)welcome ; pandoc welcome.md -o $(DOCDIR)welcome.pdf
 	# generate BASIC PDF (requires 'pandoc')
 	pandoc $(DOCDIR)basic.md -o $(DOCDIR)basic.pdf
 	# generate API PDF (requires 'pandoc')
