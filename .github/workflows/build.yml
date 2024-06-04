@@ -36,3 +36,10 @@ jobs:
       with:
         name: release
         path: release/neo6502.zip
+
+    - name: 'Upload Artifact 2'
+      uses: actions/upload-artifact@v3
+      with:
+        name: release2
+        path: documents/release/welcome.pdf
+        
