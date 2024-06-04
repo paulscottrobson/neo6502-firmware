@@ -1,10 +1,9 @@
-'
-'	error test
-'
-a$ = "Hello world"+chr$(13)+chr$(10)
-for i = 1 to len(a$)
-	c = asc(mid$(a$,i,1))
-	poke $FF04,c
-	poke $FF01,10
-	poke $FF00,1
+
+size = 16
+w = 320 \ size
+h = 240 \ size
+for x = 0 to w-1
+	for y = 0 to h-1
+		rect x*size,y*size solid ink rand(15) by size,size
+	next
 next
