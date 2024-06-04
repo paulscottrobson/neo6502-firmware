@@ -36,3 +36,12 @@ jobs:
       with:
         name: release
         path: release/neo6502.zip
+
+      - name: Upload to GitHub Release
+        uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          file: "documents/release/welcome.pdf"
+          tags: true
+          
