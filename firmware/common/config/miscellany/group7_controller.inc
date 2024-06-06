@@ -26,12 +26,9 @@ GROUP 7 Controller
         }
 
     DOCUMENTATION
-        This reads the status of the base controller into Parameter:0, and is a compatibility
-        API call.
-        \newline
+        This reads the status of the base controller into Parameter:0, and is a compatibility API call.
 
-        The base controller is the keyboard keys (these are WASD+OPKL or Arrow Keys+ZXCV) or the 
-        gamepad controller buttons. Either works.
+        The base controller is the keyboard keys (these are WASD+OPKL or Arrow Keys+ZXCV) or the gamepad controller buttons. Either works.
 
         The 8 bits of the returned byte are the following buttons, most significant first :
 
@@ -41,8 +38,7 @@ GROUP 7 Controller
         *DPARAMS = GMPGetControllerCount();
 
     DOCUMENTATION
-        This returns the number of game controllers plugged in to the USB System into Parameter:0. This does not include the
-        keyboard based controller, only physical controller hardware.
+        This returns the number of game controllers plugged in to the USB System into Parameter:0. This does not include the keyboard based controller, only physical controller hardware.
 
     FUNCTION 3 Read Controller
         *DERROR = DPARAMS[0] > GMPGetControllerCount();
@@ -55,8 +51,7 @@ GROUP 7 Controller
         }
         
     DOCUMENTATION
-        This returns a specific controller status. Controller 0 is the keyboard controller, Controllers 1 upwards are
-        those physical USB devices.
+        This returns a specific controller status. Controller 0 is the keyboard controller, Controllers 1 upwards are those physical USB devices.
 
         This returns a 32 bit value in Parameters:0..3 which currently is compatible with function 1, but allows for expansion.
 

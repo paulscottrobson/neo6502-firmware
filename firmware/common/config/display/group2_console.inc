@@ -11,7 +11,6 @@
 // ***************************************************************************************
 // ***************************************************************************************
 
-
 // ***************************************************************************************
 //
 //                                  Group 2 (Console)
@@ -27,31 +26,25 @@ GROUP 2 Console
     FUNCTION 1 Read Character
         *(DPARAMS) = KBDGetKey();
     DOCUMENTATION
-        Read and remove a key press from the keyboard queue into Parameter:0.
-        This is the ASCII value of the keystroke.
+        Read and remove a key press from the keyboard queue into Parameter:0. This is the ASCII value of the keystroke. 
         If there are no key presses in the queue, Parameter:0 will be zero.
 
-        Note that this Function is best for text input, but not for games.
-        Function 7,1 is more optimal for games, as this only detects key presses,
-        you cannot check whether the key is currently down or not.
+        Note that this Function is best for text input, but not for games. Function 7,1 is more optimal for games, as this only detects key presses, you cannot check whether the key is currently down or not.
 
     FUNCTION 2 Console Status
         *(DPARAMS) = KBDIsKeyAvailable() ? 0xFF: 0;
     DOCUMENTATION // Function 2 is key available in queue
-        Check to see if the keyboard queue is empty.
-        If it is, Parameter:0 will be $FF, otherwise it will be $00
+        Check to see if the keyboard queue is empty. If it is, Parameter:0 will be $FF, otherwise it will be $00
 
     FUNCTION 3 Read Line
         CONGetScreenLine(DSPGetInt16(DCOMMAND,4));
     DOCUMENTATION
-        Input the current line below the cursor into Parameters:0,1 as a length-prefixed string;
-        and move the cursor to the line below. Handles multiple-line input.
+        Input the current line below the cursor into Parameters:0,1 as a length-prefixed string; and move the cursor to the line below. Handles multiple-line input.
 
     FUNCTION 4 Define Hotkey
         *DERROR = KBDSetFunctionKey(*(DCOMMAND+4),DSPGetString(DCOMMAND,6));
     DOCUMENTATION
-        Define the function key F1..F10 specified in Parameter:0 as 1..10 to emit the
-        length-prefixed string stored at the memory location specified in Parameters:2,3.
+        Define the function key F1..F10 specified in Parameter:0 as 1..10 to emit the length-prefixed string stored at the memory location specified in Parameters:2,3.
     
         F11 and F12 cannot currently be defined.
 
@@ -100,14 +93,12 @@ GROUP 2 Console
     FUNCTION 13 Cursor Position
         CONGetCursorPosition(&DPARAMS[0],&DPARAMS[1]);
     DOCUMENTATION
-        Returns the current screen character cell of the cursor
-        in Parameter:0 (X), Parameter:1 (Y).
+        Returns the current screen character cell of the cursor in Parameter:0 (X), Parameter:1 (Y).
 
     FUNCTION 14 Clear Region
         CONClearArea(DPARAMS[0],DPARAMS[1],DPARAMS[2],DPARAMS[3]);
     DOCUMENTATION
-        Erase all characters within the rectangular region specified
-        in Parameters:0,1 (begin X,Y) and Parameters:2,3 (end X,Y).
+        Erase all characters within the rectangular region specified in Parameters:0,1 (begin X,Y) and Parameters:2,3 (end X,Y).
 
     FUNCTION 15 Set Text Color
         CONSetForeBackColour(DPARAMS[0],DPARAMS[1]);
@@ -117,8 +108,7 @@ GROUP 2 Console
     FUNCTION 16 Cursor Inverse
         CONReverseCursorBlock();
     DOCUMENTATION
-        Toggles the cursor colour between normal and inverse
-        (ie: swaps FG and BG colors). This should not be used.
+        Toggles the cursor colour between normal and inverse (ie: swaps FG and BG colors). This should not be used.
 
     FUNCTION 17 Tab() implementation
         CONGetCursorPosition(&u2,&u4);

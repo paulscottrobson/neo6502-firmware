@@ -144,4 +144,4 @@ clean:
 
 testdoc:
 	make -C firmware prelim
-	make -C release documentation
+#	make -C release documentation

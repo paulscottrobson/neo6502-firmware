@@ -30,9 +30,7 @@ GROUP 3 File I/O
         Load a file by name into memory. On input:
         
         Parameters:0,1 points to the length-prefixed filename string;
-        Parameters:2,3 contains the location to write the data to. If the
-        address is $FFFF, the file will instead be loaded into the
-        graphics working memory, used for sprites, tiles, images.
+        Parameters:2,3 contains the location to write the data to. If the address is $FFFF, the file will instead be loaded into the graphics working memory, used for sprites, tiles, images.
         
         On output:
         Error location contains an error/status code.
@@ -64,13 +62,9 @@ GROUP 3 File I/O
         0 opens the file for read-only access;
         1 opens the file for write-only access;
         2 opens the file for read-write access;
-        3 creates the file if it doesn't already exist, truncates it if it
-        does, and opens the file for read-write access.
+        3 creates the file if it doesn't already exist, truncates it if it does, and opens the file for read-write access.
         
-        Modes 0 to 2 will fail if the file does not already exist. If the
-        channel is already open, the call fails. Opening the same file more than
-        once on different channels has undefined behaviour, and is not
-        recommended.
+        Modes 0 to 2 will fail if the file does not already exist. If the channel is already open, the call fails. Opening the same file more than once on different channels has undefined behaviour, and is not recommended.
 
     FUNCTION 5 File Close
         *DERROR = FIOCloseFileHandle(DPARAMS[0]);
@@ -87,9 +81,7 @@ GROUP 3 File I/O
         Parameter:0 contains the file channel to operate on;
         Parameters:1..4 contains the file location.
         
-        You can seek beyond the end of a file to extend the file.
-        However, whether the file size changes when the seek happens,
-        or when you perform the write is undefined behavior.
+        You can seek beyond the end of a file to extend the file. However, whether the file size changes when the seek happens, or when you perform the write is undefined behavior.
 
     FUNCTION 7 File Tell
     {
@@ -160,9 +152,7 @@ GROUP 3 File I/O
         On output:
         Parameters:1..4 contains the size of the file.
         
-        This call should be used on open files,
-        and takes into account any buffered data which has not yet been written to disk.
-        Consequently, this may return a different size than Function 3,16 "File Stat".
+        This call should be used on open files, and takes into account any buffered data which has not yet been written to disk. Consequently, this may return a different size than Function 3,16 "File Stat".
 
     FUNCTION 11 File Set Size
     {
@@ -233,11 +223,9 @@ GROUP 3 File I/O
         Parameters:0..3 contains the length of the file;
         Parameter:4 contains the attributes bit-field of the file.
         
-        If the file is open for writing, this may not return the correct size
-        due to buffered data not having been flushed to disk.
+        If the file is open for writing, this may not return the correct size due to buffered data not having been flushed to disk.
 
-        File attributes are a bitfield as follows: 0,0,0,Hidden, Read Only, Archive,
-        System, Directory.
+        File attributes are a bitfield as follows: 0,0,0,Hidden, Read Only, Archive, System, Directory.
 
 
     FUNCTION 17 Open Directory
@@ -249,10 +237,7 @@ GROUP 3 File I/O
 
         Parameters:0,1 points to the length-prefixed filename string.
 
-        Only one directory at a time may be opened. If a directory is already
-        open when this call is made, it is automatically closed. However, an
-        open directory may make it impossible to delete the directory; so
-        closing the directory after use is good practice.
+        Only one directory at a time may be opened. If a directory is already open when this call is made, it is automatically closed. However, an open directory may make it impossible to delete the directory; so closing the directory after use is good practice.
 
     FUNCTION 18 Read Directory
         {
@@ -310,5 +295,4 @@ GROUP 3 File I/O
         
         Parameters:0,1 points to the filename search string.
         
-        Files will only be shown if the name contains the search string (ie: a
-        substring match).
+        Files will only be shown if the name contains the search string (ie: a substring match).

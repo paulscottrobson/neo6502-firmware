@@ -22,8 +22,7 @@ GROUP 9 Turtle Graphics
         TTLInitialise(DPARAMS[0]);
     DOCUMENTATION
         Initialise the turtle graphics system.
-        Parameter:0 is the sprite number to use for the turtle,
-        as the turtle graphics system “adopts” one of the sprites.
+        Parameter:0 is the sprite number to use for the turtle,as the turtle graphics system “adopts” one of the sprites.
         The icon is not currently re-definable, and initially the turtle is hidden.
 
     FUNCTION 2 Turtle Turn
@@ -34,8 +33,7 @@ GROUP 9 Turtle Graphics
     FUNCTION 3 Turtle Move
         TTLMove(DSPGetInt16(DCOMMAND,4),DCOMMAND[6],DCOMMAND[7]);
     DOCUMENTATION
-        Move the turtle forward by Parameter:0,1 degrees, drawing in colour Parameter:2,
-        pen down flag in Parameter:3. Show if hidden.
+        Move the turtle forward by Parameter:0,1 degrees, drawing in colour Parameter:2, pen down flag in Parameter:3. Show if hidden.
 
     FUNCTION 4 Turtle Hide
         TTLHide();

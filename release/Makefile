@@ -46,7 +46,7 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)exec.zip  \
 #
 # ***************************************************************************************
 
-all: documentation
+all: 
 	# Delete release files
 	$(CDEL) $(RELEASEFILE)
 	$(CDEL) $(TMPDIR)$(RELEASEFILE)
@@ -55,10 +55,6 @@ all: documentation
 	$(CMAKEDIR) $(TMPDIR)
 	$(CCOPY) $(BINARIES) $(TMPDIR)
 	$(CCOPY) $(PYTHONAPPS) $(TMPDIR)
-
-	# Create dirs for documents in own dir
-	$(CMAKEDIR) $(TMPDIR)$(S)documents
-	$(CCOPY) $(DOCUMENTS) $(TMPDIR)$(S)documents
 
 	# Create dir for crossdev & copy it
 	$(CMAKEDIR) $(TMPDIR)$(S)crossdev
@@ -75,16 +71,3 @@ all: documentation
 	cd $(TMPDIR) ; zip -r $(RELEASEFILE) *
 	$(CCOPY) $(TMPDIR)$(RELEASEFILE) .
 
-# ***************************************************************************************
-#
-#								Make the documents
-#
-# ***************************************************************************************
-
-documentation:
-	# generate Welcome PDF (requires 'pandoc')
-	cd $(DOCDIR)welcome ; pandoc welcome.md -o $(DOCDIR)welcome.pdf
-	# generate BASIC PDF (requires 'pandoc')
-	pandoc $(DOCDIR)basic.md -o $(DOCDIR)basic.pdf
-	# generate API PDF (requires 'pandoc')
-	pandoc $(DOCDIR)api.md $(DOCDIR)source$(S)api.gen.md -o $(DOCDIR)api.pdf
