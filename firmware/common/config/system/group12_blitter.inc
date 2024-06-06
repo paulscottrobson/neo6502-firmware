@@ -21,8 +21,7 @@ GROUP 12 Blitter
 
         DPARAMS[0] = 0;
     DOCUMENTATION
-        Returns a non zero value in Parameter:1 if the blitter/DMA system is currently transferring data, used to check availability
-        and transfer completion.
+        Returns a non zero value in Parameter:1 if the blitter/DMA system is currently transferring data, used to check availability and transfer completion.
 
     FUNCTION 2 Simple Blit Copy
         *DERROR = BLTSimpleCopy(DPARAMS[0],DSPGetInt16(DCOMMAND,5),DPARAMS[3],DSPGetInt16(DCOMMAND,8),DSPGetInt16(DCOMMAND,10));
@@ -89,8 +88,7 @@ GROUP 12 Blitter
         *DERROR = BLTImage(DPARAMS[0], (DPARAMS[1] | DPARAMS[2] << 8),(DPARAMS[3] | DPARAMS[4] << 8), (DPARAMS[5] | DPARAMS[6] << 8), DPARAMS[7]);
 
     DOCUMENTATION
-        Blits an image from memory onto the screen. The image will be clipped,
-        so it's safe to blit partly (or fully) offscreen-images.
+        Blits an image from memory onto the screen. The image will be clipped, so it's safe to blit partly (or fully) offscreen-images.
 
             Parameter  (0) is the blit action (see function 3, Complex Blit):
 

@@ -24,10 +24,10 @@ from datetime import date
 
 THIS_DIR     = os.path.realpath(os.path.dirname(__file__))
 ROOT_DIR     = os.path.realpath(os.path.join(THIS_DIR , '..' , '..' , '..'))
-DOCS_DIR     = os.path.join(ROOT_DIR , 'documents' , 'release' , 'source')
+DOCS_DIR     = os.path.join(ROOT_DIR , 'bin')
 CFG_DIR      = os.path.join(ROOT_DIR , 'firmware' , 'common' , 'config'  )
 CFG_FILE     = os.path.join(CFG_DIR  , 'dispatch.config'                 )
-TEX_OUT_FILE = os.path.join(DOCS_DIR , 'api.gen.md'                      )
+TEX_OUT_FILE = os.path.join(DOCS_DIR , 'api-listing.md'                  )
 ANCHORS      = ( 'GROUP' , 'FUNCTION' , 'DOCUMENTATION' )
 
 
@@ -180,23 +180,6 @@ class DispatchAPI(object):
 		print("\t\tbreak;")
 		print("}")
 
-	def renderTableHead(self,fn_table_tex,header):
-		fn_table_tex.append('\\begin{longtable*}{ | c | l | p{12cm} | }')
-
-		fn_table_tex.append('\\caption*{%s} \\\\' % header)
-		fn_table_tex.append('\\hline')
-		fn_table_tex.append("\\textbf{Function} & \\textbf{Assembly} & \\HeaderCenter{Description} \\\\")
-		fn_table_tex.append('\\hline')
-		fn_table_tex.append('\\endfirsthead')
-
-		fn_table_tex.append('\\caption*{%s (continued)} \\\\' % header)
-		fn_table_tex.append('\\hline')
-		fn_table_tex.append("\\textbf{Function} & \\textbf{Assembly} & \\HeaderCenter{Description} \\\\")
-		fn_table_tex.append('\\hline')
-		fn_table_tex.append('\\endhead')
-
-	def renderTableTail(self,fn_table_tex):
-		fn_table_tex.append('\\end{longtable*}')
 
 	def replaceParam(self,txt,oldDesc,newDesc):
 		return txt.replace("\\Param{"+oldDesc+"}","Parameters:"+newDesc)
@@ -204,7 +187,7 @@ class DispatchAPI(object):
 	# generate documentation source from template
 	def renderDocs(self):
 		group_ids    = sorted(self.groups)
-		fn_table_tex = ['---','fontfamilyoptions: sfdefault','fontsize: 12pt','---','']
+		fn_table_tex = ['']
 
 		for group_id in group_ids:
 			group  = self.groups[group_id]
@@ -214,11 +197,11 @@ class DispatchAPI(object):
 			for fn_id in fn_ids:
 		 		function = group.functions[fn_id]
 		 		fn_name  = function.funcName
-		 		fn_table_tex.append("## Function {0} : {1}".format(fn_id,fn_name))
+		 		fn_table_tex.append("### Function {0} : {1}".format(fn_id,fn_name))
 		 		docLines = function.docLines if function.docLines[-1] else function.docLines[0:-2]
-		 		desc = "\n".join(docLines)
+		 		desc = "\n\n".join([x for x in docLines if x.strip() != ""])
 		 		fn_table_tex.append(desc)
-			fn_table_tex.append("\\newpage")
+			fn_table_tex.append("\n")
 
 		with open(TEX_OUT_FILE , 'w' , encoding='utf-8' , newline='\n') as texi_file:
 			for tex_in_line in fn_table_tex:

@@ -20,8 +20,7 @@ GROUP 1 System
     FUNCTION 0 DSP Reset
         DSPReset();
     DOCUMENTATION
-        Resets the messaging system and component systems.
-        Normally, should not be used.
+        Resets the messaging system and component systems. Normally, should not be used.
 
     FUNCTION 1 Timer
         *((uint32_t *)DPARAMS) = TMRRead(); // (assumes littleendian)
@@ -63,8 +62,7 @@ GROUP 1 System
     FUNCTION 7 System Reset
         ResetSystem();
     DOCUMENTATION
-        System Reset. This is a full hardware reset. It resets the RP2040 using the Watchdog timer, and
-        this also resets the 65C02.
+        System Reset. This is a full hardware reset. It resets the RP2040 using the Watchdog timer, and this also resets the 65C02.
 
     FUNCTION 8 MOS
         *DERROR = MOSExecute(cpuMemory+DSPGetInt16(DCOMMAND,4));
@@ -74,6 +72,5 @@ GROUP 1 System
     FUNCTION 10 Write character to debug
         FDBWrite(DPARAMS[0]);
     DOCUMENTATION
-        Writes a single character to the debug port (the UART on the Pico, or stderr on the emulator). This allows
-        maximum flexibility.
+        Writes a single character to the debug port (the UART on the Pico, or stderr on the emulator). This allows maximum flexibility.
         

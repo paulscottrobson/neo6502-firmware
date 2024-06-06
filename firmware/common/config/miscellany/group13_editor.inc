@@ -25,5 +25,4 @@ GROUP 13 Editor
     FUNCTION 2 Reenter the Editor
         DCOMMAND[4] = EDITContinue();
     DOCUMENTATION
-        Re-enters the system editor. Returns the function required for call out, the editors
-        sort of 'call backs' - see editor specification.
+        Re-enters the system editor. Returns the function required for call out, the editors sort of 'call backs' - see editor specification.

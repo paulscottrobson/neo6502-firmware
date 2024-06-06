@@ -23,7 +23,7 @@ endif
 #
 # ***************************************************************************************
 
-all: firmware-deps emulator-deps-nix emulator-deps-win docs-deps
+all: firmware-deps emulator-deps-nix emulator-deps-win
 	$(CMAKEDIR) bin
 	@echo building firmware
 	$(MAKE) -B -C kernel release
@@ -80,15 +80,6 @@ macos: emulator-deps-nix
 	make -B -C examples release
 
 
-# ***************************************************************************************
-#
-# Make documentation only
-#
-# ***************************************************************************************
-
-docs: docs-deps
-	@echo building documentation
-	$(MAKE) -B -C release documentation
 
 
 # ***************************************************************************************
@@ -117,12 +108,6 @@ emulator-deps-nix:
 	@python3 -c 'from importlib.metadata import version ; pkg="gitpython" ; print("python-%s: %s" % (pkg , version(pkg)))'
 	@python3 -c 'from importlib.metadata import version ; pkg="pillow" ; print("python-%s: %s" % (pkg , version(pkg)))'
 
-docs-deps:
-	@pandoc   --version
-	@pdflatex --version
-	@# NOTE: this is not accounting for the needed latex plugins
-
-
 # ***************************************************************************************
 #
 # Clean everything
@@ -144,4 +129,4 @@ clean:
 
 testdoc:
 	make -C firmware prelim
-	make -C release documentation
+#	make -C release documentation

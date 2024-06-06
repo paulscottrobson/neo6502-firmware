@@ -42,13 +42,10 @@ GROUP 6 Sprites
     FUNCTION 4 Sprite Collision
         DPARAMS[0] = SPRCollisionCheck(DERROR,DPARAMS[0],DPARAMS[1],DPARAMS[2]);
     DOCUMENTATION
-        Parameter:0 is non-zero if the distance is less than or equal to Parameter:2
-        between the center of the sprite with index specified in Parameter:0
-        and the center of the sprite with index specified in Parameter:1 .
+        Parameter:0 is non-zero if the distance is less than or equal to Parameter:2 between the center of the sprite with index specified in Parameter:0 and the center of the sprite with index specified in Parameter:1 .
 
     FUNCTION 5 Sprite Position
         *DERROR = SPRGetSpriteData(DPARAMS);
     DOCUMENTATION
-        Deposit into Parameters:1..4, the screen coordinates of the sprite
-        with the index specified in Parameter:0.
+        Deposit into Parameters:1..4, the screen coordinates of the sprite with the index specified in Parameter:0.
 
