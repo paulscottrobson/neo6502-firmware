@@ -68,10 +68,6 @@ Most distros have the dependencies packaged.
     ```
     $ sudo pacman -S 64tass mingw-w64-gcc python-gitpython python-pillow sdl2 zip
     ```
-  * Documentation only:
-    ```
-    $ sudo pacman -S pandoc 
-    ```
   * Everything (firmware, all emulators, documentation, examples, demos, etc):
     ```
     $ sudo pacman -S 64tass arm-none-eabi-gcc arm-none-eabi-newlib cmake git mingw-w64-gcc python-gitpython python-pillow sdl2 zip
@@ -90,13 +86,9 @@ Most distros have the dependencies packaged.
     ```
     $ sudo apt install 64tass build-essential cmake g++-mingw-w64-x86-64 libsdl2-dev mingw-w64 python3 python3-pip zip
     ```
-  * Documentation only:
-    ```
-    $ sudo apt install pandoc texlive-latex-base texlive-latex-extra texlive-latex-recommended
-    ```
   * Everything (firmware, all emulators, documentation, examples, demos, etc):
     ```
-    $ sudo apt install 64tass build-essential cmake g++-mingw-w64-x86-64 gcc-arm-none-eabi git libnewlib-arm-none-eabi libsdl2-dev libstdc++-arm-none-eabi-newlib mingw-w64 pandoc python3 python3-pip texlive-latex-base texlive-latex-extra texlive-latex-recommended zip
+    $ sudo apt install 64tass build-essential cmake g++-mingw-w64-x86-64 gcc-arm-none-eabi git libnewlib-arm-none-eabi libsdl2-dev libstdc++-arm-none-eabi-newlib mingw-w64 python3 python3-pip zip
     ```
 
 ### Build
