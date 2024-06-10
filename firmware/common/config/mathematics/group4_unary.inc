@@ -105,7 +105,7 @@
 		Register1 := sign(Register 1), returns -1 0 or 1
 
 	FUNCTION 27 Random Decimal
-		f1 = (rand() % 100000) / 100000.0;
+		f1 = (rand() % 32000) / 32000.0;
 		MATHWriteFloat(f1,MATH_REG1);
 	DOCUMENTATION
 		Register1 := random float from 0-1
