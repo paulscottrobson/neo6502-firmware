@@ -1,3 +1,23 @@
-for i = 1 to 20
-print rnd(1)
-next
+' DemoPROCINTRef
+' If a real variable is passed to a PROC as a REF, it returns 0.0
+PRINT "DemoPROCINTRef":PRINT
+r_int = 0
+r_real = 0.0
+PRINT "Calling PROC_IM with INT and REAL variables..."
+CALL IM(r_int,2):PRINT "IM(r_int,2)=";r_int
+CALL IM(r_real,2):PRINT "IM(r_rea2)=";r_real
+PRINT
+PRINT "Calling PROC_RM with INT and REAL variables..."
+CALL RM(r_int,2):PRINT "RM(r_int,2)=";r_int
+CALL RM(r_real,2):PRINT "RM(r_rea2)=";r_real
+PRINT "The end."
+END
+' Int Machine
+PROC IM(ref V_IM,P)
+	V_IM = 196*P ' any INTEGER value
+ENDPROC
+
+' Real Machine
+PROC RM(ref V_RM,P)
+	V_RM = 3.14*P ' any real value
+ENDPROC
