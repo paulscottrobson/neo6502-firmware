@@ -209,7 +209,7 @@ CCCopyReferenceBack:
 		;
 		;		Copy number reference back
 		;
-		ldy 	#3 							; copy it back
+		ldy 	#4 							; copy it back
 _CCCopyBack:
 		lda 	(zTemp1),y
 		sta 	(zTemp0),y
