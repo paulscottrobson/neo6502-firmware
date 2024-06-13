@@ -89,3 +89,10 @@
 	DOCUMENTATION
 		Parameter:0 := Register 1 compare Register2 : returns $FF, 0, 1 for less equal and greater.
 		Note: float comparison is approximate because of rounding.
+
+	FUNCTION 7 Power
+		f1 = MATHReadFloat(MATH_REG1);
+		f2 = MATHReadFloat(MATH_REG2);
+		MATHWriteFloat((float)pow(f1,f2),MATH_REG1);
+	DOCUMENTATION
+		Register1 := Register 1 to the power of Register2 (floating point result whatever)
