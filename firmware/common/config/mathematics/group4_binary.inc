@@ -96,3 +96,11 @@
 		MATHWriteFloat((float)pow(f1,f2),MATH_REG1);
 	DOCUMENTATION
 		Register1 := Register 1 to the power of Register2 (floating point result whatever)
+
+	FUNCTION 8 Distance (counter-rectangle)
+		f1 = MATHReadFloat(MATH_REG1);
+		f2 = MATHReadFloat(MATH_REG2);
+		MATHWriteFloat((float)sqrt((f1*f1)+(f2*f2)),MATH_REG1);
+	DOCUMENTATION
+		Register1 := Square root of (Register1 * Register1) + (Register2 * Register2)
+		
