@@ -1,3 +1,14 @@
-print sin(45)
-print pow(25,-0.33)
-end
+1 return
+10 call demo()
+20 end
+
+30 proc demo()
+40 print "Proc"
+50 gosub 1000
+60 print "EndProc"
+70 endproc
+1000 for i = 1 to 10
+1010 print i
+1015 if i = 5 then return
+1020 next
+1030 return
