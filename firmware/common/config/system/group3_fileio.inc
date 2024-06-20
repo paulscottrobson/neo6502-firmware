@@ -71,7 +71,7 @@ GROUP 3 File I/O
     DOCUMENTATION
         Closes a particular channel. On input:
 
-        Parameter:0 contains the file channel to close.
+        Parameter:0 contains the file channel to close. If this is $FF this closes all open files.
         
     FUNCTION 6 File Seek
         *DERROR = FIOSeekFileHandle(DPARAMS[0],DSPGetInt32(DPARAMS,1));
@@ -296,3 +296,4 @@ GROUP 3 File I/O
         Parameters:0,1 points to the filename search string.
         
         Files will only be shown if the name contains the search string (ie: a substring match).
+
