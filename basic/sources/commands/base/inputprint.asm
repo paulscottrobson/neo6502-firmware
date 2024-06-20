@@ -21,7 +21,10 @@
 Command_Input: ;; [input]
 		lda 	#$FF 						; this flag determines input ($FF) output $(00)
 		sta 	InputFlag
-		bra 	Command_IP_Main
+		lda 	(codePtr),y 				; check for INPUT#
+		cmp 	#KWD_HASH
+		bne 	Command_IP_Main
+		jmp 	InputFileHandler 			; # found it's file input
 
 ; ************************************************************************************************
 ;
@@ -31,6 +34,10 @@ Command_Input: ;; [input]
 
 Command_Print:	;; [print]
 		stz 	InputFlag
+		lda 	(codePtr),y 				; check for PRINT#
+		cmp 	#KWD_HASH
+		bne 	Command_IP_Main
+		jmp 	OutputFileHandler	 		; # found it's file output
 		;
 Command_IP_Main:		
 		clc 								; carry being clear means last print wasn't comma/semicolon
