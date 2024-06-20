@@ -1,2 +1,5 @@
-print exists("assembler.bsc")
-print exists("not.exist")
+close
+open output 4,"test.file"
+close 4
+open input 4,"test.file"
+open input 5,"xxxx"

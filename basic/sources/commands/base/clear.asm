@@ -108,6 +108,10 @@ ClearCodeSetMemoryA:
 		.DoSendMessage 					
 		.byte 	4,35
 		.DoWaitMessage		
+		;
+		;		Close all open files
+		;
+		jsr 	CloseAllOpenFiles
 		ply
 		rts
 
