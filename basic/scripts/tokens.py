@@ -149,6 +149,7 @@ class TokenSet(object):
 			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM 	VBLANKS(
 			ERR 	ERL		PIN( 	IREAD( 	 ANALOG(  JOYCOUNT(  UPPER$(
 			IDEVICE( SPC( 	TAB( 	UHASDATA( MOS( 	HAVEMOUSE( LOWER$( POW(
+			EXISTS(
 		""")
 		
 if __name__ == "__main__":

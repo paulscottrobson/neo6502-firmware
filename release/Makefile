@@ -67,6 +67,7 @@ all:
 	$(CMAKEDIR) $(TMPDIR)$(S)examples$(S)basic
 	$(CCOPY) -r $(EXAMPLEDIR)basic-examples$(S)* $(TMPDIR)examples$(S)basic
 	$(CCOPY) -r $(ROOTDIR)basic$(S)libraries $(TMPDIR)
+
 	# Zip up and copy back
 	cd $(TMPDIR) ; zip -r $(RELEASEFILE) *
 	$(CCOPY) $(TMPDIR)$(RELEASEFILE) .
