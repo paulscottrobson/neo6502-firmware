@@ -34,6 +34,70 @@
 InputFileHandler:
 		iny 								; consume #
 		jsr 	FHIdentifyChannel 			; get the current channel.
+_IFHLoop:
+		lda 	(codePtr),y 				; check for ,
+		cmp 	#KWD_COMMA 					; not found, then exit.
+		bne 	_IFHExit
+		iny 								; consume comma
+
+		ldx	 	#0
+		jsr 	EXPEvaluateExpressionAtX	; get an expression, should be a variable
+		lda 	XSControl,x 				; check if reference (e.g. a variable)
+		and 	#XS_ISVARIABLE
+		beq 	_IFHType 					; if not, then we have an error.
+		lda 	XSControl,x 				; is it a string
+		bmi 	_IFHString
+;
+;		Input a number
+;
+		jsr 	IFHReadByte 				; check it is a number in the stream
+		cmp 	#$FF
+		bne 	_IFHType
+
+		ldx 	#1 							; read number to slot 1
+		jsr 	IFHReadByte
+		sta 	XSControl,x
+		jsr 	IFHReadByte
+		sta 	XSNumber0,x
+		jsr 	IFHReadByte
+		sta 	XSNumber1,x
+		jsr 	IFHReadByte
+		sta 	XSNumber2,x
+		jsr 	IFHReadByte
+		sta 	XSNumber3,x
+		dex 								; now do assignment code
+		jsr 	AssignValueToReference
+		bra 	_IFHLoop
+;
+;		Input a string
+;
+_IFHString:
+		jsr 	IFHReadByte 				; check it is a string in the stream
+		cmp 	#$FF 						; this will be the length of the string to read in.
+		beq 	_IFHType 	
+
+		pha 								; save length
+		ldx 	#1 							; slot to read into.
+		jsr 	StringTempAllocate
+		plx 								; this is a count now.
+_IFHSLoop:	
+		cpx 	#0 							; done ?
+		beq 	_IFHSReadAll
+		dex  								; do one more byte
+		jsr 	IFHReadByte		
+		jsr 	StringTempWrite
+		bra 	_IFHSLoop
+_IFHSReadAll:		
+		ldx 	#0							; now do assignment code
+		jsr 	AssignValueToReference
+		bra 	_IFHLoop
+
+
+_IFHType:
+		.error_type
+_IFHExit:
+		rts
+
 
 ; ************************************************************************************************
 ;
@@ -97,6 +161,24 @@ _OFHSLoop:
 		bra 	_OFHLoop
 _OFHExit:
 		rts
+
+; ************************************************************************************************
+;
+;										Read Byte to A
+;
+; ************************************************************************************************
+
+IFHReadByte:
+		jsr 	SetUpReadWrite 				; set up to read/write one byte
+		.DoSendMessage 						; read byte to file.
+		.byte 	3,8
+		.DoWaitMessage		
+		lda 	ControlError 				; file I/O error ?
+		bne 	_OFHRError
+		lda 	fhBuffer 					; return value
+		rts
+_OFHRError:
+		.error_file		
 
 ; ************************************************************************************************
 ;
