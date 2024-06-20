@@ -1,4 +1,4 @@
 close
 open output 4,"test.file"
-print #4,"hello",42
+print #4,"Hello",42
 close 4

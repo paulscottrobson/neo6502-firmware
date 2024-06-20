@@ -135,6 +135,10 @@ errLineNumber: 								; error line number (ERL)
 		.fill 	2		
 errCode: 									; error line address (2 bytes) offset (1 bytes)
 		.fill 	3		
+fhCurrentChannel:							; channel for i/o
+		.fill 	1	
+fhBuffer: 									; set up buffer
+		.fill 	1		
 		
 ; ************************************************************************************************
 ;	
