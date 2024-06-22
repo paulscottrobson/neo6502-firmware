@@ -292,7 +292,11 @@ void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int fl
 				pixelAnd = 0;
 				int x1 = x + (xc ^ xFlip) * scale;
 				int y1 = y + (yc ^ yFlip) * scale;
-				GFXRectangle(gMode,x1,y1,x1+scale-1,y1+scale-1,true,false);
+				if (scale == 1) {
+					GFXPlotPixel(gMode,x1,y1);
+				} else {
+					GFXRectangle(gMode,x1,y1,x1+scale-1,y1+scale-1,true,false);
+				}
 			}
 		}
 	}
