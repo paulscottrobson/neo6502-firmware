@@ -103,4 +103,13 @@
 		MATHWriteFloat((float)sqrt((f1*f1)+(f2*f2)),MATH_REG1);
 	DOCUMENTATION
 		Register1 := Square root of (Register1 * Register1) + (Register2 * Register2)
+
+	FUNCTION 9 Direction (arctangent2)
+		f1 = MATHReadFloat(MATH_REG1);
+		f2 = MATHReadFloat(MATH_REG2);
+		MATHWriteFloat(MATHConvertAngleFromDefault(atan2(f1,f2)),MATH_REG1);
+	DOCUMENTATION
+		Register1 := arctangent2(Register 1,Register 2) - angle in degrees/radians
+
+
 		
