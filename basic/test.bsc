@@ -1,8 +1,19 @@
-cls
-gload "graphics.gfx"
-rect 0,0 ink 5 solid to 319,239 frame
-for x = 0 to 25
-	for y = 0 to 18
-		image (x+y) & 3 to 4+x * 12,y*12+12
-	next
-next
+cls:print:print:print
+ink 11,2
+print "Hello world !"
+call api(2,18)
+i1 = peek($FF04)
+i2 = peek($FF05)
+print i1,i2
+ink 7
+call api(2,18)
+i1 = peek($FF04)
+i2 = peek($FF05)
+print i1,i2
+end
+'
+proc api(g,f)
+	while peek($FF00):wend
+	poke $FF01,f:poke $FF00,g
+	while peek($FF00):wend
+endproc	
