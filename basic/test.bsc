@@ -1,23 +1,11 @@
-cls:print:print:print
-ink 11,2
-print "Hello world !"
-call api(2,18)
-i1 = peek($FF04)
-i2 = peek($FF05)
-print i1,i2
-ink 7,0
-call api(2,18)
-i1 = peek($FF04)
-i2 = peek($FF05)
-print i1,i2
-end
-'
-proc api(g,f)
-	while peek($FF00):wend
-	poke $FF01,f:poke $FF00,g
-	while peek($FF00):wend
-endproc	
-'
-proc cursor(n)
-	poke $FF04,n:call api(2,19)
-endproc
+
+1000 restore
+1010 read a,b,c,d
+1015 print a,b,c,d
+1020 restore 1022
+1030 read a,b,c,d
+1035 print a,b,c,d
+1040 end
+1050 data 1,2,3,4
+1060 data 5,6,7,8
+1070 data 9,10,11,12

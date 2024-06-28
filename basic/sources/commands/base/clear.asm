@@ -74,7 +74,7 @@ ClearCodeSetMemoryA:
 		;
 		;		Reset READ/DATA
 		;
-		jsr 	Command_RESTORE
+		jsr 	RestoreComplete
 		;
 		;		Reset Graphics
 		;

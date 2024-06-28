@@ -77,6 +77,8 @@ zTemp0:
 		.fill 	2
 zTemp1:
 		.fill 	2		
+dataPtr: 									; Data equivalent of CodePtr
+		.fill 	2		
 		
 		.send zeropage
 
@@ -112,8 +114,6 @@ tempBuffer: 								; generic buffer.
 		.fill 	32
 errorBuffer: 								; error message buffer
 		.fill 	32		
-dataPtr: 									; Data equivalent of CodePtr
-		.fill 	2		
 dataPos: 									; Data position of Y
 		.fill 	1		
 dataInStatement: 							; Non zero if currently in data statement
