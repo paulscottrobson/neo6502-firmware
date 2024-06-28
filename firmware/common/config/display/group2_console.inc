@@ -118,3 +118,14 @@ GROUP 2 Console
         }
     DOCUMENTATION
         Internal helper.
+
+    FUNCTION 18 Read Ink/Paper Colours
+        CONGetForeBackColour(&i1,&i2);
+        DPARAMS[0] = i1 & 0xFF;DPARAMS[1] = i2 & 0xFF;
+    DOCUMENTATION
+        Read the ink/paper colours into Param[0] and Param[1]
+
+    FUNCTION 19 Show/Hide Cursor Reversing
+        CONSetCursorVisible(DPARAMS[0] ? 1 : 0);
+    DOCUMENTATION
+        Set the cursor visibility to Param[0]. This is reset by clearing the screen.

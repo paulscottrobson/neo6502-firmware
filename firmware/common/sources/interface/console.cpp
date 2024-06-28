@@ -107,6 +107,7 @@ void CONClearScreen(void) {
 	for (int y = 0;y < graphMode->yCSize;y++) {  								// No extended lines.
 		graphMode->isExtLine[y] = 0;
 	}
+	CONSetCursorVisible(1);														// Cursor now visible again.
 	GFXResetDefaults(); 														// Reset graphics defaults.
 }
 
@@ -227,7 +228,7 @@ void CONClearArea(int x1, int y1, int x2, int y2) {
 
 // ***************************************************************************************
 //
-//								Set the text colours
+//								Set/Get the text colours
 //
 // ***************************************************************************************
 
@@ -236,6 +237,20 @@ void CONSetForeBackColour(int fg, int bg) {
 	graphMode->backCol = bg & 0x0f;
 }
 
+void CONGetForeBackColour(int *fg, int *bg) {
+	*fg = graphMode->foreCol;
+	*bg = graphMode->backCol;
+}
+
+// ***************************************************************************************
+//
+//								Set cursor visible flag
+//
+// ***************************************************************************************
+
+void CONSetCursorVisible(uint8_t vFlag) {
+	graphMode->isCursorVisible = vFlag;
+}
 // ***************************************************************************************
 //
 //								Reverse colours at cursor
@@ -243,13 +258,15 @@ void CONSetForeBackColour(int fg, int bg) {
 // ***************************************************************************************
 
 void CONReverseCursorBlock(void) {
-	for (int y = 0;y < graphMode->fontHeight;y++) {
-		uint8_t *p = graphMode->graphicsMemory + 
-					 (y + graphMode->yCursor * graphMode->fontHeight) * graphMode->xGSize +
-					graphMode->xCursor * graphMode->fontWidth;
-		for (int x = 0;x < graphMode->fontWidth;x++) {
-			*p ^= graphMode->foreCol;
-			p++;
+	if (graphMode->isCursorVisible != 0) {
+		for (int y = 0;y < graphMode->fontHeight;y++) {
+			uint8_t *p = graphMode->graphicsMemory + 
+						 (y + graphMode->yCursor * graphMode->fontHeight) * graphMode->xGSize +
+						graphMode->xCursor * graphMode->fontWidth;
+			for (int x = 0;x < graphMode->fontWidth;x++) {
+				*p ^= graphMode->foreCol;
+				p++;
+			}
 		}
 	}
 }
