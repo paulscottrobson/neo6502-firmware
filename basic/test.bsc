@@ -5,7 +5,7 @@ call api(2,18)
 i1 = peek($FF04)
 i2 = peek($FF05)
 print i1,i2
-ink 7
+ink 7,0
 call api(2,18)
 i1 = peek($FF04)
 i2 = peek($FF05)
@@ -17,3 +17,7 @@ proc api(g,f)
 	poke $FF01,f:poke $FF00,g
 	while peek($FF00):wend
 endproc	
+'
+proc cursor(n)
+	poke $FF04,n:call api(2,19)
+endproc

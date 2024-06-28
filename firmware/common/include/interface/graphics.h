@@ -27,6 +27,7 @@ struct GraphicsMode {
 	uint8_t *graphicsMemory;  													// graphics memory
 	uint16_t *consoleMemory;  									  				// console memory.
 	uint8_t  isExtLine[MAXCONSOLEHEIGHT]; 										// True if console is extended line.
+	uint8_t  isCursorVisible;													// True if cursor visible.
 };
 
 extern struct GraphicsMode gMode;

@@ -30,7 +30,9 @@ void CONInsertLine(uint8_t y);
 void CONDeleteLine(uint8_t y);
 void CONClearArea(int x1, int y1, int x2, int y2);
 void CONSetForeBackColour(int fg, int bg);
+void CONGetForeBackColour(int *fg, int *bg);
 void CONReverseCursorBlock();
+void CONSetCursorVisible(uint8_t vFlag);
 
 extern uint8_t userDefinedFont[64*8];
 
