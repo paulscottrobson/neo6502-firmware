@@ -1,11 +1,1 @@
-
-1000 restore
-1010 read a,b,c,d
-1015 print a,b,c,d
-1020 restore 1022
-1030 read a,b,c,d
-1035 print a,b,c,d
-1040 end
-1050 data 1,2,3,4
-1060 data 5,6,7,8
-1070 data 9,10,11,12
+print atan2(3,5)*2

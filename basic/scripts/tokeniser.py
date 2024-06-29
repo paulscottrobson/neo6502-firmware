@@ -191,7 +191,7 @@ if __name__ == "__main__":
 	tk.test(".1 1.4082 4.251")
 	tk.test("gosub return rnd( left$( while")
 	tk.test("name$ a.number fre.d")
-	tk.test("case A Y$189E4-42204.1 d9j0m4")
+	tk.test("case A Y$189E4-42204.1 d9j0m4 sin( atan2(")
 	tk.test(".hello ")
 #	tk.test("+")
 	iStore.dump()
