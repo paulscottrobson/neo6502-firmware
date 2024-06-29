@@ -88,6 +88,32 @@ _CFSyntax:
 Command_NEXT:	;; [next]
 		lda 	#STK_FOR 					; check in a FOR.
 		jsr 	StackCheckFrame
+		;
+		lda 	(codePtr),y 				; is it NEXT <something>
+		cmp 	#KWD_SYS_END
+		beq 	_CNNoVariable
+		cmp 	#KWD_COLON
+		beq 	_CNNoVariable
+
+		ldx 	#0
+		jsr 	EvaluateTerm 				; term, which should match the variable
+		lda 	XSControl,x 				; check it is a variable
+		and 	#XS_ISVARIABLE
+		beq 	_CNBadVariable 				; no, we have a problem.
+
+		phy 								; check variable
+		ldy 	#4
+		lda 	(basicStack),y
+		cmp 	XSNumber0,x
+		bne 	_CNBadVariable
+		iny
+		lda 	(basicStack),y
+		cmp 	XSNumber1,x
+		bne 	_CNBadVariable
+		ply
+
+_CNNoVariable:
+		;
 		phy 								; save code pointer which we don't use.
 		ldy 	#4 							; copy variable address to zTemp0
 		lda 	(basicStack),y
@@ -131,6 +157,8 @@ _CNExitLoop:
 		jsr 	StackClose		 			; remove stack frame
 		rts
 
+_CNBadVariable:
+		.error_structure
 ;
 ;		Add X to each byte of the index, either increments (CS,X = 0) or decrements (CC,X = $FF)
 ;		

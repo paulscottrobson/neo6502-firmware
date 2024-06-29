@@ -24,6 +24,7 @@ firmware/build.sh
 firmware/common/include/data/
 storage
 storage/*
+*.neo
 *.elf
 *.uf2
 *.pdf
