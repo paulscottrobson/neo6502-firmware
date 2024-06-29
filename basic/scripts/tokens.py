@@ -71,7 +71,7 @@ class TokenSet(object):
 
 	def addToken(self,tokenID,tokenText):
 		tokenText = tokenText.strip().lower()
-		assert tokenID not in self.idToToken
+		assert tokenID not in self.idToToken,"Duplicate "+tokenText
 		if tokenText != "":
 			assert tokenText not in self.nameToToken,"Duplicate "+tokenText
 		token = Token(tokenID,tokenText)
@@ -140,16 +140,18 @@ class TokenSet(object):
 			PLX	PLY	ROL	ROR	RTI	RTS	SBC	SEC	SED	SEI	STA	STX	STY	STZ	
 			TAX	TAY	TRB	TSB	TSX	TXA	TXS	TYA 
 
-		""",0x60)
+		""",0x50)
 		#
 		#		Additional Unary functions, less popular
 		#
-		self.add(0x2E0,"""
+		self.add(0x2D0,"""
+			ATAN2( !!UU1 !!UU2 !!UU3 !!UU4 !!UU5 !!UU6 !!UU7
+			!!UU8 !!UU9 !!UU10 !!UU11 !!UU12 !!UU13 !!UU14 !!UU15		
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
 			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM 	VBLANKS(
 			ERR 	ERL		PIN( 	IREAD( 	 ANALOG(  JOYCOUNT(  UPPER$(
 			IDEVICE( SPC( 	TAB( 	UHASDATA( MOS( 	HAVEMOUSE( LOWER$( POW(
-			EXISTS(
+			EXISTS(  
 		""")
 		
 if __name__ == "__main__":

@@ -104,7 +104,7 @@
 	DOCUMENTATION
 		Register1 := Square root of (Register1 * Register1) + (Register2 * Register2)
 
-	FUNCTION 9 Direction (arctangent2)
+	FUNCTION 9 Angle calculation (arctangent2)
 		f1 = MATHReadFloat(MATH_REG1);
 		f2 = MATHReadFloat(MATH_REG2);
 		MATHWriteFloat(MATHConvertAngleFromDefault(atan2(f1,f2)),MATH_REG1);
