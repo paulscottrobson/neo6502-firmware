@@ -43,6 +43,8 @@ uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size);
 uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size);
 uint8_t FISSetFileAttributes(const std::string& filename, uint8_t attribs);
 
+typedef	uint8_t (* FILEREADBYTE)(uint8_t *);
+
 #define FIO_NUM_FILES  8
 #define FIOMODE_RDONLY   0
 #define FIOMODE_WRONLY  1
@@ -64,6 +66,7 @@ uint8_t FIOReadDir(std::string& filename, uint32_t* size, uint8_t* attribs);
 uint8_t FIOCloseDir();
 uint8_t FIORenameFile(const std::string& oldFilename, const std::string& newFilename);
 uint8_t FIOSetFileAttributes(const std::string& filename, uint8_t attribs);
+uint8_t FIOReadBlock(FILEREADBYTE readfn,uint8_t *commandPtr,bool *pContinue);
 
 uint8_t FIOOpenFileHandle(uint8_t fileno, const std::string& filename, uint8_t mode);
 uint8_t FIOCloseFileHandle(uint8_t fileno);
