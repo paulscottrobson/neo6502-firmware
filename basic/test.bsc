@@ -1,5 +1,1 @@
-for i = 1 to 3
-	for j = 8 to 9
-		print i,j
-	next i
-next i
+load "swimo.neo"
