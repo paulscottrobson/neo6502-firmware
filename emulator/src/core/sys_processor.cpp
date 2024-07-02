@@ -69,6 +69,44 @@ void CPUSaveArguments(int argc,char *argv[]) {
 
 // *******************************************************************************************************************************
 //
+//														Read Neo File
+//
+// *******************************************************************************************************************************
+
+static FILE *fInputFile = NULL;
+
+static uint8_t CPUReadByte(uint8_t *p) {
+	return fgetc(fInputFile);
+}
+
+void CPUReadNeoFile(char *fileName) {
+	uint8_t header[8];
+	printf("Trying to read header for %s\n",fileName);	
+	fInputFile = fopen(fileName,"rb"); 												// Open file.
+	if (fInputFile == NULL) return;
+
+	for (int i = 0;i < 8;i++) header[i] = CPUReadByte(NULL);  
+	bool isExec = header[0] == 0x03 && header[1] == 0x4E &&  						// Look for the magic number
+								header[2] == 0x45 && header[3] == 0x4F;
+	printf("Header check %d\n",(int)isExec);
+	if (!isExec) { fclose(fInputFile);return; }
+	printf("Header found.\n");
+	uint16_t execAddress = header[6] + (header[7] << 8); 							// Get the execute address
+	printf("Execute from $%x\n",execAddress);
+	bool processing = true; 
+	int error = 0;
+	while (processing && error == 0) {
+		error = FIOReadBlock(CPUReadByte,NULL,&processing); 						// Read one block.
+	}
+	fclose(fInputFile);
+	if (execAddress != 0xFFFF) {  													// Not the default $FFFF e.g. don't execute
+		cpuMemory[0xFFFC] = execAddress & 0xFF;
+		cpuMemory[0xFFFD] = execAddress >> 8;
+	}
+}
+
+// *******************************************************************************************************************************
+//
 //														Reset the CPU
 //
 // *******************************************************************************************************************************
@@ -129,6 +167,10 @@ void CPUReset(void) {
 			}
 			if (strcmp(command,"trace") == 0) { 									// Dump every CPU instruction to stdout.
 				traceMode = true;
+			}
+			if (strlen(command) > 4 && 												// Load .NEO file.
+						strcmp(command+strlen(command)-4,".neo") == 0) {
+				CPUReadNeoFile(command);
 			}
 		}
 	}
