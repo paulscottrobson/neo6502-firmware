@@ -97,7 +97,10 @@ trun:tbuild
 
 tneo: tbuild
 	$(MAKE) -C ..$(S)firmware run 
-	
+
+xneo:tbuild
+	$(RUNCMD) swim2.neo
+		
 # ***************************************************************************************
 #
 #							Build the command line basic
