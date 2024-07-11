@@ -111,7 +111,7 @@ GROUP 3 File I/O
         Parameter:0 contains the file channel to operate on.
         Parameters:1,2 points to the destination in memory,
               or $FFFF to read into graphics memory.
-        Parameters:2,3 contains the amount of data to read.        
+        Parameters:3,4 contains the amount of data to read.        
 
         On output:
         
