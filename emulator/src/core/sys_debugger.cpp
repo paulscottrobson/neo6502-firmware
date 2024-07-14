@@ -30,6 +30,7 @@ static int renderCount = 0;
 static BYTE8 *videoRAM = NULL;														// VRAM simple pattern.
 static BYTE8 *isExtArray = NULL;
 static uint16_t palette[256]; 														// Palette
+static uint16_t displayScale = 3; 													// Display scale.
 
 // *******************************************************************************************************************************
 //
@@ -54,12 +55,44 @@ void RNDStartMode0(struct GraphicsMode *gMode) {
 
 // *******************************************************************************************************************************
 //
+//											Get/Set emulator display scale
+//
+// *******************************************************************************************************************************
+
+void DBGSetDisplayScale(uint16_t scale) {
+	if (scale >= 1 && scale <= 4) {
+		displayScale = scale;
+	}
+}
+
+BYTE8 DBGGetDisplayScale(void) {
+	return displayScale;
+}
+
+// *******************************************************************************************************************************
+//
+//													Debugger arguments
+//
+// *******************************************************************************************************************************
+
+void DBGSaveArguments(int argc,char *argv[]) {
+	for (int i = 0;i < argc;i++) {
+		char *p = argv[i];
+		printf("%s\n",p);
+		if (strncmp(p,"scale=",6) == 0 && strlen(p) == 7) {
+			DBGSetDisplayScale(p[6]-'0');
+		}
+	}
+}
+
+// *******************************************************************************************************************************
+//
 //								Get information about the active part of the display
 //
 // *******************************************************************************************************************************
 
 void DGBXGetActiveDisplayInfo(SDL_Rect *r,int *pxs,int *pys,int *pxc,int *pyc) {
-		*pxs = 3;*pys = 3;
+		*pxs = SCALE;*pys = SCALE;
 		*pxc = 320;*pyc = 240;
 		r->w = (*pxs) * (*pxc);r->h = (*pys) * (*pyc);
 		r->x = WIN_WIDTH/2-r->w/2;r->y = WIN_HEIGHT/2-r->h/2;

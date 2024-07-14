@@ -17,9 +17,11 @@
 #include "sys_processor.h"
 #include "hardware.h"
 
+#define SCALE (DBGGetDisplayScale())
+
 #define WIN_TITLE 		"Neo6502 Emulator"											// Initial Window stuff
-#define WIN_WIDTH		(42*8*3)
-#define WIN_HEIGHT		(35*8*3)
+#define WIN_WIDTH		(42*8*SCALE)
+#define WIN_HEIGHT		(35*8*SCALE)
 #define WIN_BACKCOLOUR	0x004
 
 // *******************************************************************************************************************************
@@ -28,7 +30,7 @@
 //
 // *******************************************************************************************************************************
 
-#define DEBUG_ARGUMENTS(ac,av) { CPUSaveArguments(ac,av); }
+#define DEBUG_ARGUMENTS(ac,av) { DBGSaveArguments(ac,av);CPUSaveArguments(ac,av); }
 
 #define DEBUG_CPURENDER(x) 	DBGXRender(x,0)											// Render the debugging display
 #define DEBUG_VDURENDER(x)	DBGXRender(x,1)											// Render the game display etc.
@@ -49,6 +51,9 @@ void DBGXRender(int *address,int isRunMode);										// Render the debugger scr
 void DGBXGetActiveDisplayInfo(SDL_Rect *r,int *pxs,int *pys,int *pxc,int *pyc);
 BYTE8 DRVGFXHandler(BYTE8 key,BYTE8 isRunMode);
 BYTE8 *DBGXGetVideoRAM(void);
+BYTE8 DBGGetDisplayScale(void);
+void DBGSetDisplayScale(uint16_t scale);
+void DBGSaveArguments(int argc,char *argv[]);
 
 int DBGXDasm65(int addr, char* buffer);												// Disassemble the instruction at addr, writing into buffer.
 int DBGXInstructionSize65(int addr);												// Calc size (1,2 or 3) of instruction found at at addr.
