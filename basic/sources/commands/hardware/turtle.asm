@@ -47,11 +47,12 @@ _TCIExit:
 
 ; ************************************************************************************************
 ;
-;								Turtle CLEAR|FAST|HIDE
+;								Turtle CLEAR|FAST|HIDE|SHOW
 ;
 ; ************************************************************************************************
 
 CommandTurtle: ;; [turtle]
+		jsr 	TurtleCheckInitialised 		; check the turtle has been initialised.
 		lda 	(codePtr),y 				; all 3 are in the minor group
 		iny
 		cmp 	#KWD_SYS_SH1 
@@ -65,12 +66,15 @@ CommandTurtle: ;; [turtle]
 		beq 	_CTFast
 		cmp 	#KWD_Hide-$100
 		beq 	_CTHide
+		cmp 	#KWD_SHOW-$100
+		beq 	_CTShow
 _CTSyntax:
 		.error_syntax		
 
 _CTClear:
 		stz 	turtleInitialised 			; force reinitialisation
 		jsr 	TurtleCheckInitialised 		; reinitialise it
+_CTShow:		
 		stz 	ControlParameters+0 		; rotate 0 to draw it
 		stz 	ControlParameters+1
 		.DoSendMessage 					 	
