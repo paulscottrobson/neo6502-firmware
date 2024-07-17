@@ -18,6 +18,7 @@
 // ***************************************************************************************
 
 GROUP 9 Turtle Graphics
+
     FUNCTION 1 Turtle Initialise
         TTLInitialise(DPARAMS[0]);
     DOCUMENTATION
@@ -31,17 +32,21 @@ GROUP 9 Turtle Graphics
         Turn the turtle right by Parameter:0,1 degrees. Show if hidden. To turn left, turn by a negative amount.
 
     FUNCTION 3 Turtle Move
-        TTLMove(DSPGetInt16(DCOMMAND,4),DCOMMAND[6],DCOMMAND[7]);
+        TTLForward(DSPGetInt16(DCOMMAND,4),DCOMMAND[6],DCOMMAND[7]);
     DOCUMENTATION
-        Move the turtle forward by Parameter:0,1 degrees, drawing in colour Parameter:2, pen down flag in Parameter:3. Show if hidden.
+        Move the turtle forward by Parameter:0,1 degrees, drawing in colour Parameter:2 if Parameter:3 is non-zero.
 
     FUNCTION 4 Turtle Hide
-        TTLHide();
+        TTLSetVisible(false);
     DOCUMENTATION
         Hide the turtle.
 
     FUNCTION 5 Turtle Home
-        TTLHome();TTLUpdate();
+        TTLHome();
     DOCUMENTATION
         Move the turtle to the home position (in the center, pointing upward).
 
+    FUNCTION 6 Turtle Show
+        TTLSetVisible(true);
+    DOCUMENTATION
+        Show the turtle.
