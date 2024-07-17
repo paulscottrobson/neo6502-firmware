@@ -19,12 +19,7 @@
 ; ************************************************************************************************
 
 TurtleResetSystem:	
-		stz 	turtleInitialised
-		lda 	#1
-		sta 	turtlePenDown
-		lda 	#6
-		sta 	turtlePenColour
-		stz 	turtleFast
+		stz 	turtleInitialised 			; turtle not initialised
 		rts
 
 ; ************************************************************************************************
@@ -36,18 +31,30 @@ TurtleResetSystem:
 TurtleCheckInitialised:
 		lda 	turtleInitialised 			; already initialised ?
 		bne 	_TCIExit
+
 		inc 	turtleInitialised 			; set flag
 		lda 	#$7F 						; sprite $7F
 		sta 	ControlParameters+0
 		.DoSendMessage 					 	; and reset it.
 		.byte 	9,1
 		.DoWaitMessage		
+
+		.DoSendMessage 						; show the turtle
+		.byte 	9,6
+		.DoWaitMessage		
+
+		lda 	#1 							; turtle pen is down
+		sta 	turtlePenDown 				
+		lda 	#6   						; turtle pen colour is yellow.
+		sta 	turtlePenColour
+		stz 	turtleFast					; in slow mode.
+
 _TCIExit:
 		rts		
 
 ; ************************************************************************************************
 ;
-;								Turtle CLEAR|FAST|HIDE|SHOW
+;									Turtle HOME|FAST|HIDE|SHOW
 ;
 ; ************************************************************************************************
 
@@ -61,7 +68,7 @@ CommandTurtle: ;; [turtle]
 		lda 	(codePtr),y 				; check what it is
 		iny
 		cmp 	#KWD_HOME-$100
-		beq 	_CTClear
+		beq 	_CTHome
 		cmp 	#KWD_FAST-$100
 		beq 	_CTFast
 		cmp 	#KWD_Hide-$100
@@ -70,24 +77,32 @@ CommandTurtle: ;; [turtle]
 		beq 	_CTShow
 _CTSyntax:
 		.error_syntax		
-
-_CTClear:
-		stz 	turtleInitialised 			; force reinitialisation
-		jsr 	TurtleCheckInitialised 		; reinitialise it
-_CTShow:		
-		stz 	ControlParameters+0 		; rotate 0 to draw it
-		stz 	ControlParameters+1
+		;
+		;		Handle turtle home.
+		;
+_CTHome: 
 		.DoSendMessage 					 	
-		.byte 	9,2
+		.byte 	9,5
+		.DoWaitMessage		
+		;
+		;		Handle turtle show
+		;
+_CTShow:		
+		.DoSendMessage 						; show command	 	
+		.byte 	9,6
 		.DoWaitMessage		
 		rts
-
+		;
+		;		Handle turtle hide
+		;
 _CTHide:		
 		.DoSendMessage 					 	; hide command
 		.byte 	9,4
 		.DoWaitMessage		
 		rts
-
+		;
+		;		Handle turtle fast
+		;
 _CTFast:
 		lda 	#1  						; move fast
 		sta 	turtleFast
@@ -100,16 +115,18 @@ _CTFast:
 ; ************************************************************************************************
 
 CommandPenup: ;; [penup]
+		jsr 	TurtleCheckInitialised 		; check the turtle has been initialised.
 		stz 	turtlePenDown
 		rts
 
 ; ************************************************************************************************
 ;
-;									   Pen down
+;							Pen down ; can also be followed by a colour number
 ;
 ; ************************************************************************************************
 
 CommandPendown: ;; [pendown]
+		jsr 	TurtleCheckInitialised 		; check the turtle has been initialised.
 		lda 	#$FF
 		sta 	turtlePenDown
 		lda 	(codePtr),y
@@ -125,7 +142,7 @@ _CPDNoColour:
 
 ; ************************************************************************************************
 ;
-;									 Rotate Turtle
+;									 		Rotate Turtle
 ;
 ; ************************************************************************************************
 
@@ -211,6 +228,7 @@ _TDExit:
 ;		Date			Notes
 ;		==== 			=====
 ;		30-01-24 		TURTLE HOME replaces TURTLE CLEAR
+; 		17-07-24  		Significant rewrite. 
 ;
 ; ************************************************************************************************
 
