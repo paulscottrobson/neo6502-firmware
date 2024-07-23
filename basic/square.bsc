@@ -1,0 +1,13 @@
+size = 16
+xc = 320\size:yc = 240\size
+xo = (320-xc*size)\2
+yo = (240-yc*size)\2
+for x = 0 to xc-1
+	for y = 0 to yc-1
+		if y < yc-1
+			rect xo+x*size,yo+y*size ink rand(8) solid by size-1,size-1
+		else
+			rect xo+x*size,yo+y*size ink rand(7)+1 frame by size-1,size-1
+		endif
+	next
+next

@@ -1,21 +1,30 @@
 cmake_minimum_required(VERSION 3.14)
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 
-set(PICO_SDK_FETCH_FROM_GIT on)
+
+if(NOT DEFINED ENV{PICO_SDK_FETCH_FROM_GIT})
+    set(PICO_SDK_FETCH_FROM_GIT on)
+    message("Defaulting PICO_SDK_FETCH_FROM_GIT")
+endif()
 include(pico_sdk_import.cmake)
 
 project(firmware C CXX ASM)
 
 include(FetchContent)
 
-FetchContent_Declare(
-    tinyusb
-    GIT_REPOSITORY https://github.com/hathach/tinyusb.git
-    GIT_TAG        0.16.0
-)
-FetchContent_MakeAvailable(tinyusb)
+# if((NOT DEFINED ENV{PICO_TINYUSB_FETCH_FROM_GIT}) OR ENV{PICO_TINYUSB_FETCH_FROM_GIT})
+if(DEFINED ENV{PICO_TINYUSB_PATH})
+    set(tinyusb_SOURCE_DIR $ENV{PICO_TINYUSB_PATH})
+else()
+    FetchContent_Declare(
+        tinyusb
+        GIT_REPOSITORY https://github.com/hathach/tinyusb.git
+        GIT_TAG        0.16.0
+    )
+    FetchContent_MakeAvailable(tinyusb)
+endif()
 set(PICO_TINYUSB_PATH ${tinyusb_SOURCE_DIR})
 
 pico_sdk_init()
@@ -34,13 +43,17 @@ include_directories(
     common/include
 )
 
-FetchContent_Declare(
-    PicoDVI
-    GIT_REPOSITORY https://github.com/Wren6991/PicoDVI
-    GIT_TAG        a248d72b8cc95a08b43ef4307cd954eb801272b2 # just the latest on 11/12/2023
-)
-FetchContent_MakeAvailable(PicoDVI)
-
+if(DEFINED ENV{PICO_DVI_PATH})
+    set(picodvi_SOURCE_DIR $ENV{PICO_DVI_PATH})
+    set(picodvi_BINARY_DIR "_deps/picodvi-build")
+else()
+    FetchContent_Declare(
+        PicoDVI
+        GIT_REPOSITORY https://github.com/paulscottrobson/PicoDVI
+        #GIT_TAG        a248d72b8cc95a08b43ef4307cd954eb801272b2 # just the latest on 11/12/2023
+    )
+    FetchContent_MakeAvailable(PicoDVI)
+endif()
 add_subdirectory(${picodvi_SOURCE_DIR}/software/libdvi ${picodvi_BINARY_DIR})
 
 add_library(fatfs INTERFACE)

@@ -13,7 +13,7 @@
 import sys
 
 def convert(h,srcFile,targetName,loadAddress):
-	b = [x for x in open(srcFile,"rb").read(-1)]								# Read in file
+	b = bytearray(open(srcFile,"rb").read(-1))									# Read in file
 	if loadAddress < 0:
 		loadAddress = 0x10000-len(b)
 	h.write("//\n//\tThis file is automatically created\n//\n") 				# Output header

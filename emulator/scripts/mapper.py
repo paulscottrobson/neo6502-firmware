@@ -1,4 +1,6 @@
-
+#
+#
+#
 driverIDs = """
  KEY_ENTER 0x28 	       	// Keyboard Return (ENTER) 			M / 13
  KEY_ESC 0x29 		   	// Keyboard ESCAPE					[ / 27
@@ -9,7 +11,7 @@ driverIDs = """
  KEY_EQUAL 0x2e 			// Keyboard = and +
  KEY_LEFTBRACE 0x2f 		// Keyboard [ and {
  KEY_RIGHTBRACE 0x30 	// Keyboard ] and }
- KEY_BACKSLASH 0x31 		// Keyboard \ and |
+ KEY_BACKSLASH 0x31 		// Keyboard backslash and |
  KEY_HASHTILDE 0x32 		// Keyboard Non-US # and ~
  KEY_SEMICOLON 0x33 		// Keyboard ; and :
  KEY_APOSTROPHE 0x34 	// Keyboard ' and "
@@ -28,7 +30,7 @@ driverIDs = """
  KEY_LEFT 0x50 			// Keyboard Left Arrow 				A / 1
  KEY_DOWN 0x51 			// Keyboard Down Arrow				S / 19
  KEY_UP 0x52 			// Keyboard Up Arrow 				W / 23
- KEY_102ND 0x64 		// Keyboard Non-US \ | 	 mapped onto KEY_BACKSLASH.
+ KEY_102ND 0x64 		// Keyboard Non-US backslash | 	 mapped onto KEY_BACKSLASH.
 """
 
 keys = [ None ] * 0x80

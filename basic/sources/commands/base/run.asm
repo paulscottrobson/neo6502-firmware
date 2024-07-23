@@ -26,6 +26,7 @@ Command_RUN:	;; [run]
 		cmp 	#KWD_COLON
 		beq 	Command_RUN_Always
 		jsr 	LoadCode 					; load the program, then run it.
+
 Command_RUN_Always:
 		jsr 	ClearCode					; clear everything out.
 		lda 	Program 					; back to the program start, get the count of var pages.
@@ -139,7 +140,7 @@ Command_Shift1_Handler: ;; [!!sh1]
 
 Command_Shift2_Handler: ;; [!!sh2]
 		lda 	(codePtr),y 				; get token shifted
-		cmp 	#$D0 						; D0 up are unary functions
+		cmp 	#$E0 						; E0 up are unary functions
 		bcs 	_CS2Fail
 		iny
 		asl 	a 							; double into X
@@ -147,7 +148,30 @@ Command_Shift2_Handler: ;; [!!sh2]
 		jmp 	(AssemblerVectorTable,x) 	; and go there.
 _CS2Fail:
 		.error_syntax
-		
+
+; ************************************************************************************************
+;
+;						Advance the pointer (codePtr) over zero numbered lines.
+;
+; ************************************************************************************************
+
+SkipZeroCode:
+		lda 	(codePtr) 					; reached program end
+		beq 	_SZCExit
+		ldy 	#1 							; line number zero ?
+		lda 	(codePtr),y
+		iny
+		ora 	(codePtr),y
+		bne 	_SZCExit 					; if not, exit
+		clc  								; next line.
+		lda 	(codePtr)
+		adc 	codePtr
+		sta 	codePtr
+		bcc 	SkipZeroCode
+		inc 	codePtr+1
+		bra 	SkipZeroCode
+_SZCExit:
+		rts		
 		.send code
 
 

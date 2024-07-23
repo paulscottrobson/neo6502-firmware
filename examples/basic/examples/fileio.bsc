@@ -1,0 +1,14 @@
+'
+'		Very simple file i/o
+'
+open output 4,"test.file"
+print #4,42,"Hello"
+close 4
+
+open input 5,"test.file"
+input #5,n,test$
+close 5
+
+print n,test$
+print exists("test.file")
+print exists("made.up.file")

@@ -15,5 +15,7 @@
 void HWReset(void);
 void HWSync(void);
 void HWQueueKeyboardEvent(int sdlCode,int isPress);
+void HWSetDefaultPath(const char *defaultPath);
+void HWUpdateMouse(void);
 
 #endif

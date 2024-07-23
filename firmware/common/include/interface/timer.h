@@ -14,6 +14,7 @@
 #define _TIMER_H
 
 uint32_t TMRRead(void);
+void TMRSweet16Sync(void);
 
 #endif
 

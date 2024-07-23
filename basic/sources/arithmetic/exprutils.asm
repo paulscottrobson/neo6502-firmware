@@ -37,7 +37,7 @@ EVUType:
 EXPEvalInteger:
 		jsr 	EXPEvalNumber 				; get number, coeerce to integer.
 		bit 	XSControl,x 				; integer ?
-		beq 	_EEIExit
+		bvc 	_EEIExit
 		lda 	#17 						; no, make it integer
 		jsr 	DOMathCommand
 _EEIExit:		

@@ -19,8 +19,7 @@
 			MATHWriteInt(MATHReadInt(MATH_REG1)+MATHReadInt(MATH_REG2),MATH_REG1);
 		}
 	DOCUMENTATION
-		Addition
-		\newline Register1 := Register 1 + Register2
+		Register1 := Register 1 + Register2
 
 	FUNCTION 1 Subtraction
 		if (MATHIsFloatBinary()) {
@@ -29,8 +28,7 @@
 			MATHWriteInt(MATHReadInt(MATH_REG1)-MATHReadInt(MATH_REG2),MATH_REG1);
 		}
 	DOCUMENTATION
-		Subtraction
-		\newline Register1 := Register 1 - Register2
+		Register1 := Register 1 - Register2
 
 	FUNCTION 2 Multiplication
 		if (MATHIsFloatBinary()) {
@@ -39,8 +37,7 @@
 			MATHWriteInt(MATHReadInt(MATH_REG1)*MATHReadInt(MATH_REG2),MATH_REG1);
 		}
 	DOCUMENTATION
-		Multiplication
-		\newline Register1 := Register 1 * Register2
+		Register1 := Register 1 * Register2
 
 	FUNCTION 3 Decimal Division
 		f2 = MATHReadFloat(MATH_REG2);
@@ -50,8 +47,7 @@
 			MATHWriteFloat(MATHReadFloat(MATH_REG1)/f2,MATH_REG1);
 		}
 	DOCUMENTATION
-		Decimal Division
-		\newline Register1 := Register 1 / Register2 (floating point)
+		Register1 := Register 1 / Register2 (floating point)
 
 	FUNCTION 4 Integer Division
 		i1 = MATHReadInt(MATH_REG1);
@@ -62,8 +58,7 @@
 			MATHWriteInt(i1/i2,MATH_REG1);
 		}
 	DOCUMENTATION
-		Integer Division
-		\newline Register1 := Register 1 / Register2 (integer result)
+		Register1 := Register 1 / Register2 (integer result)
 
 	FUNCTION 5 Integer Modulus
 		i1 = MATHReadInt(MATH_REG1);
@@ -74,8 +69,7 @@
 			MATHWriteInt(abs(i1) % abs(i2),MATH_REG1);
 		}
 	DOCUMENTATION
-		Integer Modulus
-		\newline Register1 := Register 1 mod Register2
+		Register1 := Register 1 mod Register2
 
 	FUNCTION 6 Compare
 		r = 0;
@@ -93,6 +87,29 @@
 		}
 		*DPARAMS = r;
 	DOCUMENTATION
-		Compare Numbers
-		\newline \Param{0} := Register 1 compare Register2 : returns $FF, 0, 1 for less equal and greater
-		\newline Note: float comparison is approximate because of rounding.
+		Parameter:0 := Register 1 compare Register2 : returns $FF, 0, 1 for less equal and greater.
+		Note: float comparison is approximate because of rounding.
+
+	FUNCTION 7 Power
+		f1 = MATHReadFloat(MATH_REG1);
+		f2 = MATHReadFloat(MATH_REG2);
+		MATHWriteFloat((float)pow(f1,f2),MATH_REG1);
+	DOCUMENTATION
+		Register1 := Register 1 to the power of Register2 (floating point result whatever)
+
+	FUNCTION 8 Distance (counter-rectangle)
+		f1 = MATHReadFloat(MATH_REG1);
+		f2 = MATHReadFloat(MATH_REG2);
+		MATHWriteFloat((float)sqrt((f1*f1)+(f2*f2)),MATH_REG1);
+	DOCUMENTATION
+		Register1 := Square root of (Register1 * Register1) + (Register2 * Register2)
+
+	FUNCTION 9 Angle calculation (arctangent2)
+		f1 = MATHReadFloat(MATH_REG1);
+		f2 = MATHReadFloat(MATH_REG2);
+		MATHWriteFloat(MATHConvertAngleFromDefault(atan2(f1,f2)),MATH_REG1);
+	DOCUMENTATION
+		Register1 := arctangent2(Register 1,Register 2) - angle in degrees/radians
+
+
+		

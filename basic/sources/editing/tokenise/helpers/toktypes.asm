@@ -56,11 +56,13 @@ TOKFail:
 
 ; ************************************************************************************************
 ;
-;								Part of identifier (a-z0-9_)
+;								Part of identifier (a-z0-9_.)
 ;
 ; ************************************************************************************************
 
 TOKIsIdentifierElement:
+		cmp 	#"." 						; check for . or _ which are allowed after the start.
+		beq 	TOKSucceed
 		cmp 	#"_"
 		beq 	TOKSucceed 					; else fall through to alphanumeric
 		

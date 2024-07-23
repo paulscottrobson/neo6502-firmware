@@ -60,6 +60,9 @@ XSNumber3:
 ;	
 ;											Zero Page
 ;
+;		If additional allocated then they may need to be saved during system calls. the temp
+;		registers and the stack do not matter.
+;
 ; ************************************************************************************************
 
 		.section zeropage
@@ -73,6 +76,8 @@ zsTemp: 									; general string pointer
 zTemp0:	
 		.fill 	2
 zTemp1:
+		.fill 	2		
+dataPtr: 									; Data equivalent of CodePtr
 		.fill 	2		
 		
 		.send zeropage
@@ -107,8 +112,8 @@ basicStackEnd: 								; bottom limit of stack.
 		.fill 	1
 tempBuffer: 								; generic buffer.
 		.fill 	32
-dataPtr: 									; Data equivalent of CodePtr
-		.fill 	2		
+errorBuffer: 								; error message buffer
+		.fill 	32		
 dataPos: 									; Data position of Y
 		.fill 	1		
 dataInStatement: 							; Non zero if currently in data statement
@@ -130,6 +135,10 @@ errLineNumber: 								; error line number (ERL)
 		.fill 	2		
 errCode: 									; error line address (2 bytes) offset (1 bytes)
 		.fill 	3		
+fhCurrentChannel:							; channel for i/o
+		.fill 	1	
+fhBuffer: 									; set up buffer
+		.fill 	1		
 		
 ; ************************************************************************************************
 ;	
@@ -141,6 +150,11 @@ inputPos: 									; tokenising position in input buffer
 		.fill 	1
 inputBuffer: 								; input buffer / token input buffer.
 		.fill 	256
+
+transmitDataBuffer = inputBuffer 			; use input buffer for transmit data
+
+transmitDataSize: 							; data to transmit
+		.fill 	1
 
 tokLineSize: 								; offset to end of line
 		.fill 	1

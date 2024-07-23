@@ -30,9 +30,12 @@ static int renderCount = 0;
 static BYTE8 *videoRAM = NULL;														// VRAM simple pattern.
 static BYTE8 *isExtArray = NULL;
 static uint16_t palette[256]; 														// Palette
+static uint16_t displayScale = 3; 													// Display scale.
 
 // *******************************************************************************************************************************
+//
 //											Handle palette changes
+//
 // *******************************************************************************************************************************
 
 void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b) {
@@ -40,7 +43,9 @@ void RNDSetPalette(uint8_t colour,uint8_t r,uint8_t g,uint8_t b) {
 }
 
 // *******************************************************************************************************************************
+//
 //											Handle mode start
+//
 // *******************************************************************************************************************************
 
 void RNDStartMode0(struct GraphicsMode *gMode) {
@@ -49,28 +54,154 @@ void RNDStartMode0(struct GraphicsMode *gMode) {
 }
 
 // *******************************************************************************************************************************
+//
+//											Get/Set emulator display scale
+//
+// *******************************************************************************************************************************
+
+void DBGSetDisplayScale(uint16_t scale) {
+	if (scale >= 1 && scale <= 4) {
+		displayScale = scale;
+	}
+}
+
+BYTE8 DBGGetDisplayScale(void) {
+	return displayScale;
+}
+
+// *******************************************************************************************************************************
+//
+//													Debugger arguments
+//
+// *******************************************************************************************************************************
+
+void DBGSaveArguments(int argc,char *argv[]) {
+	for (int i = 0;i < argc;i++) {
+		char *p = argv[i];
+		printf("%s\n",p);
+		if (strncmp(p,"scale=",6) == 0 && strlen(p) == 7) {
+			DBGSetDisplayScale(p[6]-'0');
+		}
+	}
+}
+
+// *******************************************************************************************************************************
+//
+//								Get information about the active part of the display
+//
+// *******************************************************************************************************************************
+
+void DGBXGetActiveDisplayInfo(SDL_Rect *r,int *pxs,int *pys,int *pxc,int *pyc) {
+		*pxs = SCALE;*pys = SCALE;
+		*pxc = 320;*pyc = 240;
+		r->w = (*pxs) * (*pxc);r->h = (*pys) * (*pyc);
+		r->x = WIN_WIDTH/2-r->w/2;r->y = WIN_HEIGHT/2-r->h/2;
+}
+
+// *******************************************************************************************************************************
+//
 //											This renders the debug screen
+//
 // *******************************************************************************************************************************
 
 static const char *labels[] = { "A","X","Y","PC","SP","SR","CY","N","V","B","D","I","Z","C", NULL };
 
+// Disassemble the instruction at addr, writing it into buffer.
+// Returns address of next instruction.
+int DBGXDasm65(int addr, char* buffer) {
+	int p = addr;
+	int opc = CPUReadMemory(p);p = (p + 1) & 0xFFFF;							// Read opcode.
+	strcpy(buffer,_mnemonics[opc]);												// Work out the opcode.
+	char *at = strchr(buffer,'@');												// Look for '@'
+	if (at != NULL) {															// Operand ?
+		char hex[6],temp[32];	
+		if (at[1] == '1') {
+			sprintf(hex,"%02x",CPUReadMemory(p));
+			p = (p+1) & 0xFFFF;
+		}
+		if (at[1] == '2') {
+			sprintf(hex,"%02x%02x",CPUReadMemory(p+1),CPUReadMemory(p));
+			p = (p+2) & 0xFFFF;
+		}
+		if (at[1] == 'r') {
+			int addr = CPUReadMemory(p);
+			p = (p+1) & 0xFFFF;
+			if ((addr & 0x80) != 0) addr = addr-256;
+			sprintf(hex,"%04x",addr+p);
+		}
+		strcpy(temp,buffer);
+		strcpy(temp+(at-buffer),hex);
+		strcat(temp,at+2);
+		strcpy(buffer,temp);
+	}
+	return p;
+}
+
+
+// *******************************************************************************************************************************
+//
+// 							Return the number of bytes (1, 2 or 3) occupied by the instruction at addr.
+//
+// *******************************************************************************************************************************
+
+int DBGXInstructionSize65(int addr) {
+	int opcode = CPUReadMemory(addr);
+	const char *at = strchr(_mnemonics[opcode],'@');
+	if (at != NULL) {
+		switch(at[1]) {
+			case '1': return 2;
+			case 'r': return 2;
+			case '2': return 3;
+			default: break; // shouldn't happen...
+		}
+	}
+	return 1;   // It's a bare opcode.
+}
+
+
+// *******************************************************************************************************************************
+//
+// 									Dump out nbytes of memory to a string buffer.
+//
+// *******************************************************************************************************************************
+
+// Buffer must have room for at least 3 bytes per memory location,
+// plus an extra byte for null-termination.
+// e.g for nbytes=3: "XX XX XX \0"
+void DBGXDumpMem(int addr, int nbytes, char* buffer) {
+	char* p = buffer;
+	for (int i = 0; i < nbytes; ++i) {
+		int b = CPUReadMemory((addr + i) & 0xFFFF);
+		p += sprintf(p, "%02x ", b);
+	}
+}
+
+
+// *******************************************************************************************************************************
+//
+// 									Render debug information and/or display
+//
+// *******************************************************************************************************************************
+
+#define REG(n) 	(CPUReadMemory((n)*2)+CPUReadMemory((n)*2+1) * 256)
+
 void DBGXRender(int *address,int showDisplay) {
 	int n = 0;
 	char buffer[32];
-	CPUSTATUS *s = CPUGetStatus();
+	CPUSTATUS65 *s = CPUGetStatus65();
 
 	if (showDisplay == 0) {
 		GFXSetCharacterSize(36,24);
-		DBGVerticalLabel(21,0,labels,DBGC_ADDRESS,-1);									// Draw the labels for the register
+		DBGVerticalLabel(21,0,labels,DBGC_ADDRESS,-1);								// Draw the labels for the register
 
-		#define DN(v,w) GFXNumber(GRID(24,n++),v,16,w,GRIDSIZE,DBGC_DATA,-1)			// Helper macro
+		#define DN(v,w) GFXNumber(GRID(24,n++),v,16,w,GRIDSIZE,DBGC_DATA,-1)		// Helper macro
 
 		DN(s->a,2);DN(s->x,2);DN(s->y,2);DN(s->pc,4);DN(s->sp+0x100,4);DN(s->status,2);DN(s->cycles,4);
 		DN(s->sign,1);DN(s->overflow,1);DN(s->brk,1);DN(s->decimal,1);DN(s->interruptDisable,1);DN(s->zero,1);DN(s->carry,1);
 
 		n = 0;
 		int a = address[1];																// Dump Memory.
-		for (int row = 15;row < 24;row++) {
+		for (int row = 17;row < 24;row++) {
 			GFXNumber(GRID(0,row),a,16,4,GRIDSIZE,DBGC_ADDRESS,-1);
 			for (int col = 0;col < 8;col++) {
 				int c = CPUReadMemory(a);
@@ -82,48 +213,22 @@ void DBGXRender(int *address,int showDisplay) {
 		}
 
 		int p = address[0];																// Dump program code. 
-		int opc;
 
-		for (int row = 0;row < 14;row++) {
+		for (int row = 0;row < 16;row++) {
 			int isPC = (p == ((s->pc) & 0xFFFF));										// Tests.
 			int isBrk = (p == address[3]);
 			GFXNumber(GRID(0,row),p,16,4,GRIDSIZE,isPC ? DBGC_HIGHLIGHT:DBGC_ADDRESS,	// Display address / highlight / breakpoint
 																		isBrk ? 0xF00 : -1);
-			opc = CPUReadMemory(p);p = (p + 1) & 0xFFFF;								// Read opcode.
-			strcpy(buffer,_mnemonics[opc]);												// Work out the opcode.
-			char *at = strchr(buffer,'@');												// Look for '@'
-			if (at != NULL) {															// Operand ?
-				char hex[6],temp[32];	
-				if (at[1] == '1') {
-					sprintf(hex,"%02x",CPUReadMemory(p));
-					p = (p+1) & 0xFFFF;
-				}
-				if (at[1] == '2') {
-					sprintf(hex,"%02x%02x",CPUReadMemory(p+1),CPUReadMemory(p));
-					p = (p+2) & 0xFFFF;
-				}
-				if (at[1] == 'r') {
-					int addr = CPUReadMemory(p);
-					p = (p+1) & 0xFFFF;
-					if ((addr & 0x80) != 0) addr = addr-256;
-					sprintf(hex,"%04x",addr+p);
-				}
-				strcpy(temp,buffer);
-				strcpy(temp+(at-buffer),hex);
-				strcat(temp,at+2);
-				strcpy(buffer,temp);
-			}
+           	p = DBGXDasm65(p, buffer);
 			GFXString(GRID(5,row),buffer,GRIDSIZE,isPC ? DBGC_HIGHLIGHT:DBGC_DATA,-1);	// Print the mnemonic
 		}
 		
 	}
 	renderCount++;
 	if (showDisplay != 0) {
-		int xc = 320;int yc = 240;
-		int xs = 3;int ys = 3;
 		SDL_Rect r;
-		r.w = xs*xc;r.h = ys*yc;
-		r.x = WIN_WIDTH/2-r.w/2;r.y = WIN_HEIGHT/2-r.h/2;
+		int xc,yc,xs,ys;
+		DGBXGetActiveDisplayInfo(&r,&xs,&ys,&xc,&yc);
 		SDL_Rect rc2;rc2 = r;
 		rc2.w += 8;rc2.h += 8;rc2.x -=4;rc2.y -= 4;
 		GFXRectangle(&rc2,0);
@@ -139,12 +244,31 @@ void DBGXRender(int *address,int showDisplay) {
 					rc2.x += xs;
 				}
 			}
-			for (int y; y < 240/8;y++) {
-				rc2.x = r.x + r.w + 4;
-				rc2.y = r.y + y * ys * 8 + 2;
-				rc2.w = xs * 2;rc2.h = ys * 8 - 4;
-				GFXRectangle(&rc2,isExtArray[y] ? 0x0F0 : 0xF00);
+			const uint8_t *cursorImage;
+			uint16_t cursorX,cursorY;
+			uint8_t xHit,yHit;
+			if (MSEGetCursorDrawInformation(&cursorX,&cursorY)) {
+				cursorImage = CURGetCurrent(&xHit,&yHit);				
+				cursorX -= xHit;cursorY -= yHit;
+				uint8_t w = 16,h = 16;
+				if (cursorX + 16 >= 320) w = 320-cursorX;
+				if (cursorY + 16 >= 240) h = 240-cursorY;
+				rc2.w = xs;rc2.h = ys;
+				for (int x = 0;x < w;x++) {
+					for (int y = 0;y < h;y++) {
+						rc2.x = r.x + (x+cursorX)*xs;
+						rc2.y = r.y + (y+cursorY)*ys;
+						uint8_t pixel = cursorImage[x+y*16];
+						if (pixel != 0xFF) GFXRectangle(&rc2,palette[pixel]);
+					}
+				}
 			}
-		}		
+			for (int y = 0; y < 240/8;y++) {
+			 	rc2.x = r.x + r.w + 4;
+			 	rc2.y = r.y + y * ys * 8 + 2;
+			 	rc2.w = xs * 2;rc2.h = ys * 8 - 4;
+			 	GFXRectangle(&rc2,isExtArray[y] ? 0x0F0 : 0xF00);
+			}
+		}	
 	}
 }

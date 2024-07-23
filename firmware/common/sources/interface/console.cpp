@@ -3,9 +3,9 @@
 //
 //      Name :      console.cpp
 //      Authors :   Paul Robson (paul@robsons.org.uk)
-//      Date :      21st November 2023
+//      Date :      3rd March 2024
 //      Reviewed :  No
-//      Purpose :   Console system.
+//      Purpose :   Console system. Version 2.
 //
 // ***************************************************************************************
 // ***************************************************************************************
@@ -25,6 +25,12 @@ struct GraphicsMode *graphMode;
 
 uint8_t userDefinedFont[64*8];
 
+// ***************************************************************************************
+//
+//									Update a user character
+//
+// ***************************************************************************************
+
 uint8_t CONUpdateUserFont(uint8_t *data) {
 	if (data[0] < 0xC0) return 1;
 	for (int i = 0;i < 7;i++) {
@@ -35,15 +41,18 @@ uint8_t CONUpdateUserFont(uint8_t *data) {
 
 // ***************************************************************************************
 //
-//									Raw character output
+//						Repaint character at console position (x,y)
 //
 // ***************************************************************************************
 
-static void CONDrawCharacter(uint16_t x,uint16_t y,uint16_t ch,uint16_t fcol,uint16_t bcol) {
-	if (x < graphMode->xCSize && y < graphMode->yCSize) {  						// Coords in range.
-		graphMode->consoleMemory[x + y * MAXCONSOLEWIDTH] = ch;  				// Update console memory.
-		uint16_t cWidth = graphMode->fontWidth,cHeight = graphMode->fontHeight; 
-		if (graphMode->xGSize != 0) {  											// Only if graphics mode.
+static void CONPaintCharacter(uint16_t x,uint16_t y) {
+ 	if (x < graphMode->xCSize && y < graphMode->yCSize) {  						// Coords in range.
+ 		uint16_t ch = graphMode->consoleMemory[x + y * MAXCONSOLEWIDTH];		// Character data
+ 		uint8_t fcol = (ch >> 8) & 0x0F,bcol = (ch >> 12) & 0x0F; 				// Extract colours
+ 		uint16_t cWidth = graphMode->fontWidth,cHeight = graphMode->fontHeight; 
+ 		ch = ch & 0xFF;  														// Character #
+
+ 		if (graphMode->xGSize != 0) {  											// Only if graphics mode.
 			for (uint16_t y1 = 0;y1 < cHeight;y1++) {  							// Each line of font data
 
 				uint16_t b = font_5x7[(ch-32)*cHeight + y1]; 					// Bit pattern for that line.
@@ -57,7 +66,21 @@ static void CONDrawCharacter(uint16_t x,uint16_t y,uint16_t ch,uint16_t fcol,uin
 					b = b << 1;
 				}
 			}
-		}
+ 		}
+ 	}
+}
+
+// ***************************************************************************************
+//
+//						Raw character output, tracking console.
+//
+// ***************************************************************************************
+
+static void CONDrawCharacter(uint16_t x,uint16_t y,uint16_t ch,uint16_t fcol,uint16_t bcol) {
+ 	if (x < graphMode->xCSize && y < graphMode->yCSize) {  						// Coords in range.
+ 		graphMode->consoleMemory[x + y * MAXCONSOLEWIDTH] =  					// Character and colours are packed into the console Memory.
+ 												ch | (fcol << 8) | (bcol << 12);
+		CONPaintCharacter(x,y);  												// And repaint it. 												
 	}
 }
 
@@ -78,16 +101,19 @@ void CONClearScreen(void) {
 			memset(graphMode->graphicsMemory,graphMode->backCol,MAXGRAPHICSMEMORY); 
 		}
 	}
-	memset(graphMode->consoleMemory,' ',MAXCONSOLEMEMORY); 						// Erase character display to spaces.
+	for (int c = 0;c < MAXCONSOLEMEMORY;c++) {  								// Erase the console memory.
+		graphMode->consoleMemory[c] = ' ' + (7 << 8) + (0 << 12);
+	}
 	for (int y = 0;y < graphMode->yCSize;y++) {  								// No extended lines.
 		graphMode->isExtLine[y] = 0;
 	}
+	CONSetCursorVisible(1);														// Cursor now visible again.
 	GFXResetDefaults(); 														// Reset graphics defaults.
 }
 
 // ***************************************************************************************
 //
-//								   Reposition cursor
+//							Accessors for cursor position
 //
 // ***************************************************************************************
 
@@ -128,72 +154,57 @@ void CONInitialise(struct GraphicsMode *gMode) {
 
 // ***************************************************************************************
 //
+//						Copy a character from one position to another
+//	
+// ***************************************************************************************
+
+static void CONCopy(uint16_t xFrom,uint16_t yFrom,uint16_t xTo,uint16_t yTo) {
+	graphMode->consoleMemory[xTo + yTo * MAXCONSOLEWIDTH] =  					// Copy console mirror data
+		 						graphMode->consoleMemory[xFrom + yFrom * MAXCONSOLEWIDTH];
+	CONPaintCharacter(xTo,yTo);		 						
+}
+
+// ***************************************************************************************
+//
 //									Insert and delete lines
 //
 // ***************************************************************************************
 
 void CONInsertLine(uint8_t y) {
-	if (y >= graphMode->yCSize)
-		return;
-
-	/* Text data */
-
-	uint8_t* tsrc = graphMode->consoleMemory + y*MAXCONSOLEWIDTH;
-	uint8_t* tdest = tsrc + MAXCONSOLEWIDTH;
-	int tlen = (graphMode->yCSize - y - 1)*MAXCONSOLEWIDTH;
-	memmove(tdest, tsrc, tlen);
-	memset(tsrc, ' ', MAXCONSOLEWIDTH);
-
-	/* Line extension data */
-
-	uint8_t* esrc = graphMode->isExtLine + y;
-	uint8_t* edest = esrc + 1;
-	int elen = graphMode->yCSize - y - 1;
-	memmove(edest, esrc, elen);
-	*tsrc = 0;
-
-	/* Graphics data */
-
-	if (graphMode->xGSize != 0) {
-		int fh = graphMode->fontHeight * 320;
-		uint8_t* gsrc = graphMode->graphicsMemory + y*fh;
-		uint8_t* gdest = gsrc + fh;
-		int glen = (graphMode->yCSize - y - 1)*fh;
-		memmove(gdest, gsrc, glen);
-		memset(gsrc, graphMode->backCol, fh);
+	if (y >= graphMode->yCSize) return; 										// Bad line #
+	uint8_t y1 = graphMode->yCSize-1;  											// Copy to line.
+	while (y != y1) {  															// Copy the main block down.
+		for (int x = 0;x < graphMode->xCSize;x++) {
+			CONCopy(x,y-1,x,y);
+			graphMode->isExtLine[y] = graphMode->isExtLine[y-1];
+		}
+		y1--;
 	}
+	for (int x = 0;x < graphMode->xCSize;x++) {  								// Blank bottom line and make it not extended.
+		CONDrawCharacter(x,y,' ',graphMode->foreCol,graphMode->backCol);
+	}
+	graphMode->isExtLine[y] = false;  
 }
 
+// ***************************************************************************************
+//
+//										Delete lines
+//
+// ***************************************************************************************
+
 void CONDeleteLine(uint8_t y) {
-	if (y >= graphMode->yCSize)
-		return;
-
-	/* Text data */
-
-	uint8_t* tdest = graphMode->consoleMemory + y*MAXCONSOLEWIDTH;
-	uint8_t* tsrc = tdest + MAXCONSOLEWIDTH;
-	int tlen = (graphMode->yCSize - y - 1)*MAXCONSOLEWIDTH;
-	memmove(tdest, tsrc, tlen);
-	memset(tdest+tlen, ' ', MAXCONSOLEWIDTH);
-
-	/* Line extension data */
-
-	uint8_t* edest = graphMode->isExtLine + y;
-	uint8_t* esrc = edest + 1;
-	int elen = graphMode->yCSize - y - 1;
-	memmove(edest, esrc, elen);
-	*(edest+elen) = 0;
-
-	/* Graphics data */
-
-	if (graphMode->xGSize != 0) {
-		int fh = graphMode->fontHeight * 320;
-		uint8_t* gdest = graphMode->graphicsMemory + y*fh;
-		uint8_t* gsrc = gdest + fh;
-		int glen = (graphMode->yCSize - y - 1)*fh;
-		memmove(gdest, gsrc, glen);
-		memset(gdest+glen, graphMode->backCol, fh);
+	if (y >= graphMode->yCSize) return; 										// Bad line #
+	while (y != graphMode->yCSize-1) {  										// Copy the main block up.
+		for (int x = 0;x < graphMode->xCSize;x++) {
+			CONCopy(x,y+1,x,y);
+			graphMode->isExtLine[y] = graphMode->isExtLine[y+1];
+		}
+		y++;
 	}
+	for (int x = 0;x < graphMode->xCSize;x++) {  								// Blank bottom line and make it not extended.
+		CONDrawCharacter(x,y,' ',graphMode->foreCol,graphMode->backCol);
+	}
+	graphMode->isExtLine[y] = false;  
 }
 
 // ***************************************************************************************
@@ -217,7 +228,7 @@ void CONClearArea(int x1, int y1, int x2, int y2) {
 
 // ***************************************************************************************
 //
-//								Set the text colours
+//								Set/Get the text colours
 //
 // ***************************************************************************************
 
@@ -226,6 +237,20 @@ void CONSetForeBackColour(int fg, int bg) {
 	graphMode->backCol = bg & 0x0f;
 }
 
+void CONGetForeBackColour(int *fg, int *bg) {
+	*fg = graphMode->foreCol;
+	*bg = graphMode->backCol;
+}
+
+// ***************************************************************************************
+//
+//								Set cursor visible flag
+//
+// ***************************************************************************************
+
+void CONSetCursorVisible(uint8_t vFlag) {
+	graphMode->isCursorVisible = vFlag;
+}
 // ***************************************************************************************
 //
 //								Reverse colours at cursor
@@ -233,34 +258,16 @@ void CONSetForeBackColour(int fg, int bg) {
 // ***************************************************************************************
 
 void CONReverseCursorBlock(void) {
-	for (int y = 0;y < graphMode->fontHeight;y++) {
-		uint8_t *p = graphMode->graphicsMemory + 
-					 (y + graphMode->yCursor * graphMode->fontHeight) * graphMode->xGSize +
-					graphMode->xCursor * graphMode->fontWidth;
-		for (int x = 0;x < graphMode->fontWidth;x++) {
-			*p ^= 7;
-			p++;
+	if (graphMode->isCursorVisible != 0) {
+		for (int y = 0;y < graphMode->fontHeight;y++) {
+			uint8_t *p = graphMode->graphicsMemory + 
+						 (y + graphMode->yCursor * graphMode->fontHeight) * graphMode->xGSize +
+						graphMode->xCursor * graphMode->fontWidth;
+			for (int x = 0;x < graphMode->fontWidth;x++) {
+				*p ^= graphMode->foreCol;
+				p++;
+			}
 		}
-	}
-}
-
-// ***************************************************************************************
-//
-//						Copy a character on display and console mirror
-//	
-// ***************************************************************************************
-
-static void CONCopy(uint16_t xFrom,uint16_t yFrom,uint16_t xTo,uint16_t yTo) {
-	graphMode->consoleMemory[xTo + yTo * MAXCONSOLEWIDTH] =  					// Copy console mirror
-							graphMode->consoleMemory[xFrom + yFrom * MAXCONSOLEWIDTH];
-	uint8_t *tgt = graphMode->graphicsMemory +  								// Goes here
-					(yTo * graphMode->fontHeight * graphMode->xGSize) + (xTo * graphMode->fontWidth);							
-	uint8_t *src = graphMode->graphicsMemory +  								// From here
-					(yFrom * graphMode->fontHeight * graphMode->xGSize) + (xFrom * graphMode->fontWidth);							
-	for (int y = 0;y < graphMode->fontHeight;y++) {  							// Copy character graphics
-		memcpy(tgt,src,graphMode->fontWidth);   								// One row at a time.
-		tgt += graphMode->xGSize;
-		src += graphMode->xGSize;
 	}
 }
 
@@ -428,7 +435,7 @@ void CONGetScreenLine(uint16_t addr) {
 	for (int line = start;line <= graphMode->yCursor;line++) { 					// Input into buffer.
 		for (int x = 0;x < graphMode->xCSize;x++) {
 			if (bufferSize < 255) {
-				int ch = graphMode->consoleMemory[x+line*MAXCONSOLEWIDTH];
+				int ch = graphMode->consoleMemory[x+line*MAXCONSOLEWIDTH] & 0xFF;
 				ch = (ch < ' ') ? ' ' : ch;
 				cpuMemory[addr + bufferSize + 1] = ch;
 				bufferSize++;
@@ -474,11 +481,5 @@ void CONWriteString(const char *s, ...) {
 //
 //		Date 		Revision
 //		==== 		========
-//		11-01-24	Added user defined font option.
-//		17-01-24 	TAB goes down at end of line.
-//		30-01-24 	Fixed clear screen to clear text area only, not sprites too.
-//		31-01-24 	Added functionality to set cursor position.
-//		07-02-24	Added Insert and Delete functionality
-//		26-02-24 	Fixed black background character on insert.
 //
 // ***************************************************************************************

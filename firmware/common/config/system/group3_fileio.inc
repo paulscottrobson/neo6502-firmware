@@ -18,7 +18,7 @@
 //
 // ***************************************************************************************
 
-GROUP 3 ,0,9 File I/O
+GROUP 3 File I/O
     FUNCTION 1 List Directory
         FIODirectory("");
     DOCUMENTATION
@@ -29,84 +29,59 @@ GROUP 3 ,0,9 File I/O
     DOCUMENTATION
         Load a file by name into memory. On input:
         
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed filename string;
-        \item \Param{2,3} contains the location to write the data to. If the
-        address is \MonoSp{$FFFF}, the file will instead be loaded into the
-        graphics working memory, used for sprites, tiles, images.
-        \end{itemize}
-
+        Parameters:0,1 points to the length-prefixed filename string;
+        Parameters:2,3 contains the location to write the data to. If the address is $FFFF, the file will instead be loaded into the graphics working memory, used for sprites, tiles, images.
+        
         On output:
-
-        \begin{itemize}
-        \item \Param{0} contains an error/status code.
-        \end{itemize}
+        Error location contains an error/status code.
+        
 
     FUNCTION 3 Store File
         *DERROR = FIOWriteFile(DSPGetStdString(DCOMMAND,4),DSPGetInt16(DCOMMAND,6),DSPGetInt16(DCOMMAND,8));
     DOCUMENTATION
         Saves data in memory to a file. On input:
+        
+        Parameters:0,1 points to the length-prefixed filename string;
+        Parameters:2,3 contains the location to read data from;
+        Parameters:4,5 specified the number of bytes to store.
 
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed filename string;
-        \item \Param{2,3} contains the location to read data from;
-        \item \Param{4,5} specified the number of bytes to styore.
-        \end{itemize}
-
-        On output:
-
-        \begin{itemize}
-        \item \Param{0} contains an error/status code.
-        \end{itemize}
+        On output:    
+        Error location contains an error/status code.
+        
 
     FUNCTION 4 File Open
         *DERROR = FIOOpenFileHandle(DPARAMS[0],DSPGetStdString(DPARAMS,1),DPARAMS[3]);
     DOCUMENTATION
         Opens a file into a specific channel. On input:
-        
-        \begin{itemize}
-        \item \Param{0} contains the file channel to open;
-        \item \Param{1,2} contains the length-prefixed filename;
-        \item \Param{3} contains the open mode. See below.
-        \end{itemize}
+    
+        Parameter:0 contains the file channel to open;
+        Parameters:1,2 points to the length-prefixed filename string;
+        Parameter:3 contains the open mode. See below.
 
         Valid open modes are:
-
-        \begin{itemize}
-        \item 0 opens the file for read-only access;
-        \item 1 opens the file for write-only access;
-        \item 2 opens the file for read-write access;
-        \item 3 creates the file if it doesn't already exist, truncates it if it
-        does, and opens the file for read-write access.
-        \end{itemize}
-
-        Modes 0 to 2 will fail if the file does not already exist. If the
-        channel is already open, the call fails. Opening the same file more than
-        once on different channels has undefined behaviour and is not
-        recommended.
+        0 opens the file for read-only access;
+        1 opens the file for write-only access;
+        2 opens the file for read-write access;
+        3 creates the file if it doesn't already exist, truncates it if it does, and opens the file for read-write access.
+        
+        Modes 0 to 2 will fail if the file does not already exist. If the channel is already open, the call fails. Opening the same file more than once on different channels has undefined behaviour, and is not recommended.
 
     FUNCTION 5 File Close
         *DERROR = FIOCloseFileHandle(DPARAMS[0]);
     DOCUMENTATION
         Closes a particular channel. On input:
 
-        \begin{itemize}
-        \item \Param{0} contains the file channel to close.
-        \end{itemize}
-
+        Parameter:0 contains the file channel to close. If this is $FF this closes all open files.
+        
     FUNCTION 6 File Seek
         *DERROR = FIOSeekFileHandle(DPARAMS[0],DSPGetInt32(DPARAMS,1));
     DOCUMENTATION
         Seeks the file opened on a particular channel to a location. On input:
-
-        \begin{itemize}
-        \item \Param{0} contains the file channel to operate on;
-        \item \Param{1,2,3,4} contains the file location.
-        \end{itemize}
-
-        You can seek beyond the end of a file to extend the file. Whether the
-        file size changes when the seek happens or when you perform the write is
-        undefined.
+        
+        Parameter:0 contains the file channel to operate on;
+        Parameters:1..4 contains the file location.
+        
+        You can seek beyond the end of a file to extend the file. However, whether the file size changes when the seek happens, or when you perform the write is undefined behavior.
 
     FUNCTION 7 File Tell
     {
@@ -116,16 +91,13 @@ GROUP 3 ,0,9 File I/O
     }
     DOCUMENTATION
         Returns the current seek location for the file opened on a particular channel. On input:
-
-        \begin{itemize}
-        \item \Param{0} contains the file channel to operate on.
-        \end{itemize}
-
+        
+        Parameter:0 contains the file channel to operate on.
+        
         On output:
-
-        \begin{itemize}
-        \item \Param{1,2,3,4} contains the file location.
-        \end{itemize}
+    
+        Parameters:1..4 contains the seek location within the file.
+        
 
     FUNCTION 8 File Read
     {
@@ -135,22 +107,17 @@ GROUP 3 ,0,9 File I/O
     }
     DOCUMENTATION
         Reads data from an opened file. On input:
-
-        \begin{itemize}
-        \item \Param{0} contains the file channel to operate on;
-        \item \Param{1,2} points to the destination in memory, or \MonoSp{$FFFF}
-        to write to graphics memory;
-        \item \Param{2,3} contains the amount of data to read.
-        \end{itemize}
+        
+        Parameter:0 contains the file channel to operate on.
+        Parameters:1,2 points to the destination in memory,
+              or $FFFF to read into graphics memory.
+        Parameters:3,4 contains the amount of data to read.        
 
         On output:
+        
+        Parameters:3,4 is updated to contain the amount of data actually read.        
 
-        \begin{itemize}
-        \item \Param{2,3} is updated to contain the amount of data actually read.
-        \end{itemize}
-
-        Data is read from the current seek position, which is advanced after the
-        read.
+        Data is read from the current seek position, which is advanced after the read.
 
     FUNCTION 9 File Write
     {
@@ -160,21 +127,16 @@ GROUP 3 ,0,9 File I/O
     }
     DOCUMENTATION
         Writes data to an opened file. On input:
+        
+        Parameter:0 contains the file channel to operate on;
+        Parameters:1,2 points to the data in memory;
+        Parameters:3,4 contains the amount of data to write.
+        
+        On output:        
+        Parameters:3,4 is updated to contain the amount of data actually written.
+        
 
-        \begin{itemize}
-        \item \Param{0} contains the file channel to operate on;
-        \item \Param{1,2} points to the data in memory;
-        \item \Param{2,3} contains the amount of data to write.
-        \end{itemize}
-
-        On output:
-
-        \begin{itemize}
-        \item \Param{2,3} is updated to contain the amount of data actually written.
-        \end{itemize}
-
-        Data is written to the current seek position, which is advanced after the
-        write.
+        Data is written to the current seek position, which is advanced after the write.
 
     FUNCTION 10 File Size
     {
@@ -184,20 +146,13 @@ GROUP 3 ,0,9 File I/O
     }
     DOCUMENTATION
         Returns the current size of an opened file. On input:
-
-        \begin{itemize}
-        \item \Param{0} contains the file channel to operate on.
-        \end{itemize}
+        
+        Parameter:0 contains the file channel to operate on.
 
         On output:
-
-        \begin{itemize}
-        \item \Param{1,2,3,4} contains the size of the file.
-        \end{itemize}
-
-        This call should be used on open files and takes into account any
-        buffered data which has not yet been written to disk. As a result it may
-        return a different size to the stat API call described below.
+        Parameters:1..4 contains the size of the file.
+        
+        This call should be used on open files, and takes into account any buffered data which has not yet been written to disk. Consequently, this may return a different size than Function 3,16 "File Stat".
 
     FUNCTION 11 File Set Size
     {
@@ -205,11 +160,10 @@ GROUP 3 ,0,9 File I/O
     }
     DOCUMENTATION
         Extends or truncates an opened file to a particular size. On input:
-
-        \begin{itemize}
-        \item \Param{0} contains the file channel to operate on;
-        \item \Param{1,2,3,4} contains the new size of the file.
-        \end{itemize}
+        
+        Parameter:0 contains the file channel to operate on;
+        Parameters:1..4 contains the new size of the file.
+        
 
     FUNCTION 12 File Rename
     {
@@ -218,23 +172,19 @@ GROUP 3 ,0,9 File I/O
     DOCUMENTATION
         Renames a file. On input:
 
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed string for the old name;
-        \item \Param{2,3} points to the length-prefixed string for the new name.
-        \end{itemize}
+        Parameters:0,1 points to the length-prefixed string for the old name;
+        Parameters:2,3 points to the length-prefixed string for the new name.
 
         Files may be renamed across directories.
 
-    FUNCTION 13 Delete File
+    FUNCTION 13 File Delete
     {
         *DERROR = FIODeleteFile(DSPGetStdString(DPARAMS, 0));
     }
     DOCUMENTATION
         Deletes a file or directory. On input:
-
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed filename string.
-        \end{itemize}
+        
+        Parameters:0,1 points to the length-prefixed filename string.
 
         Deleting a file which is open has undefined behaviour. Directories may
         only be deleted if they are empty.
@@ -246,9 +196,7 @@ GROUP 3 ,0,9 File I/O
     DOCUMENTATION
         Creates a new directory. On input:
 
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed filename string.
-        \end{itemize}
+        Parameters:0,1 points to the length-prefixed filename string.
 
     FUNCTION 15 Change Directory
         {
@@ -256,12 +204,10 @@ GROUP 3 ,0,9 File I/O
         }
     DOCUMENTATION
         Changes the current working directory. On input:
+        
+        Parameters:0,1 points to the length-prefixed path string.
 
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed path string.
-        \end{itemize}
-
-    FUNCTION 16 Stat File
+    FUNCTION 16 File Stat
     {
         uint32_t length;
         uint8_t type;
@@ -271,33 +217,16 @@ GROUP 3 ,0,9 File I/O
     }
     DOCUMENTATION
         Retrieves information about a file by name. On input:
-
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed filename string.
-        \end{itemize}
-
-        On output:
-
-        \begin{itemize}
-        \item \Param{0,1,2,3} contains the length of the file;
-        \item \Param{4} contains the attribute bitfield of the file.
-        \end{itemize}
-
-        If the file is open for writing, this may not return the correct size
-        due to buffered data not having been flushed to disk.
-
-        File attributes are a bitfield as follows:
         
-        \newline
-        \ParamBits{File attributes}
-            {0}
-            {0}
-            {0}
-            {Hidden}
-            {Read only}
-            {Archive}
-            {System}
-            {Directory}
+        Parameters:0,1 points to the length-prefixed filename string.
+
+        Parameters:0..3 contains the length of the file;
+        Parameter:4 contains the attributes bit-field of the file.
+        
+        If the file is open for writing, this may not return the correct size due to buffered data not having been flushed to disk.
+
+        File attributes are a bitfield as follows: 0,0,0,Hidden, Read Only, Archive, System, Directory.
+
 
     FUNCTION 17 Open Directory
     {
@@ -306,14 +235,9 @@ GROUP 3 ,0,9 File I/O
     DOCUMENTATION
         Opens a directory for enumeration. On input:
 
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed filename string.
-        \end{itemize}
+        Parameters:0,1 points to the length-prefixed filename string.
 
-        Only one directory at a time may be opened. If a directory is already
-        open when this call is made, it is automatically closed; however, an
-        open directory may make it impossible to delete the directory, so
-        closing the directory after use is good practice.
+        Only one directory at a time may be opened. If a directory is already open when this call is made, it is automatically closed. However, an open directory may make it impossible to delete the directory; so closing the directory after use is good practice.
 
     FUNCTION 18 Read Directory
         {
@@ -328,58 +252,48 @@ GROUP 3 ,0,9 File I/O
     DOCUMENTATION
         Reads an item from the currently open directory. On input:
 
-        \begin{itemize}
-        \item \Param{0,1} points to a length-prefixed buffer for returning the filename.
-        \end{itemize}
-
-        \begin{itemize}
-        \item \Param{0,1} is unchanged, but the buffer is updated to contain the
+        Parameters:0,1 points to a length-prefixed buffer for returning the filename.
+        
+        Parameters:0,1 is unchanged, but the buffer is updated to contain the
         length-prefixed filename (without any leading path);
-        \item \Param{2,3,4,5} contains the length of the file;
-        \item \Param{6} contains the file attributes, as described by the Stat File call.
-        \end{itemize}
+        Parameters:2..5 contains the length of the file;
+        Parameter:6 contains the file attributes, as described by Function 3,16 "File Stat".
 
-        This call fails if there are no more items to read.
+        If there are no more items to read, this call fails and an error is flagged.
 
     FUNCTION 19 Close Directory
         {
             *DERROR = FIOCloseDir();
         }
     DOCUMENTATION
-        Closes any directory opened by Open Directory.
+        Closes any directory opened previously by Function 3,17 "Open Directory".
 
     FUNCTION 20 Copy File
         *DERROR = FIOCopyFile(DSPGetStdString(DPARAMS, 0), DSPGetStdString(DPARAMS, 2));
     DOCUMENTATION
         Copies a file. On input:
-
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed old filename;
-        \item \Param{2,3} points to the length-prefixed new filename.
-        \end{itemize}
-
+        
+        Parameters:0,1 points to the length-prefixed old filename;
+        Parameters:2,3 points to the length-prefixed new filename.
+        
         Only single files may be copied, not directories.
 
     FUNCTION 21 Set file attributes
         *DERROR = FIOSetFileAttributes(DSPGetStdString(DPARAMS, 0), DPARAMS[2]);
     DOCUMENTATION
         Sets the attributes for a file. On input:
-
-        \begin{itemize}
-        \item \Param{0,1} points to the length-prefixed filename;
-        \item \Param{2} is the attribute bitfield. (See Stat File for details.)
-        \end{itemize}
-
-        The directory bit cannot be changed. Obviously.
         
+        Parameters:0,1 points to the length-prefixed filename;
+        Parameter:2 is the attribute bitfield. (See Stat File for details.)
+        
+        The directory bit cannot be changed. Obviously.
+
     FUNCTION 32 List Filtered
         FIODirectory(DSPGetString(DCOMMAND,4));
     DOCUMENTATION
         Prints a filtered file listing of the current directory to the console. On input:
+        
+        Parameters:0,1 points to the filename search string.
+        
+        Files will only be shown if the name contains the search string (ie: a substring match).
 
-        \begin{itemize}
-        \item \Param{0,1} points to the filename search string.
-        \end{itemize}
-
-        Files will only be shown if the name contains the search string (via a
-        substring match).

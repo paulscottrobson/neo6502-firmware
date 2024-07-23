@@ -4,6 +4,7 @@ basic/build/basic.lst
 basic/build/tokenised.dat
 basic/sources/generated/
 basic/scripts/__pycache__/tokens.cpython-310.pyc
+basic/libraries.zip
 bin
 emulator/framework/debugger.o
 emulator/framework/gfx.o
@@ -15,14 +16,22 @@ emulator/neo
 emulator/src/core/hardware.o
 emulator/src/core/sys_debugger.o
 emulator/src/core/sys_processor.o
+emulator/src/core/processors/*.o
 examples/basic-examples
 examples/samples.zip
 firmware/build/
 firmware/build.sh
 firmware/common/include/data/
+storage
+storage/*
+*.neo
 *.elf
 *.uf2
 *.pdf
+*.bin
+*.lst
+*.sym
+*.hex
 firmware/include/data/basic_binary.h
 firmware/include/data/dispatch_code.h
 firmware/include/data/prompt.h
@@ -46,7 +55,8 @@ firmware/sources/interface/*.o
 *.dump
 *.log
 *.aux
-documents/release/api.*
+*.pyc
+documents/release/basic.pdf
 basic/scripts/__pycache__/tokens.cpython-311.pyc
 firmware/common/include/data/prompt.h
 firmware/common/include/data/neolocale.h
@@ -60,3 +70,6 @@ basic/_include.inc
 kernel/neo6502.inc
 basic/test.bsc
 basic/tests/__pycache__/testutils.cpython-311.pyc
+.cache
+documents/release/source/api.tex
+*.sublime-*

@@ -28,7 +28,6 @@ TOKTokenise:
 		stz 	tokLineNumber+1
 		;
 		stz 	inputPos 					; input position.
-		
 _TOKMainLoop:
 		jsr 	TOKTokeniseOne 				; tokenise one element in the line
 		stz 	tokIsFirstElement 			; reset first element flag

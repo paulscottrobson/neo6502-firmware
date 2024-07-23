@@ -17,20 +17,44 @@
 //
 // ***************************************************************************************
 
-GROUP 7 ,0 Controller
-    FUNCTION 1 Read Controller
+GROUP 7 Controller
+
+    FUNCTION 1 Read Default Controller
         *DPARAMS = KBDKeyboardController();
+        for (int n = 0;n < GMPGetControllerCount();n++) {
+            *DPARAMS |= GMPReadDigitalController(n) & 0xFF;
+        }
+
     DOCUMENTATION
-        This reads the status of the default controller into \Param{0}
-        \newline Initially, the Controller is the keyboard.
-        This Function interprets key presses and releases as a joystick.
-        The system maintains a bit-array of which keys are pressed.
-        Currently, the keyboard is the only available Controller. 
-        \newline
+        This reads the status of the base controller into Parameter:0, and is a compatibility API call.
 
-        This function will become obsolete shortly as a more extensive API using USB
-        controllers becomes available. However, it will maintain backward compatibility.
-        \newline
-        \ParamBits{$FF04 - Controller Flags}{0}{0}{B}{A}{Down}{Up}{Right}{Left}
+        The base controller is the keyboard keys (these are WASD+OPKL or Arrow Keys+ZXCV) or the gamepad controller buttons. Either works.
 
+        The 8 bits of the returned byte are the following buttons, most significant first :
 
+        Y X B A Down Up Right Left
+
+    FUNCTION 2 Read Controller Count
+        *DPARAMS = GMPGetControllerCount();
+
+    DOCUMENTATION
+        This returns the number of game controllers plugged in to the USB System into Parameter:0. This does not include the keyboard based controller, only physical controller hardware.
+
+    FUNCTION 3 Read Controller
+        *DERROR = DPARAMS[0] > GMPGetControllerCount();
+        if (*DERROR == 0) {
+            if (DPARAMS[0] == 0) {
+                *((uint32_t *)DPARAMS) = KBDKeyboardController();
+            } else {
+                *((uint32_t *)DPARAMS) = GMPReadDigitalController(DPARAMS[0]-1);
+            }
+        }
+        
+    DOCUMENTATION
+        This returns a specific controller status. Controller 0 is the keyboard controller, Controllers 1 upwards are those physical USB devices.
+
+        This returns a 32 bit value in Parameters:0..3 which currently is compatible with function 1, but allows for expansion.
+
+        The 8 bits of the returned byte are the following buttons, most significant first :
+
+        Y X B A Down Up Right Left

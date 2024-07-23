@@ -20,8 +20,7 @@
 ; ************************************************************************************************
 
 TokeniseIntConst:
-		jsr 	TOKExtractIdentifier 		; extract an identifier into the tokElement Buffer
-
+		jsr 	TOKExtractDigits 			; extract an identifier into the tokElement Buffer
 		lda 	#tokElement & $FF	 		; set up to convert it.
 		sta 	ControlParameters+4
 		lda 	#tokElement >> 8

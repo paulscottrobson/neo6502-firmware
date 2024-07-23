@@ -20,56 +20,36 @@
 #include "common.h"
 
 // *******************************************************************************************************************************
-//														   Timing
-// *******************************************************************************************************************************
-
-#define CYCLE_RATE 		(62*1024*1024/10)											// Cycles per second (6.25Mhz)
-#define FRAME_RATE		(50)														// Frames per second (50 arbitrary)
-#define CYCLES_PER_FRAME (CYCLE_RATE / FRAME_RATE)									// Cycles per frame
-
-// *******************************************************************************************************************************
+//
 //														CPU / Memory
+//
 // *******************************************************************************************************************************
 
-static BYTE8 a,x,y,s;																// 6502 A,X,Y and Stack registers
-static BYTE8 carryFlag,interruptDisableFlag,breakFlag,								// Values representing status reg
-			 decimalFlag,overflowFlag,sValue,zValue;
-static WORD16 pc;																	// Program Counter.
+LONG32 cycles;																		// Cycle Count.
 static int argumentCount;
 static char **argumentList;
-static LONG32 cycles;																// Cycle Count.
-static int inFastMode = 0; 															// Fast mode flag (speeds up unit testing)
 static bool useDebuggerKeys = false;  												// Use the debugger keys.
+static bool traceMode = false;														// Dump each CPU instruction to stdout.
+
+WORD16 CPUGetPC(void) {
+	return CPUGetPC65();
+}
 
 // *******************************************************************************************************************************
-//											 Memory and I/O read and write macros.
-// *******************************************************************************************************************************
-
-#define Read(a) 	_Read(a)														// Basic Read
-#define Write(a,d)	_Write(a,d)														// Basic Write
-#define ReadWord(a) (Read(a) | ((Read((a)+1) << 8)))								// Read 16 bit, Basic
-#define Cycles(n) 	cycles += (n)													// Bump Cycles
-#define Fetch() 	_Read(pc++)														// Fetch byte
-#define FetchWord()	{ temp16 = Fetch();temp16 |= (Fetch() << 8); }					// Fetch word
-
-static inline BYTE8 _Read(WORD16 address);											// Need to be forward defined as 
-static inline void _Write(WORD16 address,BYTE8 data);								// used in support functions.
-
-#include "6502/__6502support.h"
-
-// *******************************************************************************************************************************
-//											   Read and Write Inline Functions
+//
+//											   	Read and Write Functions
+//
 // *******************************************************************************************************************************
 
 BYTE8 *CPUAccessMemory(void) {
 	return cpuMemory;
 }
 
-static inline BYTE8 _Read(WORD16 address) {
+BYTE8 Read(WORD16 address) {
 	return cpuMemory[address];
 }
 
-static inline void _Write(WORD16 address,BYTE8 data) { 
+void _Write(WORD16 address,BYTE8 data) { 
 	 cpuMemory[address] = data;			
 	 if (address == CONTROLPORT) {
 	 	DSPHandler(cpuMemory+address,cpuMemory);
@@ -77,7 +57,9 @@ static inline void _Write(WORD16 address,BYTE8 data) {
 }
 
 // *******************************************************************************************************************************
+//
 //													Remember Arguments
+//
 // *******************************************************************************************************************************
 
 void CPUSaveArguments(int argc,char *argv[]) {
@@ -86,16 +68,57 @@ void CPUSaveArguments(int argc,char *argv[]) {
 }
 
 // *******************************************************************************************************************************
+//
+//														Read Neo File
+//
+// *******************************************************************************************************************************
+
+static FILE *fInputFile = NULL;
+
+static uint8_t CPUReadByte(uint8_t *p) {
+	return fgetc(fInputFile);
+}
+
+void CPUReadNeoFile(char *fileName) {
+	uint8_t header[8];
+	printf("Trying to read header for %s\n",fileName);	
+	fInputFile = fopen(fileName,"rb"); 												// Open file.
+	if (fInputFile == NULL) return;
+
+	for (int i = 0;i < 8;i++) header[i] = CPUReadByte(NULL);  
+	bool isExec = header[0] == 0x03 && header[1] == 0x4E &&  						// Look for the magic number
+								header[2] == 0x45 && header[3] == 0x4F;
+	printf("Header check %d\n",(int)isExec);
+	if (!isExec) { fclose(fInputFile);return; }
+	printf("Header found.\n");
+	uint16_t execAddress = header[6] + (header[7] << 8); 							// Get the execute address
+	printf("Execute from $%x\n",execAddress);
+	bool processing = true; 
+	int error = 0;
+	while (processing && error == 0) {
+		error = FIOReadBlock(CPUReadByte,NULL,&processing); 						// Read one block.
+	}
+	fclose(fInputFile);
+	if (execAddress != 0xFFFF) {  													// Not the default $FFFF e.g. don't execute
+		cpuMemory[0xFFFC] = execAddress & 0xFF;
+		cpuMemory[0xFFFD] = execAddress >> 8;
+	}
+}
+
+// *******************************************************************************************************************************
+//
 //														Reset the CPU
+//
 // *******************************************************************************************************************************
 
 //#include "binary.h"
 
 void CPUReset(void) {
 	char command[128];
-	HWReset();																		// Reset Hardware
+
 	for (int i = 1;i < argumentCount;i++) { 										// Look for loads.
 		strcpy(command,argumentList[i]);  											// Copy command
+		printf("[%s]\n",command);
 		char *pos = strchr(command,'@'); 											// Look for splitting @
 		if (pos != NULL) {
 			int ch,address;
@@ -109,7 +132,7 @@ void CPUReset(void) {
 			}
 			if (strcmp(command,"run") == 0) {  										// Arbitrary run address run@x
 				printf("Run machine code from $%x\n",address);
-				cpuMemory[0xFFFC] = address & 0xFF;
+				cpuMemory[0xFFFC] = address & 0xFF;  								// 6502 run.
 				cpuMemory[0xFFFD] = address >> 8;
 			} else {
 				p = cpuMemory+address;				 								// Load here.	
@@ -139,13 +162,26 @@ void CPUReset(void) {
 			if (strcmp(command,"keys") == 0) { 										// Keys work properly.
 				useDebuggerKeys = true;
 			}
+			if (strncmp(command,"path:",5) == 0) {  								// Set storage path
+				HWSetDefaultPath(command+5);
+			}
+			if (strcmp(command,"trace") == 0) { 									// Dump every CPU instruction to stdout.
+				traceMode = true;
+			}
+			if (strlen(command) > 4 && 												// Load .NEO file.
+						strcmp(command+strlen(command)-4,".neo") == 0) {
+				CPUReadNeoFile(command);
+			}
 		}
 	}
-	resetProcessor();																// Reset CPU		
+	HWReset();																		// Reset Hardware
+	CPUReset6502();
 }
 
 // *******************************************************************************************************************************
+//
 //							When non-zero disables the debugger keys, requiring control
+//
 // *******************************************************************************************************************************
 
 int CPUUseDebugKeys(void) {
@@ -153,36 +189,41 @@ int CPUUseDebugKeys(void) {
 }
 
 // *******************************************************************************************************************************
-//													  Invoke IRQ
-// *******************************************************************************************************************************
-
-void CPUInterruptMaskable(void) {
-	irqCode();
-}
-
-// *******************************************************************************************************************************
+//
 //												Execute a single instruction
+//
 // *******************************************************************************************************************************
 
 BYTE8 CPUExecuteInstruction(void) {
-	if (pc == 0xFFFF) {
+	BYTE8 forceSync = 0;
+
+	if (CPUGetPC() == 0xFFFF) {
 		printf("Hit CPU $FFFF - exiting emulator\n");
 		CPUExit();
 		return FRAME_RATE;
 	}
-	BYTE8 opcode = Fetch();															// Fetch opcode.
-	switch(opcode) {																// Execute it.
-		#include "6502/__6502opcodes.h"
+
+    if (traceMode) {
+		char mem[10]; // "XX XX XX \0"
+		char dasm[32];
+		DBGXDumpMem(CPUGetPC(), DBGXInstructionSize65(CPUGetPC()), mem);
+		DBGXDasm65(CPUGetPC(), dasm);
+		printf("%04x  %-10s %s\n", CPUGetPC(), mem, dasm);
 	}
-	int cycleMax = inFastMode ? CYCLES_PER_FRAME*10:CYCLES_PER_FRAME; 		
-	if (cycles < cycleMax) return 0;												// Not completed a frame.
+
+	forceSync = CPUExecute6502();
+
+	int cycleMax = CYCLES_PER_FRAME; 	
+	if (cycles < cycleMax && forceSync == 0) return 0;								// Not completed a frame.
 	cycles = 0;																		// Reset cycle counter.
 	HWSync();																		// Update any hardware
 	return FRAME_RATE;																// Return frame rate.
 }
 
 // *******************************************************************************************************************************
+//
 //												Read/Write Memory
+//
 // *******************************************************************************************************************************
 
 BYTE8 CPUReadMemory(WORD16 address) {
@@ -193,32 +234,42 @@ void CPUWriteMemory(WORD16 address,BYTE8 data) {
 	Write(address,data);
 }
 
-
 #include "gfx.h"
 
 // *******************************************************************************************************************************
+//
 //		Execute chunk of code, to either of two break points or frame-out, return non-zero frame rate on frame, breakpoint 0
+//
 // *******************************************************************************************************************************
 
 BYTE8 CPUExecute(WORD16 breakPoint1,WORD16 breakPoint2) { 
 	BYTE8 next;
+	BYTE8 brk = 0x03;
 	do {
 		BYTE8 r = CPUExecuteInstruction();											// Execute an instruction
 		if (r != 0) return r; 														// Frame out.
-		next = CPUReadMemory(pc);
-	} while (pc != breakPoint1 && pc != breakPoint2 && next != 0x03);				// Stop on breakpoint or UNOP, which is now break debugger
+		next = CPUReadMemory(CPUGetPC());
+	} while (CPUGetPC() != breakPoint1 && CPUGetPC() != breakPoint2 && next!=brk);	// Stop on breakpoint or UNOP, which is now break debugger
 	return 0; 
 }
 
 // *******************************************************************************************************************************
+//
 //									Return address of breakpoint for step-over, or 0 if N/A
+//
 // *******************************************************************************************************************************
 
 WORD16 CPUGetStepOverBreakpoint(void) {
-	BYTE8 opcode = CPUReadMemory(pc);												// Current opcode.
-	if (opcode == 0x20) return (pc+3) & 0xFFFF;										// Step over JSR.
-	return 0;																		// Do a normal single step
+	BYTE8 opcode = CPUReadMemory(CPUGetPC());										// Current opcode.
+	int offset = CPUGetStep65(opcode); 									 			// Get offset
+	if (offset != 0) offset = (CPUGetPC()+offset) & 0xFFFF;							// Step over Subroutines
+	return offset;																	// Do a normal single step
 }
+
+// *******************************************************************************************************************************make //
+//												Called at exit, dumps CPU memory
+//
+// *******************************************************************************************************************************
 
 void CPUEndRun(void) {
 	FILE *f = fopen("memory.dump","wb");
@@ -232,18 +283,4 @@ void CPUExit(void) {
 }
 
 
-// *******************************************************************************************************************************
-//											Retrieve a snapshot of the processor
-// *******************************************************************************************************************************
-
-static CPUSTATUS st;																	// Status area
-
-CPUSTATUS *CPUGetStatus(void) {
-	st.a = a;st.x = x;st.y = y;st.sp = s;st.pc = pc;
-	st.carry = carryFlag;st.interruptDisable = interruptDisableFlag;st.zero = (zValue == 0);
-	st.decimal = decimalFlag;st.brk = breakFlag;st.overflow = overflowFlag;
-	st.sign = (sValue & 0x80) != 0;st.status = constructFlagRegister();
-	st.cycles = cycles;
-	return &st;
-}
 

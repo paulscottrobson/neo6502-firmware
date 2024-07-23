@@ -20,7 +20,7 @@ whoList = """
 	Oliver Schmidt
 	Veselin Sladkov
 	David Given
-	Bocianu Boczansky 
+	Wojciech Bocianski
 	Bill Auger
 
 """.strip().split("\n")

@@ -30,7 +30,9 @@ void CONInsertLine(uint8_t y);
 void CONDeleteLine(uint8_t y);
 void CONClearArea(int x1, int y1, int x2, int y2);
 void CONSetForeBackColour(int fg, int bg);
+void CONGetForeBackColour(int *fg, int *bg);
 void CONReverseCursorBlock();
+void CONSetCursorVisible(uint8_t vFlag);
 
 extern uint8_t userDefinedFont[64*8];
 
@@ -47,6 +49,8 @@ extern uint8_t userDefinedFont[64*8];
 #define CC_CLS  	CONTROL('L')
 #define CC_ENTER 	CONTROL('M')
 #define CC_PAGEUP	CONTROL('R')
+#define CC_INSLINE  CONTROL('P')
+#define CC_DELLINE  CONTROL('Q')
 #define CC_DOWN 	CONTROL('S')
 #define CC_HOME 	CONTROL('T')
 #define CC_VTAB 	CONTROL('V')

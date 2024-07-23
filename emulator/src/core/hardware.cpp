@@ -9,9 +9,10 @@
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************
 
-#include "sys_processor.h"
-#include "hardware.h"
 #include "gfx.h"
+#include "sys_processor.h"
+#include "sys_debug_system.h"
+#include "hardware.h"
 #include <stdio.h>
 #include "common.h"
 #include "interface/kbdcodes.h"
@@ -29,6 +30,17 @@ static FILE* fileHandles[FIO_NUM_FILES];
 static int frameCount = 0;
 static std::filesystem::path storagePath = "storage";
 static std::filesystem::path currentPath = storagePath;
+
+// *******************************************************************************************************************************
+//
+//												Storage path management
+//
+// *******************************************************************************************************************************
+
+void HWSetDefaultPath(const char *defaultPath) {
+	storagePath = defaultPath;
+	currentPath = defaultPath;
+}
 
 static std::string getAbspath(const std::string& path) {
 	std::filesystem::path newPath;
@@ -86,6 +98,7 @@ static uint8_t convertError(int e) {
 
 void HWReset(void) {
 	std::filesystem::create_directories(currentPath);
+	MSEEnableMouse();
 }
 
 // *******************************************************************************************************************************
@@ -137,10 +150,9 @@ void SNDInitialise(void) {
 //
 // *******************************************************************************************************************************
 
-void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise) {
-	//printf("%d %d %d\n",channel,frequency,isNoise);
-	if (frequency != 0) {
-		GFXSetFrequency(frequency,1);
+void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
+	if (c->isPlayingNote != 0) {
+		GFXSetFrequency(c->currentFrequency,1);
 	} else {
 		GFXSilence();
 	}
@@ -176,6 +188,7 @@ void HWQueueKeyboardEvent(int sdlCode,int isDown) {
 // *******************************************************************************************************************************
 
 void FDBWrite(uint8_t c) {
+	fputc(c,stderr);
 }
 
 // ***************************************************************************************
@@ -538,6 +551,14 @@ uint8_t SERReadByte(void) {
 	return 0;
 }
 
+void SERWriteByte(uint8_t b) {
+	printf("Serial write %d\n",b);
+}
+
+void SERSetSerialFormat(uint32_t baudRate,uint32_t protocol) {
+	printf("Setting Serial to %d baud protocol %d.\n",baudRate,protocol);
+}
+
 // ***************************************************************************************
 //
 //								Dummy GPIO functions
@@ -545,7 +566,7 @@ uint8_t SERReadByte(void) {
 // ***************************************************************************************
 
 int UEXTSetGPIODirection(int gpio,int pinType) {
-	printf("Pin %d set direction to %d\n",gpio,pinType);
+	//printf("Pin %d set direction to %d\n",gpio,pinType);
 	return 0;
 }
 
@@ -579,12 +600,12 @@ int UEXTI2CInitialise(void) {
 
 // ***************************************************************************************
 //
-//                          Write byte to I2C device register 
+//                          	Write bytes to I2C device
 //
 // ***************************************************************************************
 
 int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
-	printf("I2C Write to $%02x\n",device);
+	printf("I2C Write to $%02x %d bytes\n",device,size);
 	for (int i = 0;i < size;i++) {
 		printf(" $%02x",data[i]);
 	}
@@ -594,13 +615,13 @@ int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
 
 // ***************************************************************************************
 //
-//                          Read byte from I2C device register 
+//                          	Read bytes from I2C device 
 //
 // ***************************************************************************************
 
 int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
 	if (device == 0x7F) return 1;
-	printf("I2C Read from $%02x\n",device);
+	printf("I2C Read from $%x %d bytes\n",device,size);
 	for (int i = 0;i < size;i++) {
 		data[i] = device + 0x12 + i * 3;
 		printf(" $%02x",data[i]);
@@ -609,6 +630,47 @@ int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
     return 0;
 }
 
+// ***************************************************************************************
+//
+//                                     Dummy SPI functions
+//
+// ***************************************************************************************
+
+int UEXTSPIInitialise(void) {
+	printf("SPI Initialise\n");
+    return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Write bytes to SPI device
+//
+// ***************************************************************************************
+
+int UEXTSPIWriteBlock(uint8_t *data,size_t size) {
+	printf("SPI Write to %d bytes\n",size);
+	for (int i = 0;i < size;i++) {
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+	return 0;
+}
+
+// ***************************************************************************************
+//
+//                          Read bytes from I2C device
+//
+// ***************************************************************************************
+
+int UEXTSPIReadBlock(uint8_t *data,size_t size) {
+	printf("SPI Read from %d bytes\n",size);
+	for (int i = 0;i < size;i++) {
+		data[i] = 0x12 + i * 3;
+		printf(" $%02x",data[i]);
+	}
+	printf("\n");
+    return 0;
+}
 // ***************************************************************************************
 //
 //                          			Hardware reset
@@ -621,12 +683,58 @@ void ResetSystem(void) {
 
 // ***************************************************************************************
 //
+//                          			Dummy Gamepad
+//
+// ***************************************************************************************
+
+uint8_t GMPGetControllerCount(void) {
+	return GFXControllerCount();
+}
+
+// ***************************************************************************************
+//
+//                          		Read controller status
+//
+// ***************************************************************************************
+
+uint32_t GMPReadDigitalController(uint8_t index) {
+	return GFXReadController(index);
+}
+
+// ***************************************************************************************
+//
 //                          		 Handle dispatch warning.
 //
 // ***************************************************************************************
 
 void DSPWarnHandler(uint8_t group,uint8_t func) {
 	fprintf(stderr,"** WARN ** Execute %d.%d not defined.\n",group,func);
+}
+
+// ***************************************************************************************
+//
+//                          Update mouse state - move or buttons
+//
+// ***************************************************************************************
+
+void HWUpdateMouse(void) {
+	int x,y;
+	SDL_Rect r;
+	int xScale,yScale,xWidth,yWidth;
+
+	Uint32 sbut = SDL_GetMouseState(&x,&y);
+	DGBXGetActiveDisplayInfo(&r,&xScale,&yScale,&xWidth,&yWidth);
+
+	if (x >= r.x && y >= r.y && x < r.x+r.w && y < r.y+r.h) {
+		x = (x - r.x) / xScale;y = (y - r.y) / yScale;
+		int buttons = 0;
+		if (sbut & SDL_BUTTON(1)) buttons |= 0x1;
+		if (sbut & SDL_BUTTON(3)) buttons |= 0x2;
+		if (sbut & SDL_BUTTON(2)) buttons |= 0x4;
+		// printf("%x %x %x\n",buttons,x,y);
+		MSESetPosition(x & 0xFFFF,y & 0xFFFF);
+		MSEUpdateButtonState(buttons & 0xFF);
+	}
 }
 
 // ***************************************************************************************
