@@ -14,6 +14,27 @@
 
 static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size);
 
+static bool isInitialised = false;
+
+// ***************************************************************************************
+//
+//								Attempt to initialise Serial I/O
+//
+// ***************************************************************************************
+
+bool SERSetup(void) {
+	if (!isInitialised) {  															// Try to initialise it.
+	    isInitialised = SERInitialise();                                         	// Initialise serial port.
+	    if (!isInitialised) {
+	    	CONWriteString("Serial not functioning.\r");  							// Failed to initialise.
+	    	return false; 												
+	    }
+	    while (SERIsByteAvailable()) SERReadByte();  								// Clear anything already incoming.
+	}
+	SERSetSerialFormat(SERIAL_TRANSFER_BAUD_RATE,SERIAL_PROTOCOL_8N1); 				// Set transceive format.
+	return true;
+}
+
 // ***************************************************************************************
 //
 //									Input and process buffer.
@@ -21,18 +42,10 @@ static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size);
 // ***************************************************************************************
 
 static uint8_t sBuffer[256];  														// Input buffer.
-static bool isInitialised = false;
 
 void SERCheckDataAvailable(void) {
-	if (!isInitialised) {  															// Try to initialise it.
-	    isInitialised = SERInitialise();                                         	// Initialise serial port.
-	    if (!isInitialised) {
-	    	CONWriteString("Serial not functioning.\r");  							// Failed to initialise.
-	    	return; 												
-	    }
-	    while (SERIsByteAvailable()) SERReadByte();  								// Clear anything already incoming.
-	}
 
+	if (!SERSetup()) return; 														// Initialise serial I/O if not done
 	bool completed = false;
 	CONWriteString("Serial link enabled.\r");
 	while (!completed) {
@@ -67,6 +80,8 @@ void SERCheckDataAvailable(void) {
 
 static uint8_t *dataPtr = NULL;  												// Where we write stuff
 static uint16_t startAddress,currentAddress;  									// Start and current address accessing.
+static uint16_t saveAddress,saveSize;  											// For writing.
+static char fileName[32]; 														// File name
 
 static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size) {
 	uint16_t a;
@@ -93,6 +108,17 @@ static bool SERCommand(uint8_t command,uint8_t *data,uint8_t size) {
 			break;
 		case 5:
 			KBDInsertQueue(data[0]);  											// 5 Insert key in keyboard queue
+			break;
+		case 6:  																// 6 Set save address
+			saveAddress = data[0]+(data[1] << 8);
+			saveSize = data[2]+(data[3] << 8);
+			//CONWriteString("%d %d\r",saveAddress,saveSize);
+			break;
+		case 7:  																// 7 Save file.			
+			for (int i = 0;i < data[0];i++) fileName[i] = data[i+1];  			// Make C String
+			fileName[data[0]] = '\0';
+			FIOWriteFile(fileName,saveAddress,saveSize);   						// Save it
+			CONWriteString("Saved '%s' (%d bytes)\r",fileName,saveSize); 		// Announce it.
 			break;
 	}
 	return (command == 0);

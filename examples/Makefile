@@ -21,7 +21,7 @@ all: basicdemos
 	$(CDEL) samples.zip
 	zip -r samples.zip basic-examples C assembly
 
-release: 
+release:
 	make -B all
 
 # ***************************************************************************************
@@ -33,24 +33,28 @@ release:
 DEMOSRC = $(shell find basic -name '*.bsc')
 DEMOBAS = $(subst bsc,bas,$(DEMOSRC))
 DEMOGFX = $(shell find basic -name '*.gfx')
+DEMOLIB = $(shell find basic -name '*.lib')
 
 BASDIR = basic-examples
 
-basicdemos: clear$(BASDIR) $(DEMOBAS)
-	$(CCOPY) $(DEMOGFX) $(BASDIR)
+basicdemos: clearbuild $(DEMOBAS)
+	$(CCOPY) -R $(DEMOGFX) $(DEMOLIB) $(BASDIR)
 	$(CCOPY) $(ROOTDIR)basic$(S)images$(S)graphics.gfx $(BASDIR)
 	$(CCOPY) $(ROOTDIR)basic$(S)images$(S)test$(S)test.gfx $(BASDIR)
-	$(CCOPY) $(ROOTDIR)basic$(S)storage$(S)*.* $(BASDIR)
 
-clear$(BASDIR):
+clearbuild:
 	$(CMAKEDIR) build
 	$(CMAKEDIR) $(BASDIR)
 	$(CDEL) $(BASDIR)$(S)*.*
 
+basic/games/asteroids.bas : basic/games/asteroids.bsc basic/games/asteroid_asm.lib
+	$(PYTHON) $(BINDIR)makebasic.zip $< -obasic/games/asteroids.bas
+	$(CCOPY) basic/games/asteroid*.bsc $(BASDIR)
+
 %.bas : %.bsc
 	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
 	$(CCOPY) $@ $< $(BASDIR)
-	
+
 
 # ***************************************************************************************
 #
@@ -59,7 +63,7 @@ clear$(BASDIR):
 # ***************************************************************************************
 
 checkasm:
-	$(ASSEMBLER) -Wno-error=implied-reg code$(S)checkasm.tass -L build/checkasm.lst -o build/asmtest.bin	
+	$(ASSEMBLER) -Wno-error=implied-reg code$(S)checkasm.tass -L build/checkasm.lst -o build/asmtest.bin
 	cmp -b $(BASDIR)/asmtest.inline build/asmtest.bin
 
 # ***************************************************************************************
@@ -69,7 +73,7 @@ checkasm:
 # ***************************************************************************************
 
 basemachine:
-	$(EMULATOR) 
+	$(EMULATOR)
 
 # ***************************************************************************************
 #
@@ -92,4 +96,3 @@ clean:
 	$(CDEL) _include.inc
 	$(CDEL) test.bas
 	$(CDEL) memory.dump
-	

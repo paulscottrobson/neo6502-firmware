@@ -31,7 +31,8 @@ release:
 		$(MAKE) -B -C images
 		$(MAKE) -B convert
 		$(MAKE) -B build
-		
+		$(MAKE) -B libraries
+
 # ***************************************************************************************
 #
 #						Build the Python Text->BASIC converters
@@ -92,11 +93,14 @@ tbuild: prelim
 	$(CCOPY) build$(S)basic.bin $(BINDIR)
 
 trun:tbuild	
-	$(RUNCMD) exec
+	$(RUNCMD) build$(S)tokenised.dat@page exec
 
 tneo: tbuild
 	$(MAKE) -C ..$(S)firmware run 
-	
+
+xneo:tbuild
+	$(RUNCMD) swim2.neo
+		
 # ***************************************************************************************
 #
 #							Build the command line basic
@@ -217,12 +221,39 @@ basemachine:
 
 # ***************************************************************************************
 #
+#										Libraries build
+#
+# ***************************************************************************************
+
+LIBSRC = $(shell find libraries -name '*.bsc')
+LIBBAS = $(subst bsc,bas,$(LIBSRC))
+
+%.bas : %.bsc
+	$(PYTHON) $(BINDIR)makebasic.zip $< -o$@
+
+libraries: $(LIBBAS)
+		$(CDEL) libraries.zip
+		zip libraries.zip libraries$(S)*.b*
+
+# ***************************************************************************************
+#
 #								Start VLC showing HDMI in (me only)
 #
 # ***************************************************************************************
 
 vlc:
 	vlc v4l2:///dev/video0:fps=30:chroma=mjpg:width=640:height=480 &
+
+# ***************************************************************************************
+#
+#								   Sweet 16 test helper
+#
+# ***************************************************************************************
+
+sweet:
+		make -C ..$(S)firmware prelim
+		touch ..$(S)firmware$(S)common$(S)sources$(S)interface$(S)sweet16.cpp
+		make emulator trun
 
 # ***************************************************************************************
 #

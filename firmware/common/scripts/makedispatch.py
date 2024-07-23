@@ -24,11 +24,10 @@ from datetime import date
 
 THIS_DIR     = os.path.realpath(os.path.dirname(__file__))
 ROOT_DIR     = os.path.realpath(os.path.join(THIS_DIR , '..' , '..' , '..'))
-DOCS_DIR     = os.path.join(ROOT_DIR , 'documents' , 'release' , 'source')
+DOCS_DIR     = os.path.join(ROOT_DIR , 'bin')
 CFG_DIR      = os.path.join(ROOT_DIR , 'firmware' , 'common' , 'config'  )
 CFG_FILE     = os.path.join(CFG_DIR  , 'dispatch.config'                 )
-TEX_IN_FILE  = os.path.join(DOCS_DIR , 'api.tex.in'                      )
-TEX_OUT_FILE = os.path.join(DOCS_DIR , 'api.tex'                         )
+TEX_OUT_FILE = os.path.join(DOCS_DIR , 'api-listing.md'                  )
 ANCHORS      = ( 'GROUP' , 'FUNCTION' , 'DOCUMENTATION' )
 
 
@@ -68,10 +67,9 @@ class Function(object):
 # ***************************************************************************************
 
 class Group(object):
-	def __init__(self,groupID,groupName = None,pageBreaks = None):
-		self.groupID = int(groupID)
+	def __init__(self,groupID,groupName = None):
+		self.groupID   = int(groupID)
 		self.groupName = groupName if groupName is not None else "Group "+str(groupID)
-		self.pageBreaks = pageBreaks
 		self.functions = {}
 	#
 	def getID(self):
@@ -84,14 +82,14 @@ class Group(object):
 	def render(self):
 		print("\tcase {0}:".format(self.groupID))
 		if self.groupID == 4:
-			print("\t\tMATHCommon(DPARAMS);")		
+			print("\t\tMATHCommon(DPARAMS);")
 		print("\t\tswitch (*DFUNCTION) {")
 		funcs = [x for x in self.functions.keys()]
 		funcs.sort()
 		for f in funcs:
 			self.functions[f].render()
 		print("\t\t\tdefault:")
-		print("\t\t\t\tWARN_GROUP(*DCOMMAND,*DFUNCTION);")
+		print("\t\t\t\tWARN_GROUP(cmd,*DFUNCTION);")
 		print("\t\t\t\tbreak;")
 		print("\t\t}")
 		print("\t\tbreak;")
@@ -105,17 +103,17 @@ class Group(object):
 
 class DispatchAPI(object):
 	def __init__(self):
-		self.currentFunction = None 
+		self.currentFunction = None
 		self.currentGroup = None
 		self.groups = {}
 		self.parsingState = 'start'
 		self.globalCodeLines = []
 	#
-	def addGroup(self,group):	
-		assert group.getID() not in self.groups 
+	def addGroup(self,group):
+		assert group.getID() not in self.groups
 		self.currentGroup = group
-		self.groups[group.getID()] = group 
-		self.currentFunction = None 
+		self.groups[group.getID()] = group
+		self.currentFunction = None
 	#
 	def addFunction(self,func):
 		assert self.currentGroup is not None
@@ -126,7 +124,7 @@ class DispatchAPI(object):
 		self.globalCodeLines.append(codeLine)
 	#
 	def addDoc(self,docLine):
-		assert self.currentFunction is not None 
+		assert self.currentFunction is not None
 		self.currentFunction.addDoc(docLine)
 	#
 	def addCode(self,codeLine):
@@ -141,11 +139,9 @@ class DispatchAPI(object):
 		if line:
 			if head == 'GROUP':
 				group_n           = words.pop(0)
-				page_breaks       = [ int(ea) for ea in words.pop(0)[1:].split(',') ] \
-				                    if words and words[0].startswith(',') else []
 				group_name        = ' '.join(words) or None
 				self.parsingState = 'group'
-				self.addGroup(Group(group_n , group_name , page_breaks))
+				self.addGroup(Group(group_n , group_name))
 			elif head == 'FUNCTION':
 				func_n            = words.pop(0)
 				func_name         = ' '.join(words)
@@ -174,71 +170,42 @@ class DispatchAPI(object):
 			for line in self.globalCodeLines: print(line)
 			print('\n')
 
-		print("switch (*DCOMMAND) {")
+		print("switch (cmd) {")
 		groups = [x for x in self.groups.keys()]
 		groups.sort()
 		for k in groups:
 			self.groups[k].render()
 		print("\tdefault:")
-		print("\t\tWARN_GROUP(*DCOMMAND,*DFUNCTION);")
+		print("\t\tWARN_GROUP(cmd,*DFUNCTION);")
 		print("\t\tbreak;")
 		print("}")
 
-	# generate documentation binaries
-	def renderTableHead(self,fn_table_tex,header):
-		#fn_table_tex.append('\\centering\\textbf{%s}' % header)
-		fn_table_tex.append('\\begin{longtable*}{ | c | l | p{12cm} | }')
 
-		fn_table_tex.append('\\caption*{%s} \\\\' % header)
-		fn_table_tex.append('\\hline')
-		fn_table_tex.append("\\textbf{Function} & \\textbf{Assembly} & \\textbf{Description} \\\\")
-		fn_table_tex.append('\\hline')
-		fn_table_tex.append('\\endfirsthead')
+	def replaceParam(self,txt,oldDesc,newDesc):
+		return txt.replace("\\Param{"+oldDesc+"}","Parameters:"+newDesc)
 
-		fn_table_tex.append('\\caption*{%s (continued)} \\\\' % header)
-		fn_table_tex.append('\\hline')
-		fn_table_tex.append("\\textbf{Function} & \\textbf{Assembly} & \\textbf{Description} \\\\")
-		fn_table_tex.append('\\hline')
-		fn_table_tex.append('\\endhead')
-
-	def renderTableTail(self,fn_table_tex):
-		fn_table_tex.append('\\end{longtable*}')
-
+	# generate documentation source from template
 	def renderDocs(self):
-		rev_date     = str(date.fromtimestamp(os.stat(CFG_FILE).st_ctime))
-		fn_table_tex = []
+		group_ids    = sorted(self.groups)
+		fn_table_tex = ['']
 
-		fn_table_tex.append('% makedispatch: BEGIN')
-		for group_id in sorted(self.groups):
+		for group_id in group_ids:
 			group  = self.groups[group_id]
-			header = "Group %s - %s Functions" % (group_id , group.groupName)
+			fn_ids = sorted(group.functions)
+			fn_table_tex.append("# Group {0} : {1}".format(group_id,group.groupName))
 			fn_ids = sorted([ fn_id for fn_id in group.functions.keys() ])
-
 			for fn_id in fn_ids:
-				if fn_id == fn_ids[0]:
-					if group_id != 1:
-						fn_table_tex.append('\\pagebreak')
-					self.renderTableHead(fn_table_tex , header)
+		 		function = group.functions[fn_id]
+		 		fn_name  = function.funcName
+		 		fn_table_tex.append("### Function {0} : {1}".format(fn_id,fn_name))
+		 		docLines = function.docLines if function.docLines[-1] else function.docLines[0:-2]
+		 		desc = "\n\n".join([x for x in docLines if x.strip() != ""])
+		 		fn_table_tex.append(desc)
+			fn_table_tex.append("\n")
 
-				function = group.functions[fn_id]
-				fn_name  = function.funcName
-				docLines = function.docLines if function.docLines[-1] else function.docLines[0:-2]
-
-				fn_table_tex.append('\\ApiFnRow{%s}{%s}{' % (fn_id , fn_name))
-				fn_table_tex.extend([ '\n'.join(docLines) , '}' ])
-			self.renderTableTail(fn_table_tex)
-		fn_table_tex.extend([ '' , '% makedispatch: END' , '' ])
-
-		with open(TEX_IN_FILE  , 'r' , encoding='utf-8'               ) as texi_file:
-			tex_in_lines = texi_file.readlines()
 		with open(TEX_OUT_FILE , 'w' , encoding='utf-8' , newline='\n') as texi_file:
-			texi_file.write('%\n% This file is automatically generated\n%\n\n\n')
-			for tex_in_line in tex_in_lines:
-				tex_subst = '\n'.join(fn_table_tex).replace(r'$' , '\$').replace('\\' , r'\\')
-				tex_out   = re.sub(r'@DATE@'      , rev_date  , tex_in_line)
-				tex_out   = re.sub(r'@FN_TABLES@' , tex_subst , tex_out    )
-
-				texi_file.write(tex_out)
+			for tex_in_line in fn_table_tex:
+				texi_file.write(tex_in_line+"\n\n")
 
 	def sendFile(self , in_file):
 		# accept input file as path or filename - no assumption of PWD

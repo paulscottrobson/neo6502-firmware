@@ -33,11 +33,22 @@ Command_GOSUB:	;; [gosub]
 ; ************************************************************************************************
 
 Command_RETURN:	;; [return]
-		lda 	#STK_GOSUB
+		jsr 	StackGetFrame 				; look at top of frame stack
+		cmp 	#STK_GOSUB 					; found a RETURN
+		beq 	_CRReturn
+		and 	#$0F 						; x0 is impossible as can't have empty frame
+		beq 	_CRStructure
+		jsr 	StackClose 					; unpick the frame
+		bra 	Command_RETURN
+
+_CRReturn:		
 		jsr 	StackCheckFrame
 		jsr 	STKLoadCodePosition 		; return
 		jsr 	StackClose		 			
 		rts
+
+_CRStructure:
+		.error_structure
 
 		.send code
 

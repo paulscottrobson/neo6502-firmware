@@ -75,7 +75,6 @@ c8  iny 4
 CA  dex 4
 d8  cld 4
 da  phx 4
-db 	stp 4
 e8  inx 4
 EA  nop 4
 f8  sed 4

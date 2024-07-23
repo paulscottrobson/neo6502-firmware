@@ -71,7 +71,7 @@ class TokenSet(object):
 
 	def addToken(self,tokenID,tokenText):
 		tokenText = tokenText.strip().lower()
-		assert tokenID not in self.idToToken
+		assert tokenID not in self.idToToken,"Duplicate "+tokenText
 		if tokenText != "":
 			assert tokenText not in self.nameToToken,"Duplicate "+tokenText
 		token = Token(tokenID,tokenText)
@@ -96,7 +96,7 @@ class TokenSet(object):
 		self.add(0x80,"""
 			!!STR 	$ 		(		RAND(	RND(	JOYPAD(	INT(	TIME(	EVENT(	
 			INKEY$(	ASC(	CHR$(	POINT( 	LEN(  	ABS(  	SGN( 	HIT(	SPOINT(
-			MID$(	LEFT$( 	RIGHT$(	TRUE	FALSE	!!UN4	!!UN5	!!UN6	!!UN7
+			MID$(	LEFT$( 	RIGHT$(	TRUE	FALSE	INSTR(	MOUSE(	!!UN6	!!UN7
 			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	
 			""",48)
 		#
@@ -124,10 +124,11 @@ class TokenSet(object):
 			LOAD	CAT 	GOSUB 	GOTO	RETURN 	RESTORE	DIM		FKEY
 			CLS 	INK		FRAME	SOLID	BY 		WHO 	PALETTE DRAW	
 			HIDE 	FLIP 	SOUND 	SFX 	ANCHOR	GLOAD	DEFCHR  LEFT
-			RIGHT 	FORWARD	TURTLE 	SWEET 	TILEMAP PENUP   PENDOWN FAST
-			HOME 	LOCALE 	CURSOR 	RENUMBER DELETE EDITOR  MON     OLD
+			RIGHT 	FORWARD	TURTLE 	CLOSE 	TILEMAP PENUP   PENDOWN FAST
+			HOME 	LOCALE 	CURSOR 	RENUMBER DELETE EDIT  	MON     OLD
 			ON 		ERROR 	PIN 	OUTPUT	WAIT 	IWRITE 	ANALOG  ISEND
-			SSEND
+			SSEND 	IRECEIVE SRECEIVE ITRANSMIT STRANSMIT OPEN LIBRARY
+			USEND 	URECEIVE UTRANSMIT UCONFIG MOS 	MOUSE 	SHOW
 			""")
 		#
 		#		Keyword tokens (assembler)
@@ -139,17 +140,18 @@ class TokenSet(object):
 			PLX	PLY	ROL	ROR	RTI	RTS	SBC	SEC	SED	SEI	STA	STX	STY	STZ	
 			TAX	TAY	TRB	TSB	TSX	TXA	TXS	TYA 
 
-			SET LD 	ST 	LDD STD POP STP ADD SUB POPD CPR INR DCR 
-			RTN BR BNC BC BP BM BZ BNZ BM1 BNM1 BK RS BS
-		""",0x60)
+		""",0x50)
 		#
 		#		Additional Unary functions, less popular
 		#
-		self.add(0x2E0,"""
+		self.add(0x2D0,"""
+			ATAN2( !!UU1 !!UU2 !!UU3 !!UU4 !!UU5 !!UU6 !!UU7
+			!!UU8 !!UU9 !!UU10 !!UU11 !!UU12 !!UU13 !!UU14 !!UU15		
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
 			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM 	VBLANKS(
-			ERR 	ERL		PIN( 	IREAD( 	 ANALOG(  IRECEIVE( SRECEIVE(
-			IDEVICE(
+			ERR 	ERL		PIN( 	IREAD( 	 ANALOG(  JOYCOUNT(  UPPER$(
+			IDEVICE( SPC( 	TAB( 	UHASDATA( MOS( 	HAVEMOUSE( LOWER$( POW(
+			EXISTS(  
 		""")
 		
 if __name__ == "__main__":

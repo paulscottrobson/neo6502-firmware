@@ -11,6 +11,8 @@
 // ***************************************************************************************
 
 #include "common.h"
+#include <algorithm>	// For std::min/max
+#include <utility>	  // For std::swap
 
 static uint8_t pixelAnd,pixelXor,useSolidFill,drawSize,flipBits;
 
@@ -105,64 +107,99 @@ void GFXPlotPixelChecked(struct GraphicsMode *gMode,int x,int y) {
 
 // ***************************************************************************************
 //
-// 								Draw a horizontal line.
-//
-// ***************************************************************************************
-
-static void GFXHorizontalLine(struct GraphicsMode *gMode,int x1,int x2,int y) {
-    int x;
-	int xEnd;
-
-	if (x2>x1){
-		x = x1;
-		xEnd = x2+1;
-	} else {
-		x = x2;
-		xEnd = x1+1;
-	}
-
-	do {
-		GFXPlotPixelChecked(gMode,x,y);
-		x++;
-	} while( x != xEnd);
-
-}
-
-// ***************************************************************************************
-//
 // 										Draw a rectangle
 //
 // ***************************************************************************************
 
+// Helper to draw a horizontal line (without safety checks!)
+static void hline_noclip(struct GraphicsMode *gMode, int xMin, int xMax, int y) {
+	uint8_t sprAnd = (SPRSpritesInUse() ? pixelAnd | 0xF0 : pixelAnd);
+	uint8_t *pixel = gMode->graphicsMemory + xMin + (y * gMode->xGSize);
+	if (sprAnd == 0) {
+		// Fast-track case: no reads or bitmasking needed.
+		memset(pixel, pixelXor, (xMax+1)-xMin);
+	} else {
+		for (int x = xMin; x <= xMax; ++x) {
+			*pixel = ((*pixel) & sprAnd) ^ pixelXor;
+			++pixel;
+		}
+	}
+}
+
+// Helper to draw a vertical line (without safety checks!)
+static void vline_noclip(struct GraphicsMode *gMode, int x, int yMin, int yMax) {
+	uint8_t sprAnd = (SPRSpritesInUse() ? pixelAnd | 0xF0 : pixelAnd);
+	uint8_t *pixel = gMode->graphicsMemory + x + (yMin * gMode->xGSize);
+	for (int y = yMin; y <= yMax; ++y) {
+		*pixel = ((*pixel) & sprAnd) ^ pixelXor;
+		pixel += gMode->xGSize;
+	}
+}
+
+
 void GFXRectangle(struct GraphicsMode *gMode,int x1,int y1,int x2,int y2,int solid,bool setZero) {
-    int yRow;
-	int yEnd;
+	int xMin, xMax, yMin, yMax;
+	// Exchange coordinates if needed.
+	if (x1 > x2) {
+		std::swap(x1, x2);
+	}
+	if (y1 > y2) {
+		std::swap(y1, y2);
+	}
+
+	// Clip against screen.
+	xMin = std::max(0, x1);
+	xMax = std::min((int)gMode->xGSize - 1, x2);
+	yMin = std::max(0, y1);
+	yMax = std::min((int)gMode->yGSize - 1, y2);
+
+	int w = xMax - xMin;
+	int h = yMax - yMin;
+	if (w < 0 || h < 0) {
+		return; // Totally offscreen.
+	}
+
+	// Save some drawing state.
 	int orgPixelAnd = pixelAnd;
 	int orgPixelXor = pixelXor;
 
-	if (y2>y1) {
-		yRow = y1;
-		yEnd = y2+1;
-	} else {
-		yRow = y2;
-		yEnd = y1+1;
-	}
-
 	if (setZero) {
-		pixelAnd = 0;pixelXor = 0;
+		pixelAnd = 0;
+		pixelXor = 0;
 	}
 
-    do {
-		if (solid != 0 || yRow == y1 || yRow == y2) {
-			GFXHorizontalLine(gMode,x1,x2,yRow);
-		} else {
-			GFXPlotPixelChecked(gMode,x1,yRow);
-			GFXPlotPixelChecked(gMode,x2,yRow);
+	if (solid == 0) {
+		// We're drawing an rectangle outline.
+		// We might be XORing pixels, so be careful to avoid overdraw!
+
+		// Top edge onscreen?
+		if (yMin == y1) {
+			hline_noclip(gMode, xMin, xMax, yMin);
+			++yMin; // Avoid overdraw for sides.
 		}
-        yRow++;
+		// Bottom edge onscreen (and not coincident with top edge)?
+		if (yMax == y2 && yMax != y1) {
+			hline_noclip(gMode, xMin, xMax, yMax);
+			--yMax; // Avoid overdraw for sides.
+		}
 
-	} while( yRow != yEnd);
+		// Draw sides (if there's a gap between top and bottom).
+		if (yMax >= yMin) {
+			if (xMin == x1) {
+				vline_noclip(gMode, xMin, yMin, yMax);
+			}
+			if (xMax == x2) {
+				vline_noclip(gMode, xMax, yMin, yMax);
+			}
+		}
+	} else {
+		// We're drawing a filled rectangle.
+		for (int y = yMin; y <= yMax; ++y) {
+			hline_noclip(gMode, xMin, xMax, y);
+		}
+	}
 
+	// Restore drawing state.
 	pixelAnd = orgPixelAnd;
 	pixelXor = orgPixelXor;
 }
@@ -178,7 +215,7 @@ void GFXScaledText(struct GraphicsMode *gMode,char *s,int x,int y,int useSolidFi
 		uint8_t c = *s++;
 		if ((c >= ' ' && c < 0x80) || (c >= 0xC0)) {
 			int y1 = y;
-			for (int yc = 0;yc < 7;yc++) {				
+			for (int yc = 0;yc < 8;yc++) {				
 				int bits = font_5x7[(c-' ')*8+yc];
 				if (c >= 0xC0) bits = userDefinedFont[(c & 0x3F) * 8 + yc];
 				int x1 = x;
@@ -255,7 +292,11 @@ void GFXDrawImage(struct GraphicsMode *gMode,int x,int y,int id,int scale,int fl
 				pixelAnd = 0;
 				int x1 = x + (xc ^ xFlip) * scale;
 				int y1 = y + (yc ^ yFlip) * scale;
-				GFXRectangle(gMode,x1,y1,x1+scale-1,y1+scale-1,true,false);
+				if (scale == 1) {
+					GFXPlotPixel(gMode,x1,y1);
+				} else {
+					GFXRectangle(gMode,x1,y1,x1+scale-1,y1+scale-1,true,false);
+				}
 			}
 		}
 	}

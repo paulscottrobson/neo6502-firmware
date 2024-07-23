@@ -112,7 +112,6 @@ _CSHide:
 		;		Handle IMAGE
 		;
 _CSWriteImage:
-		stz 	spriteFlip 					; IMAGE resets FLIP to 0
 		ldx 	#0 							; get the value 
 		jsr 	EXPEvalInteger8
 		and 	#$7F   						; clear bit 7
@@ -213,6 +212,7 @@ _CSUSError:
 ;		==== 			=====
 ;		15-01-24 		Added support to pass ANCHOR.
 ; 		20-01-24 		Changed sprite coord evaluations to allow -ve coordinates
+;		16-03-24 		Image does not reset sprite flipping.
 ;
 ; ************************************************************************************************
 

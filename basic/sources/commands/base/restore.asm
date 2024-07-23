@@ -19,6 +19,44 @@
 		.section code
 
 Command_RESTORE:	;; [restore]
+		jsr 	RestoreComplete
+		cmp 	#KWD_COLON
+		beq 	_CRExit
+		cmp 	#KWD_SYS_END
+		beq 	_CRExit
+		ldx 	#0
+		jsr 	EXPEvalInteger16 			; get line number to restore to
+		phy
+
+_CRSearch:
+		lda 	(dataPtr) 					; end of program.
+		beq 	_CRError
+		ldy 	#1 							; found line #
+		lda 	(dataPtr),y
+		cmp 	XSNumber0
+		bne 	_CRNext
+		iny
+		lda 	(dataPtr),y
+		cmp 	XSNumber1
+		bne 	_CRNext
+		ply
+_CRExit:		
+		rts
+
+_CRNext:		
+		clc 								; advance to next line.
+		lda 	(dataPtr)
+		adc 	dataPtr
+		sta 	dataPtr
+		bcc 	_CRSearch
+		inc 	dataPtr+1
+		bra 	_CRSearch
+		
+_CRError:		
+		.error_line
+
+
+RestoreComplete:
 		lda 	#Program >> 8				; back to the program start
 		clc
 		adc 	Program
@@ -27,8 +65,9 @@ Command_RESTORE:	;; [restore]
 		lda 	#3 							; position start of line
 		sta 	dataPos
 		stz 	dataInStatement 			; not in statement
+		lda 	(codePtr),y 				; end of statement ?
 		rts
-		
+
 ; ************************************************************************************************
 ;
 ;										Swap Code and Data

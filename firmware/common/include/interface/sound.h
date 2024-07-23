@@ -14,12 +14,13 @@
 #define _XSOUND_H
 
 #define SOUND_CHANNELS 	(1)
+
 #define SOUND_QUEUE_SIZE (32)
 
 typedef struct _sound_queue_item {
 	uint16_t frequency;
-	uint16_t timeMS;
-	uint16_t slide;
+	uint16_t timeCS;
+	int16_t slide;
 	uint8_t  soundType;
 } SOUND_QUEUE_ELEMENT;
 
@@ -32,13 +33,19 @@ typedef struct _sound_channel {
 	SOUND_QUEUE_ELEMENT queue[SOUND_QUEUE_SIZE];
 } SOUND_CHANNEL;
 
+typedef struct _sound_update {
+	int frequency;
+	int slide;
+	int timeCS;
+} SOUND_UPDATE;
+
 void SNDInitialise(void);
-void SNDSetFrequency(uint8_t channel,uint16_t frequency,bool isNoise);
+void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c);
 void SNDManager(void);
 
 void SNDResetAll(void);
 uint8_t SNDResetChannel(int channel);
-uint8_t SNDPlay(int channelID,uint16_t frequency,uint16_t timems,uint16_t slide,bool isNoise);
+uint8_t SNDPlay(int channelID,SOUND_UPDATE *u);
 void SNDStartup(void);
 int SNDGetNoteCount(int channelID);
 

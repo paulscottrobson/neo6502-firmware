@@ -1,0 +1,11 @@
+'
+'	API Mouse cursor manipulation
+'
+poke $FF04,1:call send.message(11,2)
+doke $FF04,128:doke $FF06,64:call send.message(11,1)
+end
+proc send.message(g,f)
+	while peek($FF00):wend
+	poke $FF01,f:poke $FF00,g
+	while peek($FF00):wend
+endproc	

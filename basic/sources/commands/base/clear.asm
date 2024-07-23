@@ -74,7 +74,7 @@ ClearCodeSetMemoryA:
 		;
 		;		Reset READ/DATA
 		;
-		jsr 	Command_RESTORE
+		jsr 	RestoreComplete
 		;
 		;		Reset Graphics
 		;
@@ -100,6 +100,18 @@ ClearCodeSetMemoryA:
 		.DoSendMessage 					
 		.byte 	10,1
 		.DoWaitMessage		
+		;
+		; 		Reset to Degrees
+		;
+		lda 	#1
+		sta 	ControlParameters+0
+		.DoSendMessage 					
+		.byte 	4,35
+		.DoWaitMessage		
+		;
+		;		Close all open files
+		;
+		jsr 	CloseAllOpenFiles
 		ply
 		rts
 

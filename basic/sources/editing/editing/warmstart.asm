@@ -19,6 +19,8 @@
 ; ************************************************************************************************
 
 WarmStart:
+		stz 	errorBuffer 				; clear the error buffer.
+WarmStartNoClear:
 		lda 	#COL_GREEN+$80 				; set display colour.
 		jsr 	WriteCharacter
 
@@ -26,22 +28,30 @@ WarmStart:
 		ldx 	#inputBuffer & $FF
 
 		jsr 	ReadLine 					; read using screen editor
-
 ;		jsr 	InputLine 					; input string to buffer direct typing (ignores YX)
 
 		lda 	inputBuffer 				; entered something ?
-		beq 	_WSNotSerialLink
+		beq 	_WSNotSerialLinkMos
 		lda 	inputBuffer+1 				; if first character is / start the serial link.
 		cmp 	#'/'
-		beq 	_WSSerialLink
-_WSNotSerialLink:		
+		beq 	_WSSerialLink		
+		cmp 	#'*' 						; if first character is * MOS command
+		beq 	_WSMosCommand
+
+_WSNotSerialLinkMos:		
 		stz 	ControlStatus 				; clear break flag.
 		jsr 	TOKTokenise 				; tokenise it.
 		lda 	tokLineNumber 				; any line number ? if not, execute it.
 		ora 	tokLineNumber+1
 		beq 	_WSExecute
 		jsr 	PGMDeleteLine 				; delete line specified
+
+		lda 	tokLineSize 				; if the line is empty, don't insert it
+		cmp 	#4
+		beq 	_WSLineBlank
+
 		jsr 	PGMInsertLine 				; insert it if not blank
+_WSLineBlank:		
 		jsr 	ClearCode 					; clear program memory
 		bra 	WarmStart 					; get another command
 
@@ -55,6 +65,16 @@ _WSExecute:
 		sta 	codePtr
 
 		jmp 	RUNNewLine 					; go to run it.
+
+_WSMosCommand:
+		lda 	#inputBuffer & $FF 			; address of command
+		sta 	ControlParameters+0
+		lda 	#inputBuffer >> 8
+		sta 	ControlParameters+1
+		.DoSendMessage 					 	; MOS Command
+		.byte 	1,8
+		.DoWaitMessage		
+		jmp 	WarmStart
 
 _WSSerialLink:
 		.DoSendMessage 					 	; and reset it.

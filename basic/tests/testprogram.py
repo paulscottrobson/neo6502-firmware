@@ -19,8 +19,8 @@ def compare(start,size):
 			errors = errors + 1
 
 errors = 0
-ram = [x for x in open("memory.dump","rb").read(-1)]
-reqd = [x for x in open("build/token_test.dat","rb").read(-1)]
+ram = bytearray(open("memory.dump","rb").read(-1))
+reqd = bytearray(open("build/token_test.dat","rb").read(-1))
 base = ram[0] << 8
 vPages = ram[base]
 

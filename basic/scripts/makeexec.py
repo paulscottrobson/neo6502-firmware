@@ -41,7 +41,7 @@ class Executable(object):
 		self.code.append(loadAddress >> 8)
 		#
 		h = open(fileName,"rb")  													# load in file.
-		data = [x for x in h.read(-1)]
+		data = bytearray(h.read(-1))
 		h.close()
 		#
 		self.code.append(len(data) & 0xFF)  										# size of data.
@@ -86,7 +86,7 @@ class Executable(object):
 	#
 	def dumpFile(self,fileName):
 		h = open(fileName,"rb")  													# read in file
-		data = [x for x in h.read(-1)]
+		data = bytearray(h.read(-1))
 		print("File : {0} ".format(fileName))
 		if data[0] != 0x03 or data[1] != 0x4E or data[2] != 0x45 or data[3] != 0x4F:# check if executable
 			print("Not a neo6502 executable")

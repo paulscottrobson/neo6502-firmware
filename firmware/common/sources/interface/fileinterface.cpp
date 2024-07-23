@@ -13,7 +13,6 @@
 #include "common.h"
 #include <inttypes.h>
 
-static bool FIOReadBlock(uint8_t *commandPtr,bool *pContinue);
 static uint8_t FIOReadByte(uint8_t *commandPtr);
 
 // ***************************************************************************************
@@ -76,16 +75,16 @@ uint8_t FIOReadFile(const std::string& fileName,uint16_t loadAddress,uint8_t *co
 	printf("Header found.\n");
 	uint16_t execAddress = header[6] + (header[7] << 8); 							// Get the execute address
 	printf("Execute from $%x\n",execAddress);
+	bool processing = true; 
+	while (processing && error == 0) {
+		error = FIOReadBlock(FIOReadByte,commandPtr,&processing); 					// Read one block.
+	}
+	if (error == 0) error = FIOCloseFileHandle(0);  								// Close the source file.
 	if (execAddress != 0xFFFF) {  													// Not the default $FFFF e.g. don't execute
 		commandPtr[8] = 0x4C;  														// Set the paraemeter area to JMP <exec address>
 		commandPtr[9] = execAddress & 0xFF;
 		commandPtr[10] = execAddress >> 8;
 	}
-	bool processing = true; 
-	while (processing && error == 0) {
-		error = FIOReadBlock(commandPtr,&processing); 								// Read one block.
-	}
-	if (error == 0) error = FIOCloseFileHandle(0);  								// Close the source file.
 	return error;
 }
 
@@ -97,15 +96,15 @@ uint8_t FIOReadFile(const std::string& fileName,uint16_t loadAddress,uint8_t *co
 
 static char commentBlock[32];  														// Space for comment text.
 
-static bool FIOReadBlock(uint8_t *commandPtr,bool *pContinue) {
-	uint8_t contByte = FIOReadByte(commandPtr);  									// Read the continuation byte
+uint8_t FIOReadBlock(FILEREADBYTE readfn,uint8_t *commandPtr,bool *pContinue) {
+	uint8_t contByte = (*readfn)(commandPtr);  										// Read the continuation byte
 	printf("Control byte %x\n",contByte);
 	*pContinue = (contByte & 0x80) != 0;  											// Continue if control continue bit set
 	uint16_t loadAddress,loadSize;  												// Read address and size.
-	loadAddress = FIOReadByte(commandPtr);
-	loadAddress |= FIOReadByte(commandPtr) << 8;
-	loadSize = FIOReadByte(commandPtr);
-	loadSize |= FIOReadByte(commandPtr) << 8;
+	loadAddress = (*readfn)(commandPtr);
+	loadAddress |= (*readfn)(commandPtr) << 8;
+	loadSize = (*readfn)(commandPtr);
+	loadSize |= (*readfn)(commandPtr) << 8;
 	printf("Load to %x size %x\n",loadAddress,loadSize);
 	if (loadAddress == 0xFFFD) {  													// Basic LOAD ?
 		loadAddress = cpuMemory[0x820]+(cpuMemory[0x821] << 8);
@@ -113,12 +112,20 @@ static bool FIOReadBlock(uint8_t *commandPtr,bool *pContinue) {
 	}
 	char *commChar = commentBlock;   												// Read in comment block.			
 	uint8_t count = 0;
-	while (*commChar = FIOReadByte(commandPtr),*commChar != 0) {
+	while (*commChar = (*readfn)(commandPtr),*commChar != 0) {
 		if (++count > sizeof(commentBlock)) commChar++;
 	}
 	printf("Comment %s\n",commentBlock);
 	printf("Loading bytes.\n");
-	return FIOReadFileHandle(0,loadAddress,&loadSize);  							// Load the body in.
+	for (int i = 0;i < loadSize;i++) {
+		uint8_t c = (*readfn)(commandPtr);
+		if (loadAddress == 0xFFFF) {
+			gfxObjectMemory[i] = c;		
+		} else {
+			cpuMemory[loadAddress+i] = c;
+		}
+	}
+	return 0;
 }
 
 // ***************************************************************************************

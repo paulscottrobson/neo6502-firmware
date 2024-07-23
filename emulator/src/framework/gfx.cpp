@@ -18,13 +18,19 @@
 #include <cmath>
 #include "sys_processor.h"
 #include <hardware.h>
+#include <common.h>
 
 #ifdef EMSCRIPTEN
 #include "emscripten.h"
 #endif
 
+#define MAX_CONTROLLERS (4)
+
 static SDL_Window *mainWindow = NULL;
 static SDL_Surface *mainSurface = NULL;
+static int controllerCount = 0;
+static SDL_Joystick *controllers[MAX_CONTROLLERS];
+
 static int background;
 
 #define RED(x) ((((x) >> 8) & 0xF) * 17)
@@ -33,6 +39,7 @@ static int background;
 
 static void _GFXInitialiseKeyRecord(void);
 static void _GFXUpdateKeyRecord(int scancode,int isDown);
+static void GFXFindControllers(void);
 
 // *******************************************************************************************************************************
 //
@@ -42,7 +49,7 @@ static void _GFXUpdateKeyRecord(int scancode,int isDown);
 
 void GFXOpenWindow(const char *title,int width,int height,int colour) {
 
-	if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)	{							// Try to initialise SDL Video and Audio
+	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_GAMECONTROLLER) < 0)	{	// Try to initialise SDL Video and Audio
 		exit(printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError()));
 	}
 
@@ -54,11 +61,16 @@ void GFXOpenWindow(const char *title,int width,int height,int colour) {
 
 	mainSurface = SDL_GetWindowSurface(mainWindow);									// Get a surface to draw on.
 
+	GFXFindControllers();
+
+
 	background = colour;															// Remember required backgrounds.
 	_GFXInitialiseKeyRecord();														// Set up key system.
 	Beeper::open();
 	Beeper::setVolume(0.0);
 	Beeper::play();
+
+	SDL_ShowCursor(SDL_DISABLE);                                                    // Hide mouse cursor
 }
 
 // *******************************************************************************************************************************
@@ -94,6 +106,15 @@ static void _GFXMainLoop(void *arg) {
 		if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {					// Handle other keys.
 			_GFXUpdateKeyRecord(event.key.keysym.sym,event.type == SDL_KEYDOWN);
 			HWQueueKeyboardEvent(event.key.keysym.scancode,event.type == SDL_KEYDOWN);
+		}
+		if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN 		// Mouse button/position  update
+														|| event.type == SDL_MOUSEBUTTONUP) {
+			HWUpdateMouse();
+		}
+		if (event.type == SDL_MOUSEWHEEL) {  									// Handle scroll wheel events.
+			int dy = event.wheel.y;
+			if (event.wheel.type == SDL_MOUSEWHEEL_FLIPPED) dy = -dy;
+			MSEUpdateScrollWheel(dy);
 		}
 		if (event.type == SDL_QUIT) {  												// GUI hardware.
 			isRunning = 0;
@@ -398,4 +419,59 @@ void GFXSetFrequency(int freq,int channel) {
 
 void GFXSilence(void) {
 	Beeper::setVolume(0.0);
+}
+
+// *******************************************************************************************************************************
+//
+//												    Get controller count
+//
+// *******************************************************************************************************************************
+
+int GFXControllerCount(void) {
+	return controllerCount;
+}
+
+// *******************************************************************************************************************************
+//
+//										Read controller, format compatible with Firmware
+//
+// *******************************************************************************************************************************
+
+unsigned int GFXReadController(int id) {
+	int bitPattern = 0;
+	Sint16 dx = SDL_JoystickGetAxis(controllers[id],0);
+	if (abs(dx) >= 1024) {
+		bitPattern |= (dx < 0) ? 0x01:0x02;
+	}
+	Sint16 dy = SDL_JoystickGetAxis(controllers[id],1);
+	if (abs(dy) >= 1024) {
+		bitPattern |= (dy < 0) ? 0x04:0x08;
+	}
+	int buttons = SDL_JoystickNumButtons(controllers[id]);
+	buttons = (buttons >= 4) ? 4 : buttons;
+	for (int b = 0;b < buttons;b++) {
+		if (SDL_JoystickGetButton(controllers[id],b)) {
+			bitPattern |= (0x10 << b);
+		}
+	}
+	return bitPattern;
+}
+
+// *******************************************************************************************************************************
+//
+//												    Search for controllers
+//
+// *******************************************************************************************************************************
+
+static void GFXFindControllers(void) {
+ 	controllerCount = 0;  															// Discover controllers. 
+	for (int i = 0; i < SDL_NumJoysticks(); i++) {
+		if (controllerCount < MAX_CONTROLLERS) {
+    		controllers[controllerCount] = SDL_JoystickOpen(i);
+    		if (controllers[controllerCount] == NULL) {
+    			exit(printf("Failed to open controller %d\n",i));
+    		}
+    		controllerCount++;
+		}
+	}
 }

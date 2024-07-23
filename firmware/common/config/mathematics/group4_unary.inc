@@ -19,17 +19,15 @@
 			MATHWriteInt(-MATHReadInt(MATH_REG1),MATH_REG1);
 		}
 	DOCUMENTATION
-		Negate
-		\newline Register1 :=  -Register 1
+		Register1 :=  -Register 1
 
 	FUNCTION 17 Floor
 		if (MATHIsFloatBinary()) {
 			f1 = floor(MATHReadFloat(MATH_REG1));
-			MATHWriteInt((uint32_t)f1,MATH_REG1);
+			MATHWriteInt((int32_t)f1,MATH_REG1);
 		}
 	DOCUMENTATION
-		Floor
-		\newline Register1 := floor(Register 1)
+		Register1 := floor(Register 1)
 
 	FUNCTION 18 Square Root
 		f1 = MATHReadFloat(MATH_REG1);
@@ -39,43 +37,37 @@
 			*DERROR = 1;
 		}
 	DOCUMENTATION
-		Square Root
-		\newline Register1 := square root(Register 1)
+		Register1 := square root(Register 1)
 
 	FUNCTION 19 Sine
 		f1 = MATHReadFloat(MATH_REG1);
-		MATHWriteFloat(sin(TORADIANS(f1)),MATH_REG1);
+		MATHWriteFloat(sin(MATHConvertAngleToDefault(f1)),MATH_REG1);
 	DOCUMENTATION
-		Sine
-		\newline Register1 := sine(Register 1) angles in degrees
+		Register1 := sine(Register 1) angles in degrees/radians
 
 	FUNCTION 20 Cosine
 		f1 = MATHReadFloat(MATH_REG1);
-		MATHWriteFloat(cos(TORADIANS(f1)),MATH_REG1);
+		MATHWriteFloat(cos(MATHConvertAngleToDefault(f1)),MATH_REG1);
 	DOCUMENTATION
-		Cosine
-		\newline Register1 := cosine(Register 1) angles in degrees
+		Register1 := cosine(Register 1) angles in degrees/radians
 
 	FUNCTION 21 Tangent
 		f1 = MATHReadFloat(MATH_REG1);
-		MATHWriteFloat(tan(TORADIANS(f1)),MATH_REG1);
+		MATHWriteFloat(tan(MATHConvertAngleToDefault(f1)),MATH_REG1);
 	DOCUMENTATION
-		Tangent
-		\newline Register1 := tangent(Register 1) angles in degrees
+		Register1 := tangent(Register 1) angles in degrees/radians
 
 	FUNCTION 22 Arctangent
 		f1 = MATHReadFloat(MATH_REG1);
-		MATHWriteFloat(FROMRADIANS(atan(f1)),MATH_REG1);
+		MATHWriteFloat(MATHConvertAngleFromDefault(atan(f1)),MATH_REG1);
 	DOCUMENTATION
-		Arctangent
-		\newline Register1 := arctangent(Register 1) angles in degrees
+		Register1 := arctangent(Register 1) angles in degrees/radians
 
 	FUNCTION 23 Exponent
 		f1 = MATHReadFloat(MATH_REG1);
 		MATHWriteFloat(exp(f1),MATH_REG1);
 	DOCUMENTATION
-		Exponent
-		\newline Register1 :=  e to the power of Register 1 
+		Register1 :=  e to the power of Register 1
 
 	FUNCTION 24 Logarithm
 		f1 = MATHReadFloat(MATH_REG1);
@@ -85,8 +77,7 @@
 			*DERROR = 1;
 		}
 	DOCUMENTATION
-		Logarithm
-		\newline Register1 := log(Register 1) natural logarithm
+		Register1 := log(Register 1) natural logarithm
 
 	FUNCTION 25 Absolute Value
 		if (MATHIsFloatUnary()) {
@@ -98,8 +89,7 @@
 			}
 		}
 	DOCUMENTATION
-		Absolute Value
-		\newline Register1 := absolute value(Register 1)
+		Register1 := absolute value(Register 1)
 
 	FUNCTION 26 Sign
 		u1 = 0;
@@ -112,15 +102,13 @@
 		}
 		MATHWriteInt(u1,MATH_REG1);
 	DOCUMENTATION
-		Sign
-		\newline Register1 := sign(Register 1), returns -1 0 or 1
+		Register1 := sign(Register 1), returns -1 0 or 1
 
 	FUNCTION 27 Random Decimal
-		f1 = (rand() % 100000) / 100000.0;
+		f1 = (rand() % 32000) / 32000.0;
 		MATHWriteFloat(f1,MATH_REG1);
 	DOCUMENTATION
-		Random Decimal
-		\newline Register1 := random float from 0-1
+		Register1 := random float from 0-1
 
 	FUNCTION 28 Random Integer
 		u1 = MATHReadInt(MATH_REG1);
@@ -128,5 +116,4 @@
 			MATHWriteInt(rand() % u1,MATH_REG1);
 		}
 	DOCUMENTATION
-		Random Integer
-		\newline Register1 := random integer from 0 to (Register 1-1)
+		Register1 := random integer from 0 to (Register 1-1)

@@ -83,23 +83,42 @@ _TEILoop:
 		bcc 	_TEIEndMainID
 		jsr 	TOKGetNext 					; get and consume
 		jsr 	TOKToUpper 					; capitalise it and add it
-		jsr 	_TEIAddChar
+		jsr 	TEIAddChar
 		bra 	_TEILoop
 _TEIEndMainID:
 		cmp 	#"$" 						; do we have a string ?
 		bne 	_TEINotString
-		jsr 	_TEIAddChar 				; add it
+		jsr 	TEIAddChar 					; add it
 		jsr 	TOKGetNext 					; consume $
 		jsr 	TOKGet 						; get next
 _TEINotString:
 		cmp 	#"("						; do we have an array ?
 		bne 	_TEINotArray
-		jsr 	_TEIAddChar 				; add (
+		jsr 	TEIAddChar 					; add (
 		jsr 	TOKGetNext 					; consume (
 _TEINotArray:		
 		rts
 
-_TEIAddChar:
+; ************************************************************************************************
+;
+;					Extract sequence of digits into the tokElement buffer
+;
+; ************************************************************************************************
+
+TOKExtractDigits:
+		stz 	tokElement
+_TEDLoop:
+		jsr 	TOKGet 						; get next, check end of token text
+		beq 	_TEDEndDigits  				; end of line
+		jsr 	TOKIsDigit 		 			; check digit
+		bcc 	_TEDEndDigits
+		jsr 	TOKGetNext 					; get and consume and add
+		jsr 	TEIAddChar
+		bra 	_TEDLoop
+_TEDEndDigits:
+		rts
+
+TEIAddChar:
 		inc 	tokElement 					; add it.
 		ldx 	tokElement
 		sta 	tokElement,x

@@ -24,13 +24,13 @@ DOCDIR = $(ROOTDIR)documents$(S)release$(S)
 #
 #		Documentation files included
 #
-DOCUMENTS = $(DOCDIR)*.odt $(DOCDIR)*.pdf $(BINDIR)neo6502.inc
+DOCUMENTS = $(DOCDIR)*.pdf $(BINDIR)neo6502.inc
 
 #
 #		Binary files included
 #
 BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf \
-			 $(ROOTDIR)emulator$(S)cross-compile$(S)neo.exe $(ROOTDIR)emulator$(S)cross-compile$(S)neo.exe \
+			 $(ROOTDIR)emulator$(S)cross-compile$(S)neo.exe \
 			 $(BINDIR)basic.bin \
 			 $(ROOTDIR)emulator$(S)neo
 #
@@ -38,7 +38,7 @@ BINARIES = 	 $(BINDIR)*.uf2 $(BINDIR)*.elf \
 #
 PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)exec.zip  \
 			 $(BINDIR)createblanks.zip $(BINDIR)makeimg.zip $(BINDIR)cvimg.zip \
-			 $(BINDIR)nxmit.zip
+			 $(BINDIR)nxmit.zip 
 
 # ***************************************************************************************
 #
@@ -46,7 +46,7 @@ PYTHONAPPS = $(BINDIR)makebasic.zip $(BINDIR)listbasic.zip $(BINDIR)exec.zip  \
 #
 # ***************************************************************************************
 
-all: documentation
+all: 
 	# Delete release files
 	$(CDEL) $(RELEASEFILE)
 	$(CDEL) $(TMPDIR)$(RELEASEFILE)
@@ -55,10 +55,6 @@ all: documentation
 	$(CMAKEDIR) $(TMPDIR)
 	$(CCOPY) $(BINARIES) $(TMPDIR)
 	$(CCOPY) $(PYTHONAPPS) $(TMPDIR)
-
-	# Create dirs for documents in own dir
-	$(CMAKEDIR) $(TMPDIR)$(S)documents
-	$(CCOPY) $(DOCUMENTS) $(TMPDIR)$(S)documents
 
 	# Create dir for crossdev & copy it
 	$(CMAKEDIR) $(TMPDIR)$(S)crossdev
@@ -70,21 +66,9 @@ all: documentation
 	$(CCOPY) -r $(EXAMPLEDIR)C $(TMPDIR)examples
 	$(CMAKEDIR) $(TMPDIR)$(S)examples$(S)basic
 	$(CCOPY) -r $(EXAMPLEDIR)basic-examples$(S)* $(TMPDIR)examples$(S)basic
+	$(CCOPY) -r $(ROOTDIR)basic$(S)libraries $(TMPDIR)
 
 	# Zip up and copy back
 	cd $(TMPDIR) ; zip -r $(RELEASEFILE) *
 	$(CCOPY) $(TMPDIR)$(RELEASEFILE) .
 
-# ***************************************************************************************
-#
-#								Make the documents
-#
-# ***************************************************************************************
-
-documentation:
-	# generate ODTs (requires 'pandoc')
-	pandoc -f latex -t odt -o $(DOCDIR)api.odt $(DOCDIR)source$(S)api.tex
-	# generate PDFs (requires 'texlive-latex', 'texlive-latexextra', 'texlive-latex-recommended')
-	# Yes, twice! Because tables!
-	pdflatex -output-directory=$(DOCDIR)       $(DOCDIR)source$(S)api.tex
-	pdflatex -output-directory=$(DOCDIR)       $(DOCDIR)source$(S)api.tex

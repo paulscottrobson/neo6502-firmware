@@ -85,7 +85,7 @@ class ImageExtractor(object):
 		best = 99999999
 		select = -1
 
-		for i in range(1,15):
+		for i in range(1,16):
 			s = self.score(rgb,self.palette[i])
 			#print("\t",i,rgb,self.palette[i],s)
 			if s < best:
@@ -138,7 +138,7 @@ class ImageCollection(object):
 	def add(self,image):
 		self.objects.append(image)
 		self.total += len(image.getData())
-		assert self.total < 20480-16,"Too many images"
+		assert self.total < 32768-256,"Too many images"
 	#
 	def render(self,fileName):
 		data = [ 0 ] * self.headerSize
