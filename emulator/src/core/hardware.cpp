@@ -72,8 +72,9 @@ static uint8_t convertError(const std::error_code& errcode) {
 	return FIOERROR_UNKNOWN;
 }
 
-static uint8_t convertError(int errno) {
-	return convertError(std::error_code(errno, std::system_category()));
+static uint8_t convertError(int e) {
+	const std::error_code ec = { e, std::system_category() };
+	return convertError(ec);
 }
 
 
