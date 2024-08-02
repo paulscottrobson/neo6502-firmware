@@ -74,3 +74,11 @@ GROUP 1 System
     DOCUMENTATION
         Writes a single character to the debug port (the UART on the Pico, or stderr on the emulator). This allows maximum flexibility.
         
+
+    FUNCTION 11 Return Version Information
+        DPARAMS[0] = VERSION_MAJOR;
+        DPARAMS[1] = VERSION_MINOR;
+        DPARAMS[2] = VERSION_PATCH;                
+    DOCUMENTATION
+        Reads the current version Major.Minor.Patch into Parameters:0..2 These values are guaranteed to be in the range 0.255
+        

@@ -1,10 +1,9 @@
-cls
-penup
-forward 20
-pendown 
-forward 20
-turtle home
-right 45
-turtle hide
-pendown 2
-forward 40
+
+while peek($FF00):wend
+poke $FF01,11
+poke $FF00,1
+while peek($FF00):wend
+v1 = peek($FF04)
+v2 = peek($FF05)
+v3 = peek($FF06)
+print v1,v2,v3
