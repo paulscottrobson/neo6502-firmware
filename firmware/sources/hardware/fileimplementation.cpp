@@ -20,6 +20,12 @@ static constexpr int COPY_BUFFER_SIZE = 1024;
 
 static FIL fileHandles[FIO_NUM_FILES];
 
+// ***************************************************************************************
+//
+//									Rename File
+//
+// ***************************************************************************************
+
 static uint8_t getAttributes(const FILINFO* fno) {
 	uint8_t attrs = 0;
 	if (fno->fattrib & AM_DIR)
