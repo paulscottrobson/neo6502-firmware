@@ -23,6 +23,23 @@ int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize);
 #define FIOATTR_READONLY (1<<3)
 #define FIOATTR_HIDDEN   (1<<4)
 
+enum FIOErrno {
+    FIOERROR_OK = 0,
+    FIOERROR_UNKNOWN = 1,
+    FIOERROR_FILE_NOT_FOUND = 2,
+    FIOERROR_FILE_EXISTS = 3,
+    FIOERROR_IS_A_DIRECTORY = 4,
+    FIOERROR_NOT_A_DIRECTORY = 5,
+    FIOERROR_OUT_OF_DISK_SPACE = 6,
+    FIOERROR_DISK_ERROR = 7,
+    FIOERROR_ACCESS_DENIED = 8,
+    FIOERROR_INVALID_PARAMETER = 9,
+    FIOERROR_DIRECTORY_NOT_EMPTY = 10,
+    FIOERROR_END_OF_DIRECTORY = 11,
+    FIOERROR_ALREADY_OPEN = 12,
+    FIOERROR_NOT_OPEN = 13,
+};
+
 uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFilename);
 uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilename);
 uint8_t FISDeleteFile(const std::string& filename);
