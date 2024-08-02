@@ -182,11 +182,28 @@ uint8_t FIOWriteFile(const std::string& filename,uint16_t startAddress,uint16_t 
 
 // ***************************************************************************************
 //
+//									Check file exists
+//
+// ***************************************************************************************
+
+uint8_t FIOExistsFile(const std::string& filename,uint8_t *pExistsFlag) {
+	uint8_t error,mode;
+	uint32_t size;
+	error = FIOStatFile(filename,&size,&mode);
+	*pExistsFlag = (error == 0) ? 1 : 0;
+	return 0;
+}
+
+// ***************************************************************************************
+//
 //									Rename File
 //
 // ***************************************************************************************
 
 uint8_t FIORenameFile(const std::string& oldFilename, const std::string& newFilename) {
+	uint8_t error,exists = 0;
+	error = FIOExistsFile(newFilename,&exists);
+	if (error != 0 || exists != 0) return 1;
 	return FISRenameFile(oldFilename, newFilename);
 }
 
