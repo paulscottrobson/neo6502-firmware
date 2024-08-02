@@ -419,11 +419,13 @@ uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {
 }
 
 uint8_t FISTellFileHandle(uint8_t fileno, uint32_t* offset) {
+
 	FILE* f = getF(fileno);
 	if (!f)
 		return 1;
 
 	*offset = ftell(f);
+	printf("FISTellFileHandle(%d, %d) -> ", fileno, *offset);
 	return 0;
 }
 
@@ -466,9 +468,10 @@ uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
 
 	printf("FISGetSizeFileHandle(%d) -> ", fileno);
 	errno = 0;
-	size_t oldpos = fseek(f, 0, SEEK_END);
+	size_t oldpos = ftell(f);
+	fseek(f, 0, SEEK_END);
 	*size = ftell(f);
-	fseek(f, SEEK_SET, oldpos);
+	fseek(f, oldpos, SEEK_SET);
 	printf("%d: %s\n", *size, strerror(errno));
 
 	return 0;

@@ -288,6 +288,21 @@ GROUP 3 File I/O
         
         The directory bit cannot be changed. Obviously.
 
+
+    FUNCTION 22 Check End of File.    
+        *DERROR = FIOIsEndOfFileHandle(DPARAMS[0],&u2);
+        DPARAMS[0] = u2 ? 0xFF:0x00;
+
+    DOCUMENTATION
+        Returns the end of file status of an opened file. On input:
+        
+        Parameter:0 contains the file channel to operate on.
+
+        On output:
+        Parameter:0 is non-zero if the file is at the end of the file.
+        
+        This call should be used on open files and may return an error if the file is closed.
+
     FUNCTION 32 List Filtered
         FIODirectory(DSPGetString(DCOMMAND,4));
     DOCUMENTATION

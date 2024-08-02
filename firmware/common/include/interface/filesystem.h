@@ -76,7 +76,7 @@ uint8_t FIOReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size);
 uint8_t FIOWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size);
 uint8_t FIOGetSizeFileHandle(uint8_t fileno, uint32_t* size);
 uint8_t FIOSetSizeFileHandle(uint8_t fileno, uint32_t size);
-
+uint8_t FIOIsEndOfFileHandle(uint8_t fileno,uint8_t *pIsEndOfFile);
 #endif
 
 // ***************************************************************************************

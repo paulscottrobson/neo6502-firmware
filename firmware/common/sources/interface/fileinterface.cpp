@@ -242,6 +242,23 @@ uint8_t FIOStatFile(const std::string& filename, uint32_t* length, uint8_t* mode
 
 // ***************************************************************************************
 //
+//								Check End of File
+//
+// ***************************************************************************************
+
+uint8_t FIOIsEndOfFileHandle(uint8_t fileno,uint8_t *pIsEndOfFile) {
+	uint32_t size,pos;
+	uint8_t err;
+	err = FIOGetSizeFileHandle(fileno,&size);
+	if (err != 0) return err;	
+	err = FIOTellFileHandle(fileno,&pos);	
+	if (err != 0) return err;	
+	*pIsEndOfFile = (size == pos) ? 1 : 0;
+	return 0;
+}
+
+// ***************************************************************************************
+//
 //								Directory enumeration
 //
 // ***************************************************************************************

@@ -1,9 +1,42 @@
+workspace = alloc(4)
 
-while peek($FF00):wend
-poke $FF01,11
-poke $FF00,1
-while peek($FF00):wend
-v1 = peek($FF04)
-v2 = peek($FF05)
-v3 = peek($FF06)
-print v1,v2,v3
+open output 1,"test.dat"
+print #1,"Hello, world !"
+close 1
+
+open input 1,"test.dat"
+input #1,a$
+close 1
+print "(";a$;")"
+
+open input 2,"test.dat"
+repeat
+	call readByte(2,c)
+	print i,c
+	call iseof(2,c)
+	print c
+until c <> 0
+close 1
+end
+
+proc readbyte(f,ref c)
+	while peek($FF00):wend
+	poke $FF04,f
+	poke $FF05,workspace & 255
+	poke $FF06,workspace >> 8
+	poke $FF07,1
+	poke $FF08,0
+	poke $FF01,8
+	poke $FF00,3
+	while peek($FF00):wend
+	c = peek(workspace)	
+endproc
+
+proc iseof(f,ref t)	
+	while peek($FF00):wend
+	poke $FF04,f
+	poke $FF01,22
+	poke $FF00,3
+	while peek($FF00):wend
+	t = peek($FF04)	
+endproc
