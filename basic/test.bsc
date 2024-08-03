@@ -14,7 +14,7 @@ repeat
 	call readByte(2,c)
 	print i,c
 	call iseof(2,c)
-	print c
+	print c,eof(2)
 until c <> 0
 close 1
 end
