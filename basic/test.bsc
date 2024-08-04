@@ -5,7 +5,9 @@ print line #1,"Line 3",""
 close 1
 
 open input 1,"test.txt"
-for i = 1 to 4
-input line #1,a$
-next
+print eof(1)
+while eof(1) = 0
+	input line #1,a$
+	print "[";a$;"]"
+wend
 close 1
