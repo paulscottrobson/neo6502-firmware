@@ -14,7 +14,7 @@
 
 ; ************************************************************************************************
 ;
-;									Handle line output
+;									Handle line input
 ;
 ; ************************************************************************************************
 
@@ -24,14 +24,41 @@ InputLineHandler:
 
 ; ************************************************************************************************
 ;
-;									Handle line input
+;									Handle line output
 ;
 ; ************************************************************************************************
 
 OutputLineHandler:
-		jsr 	IOLCommonChannelCode
-		.byte 	3		
-
+		jsr 	IOLCommonChannelCode		
+_OLHLoop:
+		lda 	(codePtr),y 				; check for EOL or colon
+		cmp 	#KWD_COLON
+		beq 	_OLHExit
+		cmp 	#KWD_SYS_END
+		beq 	_OLHExit
+		jsr 	EXPEvalString 				; string, pointer in zTemp0
+		lda 	(zTemp0) 					; get length into X
+		beq 	_OLHDone 					; handle zero length.
+		tax
+		phy
+		ldy 	#1
+_OLHWriteLoop:
+		lda 	(zTemp0),y 					; write each character out.
+		iny
+		jsr 	OFHWriteByte 				
+		dex
+		bne 	_OLHWriteLoop
+		ply
+_OLHDone:		
+		lda 	#10 						; We use LF to output here
+		jsr 	OFHWriteByte
+		lda 	(codePtr),y 				; consume comma if there is one.
+		cmp 	#KWD_COMMA
+		bne 	_OLHLoop
+		iny
+		bra 	_OLHLoop
+_OLHExit:
+		rts
 
 ; ************************************************************************************************
 ;
