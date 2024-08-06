@@ -272,7 +272,9 @@ uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attr
 	printf("FISStatFile('%s') -> ", abspath.c_str());
 
 	try {
-		*length = std::filesystem::file_size(abspath);
+		if (!std::filesystem::is_directory(abspath)) {
+			*length = std::filesystem::file_size(abspath);
+		}
 		*attribs = getAttributes(abspath);
 		printf("OK; length=0x%04x; permissions=0x%02x\n", *length, *attribs);
 		return 0;
