@@ -1,16 +1,7 @@
-f$ = "test.xxx"
-f$ = "testdir2"
-fName = $D000
-poke fName,len(f$)
-for i = 1 to len(f$):poke fname+i,asc(mid$(f$,i)):next
-
-while peek($FF00):wend
-doke $FF04,$D000
-poke $FF01,16
-poke $FF00,3
-while peek($FF00):wend
-
-result = peek($FF02)
-size = deek($FF04)
-attrib = peek($FF08)
-print result,size,attrib
+cls
+repeat
+	for x = 0 to 319
+		y = x * 2 \ 3
+		rect frame 0,0 ink rand(16) to x,y
+	next
+until false
