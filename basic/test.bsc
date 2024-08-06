@@ -1,13 +1,16 @@
-open output 1,"test.txt"
-a$ = "Line 2"
-print line #1,"Hello world!",a$
-print line #1,"Line 3",""
-close 1
+f$ = "test.xxx"
+f$ = "testdir2"
+fName = $D000
+poke fName,len(f$)
+for i = 1 to len(f$):poke fname+i,asc(mid$(f$,i)):next
 
-open input 1,"test.txt"
-print eof(1)
-while eof(1) = 0
-	input line #1,a$
-	print "[";a$;"]"
-wend
-close 1
+while peek($FF00):wend
+doke $FF04,$D000
+poke $FF01,16
+poke $FF00,3
+while peek($FF00):wend
+
+result = peek($FF02)
+size = deek($FF04)
+attrib = peek($FF08)
+print result,size,attrib
