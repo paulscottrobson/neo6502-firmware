@@ -28,6 +28,9 @@ int SNDGetChannelCount(void) {
     return 1;
 }
 
+void SNDMuteAllChannels(void) {    
+}
+
 // ***************************************************************************************
 //
 //            	Get the next sample for the driver provided hardware rate.

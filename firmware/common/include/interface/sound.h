@@ -54,6 +54,7 @@ uint16_t SNDGetNextSample(void);
 void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c);
 
 void SNDManager(void);
+void SNDMuteAllChannels(void);
 void SNDResetAll(void);
 uint8_t SNDResetChannel(int channel);
 uint8_t SNDPlay(int channelID,SOUND_UPDATE *u);
