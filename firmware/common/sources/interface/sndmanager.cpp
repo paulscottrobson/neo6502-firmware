@@ -13,7 +13,7 @@
 #include "common.h"
 
 static bool isInitialised = false;
-static SOUND_CHANNEL channel[SOUND_CHANNELS];
+static SOUND_CHANNEL channel[SOUND_CHANNELS_MAX];
 
 // ***************************************************************************************
 //
@@ -22,7 +22,7 @@ static SOUND_CHANNEL channel[SOUND_CHANNELS];
 // ***************************************************************************************
 
 void SNDResetAll(void) {
-	for (int i = 0;i < SOUND_CHANNELS;i++) {
+	for (int i = 0;i < SNDGetChannelCount();i++) {
 		SNDResetChannel(i);
 	}
 }
@@ -34,7 +34,7 @@ void SNDResetAll(void) {
 // ***************************************************************************************
 
 uint8_t SNDResetChannel(int channelID) {
-	if (channelID >= SOUND_CHANNELS) return 1;
+	if (channelID >= SNDGetChannelCount()) return 1;
 	SOUND_CHANNEL *c = &channel[channelID];  									// Initialise channel
 	c->isPlayingNote = false;
 	c->tick50Remaining = 0;
@@ -66,7 +66,7 @@ void SNDStartup(void) {
 // ***************************************************************************************
 
 int SNDGetNoteCount(int channelID) {
-	if (channelID < 0 || channelID > SOUND_CHANNELS) return -1;
+	if (channelID < 0 || channelID > SNDGetChannelCount()) return -1;
 	SOUND_CHANNEL *c = &channel[channelID];
 	return c->queueCount + (c->isPlayingNote ? 1 : 0);  						// # in queue + 1 if playing
 }
@@ -83,7 +83,8 @@ void SNDPlayNextNote(int channelID) {
 	SOUND_QUEUE_ELEMENT *qe = &(c->queue[0]); 									// Head of the queue.
 	c->currentFrequency = qe->frequency;
 	c->currentSlide = qe->slide;
-
+	c->currentType = qe->type;
+	c->currentVolume = qe->volume;
 	c->isPlayingNote = true;  													// Set up the channel data
 	c->tick50Remaining = qe->timeCS / 2;  
 	SNDUpdateSoundChannel(channelID,c);  										// Update it
@@ -100,7 +101,7 @@ void SNDPlayNextNote(int channelID) {
 // ***************************************************************************************
 
 uint8_t SNDPlay(int channelID,SOUND_UPDATE *u) {
-	if (channelID >= SOUND_CHANNELS) return 1;
+	if (channelID >= SNDGetChannelCount()) return 1;
 	SOUND_CHANNEL *c = &channel[channelID];
 	if (c->queueCount != SOUND_QUEUE_SIZE) {  									// If queue not full
 		SOUND_QUEUE_ELEMENT *qe = &(c->queue[c->queueCount]);  					// Add to queue.
@@ -110,7 +111,8 @@ uint8_t SNDPlay(int channelID,SOUND_UPDATE *u) {
 			qe->slide = (u->slide & 0x8000)?-1:1;
 		}
 		qe->timeCS = u->timeCS;
-		qe->soundType = 0;
+		qe->type = u->type;
+		qe->volume = u->volume;
 		c->queueCount++;
 	}
 	if (!c->isPlayingNote) {  													// Not playing anything, try a new note.
@@ -130,7 +132,7 @@ void SNDManager(void) {
 		SNDResetAll();
 		isInitialised = true;
 	}
-	for (int channelID = 0;channelID < SOUND_CHANNELS;channelID++) {  			// Process each.
+	for (int channelID = 0;channelID < SNDGetChannelCount();channelID++) {  	// Process each.
 		SOUND_CHANNEL *c = &channel[channelID];
 		if (c->isPlayingNote) {  												// Playing a note.
 			if (c->tick50Remaining == 0) {  									// End of note ?

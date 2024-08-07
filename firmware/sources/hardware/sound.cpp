@@ -17,13 +17,19 @@
 #include "system/dvi_video.h"
 
 #define AUDIO_PIN 	(20) 					// Beeper pin.
-#define SAMPLE_DIVIDER (32)
+#define SAMPLE_DIVIDER (32)                 // Divider, affects the interrupts / second of the PWM sample output
 
 static int adder = 0;
 static int wrapper = 0;
 static int state = 0;
-
+static int soundType = 0;
 static int sampleFrequency = -1;
+
+// ***************************************************************************************
+//
+//      Function that returns the sample rate in Hz of the implementeing hardware
+//
+// ***************************************************************************************
 
 int SNDGetSampleFrequency(void) {
     if (sampleFrequency < 0) {
@@ -31,6 +37,12 @@ int SNDGetSampleFrequency(void) {
     }
     return sampleFrequency;
 }
+
+// ***************************************************************************************
+//
+//                                  Interrupt Handler
+//
+// ***************************************************************************************
 
 void pwm_interrupt_handler() {
     pwm_clear_irq(pwm_gpio_to_slice_num(AUDIO_PIN));    
@@ -40,7 +52,11 @@ void pwm_interrupt_handler() {
     if (wrapper++ >= adder) {
         wrapper = 0;
         state = state ^ 0xFF;
-        pwm_set_gpio_level(AUDIO_PIN,state);
+        if (soundType == SOUNDTYPE_NOISE) {
+            pwm_set_gpio_level(AUDIO_PIN,rand() & 0xFF);
+        } else {
+            pwm_set_gpio_level(AUDIO_PIN,state);
+        }
     }
 }
 
@@ -77,6 +93,7 @@ void SNDInitialise(void) {
 void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
     if (c->isPlayingNote) {    
         adder = SNDGetSampleFrequency() / c->currentFrequency / 2;
+        soundType = c->currentType;
     } else {
         adder = 0;
     }

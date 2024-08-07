@@ -1,43 +1,30 @@
 // ***************************************************************************************
 // ***************************************************************************************
 //
-//      Name :      sfxmanager.cpp
+//      Name :      sndcreator.cpp
 //      Authors :   Paul Robson (paul@robsons.org.uk)
-//				   	Turi Scandurra
-//      Date :      9th January 2024
+//      Date :      7th August 2024
 //      Reviewed :  No
-//      Purpose :   Sound Effects Manager
+//      Purpose :   Waveform generator, default sound system.
 //
 // ***************************************************************************************
 // ***************************************************************************************
 
 #include "common.h"
 
-#include "data/sfxdata.h"
-
 // ***************************************************************************************
 //
-//									Play a sound effect
+//            Return number of channels supported by this implementation
 //
 // ***************************************************************************************
 
-uint8_t SFXPlay(int channelID,int effect) {
-	if (channelID >= SNDGetChannelCount()) return 1;  							// Check legal channel/sfx
-	if (effect >= SFX_COUNT) return 2;
-	const uint16_t *notes = sfxData[effect];  									// List to queue
-	while (*notes != 0xFFFF) {   												// Queue them
-		SOUND_UPDATE u;
-		u.frequency = notes[0];u.timeCS = notes[1];u.slide = 0;
-		SNDPlay(channelID,&u);
-		notes += 2;
-	}
-	return 0;
+int SNDGetChannelCount(void) {
+    return 1;
 }
 
 // ***************************************************************************************
 //
 //		Date 		Revision
 //		==== 		========
-//		15-01-24 	Added sliding option.
 //
 // ***************************************************************************************
