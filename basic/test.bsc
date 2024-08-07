@@ -1,7 +1,0 @@
-cls
-repeat
-	for x = 0 to 319
-		y = x * 2 \ 3
-		rect frame 0,0 ink rand(16) to x,y
-	next
-until false
