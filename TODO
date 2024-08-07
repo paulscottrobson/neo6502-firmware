@@ -1,0 +1,5 @@
+TODO List
+
+- implement the emulator hardware, SNDUpdateSndChannel is disabled so emulator sound will not currently work.
+	- emulator has to correctly return the sample buffers and fill them by calling nextsample.
+	

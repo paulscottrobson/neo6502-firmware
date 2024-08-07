@@ -19,10 +19,7 @@
 #define AUDIO_PIN 	(20) 					// Beeper pin.
 #define SAMPLE_DIVIDER (32)                 // Divider, affects the interrupts / second of the PWM sample output
 
-static int adder = 0;
-static int wrapper = 0;
-static int state = 0;
-static int soundType = 0;
+
 static int sampleFrequency = -1;
 
 // ***************************************************************************************
@@ -46,18 +43,7 @@ int SNDGetSampleFrequency(void) {
 
 void pwm_interrupt_handler() {
     pwm_clear_irq(pwm_gpio_to_slice_num(AUDIO_PIN));    
-
-    if (adder == 0) return;
-
-    if (wrapper++ >= adder) {
-        wrapper = 0;
-        state = state ^ 0xFF;
-        if (soundType == SOUNDTYPE_NOISE) {
-            pwm_set_gpio_level(AUDIO_PIN,rand() & 0xFF);
-        } else {
-            pwm_set_gpio_level(AUDIO_PIN,state);
-        }
-    }
+    pwm_set_gpio_level(AUDIO_PIN,SNDGetNextSample());
 }
 
 // ***************************************************************************************
@@ -84,20 +70,6 @@ void SNDInitialise(void) {
     pwm_set_irq_enabled(audio_pin_slice, true);
 }
 
-// ***************************************************************************************
-//
-//									Play note on channel
-//
-// ***************************************************************************************
-
-void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
-    if (c->isPlayingNote) {    
-        adder = SNDGetSampleFrequency() / c->currentFrequency / 2;
-        soundType = c->currentType;
-    } else {
-        adder = 0;
-    }
-}
 
 // ***************************************************************************************
 //
