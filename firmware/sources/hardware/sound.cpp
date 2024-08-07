@@ -19,7 +19,6 @@
 #define AUDIO_PIN 	(20) 					// Beeper pin.
 #define SAMPLE_DIVIDER (32)                 // Divider, affects the interrupts / second of the PWM sample output
 
-
 static int sampleFrequency = -1;
 
 // ***************************************************************************************
