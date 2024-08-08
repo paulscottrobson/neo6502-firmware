@@ -42,7 +42,7 @@ int SNDGetSampleFrequency(void) {
 
 void pwm_interrupt_handler() {
     pwm_clear_irq(pwm_gpio_to_slice_num(AUDIO_PIN));    
-    pwm_set_gpio_level(AUDIO_PIN,SNDGetNextSample());
+    pwm_set_gpio_level(AUDIO_PIN,SNDGetNextSample()+128);
 }
 
 // ***************************************************************************************

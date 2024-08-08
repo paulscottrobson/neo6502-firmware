@@ -17,6 +17,7 @@ static int wrapper = 0;
 static int state = 0;
 static int soundType = 0;
 static int level = 0;
+static int volume = 127;
 
 // ***************************************************************************************
 //
@@ -37,13 +38,14 @@ void SNDMuteAllChannels(void) {
 //
 // ***************************************************************************************
 
-uint16_t SNDGetNextSample(void) {
+int16_t SNDGetNextSample(void) {
 
     if (adder == 0) return 0;
 
     if (wrapper++ >= adder) {
         wrapper = 0;
-        level = state = state ^ 0xFF;
+        state = state ^ 0xFF;
+        level = state ? volume : -volume;
         if (soundType == SOUNDTYPE_NOISE) {
             level = rand() & 0xFF;
         }

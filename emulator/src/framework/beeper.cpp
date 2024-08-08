@@ -84,8 +84,7 @@ static void audioCallback(void* userdata,uint8_t* stream,int len) {
 	// Write data to the entire buffer by iterating through all samples and
 	// channels.
 	for (int sample = 0; sample < m_obtainedSpec.samples; ++sample) {
-		uint16_t nextSample = SNDGetNextSample();
-		double data = (nextSample-128)/128.0;
+		double data = SNDGetNextSample()/128.0;
 
 		// Write the same data to all channels
 		for (int channel = 0; channel < m_obtainedSpec.channels; ++channel) {
