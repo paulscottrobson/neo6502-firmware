@@ -21,6 +21,7 @@
 #include "dvi_serialiser.h"
 #include "system/common_dvi_pin_configs.h"
 #include "hardware/structs/bus_ctrl.h"
+#include "hardware/clocks.h"
 
 // ***************************************************************************************
 //
