@@ -50,7 +50,7 @@ void SNDInitialise(void);
 int SNDGetSampleFrequency(void);
 
 int SNDGetChannelCount(void);
-uint16_t SNDGetNextSample(void);
+int16_t SNDGetNextSample(void);
 void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c);
 
 void SNDManager(void);

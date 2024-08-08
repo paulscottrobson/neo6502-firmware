@@ -62,7 +62,7 @@ GROUP 8 Sound
         su.timeCS = DSPGetInt16(DCOMMAND,7);
         su.slide = DSPGetInt16(DCOMMAND,9);
         su.type = DCOMMAND[11];
-        su.volume = DCOMMAND[12];
+        su.volume = DCOMMAND[12] * 127 / 100;
         *DERROR = SNDPlay(DPARAMS[0],&su);
     DOCUMENTATION
         Queue a sound. Refer to Section \#\ref{sound} "Sound" for details. This is an extension of call 4 to support different waveform types and volumes. The source parameter is no longer used.

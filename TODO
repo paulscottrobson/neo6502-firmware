@@ -1,4 +1,8 @@
 TODO List
 
-- extend the functionality, now emulator/hardware should be the same save for the sample rate.
+- BASIC API, check white noise.
+- Convert to multi channel with one channel
+- Mixing and chords.
+
+
 	
