@@ -147,8 +147,8 @@ void SNDManager(void) {
 				c->tick50Remaining--;
 				if (c->currentSlide != 0) {
 					c->currentFrequency += c->currentSlide;
-					if (c->currentFrequency < 200) c->currentFrequency += 1000;
-					if (c->currentFrequency > 1200) c->currentFrequency -= 1000;
+					if (c->currentFrequency < 100) c->currentFrequency += 1100;
+					if (c->currentFrequency > 1200) c->currentFrequency -= 1100;
 					if (c->currentFrequency > 4000) c->currentFrequency = 0;
 					SNDUpdateSoundChannel(channelID,c);
 				}
