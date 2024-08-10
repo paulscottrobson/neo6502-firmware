@@ -19,9 +19,11 @@ import re,sys
 # *******************************************************************************************
 
 class ProgramLister(object):
-	def __init__(self,fileName):
+	def __init__(self,fileName,showLineNumbers):
 		self.bin = bytearray(open(fileName,"rb").read(-1))
 		self.ts = TokenSet()
+		self.dollar = self.ts.getByName("$").getID()
+		self.showLineNumbers = showLineNumbers
 
 	def list(self):
 		code = self.bin[0] << 8 
@@ -30,7 +32,7 @@ class ProgramLister(object):
 			code += self.bin[code]
 
 	def listLine(self,lineStart):
-		self.text = "{0} ".format(self.bin[lineStart+1]+self.bin[lineStart+2] * 256)
+		self.text = "{0} ".format(self.bin[lineStart+1]+self.bin[lineStart+2] * 256) if self.showLineNumbers else ""
 		p = lineStart + 3
 		while self.bin[p] != self.ts.getByName("!!END").getID():
 			p = self.listOneElement(p)
@@ -64,6 +66,15 @@ class ProgramLister(object):
 				p += 1
 			self.append(str(v))
 
+		elif n == self.dollar:
+			self.append(" $")
+			p += 1
+			v = 0 
+			while self.bin[p] >= 0x40 and self.bin[p] < 0x80:
+				v = (v << 6) + self.bin[p] - 0x40
+				p += 1
+			self.append("{0:x}".format(v))
+
 		elif n >= 0x80 or (n >= 0x20 and n < 0x40):
 			p += 1
 			if n == self.ts.getByName("!!SH1").getID():
@@ -72,7 +83,8 @@ class ProgramLister(object):
 			if n == self.ts.getByName("!!SH2").getID():
 				n = self.bin[p] + 0x200
 				p += 1
-			self.append(self.ts.getByID(n).getName())
+			s = self.ts.getByID(n).getName()
+			self.append(s)
 
 		else:
 			self.text += "[{0:02x}]".format(self.bin[p])
@@ -81,7 +93,7 @@ class ProgramLister(object):
 		return p
 
 	def append(self,s):
-		if self.type(self.text[-1]) == self.type(s[0]):
+		if self.text != "" and self.type(self.text[-1]) == self.type(s[0]):
 			self.text += " "
 		self.text += s
 
@@ -93,5 +105,13 @@ class ProgramLister(object):
 	def decode(self,d):
 		return "{0}{1}".format("" if (d & 240) == 240 else d >> 4,"" if (d & 15) == 15 else (d & 15))
 
+showLineNumbers = True
+if len(sys.argv) == 1:
+	print("listbasic.zip <options> <tokenised files>")
+	print("\t-l\t\tSuppress line numbers.")
+
 for f in sys.argv[1:]:
-	ProgramLister(f).list()
+	if f == "-l":
+		showLineNumbers = False
+	else:
+		ProgramLister(f,showLineNumbers).list()
