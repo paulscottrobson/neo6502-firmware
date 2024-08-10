@@ -309,6 +309,13 @@ uint8_t FIOSetFileAttributes(const std::string& filename, uint8_t attribs) {
 // ***************************************************************************************
 
 uint8_t FIOOpenFileHandle(uint8_t fileno, const std::string& filename, uint8_t mode) {
+	if (mode == FIOMODE_RDWR_CREATE) {  											// If open truncate 
+		uint8_t exists;
+		if (FIOExistsFile(filename,&exists) == 0) {  								// If file exists
+			uint8_t error = FIODeleteFile(filename);  								// try to delete it, as we truncate it anyway !
+			if (error) return error;
+		}
+	}
 	return FISOpenFileHandle(fileno, filename, mode);
 }
 
