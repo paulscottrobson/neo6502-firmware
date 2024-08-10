@@ -1,3 +1,15 @@
-sound 0,740,30
-sound 0,320,30	
-sound 0,100,100,14
+call snd(0,660,50,0,0,100)
+call snd(0,440,50,0,0,30)
+end
+
+proc snd(ch,fq,ms,sl,ty,v)
+	while peek($FF00):wend
+	poke $FF04,ch
+	doke $FF05,fq
+	doke $FF07,ms
+	doke $FF09,sl
+	poke $FF0B,ty
+	poke $FF0C,v
+	poke $FF01,7
+	poke $FF00,8
+endproc

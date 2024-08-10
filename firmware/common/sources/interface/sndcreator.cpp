@@ -63,6 +63,7 @@ void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
     if (c->isPlayingNote) {    
         adder = SNDGetSampleFrequency() / c->currentFrequency / 2;
         soundType = c->currentType;
+        volume = c->currentVolume;
     } else {
         adder = 0;
     }
