@@ -1,9 +1,9 @@
-call snd(0,440,100,0,0,100)
-call snd(1,220,100,120,0,100)
-call snd(2,880,100,0,0,100)
+call snd(0,660,50,0,0,100)
+call snd(0,440,50,0,0,0)
 end
 
 proc snd(ch,fq,ms,sl,ty,v)
+	print v
 	while peek($FF00):wend
 	poke $FF04,ch
 	doke $FF05,fq
