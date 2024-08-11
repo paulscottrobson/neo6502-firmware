@@ -12,12 +12,15 @@
 
 #include "common.h"
 
-static int adder = 0;
-static int wrapper = 0;
-static int state = 0;
-static int soundType = 0;
-static int level = 0;
-static int volume = 127;
+#define CHANNEL_COUNT   (4)
+
+struct _ChannelStatus {
+    int adder;
+    int wrapper;
+    int state;
+    int soundType;
+    int volume;
+} audio[CHANNEL_COUNT];
 
 // ***************************************************************************************
 //
@@ -26,10 +29,20 @@ static int volume = 127;
 // ***************************************************************************************
 
 int SNDGetChannelCount(void) {
-    return 1;
+    return CHANNEL_COUNT;
 }
 
+// ***************************************************************************************
+//
+//                                  Mute all channels
+//
+// ***************************************************************************************
+
 void SNDMuteAllChannels(void) {    
+    for (int i = 0;i < CHANNEL_COUNT;i++) {
+        struct _ChannelStatus *cs = &audio[i];
+        cs->adder = cs->wrapper = cs->state = cs->soundType = cs->volume = 0;
+    }
 }
 
 // ***************************************************************************************
@@ -40,16 +53,33 @@ void SNDMuteAllChannels(void) {
 
 int16_t SNDGetNextSample(void) {
 
-    if (adder == 0) return 0;
+    static int activeCount = 0;
 
-    if (wrapper++ >= adder) {
-        wrapper = 0;
-        state = state ^ 0xFF;
-        level = state ? volume : -volume;
-        if (soundType == SOUNDTYPE_NOISE) {
-            level = rand() & 0xFF;
+    int level = 0;                                                                  // Summative adder
+    int channelsActive = activeCount;                                               // We have a very simple form of AGC, more than one channel scales volume
+    activeCount = 0;                                                                // Reset the count
+
+    for (int i = 0;i < CHANNEL_COUNT;i++) {                                         // Scan the channels
+        struct _ChannelStatus *cs = &audio[i];                                          
+        if (cs->volume != 0) {                                                      // Channel on.
+            activeCount++;                                                          // Bump active count
+            if (cs->wrapper++ >= cs->adder) {                                       // Time to change the output level.
+                cs->wrapper = 0;
+                cs->state ^= 0xFF;
+                switch (cs->soundType) {
+                    case SOUNDTYPE_NOISE:                                           // Random white noise
+                        level += rand() % (cs->volume * 2) - cs->volume;break;
+                    default:                                                        // Square wave
+                        level += cs->state ? cs->volume : -cs->volume;break;
+                }
+            }
         }
 	}      
+    if (channelsActive > 1) {                                                       // If >= 2 channels scale output by 75% to reduce clipping.
+        level = level * 3 / 4;  
+    }
+    if (level < -127) level = -127;                                                 // Clip into range
+    if (level > 127) level = 127;
   	return level;
 }
 
@@ -61,11 +91,11 @@ int16_t SNDGetNextSample(void) {
 
 void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
     if (c->isPlayingNote) {    
-        adder = SNDGetSampleFrequency() / c->currentFrequency / 2;
-        soundType = c->currentType;
-        volume = c->currentVolume;
+        audio[channel].adder = SNDGetSampleFrequency() / c->currentFrequency / 2;
+        audio[channel].soundType = c->currentType;
+        audio[channel].volume = c->currentVolume;
     } else {
-        adder = 0;
+        audio[channel].volume = 0;
     }
 }
 
