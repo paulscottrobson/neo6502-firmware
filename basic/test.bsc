@@ -1,18 +1,9 @@
-sound 0,100,100,14
-end
+if exists("test.txt") then mos "del test.txt"
 
-call snd(0,660,50,0,0,100)
-call snd(0,440,50,0,0,30)
-end
-
-proc snd(ch,fq,ms,sl,ty,v)
-	while peek($FF00):wend
-	poke $FF04,ch
-	doke $FF05,fq
-	doke $FF07,ms
-	doke $FF09,sl
-	poke $FF0B,ty
-	poke $FF0C,v
-	poke $FF01,7
-	poke $FF00,8
-endproc
+open output 1,"test.txt"
+print #1,"Hello world"
+close 1
+cat
+open output 1,"test.txt"
+close 1
+cat
