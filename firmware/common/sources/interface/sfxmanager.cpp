@@ -27,8 +27,19 @@ uint8_t SFXPlay(int channelID,int effect) {
 	const uint16_t *notes = sfxData[effect];  									// List to queue
 	while (*notes != 0xFFFF) {   												// Queue them
 		SOUND_UPDATE u;
-		u.frequency = notes[0];u.timeCS = notes[1];u.slide = 0;
-		SNDPlay(channelID,&u);
+		u.timeCS = notes[1];u.slide = 0;u.volume = 100;u.type = 0;
+		switch(notes[0]) {
+			case 0xFFFE:
+				u.frequency = 100;u.type = 1;
+				break;
+			case 0xFFFD:
+				u.frequency = 200;u.type = 1;u.slide = 40;	
+				break;
+			default:
+				u.frequency = notes[0];
+				break;
+		}
+		SNDPlay(channelID,&u);		
 		notes += 2;
 	}
 	return 0;

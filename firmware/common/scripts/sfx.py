@@ -24,18 +24,12 @@ class Translator(object):
 	def translate(self,sfx):							
 		if sfx[0].startswith("EXPL"):
 			tSample = 1
-			xlat = []
-			for i in range(0,int(sfx[0][4:]) // (tSample+1)):
-				xlat.append(random.randint(0,500)+200)
-				xlat.append(tSample)
+			xlat = [ 0xFFFE,int(sfx[0][4:]) ]
 				
 		elif sfx[0].startswith("LAS"):
 			tSample = 1
-			xlat = []
-			length = int(sfx[0][3:]) // (tSample+1)
-			for i in range(0,length):
-				xlat.append(600-400*i // length)
-				xlat.append(tSample)
+			xlat = [ 0xFFFD, int(sfx[0][3:])]
+
 		else:
 			sfx = sfx[1:]
 			xlat = []
