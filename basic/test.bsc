@@ -1,4 +1,4 @@
-noise 1,210,100
+sfx 0,7
 end
 
 proc snd(ch,fq,ms,sl,ty,v)
