@@ -21,7 +21,7 @@ struct _ChannelStatus {
     int state;
     int soundType;
     int volume;
-    bool modulate;
+    int samplePos;
 } audio[CHANNEL_COUNT];
 
 // ***************************************************************************************
@@ -70,11 +70,8 @@ int16_t SNDGetNextSample(void) {
                 cs->state ^= 0xFF;
                 switch (cs->soundType) {
                     case SOUNDTYPE_NOISE:   
-                        if (cs->modulate) {
-                            level += cs->state ? rand() % cs->volume : -(rand() % cs->volume);
-                        } else {
-                            level += rand() % (cs->volume * 2) - cs->volume;
-                        }
+                        level += ((noisePattern[cs->samplePos] - 0x80) * cs->volume / 128);
+                        if (++cs->samplePos == NOISE_SIZE) cs->samplePos = 0;
                         break;
                     default:                                                        // Square wave
                         level += cs->state ? cs->volume : -cs->volume;break;
@@ -101,11 +98,7 @@ void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
         audio[channel].adder = SNDGetSampleFrequency() / c->currentFrequency / 2;
         audio[channel].soundType = c->currentType;
         audio[channel].volume = c->currentVolume;
-        audio[channel].modulate = true;
-        if (c->currentFrequency <= 100) {
-            audio[channel].modulate = false;
-            audio[channel].adder = SNDGetSampleFrequency() / 440 / 2;
-        }
+        audio[channel].samplePos = 0;
     } else {
         audio[channel].volume = 0;
     }
