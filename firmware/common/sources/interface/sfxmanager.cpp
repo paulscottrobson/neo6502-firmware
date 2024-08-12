@@ -30,7 +30,7 @@ uint8_t SFXPlay(int channelID,int effect) {
 		u.timeCS = notes[1];u.slide = 0;u.volume = 100;u.type = 0;
 		switch(notes[0]) {
 			case 0xFFFE:
-				u.frequency = 100;u.type = 1;
+				u.frequency = 2000;u.type = 1;
 				break;
 			case 0xFFFD:
 				u.frequency = 200;u.type = 1;u.slide = 40;	
