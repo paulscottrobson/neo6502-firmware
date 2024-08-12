@@ -18,7 +18,15 @@
 
 		.section code
 
+Command_NOISE:  ;; [noise]
+		lda 	#1
+		sta 	soundType
+		bra 	SoundCommon
+		
 Command_SOUND:	;; [sound]
+		stz 	soundType
+
+SoundCommon:		
 		lda 	#$FF  						; this is to detect SOUND CLEAR vs SOUND n CLEAR
 		sta 	XSNumber0 		
 		lda 	(codePtr),y 				; is first Shift then check for SOUND CLEAR
@@ -65,9 +73,13 @@ _CSNoSlide:
 		sta 	ControlParameters+5
 		lda 	XSNumber1+3
 		sta 	ControlParameters+6
-		stz 	ControlParameters+7
-		.DoSendMessage 						; play that sound
-		.byte 	8,4		
+		lda 	soundType
+		sta 	ControlParameters+7
+		lda 	#100
+		sta 	ControlParameters+8
+
+		.DoSendMessage 						; play that sound (extended)
+		.byte 	8,7		
 		.DoWaitMessage
 _CSCheckError:
 		lda 	ControlError

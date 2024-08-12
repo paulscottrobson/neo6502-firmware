@@ -139,6 +139,8 @@ fhCurrentChannel:							; channel for i/o
 		.fill 	1	
 fhBuffer: 									; set up buffer
 		.fill 	1		
+soundType: 									; sound type 
+		.fill 	1		
 		
 ; ************************************************************************************************
 ;	

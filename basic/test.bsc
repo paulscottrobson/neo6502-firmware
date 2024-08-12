@@ -1,6 +1,4 @@
-call snd(0,440,100,0,0,100)
-call snd(1,220,100,120,0,100)
-call snd(2,880,100,0,0,100)
+noise 1,220,100
 end
 
 proc snd(ch,fq,ms,sl,ty,v)
