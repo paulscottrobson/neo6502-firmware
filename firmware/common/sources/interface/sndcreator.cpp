@@ -11,6 +11,7 @@
 // ***************************************************************************************
 
 #include "common.h"
+#include "interface/whitenoise.h"
 
 #define CHANNEL_COUNT   (4)
 
