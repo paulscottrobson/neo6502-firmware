@@ -52,6 +52,7 @@ uint8_t SNDResetChannel(int channelID) {
 void SNDStartup(void) {
 	#ifdef PICO
 	SOUND_UPDATE u;
+	u.type = 0;u.volume = 100;
 	u.frequency = 220;u.timeCS = 50;u.slide = 0;
 	SNDPlay(0,&u);
 	u.frequency = 440;u.timeCS = 25;u.slide = 0;
