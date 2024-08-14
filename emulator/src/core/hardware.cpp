@@ -61,15 +61,15 @@ static uint8_t getAttributes(const std::string& filename) {
 
 static uint8_t convertError(const std::error_code& errcode) {
 	static const std::vector<std::pair<std::errc, FIOErrno>> errorsList = {
-		{ std::errc::no_such_device, FIOERROR_FILE_NOT_FOUND },
-		{ std::errc::file_exists, FIOERROR_FILE_EXISTS },
-		{ std::errc::permission_denied, FIOERROR_ACCESS_DENIED },
-		{ std::errc::is_a_directory, FIOERROR_IS_A_DIRECTORY },
-		{ std::errc::not_a_directory, FIOERROR_NOT_A_DIRECTORY },
-		{ std::errc::no_space_on_device, FIOERROR_OUT_OF_DISK_SPACE },
+		{ std::errc::no_such_device, FIOERROR_INVALID_NAME },
+		{ std::errc::file_exists, FIOERROR_EXIST },
+		{ std::errc::permission_denied, FIOERROR_DENIED },
+		{ std::errc::is_a_directory, FIOERROR_DENIED },
+		{ std::errc::not_a_directory, FIOERROR_NO_PATH },
+		{ std::errc::no_space_on_device, FIOERROR_DENIED },
 		{ std::errc::filename_too_long, FIOERROR_INVALID_PARAMETER },
-		{ std::errc::file_too_large, FIOERROR_OUT_OF_DISK_SPACE },
-		{ std::errc::directory_not_empty, FIOERROR_ACCESS_DENIED },
+		{ std::errc::file_too_large, FIOERROR_DENIED },
+		{ std::errc::directory_not_empty, FIOERROR_DENIED },
 	};
 
 	if (!errcode) {
@@ -397,7 +397,7 @@ uint8_t FISOpenFileHandle(uint8_t fileno, const std::string& filename, uint8_t m
 
 	/* Check if already open. */
 	if (fileHandles[fileno])
-		return FIOERROR_ALREADY_OPEN;
+		return FIOERROR_INVALID_PARAMETER;
 
 	static const char* const modes[] = {
 		"rb",	// 0: FIOMODE_RDONLY
@@ -434,7 +434,7 @@ uint8_t FISCloseFileHandle(uint8_t fileno) {
 	} else {
 		FILE* f = getF(fileno);
 		if (!f)
-			return FIOERROR_NOT_OPEN;
+			return FIOERROR_INVALID_PARAMETER;
 
 		int result = fclose(f);
 		fileHandles[fileno] = NULL;
@@ -446,7 +446,7 @@ uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {
 	printf("FISSeekFileHandle(%d, %u)\n", fileno, offset);
 	FILE* f = getF(fileno);
 	if (!f)
-		return FIOERROR_NOT_OPEN;
+		return FIOERROR_INVALID_PARAMETER;
 
 	int result = fseek(f, offset, SEEK_SET);
 	return (result >= 0) ? FIOERROR_OK : convertError(errno);
@@ -456,7 +456,7 @@ uint8_t FISTellFileHandle(uint8_t fileno, uint32_t* offset) {
 
 	FILE* f = getF(fileno);
 	if (!f)
-		return FIOERROR_NOT_OPEN;
+		return FIOERROR_INVALID_PARAMETER;
 
 	*offset = ftell(f);
 	printf("FISTellFileHandle(%d, %d) -> ", fileno, *offset);
@@ -466,7 +466,7 @@ uint8_t FISTellFileHandle(uint8_t fileno, uint32_t* offset) {
 uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	FILE* f = getF(fileno);
 	if (!f)
-		return FIOERROR_NOT_OPEN;
+		return FIOERROR_INVALID_PARAMETER;
 
 	errno = 0;
 	printf("FISReadFileHandle(%d, @0x%x, %d) -> ", fileno, address, *size);
@@ -485,7 +485,7 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	FILE* f = getF(fileno);
 	if (!f)
-		return FIOERROR_NOT_OPEN;
+		return FIOERROR_INVALID_PARAMETER;
 
 	printf("FISWriteFileHandle(%d, @0x%x, %d) -> ", fileno, address, *size);
 	size_t result = fwrite(cpuMemory+address, *size, 1, f);
@@ -498,7 +498,7 @@ uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
 	FILE* f = getF(fileno);
 	if (!f)
-		return FIOERROR_NOT_OPEN;
+		return FIOERROR_INVALID_PARAMETER;
 
 	printf("FISGetSizeFileHandle(%d) -> ", fileno);
 	errno = 0;
@@ -514,7 +514,7 @@ uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
 uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size) {
 	FILE* f = getF(fileno);
 	if (!f)
-		return FIOERROR_NOT_OPEN;
+		return FIOERROR_INVALID_PARAMETER;
 
 	printf("FISSetSizeFileHandle(%d, %d) -> ", fileno, size);
 	errno = 0;

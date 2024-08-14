@@ -24,19 +24,33 @@ int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize);
 #define FIOATTR_HIDDEN   (1<<4)
 
 enum FIOErrno {
-    FIOERROR_OK = 0,
-    FIOERROR_UNKNOWN = 1,
-    FIOERROR_FILE_NOT_FOUND = 2,
-    FIOERROR_FILE_EXISTS = 3,
-    FIOERROR_IS_A_DIRECTORY = 4,
-    FIOERROR_NOT_A_DIRECTORY = 5,
-    FIOERROR_OUT_OF_DISK_SPACE = 6,
-    FIOERROR_DISK_ERROR = 7,
-    FIOERROR_ACCESS_DENIED = 8,
-    FIOERROR_INVALID_PARAMETER = 9,
-    FIOERROR_END_OF_DIRECTORY = 10,
-    FIOERROR_ALREADY_OPEN = 11,
-    FIOERROR_NOT_OPEN = 12,
+    FIOERROR_OK = 0,                /* Succeeded */
+    FIOERROR_UNKNOWN = 1,           /* An error what we don't know what it is */
+    FIOERROR_END_OF_DIRECTORY = 2,  /* End of directory while iterating */
+    FIOERROR_UNIMPLEMENTED = 3,     /* This operation is not supported */
+
+    /* These are straight copies of the fatfs error codes and have the same
+     * semantics (but with 100 added to each number). */
+
+    FIOERROR_DISK_ERR = 101,        /* A hard error occurred in the low level disk I/O layer */
+    FIOERROR_INT_ERR,               /* Assertion failed */
+    FIOERROR_NOT_READY,             /* The physical drive cannot work */
+    FIOERROR_NO_FILE,               /* Could not find the file */
+    FIOERROR_NO_PATH,               /* Could not find the path */
+    FIOERROR_INVALID_NAME,          /* The path name format is invalid */
+    FIOERROR_DENIED,                /* Access denied due to prohibited access or directory full */
+    FIOERROR_EXIST,                 /* Access denied due to prohibited access */
+    FIOERROR_INVALID_OBJECT,        /* The file/directory object is invalid */
+    FIOERROR_WRITE_PROTECTED,       /* The physical drive is write protected */
+    FIOERROR_INVALID_DRIVE,         /* The logical drive number is invalid */
+    FIOERROR_NOT_ENABLED,           /* The volume has no work area */
+    FIOERROR_NO_FILESYSTEM,         /* There is no valid FAT volume */
+    FIOERROR_MKFS_ABORTED,          /* The f_mkfs() aborted due to any problem */
+    FIOERROR_TIMEOUT,               /* Could not get a grant to access the volume within defined period */
+    FIOERROR_LOCKED,                /* The operation is rejected according to the file sharing policy */
+    FIOERROR_NOT_ENOUGH_CORE,       /* LFN working buffer could not be allocated */
+    FIOERROR_TOO_MANY_OPEN_FILES,   /* Number of open files > FF_FS_LOCK */
+    FIOERROR_INVALID_PARAMETER      /* Given parameter is invalid */
 };
 
 uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFilename);
@@ -59,7 +73,7 @@ uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size);
 uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size);
 uint8_t FISSetFileAttributes(const std::string& filename, uint8_t attribs);
 
-typedef	uint8_t (* FILEREADBYTE)(uint8_t *);
+typedef uint8_t (* FILEREADBYTE)(uint8_t *);
 
 #define FIO_NUM_FILES  8
 #define FIOMODE_RDONLY   0
@@ -98,7 +112,7 @@ uint8_t FIOIsEndOfFileHandle(uint8_t fileno,uint8_t *pIsEndOfFile);
 
 // ***************************************************************************************
 //
-//		Date 		Revision
-//		==== 		========
+//      Date        Revision
+//      ====        ========
 //
 // ***************************************************************************************
