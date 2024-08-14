@@ -14,7 +14,8 @@
 #include "gfx.h"
 #include "sys_processor.h"
 #include "debugger.h"
-	
+#include "common.h"	
+
 static int isInitialised = 0; 														// Flag to initialise first time
 static int addressSettings[] = { 0,0,0,0x20FFFF }; 									// Adjustable values : Code, Data, Other, Break.
 static int keyMapping[16];															// Mapping for control keys to key values
@@ -24,11 +25,7 @@ static int stepBreakPoint;															// Extra breakpoint used for step over.
 static Uint32 nextFrame = 0;														// Time of next frame.
 static int frameCount = 0;
 
-#ifdef EMSCRIPTEN
-#define FRAMESKIP 	(1)
-#else
 #define FRAMESKIP 	(0)
-#endif
 
 // *******************************************************************************************************************************
 //								Handle one frame of rendering etc. for the debugger.
@@ -83,11 +80,11 @@ int GFXXRender(SDL_Surface *surface) {
 			if (CMDKEY(DBGKEY_RESET)) {												// Reset processor (F1)
 				DEBUG_RESET();					
 				addressSettings[0] = DEBUG_HOMEPC();
-				GFXSilence();
+				SNDMuteAllChannels();
 			}
 
 			if (inRunMode == 0) {
-				GFXSilence();														// Will drive us mental otherwise.
+				SNDMuteAllChannels();
 				if (isxdigit(currentKey)) {											// Is it a hex digit 0-9 A-F.
 					int digit = isdigit(currentKey)?currentKey:(currentKey-'A'+10);	// Convert to a number.
 					int setting = 0;												// Which value is being changed ?

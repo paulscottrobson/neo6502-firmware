@@ -37,6 +37,8 @@ GROUP 8 Sound
         su.frequency = DSPGetInt16(DCOMMAND,5);
         su.timeCS = DSPGetInt16(DCOMMAND,7);
         su.slide = DSPGetInt16(DCOMMAND,9);
+        su.type = 0;
+        su.volume = 100;
         *DERROR = SNDPlay(DPARAMS[0],&su);
     DOCUMENTATION
         Queue a sound. Refer to Section \#\ref{sound} "Sound" for details.
@@ -54,4 +56,22 @@ GROUP 8 Sound
         *DERROR = (i1 < 0) ? 1 : 0;
     DOCUMENTATION
         Deposit in Parameter:0 the number of notes outstanding before silence in the queue of the channel specified in Parameter:0, including the current playing sound, if any.
+
+    FUNCTION 7 Queue Sound Extended
+        su.frequency = DSPGetInt16(DCOMMAND,5);
+        su.timeCS = DSPGetInt16(DCOMMAND,7);
+        su.slide = DSPGetInt16(DCOMMAND,9);
+        su.type = DCOMMAND[11];
+        su.volume = DCOMMAND[12] * 127 / 100;
+        *DERROR = SNDPlay(DPARAMS[0],&su);
+    DOCUMENTATION
+        Queue a sound. Refer to Section \#\ref{sound} "Sound" for details. This is an extension of call 4 to support different waveform types and volumes. The source parameter is no longer used.
+
+        The parameters are : Channel, Frequency Low, Frequency High, Duration Low, Duration High, Slide Low, Slide High, Sound Type and Sound Volume. All these 
+        are 16 bit parameters except the sound type and volume, and the channel number.
+
+    FUNCTION 8 Get Channel Count
+        DPARAMS[0] = SNDGetChannelCount();
+    DOCUMENTATION
+        This returns the number of channels in Parameter #0
 

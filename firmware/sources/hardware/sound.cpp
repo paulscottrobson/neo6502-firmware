@@ -3,10 +3,9 @@
 //
 //      Name :      sound.cpp
 //      Authors :   Paul Robson (paul@robsons.org.uk)
-//					Harry Fairhead
-//      Date :      21st November 2023
+//      Date :      7th August 2024
 //      Reviewed :  No
-//      Purpose :   Audio support for Neo6502
+//      Purpose :   PWM Audio support for Neo6502
 //
 // ***************************************************************************************
 // ***************************************************************************************
@@ -17,29 +16,34 @@
 #include "dvi.h"
 #include "system/dvi_video.h"
 
-#define SOUND_PIN 	(20) 					// Beeper pin.
+#define AUDIO_PIN 	(20) 					// Beeper pin.
+#define SAMPLE_DIVIDER (32)                 // Divider, affects the interrupts / second of the PWM sample output
 
-static uint sliceNumber,channel;
+static int sampleFrequency = -1;
 
 // ***************************************************************************************
 //
-//						Set up code, borrowed from Harry Fairhead
+//      Function that returns the sample rate in Hz of the implementeing hardware
 //
 // ***************************************************************************************
 
-static int32_t SNDSetPWMFrequencyDuty(uint slice_num,uint chan,uint32_t f, int d)
-{
-	uint32_t clock = DVI_TIMING.bit_clk_khz * 1024;
-	uint32_t divider16 = clock / f / 4096 + (clock % (f * 4096) != 0);
-	if (divider16 / 16 == 0) divider16 = 16;
-	uint32_t wrap = clock * 16 / divider16 / f - 1;
-	pwm_set_clkdiv_int_frac(slice_num, divider16/16,divider16 & 0xF);
-	pwm_set_wrap(slice_num, wrap);
-	pwm_set_chan_level(slice_num, chan, wrap * d / 100);
-	return wrap;
+int SNDGetSampleFrequency(void) {
+    if (sampleFrequency < 0) {
+        sampleFrequency = DVI_TIMING.bit_clk_khz * 1024 / SAMPLE_DIVIDER / 255;
+    }
+    return sampleFrequency;
 }
 
+// ***************************************************************************************
+//
+//                                  Interrupt Handler
+//
+// ***************************************************************************************
 
+void pwm_interrupt_handler() {
+    pwm_clear_irq(pwm_gpio_to_slice_num(AUDIO_PIN));    
+    pwm_set_gpio_level(AUDIO_PIN,SNDGetNextSample()+128);
+}
 
 // ***************************************************************************************
 //
@@ -48,29 +52,27 @@ static int32_t SNDSetPWMFrequencyDuty(uint slice_num,uint chan,uint32_t f, int d
 // ***************************************************************************************
 
 void SNDInitialise(void) {
-	gpio_set_function(SOUND_PIN, GPIO_FUNC_PWM);
-	sliceNumber = pwm_gpio_to_slice_num(SOUND_PIN);
-	channel = pwm_gpio_to_channel(SOUND_PIN);
-	pwm_set_enabled(sliceNumber,false);
+    gpio_set_function(AUDIO_PIN, GPIO_FUNC_PWM);
+    int audio_pin_slice = pwm_gpio_to_slice_num(AUDIO_PIN);
+    // Setup PWM interrupt to fire when PWM cycle is complete
+    pwm_clear_irq(audio_pin_slice);
+    // set the handle function above
+    irq_set_exclusive_handler(PWM_IRQ_WRAP, pwm_interrupt_handler); 
+    irq_set_enabled(PWM_IRQ_WRAP, true);
+    // Setup PWM for audio output
+    pwm_config config = pwm_get_default_config();
+    pwm_config_set_clkdiv(&config, SAMPLE_DIVIDER); 
+    pwm_config_set_wrap(&config, 255); 
+    pwm_init(audio_pin_slice, &config, true);
+    //
+    pwm_set_gpio_level(AUDIO_PIN, 0);
+    pwm_set_irq_enabled(audio_pin_slice, true);
 }
 
-// ***************************************************************************************
-//
-//									Play note on channel
-//
-// ***************************************************************************************
-
-void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
-	if (channel < SOUND_CHANNELS) {
-		SNDSetPWMFrequencyDuty(sliceNumber,channel, c->currentFrequency, 50);
-		pwm_set_enabled(sliceNumber,c->isPlayingNote);
-	}
-}
 
 // ***************************************************************************************
 //
 //		Date 		Revision
 //		==== 		========
-//		16-01-24	Moved tick callback stuff to tick source for generalised usage
 //
 // ***************************************************************************************

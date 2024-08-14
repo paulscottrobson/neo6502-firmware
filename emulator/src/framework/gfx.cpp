@@ -20,10 +20,6 @@
 #include <hardware.h>
 #include <common.h>
 
-#ifdef EMSCRIPTEN
-#include "emscripten.h"
-#endif
-
 #define MAX_CONTROLLERS (4)
 
 static SDL_Window *mainWindow = NULL;
@@ -66,9 +62,8 @@ void GFXOpenWindow(const char *title,int width,int height,int colour) {
 
 	background = colour;															// Remember required backgrounds.
 	_GFXInitialiseKeyRecord();														// Set up key system.
-	Beeper::open();
-	Beeper::setVolume(0.0);
-	Beeper::play();
+	SOUNDOpen();
+	SOUNDPlay();
 
 	SDL_ShowCursor(SDL_DISABLE);                                                    // Hide mouse cursor
 }
@@ -84,14 +79,10 @@ static int isRunning = -1;															// Is app running
 static void _GFXMainLoop(void *arg);
 
 void GFXStart(void) {
-	#ifdef EMSCRIPTEN
-	emscripten_set_main_loop_arg(_GFXMainLoop, NULL, -1, 1);
-	#else
 	while(isRunning) {																// While still running.
 		_GFXMainLoop(NULL);
 	}
-	#endif
-	Beeper::stop();
+	SOUNDStop();
 	SDL_CloseAudio();
 }
 
@@ -402,23 +393,8 @@ int  GFXToASCII(int ch,int applyModifiers) {
 //
 // *******************************************************************************************************************************
 
-int  GFXTimer(void) {
+int GFXTimer(void) {
 	return SDL_GetTicks();
-}
-
-// *******************************************************************************************************************************
-//
-//												    Beeper interface
-//
-// *******************************************************************************************************************************
-
-void GFXSetFrequency(int freq,int channel) {
-	Beeper::setVolume(1.0);
-	Beeper::setFrequency(freq);
-}
-
-void GFXSilence(void) {
-	Beeper::setVolume(0.0);
 }
 
 // *******************************************************************************************************************************

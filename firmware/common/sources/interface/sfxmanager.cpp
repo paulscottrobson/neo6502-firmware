@@ -22,7 +22,7 @@
 // ***************************************************************************************
 
 uint8_t SFXPlay(int channelID,int effect) {
-	if (channelID >= SOUND_CHANNELS) return 1;  								// Check legal channel/sfx
+	if (channelID >= SNDGetChannelCount()) return 1;  							// Check legal channel/sfx
 	if (effect >= SFX_COUNT) return 2;
 	const uint16_t *notes = sfxData[effect];  									// List to queue
 	while (*notes != 0xFFFF) {   												// Queue them

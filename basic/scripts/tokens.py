@@ -145,7 +145,7 @@ class TokenSet(object):
 		#		Additional Unary functions, less popular
 		#
 		self.add(0x2D0,"""
-			ATAN2( !!UU1 !!UU2 !!UU3 !!UU4 !!UU5 !!UU6 !!UU7
+			ATAN2( EOF( !!UU2 !!UU3 !!UU4 !!UU5 !!UU6 !!UU7
 			!!UU8 !!UU9 !!UU10 !!UU11 !!UU12 !!UU13 !!UU14 !!UU15		
 			SIN( 	COS(	TAN(	ATAN(	 LOG(	  EXP( 	 VAL( 	STR$( 	
 			ISVAL( 	SQR( 	PAGE 	SPRITEX( SPRITEY( NOTES( HIMEM 	VBLANKS(

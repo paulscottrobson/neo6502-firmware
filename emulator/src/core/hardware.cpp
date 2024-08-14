@@ -304,7 +304,9 @@ uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attr
 	printf("FISStatFile('%s') -> ", abspath.c_str());
 
 	try {
-		*length = std::filesystem::file_size(abspath);
+		if (!std::filesystem::is_directory(abspath)) {
+			*length = std::filesystem::file_size(abspath);
+		}
 		*attribs = getAttributes(abspath);
 		printf("OK; length=0x%04x; permissions=0x%02x\n", *length, *attribs);
 		return FIOERROR_OK;
@@ -451,11 +453,13 @@ uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {
 }
 
 uint8_t FISTellFileHandle(uint8_t fileno, uint32_t* offset) {
+
 	FILE* f = getF(fileno);
 	if (!f)
 		return FIOERROR_NOT_OPEN;
 
 	*offset = ftell(f);
+	printf("FISTellFileHandle(%d, %d) -> ", fileno, *offset);
 	return FIOERROR_OK;
 }
 
@@ -498,9 +502,10 @@ uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
 
 	printf("FISGetSizeFileHandle(%d) -> ", fileno);
 	errno = 0;
-	size_t oldpos = fseek(f, 0, SEEK_END);
+	size_t oldpos = ftell(f);
+	fseek(f, 0, SEEK_END);
 	*size = ftell(f);
-	fseek(f, SEEK_SET, oldpos);
+	fseek(f, oldpos, SEEK_SET);
 	printf("%d: %s\n", *size, strerror(errno));
 
 	return FIOERROR_OK;

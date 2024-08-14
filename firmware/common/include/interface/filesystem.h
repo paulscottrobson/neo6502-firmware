@@ -77,6 +77,7 @@ uint8_t FIODeleteFile(const std::string& filename);
 uint8_t FIOCreateDirectory(const std::string& filename);
 uint8_t FIOChangeDirectory(const std::string& filename);
 uint8_t FIOStatFile(const std::string& filename, uint32_t* length, uint8_t* attribs);
+uint8_t FIOExistsFile(const std::string& filename,uint8_t *pExistsFlag);
 uint8_t FIOOpenDir(const std::string& dirname);
 uint8_t FIOReadDir(std::string& filename, uint32_t* size, uint8_t* attribs);
 uint8_t FIOCloseDir();
@@ -92,7 +93,7 @@ uint8_t FIOReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size);
 uint8_t FIOWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size);
 uint8_t FIOGetSizeFileHandle(uint8_t fileno, uint32_t* size);
 uint8_t FIOSetSizeFileHandle(uint8_t fileno, uint32_t size);
-
+uint8_t FIOIsEndOfFileHandle(uint8_t fileno,uint8_t *pIsEndOfFile);
 #endif
 
 // ***************************************************************************************
