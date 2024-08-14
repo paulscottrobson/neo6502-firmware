@@ -69,7 +69,7 @@ static uint8_t convertError(const std::error_code& errcode) {
 		{ std::errc::no_space_on_device, FIOERROR_OUT_OF_DISK_SPACE },
 		{ std::errc::filename_too_long, FIOERROR_INVALID_PARAMETER },
 		{ std::errc::file_too_large, FIOERROR_OUT_OF_DISK_SPACE },
-		{ std::errc::directory_not_empty, FIOERROR_DIRECTORY_NOT_EMPTY },
+		{ std::errc::directory_not_empty, FIOERROR_ACCESS_DENIED },
 	};
 
 	if (!errcode) {

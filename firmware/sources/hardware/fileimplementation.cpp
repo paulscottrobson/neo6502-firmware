@@ -33,6 +33,66 @@ static uint8_t getAttributes(const FILINFO* fno) {
 	return attrs;
 }
 
+static uint8_t convertError(FRESULT result) {
+	 switch (result) {
+		case FR_OK:
+			return FIOERROR_OK;
+
+		case FR_NO_FILE:
+		case FR_NO_PATH:
+		case FR_NO_FILESYSTEM:
+		case FR_NOT_READY:
+			return FIOERROR_FILE_NOT_FOUND;
+
+		case FR_EXIST: 
+			return FIOERROR_FILE_EXISTS;
+
+		case FR_DENIED:
+		case FR_LOCKED:
+		case FR_WRITE_PROTECTED:
+			return FIOERROR_ACCESS_DENIED;
+
+		case FR_INVALID_NAME:
+		case FR_INVALID_DRIVE:
+		case FR_INVALID_PARAMETER:
+			return FIOERROR_INVALID_PARAMETER;
+
+		case FR_DISK_ERR:
+			return FIOERROR_DISK_ERROR;
+
+		default:
+			return FIOERROR_UNKNOWN;
+	 }
+}
+
+namespace {
+	class FilObject {
+	public:
+		FilObject():
+			_fil(new (std::nothrow) FIL)
+		{}
+
+		~FilObject()
+		{
+			if (_fil) {
+				f_close(_fil);
+			}
+			delete _fil;
+		}
+
+		operator FIL* () const {
+			return _fil;
+		}
+
+		operator bool () const {
+			return _fil;
+		}
+
+	private:
+		FIL* _fil;
+	};
+}
+
 // ***************************************************************************************
 //
 //									Rename File
@@ -44,7 +104,7 @@ uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFile
 	// CONWriteString("FISRenameFile('%s', '%s') -> ", oldFilename.c_str(), newFilename.c_str());
 	FRESULT result = f_rename(oldFilename.c_str(), newFilename.c_str());
 	// CONWriteString("%d\r", result);
-	return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 }
 
 // ***************************************************************************************
@@ -59,13 +119,13 @@ uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilena
 	// Our stack is quite small and there's a lot of buffer here, so
 	// allocate them from the heap. The unique_ptr<> causes them to be
 	// cleaned up automatically when the function ends.
-	std::unique_ptr<FIL> oldFile(new (std::nothrow) FIL);
-	std::unique_ptr<FIL> newFile(new (std::nothrow) FIL);
+	FilObject oldFile;
+	FilObject newFile;
 	std::unique_ptr<uint8_t[]> buffer(new (std::nothrow) uint8_t[COPY_BUFFER_SIZE]);
 	if (!oldFile || !newFile || !buffer) {
 		// Out of memory.
 		// CONWriteString("Out of memory\r");
-		return 1;
+		return FIOERROR_UNKNOWN;
 	}
 
 	FRESULT result = f_open(&*oldFile, oldFilename.c_str(), FA_READ);
@@ -90,18 +150,13 @@ uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilena
 					break;
 				if (bytesWritten != bytesRead) {
 					// Disk full.
-					result = FR_DISK_ERR;
-					break;
+					return FIOERROR_OUT_OF_DISK_SPACE;
 				}
 			}
-
-			f_close(&*newFile);
 		}
-
-		f_close(&*oldFile);
 	}
 
-	return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 }
 
 
@@ -130,7 +185,7 @@ uint8_t FISCreateDirectory(const std::string& filename) {
 	// CONWriteString("FISCreateDirectory('%s') ->", filename.c_str());
 	FRESULT result = f_mkdir(filename.c_str());
 	// CONWriteString("%d\r", result);
-	return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 }
 
 // ***************************************************************************************
@@ -145,6 +200,7 @@ uint8_t FISChangeDirectory(const std::string& filename) {
 	FRESULT result = f_chdir(filename.c_str());
 	// CONWriteString("%d\r", result);
 	return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 }
 
 // ***************************************************************************************
@@ -163,6 +219,7 @@ uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attr
 	*attribs = getAttributes(&fno);
 
 	return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 }
 
 // ***************************************************************************************
@@ -210,6 +267,7 @@ uint8_t FISOpenDir(const std::string& filename) {
 
 	FRESULT result = f_opendir(&readDir, filename.c_str());
 	return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 }
 
 uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs) {
@@ -268,6 +326,7 @@ uint8_t FISOpenFileHandle(uint8_t fileno, const std::string& filename, uint8_t m
 	STOInitialise();
 	FRESULT result = f_open(f, filename.c_str(), modes[mode]);
 	return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 }
 
 static FIL* getF(uint8_t fileno) {
@@ -295,6 +354,7 @@ uint8_t FISCloseFileHandle(uint8_t fileno) {
 
 		FRESULT result = f_close(f);
 		return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 	}
 }
 
@@ -305,6 +365,7 @@ uint8_t FISSeekFileHandle(uint8_t fileno, uint32_t offset) {
 
 	FRESULT result = f_lseek(f, offset);
 	return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 }
 
 uint8_t FISTellFileHandle(uint8_t fileno, uint32_t* offset) {
@@ -336,6 +397,7 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	// CONWriteString("%d, 0x%04x\r", result, read);
 
 	return ((result == FR_OK) && (read != 0)) ? 0 : 1;
+	return convertError(result);
 }
 
 uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
@@ -352,6 +414,7 @@ uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	// CONWriteString("%d, 0x%04x\r", result, written);
 
 	return ((result == FR_OK) && (written != 0)) ? 0 : 1;
+	return convertError(result);
 }
 
 uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {
@@ -377,6 +440,7 @@ uint8_t FISSetSizeFileHandle(uint8_t fileno, uint32_t size) {
 	// CONWriteString("%d\r", result);
 
 	return (result == FR_OK) ? 0 : 1;
+	return convertError(result);
 }
 
 // ***************************************************************************************
