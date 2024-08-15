@@ -374,7 +374,7 @@ uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs) {
 		return FIOERROR_OK;
 	} else {
 		printf("Failed\n");
-		return FIOERROR_END_OF_DIRECTORY;
+		return FIOERROR_EOF;
 	}
 }
 
@@ -479,7 +479,10 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	printf("%d: %s\n", (int)result, (result != *size) ? strerror(errno) : "OK");
 	*size = result;
 
-	return (result > 0) ? FIOERROR_OK : convertError(errno);
+	if ((errno == 0) && (result == 0)) {
+		return FIOERROR_EOF;
+	}
+	return convertError(errno);
 }
 
 uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
@@ -492,7 +495,10 @@ uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	printf("%d: %s\n", (int)result, (result != 1) ? strerror(errno) : "OK");
 	//*size = result;
 
-	return (result > 0) ? FIOERROR_OK : convertError(errno);
+	if (result == 1) {
+		return FIOERROR_OK;
+	}
+	return convertError(errno);
 }
 
 uint8_t FISGetSizeFileHandle(uint8_t fileno, uint32_t* size) {

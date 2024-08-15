@@ -26,7 +26,7 @@ int FISDirectoryNext(char *buffer,int *isDirectory,int *fileSize);
 enum FIOErrno {
     FIOERROR_OK = 0,                /* Succeeded */
     FIOERROR_UNKNOWN = 1,           /* An error what we don't know what it is */
-    FIOERROR_END_OF_DIRECTORY = 2,  /* End of directory while iterating */
+    FIOERROR_EOF = 2,               /* End of file or directory */
     FIOERROR_UNIMPLEMENTED = 3,     /* This operation is not supported */
 
     /* These are straight copies of the fatfs error codes and have the same

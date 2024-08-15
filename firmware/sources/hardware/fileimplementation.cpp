@@ -283,7 +283,7 @@ uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs) {
 	} else {
 		// CONWriteString("finished\r");
 		f_closedir(&readDir);
-		return FIOERROR_END_OF_DIRECTORY;
+		return FIOERROR_EOF;
 	}
 }
 
@@ -390,6 +390,8 @@ uint8_t FISReadFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	*size = read;
 	// CONWriteString("%d, 0x%04x\r", result, read);
 
+	if ((result == FR_OK) && (read == 0))
+		return FIOERROR_EOF;
 	return convertError(result);
 }
 
@@ -406,6 +408,9 @@ uint8_t FISWriteFileHandle(uint8_t fileno, uint16_t address, uint16_t* size) {
 	*size = written;
 	// CONWriteString("%d, 0x%04x\r", result, written);
 
+	if (written < towrite) {
+		return FIOERROR_DENIED; /* out of disk space */
+	}
 	return convertError(result);
 }
 
