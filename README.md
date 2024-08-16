@@ -2,6 +2,9 @@
 Firmware and emulators for the Neo6502 retro-computer
 
 ## The home page
+
+All the documentation currently resides at.
+
 - http://www.neo6502.com
 
 ## The Documentation wiki
@@ -10,7 +13,8 @@ Firmware and emulators for the Neo6502 retro-computer
 ## Releases
 
 The release tarballs contain pre-built firmware, emulators for windows and *nixes,
-documentation, and examples/demos of BASIC, C, and assembly programs.
+utilities, documentation, and examples/demos of BASIC, C, and assembly programs.
+
 - https://github.com/paulscottrobson/neo6502-firmware/releases
 
 ## Compilation
@@ -52,28 +56,30 @@ $ export PICO_FATFS_PATH=/path/to/picofatfs_sources
     - 'pyserial' (not needed at build-time - optional for uploading files via serial port)
 
 All of the sources and dependencies are freely available.
-Most distros have the dependencies packaged.
 
-* Arch-based distros:  
-  _NOTE: '64tass' is in the AUR (https://aur.archlinux.org/packages/64tass)_.
+Most distros have the dependencies packaged. Firmware has been successfully built on Arch, Fedora, Ubuntu, Debian and Solus. 
+
+* Arch and derivative distributions:  
+  The 64tass assembler is in the Arch AUR (or can be downloaded and compiled from the repository)  (https://aur.archlinux.org/packages/64tass).
+  
   * Firmware only:
     ```
     $ sudo pacman -S arm-none-eabi-gcc arm-none-eabi-newlib cmake
     ```
   * *nix emulator only:
     ```
-    $ sudo pacman -S 64tass python-gitpython python-pillow sdl2 zip
+    $ sudo pacman -S python-gitpython python-pillow sdl2 zip
     ```
   * Windows emulator only:
     ```
-    $ sudo pacman -S 64tass mingw-w64-gcc python-gitpython python-pillow sdl2 zip
+    $ sudo pacman -S mingw-w64-gcc python-gitpython python-pillow sdl2 zip
     ```
   * Everything (firmware, all emulators, documentation, examples, demos, etc):
     ```
-    $ sudo pacman -S 64tass arm-none-eabi-gcc arm-none-eabi-newlib cmake git mingw-w64-gcc python-gitpython python-pillow sdl2 zip
+    $ sudo pacman -S arm-none-eabi-gcc arm-none-eabi-newlib cmake git mingw-w64-gcc python-gitpython python-pillow sdl2 zip
     ```
-
-* Debian-based distros:
+  
+* Debian/Ubuntu and other similar distributions (.deb):
   * Firmware only:
     ```
     $ sudo apt install build-essential cmake gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib
@@ -117,14 +123,12 @@ Build the mac emulator only:
 $ make macos
 ```
 
-Build the documentation only:
-
-```
-$ make docs
-```
-
-Build everything (firmware, all emulators, documentation, examples, demos, etc):
+Build everything (firmware, all emulators, examples, demos, etc):
 
 ```
 $ make
 ```
+
+### Uploading Firmware
+
+At the time of writing, to use openocd to upload with CMSIS-DAP v2 (which is Pico based programmers) requires it to be built from source, which often has libusb1 as a dependency (without this it will build).
