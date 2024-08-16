@@ -30,27 +30,36 @@ enum FIOErrno {
     FIOERROR_UNIMPLEMENTED = 3,     /* This operation is not supported */
 
     /* These are straight copies of the fatfs error codes and have the same
-     * semantics (but with 100 added to each number). */
+     * semantics, but have different numbers. They are grouped together into
+     * error classes via the top four bits to make testing for common errors
+     * easier. */
 
-    FIOERROR_DISK_ERR = 101,        /* A hard error occurred in the low level disk I/O layer */
-    FIOERROR_INT_ERR,               /* Assertion failed */
-    FIOERROR_NOT_READY,             /* The physical drive cannot work */
+    FIOERROR_GROUP_PATH = 0x10,     /* Errors related to path or name: file not found etc. */
     FIOERROR_NO_FILE,               /* Could not find the file */
     FIOERROR_NO_PATH,               /* Could not find the path */
+    FIOERROR_INVALID_DRIVE,         /* The logical drive number is invalid */
     FIOERROR_INVALID_NAME,          /* The path name format is invalid */
-    FIOERROR_DENIED,                /* Access denied due to prohibited access or directory full */
+    FIOERROR_INVALID_PARAMETER,     /* Given parameter is invalid */
+
+    FIOERROR_GROUP_ACCESS = 0x20,   /* Permission denied, file exists, etc */
+    FIOERROR_DENIED,                /* Access denied due to prohibited access or disk or directory full */
     FIOERROR_EXIST,                 /* Access denied due to prohibited access */
     FIOERROR_INVALID_OBJECT,        /* The file/directory object is invalid */
     FIOERROR_WRITE_PROTECTED,       /* The physical drive is write protected */
-    FIOERROR_INVALID_DRIVE,         /* The logical drive number is invalid */
+    FIOERROR_LOCKED,                /* The operation is rejected according to the file sharing policy */
+
+    FIOERROR_GROUP_DISK = 0x30,     /* Disk cannot be accessed, invalid filesystem, etc */
+    FIOERROR_DISK_ERR,              /* A hard error occurred in the low level disk I/O layer */
+    FIOERROR_INT_ERR,               /* Assertion failed */
+    FIOERROR_NOT_READY,             /* The physical drive cannot work */
     FIOERROR_NOT_ENABLED,           /* The volume has no work area */
     FIOERROR_NO_FILESYSTEM,         /* There is no valid FAT volume */
+
+    FIOERROR_GROUP_INTERNAL = 0x40, /* Internal errors which should never happen in real life */
     FIOERROR_MKFS_ABORTED,          /* The f_mkfs() aborted due to any problem */
     FIOERROR_TIMEOUT,               /* Could not get a grant to access the volume within defined period */
-    FIOERROR_LOCKED,                /* The operation is rejected according to the file sharing policy */
     FIOERROR_NOT_ENOUGH_CORE,       /* LFN working buffer could not be allocated */
     FIOERROR_TOO_MANY_OPEN_FILES,   /* Number of open files > FF_FS_LOCK */
-    FIOERROR_INVALID_PARAMETER      /* Given parameter is invalid */
 };
 
 uint8_t FISRenameFile(const std::string& oldFilename, const std::string& newFilename);
