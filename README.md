@@ -7,13 +7,10 @@ All the documentation currently resides at.
 
 - http://www.neo6502.com
 
-## The Documentation wiki
-- https://github.com/paulscottrobson/neo6502-firmware/wiki
-
 ## Releases
 
 The release tarballs contain pre-built firmware, emulators for windows and *nixes,
-utilities, documentation, and examples/demos of BASIC, C, and assembly programs.
+scripts, utilities, documentation, and examples/demos of BASIC, C, and assembly programs.
 
 - https://github.com/paulscottrobson/neo6502-firmware/releases
 
