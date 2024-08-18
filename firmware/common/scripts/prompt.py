@@ -23,6 +23,7 @@ try:
     if repo.is_dirty():
         version += " dirty"
 except:
+    plainVersion = "v0.0-0"
     version = "?"
     plainVersion = "v0.0.0"
 
