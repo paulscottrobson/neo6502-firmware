@@ -63,7 +63,7 @@ all:
 	# Create dir for examples and copy , note basic-examples => basic
 	$(CMAKEDIR) $(TMPDIR)$(S)examples
 	$(CCOPY) -r $(EXAMPLEDIR)assembly $(TMPDIR)examples
-	$(CCOPY) -r $(EXAMPLEDIR)C $(TMPDIR)examples
+	$(CCOPY) -r $(EXAMPLEDIR)c $(TMPDIR)examples
 	$(CMAKEDIR) $(TMPDIR)$(S)examples$(S)basic
 	$(CCOPY) -r $(EXAMPLEDIR)basic-examples$(S)* $(TMPDIR)examples$(S)basic
 	$(CCOPY) -r $(ROOTDIR)basic$(S)libraries $(TMPDIR)

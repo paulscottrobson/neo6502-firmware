@@ -22,6 +22,9 @@ whoList = """
 	David Given
 	Wojciech Bocianski
 	Bill Auger
+	Pete Gollan
+	Andy McCall
+	Chris Garrett
 
 """.strip().split("\n")
 whoList = [x.strip() for x in whoList]
