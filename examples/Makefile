@@ -19,7 +19,7 @@ endif
 
 all: basicdemos
 	$(CDEL) samples.zip
-	zip -r samples.zip basic-examples C assembly
+	zip -r samples.zip basic-examples c assembly
 
 release:
 	make -B all
