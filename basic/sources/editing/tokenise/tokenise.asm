@@ -26,6 +26,9 @@ TOKTokenise:
 		sta 	tokLineSize 				; line length itself and the line numbers.
 		stz 	tokLineNumber
 		stz 	tokLineNumber+1
+		stz 	ERRLine 					; suppresses line # on error
+		stz 	ERRLine+1
+
 		;
 		stz 	inputPos 					; input position.
 _TOKMainLoop:

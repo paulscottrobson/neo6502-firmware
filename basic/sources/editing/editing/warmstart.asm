@@ -40,6 +40,7 @@ WarmStartNoClear:
 
 _WSNotSerialLinkMos:		
 		stz 	ControlStatus 				; clear break flag.
+
 		jsr 	TOKTokenise 				; tokenise it.
 		lda 	tokLineNumber 				; any line number ? if not, execute it.
 		ora 	tokLineNumber+1

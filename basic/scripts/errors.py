@@ -35,6 +35,7 @@ errors = """
 	array : 	array not declared
 	hardware : 	hardware error
 	mos : 		mos command error
+	badline : 	illegal line number
 """
 
 err = []
