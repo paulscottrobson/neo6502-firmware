@@ -47,7 +47,7 @@ _TICLineNumber:
 		sta 	tokLineNumber+1
 		rts
 _TICSyntax:
-		.error_syntax
+		.error_badline
 
 		.send code
 

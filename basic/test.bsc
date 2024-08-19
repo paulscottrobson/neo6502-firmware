@@ -1,14 +1,1 @@
-sfx 0,19
-end
-
-proc snd(ch,fq,ms,sl,ty,v)
-	while peek($FF00):wend
-	poke $FF04,ch
-	doke $FF05,fq
-	doke $FF07,ms
-	doke $FF09,sl
-	poke $FF0B,ty
-	poke $FF0C,v
-	poke $FF01,7
-	poke $FF00,8
-endproc
+print "98765";
