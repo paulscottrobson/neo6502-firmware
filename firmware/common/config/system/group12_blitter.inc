@@ -21,7 +21,7 @@ GROUP 12 Blitter
 
         DPARAMS[0] = 0;
     DOCUMENTATION
-        Returns a non zero value in Parameter:1 if the blitter/DMA system is currently transferring data, used to check availability and transfer completion.
+        Returns a non zero value in Parameter:0 if the blitter/DMA system is currently transferring data, used to check availability and transfer completion.
 
     FUNCTION 2 Simple Blit Copy
         *DERROR = BLTSimpleCopy(DPARAMS[0],DSPGetInt16(DCOMMAND,5),DPARAMS[3],DSPGetInt16(DCOMMAND,8),DSPGetInt16(DCOMMAND,10));
