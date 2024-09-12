@@ -25,7 +25,9 @@
 #include <fcntl.h>
 #include <filesystem>
 #include <vector>
+#include "serial_emu.h"
 
+static const SerialInterface* serialInterface = NULL;
 static FILE* fileHandles[FIO_NUM_FILES];
 static int frameCount = 0;
 static std::filesystem::path storagePath = "storage";
@@ -546,7 +548,7 @@ void STOSynchronise(void) {
 
 // ***************************************************************************************
 //
-//								Dummy serial functions
+//								Emulated serial functions
 //
 // ***************************************************************************************
 
@@ -555,20 +557,30 @@ bool SERInitialise(void) {
 }
 
 bool SERIsByteAvailable(void) {
-	return false;
+    return serialInterface ? serialInterface->isByteAvailable() : false;
 }
 
 uint8_t SERReadByte(void) {
-	return 0;
+    return serialInterface ? serialInterface->readByte() : 0;
 }
 
 void SERWriteByte(uint8_t b) {
-	printf("Serial write %d\n",b);
+    if (serialInterface) {
+        serialInterface->writeByte(b);
+    }
 }
 
-void SERSetSerialFormat(uint32_t baudRate,uint32_t protocol) {
-	printf("Setting Serial to %d baud protocol %d.\n",baudRate,protocol);
+void SERSetSerialFormat(uint32_t baudRate, uint32_t protocol) {
+    // Initialize the interface if it hasn't been set yet
+    if (!serialInterface) {
+        serialInterface = SerialInterfaceOpen(SER_TCP);
+    }
+    
+    if (serialInterface) {
+        serialInterface->setSerialFormat(baudRate, protocol);
+    }
 }
+
 
 // ***************************************************************************************
 //

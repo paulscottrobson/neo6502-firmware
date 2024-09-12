@@ -26,6 +26,7 @@ COMMONSOURCES = $(wildcard $(IMPSRC)*.cpp)
 SOURCES = 	$(FRASRC)main.cpp $(FRASRC)gfx.cpp $(FRASRC)debugger.cpp $(FRASRC)beeper.cpp \
 			$(EMUSRC)core$(S)sys_processor.cpp  $(EMUSRC)core$(S)sys_debugger.cpp $(EMUSRC)core$(S)hardware.cpp \
 			$(EMUSRC)core$(S)6502.cpp \
+			$(EMUSRC)core$(S)serial_tcp.cpp \
 			$(COMMONSOURCES)
   			
 INCLUDES= -I ../include -I ../framework -I .. -I $(COMDIR)include
