@@ -27,10 +27,12 @@
 #include <vector>
 #include "serial_emu.h"
 
+#define DEFAULT_STORAGE "storage"
+
 static const SerialInterface* serialInterface = NULL;
 static FILE* fileHandles[FIO_NUM_FILES];
 static int frameCount = 0;
-static std::filesystem::path storagePath = "storage";
+static std::filesystem::path storagePath = DEFAULT_STORAGE;
 static std::filesystem::path currentPath = storagePath;
 
 // *******************************************************************************************************************************
@@ -293,6 +295,19 @@ uint8_t FISChangeDirectory(const std::string& filename) {
 	} else {
 		return convertError(ec);
 	}
+}
+
+// ***************************************************************************************
+//
+//								Read current directory
+//
+// ***************************************************************************************
+
+uint8_t FISGetCurrentDirectory(char *target,int maxSize) {
+	strcpy(target,(const char *)currentPath.c_str()+strlen(DEFAULT_STORAGE)-1);
+	*target = '/';
+	printf("FISGetCurrentDirectory() ->\n");
+	return FIOERROR_OK;
 }
 
 // ***************************************************************************************
@@ -628,7 +643,7 @@ int UEXTI2CInitialise(void) {
 // ***************************************************************************************
 
 int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
-	printf("I2C Write to $%02x %d bytes\n",device,size);
+	printf("I2C Write to $%02x %d bytes\n",device,(int)size);
 	for (int i = 0;i < size;i++) {
 		printf(" $%02x",data[i]);
 	}
@@ -644,7 +659,7 @@ int UEXTI2CWriteBlock(uint8_t device,uint8_t *data,size_t size) {
 
 int UEXTI2CReadBlock(uint8_t device,uint8_t *data,size_t size) {
 	if (device == 0x7F) return 1;
-	printf("I2C Read from $%x %d bytes\n",device,size);
+	printf("I2C Read from $%x %d bytes\n",device,(int)size);
 	for (int i = 0;i < size;i++) {
 		data[i] = device + 0x12 + i * 3;
 		printf(" $%02x",data[i]);
@@ -671,7 +686,7 @@ int UEXTSPIInitialise(void) {
 // ***************************************************************************************
 
 int UEXTSPIWriteBlock(uint8_t *data,size_t size) {
-	printf("SPI Write to %d bytes\n",size);
+	printf("SPI Write to %d bytes\n",(int)size);
 	for (int i = 0;i < size;i++) {
 		printf(" $%02x",data[i]);
 	}
@@ -686,7 +701,7 @@ int UEXTSPIWriteBlock(uint8_t *data,size_t size) {
 // ***************************************************************************************
 
 int UEXTSPIReadBlock(uint8_t *data,size_t size) {
-	printf("SPI Read from %d bytes\n",size);
+	printf("SPI Read from %d bytes\n",(int)size);
 	for (int i = 0;i < size;i++) {
 		data[i] = 0x12 + i * 3;
 		printf(" $%02x",data[i]);

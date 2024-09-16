@@ -67,6 +67,7 @@ uint8_t FISCopyFile(const std::string& oldFilename, const std::string& newFilena
 uint8_t FISDeleteFile(const std::string& filename);
 uint8_t FISCreateDirectory(const std::string& filename);
 uint8_t FISChangeDirectory(const std::string& filename);
+uint8_t FISGetCurrentDirectory(char *target,int maxSize);
 uint8_t FISStatFile(const std::string& filename, uint32_t* length, uint8_t* attribs);
 uint8_t FISOpenDir(const std::string& dirname);
 uint8_t FISReadDir(std::string& filename, uint32_t* size, uint8_t* attribs);
@@ -99,6 +100,7 @@ uint8_t FIOCopyFile(const std::string& oldFilename, const std::string& newFilena
 uint8_t FIODeleteFile(const std::string& filename);
 uint8_t FIOCreateDirectory(const std::string& filename);
 uint8_t FIOChangeDirectory(const std::string& filename);
+uint8_t FIOGetCurrentDirectory(char *target,int maxSize);
 uint8_t FIOStatFile(const std::string& filename, uint32_t* length, uint8_t* attribs);
 uint8_t FIOExistsFile(const std::string& filename,uint8_t *pExistsFlag);
 uint8_t FIOOpenDir(const std::string& dirname);

@@ -303,6 +303,14 @@ GROUP 3 File I/O
         
         This call should be used on open files and may return an error if the file is closed.
 
+    FUNCTION 23 Get Current Working Directory.
+        s = (char *)(cpuMemory+DSPGetInt16(DPARAMS,0));
+        *DERROR = FIOGetCurrentDirectory(s+1,DPARAMS[2]);
+        *s = strlen(s+1);
+
+    DOCUMENTATION
+        Copies the current working directory into the String at address Parameters:0,1. which is of maximum length Parameters:2
+
     FUNCTION 32 List Filtered
         FIODirectory(DSPGetString(DCOMMAND,4));
     DOCUMENTATION

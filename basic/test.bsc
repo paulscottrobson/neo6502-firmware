@@ -1,1 +1,9 @@
-print not 0, not 1, not -1
+doke $FF04,$E000
+poke $FF06,255
+poke $FF01,23
+poke $FF00,3
+print peek($E000)
+for i = 1 to peek($E000)
+	print chr$(peek($E000+i));
+next
+print
