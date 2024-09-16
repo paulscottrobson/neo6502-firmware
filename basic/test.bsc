@@ -1,1 +1,1 @@
-print "98765";
+print not 0, not 1, not -1
