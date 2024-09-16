@@ -97,7 +97,7 @@ class TokenSet(object):
 			!!STR 	$ 		(		RAND(	RND(	JOYPAD(	INT(	TIME(	EVENT(	
 			INKEY$(	ASC(	CHR$(	POINT( 	LEN(  	ABS(  	SGN( 	HIT(	SPOINT(
 			MID$(	LEFT$( 	RIGHT$(	TRUE	FALSE	INSTR(	MOUSE(	!!UN6	!!UN7
-			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	
+			KEY(	PEEK(	DEEK(	ALLOC(	MAX( 	MIN( 	NOT
 			""",48)
 		#
 		#		Structure tokens
