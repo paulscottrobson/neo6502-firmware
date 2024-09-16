@@ -16,6 +16,7 @@
 #define CHANNEL_COUNT   (4)
 
 struct _ChannelStatus {
+    int limit;
     int adder;
     int wrapper;
     int state;
@@ -43,7 +44,7 @@ int SNDGetChannelCount(void) {
 void SNDMuteAllChannels(void) {    
     for (int i = 0;i < CHANNEL_COUNT;i++) {
         struct _ChannelStatus *cs = &audio[i];
-        cs->adder = cs->wrapper = cs->state = cs->soundType = cs->volume = 0;
+        cs->limit = cs->wrapper = cs->state = cs->soundType = cs->volume = 0;
     }
 }
 
@@ -57,7 +58,7 @@ int16_t SNDGetNextSample(void) {
 
     static int activeCount = 0;
 
-    int level = 0;                                                                  // Summative adder
+    int level = 0;                                                                  // Summative limit
     int channelsActive = activeCount;                                               // We have a very simple form of AGC, more than one channel scales volume
     activeCount = 0;                                                                // Reset the count
 
@@ -65,8 +66,9 @@ int16_t SNDGetNextSample(void) {
         struct _ChannelStatus *cs = &audio[i];                                          
         if (cs->volume != 0) {                                                      // Channel on.
             activeCount++;                                                          // Bump active count
-            if (cs->wrapper++ >= cs->adder) {                                       // Time to change the output level.
-                cs->wrapper = 0;
+            cs->wrapper = cs->wrapper + cs->adder;
+            if (cs->wrapper >= cs->limit) {                                         // Time to change the output level.
+                cs->wrapper = cs->wrapper - cs->limit;                              // Fix up the new limit.
                 cs->state ^= 0xFF;
                 switch (cs->soundType) {
                     case SOUNDTYPE_NOISE:   
@@ -94,8 +96,18 @@ int16_t SNDGetNextSample(void) {
 // ***************************************************************************************
 
 void SNDUpdateSoundChannel(uint8_t channel,SOUND_CHANNEL *c) {
-    if (c->isPlayingNote && c->currentFrequency != 0) {    
-        audio[channel].adder = SNDGetSampleFrequency() / c->currentFrequency / 2;
+    if (c->isPlayingNote && c->currentFrequency != 0) {  
+        //
+        //      This doesn't work. It warbles on the real hardware. Why ?
+        //  
+        audio[channel].limit = 1000000;
+        audio[channel].adder = (int)(1000000.0 * c->currentFrequency / SNDGetSampleFrequency() * 2);
+        //
+        //      This does work.
+        //
+        audio[channel].adder = 1;
+        audio[channel].limit = SNDGetSampleFrequency()/c->currentFrequency/2;
+
         audio[channel].soundType = c->currentType;
         audio[channel].volume = c->currentVolume;
         audio[channel].samplePos = 0;
