@@ -156,7 +156,7 @@ static void TMRRenderTileLine(uint8_t count) {
 			//
 			//		Do while tiles to render and not on a 32 bit boundary
 			//
-			while (count > 0 && ((uint32_t(gDraw)) & 3)) {  			
+			while (count > 0 && ((uint64_t(gDraw)) & 3)) {  			
 				*gDraw = (*gDraw & 0xF0) | b;gDraw++;count--;
 			}
 			//
