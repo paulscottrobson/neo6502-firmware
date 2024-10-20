@@ -16,7 +16,6 @@ else
 include build_env/common.make
 endif
 
-
 # ***************************************************************************************
 #
 # Remake everything to release state
