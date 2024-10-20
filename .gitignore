@@ -32,7 +32,6 @@ storage/*
 *.lst
 *.sym
 *.hex
-*.obj
 firmware/include/data/basic_binary.h
 firmware/include/data/dispatch_code.h
 firmware/include/data/prompt.h
