@@ -13,6 +13,7 @@
 #include "GamepadController.h"
 
 #include "gamepads/Gamepad054C0CDA.h"
+#include "gamepads/Gamepad054C09CC.h"
 #include "gamepads/Gamepad081FE401.h"
 #include "gamepads/Gamepad0079181C.h"
 #include "gamepads/Gamepad07382217.h"
@@ -62,6 +63,7 @@ bool GamepadController::add(uint16_t vid, uint16_t pid, uint8_t dev_addr, uint8_
 	case 0x054C:
 		switch (pid) {
 		case 0x0CDA: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad054C0CDA>()}); break;
+		case 0x09CC: m_gamepads.insert({key(dev_addr, instance), std::make_unique<Gamepad054C09CC>()}); break;
 		}
 		break;
 
