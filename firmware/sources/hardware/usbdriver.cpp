@@ -5,6 +5,7 @@
 //      Authors :   Tsvetan Usunov (Olimex)
 //                  Paul Robson (paul@robsons.org.uk)
 //                  Sascha Schneider
+//                  Angel Sancho
 //      Date :      20th November 2023
 //      Reviewed :  No
 //      Purpose :   USB interface and HID->Event mapper.
@@ -150,13 +151,18 @@ uint32_t GMPReadDigitalController(uint8_t index) {
 // ***************************************************************************************
 
 void __time_critical_func(KBDSync)(void) {
-    tuh_task();
+    if (tuh_task_event_ready()) {
+      tuh_task_ext(0, false);
+    }
+    
     KBDCheckTimer();
+    
 }
 
 // ***************************************************************************************
 //
 //      Date        Revision
 //      ====        ========
+//		 13-03-26     Optimized tuh_task call
 //
 // ***************************************************************************************
