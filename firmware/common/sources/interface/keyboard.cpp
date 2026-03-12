@@ -3,6 +3,7 @@
 //
 //      Name :      keyboard.cpp
 //      Authors :   Paul Robson (paul@robsons.org.uk)
+//									Angel Sancho
 //      Date :      21st November 2023
 //      Reviewed :  No
 //      Purpose :   Converts keyboard events to a queue and key state array.
@@ -15,6 +16,7 @@
 
 #define MAX_QUEUE_SIZE (64) 													// Max size of keyboard queue.
 #define MAX_FKEY_SIZE (48)   													// Max length of function key.
+#define QUEUE_MASK (MAX_QUEUE_SIZE-1)
 
 //
 //		Bit patterns for the key states. These represent the key codes (see kbdcodes.h)
@@ -27,7 +29,8 @@ static uint8_t keyboardModifiers;
 //		Queue of ASCII keycode presses.
 //
 static uint8_t queue[MAX_QUEUE_SIZE+1];
-static uint8_t queueSize = 0;
+static volatile uint8_t queueHead = 0;
+static volatile uint8_t queueTail = 0;
 
 static uint8_t currentASCII = 0,currentKeyCode = 0; 							// Current key pressed.
 static uint32_t nextRepeat = 9999;  											// Time of next repeat.
@@ -50,7 +53,8 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 	}
 
 	if (keyCode == 0xFF) { 														// Reset request
-		queueSize = 0; 															// Empty keyboard queue
+		queueHead = 0; 															// Empty keyboard queue
+		queueTail = 0; 															// Empty keyboard queue
 		for (unsigned int i = 0;i < sizeof(keyboardState);i++) {   				// No keys down.
 			keyboardState[i] = 0; 
 		}
@@ -82,7 +86,7 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 //
 // ***************************************************************************************
 
-void KBDCheckTimer(void) {
+void __time_critical_func(KBDCheckTimer)(void) {
 	if (currentASCII != 0) {  													// Key pressed
 		if (TMRRead() >= nextRepeat) {  										// Time up ?
 			KBDInsertQueue(currentASCII);  										// Put in queue
@@ -117,10 +121,10 @@ uint8_t KBDGetModifiers(void) {
 // ***************************************************************************************
 
 void KBDInsertQueue(uint8_t ascii) {
-	if (queueSize < MAX_QUEUE_SIZE) {   										// Do we have a full queue ?
-		queue[queueSize] = ascii;  												// If not insert it.
-		queueSize++;
-	}
+	uint8_t next = (queueTail + 1) & QUEUE_MASK;
+    if (next == queueHead) return;        // full
+    queue[queueTail] = ascii;
+    queueTail = next;
 }
 
 // ***************************************************************************************
@@ -130,7 +134,7 @@ void KBDInsertQueue(uint8_t ascii) {
 // ***************************************************************************************
 
 bool KBDIsKeyAvailable(void) {
-	return queueSize != 0;
+	return (queueHead != queueTail);
 }
 
 // ***************************************************************************************
@@ -140,11 +144,10 @@ bool KBDIsKeyAvailable(void) {
 // ***************************************************************************************
 
 uint8_t KBDGetKey(void) {
-	if (queueSize == 0) return 0; 												// Queue empty.
-	uint8_t key = queue[0];
-	for (uint8_t i = 0;i < queueSize;i++) queue[i] = queue[i+1];  				// Dequeue it
-	queueSize--;
-	return key;
+	if (queueHead == queueTail) return 0;            // empty
+    uint8_t key = queue[queueHead];
+    queueHead = (queueHead + 1) & QUEUE_MASK;
+    return key;
 }
 
 // ***************************************************************************************
@@ -321,5 +324,6 @@ uint8_t KBDKeyboardController(void) {
 //		18-02-24	Keys WASDOP now default keys, also cursor keys.
 //		17-03-24 	Added ZX control keys.
 //		25-03-24 	Extended to support ABXY in the basic API structure.
+//		13-03-26  Optimized keyboard queue
 //	
 // ***************************************************************************************
