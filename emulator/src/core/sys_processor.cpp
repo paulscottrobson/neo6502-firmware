@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <ctype.h>
 #include <cstdint>
 #include "sys_processor.h"
@@ -168,8 +169,8 @@ void CPUReset(void) {
 			if (strcmp(command,"trace") == 0) { 									// Dump every CPU instruction to stdout.
 				traceMode = true;
 			}
-			if (strlen(command) > 4 && 												// Load .NEO file.
-						strcmp(command+strlen(command)-4,".neo") == 0) {
+			if (strlen(command) > 4 && 												// Load .NEO file (case-insensitive
+						strcasecmp(command+strlen(command)-4,".neo") == 0) {	// so FTD.NEO / Foo.Neo also match).
 				CPUReadNeoFile(command);
 			}
 		}
