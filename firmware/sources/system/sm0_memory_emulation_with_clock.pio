@@ -2,17 +2,20 @@
 .side_set 1 opt
 .wrap_target
 start:
-    set pins, 0b110 side 1  [6] ; activate A0-A7, side 1 is clock high
-    in  pins, 8                 ; read 8 bits
-    set pins, 0b101         [5] ; activate A8-A15
-    in  pins, 24                ; read 8 bits, OEs, r/w bit and some random bits
-    set pins, 0b011         [4] ; activate D0-D7
+    set pins, 0b101  side 1  [5] ; activate A8-A15
+    in  pins, 24                 ; read 8 bits, OEs, r/w bit and some random bits
+    set pins, 0b110          [4] ; activate A0-A7, side 1 is clock high
+    mov osr, ~null               ; preload osr with OUT value for pindirs
+    in  pins, 8                  ; read 8 bits
+    set pins, 0b011              ; activate D0-D7
     jmp pin read
-    in  pins, 32                ; read data and some random bits
-    jmp start       side 0  [3] ; side 0 is clock low
+    out null, 8                  ; discard osr (write cycle)
+    nop                      [2]
+    in  pins, 32    side 0   [3] ; read data and some random bits, side 0 is clock low
+    jmp start
+    
 read:
-    mov osr, ~null              ; set pins 0-7 to OUT
-    out pindirs, 8
+    out pindirs, 8              ; set pins 0-7 to OUT
     out pins, 8                 ; Write out data
     mov osr, null               ; set pins 0-7 to IN
     out pindirs, 8  side 0  [4] ; side 0 is clock low
@@ -39,7 +42,7 @@ void memory_emulation_with_clock_program_init(PIO pio, uint sm, uint offset) {
     pio_sm_set_consecutive_pindirs(pio, sm, 21, 1, true);
 
     pio_sm_config c = memory_emulation_with_clock_program_get_default_config(offset);
-
+    
     sm_config_set_set_pins(&c, 8, 3);
 
     sm_config_set_in_pins(&c, 0);
@@ -48,7 +51,7 @@ void memory_emulation_with_clock_program_init(PIO pio, uint sm, uint offset) {
 
     sm_config_set_sideset_pins(&c, 21);
 
-    sm_config_set_in_shift(&c, true, true, 32);
+    sm_config_set_in_shift(&c, false, true, 32);
 
     sm_config_set_out_shift(&c, true, true, 8);
 
