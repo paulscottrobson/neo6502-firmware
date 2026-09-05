@@ -76,11 +76,12 @@ linux: emulator-deps-nix
 
 macos: emulator-deps-nix
 	@echo building macos emulator
-	make -B -C emulator emacos
-	make -B -C examples release
-
-
-
+	$(CMAKEDIR) bin
+	$(MAKE) -B -C kernel
+	$(MAKE) -B -C basic release
+	$(MAKE) -B -C emulator clean
+	$(MAKE) -B -C emulator emacos
+	$(MAKE) -B -C examples release
 
 # ***************************************************************************************
 #
