@@ -18,6 +18,12 @@
 #define MAX_FKEY_SIZE (48)   													// Max length of function key.
 #define QUEUE_MASK (MAX_QUEUE_SIZE-1)
 
+#ifdef PICO
+#define TIMECRITICAL(x) __time_critical_func(x)
+#else
+#define TIMECRITICAL(x) x
+#endif
+
 //
 //		Bit patterns for the key states. These represent the key codes (see kbdcodes.h)
 //		at 8 states per byte, so keycode 0 is byte 0 bit 0, keycode 7 is byte 0 bit 7
@@ -86,7 +92,7 @@ void KBDEvent(uint8_t isDown,uint8_t keyCode,uint8_t modifiers) {
 //
 // ***************************************************************************************
 
-void __time_critical_func(KBDCheckTimer)(void) {
+void TIMECRITICAL(KBDCheckTimer)(void) {
 	if (currentASCII != 0) {  													// Key pressed
 		if (TMRRead() >= nextRepeat) {  										// Time up ?
 			KBDInsertQueue(currentASCII);  										// Put in queue
