@@ -25,7 +25,6 @@ Command_INK:	;; [ink]
 		lda 	(codePtr),y
 		cmp 	#KWD_COMMA
 		bne 	_CIExit
-		jsr 	WriteCharacter
 		iny
 		jsr 	InkGetColour
 		ora 	#$90
