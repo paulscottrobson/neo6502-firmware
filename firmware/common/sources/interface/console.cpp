@@ -95,14 +95,14 @@ void CONClearScreen(void) {
 	if (graphMode->xGSize != 0) {  												// Graphics present ?
 		if (SPRSpritesInUse()) {  												// Sprites present, only delete that layer
 			for (int i = 0;i < gMode.xGSize*gMode.yGSize;i++) {
-				graphMode->graphicsMemory[i] &= 0xF0;
+				graphMode->graphicsMemory[i] = (graphMode->graphicsMemory[i] & 0xF0) | graphMode->backCol;
 			}
 		} else {																// Erase graphics screen to black
 			memset(graphMode->graphicsMemory,graphMode->backCol,MAXGRAPHICSMEMORY); 
 		}
 	}
 	for (int c = 0;c < MAXCONSOLEMEMORY;c++) {  								// Erase the console memory.
-		graphMode->consoleMemory[c] = ' ' + (7 << 8) + (0 << 12);
+		graphMode->consoleMemory[c] = ' ' + (graphMode->foreCol << 8) + (graphMode->backCol << 12);
 	}
 	for (int y = 0;y < graphMode->yCSize;y++) {  								// No extended lines.
 		graphMode->isExtLine[y] = 0;
