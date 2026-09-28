@@ -21,7 +21,15 @@
 WarmStart:
 		stz 	errorBuffer 				; clear the error buffer.
 WarmStartNoClear:
-		lda 	#COL_GREEN+$80 				; set display colour.
+		lda 	promptInk 					; set display colour, the last INK
+		and 	#$F0 						; if one has been set, else green.
+		cmp 	#$80
+		beq 	_WSUserInk
+		lda 	#COL_GREEN+$80
+		bra 	_WSSetInk
+_WSUserInk:
+		lda 	promptInk
+_WSSetInk:
 		jsr 	WriteCharacter
 
 		ldy 	#inputBuffer >> 8 			; address of input buffer
