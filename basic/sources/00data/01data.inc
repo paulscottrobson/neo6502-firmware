@@ -127,7 +127,9 @@ clFrom: 									; LIST range.
 clTo:
 		.fill 	2		
 highMemoryUpper: 							; High byte of high memory
-		.fill 	1	
+		.fill 	1
+promptInk: 									; ink code ($80+n) set by INK, used by the prompt
+		.fill 	1 							; (anything else means green)
 
 errNumber: 									; error number (ERR)
 		.fill 	1 

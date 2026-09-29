@@ -29,6 +29,7 @@ boot:   jmp     BColdStart 					; $800 cold start
 		.byte 	Program & $FF,Program>>8 	; $820 address of Program base (var table)
 		
 BColdStart:
+		stz 	promptInk 					; prompt starts green
 		ldy 	#_CSMsg >> 8
 		lda 	#_CSMsg & $FF
 		jsr 	CPPrintYA 

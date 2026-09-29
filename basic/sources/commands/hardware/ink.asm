@@ -21,11 +21,11 @@
 Command_INK:	;; [ink]
 		jsr 	InkGetColour
 		ora 	#$80
+		sta 	promptInk 					; the prompt keeps this ink
 		jsr 	WriteCharacter
 		lda 	(codePtr),y
 		cmp 	#KWD_COMMA
 		bne 	_CIExit
-		jsr 	WriteCharacter
 		iny
 		jsr 	InkGetColour
 		ora 	#$90
