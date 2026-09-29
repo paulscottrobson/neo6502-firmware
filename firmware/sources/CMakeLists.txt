@@ -85,6 +85,11 @@ target_link_libraries(firmware
     tinyusb_board
 )
 
+target_link_options(firmware PRIVATE
+    "LINKER:--wrap=interp_save"
+    "LINKER:--wrap=interp_restore"
+)
+
 target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 pico_add_extra_outputs(firmware)
 

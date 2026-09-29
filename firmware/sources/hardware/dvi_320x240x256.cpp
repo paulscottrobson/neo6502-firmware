@@ -22,6 +22,7 @@
 #include "system/common_dvi_pin_configs.h"
 #include "hardware/structs/bus_ctrl.h"
 #include "hardware/clocks.h"
+#include "hardware/interp.h"
 
 // ***************************************************************************************
 //
@@ -52,6 +53,33 @@ bool  isInitialised = false;                                      				// Only st
 const uint8_t *cursorImage = NULL; 												// Cursor status
 uint16_t xCursor,yCursor,wCursor,hCursor;
 bool cursorEnabled = false;
+
+// ***************************************************************************************
+//
+//      RAM copies of the SDK interp_save/restore, which PicoDVI's TMDS encoder calls
+//      every scanline. The SDK versions are in flash. Linked with --wrap.
+//
+// ***************************************************************************************
+
+extern "C" void __not_in_flash_func(__wrap_interp_save)(interp_hw_t *interp, interp_hw_save_t *saver) {
+	saver->accum[0] = interp->accum[0];
+	saver->accum[1] = interp->accum[1];
+	saver->base[0] = interp->base[0];
+	saver->base[1] = interp->base[1];
+	saver->base[2] = interp->base[2];
+	saver->ctrl[0] = interp->ctrl[0];
+	saver->ctrl[1] = interp->ctrl[1];
+}
+
+extern "C" void __not_in_flash_func(__wrap_interp_restore)(interp_hw_t *interp, interp_hw_save_t *saver) {
+	interp->accum[0] = saver->accum[0];
+	interp->accum[1] = saver->accum[1];
+	interp->base[0] = saver->base[0];
+	interp->base[1] = saver->base[1];
+	interp->base[2] = saver->base[2];
+	interp->ctrl[0] = saver->ctrl[0];
+	interp->ctrl[1] = saver->ctrl[1];
+}
 
 // ***************************************************************************************
 //
