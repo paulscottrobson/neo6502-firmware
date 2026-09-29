@@ -110,11 +110,16 @@ static void _GFXMainLoop(void *arg) {
 		if (event.type == SDL_QUIT) {  												// GUI hardware.
 			isRunning = 0;
 		}
+		if (event.type == SDL_WINDOWEVENT) {  										// Window resized, moved etc.
+			mainSurface = SDL_GetWindowSurface(mainWindow);							// Surface may now be invalid (Wayland, sdl2-compat).
+		}
 	}
 	SDL_FillRect(mainSurface, NULL, 												// Draw the background.
 						SDL_MapRGB(mainSurface->format, RED(background),GREEN(background),BLUE(background)));
 	int render = GFXXRender(mainSurface);											// Ask app to render state
-	if (render) SDL_UpdateWindowSurface(mainWindow);								// And update the main window.
+	if (render && SDL_UpdateWindowSurface(mainWindow) != 0) {						// And update the main window.
+		mainSurface = SDL_GetWindowSurface(mainWindow);								// Failed, reacquire the stale surface.
+	}
 }
 
 // *******************************************************************************************************************************
