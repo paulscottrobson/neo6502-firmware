@@ -21,7 +21,7 @@ else()
     FetchContent_Declare(
         tinyusb
         GIT_REPOSITORY https://github.com/hathach/tinyusb.git
-        GIT_TAG        0.16.0
+        GIT_TAG        0.21.0
     )
     FetchContent_MakeAvailable(tinyusb)
 endif()
@@ -57,12 +57,14 @@ endif()
 add_subdirectory(${picodvi_SOURCE_DIR}/software/libdvi ${picodvi_BINARY_DIR})
 
 add_library(fatfs INTERFACE)
+# Keep the existing FatFs R0.15 sources/configuration: TinyUSB 0.21 no longer
+# bundles FatFs. This isolates the USB host upgrade from filesystem changes.
 target_sources(fatfs INTERFACE
-    ${tinyusb_SOURCE_DIR}/lib/fatfs/source/ff.c
-    ${tinyusb_SOURCE_DIR}/lib/fatfs/source/ffsystem.c
-    ${tinyusb_SOURCE_DIR}/lib/fatfs/source/ffunicode.c
+    ${CMAKE_CURRENT_LIST_DIR}/lib/fatfs/source/ff.c
+    ${CMAKE_CURRENT_LIST_DIR}/lib/fatfs/source/ffsystem.c
+    ${CMAKE_CURRENT_LIST_DIR}/lib/fatfs/source/ffunicode.c
 )
-target_include_directories(fatfs INTERFACE ${tinyusb_SOURCE_DIR}/lib/fatfs/source/)
+target_include_directories(fatfs INTERFACE ${CMAKE_CURRENT_LIST_DIR}/lib/fatfs/source/)
 
 add_subdirectory(sources)
 
