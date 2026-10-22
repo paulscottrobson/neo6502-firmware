@@ -82,7 +82,6 @@ target_link_libraries(firmware
     libdvi
     tinyusb_host
     tinyusb_device
-    tinyusb_board
 )
 
 target_include_directories(firmware PUBLIC ${CMAKE_CURRENT_LIST_DIR})
